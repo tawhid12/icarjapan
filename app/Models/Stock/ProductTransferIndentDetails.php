@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models\Stock;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Product\Product;
+use App\Models\Company\Warehouse;
+use App\Models\Company\WarehouseBoard;
+use App\Models\Settings\UnitStyle;
+
+class ProductTransferIndentDetails extends Model
+{
+    use HasFactory;
+    public function product(){
+        return $this->belongsTo(Product::class,'product_id','id');
+    }
+    public function warehouse(){
+        return $this->belongsTo(Warehouse::class,'warehouse_id','id');
+    }
+    public function warehouseboard(){
+        return $this->belongsTo(WarehouseBoard::class,'warehouse_board_id','id');
+    }
+    public function unitstyle(){
+        return $this->belongsTo(UnitStyle::class,'unit_style_id','id');
+    }
+}
