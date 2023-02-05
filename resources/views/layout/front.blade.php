@@ -122,12 +122,12 @@
             <div class="card shadow radious-10">
               <h5 class="card-title bg-brand text-white">Search by Brands</h5>
               <div class="card-body">
+                @forelse($brands as $b)
                 <p class="card-text">
-                  <img src="{{asset('front/img/honda.png')}}" alt="" /> Honda
+                  <a href="" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}}</a>
                 </p>
-                <p class="card-text">
-                  <img src="{{asset('front/img/toyota.png')}}" alt="" /> TOYOTA
-                </p>
+                @empty
+                @endforelse
               </div>
             </div>
           </div>
@@ -139,10 +139,12 @@
               </h5>
               <div class="card-body">
                 <p class="card-text">
-                  <img src="{{asset('front/img/japan2.png')}}" alt="" /> Japan
-                </p>
-                <p class="card-text">
-                  <img src="{{asset('front/img/japan.png')}}" alt="" /> Thailand
+                  @forelse($inv_loc as $inv)
+                  <p class="card-text">
+                    <a href="" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$inv->image)}}" alt="" /> {{$inv->name}}</a>
+                  </p>
+                  @empty
+                  @endforelse
                 </p>
               </div>
             </div>
@@ -152,12 +154,15 @@
             <div class="card shadow radious-10">
               <h5 class="card-title bg-brand text-white">Search By Price</h5>
               <div class="card-body">
+                @php 
+                for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
+                @endphp  
                 <p class="card-text">
-                  <i class="bi bi-currency-dollar"></i> Under USD 500
-                </p>
-                <p class="card-text">
-                  <i class="bi bi-currency-dollar"></i> Under USD 1000
-                </p>
+                  <i class="bi bi-currency-dollar"></i> Under USD {{$i}}
+                </p>  
+                @php    
+                }
+                @endphp
               </div>
             </div>
           </div>
@@ -168,12 +173,15 @@
                 Search By Discount
               </h5>
               <div class="card-body">
+                @php 
+                for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
+                @endphp  
                 <p class="card-text">
-                  <i class="bi bi-funnel"></i> Up to 90%
-                </p>
-                <p class="card-text">
-                  <i class="bi bi-funnel"></i> Under USD 1000
-                </p>
+                  <i class="bi bi-funnel"></i> Up to {{$i}}%
+                </p>  
+                @php    
+                }
+                @endphp
               </div>
             </div>
           </div>
@@ -182,12 +190,12 @@
             <div class="card shadow radious-10">
               <h5 class="card-title bg-brand text-white">Search By Type</h5>
               <div class="card-body">
+                @forelse($body_types as $bt)
                 <p class="card-text">
-                  <i class="bi bi-car-front-fill"></i>Sedan (2798)
+                  <a href="" style="text-decoration:none;color:#000;"><i class="bi bi-car-front-fill"></i>{{$bt->name}} (2798)</a>
                 </p>
-                <p class="card-text">
-                  <i class="bi bi-bus-front-fill"></i> Tractor (56789)
-                </p>
+                @empty
+                @endforelse
               </div>
             </div>
           </div>
@@ -198,12 +206,12 @@
                 Search By Category
               </h5>
               <div class="card-body">
+                @forelse($trans as $t)
                 <p class="card-text">
-                  <i class="bi bi-arrows-move"></i>Manual (2798)
+                  <i class="bi bi-arrows-move"></i>{{$t->name}} (2798)
                 </p>
-                <p class="card-text">
-                  <i class="bi bi-gear"></i> Auto (56789)
-                </p>
+                @empty
+                @endforelse
               </div>
             </div>
           </div>
@@ -253,14 +261,15 @@
             </div>
             <!-- product card -->
             <div class="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+              @forelse($vehicles as $v)
               <div class="col">
                 <div class="product-card my-3">
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
                   <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
+                    <p>{{$v->name}}</p>
+                    <p>{{$v->vehicle_model->name}}</p>
                     <p>Price :</p>
-                    <p>USD 13,000.00</p>
+                    <p>USD {{$v->price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
                       <p>BDT 1,13,000.00</p>
@@ -268,141 +277,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="product-card my-3">
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  <div class="product-card-body">
-                    <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                    <p>DBA-NZT260</p>
-                    <p>Price :</p>
-                    <p>USD 13,000.00</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT 1,13,000.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              @empty
+              @endforelse
             </div>
           </div>
           <!-- mid row 5 product row 2 -->
@@ -975,27 +851,24 @@
               <div class="p-2">
                 <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                   <option selected>Brands</option>
-                  <option value="1">TOYOTA</option>
-                  <option value="2">Acura</option>
-                  <option value="3">Alfa Romeo</option>
-                  <option value="3">Audi</option>
-                  <option value="3">BMW</option>
+                  @forelse($brands as $b)
+                  <option value="{{$b->id}}">{{$b->name}}</option>
+                  @empty
+                  @endforelse
                 </select>
                 <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                   <option selected>Car Name</option>
-                  <option value="1">TOYOTA</option>
-                  <option value="2">Acura</option>
-                  <option value="3">Alfa Romeo</option>
-                  <option value="3">Audi</option>
-                  <option value="3">BMW</option>
+                  @forelse($vehicles as $v)
+                  <option value="{{$v->id}}">{{$v->name}}</option>
+                  @empty
+                  @endforelse
                 </select>
                 <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                   <option selected>Body Type</option>
-                  <option value="1">TOYOTA</option>
-                  <option value="2">Acura</option>
-                  <option value="3">Alfa Romeo</option>
-                  <option value="3">Audi</option>
-                  <option value="3">BMW</option>
+                  @forelse($body_types as $bt)
+                  <option value="{{$bt->id}}">{{$bt->id}}</option>
+                  @empty
+                  @endforelse
                 </select>
                 <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                   <option selected>RHL / LHS</option>
@@ -1005,14 +878,24 @@
                 <div class="d-flex search-to">
                   <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                     <option selected>Year</option>
-                    <option value="1">2000</option>
-                    <option value="2">2001</option>
+                    @php 
+                    for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                    @endphp
+                    <option value="{{$i}}">{{$i}}</option>   
+                    @php    
+                    }
+                    @endphp
                   </select>
                   <span>To</span>
                   <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                     <option selected>Year</option>
-                    <option value="1">2023</option>
-                    <option value="2">2024</option>
+                    @php 
+                    for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                    @endphp
+                    <option value="{{$i}}">{{$i}}</option>   
+                    @php    
+                    }
+                    @endphp
                   </select>
                 </div>
                 <input class="form-control form-control-sm mb-3" type="text" placeholder="Search ID or Keywords" aria-label=".form-control-sm example" />

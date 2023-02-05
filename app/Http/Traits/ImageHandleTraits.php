@@ -8,7 +8,7 @@ trait ImageHandleTraits{
 
     public function uploadImage($image, $path)
     {
-        $imageNewName = time() . "." . $this->checkValidImage($image);
+        $imageNewName = uniqid().time() . "." . $this->checkValidImage($image);
         $image->move("public/".$path,$imageNewName);
         return $imageNewName;
     }

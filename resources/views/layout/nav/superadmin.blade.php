@@ -50,12 +50,12 @@
             <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
             <div class="submenu-group-wrapper">
                 <ul class="submenu-group">
-                    <li class="submenu-item"><a href="{{route(currentUser().'.category.index')}}" class='submenu-link'>{{__('Category')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.category.index')}}" class='submenu-link'>{{__('Brand')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.category.index')}}" class='submenu-link'>{{__('Model')}}</a></li>
-                    {{--<li class="submenu-item"><a href="{{route(currentUser().'.product.index')}}" class='submenu-link'>{{__('Product')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.productstyle.index')}}" class='submenu-link'>{{__('Product Style')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.indent.index')}}" class='submenu-link'>{{__('Indent')}}</a></li>--}}
+                    <li class="submenu-item"><a href="{{route(currentUser().'.vehicle.index')}}" class='submenu-link'>{{__('Vehicle')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.brand.index')}}" class='submenu-link'>{{__('Brand')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.vehicle_model.index')}}" class='submenu-link'>{{__('Vehicle Model')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.color.index')}}" class='submenu-link'>{{__('Color')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.fuel.index')}}" class='submenu-link'>{{__('Fuel')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.transmission.index')}}" class='submenu-link'>{{__('Transmission')}}</a></li>
                 </ul>  
             </div>
         </div>
