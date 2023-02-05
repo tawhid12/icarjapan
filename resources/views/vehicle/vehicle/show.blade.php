@@ -12,8 +12,22 @@
                     <table class="table table-bordered mb-0">
                         <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.vehicle.index')}}"><i class="bi bi-plus-square"></i> All Vehicle</a>
                         <tbody>
-                            <th scope="col">{{__('Vehicle Name')}}</th>
-                            <th>{{$v->name}}</th>
+                            <tr>
+                                <th scope="col">{{__('Vehicle Name')}}</th>
+                                <td>{{$v->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>{{__('Brand')}}</strong>{{$v->brand_id}}</p>
+                                    <p><strong>{{__('Vehicle Stock Id')}}</strong>{{$v->stock_id}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">{{__('Description')}}</th>
+                                <td>{{$v->description}}</td>
+                                <th scope="col">{{__('Note')}}</th>
+                                <td colspan="3">{{$v->note}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
