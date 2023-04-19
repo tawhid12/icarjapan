@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inventory_locations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('country_id');
             $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
             $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable()->index()->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');

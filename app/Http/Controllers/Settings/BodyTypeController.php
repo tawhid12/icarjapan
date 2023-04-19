@@ -5,8 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Settings\BodyType;
 use Illuminate\Http\Request;
-use App\Http\Requests\Settings\BodyType\AddNewRequest;
-use App\Http\Requests\Settings\BodyType\UpdateRequest;
+
 
 use Toastr;
 
@@ -19,8 +18,9 @@ class BodyTypeController extends Controller
      */
     public function index()
     {
-        $body_types=BodyType::latest()->paginate(15);
+        $body_types=BodyType::orderBy('id', 'DESC')->paginate(25);
         return view('settings.bodytype.index',compact('body_types'));
+        
     }
 
     /**
@@ -39,7 +39,7 @@ class BodyTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddNewRequest $request)
+    public function store(Request $request)
     {
         try{
             $bd=new BodyType();

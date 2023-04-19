@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Company;
+use App\Models\Settings\Country;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Requests\Authentication\SignupRequest;
 use App\Http\Requests\Authentication\SigninRequest;
@@ -16,26 +16,22 @@ class AuthenticationController extends Controller
     use ResponseTrait;
 
     public function signUpForm(){
-        return view('authentication.register');
+        $countries = Country::all();
+        return view('authentication.register',compact('countries'));
     }
 
     public function signUpStore(SignupRequest $request){
         try{
-            $company=new Company;
-            $company->status=1;
-            if($company->save()){
-                $user=new User;
-                $user->name=$request->FullName;
-                $user->contact_no=$request->PhoneNumber;
-                $user->email=$request->EmailAddress;
-                $user->password=Hash::make($request->password);
-                $user->company_id=$company->id;
-                $user->role_id=2;
-                if($user->save())
-                    return redirect('login')->with($this->resMessageHtml(true,null,'Successfully Registred'));
-                else
-                    return redirect('login')->with($this->resMessageHtml(false,'error','Please try again'));
-            }else
+            $user=new User;
+            $user->name=$request->FullName;
+            $user->contact_no=$request->PhoneNumber;
+            $user->email=$request->EmailAddress;
+            $user->country_id=$request->country_id;
+            $user->password=Hash::make($request->password);
+            $user->role_id=3;
+            if($user->save())
+                return redirect('login')->with($this->resMessageHtml(true,null,'Successfully Registred'));
+            else
                 return redirect('login')->with($this->resMessageHtml(false,'error','Please try again'));
         }catch(Exception $e){
             //dd($e);
@@ -72,8 +68,9 @@ class AuthenticationController extends Controller
                     'userName'=>encryptor('encrypt',$user->name),
                     'role'=>encryptor('encrypt',$user->role->type),
                     'roleIdentity'=>encryptor('encrypt',$user->role->identity),
-                    'language'=>encryptor('encrypt',$user->language),
-                    'companyId'=>encryptor('encrypt',$user->company_id),
+                    'country_id'=>$user->country_id,
+                    /*'language'=>encryptor('encrypt',$user->language),
+                    'companyId'=>encryptor('encrypt',$user->company_id),*/
                     'companyAccess'=>encryptor('encrypt',$user->all_company_access),
                     'image'=>$user->image?$user->image:'no-image.png'
                 ]

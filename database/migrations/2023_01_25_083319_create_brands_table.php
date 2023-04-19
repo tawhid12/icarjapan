@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique()->index();
+            $table->string('slug_name')->unique()->index();
             $table->string('image')->nullable();
             $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
             $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

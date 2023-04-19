@@ -25,7 +25,8 @@ class AddNewRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:brands,name'
+            'name'  =>'required|unique:brands,name',
+            'slug'  => 'unique:brands,slug',
         ];
     }
 

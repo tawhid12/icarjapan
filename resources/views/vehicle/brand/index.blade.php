@@ -52,6 +52,9 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                            <div class="pt-2">
+                            {{ $brands->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ use App\Models\Vehicle\Brand;
 use App\Models\Vehicle\Fuel;
 use App\Models\Vehicle\Color;
 use App\Models\Vehicle\Transmission;
+use App\Models\UserDetail;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +25,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call();
+        $this->call([
+            BrandSeeder::class,
+            SubBrandSeeder::class,
+            CountrySeeder::class,
+            PortSeeder::class,
+            CompanyInformationSeeder::class,
+            VehicleModelSeeder::class,
+            VehicleSeeder::class,
+            VehicleImageSeeder::class,
+            VehicleNewArivalSeeder::class,
+            VehicleCountriesSeeder::class,
+            VehicleMostViewdSeeder::class
+        ]);
+        UserDetail::factory(3)->create();
 
         // creating Body Type
         foreach(body_types() as $body_type) {
@@ -53,18 +67,11 @@ class DatabaseSeeder extends Seeder
         // creating Inventory Location
         foreach(inventory_location() as $in) {
             $inv = new InventoryLocation();
-            $inv->name = $in['name'];
+            $inv->country_id = $in['country_id'];
             $inv->created_by =1;
             $inv->save();
         }
 
-        // creating Brands
-        foreach(brands() as $ba) {
-            $b = new Brand();
-            $b->name = $ba['name'];
-            $b->created_by =1;
-            $b->save();
-        }
         // creating Fuel
         foreach(fuel() as $fu) {
             $f = new Fuel();

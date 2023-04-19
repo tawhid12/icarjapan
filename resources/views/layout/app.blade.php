@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
 {{--<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">--}}
 <link rel="stylesheet" href="{{ asset('/assets/extensions/laravel-toster/toastr.min.css') }}">
+<!-- Bootstrap Date Range Picker  -->
+<link rel="stylesheet" href="{{asset('assets/bootstrap-daterangepicker/daterangepicker.css')}}">
 <style>
 .loader {
     margin: 0 auto;
@@ -63,8 +65,8 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
-                                  <li><a class="dropdown-item" href="#">{{__('My Account') }}</a></li>
-                                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                                  <li><a class="dropdown-item" href="{{route(currentUser().'.profile')}}">{{__('My Account') }}</a></li>
+                                  <li><a class="dropdown-item" href="{{route(currentUser().'.change_password')}}">{{__('Change Password') }}</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('logOut')}}">{{__('Logout') }}</a></li>
                                 </ul>
@@ -131,6 +133,10 @@
 <script src="{{ asset('/assets/js/pages/horizontal-layout.js') }}"></script>
 {{--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>--}}
 <script src="{{ asset('/assets/extensions/laravel-toster/toastr.min.js') }}"></script>
+<script src="{{asset('assets/moment/moment.min.js')}}"></script> 
+<!-- Bootstrap Date Range Picker  -->
+<script src="{{asset('assets/bootstrap-daterangepicker/daterangepicker.js')}}"></script> 
+
 @stack('scripts')
 {!! Toastr::message() !!}
 </body>

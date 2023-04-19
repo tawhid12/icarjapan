@@ -18,8 +18,8 @@ class VehicleModelController extends Controller
      */
     public function index()
     {
-        $vehicle_models=VehicleModel::latest()->paginate(15);
-        return view('vehicle.vehiclemodel.index',compact('vehicle_models'));
+        $vehiclemodels=VehicleModel::latest()->paginate(15);
+        return view('vehicle.vehiclemodel.index',compact('vehiclemodels'));
     }
 
     /**

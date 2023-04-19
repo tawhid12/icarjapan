@@ -1,4 +1,5 @@
 <?php 
+
 function brands() {
     $brands = array(
         array('id' => '1','name' => 'Toyota'),
@@ -95,15 +96,16 @@ function color() {
 }
 function inventory_location() {
     $inventory_location = array(
-        array('id' => '1','name' =>'Bangladesh'),
-        array('id' => '2','name' => 'India'),
-        array('id' => '3','name' => 'Japan'),
-        array('id' => '4','name' => 'China'),
-        array('id' => '5','name' => 'England'),
-        array('id' => '6','name' => 'Malaysia'),
-        array('id' => '7','name' => 'Singapore'),
+        array('id' => '1','country_id' =>'20'),
+        array('id' => '2','country_id' => '100'),
+        array('id' => '3','country_id' => '109'),
+        array('id' => '4','country_id' => '131'),
+        array('id' => '5','country_id' => '192'),
+        array('id' => '6','country_id' => '45'),
+        array('id' => '7','country_id' => '226'),
     );
 
     return $inventory_location;
 }
+
 

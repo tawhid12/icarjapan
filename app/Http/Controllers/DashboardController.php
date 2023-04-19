@@ -23,15 +23,15 @@ class DashboardController extends Controller
     /*
     * owner dashboard
     */
-    public function ownerDashboard(){
-        return view('dasbhoard.owner');
+    public function userDashboard(){
+        return view('dasbhoard.user');
     }
     
     /*
     * sales manager dashboard
     */
-    public function salesmanagerDashboard(){
-        return view('dasbhoard.salesmanager');
+    public function salesexecutiveDashboard (){
+        return view('dasbhoard.salesexecutive');
     }
 
     /*

@@ -7,9 +7,12 @@ use App\Models\Settings\BodyType;
 use App\Models\Settings\DriveType;
 use App\Models\Settings\InventoryLocation;
 use App\Models\Settings\SubBodyType;
+use App\Models\Settings\Country;
+
 
 use App\Models\Vehicle\Vehicle;
 use App\Models\Vehicle\Brand;
+use App\Models\Vehicle\SubBrand;
 use App\Models\Vehicle\Fuel;
 use App\Models\Vehicle\Color;
 use App\Models\Vehicle\Transmission;
@@ -24,6 +27,8 @@ use Carbon\Carbon;
 use DB;
 use File;
 use App\Http\Traits\ImageHandleTraits;
+use App\Models\Vehicle\NewArival;
+
 class VehicleController extends Controller
 {
     use ImageHandleTraits;
@@ -34,7 +39,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicles=Vehicle::latest()->paginate(15);
+        $vehicles=Vehicle::latest()->paginate(20);
         return view('vehicle.vehicle.index',compact('vehicles'));
     }
 
@@ -45,17 +50,19 @@ class VehicleController extends Controller
      */
     public function create()
     {
+        $countries = Country::all();
         $body_types = BodyType::all();
         $drive_types = DriveType::all();
         $inv_loc = InventoryLocation::all();
         $sub_body_types = SubBodyType::all();
 
         $brands = Brand::all();
+        $sub_brands = SubBrand::all();
         $fuel= Fuel::all();
         $colors = Color::all();
         $trans = Transmission::all();
         $vehicle_models = VehicleModel::all();
-        return view('vehicle.vehicle.create',compact('body_types','drive_types','inv_loc','sub_body_types','brands','fuel','colors','trans','vehicle_models'));
+        return view('vehicle.vehicle.create',compact('sub_brands','countries','body_types','drive_types','inv_loc','sub_body_types','brands','fuel','colors','trans','vehicle_models'));
     }
 
     /**
@@ -68,19 +75,23 @@ class VehicleController extends Controller
     {
         try{
             $vehicle = New Vehicle();
-            $vehicle->name = $request->name; 
             $vehicle->stock_id = $request->stock_id; 
+            $vehicle->search_keyword =str_replace(' ', ',', $request->search_keyword);
             $vehicle->brand_id = $request->brand_id; 
+            $vehicle->sub_brand_id = $request->sub_brand_id; 
+            $vehicle->package = $request->package; 
             $vehicle->v_model_id = $request->v_model_id; 
             $vehicle->version = $request->version; 
             $vehicle->m3 = $request->m3; 
             $vehicle->weight = $request->weight; 
-            $vehicle->model_code = $request->model_code; 
+            $vehicle->v_model = $request->v_model; 
             $vehicle->chassis_no = $request->chassis_no; 
             $vehicle->fob = $request->fob; 
             $vehicle->steering = $request->steering; 
             $vehicle->body_type_id = $request->body_type_id; 
             $vehicle->sub_body_type_id = $request->sub_body_type_id; 
+            $vehicle->door = $request->door; 
+            $vehicle->truck_size = $request->truck_size; 
             $vehicle->drive_id = $request->drive_id; 
             $vehicle->price = $request->price; 
             $vehicle->cc = $request->cc; 
@@ -91,11 +102,14 @@ class VehicleController extends Controller
             $vehicle->color_id = $request->color_id; 
             $vehicle->b_length = $request->b_length; 
             $vehicle->max_loading_capacity = $request->max_loading_capacity; 
-            $vehicle->e_size = $request->e_size; 
-            $vehicle->year = date('Y',strtotime($request->year)); 
+            $vehicle->e_type = $request->e_type; 
+            $vehicle->e_code = $request->e_code; 
+            $vehicle->year = $request->year; 
             $vehicle->reg_year = date('Y-m-d',strtotime($request->reg_year)); 
-            $vehicle->manu_year = date('Y-m-d',strtotime($request->manu_year)); 
-            $vehicle->inv_locatin_id = $request->inv_locatin_id; 
+            $vehicle->manu_year = $request->manu_year; 
+            $vehicle->inv_locatin_id = $request->inv_locatin_id;
+            $vehicle->description = $request->description; 
+            $vehicle->note = $request->note;  
             $vehicle->air_bag = $request->air_bag==1? $request->air_bag:0;
             $vehicle->anti_lock_brake_system = $request->anti_lock_brake_system==1?$request->anti_lock_brake_system:0;
             $vehicle->air_con = $request->air_con==1?$request->air_con:0;
@@ -114,20 +128,51 @@ class VehicleController extends Controller
             //$vehicle = $request->image 
             $vehicle->v_link = $request->v_link; 
             $vehicle->created_by=currentUserId();
+
+            /*Maximun in  Model in Vehicle Table*/
+            $v_year_count = DB::table('vehicles')->where('year',$request->year)->count();
+            if(empty($v_year_count)){
+                $v_year_count = 1;
+            }else{
+                $v_year_count++;
+            }
+            $vehicle->year_count = $v_year_count;
+            
+            //$vehicle_name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".$request->v_model." ".$request->year." ".$request->name." ".str_replace(' ', '-', $request->package);
+            $vehicle_name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".$request->year."/".$v_year_count." ".$request->name." ".str_replace(' ', '-', $request->package);
+            
+            //$vehicle->name = str_replace(' ', '-', $request->name);
+            $vehicle->name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".DB::table('sub_brands')->where('id',$request->sub_brand_id)->first()->name." ".$request->v_model;
+            $vehicle->fullName = $vehicle_name; 
+
             if($vehicle->save()){
                 if($request->hasFile('image')) {
-                    //print_r($_FILES['image']);die;
                     $images = $request->file('image');
-                    foreach($images as $key => $val){
-                        $ext    = $val->extension();
-                        $filename = time().uniqid().'.'.$ext;
-                        $image_path = $val->storeAs('upload/vehicle_images',$filename,['disk' => 'public_uploads']);
-                        $vehicleImagesArr['image']  = str_ireplace("public/","/storage/",$image_path);
+                    foreach($images as  $val){
+                        $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
                         $vehicleImagesArr['vehicle_id'] = $vehicle->id;
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
                     }
                 }
+                
+                
+                /*== Vehicle Country Wise */
+                if($request->post('country_id')){
+                $country_data = $request->post('country_id');
+                foreach($country_data as $key => $c){
+                    $v_data = Vehicle::find($vehicle->id); //any user we want to find 
+                    $v_data->countries()->attach($country_data[$key]);
+                }
+                /*==New Vehicle Arival Country Wise */
+                if($request->post('arival_country_id')){
+                    $arival_country_data = $request->post('arival_country_id');
+                    foreach($arival_country_data as $key => $c){
+                        $v_data = Vehicle::find($vehicle->id); //any user we want to find 
+                        $v_data->arival_country()->attach($arival_country_data[$key]);
+                    }
+                }
+            }
                 return redirect()->route(currentUser().'.vehicle.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             }else{
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -171,12 +216,14 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
+        $countries = Country::all();
         $body_types = BodyType::all();
         $drive_types = DriveType::all();
         $inv_loc = InventoryLocation::all();
         $sub_body_types = SubBodyType::all();
 
         $brands = Brand::all();
+        $sub_brands = SubBrand::all();
         $fuel= Fuel::all();
         $colors = Color::all();
         $trans = Transmission::all();
@@ -184,8 +231,10 @@ class VehicleController extends Controller
 
         $v=Vehicle::findOrFail(encryptor('decrypt',$id));
         $v_images = DB::table('vehicle_images')->where('vehicle_id',encryptor('decrypt',$id))->get();
+        $vehicle_avaliable_country = array_values(DB::table('countries_vehicles')->where('vehicle_id',encryptor('decrypt',$id))->pluck('country_id')->toArray());
+        $new_arivals = array_values(DB::table('new_arivals')->where('vehicle_id',encryptor('decrypt',$id))->pluck('country_id')->toArray());
 
-        return view('vehicle.vehicle.edit',compact('v_images','v','body_types','drive_types','inv_loc','sub_body_types','brands','fuel','colors','trans','vehicle_models'));
+        return view('vehicle.vehicle.edit',compact('vehicle_avaliable_country','sub_brands','new_arivals','countries','v_images','v','body_types','drive_types','inv_loc','sub_body_types','brands','fuel','colors','trans','vehicle_models'));
     }
 
     /**
@@ -195,23 +244,27 @@ class VehicleController extends Controller
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         try{
             $vehicle=Vehicle::findOrFail(encryptor('decrypt',$id));
-            $vehicle->name = $request->name; 
+            $vehicle->search_keyword =str_replace(' ', ',', $request->search_keyword);
             $vehicle->stock_id = $request->stock_id; 
             $vehicle->brand_id = $request->brand_id; 
+            $vehicle->sub_brand_id = $request->sub_brand_id; 
+            $vehicle->package = $request->package; 
             $vehicle->v_model_id = $request->v_model_id; 
             $vehicle->version = $request->version; 
             $vehicle->m3 = $request->m3; 
             $vehicle->weight = $request->weight; 
-            $vehicle->model_code = $request->model_code; 
+            $vehicle->v_model = $request->v_model; 
             $vehicle->chassis_no = $request->chassis_no; 
             $vehicle->fob = $request->fob; 
             $vehicle->steering = $request->steering; 
             $vehicle->body_type_id = $request->body_type_id; 
             $vehicle->sub_body_type_id = $request->sub_body_type_id; 
+            $vehicle->door = $request->door; 
+            $vehicle->truck_size = $request->truck_size; 
             $vehicle->drive_id = $request->drive_id; 
             $vehicle->price = $request->price; 
             $vehicle->cc = $request->cc; 
@@ -222,11 +275,15 @@ class VehicleController extends Controller
             $vehicle->color_id = $request->color_id; 
             $vehicle->b_length = $request->b_length; 
             $vehicle->max_loading_capacity = $request->max_loading_capacity; 
-            $vehicle->e_size = $request->e_size; 
-            $vehicle->year = date('Y',strtotime($request->year)); 
+            $vehicle->e_type = $request->e_type; 
+            $vehicle->e_code = $request->e_code;
+            
+            $vehicle->year = $request->year; 
             $vehicle->reg_year = date('Y-m-d',strtotime($request->reg_year)); 
-            $vehicle->manu_year = date('Y-m-d',strtotime($request->manu_year)); 
+            $vehicle->manu_year = $request->manu_year; 
             $vehicle->inv_locatin_id = $request->inv_locatin_id; 
+            $vehicle->description = $request->description; 
+            $vehicle->note = $request->note; 
             $vehicle->air_bag = $request->air_bag==1? $request->air_bag:0;
             $vehicle->anti_lock_brake_system = $request->anti_lock_brake_system==1?$request->anti_lock_brake_system:0;
             $vehicle->air_con = $request->air_con==1?$request->air_con:0;
@@ -245,6 +302,14 @@ class VehicleController extends Controller
             //$vehicle = $request->image 
             $vehicle->v_link = $request->v_link; 
             $vehicle->updated_by=currentUserId();
+
+            
+            //$vehicle_name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".$request->v_model." ".$request->year." ".$request->name." ".str_replace(' ', '-', $request->package);
+            $vehicle_name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".$request->year."/".$vehicle->year_count." ".$request->name." ".str_replace(' ', '-', $request->package);
+            
+            //$vehicle->name = str_replace(' ', '-', $request->name);
+            $vehicle->name = DB::table('brands')->where('id',$request->brand_id)->first()->name." ".DB::table('sub_brands')->where('id',$request->sub_brand_id)->first()->name." ".$request->v_model;
+            $vehicle->fullName = $vehicle_name; 
             if($vehicle->save()){
                 if($request->hasFile('image')) {
                     $images = $request->file('image');
@@ -254,6 +319,26 @@ class VehicleController extends Controller
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
                     }
+                }
+                /*== Vehicle Country Wise */
+                if($request->post('country_id')){
+                $country_data = $request->post('country_id');
+
+                foreach($country_data as $key => $c){
+                    $v_data = Vehicle::find($vehicle->id); //any user we want to find 
+                    $data = $country_data[$key];
+                }
+                $v_data->countries()->sync($country_data);
+                }
+                /*== Vehicle Arival Wise */
+                if($request->post('arival_country_id')){
+                    $arival_country_data = $request->post('arival_country_id');
+    
+                    foreach($arival_country_data as $key => $c){
+                        $v_data = Vehicle::find($vehicle->id); //any user we want to find 
+                        $data = $arival_country_data[$key];
+                    }
+                    $v_data->arival_country()->sync($arival_country_data);
                 }
                 return redirect()->route(currentUser().'.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             }else{

@@ -56,5 +56,7 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo(Company::class);
     }
-    
+    public function userDetl(){
+        return $this->hasOne(UserDetail::class);
+    }
 }

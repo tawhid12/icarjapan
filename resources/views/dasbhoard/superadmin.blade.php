@@ -104,13 +104,30 @@
             </div>
             <div class="card">
                 <div class="card-header p-2">
-                    <h4 class="mb-1 border-bottom">Pending Order</h4>
+                    <h4 class="mb-1 border-bottom">Pending Reserved Vehicle</h4>
                 </div>
                 <div class="card-content pb-2">
-                   
+                @forelse(\App\Models\Notification::where('read_status',0)->orderBy('id','desc')->get() as $res)
+                    <div class="recent-message d-flex px-2 py-1 rounded-pill border-bottom">
+                        <div class="name ms-2 rounded-pill">
+                            <a href="{{url($res->click_url)}}">
+                                <h6 class="mb-1">
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    You have a new Reservation for  {{$res->title}}
+                                </h6>
+                            </a>
+                        </div>
+                    </div>
+                    @empty
+                        <div class="recent-message d-flex px-4 py-1">
+                            <div class="name ms-4">
+                                <h5 class="mb-1">No Notification</h5>
+                            </div>
+                        </div>
+                    @endforelse
                     
                     <div class="px-4">
-                        <a href="" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>See All Order</a>
+                        <a href="{{route(currentUser().'.notification.index')}}" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>See All Requisition</a>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($vehicle_models as $vm)
+                                @forelse($vehiclemodels as $vm)
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
                                     <td>{{$vm->name}}</td>
@@ -44,7 +44,7 @@
                             </tbody>
                         </table>
                         <div class="pt-2">
-                            {{$vehicle_models->links()}}
+                            {{ $vehiclemodels->links() }}
                         </div>
                     </div>
                 </div>

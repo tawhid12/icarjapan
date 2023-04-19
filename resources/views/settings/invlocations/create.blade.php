@@ -13,10 +13,15 @@
                                 <div class="row">
                                    
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" value="{{old('name')}}" class="form-control" placeholder="Inventory Location Name" name="name">
-                                        </div>
+                                        <select class="form-control" name="country_id">
+                                            <option value="">Select Inventory Location</option>
+                                            @if(count($countries) > 0)
+                                            @forelse($countries as $c)
+                                            <option value="{{$c->id}}" {{ old('country_id') == $c->id ? "selected" : "" }}>{{$c->name}}</option>
+                                            @empty
+                                            @endforelse
+                                            @endif
+                                        </select>
                                         @if($errors->has('name'))
                                             <span class="text-danger"> {{ $errors->first('name') }}</span>
                                         @endif
