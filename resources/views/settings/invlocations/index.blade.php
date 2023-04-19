@@ -22,7 +22,7 @@
                                 @forelse($inv_locations as $inv_loc)
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
-                                    <td>{{$inv_loc->name}}</td>
+                                    <td>{{$inv_loc->country?->name}}</td>
                                     <td class="white-space-nowrap">
                                         <a href="{{route(currentUser().'.invloc.edit',encryptor('encrypt',$inv_loc->id))}}">
                                             <i class="bi bi-pencil-square"></i>

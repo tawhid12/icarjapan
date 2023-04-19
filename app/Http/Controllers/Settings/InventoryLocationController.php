@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 
 use App\Models\Settings\InventoryLocation;
+use App\Models\Settings\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\Settings\InventoryLocation\AddNewRequest;
 use App\Http\Requests\Settings\InventoryLocation\UpdateRequest;
@@ -30,7 +31,8 @@ class InventoryLocationController extends Controller
      */
     public function create()
     {
-        return view('settings.invlocations.create');
+        $countries = Country::all();
+        return view('settings.invlocations.create',compact('countries'));
     }
 
     /**
@@ -43,7 +45,7 @@ class InventoryLocationController extends Controller
     {
         try{
             $inv_loc=new InventoryLocation();
-            $inv_loc->name=$request->name;
+            $inv_loc->country_id=$request->country_id;
             if($inv_loc->save())
                 return redirect()->route(currentUser().'.invloc.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             else
@@ -73,8 +75,9 @@ class InventoryLocationController extends Controller
      */
     public function edit($id)
     {
+        $countries = Country::all();
         $invloc=InventoryLocation::findOrFail(encryptor('decrypt',$id));
-        return view('settings.invlocations.edit',compact('invloc'));
+        return view('settings.invlocations.edit',compact('invloc','countries'));
     }
 
     /**
@@ -88,7 +91,7 @@ class InventoryLocationController extends Controller
     {
         try{
             $inv_loc=InventoryLocation::findOrFail(encryptor('decrypt',$id));
-            $inv_loc->name=$request->name;
+            $inv_loc->country_id=$request->country_id;
             if($inv_loc->save())
                 return redirect()->route(currentUser().'.invloc.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             else

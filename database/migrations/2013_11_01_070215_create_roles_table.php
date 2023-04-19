@@ -31,13 +31,13 @@ return new class extends Migration
                 'created_at' => Carbon::now()
             ],
             [
-                'type' => 'Manager',
-                'identity' => 'manager',
+                'type' => 'Sales Executive',
+                'identity' => 'salesexecutive',
                 'created_at' => Carbon::now()
             ],
             [
-                'type' => 'Store Keeper',
-                'identity' => 'storekeeper',
+                'type' => 'General User',
+                'identity' => 'user',
                 'created_at' => Carbon::now()
             ]
         ]);

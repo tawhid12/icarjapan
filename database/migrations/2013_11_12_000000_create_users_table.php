@@ -20,14 +20,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('contact_no')->unique();
-            $table->unsignedBigInteger('designation_id')->index()->foreign('designation_id')->references('id')->on('designations')->onDelete('cascade');
-            $table->unsignedBigInteger('department_id')->index()->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->unsignedBigInteger('role_id')->index()->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('password');
-            $table->unsignedBigInteger('company_id')->nullable()->index()->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('country_id')->index()->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->integer('port_id')->nullable();
             $table->string('image')->nullable();
+            $table->integer('company_id')->nullable();
+            $table->integer('department_id')->nullable();
+            $table->integer('designation_id')->nullable();
+            $table->integer('show_price')->nullable();
             $table->boolean('all_company_access')->nullable()->default(0)->comment('1=>active 2=>inactive');
-            $table->boolean('show_price')->nullable()->default(0)->comment('1=>active 2=>inactive');
             $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
             $table->string('last_login')->nullable();
             $table->string('last_login_ip')->nullable();
@@ -48,7 +50,41 @@ return new class extends Migration
                 'department_id' => 1,
                 'role_id' => 1,
                 'company_id' => 1,
+                'country_id' => 20,
+                'port_id'   => 48,
                 'all_company_access' => 1,
+                'show_price' => 1,
+                'status' => 1,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Sales Executive',
+                'email' => 'sales@email.com',
+                'contact_no' => '01600000001',
+                'password' => Hash::make('sales'),
+                'designation_id' => 1,
+                'department_id' => 1,
+                'role_id' => 3,
+                'company_id' => 1,
+                'country_id' => 20,
+                'port_id'   => 48,
+                'all_company_access' => 1,
+                'show_price' => 1,
+                'status' => 1,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'name' => 'General User',
+                'email' => 'user@email.com',
+                'contact_no' => '01600000002',
+                'password' => Hash::make('user'),
+                'designation_id' => 1,
+                'department_id' => 1,
+                'role_id' => 4,
+                'company_id' => 1,
+                'port_id'   => 48,
+                'country_id' => 20,
+                'all_company_access' => 0,
                 'show_price' => 1,
                 'status' => 1,
                 'created_at' => Carbon::now()

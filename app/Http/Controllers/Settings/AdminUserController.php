@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Company\Company;
-use App\Models\Settings\Department;
-use App\Models\Settings\Designation;
 use App\Http\Requests\AdminUser\AddNewRequest;
 use App\Http\Requests\AdminUser\UpdateRequest;
 use Illuminate\Support\Facades\Hash;
@@ -43,10 +40,7 @@ class AdminUserController extends Controller
     public function create()
     {
         $role=Role::all();
-        $department=Department::all();
-        $designation=Designation::all();
-        $company=Company::all();
-        return view('settings.adminusers.create',compact('department','designation','company','role'));
+        return view('settings.adminusers.create',compact('role'));
     }
 
     /**
@@ -62,13 +56,10 @@ class AdminUserController extends Controller
             $user->name=$request->userName;
             $user->contact_no=$request->contactNumber;
             $user->email=$request->userEmail;
-            $user->company_id=$request->company_id;
-            $user->department_id=$request->department_id;
-            $user->designation_id=$request->designation_id;
             $user->role_id=$request->role_id;
             $user->password=Hash::make($request->password);
             $user->all_company_access=$request->all_company_access;
-            $user->show_price=$request->show_price;
+
 
             if($request->has('image')) $user->image = $this->uploadImage($request->file('image'), 'uploads/admin');
 
@@ -102,11 +93,8 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         $role=Role::all();
-        $department=Department::all();
-        $designation=Designation::all();
-        $company=Company::all();
         $user=User::findOrFail(encryptor('decrypt',$id));
-        return view('settings.adminusers.edit',compact('user','department','designation','company','role'));
+        return view('settings.adminusers.edit',compact('user','role'));
     }
 
     /**
@@ -122,14 +110,9 @@ class AdminUserController extends Controller
             $user=User::findOrFail(encryptor('decrypt',$id));
             $user->name=$request->userName;
             $user->contact_no=$request->contactNumber;
-            $user->email=$request->userEmail;
-            $user->company_id=$request->company_id;
-            $user->department_id=$request->department_id;
-            $user->designation_id=$request->designation_id;
             $user->role_id=$request->role_id;
             $user->status=$request->status;
             $user->all_company_access=$request->all_company_access;
-            $user->show_price=$request->show_price;
 
 
             if($request->has('image')) 

@@ -44,7 +44,7 @@
                             </tbody>
                         </table>
                         <div class="pt-2">
-                            {{$body_types->links()}}
+                            {{ $body_types->links() }}
                         </div>
                     </div>
                 </div>

@@ -55,7 +55,7 @@ return [
 
     'url' => env('APP_URL', "http://localhost"),
 
-    'asset_url' => env('ASSET_URL', "http://localhost/icarjapan/").'/public',
+    'asset_url' => env('ASSET_URL', "http://localhost/icarjapan").'/public',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +180,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
 
         /*
          * Package Service Providers...

@@ -11,8 +11,7 @@ class DashboardController extends Controller
     * admin dashboard
     */
     public function superadminDashboard(){
-        $requisitions=Requisition::where(company())->where('status',0)->latest()->paginate(10);
-        return view('dasbhoard.superadmin',compact('requisitions'));
+        return view('dasbhoard.superadmin');
     }
     /*
     * admin dashboard
@@ -24,15 +23,15 @@ class DashboardController extends Controller
     /*
     * owner dashboard
     */
-    public function ownerDashboard(){
-        return view('dasbhoard.owner');
+    public function userDashboard(){
+        return view('dasbhoard.user');
     }
     
     /*
     * sales manager dashboard
     */
-    public function salesmanagerDashboard(){
-        return view('dasbhoard.salesmanager');
+    public function salesexecutiveDashboard (){
+        return view('dasbhoard.salesexecutive');
     }
 
     /*

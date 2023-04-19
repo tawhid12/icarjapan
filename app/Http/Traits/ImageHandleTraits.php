@@ -8,7 +8,7 @@ trait ImageHandleTraits{
 
     public function uploadImage($image, $path)
     {
-        $imageNewName = time() . "." . $this->checkValidImage($image);
+        $imageNewName = uniqid().time() . "." . $this->checkValidImage($image);
         $image->move("public/".$path,$imageNewName);
         return $imageNewName;
     }
@@ -16,7 +16,7 @@ trait ImageHandleTraits{
     public function checkValidImage($image)
     {
         $extention = $image->getClientOriginalExtension();
-        if ($extention === 'jpeg' || $extention === 'jpg' || $extention === 'png' || $extention === 'gif' || $extention === 'svg') {
+        if ($extention === 'jpeg' || $extention === 'jpg' || $extention === 'png' || $extention === 'gif' || $extention === 'svg' || $extention === 'pdf') {
             return $extention;
         } else {
             return 'Invalid image format. Please try again';
