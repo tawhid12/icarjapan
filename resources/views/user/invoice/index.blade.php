@@ -61,7 +61,7 @@
                                     <p class="m-0">{{$inv-> shipping_date}}</p>
                                 </td>
                                 <td>
-                                    <p class="m-0">{{$inv->consignee->c_name}}</p>
+                                    <p class="m-0">{{optional($inv->consignee)->c_name}}</p>
                                 </td>
                                 <td>
 
