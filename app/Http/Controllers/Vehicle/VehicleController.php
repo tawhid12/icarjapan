@@ -356,9 +356,10 @@ class VehicleController extends Controller
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy($id)
     {
-        //
+        $vehicle = Vehicle::find($id);
+        print_r($vehicle);die;
     }
 
     /*if($request->hasFile('image')) {
