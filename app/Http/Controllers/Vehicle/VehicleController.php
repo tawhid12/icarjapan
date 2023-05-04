@@ -358,8 +358,25 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
+        try{
         $vehicle = Vehicle::find(encryptor('decrypt',$id));
-        print_r($vehicle);die;
+        $vehicle_images = DB::table('vehicle_images')->where('vehicle_id',$id)->get();
+        foreach($vehicle_images as $v){
+            if (File::exists(public_path($v->image))) {
+                File::delete(public_path($v->image));
+            }
+        }
+        DB::table('vehicle_images')->where('vehicle_id',$id)->delete();
+        if($vehicle->delete()){
+        return redirect()->route(currentUser().'.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+            }else{
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            }
+        }catch(Exception $e){
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+
     }
 
     /*if($request->hasFile('image')) {
