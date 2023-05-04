@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+use App\Models\Vehicle\Vehicle;
 
 use App\Models\Settings\BodyType;
 use App\Models\Settings\DriveType;
@@ -20,6 +21,7 @@ use App\Models\Vehicle\Color;
 use App\Models\Vehicle\Transmission;
 use App\Models\Vehicle\VehicleModel;
 
+Use App\Models\CompanyAccountInfo;
 use DB;
 use Carbon\Carbon;
 
@@ -53,7 +55,8 @@ class AppServiceProvider extends ServiceProvider
             $inv_loc = InventoryLocation::all();
             $sub_body_types = SubBodyType::all();
 
-            $brands = Brand::all();
+            $brands = Brand::withCount('vehicles')->get();
+            
             $sub_brands = SubBrand::all();
             $fuel= Fuel::all();
             $colors = Color::all();
@@ -90,7 +93,10 @@ class AppServiceProvider extends ServiceProvider
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code',$location['geoplugin_countryCode'])->first();
 
-            $view->with(['countryName' => $countryName,'location' => $location, 'current_locale_data' => $current_locale_data,'japan_locale_data' => $japan_locale_data,'max_manu_Year'=> $max_manu_Year,'min_manu_Year'=> $min_manu_Year,'engine_types'=>$engine_types,'max_loading_range'=>$max_loading_range,'b_length_range'=>$b_length_range,'mileage_range'=>$mileage_range,'cc_range'=>$cc_range,'year_range' => $year_range,'discount_range' => $discount_range,'price_range' => $price_range,'body_types' =>$body_types,'drive_types' => $drive_types,'inv_loc'=> $inv_loc,'sub_body_types' => $sub_body_types,'brands' => $brands,'sub_brands'=> $sub_brands,'fuel' =>$fuel,'colors' => $colors,'trans' => $trans,'vehicle_models' => $vehicle_models]);
+            $com_acc_info = CompanyAccountInfo::first();
+            $total_cars = Vehicle::whereNull('r_status')->count();
+
+            $view->with(['total_cars' => $total_cars, 'com_acc_info' => $com_acc_info,'countryName' => $countryName,'location' => $location, 'current_locale_data' => $current_locale_data,'japan_locale_data' => $japan_locale_data,'max_manu_Year'=> $max_manu_Year,'min_manu_Year'=> $min_manu_Year,'engine_types'=>$engine_types,'max_loading_range'=>$max_loading_range,'b_length_range'=>$b_length_range,'mileage_range'=>$mileage_range,'cc_range'=>$cc_range,'year_range' => $year_range,'discount_range' => $discount_range,'price_range' => $price_range,'body_types' =>$body_types,'drive_types' => $drive_types,'inv_loc'=> $inv_loc,'sub_body_types' => $sub_body_types,'brands' => $brands,'sub_brands'=> $sub_brands,'fuel' =>$fuel,'colors' => $colors,'trans' => $trans,'vehicle_models' => $vehicle_models]);
         });
     }
 }

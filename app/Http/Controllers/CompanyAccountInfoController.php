@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanyAccountInfo;
 use Illuminate\Http\Request;
-
+use Toastr;
 class CompanyAccountInfoController extends Controller
 {
     /**
@@ -24,7 +24,7 @@ class CompanyAccountInfoController extends Controller
      */
     public function create()
     {
-        $com_acc_info = CompanyAccountInfo::all();
+        $com_acc_info = CompanyAccountInfo::first();
         return view('settings.company.com_info',compact('com_acc_info'));
     }
 
@@ -68,9 +68,31 @@ class CompanyAccountInfoController extends Controller
      * @param  \App\Models\CompanyAccountInfo  $companyAccountInfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyAccountInfo $companyAccountInfo)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $cinfo=CompanyAccountInfo::findOrFail(encryptor('decrypt',$id));
+            $cinfo->c_name=$request->c_name;
+            $cinfo->c_address=$request->c_address;
+            $cinfo->bank_name=$request->bank_name;
+            $cinfo->account_name=$request->account_name;
+            $cinfo->branch_name=$request->branch_name;
+            $cinfo->account_number=$request->account_number;
+            $cinfo->swift_code=$request->swift_code;
+            $cinfo->bank_address=$request->bank_address;
+            $cinfo->tel=$request->tel;
+            $cinfo->fax=$request->fax;
+            $cinfo->whatsup=$request->whatsup;
+            $cinfo->email=$request->email;
+            $cinfo->website=$request->website;
+            if($cinfo->save())
+                return redirect()->route(currentUser().'.compaccinfo.create')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+            else
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }catch(Exception $e){
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 
     /**

@@ -11,6 +11,8 @@ use App\Http\Requests\Authentication\SignupRequest;
 use App\Http\Requests\Authentication\SigninRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use DB;
+
 class AuthenticationController extends Controller
 {
     use ResponseTrait;
@@ -26,7 +28,8 @@ class AuthenticationController extends Controller
             $user->name=$request->FullName;
             $user->contact_no=$request->PhoneNumber;
             $user->email=$request->EmailAddress;
-            $user->country_id=$request->country_id;
+            $country_id = DB::table('countries')->where('code',$request->country_id)->first()->id;
+            $user->country_id=$country_id;
             $user->password=Hash::make($request->password);
             $user->role_id=3;
             if($user->save())

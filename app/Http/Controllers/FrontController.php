@@ -29,8 +29,8 @@ class FrontController extends Controller
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
 
-        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])); print_r($location);
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
 
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
 
@@ -86,7 +86,9 @@ class FrontController extends Controller
             ->select('countries.name')->distinct()->get();
         //return response()->json(array('data' =>'ok'));
 
-        return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'japan_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
+        
+
+        return view('front.welcome', compact('total_cars','most_views', 'countryName', 'current_locale_data', 'japan_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
     }
     public function brand(Brand $brand)
     {

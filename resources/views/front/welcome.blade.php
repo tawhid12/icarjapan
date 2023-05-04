@@ -21,14 +21,14 @@
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-brand text-white">
-              ICarJapan Bangladesh
+            {{$com_acc_info->c_name}} {{$countryName->name}}
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <i class="bi bi-geo-alt-fill"></i> Dhaka
+                <i class="bi bi-geo-alt-fill"></i> {{$location['geoplugin_city']}}
               </p>
               <p class="card-text">
-                <i class="bi bi-telephone-fill"></i> +880 123 4567809
+                <i class="bi bi-telephone-fill"></i> {{$com_acc_info->tel}}
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@
             <div class="card-body">
               @forelse($brands as $b)
               <p class="card-text">
-                <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}}</a>
+                <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}} ({{$b->vehicles_count}})</a>
               </p>
               @empty
               @endforelse

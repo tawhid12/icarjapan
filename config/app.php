@@ -55,8 +55,8 @@ return [
 
     'url' => env('APP_URL', "http://localhost"),
 
-    //'asset_url' => env('ASSET_URL', "http://localhost/icarjapan").'/public',
-    'asset_url' => env('ASSET_URL', " https://test.icarjapan.com").'/public',
+    'asset_url' => env('ASSET_URL', "http://localhost/icarjapan").'/public',
+    //'asset_url' => env('ASSET_URL', " https://test.icarjapan.com").'/public',
    
 
     /*

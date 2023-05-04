@@ -45,7 +45,7 @@ class BrandController extends Controller
         try{
             $b=new Brand;
             $b->name=$request->name;
-            $b->slug=strtolower(str_replace(' ', '-', $request->name));
+            $b->slug_name=strtolower(str_replace(' ', '-', $request->name));
             $b->created_by=currentUserId();
             if($request->has('image')) $b->image = $this->uploadImage($request->file('image'), 'uploads/brands');
             if($b->save()){
@@ -95,7 +95,7 @@ class BrandController extends Controller
         try{
             $b=Brand::findOrFail(encryptor('decrypt',$id));
             $b->name=$request->name;
-            $b->slug=strtolower(str_replace(' ', '-', $request->name));
+            $b->slug_name=strtolower(str_replace(' ', '-', $request->name));
             $b->updated_by=currentUserId();
             if($request->has('image')) $b->image = $this->uploadImage($request->file('image'), 'uploads/brands');
             if($b->save()){

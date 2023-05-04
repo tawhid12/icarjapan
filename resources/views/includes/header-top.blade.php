@@ -10,7 +10,7 @@
           <div class="row text-brand gx-1">
             <div class="col-md-3 mb-3 p-0">
               <p>{{$japan_locale_data->format('M, d, H:i (T)')}} {{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
-              <p>Total Cars: 247,455</p>
+              <p>Total Cars: {{$total_cars}}</p>
             </div>
             @php //print_r($location);die;@endphp
             <div class="col-md-3 mb-3 p-0">
