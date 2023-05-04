@@ -88,7 +88,7 @@ class FrontController extends Controller
 
         
 
-        return view('front.welcome', compact('total_cars','most_views', 'countryName', 'current_locale_data', 'japan_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
+        return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'japan_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
     }
     public function brand(Brand $brand)
     {
