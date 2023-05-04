@@ -21,7 +21,7 @@
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-brand text-white">
-            {{$com_acc_info->c_name}} {{$countryName->name}}
+            {{$com_acc_info->c_name}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
