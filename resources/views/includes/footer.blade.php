@@ -235,7 +235,7 @@
       <!-- Signature & Copywrite -->
       <div class="copywrite text-white">
           <div class="container">
-              <p>&copy I CAR JAPAN LTD.</p>
+              <p>&copy ICAR JAPAN LTD.</p>
           </div>
       </div>
   </footer>
