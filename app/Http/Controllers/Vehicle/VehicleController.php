@@ -358,7 +358,7 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        $vehicle = Vehicle::find($id);
+        $vehicle = Vehicle::find(encryptor('decrypt',$id));
         print_r($vehicle);die;
     }
 
