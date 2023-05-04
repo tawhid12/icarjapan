@@ -7,8 +7,25 @@
 @section('content')
 
 <!-- main section -->
-<main class="my-4">
+<main class="">
   <div class="container">
+    <!-- Important Notice -->
+    <div class="row text-brand">
+       <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
+        <p class="mb-1 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          Beware of Scams Advising Fake Money Transfer Instructions! <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+        <p class="mb-1 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+        <p class="mb-1 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+      </div>  
+    </div>
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
         <!-- left row 1 -->

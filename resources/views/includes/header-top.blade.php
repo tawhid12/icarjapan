@@ -1,5 +1,5 @@
   <!-- Header top start -->
-  <header class="container my-3 fw-bold header-top text-center">
+  <header class="container mt-3 fw-bold header-top text-center">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-3 logo">
         <img class="img-fluid" src="{{asset('front/img/header-logo.png')}}" alt="" />
@@ -43,7 +43,7 @@
                 <option value="3">UK</option>
               </select>
             </div> -->
-
+            @if(currentUser())
             <div class="col-md-3 mb-3">
               <!-- Button trigger dropdown -->
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,18 +51,19 @@
               </button>
               <!-- Dropdown menu -->
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="z-index:9999">
-                @if(currentUser())
                 <li><a class="dropdown-item" href="#"><strong>{{encryptor('decrypt', request()->session()->get('userName'))}}</strong></a></li>
                 <li><a class="dropdown-item" href="{{route(currentUser().'.profile')}}">{{__('My Account') }}</a></li>
                 <li><a class="dropdown-item" href="{{route(currentUser().'.change_password')}}">{{__('Change Password') }}</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{{route('logOut')}}">{{__('Logout') }}</a></li>
-                @else
-                <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
-                <li><a class="dropdown-item" href="{{route('register')}}">Register</a></li>
-                @endif
               </ul>
             </div>
+            @else
+              <div class="col-md-3 mb-3">
+                <a class="fw-bold" href="{{route('login')}}" style="color: var(--brand-color);font-size:13px;margin-right:10px;text-decoration:none;">Login</a>
+                <a class="fw-bold" href="{{route('register')}}" style="color: var(--brand-color);font-size:13px;margin-right:10px;text-decoration:none;">Register</a>
+              </div>
+            @endif
           </div>
         </div>
       </div>
