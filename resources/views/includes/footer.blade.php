@@ -1,6 +1,6 @@
   <!-- footer start -->
   <footer class="footer">
-      <div class="container py-4">
+      <div class="container-fluid py-4">
           <div class="row">
               <div class="col-sm-12 col-md-6 col-lg-3 footer-logo">
                   <img class="img-fluid" src="{{asset('front/img/header-logo.png')}}" alt="" />
