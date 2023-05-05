@@ -4,7 +4,7 @@
 @section('pageSubTitle','Create')
 
 @section('content')
-
+@include('partials.breadcrumbs',['model' => 'Brand'])
   <section id="multiple-column-form">
       <div class="row match-height">
           <div class="col-12">

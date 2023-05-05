@@ -63,20 +63,12 @@
         <!-- mid row 1 -->
         <div class="sg-mid-row-1">
           <!-- breadcrumb -->
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#"></a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Data
-              </li>
-            </ol>
-          </nav>
+          @include('partials.breadcrumbs',['model' => $brand])
           <!-- Product Search -->
-          <div class="input-group mb-3 shadow">
-            <span class="input-group-text">Search Car</span>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8 container-xl-8">
+              @include('front.search-box')
+            </div>
           </div>
           <!-- Status -->
           <div class="d-flex status">
@@ -103,7 +95,7 @@
             </div>
           </div>
           <!-- Product Title -->
-          <div class="prodcut-title my-3">
+          <div class="prodcut-title">
             <span>Stock Id: {{$v->stock_id}} </span>
             <p>{{$v->fullName}}</p>
             <span>4 Review <i class="bi bi-star-half"></i> </span> <br />

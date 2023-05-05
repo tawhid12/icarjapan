@@ -56,9 +56,10 @@ body {
 .navbar ul li a {
   font-weight: bold;
   color: #fff;
+  font-size:14px;
 }
 .navbar ul li a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: #fff;
 }
 /* left col */
@@ -477,4 +478,33 @@ body {
 /*right-row-serarch*/
 .right-row-serarch{
   background-color: #353535 !important;
+}
+/*Nav*/
+li.nav-item {
+    margin: 0px 40px;
+}
+/*Logo Image*/
+.header-top .logo .img-fluid{
+    max-width: 100%;
+    height: 60px;
+    object-fit: scale-down;
+    width: auto;
+}
+.header-top h4{
+  color:#000;
+  font-size:20px;
+  letter-spacing: 2px;
+}
+.navbar-nav ,.navbar{
+  padding:0px !important;
+}
+#lang_id{
+  color:#000;
+  border-color:#000;
+}
+.auth-link{
+  color: #000;
+  font-size:13px;
+  margin-right:10px;
+  text-decoration:none;
 }

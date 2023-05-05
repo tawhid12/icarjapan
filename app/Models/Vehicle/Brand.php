@@ -23,5 +23,8 @@ class Brand extends Model
     public function getSlugAttribute()
     {
         return \Illuminate\Support\Str::slug($this->name);
-    }     
+    } 
+    public function breadcrumbName(){
+        return $this->name;
+    }    
 }

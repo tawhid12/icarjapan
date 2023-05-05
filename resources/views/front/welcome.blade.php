@@ -8,19 +8,19 @@
 
 <!-- main section -->
 <main class="">
-  <div class="container">
+  <div class="container-fluid">
     <!-- Important Notice -->
     <div class="row text-brand">
        <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
-        <p class="mb-1 notice-text">
+        <p class="m-0 notice-text">
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
           Beware of Scams Advising Fake Money Transfer Instructions! <a class="text-primary font-bold" href="">See Details</a>
         </p>
-        <p class="mb-1 notice-text">
+        <p class="m-0 notice-text">
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
           About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
         </p>
-        <p class="mb-1 notice-text">
+        <p class="m-0 notice-text">
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
           About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
         </p>
@@ -37,7 +37,7 @@
         <!-- left row 2 -->
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
+            <h5 class="card-title bg-brand text-black">
             {{$com_acc_info->c_name}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
@@ -53,7 +53,7 @@
         <!-- left row 3 -->
         <div class="left-row left-row-3 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search by Brands</h5>
+            <h5 class="card-title bg-brand text-black">Search by Brands</h5>
             <div class="card-body">
               @forelse($brands as $b)
               <p class="card-text">
@@ -67,7 +67,7 @@
         <!-- left row 4 -->
         <div class="left-row left-row-4 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
+            <h5 class="card-title bg-brand text-black">
               Search By Inventory Location
             </h5>
             <div class="card-body">
@@ -85,7 +85,7 @@
         <!-- left row 5 -->
         <div class="left-row left-row-5 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Price</h5>
+            <h5 class="card-title bg-brand text-black">Search By Price</h5>
             <div class="card-body">
               @php
               for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
@@ -102,7 +102,7 @@
         <!-- left row 6 -->
         <div class="left-row left-row-6 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
+            <h5 class="card-title bg-brand text-black">
               Search By Discount
             </h5>
             <div class="card-body">
@@ -121,7 +121,7 @@
         <!-- left row 7 -->
         <div class="left-row left-row-7 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Type</h5>
+            <h5 class="card-title bg-brand text-black">Search By Type</h5>
             <div class="card-body">
               @forelse($body_types as $bt)
               <p class="card-text">
@@ -135,7 +135,7 @@
         <!-- left row 8 -->
         <div class="left-row left-row-8 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
+            <h5 class="card-title bg-brand text-black">
               Search By Category
             </h5>
             <div class="card-body">
@@ -150,14 +150,7 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
-        <!-- mid row 1 -->
-        <div class="mid-row-1">
-          <div class="input-group mb-3 shadow">
-            <span class="input-group-text">Search Car</span>
-            <input type="text" id="item_search" class="form-control ui-autocomplete-input" aria-label="Amount (to the nearest dollar)" />
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
-          </div>
-        </div>
+        @include('front.search-box')
         <!-- mid row 2 -->
         <div class="mid-row-2">
           <div class="row">
