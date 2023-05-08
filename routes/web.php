@@ -19,6 +19,9 @@ use App\Http\Controllers\Settings\CountryController as country;
 use App\Http\Controllers\Vehicle\BrandController as brand;
 use App\Http\Controllers\Vehicle\SubBrandController as subBrand;
 use App\Http\Controllers\Vehicle\ColorController as color;
+use App\Http\Controllers\Vehicle\DoorController as door;
+use App\Http\Controllers\Vehicle\SeatController as seat;
+use App\Http\Controllers\Vehicle\ConditionController as condition;
 use App\Http\Controllers\Vehicle\FuelController as fuel;
 use App\Http\Controllers\Vehicle\TransmissionController as transmission;
 use App\Http\Controllers\Vehicle\VehicleModelController as vehicle_model;
@@ -138,6 +141,9 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('brand',brand::class,['as'=>'superadmin']);
         Route::resource('subBrand',subBrand::class,['as'=>'superadmin']);
         Route::resource('color',color::class,['as'=>'superadmin']);
+        Route::resource('door',door::class,['as'=>'superadmin']);
+        Route::resource('seat',seat::class,['as'=>'superadmin']);
+        Route::resource('condition',condition::class,['as'=>'superadmin']);
         Route::resource('fuel',fuel::class,['as'=>'superadmin']);
         Route::resource('transmission',transmission::class,['as'=>'superadmin']);
         Route::resource('vehicle_model',vehicle_model::class,['as'=>'superadmin']);
@@ -161,6 +167,8 @@ Route::group(['middleware'=>isAdmin::class],function(){
         
     });
 });
+Route::post('gallery/delete',[vehicle::class, 'deleteImg'])->name('gallery.delete');
+Route::get('gallery/cover/{id}',[vehicle::class, 'galleryCover'])->name('gallery.cover');
 
 
 

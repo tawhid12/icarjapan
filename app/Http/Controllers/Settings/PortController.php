@@ -99,8 +99,18 @@ class PortController extends Controller
      * @param  \App\Models\Port  $port
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Port $port)
+    public function destroy($id)
     {
-        //
+        try{
+            $port = Port::find(encryptor('decrypt',$id));
+            if($port->delete()){
+            return redirect()->route(currentUser().'.port.index')->with(Toastr::success('Data Deleted!', 'Success', ["positionClass" => "toast-top-right"]));
+                }else{
+                    return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+                }
+            }catch(Exception $e){
+                //dd($e);
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            }
     }
 }

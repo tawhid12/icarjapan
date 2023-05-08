@@ -24,12 +24,12 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                       <div class="form-group">
-                                          <label for="inv_loc_id">Inventory Location</label>
+                                          <label for="inv_loc_id">Select Country</label>
                                           <select name="inv_loc_id" class="form-control">
                                               <option value="">Select</option>
-                                              @if(count($inv_loc))
-                                              @foreach($inv_loc as $in)
-                                              <option value="{{ $in->id}}">{{$in->name}}</option>
+                                              @if(count($countries))
+                                              @foreach($countries as $c)
+                                              <option value="{{ $c->id}}">{{$c->name}}</option>
                                               @endforeach
                                               @endif
                                           </select>

@@ -66,8 +66,11 @@
                     <li class="submenu-item"><a href="{{route(currentUser().'.vehicle.index')}}" class='submenu-link'>{{__('Vehicle')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.brand.index')}}" class='submenu-link'>{{__('Brand')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.subBrand.index')}}" class='submenu-link'>{{__('Sub Brand')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.vehicle_model.index')}}" class='submenu-link'>{{__('Vehicle Model')}}</a></li>
+                    {{--<li class="submenu-item"><a href="{{route(currentUser().'.vehicle_model.index')}}" class='submenu-link'>{{__('Vehicle Model')}}</a></li>--}}
                     <li class="submenu-item"><a href="{{route(currentUser().'.color.index')}}" class='submenu-link'>{{__('Color')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.door.index')}}" class='submenu-link'>{{__('Door')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.seat.index')}}" class='submenu-link'>{{__('Seat')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.condition.index')}}" class='submenu-link'>{{__('Condition')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.fuel.index')}}" class='submenu-link'>{{__('Fuel')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.transmission.index')}}" class='submenu-link'>{{__('Transmission')}}</a></li>
                 </ul>  

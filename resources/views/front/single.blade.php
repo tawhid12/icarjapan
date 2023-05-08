@@ -19,6 +19,52 @@
       padding-right: 50px;
     }
   }
+
+  .owl-carousel .vehicle-img img {
+    height: 480px;
+    /* Set the height of the image */
+    width: 100%;
+    /* Set the width of the image to 100% to make it responsive */
+    object-fit: cover;
+    /* Use object-fit: cover to make sure the image fills the container */
+  }
+
+  .owl-carousel .vehicle-img-gallery img {
+    height: 60px;
+    /* Set the height of the image */
+    width: 80px;
+    /* Set the width of the image to 100% to make it responsive */
+    object-fit: cover;
+    /* Use object-fit: cover to make sure the image fills the container */
+  }
+
+  .main-img {
+    position: relative;
+  }
+
+  .main-img.owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    background-color: #fff;
+    color: #000;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .main-img.owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 0;
+    background-color: #fff;
+    color: #000;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
 </style>
 
 
@@ -72,7 +118,7 @@
           </div>
           <!-- Status -->
           <div class="d-flex status">
-            <div class="shadow">
+            <div class="hg-box inv">
               <p>
                 <span>
                   @if($v->inv_loc)
@@ -82,7 +128,7 @@
                 Inventory
               </p>
             </div>
-            <div class="shadow">
+            <div class="hg-box deg mx-2">
               <p>
                 <span>
                   <img src="{{asset('uploads/default/360.png')}}" alt="" />
@@ -90,13 +136,13 @@
                 360 <sup>o</sup> Images
               </p>
             </div>
-            <div class="shadow">
-              <p>New Arrival</p>
+            <div class="hg-box new-arival">
+              <p class="text-primary">New Arrival</p>
             </div>
           </div>
           <!-- Product Title -->
           <div class="prodcut-title">
-            <span>Stock Id: {{$v->stock_id}} </span>
+            {{--<span>Stock Id: {{$v->stock_id}} </span>--}}
             <p>{{$v->fullName}}</p>
             <span>4 Review <i class="bi bi-star-half"></i> </span> <br />
             <span>{{$v->description}}</span>
@@ -105,16 +151,16 @@
           <div class="product-view">
             <div class="row">
               <div class="col-sm-8">
-                <div class="prductgalary">
+                <div class="">
                   <div class="main-img owl-carousel owl-theme">
                     @forelse($v_images as $v_img)
-                    <img class="img-fluid w-100 single-image" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" />
+                    <div class="vehicle-img"><img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" class="single-image"></div>
                     @empty
                     @endforelse
                   </div>
 
 
-                  <div class="product-galary my-3">
+                  <div class="">
                     <div id="">
 
                       <?php $index = 0; ?>
@@ -123,7 +169,7 @@
 
                           <?php foreach ($chunk as $vimg) : ?>
 
-                            <div>
+                            <div class="vehicle-img-gallery">
                               <img data-src="{{asset('uploads/vehicle_images/'.$vimg->image)}}" src="{{asset('uploads/vehicle_images/'.$vimg->image)}}" class="d-block sm-product-img gallery-img" alt="..." />
                             </div>
                           <?php endforeach; ?>
@@ -143,34 +189,104 @@
                     <thead>
                       <tr class="table-dark">
                         <th class="text-center" colspan="4" scope="col">
-                          {{optional($v->brand)->name}} {{optional($v->sub_brand)->name}} - Car Details
+                          {{$v->fullName}} - Car Details
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">Stock Id:</th>
+                        <th scope="row">STOCK ID</th>
                         <td>{{$v->stock_id}}</td>
-                        <th scope="row">Inventory Location:</th>
+                        <th scope="row">Engine Size (CC)</th>
+                        <td>{{$v->e_size}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Maker</th>
+                        <td>{{ optional($v->brand)->name }}</td>
+                        <th scope="row">Engine Info</th>
+                        <td>{{$v->e_info}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Model</th>
+                        <td>{{ optional($v->sub_brand)->name }}</td>
+                        <th scope="row">Engine Code</th>
+                        <td>{{$v->e_code}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Package</th>
+                        <td>{{ $v->package }}</td>
+                        <th scope="row">Location</th>
                         <td>{{ optional($v->inv_loc)->name }}</td>
                       </tr>
                       <tr>
-                        <th scope="row">Model Code:</th>
-                        <td>{{ optional($v->vehicle_model)->name }}</td>
-                        <th scope="row">Registration Year:</th>
-                        <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y/m')}}</td>
+                        <th scope="row">Chassis</th>
+                        <td>{{ $v->chassis_no }}</td>
+                        <th scope="row">Drive</th>
+                        <td>{{ optional($v->drive_type)->name }}</td>
                       </tr>
                       <tr>
-                        <th scope="row">Production Year:</th>
+                        <th scope="row">Manufacture Year</th>
+                        <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->manu_year))->format('Y')}}</td>
+                        <th scope="row">Registration Year</th>
                         <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}</td>
-                        <th scope="row">Transmission:</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Mileage (KM)</th>
+                        <td>{{ $v->mileage }}</td>
+                        <th scope="row">Transmission</th>
                         <td>{{ optional($v->trans)->name }}</td>
                       </tr>
                       <tr>
-                        <th scope="row">Color:</th>
-                        <td>{{ optional($v->color)->name }}</td>
-                        <th scope="row">Drive:</th>
-                        <td>{{ optional($v->drive_type)->name }}</td>
+                        <th scope="row">Ext. Color</th>
+                        <td>{{ optional($v->ext_color)->name }}</td>
+                        <th scope="row">Steering</th>
+                        <td>@if($v->steering == 1)  RHD @else LHD @endif</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Door</th>
+                        <td>{{ optional($v->door)->name }}</td>
+                        <th scope="row">Weight</th>
+                        <td>{{ $v->weight }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Seats</th>
+                        <td>{{ optional($v->seat)->name }}</td>
+                        <th scope="row">Capacity</th>
+                        <td>{{ $v->max_loading_capacity }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Body Type</th>
+                        <td>{{ optional($v->body_type)->name }}</td>
+                        <th scope="row">Dimention (L*H*W)</th>
+                        <td>{{ $v->body_length }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Fuel Type</th>
+                        <td>{{ optional($v->fuel)->name }}</td>
+                        <th scope="row">M3</th>
+                        <td>{{ $v->m3 }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Int. Color</th>
+                        <td>{{ optional($v->int_color)->name }}</td>
+                        <th scope="row">Condition</th>
+                        <td>{{ optional($v->condition)->name }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">New Arival Country</th>
+                        <td></td>
+                        <th scope="row">Discount</th>
+                        <td>{{ $v->discount }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Search Keyword</th>
+                        <td>{{ str_replace(',', ' ', $v->search_keyword) }}</td>
+                        <th scope="row">FOB</th>
+                        <td>{{ $v->fob }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Description</th>
+                        <td colspan="3">{{ $v->description }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -200,33 +316,62 @@
                     <thead>
                       <tr class="table-dark">
                         <th class="text-center" colspan="4" scope="col">
-                          Accessories
+                          Features
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="@if($v->air_bag ==1) bg-danger-subtle @endif">Air Bag</td>
-                        <td class="@if($v->anti_lock_brake_system ==1) bg-danger-subtle @endif">Anti-Lock Brake System</td>
-                        <td class="@if($v->air_con ==1) bg-danger-subtle @endif">Air Conditioner</td>
-                        <td class="@if($v->back_tire ==1) bg-danger-subtle @endif">Back Tire</td>
+                        @if($v->cd_player ==1)<td>CD Player</td> @else <td>-</td> @endif
+                        @if($v->sun_roof ==1)<td>Sun Roof</td> @else <td>-</td> @endif
+                        @if($v->leather_seat ==1)<td>Leather Seat</td> @else <td>-</td>@endif
+                        @if($v->alloy_wheels ==1)<td>Alloy Wheels</td> @else <td>-</td> @endif
                       </tr>
                       <tr>
-                        <td class="@if($v->fog_lights ==1) bg-danger-subtle @endif">Fog Lights</td>
-                        <td class="@if($v->grill_guard ==1) bg-danger-subtle @endif">Grill Guard</td>
-                        <td class="@if($v->leather_seats ==1) bg-danger-subtle @endif">Leather Seats</td>
-                        <td class="@if($v->navigation ==1) bg-danger-subtle @endif">Navigation</td>
+                        @if($v->power_steering ==1)<td>Power Steering</td> @else <td>-</td> @endif
+                        @if($v->power_windows ==1)<td>Power Windows</td> @else <td>-</td> @endif
+                        @if($v->air_con ==1)<td>Air Con</td> @else <td>-</td> @endif
+                        @if($v->anti_lock_brake_system ==1)<td>ABS lock_brake_system</td> @else <td>-</td> @endif
                       </tr>
                       <tr>
-                        <td class="@if($v->power_steering ==1) bg-danger-subtle @endif">Power Steering</td>
-                        <td class="@if($v->power_windows ==1) bg-danger-subtle @endif">Power Windows</td>
-                        <td class="@if($v->roof_rails ==1) bg-danger-subtle @endif">Roof Rails</td>
-                        <td class="@if($v->rear_spoiler ==1) bg-danger-subtle @endif">Rea Spoiler</td>
+                        @if($v->air_bag ==1)<td>Air Bag</td> @else <td>-</td> @endif
+                        @if($v->radio ==1)<td>Radio</td> @else <td>-</td> @endif
+                        @if($v->cd_changer ==1)<td>Cd Changer</td> @else <td>-</td> @endif
+                        @if($v->dvd ==1)<td>DVD</td> @else <td>-</td> @endif
                       </tr>
                       <tr>
-                        <td class="@if($v->sun_roof ==1) bg-danger-subtle @endif">Sun Roof</td>
-                        <td class="@if($v->tv ==1) bg-danger-subtle @endif">Tv</td>
-                        <td class="@if($v->dual_air_bags ==1) bg-danger-subtle @endif">Dual Air Bags</td>
+                        @if($v->tv ==1)<td>TV</td> @else <td>-</td> @endif
+                        @if($v->power_seat ==1)<td>Power Seat</td> @else <td>-</td> @endif
+                        @if($v->back_tire ==1)<td>Back Tire</td>@else <td>-</td>  @endif
+                        @if($v->grill_guard ==1)<td>Grill Guard</td> @else <td>-</td> @endif
+                      </tr>
+                      <tr>
+                        @if($v->rear_spoiler ==1)<td>Rear Spoiler</td> @else <td>-</td> @endif
+                        @if($v->central_locking ==1)<td>Central Locking</td> @else <td>-</td> @endif
+                        @if($v->jack ==1)<td>Jack</td> @else <td>-</td> @endif
+                        @if($v->spare_tire ==1)<td>Spare Tire</td> @else <td>-</td> @endif
+                      </tr>
+                      <tr>
+                        @if($v->wheel_spanner ==1)<td>Wheel Spanner</td> @else <td>-</td> @endif
+                        @if($v->fog_lights ==1)<td>Fog Lights</td> @else <td>-</td> @endif
+                        @if($v->back_camera ==1)<td>Back Camera</td> @else <td>-</td> @endif
+                        @if($v->push_start ==1)<td>Push Start</td> @else <td>-</td> @endif
+                      </tr>
+                      <tr>
+                        @if($v->keyless_entry ==1)<td>Keyless Entry</td> @else <td>-</td> @endif
+                        @if($v->esc ==1)<td>ESC</td> @else <td>-</td> @endif
+                        @if($v->deg_360_cam ==1)<td>360 Degree Camera</td> @else <td>-</td> @endif
+                        @if($v->body_kit ==1)<td>Body Kit</td> @else <td>-</td> @endif
+                      </tr>
+                      <tr>
+                        @if($v->side_airbag ==1)<td>Side Airbag</td> @else <td>-</td> @endif
+                        @if($v->power_mirror ==1)<td>Power Mirror</td> @else <td>-</td> @endif
+                        @if($v->side_skirts ==1)<td>Side Skirts</td> @else <td>-</td> @endif
+                        @if($v->front_lip_spoiler ==1)<td>Front Lip Spoiler</td> @else <td>-</td> @endif
+                      </tr>
+                      <tr>
+                        @if($v->navigation ==1)<td>Navigation</td> @else <td>-</td> @endif
+                        @if($v->turbo ==1)<td>Turbo</td> @else <td>-</td> @endif
                       </tr>
                     </tbody>
                   </table>
@@ -388,155 +533,161 @@
                   </div>
                 </div>
                 <!-- price table -->
-                <div class="my-4 price-table bg-light p-2 shadow">
-                  <table class="table table-bordered m-0">
-                    <thead>
-                      <tr>
-                        <th class="table-dark" colspan="2" scope="col">
-                          Total Price Calculator
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Currency</th>
-                        <td>
-                          <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option value="1">USD</option>
-                          </select>
-                        </td>
-                      </tr>
-                      @php
-                      $actual_price = $v->price;
-                      $dis_price = $v->price*$v->discount/100;
-                      $price_after_dis = ($actual_price-$dis_price);
-                      @endphp
-                      <tr>
-                        <th scope="row">Vehicle Price</th>
-                        <td>USD {{$price_after_dis}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"></th>
-                        <td><del>USD {{$actual_price}}</del></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Save</th>
-                        <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Approx.</th>
-                        <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$dis_price), 2, '.', ',')}}</td>
-                        <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
-                      </tr>
-                      <tr>
-                        <th scope="row">Destination Country</th>
-                        <td>
-                          <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option value="">Selet Country</option>
-                            @if(count($countries) > 0)
-                            @forelse($countries as $c)
+                <form id="my-form">
+                  <div class="my-4 price-table bg-light p-2 shadow">
+                    <table class="table table-bordered m-0">
+                      <thead>
+                        <tr>
+                          <th class="table-dark" colspan="2" scope="col">
+                            Total Price Calculator
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Currency</th>
+                          <td>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                              <option value="1">USD</option>
+                            </select>
+                          </td>
+                        </tr>
+                        @php
+                        $actual_price = $v->price;
+                        $dis_price = $v->price*$v->discount/100;
+                        $price_after_dis = ($actual_price-$dis_price);
+                        @endphp
+                        <tr>
+                          <th scope="row">Vehicle Price</th>
+                          <td>USD {{$price_after_dis}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td><del>USD {{$actual_price}}</del></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Save</th>
+                          <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Approx.</th>
+                          <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$dis_price), 2, '.', ',')}}</td>
+                          <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
+                        </tr>
+                        <tr>
+                          <th scope="row">Destination Country</th>
+                          <td>
+                            {{\Session::get('country_id')}} {{request('country_id')}}
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
+                              <option value="">Selet Country</option>
+                              @if(count($countries) > 0)
+                              @forelse($countries as $c)
+                              @if(\Session::get('country_id') && empty(request('country_id')))
+                              <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                              @elseif(!empty(request('country_id')))
+                              <option value="{{$c->id}}" @if(request('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                              @else
+                              <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
+                              @endif
 
-                            @if(\Session::get('country_id'))
-                            <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
-                            @else
-                            <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
-                            @endif
-
-                            @empty
-                            @endforelse
-                            @endif
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th colspan="2" id="table-bg" scope="row">
-                          {{$v->note}}
-                        </th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Destination Port</th>
-                        <td>
-                          @php
-                          if(\Session::get('country_id')){
+                              @empty
+                              @endforelse
+                              @endif
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th colspan="2" id="table-bg" scope="row">
+                            {{$v->note}}
+                          </th>
+                        </tr>
+                        <tr>
+                          <th scope="row">Destination Port</th>
+                          <td>
+                            @php
+                            if(\Session::get('country_id') && empty(request('country_id'))){
                             $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
-                          }else{
+                            }elseif(!empty(request('country_id'))){
+                            $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
+                            }else{
                             $des_port = \DB::table('ports')->where('inv_loc_id',$countryName->id)->get();
-                          }
-                          
-                          @endphp
-                          <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option value="">Select Port</option>
-                            @if(count($des_port) > 0)
-                            @forelse($des_port as $key => $dp)
-                            <option value="{{$dp->id}}" @if($key == 0) selected @endif>{{$dp->name}}</option>
-                            @empty
-                            @endforelse
-                            @endif
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Shipment</th>
-                        <td>
-                          <div class="mb-3 form-check">
-                            <input type="radio" class="form-check-input" id="exampleCheck1" checked />
-                            <label class="form-check-label" for="exampleCheck1">RoRo</label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Freight</th>
-                        <td>Ask</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Vanning</th>
-                        <td>N/A</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Inspection</th>
-                        <td>USD 200.00</td>
-                        <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*200)}}" class="ins_val">
-                      </tr>
-                      <tr>
-                        <th scope="row"></th>
-                        <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Insurance</th>
-                        <td>USD 272</td>
-                        <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*272)}}" class="insur">
-                      </tr>
-                      <tr>
-                        <th scope="row"></th>
-                        <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"></th>
-                        <td class="total"></td>
-                      </tr>
-                      <tr>
-                        <th colspan="2" scope="row">
-                          ICARJAPAN ships a car upon receiving Deposit(Down
-                          payment agreed). A customer shall pay within 7
-                          days after BL copy shown as an evidence of export.
-                          Please give us an inquiry if you have any concern.
-                        </th>
-                      </tr>
-                      <tr>
-                        <th colspan="2" scope="row">
-                          Production Year/month is provided by Suppliers.
-                          ICARJAPAN shall not be responsible for any loss, damages
-                          and troubles caused by this information.
-                        </th>
-                      </tr>
-                      <tr class="table-dark">
-                        <th class="h5 fw-bold" scope="row">Total Price</th>
-                        <td class="fw-bold">Ask</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Contact Us  -->
-                </div>
+                            }
+
+                            @endphp
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                              <option value="">Select Port</option>
+                              @if(count($des_port) > 0)
+                              @forelse($des_port as $key => $dp)
+                              <option value="{{$dp->id}}" @if($key==0) selected @endif>{{$dp->name}}</option>
+                              @empty
+                              @endforelse
+                              @endif
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Shipment</th>
+                          <td>
+                            <div class="mb-3 form-check">
+                              <input type="radio" class="form-check-input" id="exampleCheck1" checked />
+                              <label class="form-check-label" for="exampleCheck1">RoRo</label>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Freight</th>
+                          <td>Ask</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Vanning</th>
+                          <td>N/A</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Inspection</th>
+                          <td>USD 200.00</td>
+                          <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*200)}}" class="ins_val">
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Insurance</th>
+                          <td>USD 272</td>
+                          <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*272)}}" class="insur">
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td class="total"></td>
+                        </tr>
+                        <tr>
+                          <th colspan="2" scope="row">
+                            ICARJAPAN ships a car upon receiving Deposit(Down
+                            payment agreed). A customer shall pay within 7
+                            days after BL copy shown as an evidence of export.
+                            Please give us an inquiry if you have any concern.
+                          </th>
+                        </tr>
+                        <tr>
+                          <th colspan="2" scope="row">
+                            Production Year/month is provided by Suppliers.
+                            ICARJAPAN shall not be responsible for any loss, damages
+                            and troubles caused by this information.
+                          </th>
+                        </tr>
+                        <tr class="table-dark">
+                          <th class="h5 fw-bold" scope="row">Total Price</th>
+                          <td class="fw-bold">Ask</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- Contact Us  -->
+                  </div>
+                </form>
                 @if(currentUser() == 'user')
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
@@ -756,7 +907,10 @@
     console.log(insurance);
     $('.total').text('Approx. BDT ' + (convert_price + inspection + insurance));
 
-
+    /*===Country Wise Port  */
+    $('select[name="country_id"]').on('change', function() {
+      $('#my-form').submit();
+    });
 
   });
 </script>

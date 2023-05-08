@@ -1,6 +1,6 @@
   <!-- Header top start -->
   <div class="header-top">
-    <header class="container-fluid fw-bold">
+    <header class="container fw-bold">
       <div class="row d-flex align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-2 logo">
           <img class="img-fluid" src="{{asset('front/img/header-logo.png')}}" alt="" />

@@ -29,8 +29,8 @@ class FrontController extends Controller
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
 
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
-        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
 
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
 
@@ -40,7 +40,7 @@ class FrontController extends Controller
 
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.v_model', 'vehicles.v_model_id', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
             ->join('new_arivals', 'vehicles.id', 'new_arivals.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
@@ -52,7 +52,7 @@ class FrontController extends Controller
 
         /*==Afford Vehicle==*/
         $afford_by_country = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.v_model', 'vehicles.v_model_id', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
             ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
@@ -62,7 +62,7 @@ class FrontController extends Controller
 
         /*==High Grade Vehicle==*/
         $high_grade_by_country = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.v_model', 'vehicles.v_model_id', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
             ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
@@ -73,11 +73,11 @@ class FrontController extends Controller
         $vehicles = Vehicle::latest()->take(10)->get();
         /*=Most Viewed Vehicle in Bangladesh==*/
         $most_views = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.v_model', 'vehicles.v_model_id', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
             ->join('most_views', 'vehicles.id', 'most_views.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('r_status')
+            ->whereNull('vehicles.r_status')
             ->where('most_views.country_id', $countryName->id)->inRandomOrder()->take(10)->get();
         //print_r($most_views);die;
 

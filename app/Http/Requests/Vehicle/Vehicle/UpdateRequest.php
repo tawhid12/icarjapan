@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
             'stock_id'=>'required|unique:vehicles,stock_id,'.$id,
             'brand_id'=>'required',
             'sub_brand_id'=>'required',
-            'year'=>'required',
+            //'year'=>'required',
         ];
     }
 

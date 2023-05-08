@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['front.welcome','front.single','front.brand','front.search'], function($view)
         {
-            $body_types = BodyType::all();
+            $body_types = BodyType::withCount('vehicles')->get();
             $drive_types = DriveType::all();
             $inv_loc = InventoryLocation::all();
             $sub_body_types = SubBodyType::all();
@@ -68,25 +68,25 @@ class AppServiceProvider extends ServiceProvider
             $colors = Color::all();
             $trans = Transmission::all();
             $vehicle_models = VehicleModel::all();
-            $trans = Transmission::all();
+            $trans = Transmission::withCount('vehicles')->get();
 
             /*====Price====Max===Min*/
             $price_range = DB::table('vehicles')->select(\DB::raw('MIN(price) AS minprice, MAX(price) AS maxprice'))->get()->toArray();
             /*====Discount====Max===Min*/
             $discount_range = DB::table('vehicles')->select(\DB::raw('MIN(discount) AS mindis, MAX(discount) AS maxdis'))->get()->toArray();
             /*====year====Max===Min*/
-            $year_range = DB::table('vehicles')->select(\DB::raw('MIN(year) AS minyear, MAX(year) AS maxyear'))->get()->toArray();
+            $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
             /*====engine cc====Max===Min*/
-            $cc_range = DB::table('vehicles')->select(\DB::raw('MIN(cc) AS mincc, MAX(cc) AS maxcc'))->get()->toArray();
+            $cc_range = DB::table('vehicles')->select(\DB::raw('MIN(e_size) AS mincc, MAX(e_size) AS maxcc'))->get()->toArray();
             /*====Mileage====Max===Min*/
             $mileage_range = DB::table('vehicles')->select(\DB::raw('MIN(mileage) AS min_mileage, MAX(mileage) AS max_mileage'))->get()->toArray();
             /*====Body Length===Max===Min*/
-            $b_length_range = DB::table('vehicles')->select(\DB::raw('MIN(b_length) AS b_length_min, MAX(b_length) AS b_length_max'))->get()->toArray();
+            $b_length_range = DB::table('vehicles')->select(\DB::raw('MIN(e_info) AS b_length_min, MAX(e_info) AS b_length_max'))->get()->toArray();
             /*====Max Loading===Max===Min*/
             $max_loading_range = DB::table('vehicles')->select(\DB::raw('MIN(max_loading_capacity) AS loading_min, MAX(max_loading_capacity) AS loading_max'))->get()->toArray();
 
             /*==Engine Type */
-            $engine_types = DB::table('vehicles')->select('e_type')->distinct()->wherenotNull('e_type')->get();
+            $engine_types = DB::table('vehicles')->select('e_info')->distinct()->wherenotNull('e_info')->get();
             /*====Manufacture year====Max===Min*/
             $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
             $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
