@@ -56,7 +56,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="brand_id">Brand</label>
-                                        <select name="brand_id" class="form-control js-example-basic-single">
+                                        <select name="brand_id" class="form-control js-example-basic-single" id="brand_id">
                                             <option value="">Select</option>
                                             @if(count($brands))
                                             @foreach($brands as $b)
@@ -73,13 +73,13 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="sub_brand_id">Sub Brand</label>
-                                        <select name="sub_brand_id" class="form-control js-example-basic-single">
-                                            <option value="">Select</option>
+                                        <select name="sub_brand_id" class="form-control js-example-basic-single" id="sub_brand">
+                                            {{--<option value="">Select</option>
                                             @if(count($sub_brands))
                                             @foreach($sub_brands as $sb)
                                             <option value="{{ $sb->id}}" {{ old('sub_brand_id',$v->sub_brand_id) == $sb->id ? "selected" : "" }}>{{$sb->name}}</option>
                                             @endforeach
-                                            @endif
+                                            @endif--}}
                                         </select>
                                     </div>
                                     @if($errors->has('sub_brand_id'))
@@ -106,13 +106,13 @@
                                         <label for="manu_year">Manufacture Year</label>
                                         <select name="manu_year" class="form-control js-example-basic-single">
                                             <option value="">Select Manufacture Year</option>
-                                                @php
-                                                for($i=date('Y');$i>=1980;$i--){
-                                                @endphp 
-                                                <option value="{{$i}}" @if($v->manu_year == $i) selected @endif>{{$i}}</option>
-                                                @php
-                                                }
-                                                @endphp
+                                            @php
+                                            for($i=date('Y');$i>=1980;$i--){
+                                            @endphp
+                                            <option value="{{$i}}" @if($v->manu_year == $i) selected @endif>{{$i}}</option>
+                                            @php
+                                            }
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
@@ -375,7 +375,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 col-12">
+                                {{--<div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" id="name" value="{{old('name',$v->name)}}" class="form-control" placeholder="Vehicle Name" name="name">
@@ -383,7 +383,7 @@
                                     @if($errors->has('name'))
                                     <span class="text-danger"> {{ $errors->first('name') }}</span>
                                     @endif
-                                </div>
+                                </div>--}}
 
 
                                 <div class="col-md-3 col-12">
@@ -404,7 +404,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="price">Price</label>
-                                        <input type="text" id="price" value="{{old('price',$v->price)}}" class="form-control" placeholder="price" name="price">
+                                        <input type="text" id="price" value="{{old('price',$v->fob)}}" class="form-control" placeholder="price" name="price">
                                     </div>
                                 </div>
 
@@ -585,48 +585,48 @@
                                     <div class="form-group mt-3">
                                         <label for="name">Video Link</label>
                                         <input type="text" id="v_link" value="{{old('v_link',$v->v_link)}}" class="form-control" placeholder="Video Link" name="v_link">
-                                    </div>
-                                </div>--}}
-                                <div class="col-md-6 col-12 mt-3">
-                                    <div class="form-group">
-                                        <h4>Gallery Image</h4>
-                                        <input type="file" id="image" class="form-control" name="image[]" multiple>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary m-1">Update</button>
-                                </div>
                             </div>
-                        </form>
-                        <div class="col-md-12 col-12 mt-3">
-                            <form action="{{ route('gallery.delete') }}" method="post">
-                                @csrf
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary m-1">Delete selected images</button>
-                                </div>
-                                <div class="row gx-1">
-                                    @forelse($v_images as $v_img)
-                                    <div class="col col-md-1 mt-1 main-img">
-                                        <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
-                                        @if(!$v_img->is_cover_img)
-                                        <a href="{{ route('gallery.cover',$v_img->id) }}" class="cover-img-box">Make Cover</a>
-                                        @else
-                                        <a href="" class="cover-img-box">Selected</a>
-                                        @endif
-                                        <input type="checkbox" name="delete[]" value="{{ $v_img->id }}">
-                                    </div>
-                                    @empty
-                                    @endforelse
-                                </div>
-                            </form>
+                    </div>--}}
+                    <div class="col-md-6 col-12 mt-3">
+                        <div class="form-group">
+                            <h4>Gallery Image</h4>
+                            <input type="file" id="image" class="form-control" name="image[]" multiple>
                         </div>
+                    </div>
 
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary m-1">Update</button>
                     </div>
                 </div>
+                </form>
+                <div class="col-md-12 col-12 mt-3">
+                    <form action="{{ route('gallery.delete') }}" method="post">
+                        @csrf
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary m-1">Delete selected images</button>
+                        </div>
+                        <div class="row gx-1">
+                            @forelse($v_images as $v_img)
+                            <div class="col col-md-1 mt-1 main-img">
+                                <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
+                                @if(!$v_img->is_cover_img)
+                                <a href="{{ route('gallery.cover',$v_img->id) }}" class="cover-img-box">Make Cover</a>
+                                @else
+                                <a href="" class="cover-img-box">Selected</a>
+                                @endif
+                                <input type="checkbox" name="delete[]" value="{{ $v_img->id }}">
+                            </div>
+                            @empty
+                            @endforelse
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
+    </div>
+    </div>
 </section>
 <!-- // Basic multiple Column Form section end -->
 </div>
@@ -653,6 +653,54 @@
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
         });
+
+        /*Brand|Subbrand */
+        $('#brand_id').on('change', function() {
+            var brand_id = $(this).val();
+            if (brand_id) {
+                $.ajax({
+                    url: "{{route('subBrandbyId')}}",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id: brand_id,
+                    },
+                    success: function(data) {
+                        //console.log(data);
+                        $('#sub_brand').empty();
+                        $('#sub_brand').append('<option value="">Select a Sub Brand</option>');
+                        $.each(data, function(key, value) {
+                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#sub_brand').empty();
+            }
+        });
+        var brand_id = $('#brand_id option:selected').val();
+        var sub_brand_id = '{{$v->sub_brand_id}}';
+        if (brand_id) {
+            $.ajax({
+                url: "{{route('subBrandbyId')}}",
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    id: brand_id,
+                },
+                success: function(data) {
+                    //console.log(data);
+                    $.each(data, function(key, value) {
+                        if(sub_brand_id == value.id){
+                            $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                        }else{
+                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        }
+                        
+                    });
+                }
+            });
+        }
     });
 </script>
 @endpush

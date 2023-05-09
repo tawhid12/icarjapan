@@ -29,8 +29,8 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="brand_id">Brand</label>
-                                        <select name="brand_id" class="form-control js-example-basic-single">
+                                        <label for="brand_id">Maker</label>
+                                        <select name="brand_id" class="form-control js-example-basic-single" id="brand_id">
                                             <option value="">Select</option>
                                             @if(count($brands))
                                             @foreach($brands as $b)
@@ -46,14 +46,14 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="sub_brand_id">Sub Brand</label>
-                                        <select name="sub_brand_id" class="form-control js-example-basic-single">
-                                            <option value="">Select</option>
+                                        <label for="sub_brand_id">Model</label>
+                                        <select name="sub_brand_id" class="form-control js-example-basic-single" id="sub_brand">
+                                            {{--<option value="">Select</option>
                                             @if(count($sub_brands))
                                             @foreach($sub_brands as $sb)
                                             <option value="{{ $sb->id}}" {{ old('sub_brand_id') == $sb->id ? "selected" : "" }}>{{$sb->name}}</option>
                                             @endforeach
-                                            @endif
+                                            @endif--}}
                                         </select>
                                     </div>
                                     @if($errors->has('sub_brand_id'))
@@ -207,7 +207,7 @@
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <textarea class="form-control" rows="8"></textarea>
+                                        <textarea class="form-control" rows="4"></textarea>
                                     </div>
                                 </div>
 
@@ -348,31 +348,31 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 col-12">
+                                {{--<div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="name">Vehicle Name</label>
                                         <input type="text" id="name" value="{{old('name')}}" class="form-control" placeholder="Vehicle Name" name="name">
-                                    </div>
-                                    @if($errors->has('name'))
-                                    <span class="text-danger"> {{ $errors->first('name') }}</span>
-                                    @endif
-                                </div>
+                            </div>
+                            @if($errors->has('name'))
+                            <span class="text-danger"> {{ $errors->first('name') }}</span>
+                            @endif
+                    </div>--}}
 
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label for="country_id">Vehicle Availabe Country</label>
-                                        <select name="country_id[]" class="form-control js-example-basic-multiple" multiple="multiple">
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <label for="country_id">Vehicle Availabe Country</label>
+                            <select name="country_id[]" class="form-control js-example-basic-multiple" multiple="multiple">
 
-                                            @if(count($countries))
-                                            @foreach($countries as $c)
-                                            <option value="{{ $c->id}}">{{$c->name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
+                                @if(count($countries))
+                                @foreach($countries as $c)
+                                <option value="{{ $c->id}}">{{$c->name}}</option>
+                                @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
 
-                                {{--<div class="col-md-3 col-12">
+                    {{--<div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="v_model_id">Vehicle Model</label>
                                         <select name="v_model_id" class="form-control">
@@ -380,288 +380,288 @@
                                             @if(count($vehicle_models))
                                             @foreach($vehicle_models as $vm)
                                             <option value="{{ $vm->id}}">{{$vm->name}}</option>
-                                @endforeach
-                                @endif
-                                </select>
-                            </div>--}}
-                    </div>
+                    @endforeach
+                    @endif
+                    </select>
+                </div>--}}
+            </div>
 
-                    {{--<div class="col-md-3 col-12">
+            {{--<div class="col-md-3 col-12">
                         <div class="form-group">
                             <label for="version">Version</label>
                             <input type="text" id="version" value="{{old('version')}}" class="form-control" placeholder="Vehicle Version" name="version">
-                        </div>
-                    </div>
+        </div>
+    </div>
 
-                    <div class="col-md-3 col-12">
-                        <div class="form-group">
-                            <label for="name">Vehicle Model</label>
-                            <input type="text" id="v_model" value="{{old('v_model')}}" class="form-control" placeholder="Vehicle Model" name="v_model">
-                        </div>
-                        @if($errors->has('v_model'))
-                        <span class="text-danger"> {{ $errors->first('v_model') }}</span>
-                        @endif
-                    </div>
+    <div class="col-md-3 col-12">
+        <div class="form-group">
+            <label for="name">Vehicle Model</label>
+            <input type="text" id="v_model" value="{{old('v_model')}}" class="form-control" placeholder="Vehicle Model" name="v_model">
+        </div>
+        @if($errors->has('v_model'))
+        <span class="text-danger"> {{ $errors->first('v_model') }}</span>
+        @endif
+    </div>
 
-                    <div class="col-md-3 col-12">
-                        <div class="form-group">
-                            <label for="sub_body_type_id">Sub Body Types</label>
-                            <select name="sub_body_type_id" class="form-control">
-                                <option value="">Select</option>
-                                @if(count($sub_body_types))
-                                @foreach($sub_body_types as $sbd)
-                                <option value="{{ $sbd->id}}">{{$sbd->name}}</option>
-                                @endforeach
-                                @endif
-                            </select>
-                        </div>
-                    </div>--}}
+    <div class="col-md-3 col-12">
+        <div class="form-group">
+            <label for="sub_body_type_id">Sub Body Types</label>
+            <select name="sub_body_type_id" class="form-control">
+                <option value="">Select</option>
+                @if(count($sub_body_types))
+                @foreach($sub_body_types as $sbd)
+                <option value="{{ $sbd->id}}">{{$sbd->name}}</option>
+                @endforeach
+                @endif
+            </select>
+        </div>
+    </div>--}}
 
-                    <div class="col-md-3 col-12">
+    {{--<div class="col-md-3 col-12">
                         <div class="form-group">
                             <label for="price">Price</label>
                             <input type="text" id="price" value="{{old('price')}}" class="form-control" placeholder="price" name="price">
-                        </div>
-                    </div>
+    </div>
+    </div>
 
-                    {{--<div class="col-md-3 col-12">
-                        <div class="form-group">
-                            <label for="cc">CC</label>
-                            <input type="text" id="cc" value="{{old('cc')}}" class="form-control" placeholder="cc" name="cc">
-                        </div>
-                    </div>
+    <div class="col-md-3 col-12">
+        <div class="form-group">
+            <label for="cc">CC</label>
+            <input type="text" id="cc" value="{{old('cc')}}" class="form-control" placeholder="cc" name="cc">
+        </div>
+    </div>
 
-                    <div class="col-md-3 col-12">
-                        <div class="form-group">
-                            <label for="truck_size">Truck Size</label>
-                            <select name="truck_size" class="form-control">
-                                <option value="">Select</option>
-                                <option value="1">Large Truck</option>
-                                <option value="2">Medium Truck</option>
-                                <option value="3">Small Truck</option>
-                                <option value="4">Multicab</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-md-3 col-12">
-                        <div class="form-group">
-                            <label for="year">Year(Model)</label>
-                            <select name="year" class="form-control js-example-basic-single">
-                                <option value="">Select Year</option>
-                                @php
-                                for($i=date('Y');$i>=1980;$i--){
-                                @endphp
-                                <option value="{{$i}}">{{$i}}</option>
-                                @php
-                                }
-                                @endphp
-                            </select>
-                        </div>
-                        @if($errors->has('year'))
-                        <span class="text-danger"> {{ $errors->first('year') }}</span>
-                        @endif
-                    </div>
-
-                    <div class="col-md-12 col-12">
-                        <div class="form-group">
-                            <label for="note">Note</label>
-                            <textarea class="form-control" rows="8"></textarea>
-                        </div>
-                    </div>--}}
+    <div class="col-md-3 col-12">
+        <div class="form-group">
+            <label for="truck_size">Truck Size</label>
+            <select name="truck_size" class="form-control">
+                <option value="">Select</option>
+                <option value="1">Large Truck</option>
+                <option value="2">Medium Truck</option>
+                <option value="3">Small Truck</option>
+                <option value="4">Multicab</option>
+            </select>
+        </div>
+    </div>
 
 
-                    <div class="col-md-12 col-12 mt-3">
-                        <h4>Additional Vechicle Facility</h4>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cd_player" name="cd_player" value="1">
-                            <label class="form-check-label" for="cd_player">CD Player</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="sun_roof" name="sun_roof" value="1">
-                            <label class="form-check-label" for="sun_roof">Sun Roof</label>
-                        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="leather_seat" name="leather_seat" value="1">
-                            <label class="form-check-label" for="leather_seats">Leather Seat</label>
-                        </div>
+    <div class="col-md-3 col-12">
+        <div class="form-group">
+            <label for="year">Year(Model)</label>
+            <select name="year" class="form-control js-example-basic-single">
+                <option value="">Select Year</option>
+                @php
+                for($i=date('Y');$i>=1980;$i--){
+                @endphp
+                <option value="{{$i}}">{{$i}}</option>
+                @php
+                }
+                @endphp
+            </select>
+        </div>
+        @if($errors->has('year'))
+        <span class="text-danger"> {{ $errors->first('year') }}</span>
+        @endif
+    </div>--}}
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="alloy_wheels" name="alloy_wheels" value="1">
-                            <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
-                        </div>
+    <div class="col-md-12 col-12">
+        <div class="form-group">
+            <label for="note">Options</label>
+            <textarea class="form-control" rows="3" name="option"></textarea>
+        </div>
+    </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="power_steering" name="power_steering" value="1">
-                            <label class="form-check-label" for="power_steering">Power Steering</label>
-                        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="power_windows" name="power_windows" value="1">
-                            <label class="form-check-label" for="power_windows">Power Windows</label>
-                        </div>
+    <div class="col-md-12 col-12 mt-3">
+        <h4>Additional Vechicle Facility</h4>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="cd_player" name="cd_player" value="1">
+            <label class="form-check-label" for="cd_player">CD Player</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="sun_roof" name="sun_roof" value="1">
+            <label class="form-check-label" for="sun_roof">Sun Roof</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="air_con" name="air_con" value="1">
-                            <label class="form-check-label" for="air_con">AC</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="leather_seat" name="leather_seat" value="1">
+            <label class="form-check-label" for="leather_seats">Leather Seat</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="anti_lock_brake_system" name="anti_lock_brake_system" value="1">
-                            <label class="form-check-label" for="anti_lock_brake_system">ABS</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="alloy_wheels" name="alloy_wheels" value="1">
+            <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="air_bag" name="air_bag" value="1">
-                            <label class="form-check-label" for="air_bag">Air Bag</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="power_steering" name="power_steering" value="1">
+            <label class="form-check-label" for="power_steering">Power Steering</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="radio" name="radio" value="1">
-                            <label class="form-check-label" for="air_bag">Radio</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="power_windows" name="power_windows" value="1">
+            <label class="form-check-label" for="power_windows">Power Windows</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cd_changer" name="cd_changer" value="1">
-                            <label class="form-check-label" for="cd_changer">CD Changer</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="air_con" name="air_con" value="1">
+            <label class="form-check-label" for="air_con">AC</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="dvd" name="dvd" value="1">
-                            <label class="form-check-label" for="dvd">DVD</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="anti_lock_brake_system" name="anti_lock_brake_system" value="1">
+            <label class="form-check-label" for="anti_lock_brake_system">ABS</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="tv" name="tv" value="1">
-                            <label class="form-check-label" for="tv">Tv</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="air_bag" name="air_bag" value="1">
+            <label class="form-check-label" for="air_bag">Air Bag</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="power_seat" name="power_seat" value="1">
-                            <label class="form-check-label" for="tv">Power Seat</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radio" name="radio" value="1">
+            <label class="form-check-label" for="air_bag">Radio</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="back_tire" placeholder="back_tire" name="back_tire" value="1">
-                            <label class="form-check-label" for="back_tire">Back Tire</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="cd_changer" name="cd_changer" value="1">
+            <label class="form-check-label" for="cd_changer">CD Changer</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="grill_guard" placeholder="grill_guard" name="grill_guard" value="1">
-                            <label class="form-check-label" for="grill_guard">Grill Guard</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="dvd" name="dvd" value="1">
+            <label class="form-check-label" for="dvd">DVD</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="rear_spoiler" name="rear_spoiler" value="1">
-                            <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tv" name="tv" value="1">
+            <label class="form-check-label" for="tv">Tv</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="central_locking" name="central_locking" value="1">
-                            <label class="form-check-label" for="central_locking">Central Locking</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="power_seat" name="power_seat" value="1">
+            <label class="form-check-label" for="tv">Power Seat</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="jack" name="jack" value="1">
-                            <label class="form-check-label" for="jack">Jack</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="back_tire" placeholder="back_tire" name="back_tire" value="1">
+            <label class="form-check-label" for="back_tire">Back Tire</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="spare_tire" name="spare_tire" value="1">
-                            <label class="form-check-label" for="spare_tire">Spare Tire</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="grill_guard" placeholder="grill_guard" name="grill_guard" value="1">
+            <label class="form-check-label" for="grill_guard">Grill Guard</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="wheel_spanner" name="wheel_spanner" value="1">
-                            <label class="form-check-label" for="wheel_spanner">Wheel Spanner</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="rear_spoiler" name="rear_spoiler" value="1">
+            <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="fog_lights" name="fog_lights" value="1">
-                            <label class="form-check-label" for="fog_lights">Fog Lights</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="central_locking" name="central_locking" value="1">
+            <label class="form-check-label" for="central_locking">Central Locking</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="back_camera" name="back_camera" value="1">
-                            <label class="form-check-label" for="back_camera">Back Camera</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="jack" name="jack" value="1">
+            <label class="form-check-label" for="jack">Jack</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="push_start" name="push_start" value="1">
-                            <label class="form-check-label" for="push_start">Push Start</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="spare_tire" name="spare_tire" value="1">
+            <label class="form-check-label" for="spare_tire">Spare Tire</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="keyless_entry" name="keyless_entry" value="1">
-                            <label class="form-check-label" for="keyless_entry">Keyless Entry</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="wheel_spanner" name="wheel_spanner" value="1">
+            <label class="form-check-label" for="wheel_spanner">Wheel Spanner</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="esc" name="esc" value="1">
-                            <label class="form-check-label" for="esc">ESC</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="fog_lights" name="fog_lights" value="1">
+            <label class="form-check-label" for="fog_lights">Fog Lights</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="deg_360_cam" name="deg_360_cam" value="1">
-                            <label class="form-check-label" for="deg_360_cam">360 Degree Camera</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="back_camera" name="back_camera" value="1">
+            <label class="form-check-label" for="back_camera">Back Camera</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="body_kit" name="body_kit" value="1">
-                            <label class="form-check-label" for="body_kit">Body Kit</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="push_start" name="push_start" value="1">
+            <label class="form-check-label" for="push_start">Push Start</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="side_airbag" name="side_airbag" value="1">
-                            <label class="form-check-label" for="side_airbag">Side Air Bag</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="keyless_entry" name="keyless_entry" value="1">
+            <label class="form-check-label" for="keyless_entry">Keyless Entry</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="power_mirror" name="power_mirror" value="1">
-                            <label class="form-check-label" for="power_mirror">Power Mirror</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="esc" name="esc" value="1">
+            <label class="form-check-label" for="esc">ESC</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="side_skirts" name="side_skirts" value="1">
-                            <label class="form-check-label" for="side_skirts">Side Skirts</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="deg_360_cam" name="deg_360_cam" value="1">
+            <label class="form-check-label" for="deg_360_cam">360 Degree Camera</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="front_lip_spoiler" name="front_lip_spoiler" value="1">
-                            <label class="form-check-label" for="front_lip_spoiler">Front Lip Spoiler</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="body_kit" name="body_kit" value="1">
+            <label class="form-check-label" for="body_kit">Body Kit</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="navigation" name="navigation" value="1">
-                            <label class="form-check-label" for="navigation">Navigation</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="side_airbag" name="side_airbag" value="1">
+            <label class="form-check-label" for="side_airbag">Side Air Bag</label>
+        </div>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="turbo" name="turbo" value="1">
-                            <label class="form-check-label" for="turbo">Turbo</label>
-                        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="power_mirror" name="power_mirror" value="1">
+            <label class="form-check-label" for="power_mirror">Power Mirror</label>
+        </div>
 
-                    </div>
-                    <div class="col-md-6 col-12 mt-3">
-                        <div class="form-group">
-                            <h4>Gallery Image</h4>
-                            <input type="file" id="image[]" class="form-control" name="image[]" multiple>
-                        </div>
-                        {{--<div class="form-group mt-3">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="side_skirts" name="side_skirts" value="1">
+            <label class="form-check-label" for="side_skirts">Side Skirts</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="front_lip_spoiler" name="front_lip_spoiler" value="1">
+            <label class="form-check-label" for="front_lip_spoiler">Front Lip Spoiler</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="navigation" name="navigation" value="1">
+            <label class="form-check-label" for="navigation">Navigation</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="turbo" name="turbo" value="1">
+            <label class="form-check-label" for="turbo">Turbo</label>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-12 mt-3">
+        <div class="form-group">
+            <h4>Gallery Image</h4>
+            <input type="file" id="image[]" class="form-control" name="image[]" multiple>
+        </div>
+        {{--<div class="form-group mt-3">
                     <label for="name">Video Link</label>
                     <input type="text" id="v_link" value="{{old('v_link')}}" class="form-control" placeholder="Video Link" name="v_link">
-                    </div>--}}
-                </div>
+    </div>--}}
+    </div>
 
-                <div class="col-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
-                </div>
-            </div>
-            </form>
-        </div>
+    <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+    </div>
+    </div>
+    </form>
+    </div>
     </div>
     </div>
     </div>
@@ -685,6 +685,31 @@
         }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
+        });
+
+        /*Brand|Subbrand */
+        $('#brand_id').on('change', function() {
+            var brand_id = $(this).val();
+            if (brand_id) {
+                $.ajax({
+                    url: "{{route('subBrandbyId')}}",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id: brand_id,
+                    },
+                    success: function(data) {
+                        //console.log(data);
+                        $('#sub_brand').empty();
+                        $('#sub_brand').append('<option value="">Select a Sub Brand</option>');
+                        $.each(data, function(key, value) {
+                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#sub_brand').empty();
+            }
         });
     });
 </script>

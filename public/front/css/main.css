@@ -514,5 +514,6 @@ li.nav-item {
   font-size: 15px;
   color: #505050;
   /* font-stretch: condensed; */
-  letter-spacing: 2px;
+  /*letter-spacing: 2px;*/
+  font-weight: 600;
 }

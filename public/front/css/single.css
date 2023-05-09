@@ -59,9 +59,7 @@
 }
 .view-port {
   background-color: #dd1c1c31;
-  padding: 10px;
   font-size: 12px;
-  border-radius: 10px;
 }
 .view-port div:nth-of-type(1) div,
 .view-port div:nth-of-type(2) div,
@@ -113,4 +111,21 @@
 .contact-us-section img {
   max-width: 200px;
   margin: 20px 0;
+}
+/*Single CSS*/
+.big-gallery{
+  position: relative;
+}
+.main-img-number {
+  font-size: 14px;
+  position: absolute;
+  left: 0;
+  bottom: 130px;
+  content: "";
+  background: rgba(0,0,0,.4);
+  border-radius: 1px;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 2px 8px;
 }

@@ -8,7 +8,7 @@
         <div class="col-sm-12 col-md-12 col-lg-10 header-top-secound">
           <div class="container-fluid">
             <div class="row d-flex align-items-center">
-              <div class="col-md-4">
+              <div class="col-md-3">
               <p>{{$japan_locale_data->format('M, d, H:i (T)')}} {{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
               <h4 class="m-0">Total Cars: {{$total_cars}}</h4>
               </div>
@@ -19,7 +19,7 @@
               <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p>
             </div>
 
-            <div class="col-md-2 d-grid text-center">
+            <div class="col-md-3 d-grid text-center">
               <p>Home currency display</p>
               <button class="btn btn-secondary" type="button" style="color: #fff;text-align: center;text-decoration: none;font-weight: bold;font-size: 12px;border-radius: 10px;">On</button>
               <!--<select class="form-select" id="currency_opt" aria-label="Default select example">

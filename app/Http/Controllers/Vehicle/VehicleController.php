@@ -105,7 +105,7 @@ class VehicleController extends Controller
             $vehicle->con_id = $request->con_id;
             //$vehicle->truck_size = $request->truck_size;
             $vehicle->drive_id = $request->drive_id;
-            $vehicle->price = $request->price;
+            $vehicle->price = $request->fob;
             //$vehicle->cc = $request->cc;
             $vehicle->mileage = $request->mileage;
             $vehicle->transmission_id = $request->transmission_id;
@@ -124,6 +124,7 @@ class VehicleController extends Controller
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->description = $request->description;
             //$vehicle->note = $request->note;
+            $vehicle->option = $request->option;
             $vehicle->cd_player = $request->cd_player == 1 ? $request->cd_player : 0;
             $vehicle->sun_roof = $request->sun_roof == 1 ? $request->sun_roof : 0;
             $vehicle->leather_seat = $request->leather_seat == 1 ? $request->leather_seat : 0;
@@ -324,7 +325,7 @@ class VehicleController extends Controller
             $vehicle->seat_id = $request->seat_id;
             $vehicle->con_id = $request->con_id;
             $vehicle->drive_id = $request->drive_id;
-            $vehicle->price = $request->price;
+            $vehicle->price = $request->fob;
             $vehicle->mileage = $request->mileage;
             $vehicle->transmission_id = $request->transmission_id;
             $vehicle->discount = $request->discount;
@@ -342,6 +343,7 @@ class VehicleController extends Controller
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->description = $request->description;
             //$vehicle->note = $request->note;
+            $vehicle->option = $request->option;
             $vehicle->cd_player = $request->cd_player == 1 ? $request->cd_player : 0;
             $vehicle->sun_roof = $request->sun_roof == 1 ? $request->sun_roof : 0;
             $vehicle->leather_seat = $request->leather_seat == 1 ? $request->leather_seat : 0;

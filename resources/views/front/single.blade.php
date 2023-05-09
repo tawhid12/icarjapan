@@ -65,6 +65,10 @@
     width: 30px;
     height: 30px;
   }
+
+  .owl-carousel .vehicle-img-gallery img.active {
+    border: 2px solid red;
+  }
 </style>
 
 
@@ -72,8 +76,8 @@
 @section('content')
 <!-- main section -->
 <main class="my-4">
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container">
+    <div class="row gx-3">
       <div class="col-sm-2 col-md-2 col-lg-2 container-xl-2 left-col">
         <!-- left row  -->
         <div class="left-row-2 mb-3">
@@ -151,13 +155,17 @@
           <div class="product-view">
             <div class="row">
               <div class="col-sm-8">
-                <div class="">
+                <div class="big-gallery">
                   <div class="main-img owl-carousel owl-theme">
                     @forelse($v_images as $v_img)
                     <div class="vehicle-img"><img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" class="single-image"></div>
                     @empty
                     @endforelse
+
                   </div>
+                  <div class="main-img-number"></div>
+
+
 
 
                   <div class="">
@@ -189,7 +197,7 @@
                     <thead>
                       <tr class="table-dark">
                         <th class="text-center" colspan="4" scope="col">
-                          {{$v->fullName}} - Car Details
+                          {{$v->fullName}} - Details
                         </th>
                       </tr>
                     </thead>
@@ -240,7 +248,7 @@
                         <th scope="row">Ext. Color</th>
                         <td>{{ optional($v->ext_color)->name }}</td>
                         <th scope="row">Steering</th>
-                        <td>@if($v->steering == 1)  RHD @else LHD @endif</td>
+                        <td>@if($v->steering == 1) RHD @else LHD @endif</td>
                       </tr>
                       <tr>
                         <th scope="row">Door</th>
@@ -271,22 +279,6 @@
                         <td>{{ optional($v->int_color)->name }}</td>
                         <th scope="row">Condition</th>
                         <td>{{ optional($v->condition)->name }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">New Arival Country</th>
-                        <td></td>
-                        <th scope="row">Discount</th>
-                        <td>{{ $v->discount }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Search Keyword</th>
-                        <td>{{ str_replace(',', ' ', $v->search_keyword) }}</td>
-                        <th scope="row">FOB</th>
-                        <td>{{ $v->fob }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Description</th>
-                        <td colspan="3">{{ $v->description }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -322,55 +314,55 @@
                     </thead>
                     <tbody>
                       <tr>
-                        @if($v->cd_player ==1)<td>CD Player</td> @else <td>-</td> @endif
-                        @if($v->sun_roof ==1)<td>Sun Roof</td> @else <td>-</td> @endif
-                        @if($v->leather_seat ==1)<td>Leather Seat</td> @else <td>-</td>@endif
-                        @if($v->alloy_wheels ==1)<td>Alloy Wheels</td> @else <td>-</td> @endif
+                        @if($v->cd_player ==1)<td>CD Player</td> @else <td></td> @endif
+                        @if($v->sun_roof ==1)<td>Sun Roof</td> @else <td></td> @endif
+                        @if($v->leather_seat ==1)<td>Leather Seat</td> @else <td></td>@endif
+                        @if($v->alloy_wheels ==1)<td>Alloy Wheels</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->power_steering ==1)<td>Power Steering</td> @else <td>-</td> @endif
-                        @if($v->power_windows ==1)<td>Power Windows</td> @else <td>-</td> @endif
-                        @if($v->air_con ==1)<td>Air Con</td> @else <td>-</td> @endif
-                        @if($v->anti_lock_brake_system ==1)<td>ABS lock_brake_system</td> @else <td>-</td> @endif
+                        @if($v->power_steering ==1)<td>Power Steering</td> @else <td></td> @endif
+                        @if($v->power_windows ==1)<td>Power Windows</td> @else <td></td> @endif
+                        @if($v->air_con ==1)<td>Air Con</td> @else <td></td> @endif
+                        @if($v->anti_lock_brake_system ==1)<td>ABS lock_brake_system</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->air_bag ==1)<td>Air Bag</td> @else <td>-</td> @endif
-                        @if($v->radio ==1)<td>Radio</td> @else <td>-</td> @endif
-                        @if($v->cd_changer ==1)<td>Cd Changer</td> @else <td>-</td> @endif
-                        @if($v->dvd ==1)<td>DVD</td> @else <td>-</td> @endif
+                        @if($v->air_bag ==1)<td>Air Bag</td> @else <td></td> @endif
+                        @if($v->radio ==1)<td>Radio</td> @else <td></td> @endif
+                        @if($v->cd_changer ==1)<td>Cd Changer</td> @else <td></td> @endif
+                        @if($v->dvd ==1)<td>DVD</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->tv ==1)<td>TV</td> @else <td>-</td> @endif
-                        @if($v->power_seat ==1)<td>Power Seat</td> @else <td>-</td> @endif
-                        @if($v->back_tire ==1)<td>Back Tire</td>@else <td>-</td>  @endif
-                        @if($v->grill_guard ==1)<td>Grill Guard</td> @else <td>-</td> @endif
+                        @if($v->tv ==1)<td>TV</td> @else <td></td> @endif
+                        @if($v->power_seat ==1)<td>Power Seat</td> @else <td></td> @endif
+                        @if($v->back_tire ==1)<td>Back Tire</td>@else <td></td> @endif
+                        @if($v->grill_guard ==1)<td>Grill Guard</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->rear_spoiler ==1)<td>Rear Spoiler</td> @else <td>-</td> @endif
-                        @if($v->central_locking ==1)<td>Central Locking</td> @else <td>-</td> @endif
-                        @if($v->jack ==1)<td>Jack</td> @else <td>-</td> @endif
-                        @if($v->spare_tire ==1)<td>Spare Tire</td> @else <td>-</td> @endif
+                        @if($v->rear_spoiler ==1)<td>Rear Spoiler</td> @else <td></td> @endif
+                        @if($v->central_locking ==1)<td>Central Locking</td> @else <td></td> @endif
+                        @if($v->jack ==1)<td>Jack</td> @else <td></td> @endif
+                        @if($v->spare_tire ==1)<td>Spare Tire</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->wheel_spanner ==1)<td>Wheel Spanner</td> @else <td>-</td> @endif
-                        @if($v->fog_lights ==1)<td>Fog Lights</td> @else <td>-</td> @endif
-                        @if($v->back_camera ==1)<td>Back Camera</td> @else <td>-</td> @endif
-                        @if($v->push_start ==1)<td>Push Start</td> @else <td>-</td> @endif
+                        @if($v->wheel_spanner ==1)<td>Wheel Spanner</td> @else <td></td> @endif
+                        @if($v->fog_lights ==1)<td>Fog Lights</td> @else <td></td> @endif
+                        @if($v->back_camera ==1)<td>Back Camera</td> @else <td></td> @endif
+                        @if($v->push_start ==1)<td>Push Start</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->keyless_entry ==1)<td>Keyless Entry</td> @else <td>-</td> @endif
+                        @if($v->keyless_entry ==1)<td>Keyless Entry</td> @else <td></td> @endif
                         @if($v->esc ==1)<td>ESC</td> @else <td>-</td> @endif
-                        @if($v->deg_360_cam ==1)<td>360 Degree Camera</td> @else <td>-</td> @endif
-                        @if($v->body_kit ==1)<td>Body Kit</td> @else <td>-</td> @endif
+                        @if($v->deg_360_cam ==1)<td>360 Degree Camera</td> @else <td></td> @endif
+                        @if($v->body_kit ==1)<td>Body Kit</td> @else <td></td> @endif
                       </tr>
                       <tr>
-                        @if($v->side_airbag ==1)<td>Side Airbag</td> @else <td>-</td> @endif
-                        @if($v->power_mirror ==1)<td>Power Mirror</td> @else <td>-</td> @endif
-                        @if($v->side_skirts ==1)<td>Side Skirts</td> @else <td>-</td> @endif
+                        @if($v->side_airbag ==1)<td>Side Airbag</td> @else <td></td> @endif
+                        @if($v->power_mirror ==1)<td>Power Mirror</td> @else <td></td> @endif
+                        @if($v->side_skirts ==1)<td>Side Skirts</td> @else <td></td> @endif
                         @if($v->front_lip_spoiler ==1)<td>Front Lip Spoiler</td> @else <td>-</td> @endif
                       </tr>
                       <tr>
-                        @if($v->navigation ==1)<td>Navigation</td> @else <td>-</td> @endif
+                        @if($v->navigation ==1)<td>Navigation</td> @else <td></td> @endif
                         @if($v->turbo ==1)<td>Turbo</td> @else <td>-</td> @endif
                       </tr>
                     </tbody>
@@ -512,7 +504,8 @@
               </div>
               <div class="col-sm-4">
                 <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
-                <div class="row view-port shadow">
+                <div class="row">
+                  <div class="d-flex view-port">
                   <div class="col-sm-4">
                     <div class="w-100">
                       <div class="page-view">Page View</div>
@@ -531,10 +524,12 @@
                       <div>712</div>
                     </div>
                   </div>
-                </div>
+                  </div>
+
+                
                 <!-- price table -->
-                <form id="my-form">
-                  <div class="my-4 price-table bg-light p-2 shadow">
+                <form class="p-0" id="my-form">
+                  <div class="my-2 price-table bg-light">
                     <table class="table table-bordered m-0">
                       <thead>
                         <tr>
@@ -577,7 +572,6 @@
                         <tr>
                           <th scope="row">Destination Country</th>
                           <td>
-                            {{\Session::get('country_id')}} {{request('country_id')}}
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
                               <option value="">Selet Country</option>
                               @if(count($countries) > 0)
@@ -688,6 +682,7 @@
                     <!-- Contact Us  -->
                   </div>
                 </form>
+                </div>
                 @if(currentUser() == 'user')
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
@@ -868,12 +863,58 @@
       items: 1,
       nav: true,
       dots: false,
-      navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+      navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+      onChanged: owlChanged,
+      onInitialized: showImageNumber,
+      onTranslated: showImageNumber
     });
-    $('.gallery-img').on('click', function() {
+    $('.nav .owl-item').on('click', function() {
       var src = $(this).data('src');
-      $('.single-image').attr('src', src);
+      var index = $(this).index();
+      // Trigger the big image carousel to display the clicked image
+      $('.main-img').trigger('to.owl.carousel', index);
+      // Remove active class from all images
+
+      $('.nav .owl-item').find('.vehicle-img-gallery').children("img").removeClass('active');
+      // Add active class to clicked image
+      $(this).find('.vehicle-img-gallery').children("img").addClass('active');
+
+      // Display image number
+      $('.image-number').text(index + 1 + '/' + owlSmallImage.owlCarousel('getTotalItems'));
+
     });
+    /*$('.main-img .owl-prev').on('click', function() {
+      $('.main-img').trigger('prev.owl.carousel');
+    });
+
+    $('.main-img .owl-next').on('click', function() {
+      $('.main-img').trigger('next.owl.carousel');
+    });*/
+
+    function owlChanged(event) {
+      // Get the current item index
+      var currentItemIndex = event.item.index;
+      $('.nav .owl-item').find("img").removeClass('active');
+      $('.nav .owl-item').eq(currentItemIndex).find('img').addClass('active');
+      // Get the total number of items
+      var totalItems = event.item.count;
+      // Get the previous item index
+      var previousItemIndex = currentItemIndex - event.item.step;
+      // Get the next item index
+      var nextItemIndex = currentItemIndex + event.item.step;
+    }
+
+    function showImageNumber(event) {
+      // Get the current image index
+      var currentIndex = event.item.index;
+      // Get the total number of images
+      var totalImages = event.item.count;
+      // Display the image number in a separate element
+      $('.main-img-number').text((currentIndex + 1) + '/' + totalImages);
+    }
+
+
+
 
     /*==Most Viewed Vehicle Data save with ajax request==*/
     var csrfToken = "{{ csrf_token() }}";
