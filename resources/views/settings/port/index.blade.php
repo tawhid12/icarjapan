@@ -35,10 +35,10 @@
                                     <a href="{{route(currentUser().'.country.edit',encryptor('encrypt',$p->id))}}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <!-- <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
+                                    <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                                 <i class="bi bi-trash"></i>
-                                            </a> -->
-                                    <form id="form{{$p->id}}" action="{{route(currentUser().'.country.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                            </a>
+                                    <form id="form{{$p->id}}" action="{{route(currentUser().'.port.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                         @csrf
                                         @method('delete')
 

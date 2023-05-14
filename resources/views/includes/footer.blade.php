@@ -9,11 +9,11 @@
                   </div>
                   <div class="address">
                       <p>
-                          934-0027 Toyama-Ken,imizu-shi, Nakashinminato 17-1, Japan <br />
-                          TEL : +81 50 5539 4712 (Hotline) <br />
-                          whatsapp : +81 90-8099-1615 <br />
-                          Corporate Site : www.icarjapan.com <br />
-                          E-mail : csd@sbtjapan.com
+                          {{$com_acc_info->c_address}} <br />
+                          TEL : {{$com_acc_info->tel}} (Hotline) <br />
+                          whatsapp : {{$com_acc_info->whatsup}} <br />
+                          Corporate Site : {{$com_acc_info->website}} <br />
+                          E-mail : {{$com_acc_info->email}}
                       </p>
                   </div>
                   <div class="improtant-lint mt-5 color-first-letter">
@@ -235,7 +235,7 @@
       <!-- Signature & Copywrite -->
       <div class="copywrite text-white">
           <div class="container">
-              <p>&copy I CAR JAPAN LTD.</p>
+              <p>&copy ICAR JAPAN LTD.</p>
           </div>
       </div>
   </footer>

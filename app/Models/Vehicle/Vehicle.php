@@ -47,8 +47,23 @@ class Vehicle extends Model
     public function trans(){
         return $this->belongsTo(Transmission::class,'transmission_id','id');
     }
-    public function color(){
-        return $this->belongsTo(Color::class,'color_id','id');
+    public function ext_color(){
+        return $this->belongsTo(Color::class,'ext_color_id','id');
+    }
+    public function int_color(){
+        return $this->belongsTo(Color::class,'int_color_id','id');
+    }
+    public function door(){
+        return $this->belongsTo(Door::class,'door_id','id');
+    }
+    public function seat(){
+        return $this->belongsTo(Seat::class,'seat_id','id');
+    }
+    public function condition(){
+        return $this->belongsTo(Condition::class,'con_id','id');
+    }
+    public function fuel(){
+        return $this->belongsTo(Fuel::class,'fuel_id','id');
     }
     public function country(){
         return $this->belongsTo(Country::class);

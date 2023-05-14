@@ -4,7 +4,7 @@
   --footer-color: #373737;
 }
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'DM Serif Display', serif;
   overflow-x: hidden;
 }
 .top-btn {
@@ -56,9 +56,10 @@ body {
 .navbar ul li a {
   font-weight: bold;
   color: #fff;
+  font-size:14px;
 }
 .navbar ul li a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: #fff;
 }
 /* left col */
@@ -92,9 +93,9 @@ body {
   font-size: 13px;
   font-weight: bold;
   text-align: center;
-  color: var(--brand-color);
+  color: #fff;
   padding: 10px 10px 15px 10px;
-  border-bottom: 1px solid var(--brand-color);
+  border-bottom: 1px solid #fff;
 }
 .right-row-1 select,
 .right-row-1 input {
@@ -102,7 +103,7 @@ body {
   color: #494949;
 }
 .right-row-1 select {
-  border-color: var(--brand-color);
+  border-color: #fff;
 }
 .search-to span {
   margin: 0 10px;
@@ -191,7 +192,7 @@ body {
   margin-right: 0px;
 }
 .mid-row-3 a:first-child {
-  border-radius: 10px 0 0 10px;
+  /*border-radius: 10px 0 0 10px;*/
 }
 .review-header {
   border-bottom: 1px solid var(--brand-color);
@@ -273,13 +274,13 @@ body {
 }
 .product-card img {
   width: 200px;
-  height: 80px;
+  height: auto;
 }
 .product-card-body p:nth-of-type(1) {
   color: #575656;
   font-size: 12px;
   font-weight: 700;
-  margin-top: 5px;
+  margin:0;
 }
 .product-card-body p:nth-of-type(2) {
   font-size: 10px;
@@ -313,7 +314,7 @@ body {
 }
 /* footer */
 .footer {
-  background-color: var(--footer-color);
+  background-color: #353535;
   color: rgb(231, 231, 231);
 }
 .footer-title {
@@ -462,4 +463,57 @@ body {
 }
 #dis-lights {
   display: none;
+}
+/*Important Notice*/
+.notice-text {
+  font-size: 13px;
+}
+.notice-text i{
+  font-size: 18px;
+}
+.notice-text a{
+  text-decoration: none;
+  font-size: 12px;
+}
+/*right-row-serarch*/
+.right-row-serarch{
+  background-color: #353535 !important;
+}
+/*Nav*/
+li.nav-item {
+    margin: 0px 40px;
+}
+/*Logo Image*/
+.header-top .logo .img-fluid{
+    max-width: 100%;
+    height: 60px;
+    object-fit: scale-down;
+    width: auto;
+}
+.header-top h4{
+  color:#000;
+  font-size:20px;
+  letter-spacing: 2px;
+}
+.navbar-nav ,.navbar{
+  padding:0px !important;
+}
+#lang_id{
+  color:#000;
+  border-color:#000;
+}
+.auth-link{
+  color: #000;
+  font-size:13px;
+  margin-right:10px;
+  text-decoration:none;
+}
+/*BreadCrumb Css*/
+.breadcrumb-item a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #505050;
+  /* font-stretch: condensed; */
+  /*letter-spacing: 2px;*/
+  font-weight: 600;
 }

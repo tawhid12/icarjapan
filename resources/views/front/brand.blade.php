@@ -122,6 +122,7 @@
           </div>
         </div>
         <!--Heading -->
+        @include('partials.breadcrumbs',['model' => $brand])
         <h4 class="cat-heading"><img src="{{asset('uploads/brands/'.$brand->image)}}" alt="{{$brand->name}}" width="40px" height="30px">Used {{$brand->name}} Cars for Sale</h4>
         <p>Here We Need To show Best Selling Product Based On Sale </p>
         <p>Best-selling vehicles of {{$brand->name}}</p>

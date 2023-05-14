@@ -31,12 +31,12 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             PortSeeder::class,
             CompanyInformationSeeder::class,
-            VehicleModelSeeder::class,
+            /*VehicleModelSeeder::class,
             VehicleSeeder::class,
             VehicleImageSeeder::class,
             VehicleNewArivalSeeder::class,
             VehicleCountriesSeeder::class,
-            VehicleMostViewdSeeder::class
+            VehicleMostViewdSeeder::class*/
         ]);
         UserDetail::factory(3)->create();
 

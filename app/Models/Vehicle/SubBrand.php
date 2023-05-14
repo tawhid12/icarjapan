@@ -10,13 +10,13 @@ class SubBrand extends Model
     use HasFactory;
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'slug_name';
     }
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
     public function getSlugAttribute()
     {
-        return \Illuminate\Support\Str::slug($this->name);
+        return \Illuminate\Support\Str::slug($this->slug_name);
     } 
 }

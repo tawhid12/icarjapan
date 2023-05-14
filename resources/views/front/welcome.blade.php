@@ -7,9 +7,26 @@
 @section('content')
 
 <!-- main section -->
-<main class="my-4">
+<main class="">
   <div class="container">
-    <div class="row">
+    <!-- Important Notice -->
+    <div class="row text-brand">
+       <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
+        <p class="m-0 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          Beware of Scams Advising Fake Money Transfer Instructions! <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+        <p class="m-0 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+        <p class="m-0 notice-text">
+          <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
+          About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
+        </p>
+      </div>  
+    </div>
+    <div class="row gx-4">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
         <!-- left row 1 -->
         <div class="left-row-1 mb-3">
@@ -20,127 +37,27 @@
         <!-- left row 2 -->
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              ICarJapan Bangladesh
+            <h5 class="card-title bg-brand text-black">
+            {{$com_acc_info->c_name}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <i class="bi bi-geo-alt-fill"></i> Dhaka
+                <i class="bi bi-geo-alt-fill"></i> {{$location['geoplugin_city']}}
               </p>
               <p class="card-text">
-                <i class="bi bi-telephone-fill"></i> +880 123 4567809
+                <i class="bi bi-telephone-fill"></i> {{$com_acc_info->tel}}
               </p>
             </div>
           </div>
         </div>
-        <!-- left row 3 -->
-        <div class="left-row left-row-3 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search by Brands</h5>
-            <div class="card-body">
-              @forelse($brands as $b)
-              <p class="card-text">
-                <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}}</a>
-              </p>
-              @empty
-              @endforelse
-            </div>
-          </div>
-        </div>
-        <!-- left row 4 -->
-        <div class="left-row left-row-4 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              Search By Inventory Location
-            </h5>
-            <div class="card-body">
-              <p class="card-text">
-                @forelse($inv_loc as $inv)
-              <p class="card-text">
-                <a href="" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$inv->image)}}" alt="" /> {{$inv->name}}</a>
-              </p>
-              @empty
-              @endforelse
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- left row 5 -->
-        <div class="left-row left-row-5 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Price</h5>
-            <div class="card-body">
-              @php
-              for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
-                @endphp
-                <p class="card-text">
-                  <i class="bi bi-currency-dollar"></i> Under USD {{$i}}
-                </p>
-                @php
-                }
-                @endphp
-            </div>
-          </div>
-        </div>
-        <!-- left row 6 -->
-        <div class="left-row left-row-6 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              Search By Discount
-            </h5>
-            <div class="card-body">
-              @php
-              for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                @endphp
-                <p class="card-text">
-                  <i class="bi bi-funnel"></i> Up to {{$i}}%
-                </p>
-                @php
-                }
-                @endphp
-            </div>
-          </div>
-        </div>
-        <!-- left row 7 -->
-        <div class="left-row left-row-7 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Type</h5>
-            <div class="card-body">
-              @forelse($body_types as $bt)
-              <p class="card-text">
-                <a href="" style="text-decoration:none;color:#000;"><i class="bi bi-car-front-fill"></i>{{$bt->name}} (2798)</a>
-              </p>
-              @empty
-              @endforelse
-            </div>
-          </div>
-        </div>
-        <!-- left row 8 -->
-        <div class="left-row left-row-8 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              Search By Category
-            </h5>
-            <div class="card-body">
-              @forelse($trans as $t)
-              <p class="card-text">
-                <i class="bi bi-arrows-move"></i>{{$t->name}} (2798)
-              </p>
-              @empty
-              @endforelse
-            </div>
-          </div>
-        </div>
-      </div>
+        @include('front.partial.brand-side-bar')
+        @include('front.partial.inventory-side-bar')
+        @include('front.partial.price-side-bar')
+        @include('front.partial.discount-side-bar')
+        @include('front.partial.type-side-bar')
+        @include('front.partial.category-side-bar')
       <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
-        <!-- mid row 1 -->
-        <div class="mid-row-1">
-          <div class="input-group mb-3 shadow">
-            <span class="input-group-text">Search Car</span>
-            <input type="text" id="item_search" class="form-control ui-autocomplete-input" aria-label="Amount (to the nearest dollar)" />
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
-          </div>
-        </div>
+        @include('front.search-box')
         <!-- mid row 2 -->
         <div class="mid-row-2">
           <div class="row">
@@ -158,7 +75,7 @@
           </div>
         </div>
         <!-- mid row 3 -->
-        <div class="my-4 d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
           <div class="d-flex mid-row-3">
             <a class="shadow" href="#">My Accounts Status</a>
             <a class="shadow" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
@@ -176,28 +93,30 @@
             </div>
           </div>
           <!-- product card -->
-          <div class="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+          <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
             @php //echo '<pre>'; print_r($most_views->toArray());die;@endphp
               @forelse($most_views as $v)
               <div class="col">
-                <div class="product-card my-3">
+                <div class="product-card mb-3">
+                  @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->vid)->where('is_cover_img',1)->first(); @endphp
+                  @if($cover_img)
+                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+                  @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                  @endif
                   <div class="product-card-body">
-                  <p><a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
-                    @php $vmodel = \DB::table('vehicle_models')->where('id',$v->v_model_id)->first(); @endphp
-                    @if($vmodel)
-                    <p>{{$vmodel->name}}</p>
-                    @endif
+                  <p clss="m-0"><a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
+                    <p class="m-0">{{$v->chassis_no}}</p>
                     @php
                       $actual_price = $v->price;
                       $dis_price = $v->price*$v->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
-                    <p>Price :</p>
-                    <p>USD {{$price}}</p>
+                    <p class="m-0">Price :</p>
+                    <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p class="m-0">Approx.</p>
+                      <p class="m-0">BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>
@@ -221,27 +140,32 @@
             //print_r($new_arivals);die;
             @endphp
             <!-- product card -->
-            <div class="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center align-items-stretch">
               @forelse($new_arivals as $n)
              
               <div class="col">
-                <div class="product-card my-3">
+                <div class="product-card mb-3">
                   <a href="">
+                  @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
+                  @if($cover_img)
+                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+                  @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                  @endif
                   </a>
                   <div class="product-card-body">
-                    <p><a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $n->name) }}</a></p>
-                    @php $vmodel = \DB::table('vehicle_models')->where('id',$n->v_model_id)->first(); @endphp
-                    @if($vmodel)
-                    <p>{{$vmodel->name}}</p>
-                    @endif
+                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $n->name) }}</a></p>
+                    @php //$vmodel = \DB::table('vehicle_models')->where('id',$n->v_model_id)->first(); @endphp
+                    {{--@if($vmodel)--}}
+                    <p class="m-0">{{$n->chassis_no}}</p>
+                    {{--@endif--}}
                     @php
                       $actual_price = $n->price;
                       $dis_price = $n->price*$n->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
-                    <p>Price :</p>
-                    <p>USD {{$price}}</p>
+                    <p class="m-0">Price :</p>
+                    <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
                       <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
@@ -266,24 +190,26 @@
               </div>
             </div>
             <!-- product card -->
-            <div class="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
               @forelse($afford_by_country as $af)
               <div class="col">
                 <div class="product-card my-3">
+                  @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$af->vid)->where('is_cover_img',1)->first(); @endphp
+                  @if($cover_img)
+                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+                  @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                  @endif
                   <div class="product-card-body">
-                    <p><a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
-                    @php $vmodel = \DB::table('vehicle_models')->where('id',$af->v_model_id)->first(); @endphp
-                    @if($vmodel)
-                    <p>{{$vmodel->name}}</p>
-                    @endif
+                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
+                    <p class="m-0">{{$v->chassis_no}}</p>
                     @php
                       $actual_price = $af->price;
                       $dis_price = $af->price*$af->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
-                    <p>Price :</p>
-                    <p>USD {{$price}}</p>
+                    <p class="m-0">Price :</p>
+                    <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
                       <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
@@ -305,24 +231,26 @@
               </div>
             </div>
             <!-- product card -->
-            <div class="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
             @forelse($high_grade_by_country as $hg)
               <div class="col">
                 <div class="product-card my-3">
+                  @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$hg->vid)->where('is_cover_img',1)->first(); @endphp
+                  @if($cover_img)
+                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+                  @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                  @endif
                   <div class="product-card-body">
-                    <p><a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
-                    @php $vmodel = \DB::table('vehicle_models')->where('id',$hg->v_model_id)->first(); @endphp
-                    @if($vmodel)
-                    <p>{{$vmodel->name}}</p>
-                    @endif
+                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
+                    <p class="m-0">{{$v->chassis_no}}</p>
                     @php
                       $actual_price = $hg->price;
                       $dis_price = $hg->price*$hg->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
-                    <p>Price :</p>
-                    <p>USD {{$price}}</p>
+                    <p class="m-0">Price :</p>
+                    <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
                       <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
@@ -480,8 +408,8 @@
                 </select>
                 <select name="steering" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                   <option value="" selected>RHL / LHS</option>
-                  <option value="1">LHS</option>
-                  <option value="2">RHL</option>
+                  <option value="1">Right Hand Drive</option>
+                  <option value="2">Left Hand Drive</option>
                 </select>
                 <div class="d-flex search-to">
                   <select value="" name="from_year" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">

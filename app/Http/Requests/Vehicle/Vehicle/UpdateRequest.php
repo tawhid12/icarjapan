@@ -26,11 +26,11 @@ class UpdateRequest extends FormRequest
     {
         $id=encryptor('decrypt',$r->uptoken);
         return [
-            'name'=>'required',
+            //'name'=>'required',
             'stock_id'=>'required|unique:vehicles,stock_id,'.$id,
             'brand_id'=>'required',
             'sub_brand_id'=>'required',
-            'year'=>'required',
+            //'year'=>'required',
         ];
     }
 

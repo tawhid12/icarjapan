@@ -124,4 +124,8 @@ class SubBrandController extends Controller
     {
         //
     }
+    public function get_sub_brand_by_id(Request $request){
+        $sub_brands = SubBrand::where('brand_id',$request->id)->get();
+        echo json_encode($sub_brands);
+    }
 }

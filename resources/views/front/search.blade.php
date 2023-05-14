@@ -666,6 +666,7 @@
             </div>
           </div>
         </div>
+        
         <!-- Vehicles -->
         @forelse($vehicles as $v)
         <div class="single-vehicle my-3">

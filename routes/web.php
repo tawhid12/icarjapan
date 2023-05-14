@@ -19,6 +19,9 @@ use App\Http\Controllers\Settings\CountryController as country;
 use App\Http\Controllers\Vehicle\BrandController as brand;
 use App\Http\Controllers\Vehicle\SubBrandController as subBrand;
 use App\Http\Controllers\Vehicle\ColorController as color;
+use App\Http\Controllers\Vehicle\DoorController as door;
+use App\Http\Controllers\Vehicle\SeatController as seat;
+use App\Http\Controllers\Vehicle\ConditionController as condition;
 use App\Http\Controllers\Vehicle\FuelController as fuel;
 use App\Http\Controllers\Vehicle\TransmissionController as transmission;
 use App\Http\Controllers\Vehicle\VehicleModelController as vehicle_model;
@@ -59,11 +62,14 @@ use App\Http\Middleware\isUser;
 /*========FrontEnd==== */
 Route::get('/', [front::class,'index'])->name('front');
 Route::resource('mostview',mostView::class);
-Route::get('/userd-cars/{brand}', [front::class,'brand'])->name('brand');
-Route::get('/userd-cars/{brand}/{subBrand}', [front::class,'subBrand'])->name('subBrand');
-Route::get('/userd-cars/{brand}/{subBrand}/{stock_id}', [front::class,'singleVehicle'])->name('singleVehicle');
-Route::get('/vehicle/search',[front::class,'searchStData'])->name('searchStData');
+Route::get('/used-cars-search/{brand}', [front::class,'brand'])->name('brand');
+Route::get('/used-cars-search/{brand}/{subBrand}', [front::class,'subBrand'])->name('subBrand');
+Route::get('/used-cars-search/{brand}/{subBrand}/{stock_id}', [front::class,'singleVehicle'])->name('singleVehicle');
+Route::get('/used-cars-search',[front::class,'searchStData'])->name('searchStData');
 Route::get('/vehicle/search/data/',[front::class,'search_by_data'])->name('search_by_data');
+
+Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeImage'])->name('resizeImage');
+
 
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
@@ -138,6 +144,9 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('brand',brand::class,['as'=>'superadmin']);
         Route::resource('subBrand',subBrand::class,['as'=>'superadmin']);
         Route::resource('color',color::class,['as'=>'superadmin']);
+        Route::resource('door',door::class,['as'=>'superadmin']);
+        Route::resource('seat',seat::class,['as'=>'superadmin']);
+        Route::resource('condition',condition::class,['as'=>'superadmin']);
         Route::resource('fuel',fuel::class,['as'=>'superadmin']);
         Route::resource('transmission',transmission::class,['as'=>'superadmin']);
         Route::resource('vehicle_model',vehicle_model::class,['as'=>'superadmin']);
@@ -161,6 +170,9 @@ Route::group(['middleware'=>isAdmin::class],function(){
         
     });
 });
+Route::post('gallery/delete',[vehicle::class, 'deleteImg'])->name('gallery.delete');
+Route::get('gallery/cover/{id}',[vehicle::class, 'galleryCover'])->name('gallery.cover');
+Route::get('subBrand',[subBrand::class, 'get_sub_brand_by_id'])->name('subBrandbyId');
 
 
 

@@ -10,7 +10,7 @@ class Brand extends Model
     use HasFactory;
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'slug_name';
     }
     public function vehicles()
     {
@@ -22,6 +22,9 @@ class Brand extends Model
     }
     public function getSlugAttribute()
     {
-        return \Illuminate\Support\Str::slug($this->name);
-    }     
+        return \Illuminate\Support\Str::slug($this->slug_name);
+    } 
+    public function breadcrumbName(){
+        return $this->name;
+    }    
 }
