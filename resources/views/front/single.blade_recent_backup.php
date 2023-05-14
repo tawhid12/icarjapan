@@ -1,23 +1,11 @@
 @extends('layout.landing')
-
-@section('pageSubTitle','ICAR JAPAN')
-@section('meta')
-  <meta property="og:title" content="{{$v->name}}">
-  <meta property="og:description" content="{{$v->description}}">
-  <meta property="og:site_name" content="ICAR JAPAN">
-  <meta property="fb:app_id" content="800032724610621" /> 
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="{{asset('uploads/vehicle_images/'.$cover_img->image)}}">
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="640" />
-  <meta property="og:image:height" content="480" />
-  <meta property="og:image:alt" content="{{$v->name}}" />
-  <meta name="keywords" content="">
-@endsection
+@section('pageTitle','ICARJAPAN')
+@section('pageSubTitle','HOME')
 @push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
 <style>
   .container-fluid {
@@ -32,498 +20,60 @@
     }
   }
 
-  
-
-.slick-slider {
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -ms-touch-action: pan-y;
-    touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent
-}
-.slick-list {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    margin: 0;
-    padding: 0
-}
-.slick-list:focus {
-    outline: none
-}
-.slick-list.dragging {
-    cursor: pointer;
-    cursor: hand
-}
-.slick-slider .slick-track,
-.slick-slider .slick-list {
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0)
-}
-.slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
-.slick-track:before,
-.slick-track:after {
-    display: table;
-    content: ''
-}
-.slick-track:after {
-    clear: both
-}
-.slick-loading .slick-track {
-    visibility: hidden
-}
-.slick-slide {
-    display: none;
-    float: left;
-    height: 100%;
-    min-height: 1px
-}
-[dir='rtl'] .slick-slide {
-    float: right
-}
-.slick-slide img {
-    display: block
-}
-.slick-slide.slick-loading img {
-    display: none
-}
-.slick-slide.dragging img {
-    pointer-events: none
-}
-.slick-initialized .slick-slide {
-    display: block
-}
-.slick-loading .slick-slide {
-    visibility: hidden
-}
-.slick-vertical .slick-slide {
-    display: block;
-    height: auto;
-    border: 1px solid transparent
-}
-.slick-arrow.slick-hidden {
-    display: none;
-}
-.slick-loading .slick-list {
-    background: #fff url({{url('public/assets/images/ajax-loader.gif')}}) center center no-repeat;
-}
-@font-face {
-    font-family: 'slick';
-    font-weight: normal;
-    font-style: normal;
-    src: url("./fonts/slick.eot");
-    src: url("./fonts/slick.eot?#iefix") format("embedded-opentype"), url("./fonts/slick.woff") format("woff"), url("./fonts/slick.ttf") format("truetype"), url("./fonts/slick.svg#slick") format("svg")
-}
-.slick-prev,
-.slick-next {
-    font-size: 0;
-    line-height: 0;
-    position: absolute;
-    top: 50%;
-    display: block;
-    width: 20px;
-    height: 20px;
-    margin-top: -10px;
-    padding: 0;
-    cursor: pointer;
-    color: transparent;
-    border: 0;
-    outline: 0;
-    background: transparent
-}
-.slick-prev:hover,
-.slick-prev:focus,
-.slick-next:hover,
-.slick-next:focus {
-    color: transparent;
-    outline: 0;
-    background: transparent
-}
-.slick-prev:hover:before,
-.slick-prev:focus:before,
-.slick-next:hover:before,
-.slick-next:focus:before {
-    opacity: 1
-}
-.slick-prev.slick-disabled:before,
-.slick-next.slick-disabled:before {
-    opacity: 0.25
-}
-.slick-prev:before,
-.slick-next:before {
-    font-family: 'slick';
-    font-size: 20px;
-    line-height: 1;
-    opacity: 0.75;
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
-}
-
-
-
-.slick-dots {
-    position: absolute;
-    bottom: -45px;
-    display: block;
-    width: 100%;
-    padding: 0;
-    list-style: none;
-    text-align: center
-}
-.slick-dots li {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
-    padding: 0;
-    cursor: pointer
-}
-.slick-dots li button {
-    font-size: 0;
-    line-height: 39px;
-    display: block;
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    cursor: pointer;
-    color: transparent;
-    border: 0;
-    outline: 0;
-    background: transparent
-}
-.slick-dots li button:hover,
-.slick-dots li button:focus {
-    outline: 0
-}
-.slick-dots li button:hover:before,
-.slick-dots li button:focus:before {
-    opacity: 1
-}
-.slick-dots li button:before {
-    font-family: 'slick';
-    position: absolute;
-    top: -10px;
-    left: 0;
-    width: 30px;
-    height: 30px;
-    content: "•";
-    text-align: center;
-    opacity: .25;
-    color: #000;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
-}
-@media screen and (min-width: 1024px) {
-    .slick-dots li button:before {
-        font-size: 79px
-    }
-}
-@media screen and (max-width: 1023px) {
-    .slick-dots li button:before {
-        font-size: 45px !important
-    }
-}
-.slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: black
-}
-
-	
-#contents_detail .car_detail_car_navigation li {
-    display: block
-}
-#contents_detail .car_display_area {
-    position: relative
-}
-#contents_detail .car_display_area #pager_display {
-    position: absolute;
-    width: 58px;
-    font-size: 12px;
-    background-color: rgba(0, 0, 0, .4);
-    color: #fff;
-    line-height: 1.5405;
-    text-align: center;
-    bottom: 17px;
-    left: 50%;
-    border-radius: 4px;
-    margin-left: -29px !important;
-    z-index: 3
-}
-#contents_detail .car_display_area #car_MainIMG_car_display {
-    margin-bottom: 6px
-}
-#contents_detail #car_MainIMG_car_display:not(.slick-slider) {
-    width: 640px;
+  .owl-carousel .vehicle-img img {
     height: 480px;
-    background-image: url(../images/comingsoon_l.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    overflow: hidden
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow {
-    position: absolute;
-    width: 7.94259375%;
-    height: 100%;
-    bottom: 0;
-    top: 0;
-    border: none;
-    cursor: pointer;
-    outline: 0;
-    padding: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    z-index: 2
-}
-#contents_detail #car_MainIMG_car_display.playingYoutube button.slick-arrow {
-    bottom: 164px;
-    height: 316px
-}
-#contents_detail #car_MainIMG_car_display.playingVR button.slick-arrow {
-    position: absolute;
-    top: 50%;
-    margin: -21px auto;
-    z-index: 10;
-    height: 42px;
-    width: 44px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.slick-disabled {
-    opacity: .2;
-    cursor: default
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow i {
-    display: block;
-    font-size: 41px;
-    width: .4544em;
-    height: .4544em;
-    border-width: 0 0 .2em .2em;
-    border-color: transparent transparent rgba(255, 255, 255, .8) rgba(255, 255, 255, .8);
-    border-radius: 1.5px;
-    border-style: none none solid solid;
-    position: absolute;
-    top: 50%;
-    margin-top: -.2272em
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow i {
-    margin-top: 13px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow:not(.slick-disabled):hover i {
-    border-color: transparent transparent #fff #fff
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton {
-    left: 0
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton i {
-    -moz-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    left: 16px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton {
-    right: 0
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton i {
-    -moz-transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-    right: 16px
-}
-#contents_detail #car_thumbnail_car_navigation:not(.slick-slider) {
-    width: 590px;
-    margin: auto
-}
-#contents_detail #car_thumbnail_car_navigation:not(.slick-slider) div {
-    width: 75px !important;
-    height: 56.25px;
-    float: left;
-    margin-left: 8px;
-    margin-bottom: 5px
-}
-#contents_detail #car_thumbnail_car_navigation {
-    overflow: hidden;
-    padding-top: 4px
-}
-#contents_detail #car_thumbnail_car_navigation:after,
-#contents_detail #car_thumbnail_car_navigation:before {
-    content: "";
-    display: block;
-    background-color: #fff;
-    height: 127px;
-    width: 31px;
-    position: absolute;
-    top: -1px;
-    z-index: 1;
-    visibility: visible
-}
-#contents_detail #car_thumbnail_car_navigation:before {
-    background: -moz-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #fff), color-stop(100%, rgba(255, 255, 255, 0)));
-    background: -webkit-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
-    background: -o-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
-    background: -ms-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
-    background: linear-gradient(to right, #fff 0, rgba(255, 255, 255, 0) 100%);
-    left: 0
-}
-#contents_detail #car_thumbnail_car_navigation:after {
-    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(100%, #fff));
-    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, #fff 100%);
-    right: 0
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow {
-    width: 25px;
-    height: 66px;
-    background-color: rgba(0, 0, 0, .5);
-    position: absolute;
-    top: 50%;
-    margin-top: -33px;
-    border: none;
-    cursor: pointer;
-    outline: 0;
-    padding: 0;
-    box-shadow: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    z-index: 2
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled {
-    background-color: rgba(0, 0, 0, .2);
-    cursor: default
-}
-#contents_detail #car_thumbnail_car_navigation .original_slick-arrow i {
-    font-size: 25px;
-    display: block;
-    width: .34512em;
-    height: .34512em;
-    border-width: 0 0 2px 2px;
-    border-style: none none solid solid;
-    border-color: transparent transparent #fff #fff;
-    border-radius: .5px;
-    line-height: 33px
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled i {
-    opacity: .54
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow {
-    left: 0
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow i {
-    -moz-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    float: left;
-    margin-left: 8px
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow {
-    right: 0
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow i {
-    -moz-transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-    float: right;
-    margin-right: 8px
-}
-#contents_detail #car_thumbnail_car_navigation .slick-list {
-    width: 590px;
-    margin: auto;
-    overflow: visible
-}
-@media all and (-ms-high-contrast:none) {
-    #contents_detail #car_thumbnail_car_navigation .slick-list {
-        overflow: hidden;
-        padding-top: 2px
-    }
-}
-#contents_detail #car_thumbnail_car_navigation div.slick-slide > div > div {
-    width: 75px !important;
-    height: 56.25px;
-    float: left;
-    margin-left: 8px;
-    margin-bottom: 5px;
-    cursor: pointer
-}
-#contents_detail #car_thumbnail_car_navigation div.slick-slide > div > div.now_imgDisplay img{
-    outline: 1px solid #e60012;
-    -moz-box-shadow: 0 0 2px #e60012;
-    -webkit-box-shadow: 0 0 2px #e60012;
-    -o-box-shadow: 0 0 2px #e60012;
-    -ms-box-shadow: 0 0 2px #e60012;
-    box-shadow: 0 0 2px #e60012
-}
-#contents_detail #car_thumbnail_car_navigation div img {
-    max-height: 56.25px;
-    width: auto;
-    max-width: 100%;
-    margin: auto;
-    display: block
-}
-#contents_detail .car_display_area {
+    /* Set the height of the image */
+    width: 100%;
+    /* Set the width of the image to 100% to make it responsive */
+    object-fit: cover;
+    /* Use object-fit: cover to make sure the image fills the container */
+  }
+
+  .owl-carousel .vehicle-img-gallery img {
+    height: 55px;
+    /* Set the height of the image */
+    width: 74px;
+    /* Set the width of the image to 100% to make it responsive */
+    object-fit: contain;
+    /* Use object-fit: cover to make sure the image fills the container */
+  }
+  .vehicle-img-gallery{
+    margin-bottom: 3px;
+  }
+  .main-img {
     position: relative;
-}
-#contents_detail .car_display_area #pager_display {
+  }
+
+  .main-img.owl-carousel .owl-nav .owl-prev {
     position: absolute;
-    width: 58px;
-    font-size: 12px;
-    background-color: rgba(0,0,0,.4);
-    color: #fff;
-    line-height: 1.5405;
-    text-align: center;
-    bottom: 17px;
-    left: 50%;
-    border-radius: 4px;
-    margin-left: -29px!important;
-    z-index: 3;
-}
-/*Share */
-div#social-links {
-                margin: 0 auto;
-                max-width: 500px;
-            }
-            div#social-links ul li {
-                display: inline-block;
-            }          
-            div#social-links ul li a {
-                padding: 20px;
-                border: 1px solid #ccc;
-                margin: 1px;
-                font-size: 30px;
-                color: #222;
-                background-color: #ccc;
-            }
+    content: "";
+    top: 50%;
+    left: 0;
+    background-color: #fff;
+    color: #000;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .main-img.owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 0;
+    background-color: #fff;
+    color: #000;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .owl-carousel .vehicle-img-gallery img.active {
+    border: 2px solid red;
+  }
+  .owl-theme .owl-nav.disabled+.owl-dots{
+    margin: 0;
+  }
 </style>
 
 
@@ -599,7 +149,6 @@ div#social-links {
               <p class="text-primary">New Arrival</p>
             </div>
           </div>
-          {!! $shareComponent !!}
           <!-- Product Title -->
           <div class="prodcut-title">
             {{--<span>Stock Id: {{$v->stock_id}} </span>--}}
@@ -611,46 +160,42 @@ div#social-links {
           <div class="product-view">
             <div class="row">
               <div class="col-sm-8">
-              <div id="contents_detail" class="single">
-                <div class="car_display_area">
-              <div id="car_MainIMG_car_display">
-              @forelse($v_images as $v_img)
-                <div>
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="640" height="480" />
-                </div>
-                @empty
+                <div class="big-gallery">
+                  <div class="main-img owl-carousel owl-theme">
+                    @forelse($v_images as $v_img)
+                    <div class="vehicle-img"><img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" class="single-image"></div>
+                    @empty
                     @endforelse
 
+                  </div>
+                  <div class="main-img-number"></div>
 
 
 
-            </div><!-- #car_MainIMG_car_display -->
-            <p id="pager_display" class="nopointer_event nowrap_txt"><span
-                    id="currentPage_display">1</span>&nbsp;/&nbsp;<span id="totalPages_display">00</span></p>
-              </div>
-            <div>
-                                    <span class="centre bluecolor">Click on thumbnails to enlarge</span>
-                                </div>
-          
 
-                    <div id="car_thumbnail_car_navigation" class="clearfix car_detail_car_navigation">
-                    @forelse($v_images as $key => $v_img)
-                    @if($key == 0)
+                  
                     
-              
-                    <div id="imgdisp_select{{$key}}" class="now_imgDisplay">
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt=""/>
+                    <div class="nav owl-carousel owl-theme">
+                      <?php $index = 0; ?>
+                      <?php foreach ($v_images->chunk(8) as $chunk) : ?>
+                       
+
+                          <?php foreach ($chunk as $vimg) : ?>
+
+                            <div class="vehicle-img-gallery">
+                              <img data-src="{{asset('uploads/vehicle_images/'.$vimg->image)}}" src="{{asset('uploads/vehicle_images/'.$vimg->image)}}" class="d-block sm-product-img gallery-img" alt="..." />
+                            </div>
+                          <?php endforeach; ?>
+                          
+                        
+                        <?php $index++; ?>
+                      <?php endforeach; ?>
+                      </div>
+
+
+                   
+                  
                 </div>
-                    @else
-                    <div id="imgdisp_select{{$key}}">
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt=""/>
-                </div>
-                    @endif
-                
-                @empty
-                    @endforelse
-            </div><!-- #car_thumbnail_car_navigation -->
-            </div>
                 <!--Car Details  -->
                 <div class="bg-light shadow">
                   <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
@@ -1276,7 +821,6 @@ div#social-links {
 @endsection
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js" integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   $('.confirm').on('click', function(event) {
     var name = $(this).data("name");
@@ -1297,87 +841,88 @@ div#social-links {
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js" integrity="sha512-An4a3FEMyR5BbO9CRQQqgsBscxjM7uNNmccUSESNVtWn53EWx5B9oO7RVnPvPG6EcYcYPp0Gv3i/QQ4KUzB5WA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
   $(document).ready(function() {
-    $(function() {
-    "use strict";
-    var e = $("#car_MainIMG_car_display > .ytslide").length;
-    $("#car_MainIMG_car_display").on("init", function(e, t) {
-        $("#currentPage_display").text(t.currentSlide + 1), $("#totalPages_display").text(t.slideCount)
-    }).slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        initialSlide: e,
-        lazyLoad: "progressive",
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100
-    }).on("afterChange", function(e, t, r) {
-        ($("#currentPage_display").text(r + 1), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $("div#imgdisp_select" + r).addClass("now_imgDisplay"), $(".slick-current").hasClass("ytonly")) ? ($("#car_MainIMG_car_display .ytslide.slick-current > iframe")[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide.slick-current > iframe").addClass("playingYoutube")) : $("#car_MainIMG_car_display .ytslide > iframe").hasClass("playingYoutube") && ($("#car_MainIMG_car_display .ytslide > iframe")[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide > iframe").removeClass("playingYoutube")), $(".slick-current").hasClass("vronly") ? $("#car_MainIMG_car_display").addClass("playingVR") : $("#car_MainIMG_car_display").removeClass("playingVR")
-    })
-}), $(function() {
-    "use strict";
-    $("#car_thumbnail_car_navigation").slick({
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button id="thum_slide_prevbutton" class="original_slick-arrow"><i class="fa-chevron-originecssleft" aria-hidden="true">&nbsp;</i></button>',
-        nextArrow: '<button id="thum_slide_nextbutton" class="original_slick-arrow"><i class="fa-chevron-originecssright" aria-hidden="true">&nbsp;</i></button>',
-        rows: 2,
-        slidesPerRow: 7,
-        speed: 330,
-        touchMove: !1,
-        cssEase: "linear",
-        focusOnSelect: !0,
-        zIndex: 100
-    }), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').on("click", function() {
-        var e = $(this).attr("id").replace("imgdisp_select", "");
-        $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $(this).addClass("now_imgDisplay"), $("#car_MainIMG_car_display").slick("slickSetOption", "lazyLoad", "ondemand", !0).slick("slickGoTo", e)
-    })
-}), $(function() {
-    "use strict";
-    $("#also_viewed_car_list").slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    })
-}), 
-$(function() {
-    "use strict";
-    $("#recently_viewed_car_list").slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    })
-});
+    var itemCount = <?php echo count($v_images); ?>; // Get the number of items from Laravel
+    var itemsPerRow = 8; // Set a default value
 
-jQuery(function($){
-    $("#contents_detail img.lazy").lazyload({
-        effect: 'fadeIn',
-        effectspeed: 1000
+    if (itemCount <= 8) {
+      itemsPerRow = itemCount;
+    } else {
+      if (itemCount % 2 == 0) {
+        itemsPerRow = 2;
+      } else {
+        itemsPerRow = 3;
+      }
+    }
+
+    $('.nav').owlCarousel({
+      items: 8,
+      itemsDesktop: [1199, 8],
+      itemsDesktopSmall: [980, itemsPerRow],
+      itemsTablet: [768, itemsPerRow],
+      itemsMobile: [479, 1],
+      navigation: false,
+      pagination: false,
+      mouseDrag:false,
     });
-    $(".car_detail_car_navigation img.lazy").lazyload({
-        effect: 'fadeIn',
-        effectspeed: 1000
+
+    $('.main-img').owlCarousel({
+      items: 1,
+      nav: true,
+      dots: false,
+      navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+      onChanged: owlChanged,
+      onInitialized: showImageNumber,
+      onTranslated: showImageNumber
     });
-    $(".carDetails img.lazy").lazyload({
-        effect: 'fadeIn',
+    $('.nav .owl-item').on('click', function() {
+      var src = $(this).data('src');
+      var index = $(this).index();
+      // Trigger the big image carousel to display the clicked image
+      $('.main-img').trigger('to.owl.carousel', index);
+      // Remove active class from all images
+
+      $('.nav .owl-item').find('.vehicle-img-gallery').children("img").removeClass('active');
+      // Add active class to clicked image
+      $(this).find('.vehicle-img-gallery').children("img").addClass('active');
+
+    
+
     });
-});
+    /*$('.main-img .owl-prev').on('click', function() {
+      $('.main-img').trigger('prev.owl.carousel');
+    });
+
+    $('.main-img .owl-next').on('click', function() {
+      $('.main-img').trigger('next.owl.carousel');
+    });*/
+
+    function owlChanged(event) {
+      // Get the current item index
+      var currentItemIndex = event.item.index;
+      $('.nav .owl-item').find("img").removeClass('active');
+      $('.nav .owl-item').eq(currentItemIndex).find('img').addClass('active');
+      // Get the total number of items
+      var totalItems = event.item.count;
+      // Get the previous item index
+      var previousItemIndex = currentItemIndex - event.item.step;
+      // Get the next item index
+      var nextItemIndex = currentItemIndex + event.item.step;
+    }
+
+    function showImageNumber(event) {
+      // Get the current image index
+      var currentIndex = event.item.index;
+      // Get the total number of images
+      var totalImages = event.item.count;
+      // Display the image number in a separate element
+      $('.main-img-number').text((currentIndex + 1) + '/' + totalImages);
+    }
+
+
+
 
     /*==Most Viewed Vehicle Data save with ajax request==*/
     var csrfToken = "{{ csrf_token() }}";

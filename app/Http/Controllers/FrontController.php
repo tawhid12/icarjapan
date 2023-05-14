@@ -22,6 +22,7 @@ use DB;
 use Carbon\Carbon;
 
 use function PHPUnit\Framework\isEmpty;
+use Intervention\Image\Facades\Image;
 
 class FrontController extends Controller
 {
@@ -29,8 +30,8 @@ class FrontController extends Controller
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
 
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
-        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
         /*Use try catch or if else if location data found then data show either default data show or internet not found problem solving issue */
         /*
         $data = @file_get_contents($location);
@@ -62,7 +63,9 @@ class FrontController extends Controller
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')
-            ->where('new_arivals.country_id', $countryName->id)->inRandomOrder()->take(10)->get();
+            ->where('new_arivals.country_id', $countryName->id)
+            ->orWhereNotNull('new_arivals.country_id')
+            ->inRandomOrder()->take(10)->get();
         //print_r($new_arivals);die;
         $country_price_range = DB::table('countries')->select('afford_range', 'high_grade_range')->where('id', $countryName->id)->first();
 
@@ -140,14 +143,19 @@ class FrontController extends Controller
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
-        $brand = Brand::where('name', $brand->name)->firstOrFail();
-        $sub_brand_id = SubBrand::where('name', $subBrand->name)->firstOrFail();
+        $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
+        $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
         $v = Vehicle::where('stock_id', $stock_id)->first();
         $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
-        /*$v_image = DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img','=',1)->first();*/
+        $cover_img = DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first();
         $countries = Country::all();
-
-        return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id'));
+        $url= url('used-cars-search/'.$brand->slug_name.'/'.$subBrand->slug_name.'/'.$stock_id);
+        $shareComponent = \Share::page($url, 'Share title')
+        ->facebook()
+        ->twitter()
+        ->linkedin('Extra linkedin summary can be passed here')
+        ->whatsapp();
+        return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id','shareComponent','url','cover_img'));
     }
     public function searchStData(Request $request)
     {
@@ -200,4 +208,16 @@ class FrontController extends Controller
         /*print_r($request->toArray());
         die;*/
     }
+    
+
+
+    public function resizeImage($filename, $width, $height)
+    {
+        $img = Image::make(public_path('uploads/vehicle_images/'.$filename));
+        $img->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        return $img->response();
+    }
+    
 }

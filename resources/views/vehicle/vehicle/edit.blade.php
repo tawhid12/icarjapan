@@ -55,7 +55,7 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="brand_id">Brand</label>
+                                        <label for="brand_id">Maker</label>
                                         <select name="brand_id" class="form-control js-example-basic-single" id="brand_id">
                                             <option value="">Select</option>
                                             @if(count($brands))
@@ -72,7 +72,7 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="sub_brand_id">Sub Brand</label>
+                                        <label for="sub_brand_id">Model</label>
                                         <select name="sub_brand_id" class="form-control js-example-basic-single" id="sub_brand">
                                             {{--<option value="">Select</option>
                                             @if(count($sub_brands))
@@ -379,252 +379,258 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" id="name" value="{{old('name',$v->name)}}" class="form-control" placeholder="Vehicle Name" name="name">
-                                    </div>
-                                    @if($errors->has('name'))
-                                    <span class="text-danger"> {{ $errors->first('name') }}</span>
-                                    @endif
-                                </div>--}}
+                            </div>
+                            @if($errors->has('name'))
+                            <span class="text-danger"> {{ $errors->first('name') }}</span>
+                            @endif
+                    </div>--}}
 
 
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label for="fuel_id">Vehicle Availabe Country</label>
-                                        <select name="country_id[]" class="form-control js-example-basic-multiple" multiple="multiple">
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <label for="fuel_id">Vehicle Availabe Country</label>
+                            <select name="country_id[]" class="form-control js-example-basic-multiple" multiple="multiple">
 
-                                            @if(count($countries))
-                                            @foreach($countries as $c)
-                                            <option value="{{ $c->id}}" @if(in_array($c->id,$vehicle_avaliable_country)) selected @endif>{{$c->name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
+                                @if(count($countries))
+                                @foreach($countries as $c)
+                                <option value="{{ $c->id}}" @if(in_array($c->id,$vehicle_avaliable_country)) selected @endif>{{$c->name}}</option>
+                                @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
 
 
-                                <div class="col-md-3 col-12">
+                    {{--<div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="price">Price</label>
                                         <input type="text" id="price" value="{{old('price',$v->fob)}}" class="form-control" placeholder="price" name="price">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 col-12 mt-3">
-                                    <h4>Additional Vechicle Facility</h4>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="cd_player" name="cd_player" value="1">
-                                        <label class="form-check-label" for="cd_player">CD Player</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->sun_roof ==1) checked @endif id="sun_roof" name="sun_roof" value="1">
-                                        <label class="form-check-label" for="sun_roof">Sun Roof</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->leather_seat ==1) checked @endif id="leather_seat" name="leather_seat" value="1">
-                                        <label class="form-check-label" for="leather_seats">Leather Seat</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->alloy_wheels ==1) checked @endif id="alloy_wheels" name="alloy_wheels" value="1">
-                                        <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->power_steering ==1) checked @endif id="power_steering" name="power_steering" value="1">
-                                        <label class="form-check-label" for="power_steering">Power Steering</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->power_windows ==1) checked @endif id="power_windows" name="power_windows" value="1">
-                                        <label class="form-check-label" for="power_windows">Power Windows</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->air_con ==1) checked @endif id="air_con" name="air_con" value="1">
-                                        <label class="form-check-label" for="air_con">AC</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->anti_lock_brake_system ==1) checked @endif id="anti_lock_brake_system" name="anti_lock_brake_system" value="1">
-                                        <label class="form-check-label" for="anti_lock_brake_system">ABS</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->air_bag ==1) checked @endif id="air_bag" name="air_bag" value="1">
-                                        <label class="form-check-label" for="air_bag">Air Bag</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->radio ==1) checked @endif id="radio" name="radio" value="1">
-                                        <label class="form-check-label" for="air_bag">Radio</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->cd_changer ==1) checked @endif id="cd_changer" name="cd_changer" value="1">
-                                        <label class="form-check-label" for="cd_changer">CD Changer</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->dvd ==1) checked @endif id="dvd" name="dvd" value="1">
-                                        <label class="form-check-label" for="dvd">DVD</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->tv ==1) checked @endif id="tv" name="tv" value="1">
-                                        <label class="form-check-label" for="tv">Tv</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->power_seat ==1) checked @endif id="power_seat" name="power_seat" value="1">
-                                        <label class="form-check-label" for="tv">Power Seat</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->back_tire ==1) checked @endif id="back_tire" placeholder="back_tire" name="back_tire" value="1">
-                                        <label class="form-check-label" for="back_tire">Back Tire</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->grill_guard ==1) checked @endif id="grill_guard" placeholder="grill_guard" name="grill_guard" value="1">
-                                        <label class="form-check-label" for="grill_guard">Grill Guard</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->rear_spoiler ==1) checked @endif id="rear_spoiler" name="rear_spoiler" value="1">
-                                        <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->central_locking ==1) checked @endif id="central_locking" name="central_locking" value="1">
-                                        <label class="form-check-label" for="central_locking">Central Locking</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->jack ==1) checked @endif id="jack" name="jack" value="1">
-                                        <label class="form-check-label" for="jack">Jack</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="spare_tire" name="spare_tire" value="1">
-                                        <label class="form-check-label" for="spare_tire">Spare Tire</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->wheel_spanner ==1) checked @endif id="wheel_spanner" name="wheel_spanner" value="1">
-                                        <label class="form-check-label" for="wheel_spanner">Wheel Spanner</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->fog_lights ==1) checked @endif id="fog_lights" name="fog_lights" value="1">
-                                        <label class="form-check-label" for="fog_lights">Fog Lights</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="back_camera" name="back_camera" value="1">
-                                        <label class="form-check-label" for="back_camera">Back Camera</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="push_start" name="push_start" value="1">
-                                        <label class="form-check-label" for="push_start">Push Start</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->keyless_entry ==1) checked @endif id="keyless_entry" name="keyless_entry" value="1">
-                                        <label class="form-check-label" for="keyless_entry">Keyless Entry</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->esc ==1) checked @endif id="esc" name="esc" value="1">
-                                        <label class="form-check-label" for="esc">ESC</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->deg_360_cam ==1) checked @endif id="deg_360_cam" name="deg_360_cam" value="1">
-                                        <label class="form-check-label" for="deg_360_cam">360 Degree Camera</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->body_kit ==1) checked @endif id="body_kit" name="body_kit" value="1">
-                                        <label class="form-check-label" for="body_kit">Body Kit</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->side_airbag ==1) checked @endif id="side_airbag" name="side_airbag" value="1">
-                                        <label class="form-check-label" for="side_airbag">Side Air Bag</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->power_mirror ==1) checked @endif id="power_mirror" name="power_mirror" value="1">
-                                        <label class="form-check-label" for="power_mirror">Power Mirror</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->side_skirts ==1) checked @endif id="side_skirts" name="side_skirts" value="1">
-                                        <label class="form-check-label" for="side_skirts">Side Skirts</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->front_lip_spoiler ==1) checked @endif id="front_lip_spoiler" name="front_lip_spoiler" value="1">
-                                        <label class="form-check-label" for="front_lip_spoiler">Front Lip Spoiler</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->navigation ==1) checked @endif id="navigation" name="navigation" value="1">
-                                        <label class="form-check-label" for="navigation">Navigation</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" @if($v->turbo ==1) checked @endif id="turbo" name="turbo" value="1">
-                                        <label class="form-check-label" for="turbo">Turbo</label>
-                                    </div>
-
-                                </div>
-
-                                {{--<div class="col-md-6 col-12 mt-3">
-                                    <div class="form-group mt-3">
-                                        <label for="name">Video Link</label>
-                                        <input type="text" id="v_link" value="{{old('v_link',$v->v_link)}}" class="form-control" placeholder="Video Link" name="v_link">
-                            </div>
-                    </div>--}}
-                    <div class="col-md-6 col-12 mt-3">
-                        <div class="form-group">
-                            <h4>Gallery Image</h4>
-                            <input type="file" id="image" class="form-control" name="image[]" multiple>
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary m-1">Update</button>
-                    </div>
                 </div>
-                </form>
-                <div class="col-md-12 col-12 mt-3">
-                    <form action="{{ route('gallery.delete') }}" method="post">
-                        @csrf
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary m-1">Delete selected images</button>
-                        </div>
-                        <div class="row gx-1">
-                            @forelse($v_images as $v_img)
-                            <div class="col col-md-1 mt-1 main-img">
-                                <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
-                                @if(!$v_img->is_cover_img)
-                                <a href="{{ route('gallery.cover',$v_img->id) }}" class="cover-img-box">Make Cover</a>
-                                @else
-                                <a href="" class="cover-img-box">Selected</a>
-                                @endif
-                                <input type="checkbox" name="delete[]" value="{{ $v_img->id }}">
-                            </div>
-                            @empty
-                            @endforelse
-                        </div>
-                    </form>
+            </div>--}}
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <label for="note">Options</label>
+                    <textarea class="form-control" rows="3" name="option">{{old('option',$v->option)}}</textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-12 mt-3">
+                <h4>Additional Vechicle Facility</h4>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="cd_player" name="cd_player" value="1">
+                    <label class="form-check-label" for="cd_player">CD Player</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->sun_roof ==1) checked @endif id="sun_roof" name="sun_roof" value="1">
+                    <label class="form-check-label" for="sun_roof">Sun Roof</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->leather_seat ==1) checked @endif id="leather_seat" name="leather_seat" value="1">
+                    <label class="form-check-label" for="leather_seats">Leather Seat</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->alloy_wheels ==1) checked @endif id="alloy_wheels" name="alloy_wheels" value="1">
+                    <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->power_steering ==1) checked @endif id="power_steering" name="power_steering" value="1">
+                    <label class="form-check-label" for="power_steering">Power Steering</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->power_windows ==1) checked @endif id="power_windows" name="power_windows" value="1">
+                    <label class="form-check-label" for="power_windows">Power Windows</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->air_con ==1) checked @endif id="air_con" name="air_con" value="1">
+                    <label class="form-check-label" for="air_con">AC</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->anti_lock_brake_system ==1) checked @endif id="anti_lock_brake_system" name="anti_lock_brake_system" value="1">
+                    <label class="form-check-label" for="anti_lock_brake_system">ABS</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->air_bag ==1) checked @endif id="air_bag" name="air_bag" value="1">
+                    <label class="form-check-label" for="air_bag">Air Bag</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->radio ==1) checked @endif id="radio" name="radio" value="1">
+                    <label class="form-check-label" for="air_bag">Radio</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->cd_changer ==1) checked @endif id="cd_changer" name="cd_changer" value="1">
+                    <label class="form-check-label" for="cd_changer">CD Changer</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->dvd ==1) checked @endif id="dvd" name="dvd" value="1">
+                    <label class="form-check-label" for="dvd">DVD</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->tv ==1) checked @endif id="tv" name="tv" value="1">
+                    <label class="form-check-label" for="tv">Tv</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->power_seat ==1) checked @endif id="power_seat" name="power_seat" value="1">
+                    <label class="form-check-label" for="tv">Power Seat</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->back_tire ==1) checked @endif id="back_tire" placeholder="back_tire" name="back_tire" value="1">
+                    <label class="form-check-label" for="back_tire">Back Tire</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->grill_guard ==1) checked @endif id="grill_guard" placeholder="grill_guard" name="grill_guard" value="1">
+                    <label class="form-check-label" for="grill_guard">Grill Guard</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->rear_spoiler ==1) checked @endif id="rear_spoiler" name="rear_spoiler" value="1">
+                    <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->central_locking ==1) checked @endif id="central_locking" name="central_locking" value="1">
+                    <label class="form-check-label" for="central_locking">Central Locking</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->jack ==1) checked @endif id="jack" name="jack" value="1">
+                    <label class="form-check-label" for="jack">Jack</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="spare_tire" name="spare_tire" value="1">
+                    <label class="form-check-label" for="spare_tire">Spare Tire</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->wheel_spanner ==1) checked @endif id="wheel_spanner" name="wheel_spanner" value="1">
+                    <label class="form-check-label" for="wheel_spanner">Wheel Spanner</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->fog_lights ==1) checked @endif id="fog_lights" name="fog_lights" value="1">
+                    <label class="form-check-label" for="fog_lights">Fog Lights</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="back_camera" name="back_camera" value="1">
+                    <label class="form-check-label" for="back_camera">Back Camera</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->cd_player ==1) checked @endif id="push_start" name="push_start" value="1">
+                    <label class="form-check-label" for="push_start">Push Start</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->keyless_entry ==1) checked @endif id="keyless_entry" name="keyless_entry" value="1">
+                    <label class="form-check-label" for="keyless_entry">Keyless Entry</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->esc ==1) checked @endif id="esc" name="esc" value="1">
+                    <label class="form-check-label" for="esc">ESC</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->deg_360_cam ==1) checked @endif id="deg_360_cam" name="deg_360_cam" value="1">
+                    <label class="form-check-label" for="deg_360_cam">360 Degree Camera</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->body_kit ==1) checked @endif id="body_kit" name="body_kit" value="1">
+                    <label class="form-check-label" for="body_kit">Body Kit</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->side_airbag ==1) checked @endif id="side_airbag" name="side_airbag" value="1">
+                    <label class="form-check-label" for="side_airbag">Side Air Bag</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->power_mirror ==1) checked @endif id="power_mirror" name="power_mirror" value="1">
+                    <label class="form-check-label" for="power_mirror">Power Mirror</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->side_skirts ==1) checked @endif id="side_skirts" name="side_skirts" value="1">
+                    <label class="form-check-label" for="side_skirts">Side Skirts</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->front_lip_spoiler ==1) checked @endif id="front_lip_spoiler" name="front_lip_spoiler" value="1">
+                    <label class="form-check-label" for="front_lip_spoiler">Front Lip Spoiler</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->navigation ==1) checked @endif id="navigation" name="navigation" value="1">
+                    <label class="form-check-label" for="navigation">Navigation</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if($v->turbo ==1) checked @endif id="turbo" name="turbo" value="1">
+                    <label class="form-check-label" for="turbo">Turbo</label>
                 </div>
 
             </div>
+
+            {{--<div class="col-md-6 col-12 mt-3">
+                                    <div class="form-group mt-3">
+                                        <label for="name">Video Link</label>
+                                        <input type="text" id="v_link" value="{{old('v_link',$v->v_link)}}" class="form-control" placeholder="Video Link" name="v_link">
         </div>
+    </div>--}}
+    <div class="col-md-6 col-12 mt-3">
+        <div class="form-group">
+            <h4>Gallery Image</h4>
+            <input type="file" id="image" class="form-control" name="image[]" multiple>
+        </div>
+    </div>
+
+
+    <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary m-1">Update</button>
+    </div>
+    </div>
+    </form>
+    <div class="col-md-12 col-12 mt-3">
+        <form action="{{ route('gallery.delete') }}" method="post">
+            @csrf
+            <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary m-1">Delete selected images</button>
+            </div>
+            <div class="row gx-1">
+                @forelse($v_images as $v_img)
+                <div class="col col-md-1 mt-1 main-img">
+                    <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
+                    @if(!$v_img->is_cover_img)
+                    <a href="{{ route('gallery.cover',$v_img->id) }}" class="cover-img-box">Make Cover</a>
+                    @else
+                    <a href="" class="cover-img-box">Selected</a>
+                    @endif
+                    <input type="checkbox" name="delete[]" value="{{ $v_img->id }}">
+                </div>
+                @empty
+                @endforelse
+            </div>
+        </form>
+    </div>
+
+    </div>
+    </div>
     </div>
     </div>
 </section>
@@ -691,12 +697,12 @@
                 success: function(data) {
                     //console.log(data);
                     $.each(data, function(key, value) {
-                        if(sub_brand_id == value.id){
+                        if (sub_brand_id == value.id) {
                             $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
-                        }else{
+                        } else {
                             $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
                         }
-                        
+
                     });
                 }
             });

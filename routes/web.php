@@ -68,6 +68,9 @@ Route::get('/used-cars-search/{brand}/{subBrand}/{stock_id}', [front::class,'sin
 Route::get('/used-cars-search',[front::class,'searchStData'])->name('searchStData');
 Route::get('/vehicle/search/data/',[front::class,'search_by_data'])->name('search_by_data');
 
+Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeImage'])->name('resizeImage');
+
+
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
 Route::get('/signin', [auth::class,'signInForm'])->name('signIn');

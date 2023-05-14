@@ -53,11 +53,11 @@ return [
     |
     */
 
-    //'url' => env('APP_URL', "http://localhost"),
-    'url' => env('APP_URL', "https://test.icarjapan.com"),
+    'url' => env('APP_URL', "http://localhost"),
+    //'url' => env('APP_URL', "https://test.icarjapan.com"),
 
-    //'asset_url' => env('ASSET_URL', "http://localhost/icarjapan").'/public',
-    'asset_url' => env('ASSET_URL', " https://test.icarjapan.com").'/public',
+    'asset_url' => env('ASSET_URL', "http://localhost/icarjapan").'/public',
+    //'asset_url' => env('ASSET_URL', " https://test.icarjapan.com").'/public',
    
 
     /*
@@ -183,7 +183,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -216,6 +216,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'LogActivity' => App\Helpers\LogActivity::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
     ])->toArray(),
 
 ];
