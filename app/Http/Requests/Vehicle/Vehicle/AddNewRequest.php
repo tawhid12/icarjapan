@@ -25,11 +25,11 @@ class AddNewRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            //'name'=>'required',
             'stock_id'=>'required|unique:vehicles,stock_id',
             'brand_id'=>'required',
             'sub_brand_id'=>'required',
-            'year'=>'required',
+            //'year'=>'required',
         ];
     }
 

@@ -654,6 +654,9 @@
             startDate: moment(date).format('DD/MM/YYYY'),
             showDropdowns: true,
             autoUpdateInput: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
         }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);

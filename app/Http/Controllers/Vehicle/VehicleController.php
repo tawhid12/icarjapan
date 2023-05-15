@@ -79,7 +79,7 @@ class VehicleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddNewRequest $request)
     {
         /*echo '<pre>';
         print_r($request->toArray());die;*/
@@ -119,7 +119,7 @@ class VehicleController extends Controller
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
             //$vehicle->year = $request->year;
-            $vehicle->reg_year = date('Y-m-d', strtotime($request->reg_year));
+            $vehicle->reg_year = Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d');
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->description = $request->description;
@@ -341,7 +341,7 @@ class VehicleController extends Controller
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
             
-            $vehicle->reg_year = date('Y-m-d', strtotime($request->reg_year));
+            $vehicle->reg_year = Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d');
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->description = $request->description;
