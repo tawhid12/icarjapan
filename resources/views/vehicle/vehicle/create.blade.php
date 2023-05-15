@@ -263,7 +263,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="reg_year">Registration Year</label>
-                                        <input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year" placeholder="dd/mm/yyyy">
+                                        <input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year">
                                     </div>
                                 </div>
 
@@ -684,7 +684,7 @@
             locale: {
                 format: 'DD/MM/YYYY'
             }
-        }).on('change', function(e) {
+        }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
         });

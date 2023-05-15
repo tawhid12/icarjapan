@@ -651,13 +651,10 @@
             date = new Date();
         $('#reg_year').daterangepicker({
             singleDatePicker: true,
-            startDate: moment().format('DD/MM/YYYY'),
+            startDate: moment(date).format('DD/MM/YYYY'),
             showDropdowns: true,
             autoUpdateInput: true,
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-        }).on('change', function(e) {
+        }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
         });
