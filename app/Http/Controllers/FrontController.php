@@ -23,15 +23,20 @@ use Carbon\Carbon;
 
 use function PHPUnit\Framework\isEmpty;
 use Intervention\Image\Facades\Image;
-
+use App\Services\GeoLocationService;
 class FrontController extends Controller
 {
+    protected $geoLocationService;
+    public function __construct(GeoLocationService $geoLocationService)
+    {
+        $this->geoLocationService = $geoLocationService;
+    }
     public function index(Request $request)
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
 
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
-        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
         /*Use try catch or if else if location data found then data show either default data show or internet not found problem solving issue */
         /*
         $data = @file_get_contents($location);
@@ -143,19 +148,31 @@ class FrontController extends Controller
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
+        $countryName = $this->geoLocationService->getCountry();
         $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
         $v = Vehicle::where('stock_id', $stock_id)->first();
         $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
         $cover_img = DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first();
         $countries = Country::all();
+        $recomended = DB::table('vehicles')
+        ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+        ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
+        ->join('brands', 'vehicles.brand_id', 'brands.id')
+        ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+        ->whereNull('r_status')
+        ->orWhere('countries_vehicles.country_id', $countryName->id)
+        ->where('brands.id', $v->brand_id)
+        ->where('sub_brands.id', $v->sub_brand_id)
+        ->whereNotIn('vehicles.id', [$v->id])
+        ->inRandomOrder()->take(10)->get();
+
         $url= url('used-cars-search/'.$brand->slug_name.'/'.$subBrand->slug_name.'/'.$stock_id);
         $shareComponent = \Share::page($url, 'Share title')
         ->facebook()
         ->twitter()
-        ->linkedin('Extra linkedin summary can be passed here')
         ->whatsapp();
-        return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id','shareComponent','url','cover_img'));
+        return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id','shareComponent','url','cover_img','recomended'));
     }
     public function searchStData(Request $request)
     {

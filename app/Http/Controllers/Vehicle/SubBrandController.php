@@ -47,7 +47,7 @@ class SubBrandController extends Controller
         try{
             $sb=new SubBrand();
             $sb->name=$request->name;
-            $sb->slug=strtolower(str_replace(' ', '-', $request->name));
+            $sb->slug_name=strtolower(str_replace(' ', '-', $request->name));
             $sb->brand_id=$request->brand_id;
             $sb->created_by=currentUserId();
             if($request->has('image')) $b->image = $this->uploadImage($request->file('image'), 'uploads/sub_brands');

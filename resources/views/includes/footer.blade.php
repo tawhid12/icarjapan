@@ -2,6 +2,13 @@
   <footer class="footer">
       <div class="container py-4">
           <div class="row">
+              <div class="col-md-12 d-flex justify-content-end">
+                  <div class="social-icon">
+                      <span class="fb"><i class="bi bi-facebook"></i></span>
+                      <span class="youtube"><i class="bi bi-youtube"></i></span>
+                      <span class="twitter"><i class="bi bi-twitter"></i></span>
+                  </div>
+              </div>
               <div class="col-sm-12 col-md-6 col-lg-3 footer-logo">
                   <img class="img-fluid" src="{{asset('front/img/header-logo.png')}}" alt="" />
                   <div class="footer-title my-3">
@@ -16,7 +23,7 @@
                           E-mail : {{$com_acc_info->email}}
                       </p>
                   </div>
-                  <div class="improtant-lint mt-5 color-first-letter">
+                  <div class="mt-5 color-first-letter">
                       <ul>
                           <li>
                               <a class="nav-link" href="#">Terms of Use</a>
@@ -61,12 +68,12 @@
                   </div>
                   <div class="my-3">
                       <ul class="navbar-nav">
-                            @forelse($brands as $b)
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('brand',strtolower($b->name))}}">{{$b->name}}</a>
-                            </li>
-                            @empty
-                            @endforelse
+                          @forelse($brands as $b)
+                          <li class="nav-item">
+                              <a class="nav-link" href="{{route('brand',strtolower($b->name))}}">{{$b->name}}</a>
+                          </li>
+                          @empty
+                          @endforelse
                       </ul>
                   </div>
               </div>
@@ -74,46 +81,46 @@
                   <div class="footer-title">
                       <p>By Prices</p>
                   </div>
-                  <div class="my-3 improtant-lint">
+                  <div class="my-3">
                       <ul>
-                        @php 
-                        for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 3000) {
-                        @endphp
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Under USD {{$i}} </a>
-                          </li>
-                        @php    
-                        }
-                        @endphp
+                          @php
+                          for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 3000) {
+                              @endphp
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#">Under USD {{$i}} </a>
+                              </li>
+                              @php
+                              }
+                              @endphp
                       </ul>
                   </div>
                   <div class="footer-title">
                       <p>By Discount</p>
                   </div>
-                  <div class="my-3 improtant-lint">
+                  <div class="my-3">
                       <ul>
-                        @php 
-                        for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                        @endphp
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">90%~ OFF </a>
-                          </li>
-                        @php    
-                        }
-                        @endphp
+                          @php
+                          for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
+                              @endphp
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#">90%~ OFF </a>
+                              </li>
+                              @php
+                              }
+                              @endphp
                       </ul>
                   </div>
                   <div class="footer-title">
                       <p>Inventory Location</p>
                   </div>
-                  <div class="my-3 improtant-lint">
+                  <div class="my-3">
                       <ul>
-                        @forelse($inv_loc as $inv)
+                          @forelse($inv_loc as $inv)
                           <li class="nav-item">
                               <a class="nav-link" href="#">{{$inv->name}} Inventory </a>
                           </li>
-                        @empty
-                        @endforelse
+                          @empty
+                          @endforelse
                       </ul>
                   </div>
               </div>
@@ -121,14 +128,14 @@
                   <div class="footer-title">
                       <p>By Type</p>
                   </div>
-                  <div class="my-3 improtant-lint">
+                  <div class="my-3">
                       <ul>
-                        @forelse($body_types as $bt)
+                          @forelse($body_types as $bt)
                           <li class="nav-item">
                               <a class="nav-link" href="#">{{$bt->name}}</a>
                           </li>
-                        @empty
-                        @endforelse
+                          @empty
+                          @endforelse
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -136,12 +143,12 @@
                   </div>
                   <div class="my-3 improtant-lint">
                       <ul>
-                        @forelse($drive_types as $dt)
+                          @forelse($drive_types as $dt)
                           <li class="nav-item">
                               <a class="nav-link" href="#">{{$dt->name}}</a>
                           </li>
-                        @empty
-                        @endforelse
+                          @empty
+                          @endforelse
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -221,14 +228,6 @@
                           </li>
                       </ul>
                   </div>
-                  <div class="footer-title mt-5 pt-5">
-                      <p>Connect with us</p>
-                  </div>
-                  <div class="social-icon">
-                      <i class="bi bi-facebook"></i>
-                      <i class="bi bi-youtube"></i>
-                      <i class="bi bi-twitter"></i>
-                  </div>
               </div>
           </div>
       </div>
@@ -251,11 +250,11 @@
   <!-- fb page js -->
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=425979584449354&autoLogAppEvents=1" nonce="lQcO9Eh9"></script>
-  <script src="//code.jquery.com/jquery-1.12.4.min.js"></script> 
+  <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')
   <!--end::Page Scripts-->
-     
-</body>
+
+  </body>
 
   </html>

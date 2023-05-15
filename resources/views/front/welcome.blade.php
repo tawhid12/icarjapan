@@ -37,7 +37,7 @@
         <!-- left row 2 -->
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-black">
+            <h5 class="card-title bg-black text-white">
             {{$com_acc_info->c_name}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
@@ -59,30 +59,45 @@
       <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
         @include('front.search-box')
         <!-- mid row 2 -->
-        <div class="mid-row-2">
-          <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner mb-3 d-flex justify-content-center">
-              <img class="img-fluid shadow" src="{{asset('front/img/slide3.png')}}" alt="" />
+        <style>
+           .mid-sm-banner img{
+    width: 172px;
+    aspect-ratio: auto 172 / 104;
+    height: 104px;
+}
+        </style>
+        <div class="mid-row-2 mb-3">
+          <div class="row gx-2 d-flex align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
+              <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner mb-3">
-              <img class="img-fluid mb-3 shadow mb-3" src="{{asset('front/img/slide1.png')}}" alt="" />
-              <img class="img-fluid shadow" src="{{asset('front/img/image_3.png')}}" alt="" />
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt=""/>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner mb-3 justify-content-center">
-              <img class="img-fluid mb-3 shadow" src="{{asset('front/img/image_3.png')}}" alt="" />
-              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt="" />
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt=""/>
             </div>
           </div>
         </div>
         <!-- mid row 3 -->
-        <div class="d-flex justify-content-center">
-          <div class="d-flex mid-row-3">
-            <a class="shadow" href="#">My Accounts Status</a>
-            <a class="shadow" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
-            <a class="shadow" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
-            <a class="shadow" href="#"><i class="bi bi-search"></i>My Search History</a>
+    
+          <div class="mid-row-3">
+            <div class="row">
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
+              </div>
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
+              </div>
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
+              </div>
+            </div>
+            {{--<a class="shadow" href="#">My Accounts Status</a>--}}
           </div>
-        </div>
+       
         <!-- mid row 4 product row 1 -->
         <div class="mid-row-4 my-4">
           <!-- product row title -->

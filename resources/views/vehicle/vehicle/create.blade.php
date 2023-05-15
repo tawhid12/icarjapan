@@ -263,7 +263,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="reg_year">Registration Year</label>
-                                        <input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year">
+                                        <input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year" placeholder="dd/mm/yyyy">
                                     </div>
                                 </div>
 
@@ -678,11 +678,13 @@
         });
         $('#reg_year').daterangepicker({
             singleDatePicker: true,
-            startDate: new Date(),
+            startDate: moment().format('DD/MM/YYYY'),
             showDropdowns: true,
             autoUpdateInput: true,
-            format: 'dd/mm/yyyy',
-        }).on('changeDate', function(e) {
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        }).on('change', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
         });

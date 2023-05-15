@@ -231,6 +231,9 @@ class VehicleController extends Controller
                             $v_data->arival_country()->attach($arival_country_data[$key]);
                         }
                     }
+                }else{
+                    DB::table('countries_vehicles')->insert(['country_id' => null,'vehicle_id'=>$vehicle->id]);
+                    DB::table('new_arivals')->insert(['country_id' => null,'vehicle_id'=>$vehicle->id]);
                 }
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
@@ -412,6 +415,20 @@ class VehicleController extends Controller
                         $data = $country_data[$key];
                     }
                     $v_data->countries()->sync($country_data);
+                }else{
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('countries_vehicles')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        DB::table('countries_vehicles')->insert(['country_id' => null,'vehicle_id'=>$vehicle->id]);
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
+                    }
                 }
                 /*== Vehicle Arival Wise */
                 if ($request->post('arival_country_id')) {
@@ -422,6 +439,20 @@ class VehicleController extends Controller
                         $data = $arival_country_data[$key];
                     }
                     $v_data->arival_country()->sync($arival_country_data);
+                }else{
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('new_arivals')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        DB::table('new_arivals')->insert(['country_id' => null,'vehicle_id'=>$vehicle->id]);
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
+                    }
                 }
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {

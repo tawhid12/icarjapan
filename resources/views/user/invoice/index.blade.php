@@ -18,15 +18,14 @@
                         <thead>
                             <tr>
                                 <th scope="col" rowspan="2">{{__('#SL')}}</th>
-                                <th scope="col" rowspan="2">{{__('Invoice Detl')}}</th>
-                                <th>Order Detl</th>
-                                <th>Settle Price</th>
+                                <th scope="col" rowspan="2">{{__('Invoice')}}</th>
+                                <th>Reservation Details</th>
+                                <th>Settle|Confirmed Price</th>
                                 <th>Shipping Detl</th>
                                 <th>Inspection Detl</th>
                                 <th>BL Detl</th>
                                 <th>Consignee</th>
-                                <th>Documents</th>
-                                <th>{{__('Status')}}</th>
+                                {{--<th>{{__('Status')}}</th>--}}
                                 <th class="white-space-nowrap" rowspan="2">{{__('ACTION')}}</th>
                             </tr>
                         </thead>
@@ -35,8 +34,7 @@
                             <tr>
                                 <td>{{ ++$loop->index }}</td>
                                 <td>
-                                    {{$inv->id}}
-                                    {{$inv->created_at}}
+                                    <strong>ID: </strong>{{$inv->id}}
                                 </td>
                                 <td>
                                     <p class="m-0"><strong>Customer Id : </strong>{{optional($inv->user)->id}}</p>
@@ -63,20 +61,12 @@
                                 <td>
                                     <p class="m-0">{{optional($inv->consignee)->c_name}}</p>
                                 </td>
-                                <td>
-
-                                </td>
-                                <td>@if($inv->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
+                                {{--<td>@if($inv->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>--}}
                                 <td class="white-space-nowrap">
                                     @if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin')
-                                    <a href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    @endif
-                                    @if (currentUser() == 'salesexecutive' || currentUser() == 'user')
-                                    <a href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$inv->id))}}">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
+                                    <a title="payment" href="{{route(currentUser().'.payment.create')}}?id={{$inv->id}}"><i class="bi bi-box-arrow-in-right"></i></a>
+                                    <a href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$inv->id))}}"><i class="bi bi-eye"></i></a>
                                     @endif
                                     <!-- <a href="javascript:void()" onclick="$('#form{{$inv->id}}').submit()">
                                                 <i class="bi bi-trash"></i>

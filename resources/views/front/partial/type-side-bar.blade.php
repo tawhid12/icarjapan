@@ -1,7 +1,7 @@
         <!-- left row 7 -->
         <div class="left-row left-row-7 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-black">Search By Type</h5>
+            <h5 class="card-title bg-black text-white">Search By Type</h5>
             <div class="card-body">
               @forelse($body_types as $bt)
               <p class="card-text">

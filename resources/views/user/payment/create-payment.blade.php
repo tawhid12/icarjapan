@@ -1,7 +1,7 @@
   @extends('layout.app')
 
-  @section('pageTitle','Create Payment')
-  @section('pageSubTitle','Create')
+  @section('pageTitle','Make Payment')
+  @section('pageSubTitle','Payment')
 
   @section('content')
   <section id="multiple-column-form">
@@ -13,31 +13,24 @@
                           <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.payment.store')}}">
                               @csrf
                               <div class="row">
-                                  <div class="col-md-4 col-12">
-                                      <div class="form-group">
-                                          <label for="user_id">Select Customer Id</label>
-                                          <select name="user_id" class="form-control" required>
-                                              <option value="">Select</option>
-                                              @if(count($invoices))
-                                              @foreach($invoices as $in)
-                                              <option value="{{ $in->customer_id}}">Customer Id # {{$in->customer_id}} & Name # {{optional($in->user)->name}}</option>
-                                              @endforeach
-                                              @endif
-                                          </select>
-                                      </div>
+                                  <div class="col-md-3 col-12">
+                                      <p class="m-0"><strong>Customer Name : {{optional($invoice->user)->name}} <br> Customer ID :{{$invoice->customer_id}}</strong></p>
                                   </div>
-                                  <div class="col-md-4 col-12">
+                                  <div class="col-md-3 col-12">
+                                      <p class="m-0"><strong>Invoice No : {{$invoice->id}}</strong></p>
+                                  </div>
+                                  <hr>
+                                  <input type="hidden" value="{{$invoice->customer_id}}" name="user_id">
+                                  <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="type">Payment Type</label>
                                           <select name="type" class="form-control">
                                               <option value="">Select</option>
-                                              <option value="1" selected>Deposit</option>
-                                              {{--<option value="2">Allocated</option>
-                                            <option value="3">Security Deposit</option>--}}
+                                              <option value="2" selected>Allocated</option>
                                           </select>
                                       </div>
                                   </div>
-                                  <div class="col-md-4 col-12">
+                                  <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="currency">Currency</label>
                                           <select name="currency" class="form-control">
@@ -58,16 +51,11 @@
                                           <input type="text" id="amount" class="form-control" placeholder="Amount" name="amount">
                                       </div>
                                   </div>
-                                  {{--<div class="col-md-3 col-12">
+                                  {{--value="optional($invoice->res_vehicle)->settle_price"--}}
+                                  <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="allocated">Allocated</label>
                                           <input type="text" id="allocated" class="form-control" placeholder="Allocated" name="allocated">
-                                      </div>
-                                  </div>--}}
-                                  <div class="col-md-3 col-12">
-                                      <div class="form-group">
-                                          <label for="deposit">Deposit</label>
-                                          <input type="text" id="deposit" class="form-control" placeholder="Deposit" name="deposit">
                                       </div>
                                   </div>
                               </div>
