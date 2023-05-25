@@ -15,10 +15,12 @@
                                 <tr>
                                     <th scope="col">{{__('#SL')}}</th>
                                     <th scope="col">{{__('Vehicle Short Name')}}</th>
-                                    <th scope="col">{{__('Vehicle Long Name')}}</th>
+                                    <th scope="col">{{__('Year')}}</th>
+                                    <th scope="col">{{__('Chasis No')}}</th>
+                                    {{--<th scope="col">{{__('Vehicle Long Name')}}</th>--}}
                                     <th scope="col">{{__('Stock Id')}}</th>
                                     <th scope="col">{{__('Brand')}}</th>
-                                    <th scope="col">{{__('Model')}}</th>
+                                    {{--<th scope="col">{{__('Model')}}</th>--}}
                                     <th scope="col">{{__('Inventory Location')}}</th>
                                     <th class="white-space-nowrap">{{__('ACTION')}}</th>
                                 </tr>
@@ -28,10 +30,12 @@
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
                                     <td>{{$v->name}}</td>
-                                    <td>{{$v->fullName}}</td>
+                                    <td>{{$v->manu_year}}</td>   
+                                    <td>{{$v->chassis_no}}</td>                                 
+                                    {{--<td>{{$v->fullName}}</td>--}}
                                     <td>{{$v->stock_id}}</td>
                                     <td>{{$v->brand->name}}</td>
-                                    <td>{{optional($v->vehicle_model)->name}}</td>
+                                    {{--<td>{{optional($v->vehicle_model)->name}}</td>--}}
                                     <td>{{optional($v->inv_loc)->name}}</td>
                                     <td class="white-space-nowrap">
                                         <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">

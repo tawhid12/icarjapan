@@ -1,6 +1,23 @@
 @extends('layout.app')
 @section('pageTitle','Vehicle Show')
 @section('pageSubTitle','Show')
+@push('styles')
+<style>
+th,td{
+    padding:2px !important;
+    border: 1px solid #d6d6d6 !important;
+}
+.bg{
+    background-color: #f8f8f8 !important; 
+}
+.bg-danger-subtle {
+    border: 1px solid #d6d6d6;
+    font-size: 14px;
+    text-align: center;
+    height: 30px;
+}
+</style>
+@endpush
 @section('content')
 <!-- Bordered table start -->
 <section class="section">
@@ -8,181 +25,182 @@
         <div class="col-12">
             <div class="card">
                 <div class="col-md-12">
+                    
+                    <a class="btn btn-sm btn-info float-start" href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}"><i class="bi bi-pencil-square"></i> Edit Vehicle</a>
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.vehicle.index')}}"><i class="bi bi-plus-square"></i> All Vehicle</a>
                 </div>
                 <!-- table bordered -->
                 <div class="row p-3">
-                    <div class="col-md-8">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <tr>
-                                        <th colspan="4" class="text-center">
-                                            <h5>{{__('Vehicle Name')}}</h5>
-                                            <h6>{{$v->fullName}}</h6>
-                                            <p><strong>{{__('Vehicle Price')}} :- {{$v->price}}</strong></p>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td width="200px">
-                                            <p clss="m-0"><strong>{{__('Brand')}} :- </strong>{{$v->brand->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Version')}} :- </strong>{{$v->version}}</p>
-                                            <p clss="m-0"><strong>{{__('M2')}} :- </strong>{{$v->m3}}</p>
-                                            <p clss="m-0"><strong>{{__('Model')}} :- </strong>{{optional($v->vehicle_model)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Model code')}} :- </strong>{{$v->model_code}}</p>
-                                            <p clss="m-0"><strong>{{__('Chasis')}} :- </strong>{{$v->chassis_no}}</p>
-                                            <p clss="m-0"><strong>{{__('fob')}} :- </strong>{{$v->fob}}</p>
-                                            <p clss="m-0"><strong>{{__('Manufacture Year')}} :- </strong>{{$v->manu_year}}</p>
-                                        </td>
-                                        <td>
-                                            <p clss="m-0"><strong>{{__('Sub Brand')}} :- </strong>{{optional($v->sub_brand)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Steering')}} :- </strong>@if($v->steering ==1) Left @else Right @endif</p>
-                                            <p clss="m-0"><strong>{{__('Body Type')}} :- </strong>{{optional($v->body_type)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Sub Body Type')}} :- </strong>{{optional($v->sub_body_type)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Door')}} :- </strong>{{$v->door}}</p>
-                                            <p clss="m-0"><strong>{{__('Weight')}} :- </strong>{{$v->weight}}</p>
-                                            <p clss="m-0"><strong>{{__('Drive Type')}} :- </strong>{{optional($v->drive_type)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Inventory Location')}} :- </strong>{{optional($v->inv_loc)->name}}</p>
-                                        </td>
-                                        <td>
-                                            <p clss="m-0"><strong>{{__('Stock Id')}} :- </strong>{{$v->stock_id}}</p>
-                                            <p clss="m-0"><strong>{{__('CC')}} :- </strong>{{$v->cc}}</p>
-                                            <p clss="m-0"><strong>{{__('Mileage')}} :- </strong>{{$v->mileage}}</p>
-                                            <p clss="m-0"><strong>{{__('Transmission')}} :- </strong>{{$v->transmission_id}}</p>
-                                            <p clss="m-0"><strong>{{__('Discount')}} :- </strong>{{$v->discount}}</p>
-                                            <p clss="m-0"><strong>{{__('Color')}} :- </strong>{{optional($v->color)->name}}</p>
-                                            <p clss="m-0"><strong>{{__('Body Length')}} :- </strong>{{$v->b_length}}</p>
-                                        </td>
-                                        <td>
-                                            <p clss="m-0"><strong>{{__('Package')}} :- </strong>{{$v->package}}</p>
-                                            @php $truck_size = array(1 => 'Large Truck', 2 => '>Medium Truck', 3 => 'Small Truck', 4 => 'Multicab'); @endphp
-                                            <p clss="m-0"><strong>
-                                                {{__('Truck Size')}} :- </strong>@php if (array_key_exists(1, $truck_size)) 
-                                                {
-                                                echo $truck_size[1]; // Output: bar
-                                                } @endphp
-                                            </p>
-                                            <p clss="m-0"><strong>{{__('Max Loading Capacity')}} :- </strong>{{$v->max_loading_capacity}}</p>
-                                            <p clss="m-0"><strong>{{__('Engine Capacity')}} :- </strong>{{$v->e_type}}</p>
-                                            <p clss="m-0"><strong>{{__('Engine Code')}} :- </strong>{{$v->e_code}}</p>
-                                            <p clss="m-0"><strong>{{__('Year')}} :- </strong>{{$v->year}}</p>
-                                            <p clss="m-0"><strong>{{__('Reg Year')}} :- </strong>{{$v->reg_year}}</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">{{__('Description')}}</th>
-                                        <th colspan="2">{{__('Note')}}</th>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">{{$v->description}}</td>
-                                        <td colspan="2">{{$v->note}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Additional Information
-                                        </td>
-                                        <td colspan="3">
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="air_bag" placeholder="air_bag" name="air_bag" value="1" @if($v->air_bag ==1) checked @endif>
-                                                <label for="air_bag" class="form-check-label">Air Bag</label>
-                                            </div>
+                    <div class="col-md-8 offset-md-2">
 
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="anti_lock_brake_system" placeholder="anti_lock_brake_system" name="anti_lock_brake_system" value="1" @if($v->anti_lock_brake_system ==1) checked @endif>
-                                                <label for="anti_lock_brake_system" class="form-check-label">Anti Lock Brake System</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="air_con" placeholder="air_con" name="air_con" value="1" @if($v->air_con ==1) checked @endif>
-                                                <label for="air_con" class="form-check-label">Air Condition</label>
-                                            </div>
+                    <table class="table table-sm table-bordered text-center" style="font-size: smaill;">
+                        <thead>
+                            <tr>
+                                <th colspan="4" scope="col">
+                                    {{$v->fullName}} - Details
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="bg" scope="row">STOCK ID</th>
+                                <td>{{$v->stock_id}}</td>
+                                <th class="bg" scope="row">Engine Size (CC)</th>
+                                <td>{{$v->e_size}}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Maker</th>
+                                <td>{{ optional($v->brand)->name }}</td>
+                                <th class="bg" scope="row">Engine Info</th>
+                                <td>{{$v->e_info}}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Model</th>
+                                <td>{{ optional($v->sub_brand)->name }}</td>
+                                <th class="bg" scope="row">Engine Code</th>
+                                <td>{{$v->e_code}}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Package</th>
+                                <td>{{ $v->package }}</td>
+                                <th class="bg" scope="row">Location</th>
+                                <td>{{ optional($v->inv_loc)->name }} | {{ optional($v->inv_port)->name }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Chassis</th>
+                                <td>{{ $v->chassis_no }}</td>
+                                <th class="bg" scope="row">Drive</th>
+                                <td>{{ optional($v->drive_type)->name }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Manufacture Year</th>
+                                <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->manu_year))->format('Y')}}</td>
+                                <th class="bg" scope="row">Registration Year</th>
+                                <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Mileage (KM)</th>
+                                <td>{{ $v->mileage }}</td>
+                                <th class="bg" scope="row">Transmission</th>
+                                <td>{{ optional($v->trans)->name }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Ext. Color</th>
+                                <td>{{ optional($v->ext_color)->name }}</td>
+                                <th class="bg" scope="row">Steering</th>
+                                <td>@if($v->steering == 1) RHD @else LHD @endif</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Door</th>
+                                <td>{{ optional($v->door)->name }}</td>
+                                <th class="bg" scope="row">Weight</th>
+                                <td>{{ $v->weight }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Seats</th>
+                                <td>{{ optional($v->seat)->name }}</td>
+                                <th class="bg" scope="row">Capacity</th>
+                                <td>{{ $v->max_loading_capacity }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Body Type</th>
+                                <td>{{ optional($v->body_type)->name }}</td>
+                                <th class="bg" scope="row">Dimention (L*H*W)</th>
+                                <td>{{ $v->body_length }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg" scope="row">Fuel Type</th>
+                                <td>{{ optional($v->fuel)->name }}</td>
+                                <th class="bg" scope="row">M3</th>
+                                <td>{{ $v->m3 }}</td>
+                            </tr>
+                            <tr>
+                                {{--<th class="bg" scope="row">Int. Color</th>
+                                <td>{{ optional($v->int_color)->name }}</td>--}}
+                                <th class="bg" scope="row">Condition</th>
+                                <td>{{ optional($v->condition)->name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="back_tire" placeholder="back_tire" name="back_tire" value="1" @if($v->back_tire ==1) checked @endif>
-                                                <label for="back_tire" class="form-check-label">Back Tire</label>
-                                            </div>
+                    
+           
+                  <!--Accessories  -->
+                  <div class="mt-2">
+                    <table class="m-0 table table-sm">
+                      <thead>
+                        <tr class="">
+                          <th class="text-center" colspan="4" scope="col">
+                            Features
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div class="row gx-0">
+                
+                        @if($v->cd_player ==1) <div class="col-md-3 bg-danger-subtle">CD Player</div> @endif
+                        @if($v->sun_roof ==1) <div class="col-md-3 bg-danger-subtle">Sun Roof</div> @endif
+                        @if($v->leather_seat ==1)<div class="col-md-3 bg-danger-subtle">Leather Seat</div>@endif
+                        @if($v->alloy_wheels ==1)<div class="col-md-3 bg-danger-subtle">Alloy Wheels</div> @endif
+                      
+                        @if($v->power_steering ==1)<div class="col-md-3 bg-danger-subtle">Power Steering</div> @endif
+                        @if($v->power_windows ==1)<div class="col-md-3 bg-danger-subtle">Power Windows</div> @endif
+                        @if($v->air_con ==1)<div class="col-md-3 bg-danger-subtle">Air Con</div> @endif
+                        @if($v->anti_lock_brake_system ==1)<div class="col-md-3 bg-danger-subtle">Anti lock Brake System</div> @endif
+                     
+                        @if($v->air_bag ==1)<div class="col-md-3 bg-danger-subtle">Air Bag</div> @endif
+                        @if($v->radio ==1)<div class="col-md-3 bg-danger-subtle">Radio</div> @endif
+                        @if($v->cd_changer ==1)<div class="col-md-3 bg-danger-subtle">Cd Changer</div> @endif
+                        @if($v->dvd ==1)<div class="col-md-3 bg-danger-subtle">DVD</div>@endif
+                     
+                        @if($v->tv ==1)<div class="bg-danger-subtle">TV</div> @endif
+                        @if($v->power_seat ==1)<div class="bg-danger-subtle">Power Seat</div> @endif
+                        @if($v->back_tire ==1)<div class="bg-danger-subtle">Back Tire @endif
+                          @if($v->grill_guard ==1)
+                        <div class="bg-danger-subtle">Grill Guard</div> @endif
+                     
+                        @if($v->rear_spoiler ==1)<div class="bg-danger-subtle">Rear Spoiler</div> @endif
+                        @if($v->central_locking ==1)<div class="bg-danger-subtle">Central Locking</div> @endif
+                        @if($v->jack ==1)<div>Jack</div class="bg-danger-subtle"> @endif
+                        @if($v->spare_tire ==1)<div class="bg-danger-subtle">Spare Tire</div> @endif
+                      
+                        @if($v->wheel_spanner ==1)<div class="bg-danger-subtle">Wheel Spanner</div> @endif
+                        @if($v->fog_lights ==1)<div class="bg-danger-subtle">Fog Lights</div> @endif
+                        @if($v->back_camera ==1)<div class="bg-danger-subtle">Back Camera</div> @endif
+                        @if($v->push_start ==1)<div class="bg-danger-subtle">Push Start</div> @endif
+                      
+                        @if($v->keyless_entry ==1)<div>Keyless Entry</div> @endif
+                        @if($v->esc ==1)<div>ESC</div> @endif
+                        @if($v->deg_360_cam ==1)<div>360 Degree Camera</div> @endif
+                        @if($v->body_kit ==1)<div>Body Kit</div> @endif
+                    
+                        @if($v->side_airbag ==1)<div class="bg-danger-subtle">Side Airbag</div>@endif
+                        @if($v->power_mirror ==1)<div class="bg-danger-subtle">Power Mirror</div> @endif
+                        @if($v->side_skirts ==1)<div class="bg-danger-subtle">Side Skirts</div> @endif
+                        @if($v->front_lip_spoiler ==1)<div class="bg-danger-subtle">Front Lip Spoiler</div> @endif
+                      
+                        @if($v->navigation ==1)<div class="bg-danger-subtle">Navigation</div> @endif
+                        @if($v->turbo ==1)<div class="bg-danger-subtle">Turbo</div> @endif
+                     
+               
 
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="fog_lights" placeholder="fog_lights" name="fog_lights" value="1" @if($v->fog_lights ==1) checked @endif>
-                                                <label for="fog_lights" class="form-check-label">Fog Lights</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="grill_guard" placeholder="grill_guard" name="grill_guard" value="1" @if($v->grill_guard ==1) checked @endif>
-                                                <label for="grill_guard" class="form-check-label">Grill Guard</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="leather_seats" placeholder="leather_seats" name="leather_seats" value="1" @if($v->leather_seats ==1) checked @endif>
-                                                <label for="leather_seats" class="form-check-label">Leather Seats</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="navigation" placeholder="navigation" name="navigation" value="1" @if($v->navigation ==1) checked @endif>
-                                                <label for="navigation" class="form-check-label">Navigation</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="power_steering" name="power_steering" value="1" @if($v->power_steering ==1) checked @endif>
-                                                <label for="power_steering" class="form-check-label">Power Steering</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="power_windows" name="power_windows" value="1" @if($v->power_windows ==1) checked @endif>
-                                                <label for="power_windows" class="form-check-label">Power Windows</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="roof_rails" name="roof_rails" value="1" @if($v->roof_rails ==1) checked @endif>
-                                                <label for="roof_rails" class="form-check-label">Roof Rails</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="rear_spoiler" name="rear_spoiler" value="1" @if($v->rear_spoiler ==1) checked @endif>
-                                                <label for="rear_spoiler" class="form-check-label">Rea Spoiler</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="sun_roof" name="sun_roof" value="1" @if($v->sun_roof ==1) checked @endif>
-                                                <label for="sun_roof" class="form-check-label">Sun Roof</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="tv" name="tv" value="1" @if($v->tv ==1) checked @endif>
-                                                <label for="tv" class="form-check-label">Tv</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="dual_air_bags" name="dual_air_bags" value="1" @if($v->dual_air_bags ==1) checked @endif>
-                                                <label for="tv" class="form-check-label">Dual Air Bags</label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4">
-                                            <p clss="m-0"><strong>{{__('Video Link')}} :- </strong>{{$v->v_link}}</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                  </div>
+                
+                <div class="col-md-12">
+                    <h6>Vehicle Images</h6>
+                    <div class="row gx-1">
+                        @forelse($v_images as $v_img)
+                        <div class="col-md-2 mt-1">
+                            <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h6>Vehicle Images</h6>
-                        <div class="row">
-                            @forelse($v_images as $v_img)
-                            <div class="col-12">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="Card image cap">
-                                </div>
-                            </div>
-                            @empty
-                            @endforelse
-                        </div>
+                        @empty
+                        @endforelse
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
     </div>
 </section>
 <!-- Bordered table end -->

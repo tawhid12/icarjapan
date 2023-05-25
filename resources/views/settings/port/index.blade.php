@@ -11,6 +11,13 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
+                <ul class="pagination justify-content-end">
+                    <form action="{{route(currentUser().'.port.index')}}" role="search" class="d-flex">
+                        @csrf
+                        <input type="text" placeholder="Search Port.." name="search" class="form-control">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </form>
+                </ul>
                 <!-- table bordered -->
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">
@@ -20,7 +27,8 @@
                                 <th scope="col">{{__('#SL')}}</th>
                                 <th scope="col">{{__('Name')}}</th>
                                 <th scope="col">{{__('Inventor Location')}}</th>
-                                <th scope="col">{{__('Status')}}</th>
+                                <th scope="col">{{__('M3 Charge')}}</th>
+                                <!-- <th scope="col">{{__('Status')}}</th> -->
                                 <th class="white-space-nowrap">{{__('ACTION')}}</th>
                             </tr>
                         </thead>
@@ -30,14 +38,15 @@
                                 <th scope="row">{{ ++$loop->index }}</th>
                                 <td>{{$p->name}}</td>
                                 <td>{{$p->inv_loc->name}}</td>
-                                <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
+                                <td>{{$p->m3}}</td>
+                                <!-- <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td> -->
                                 <td class="white-space-nowrap">
-                                    <a href="{{route(currentUser().'.country.edit',encryptor('encrypt',$p->id))}}">
+                                    <a href="{{route(currentUser().'.port.edit',encryptor('encrypt',$p->id))}}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                     <form id="form{{$p->id}}" action="{{route(currentUser().'.port.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                         @csrf
                                         @method('delete')

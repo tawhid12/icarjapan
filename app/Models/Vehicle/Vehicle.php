@@ -8,6 +8,7 @@ use App\Models\Settings\DriveType;
 use App\Models\Vehicle\Transmission;
 
 use App\Models\Settings\Country;
+use App\Models\Settings\Port;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +35,9 @@ class Vehicle extends Model
     }
     public function inv_loc(){
         return $this->belongsTo(Country::class,'inv_locatin_id','id');
+    }
+    public function inv_port(){
+        return $this->belongsTo(Port::class,'inv_port_id','id');
     }
     public function body_type(){
         return $this->belongsTo(BodyType::class,'body_type_id','id');

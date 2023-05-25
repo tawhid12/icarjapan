@@ -173,6 +173,9 @@ Route::group(['middleware'=>isAdmin::class],function(){
 Route::post('gallery/delete',[vehicle::class, 'deleteImg'])->name('gallery.delete');
 Route::get('gallery/cover/{id}',[vehicle::class, 'galleryCover'])->name('gallery.cover');
 Route::get('subBrand',[subBrand::class, 'get_sub_brand_by_id'])->name('subBrandbyId');
+Route::get('port',[port::class, 'get_port_by_id'])->name('portById');
+Route::get('m3',[port::class, 'get_m3_charge_by_port_id'])->name('m3Charge');
+Route::get('/watermark',[vehicle::class, 'addWatermarkall']);
 
 
 

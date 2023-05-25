@@ -235,13 +235,21 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="inv_locatin_id">Inventory Location</label>
-                                        <select name="inv_locatin_id" class="form-control">
+                                        <select id="inv_locatin_id" name="inv_locatin_id" class="form-control js-example-basic-single">
                                             <option value="">Select</option>
-                                            @if(count($inv_loc))
-                                            @foreach($inv_loc as $inv)
-                                            <option value="{{ $inv->country_id}}">{{$inv->country->name}}</option>
+                                            @if(count($countries))
+                                            @foreach($countries as $c)
+                                            <option value="{{ $c->id}}">{{$c->name}}</option>
                                             @endforeach
                                             @endif
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label for="inv_port_id">Inventory Location Port</label>
+                                        <select name="inv_port_id" class="form-control js-example-basic-single" id="inv_port_id">
                                         </select>
                                     </div>
                                 </div>
@@ -309,16 +317,28 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="b_length">Dimention (L*H*W)</label>
-                                        <input type="text" id="b_length" value="{{old('b_length')}}" class="form-control" placeholder="body length" name="b_length">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" id="b_length" value="{{old('b_length')}}" class="form-control" placeholder="Length" name="b_length">
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" id="b_height" value="{{old('b_height')}}" class="form-control" placeholder="Height" name="b_height">
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" id="b_width" value="{{old('b_width')}}" class="form-control" placeholder="Width" name="b_width">
+                                            </div>
+                                        </div>
+
                                     </div>
+
                                 </div>
 
-                                <div class="col-md-3 col-12">
+                                <!-- <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="m3">M3</label>
                                         <input type="text" id="m3" value="{{old('m3')}}" class="form-control" placeholder="M3" name="m3">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
@@ -649,6 +669,16 @@
         <div class="form-group">
             <h4>Gallery Image</h4>
             <input type="file" id="image[]" class="form-control" name="image[]" multiple>
+            @if ($errors->any())
+            <div class="">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li><span class="text-danger"> {{ $error }}</span></li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
         </div>
         {{--<div class="form-group mt-3">
                     <label for="name">Video Link</label>
@@ -674,7 +704,7 @@
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2({
-            placeholder: "Select Country Arival"
+            placeholder: "Select Country"
         });
         $('#reg_year').daterangepicker({
             singleDatePicker: true,
@@ -711,6 +741,31 @@
                 });
             } else {
                 $('#sub_brand').empty();
+            }
+        });
+
+        /*Inventory Port */
+        $('#inv_locatin_id').on('change', function() {
+            var country_id = $(this).val();
+            if (country_id) {
+                $.ajax({
+                    url: "{{route('portById')}}",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id: country_id,
+                    },
+                    success: function(data) {
+                        //console.log(data);
+                        $('#inv_port_id').empty();
+                        $('#inv_port_id').append('<option value="">Select a Port</option>');
+                        $.each(data, function(key, value) {
+                            $('#inv_port_id').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#inv_port_id').empty();
             }
         });
     });

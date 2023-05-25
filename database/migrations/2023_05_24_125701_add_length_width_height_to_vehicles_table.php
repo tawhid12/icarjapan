@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->integer('user_id')->after('invoice_id');;
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->integer('b_width')->after('b_length')->nullable();
+            $table->integer('b_height')->after('b_width')->nullable();
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->dropColumn('b_width');
+            $table->dropColumn('b_height');
         });
     }
 };

@@ -606,6 +606,19 @@
   div#social-links ul li:nth-child(3) a {
     background-color: #25d366;
   }
+  .bg-danger-subtle {
+    border: 1px solid #d6d6d6;
+    font-size: 14px;
+    text-align: center;
+    height: 30px;
+}
+.detl th,td{
+  background-color: #f8f8f8;
+}
+.detl th,td{
+  border: 1px solid #d6d6d6;
+}
+
 </style>
 
 
@@ -632,7 +645,7 @@
               <div class="p-2">
                 <!-- product card -->
                 <div class="row justify-content-center">
-                @forelse($recomended as $r)
+                  @forelse($recomended as $r)
                   <div class="col-12">
                     <div class="product-card my-3">
                       @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$r->vid)->where('is_cover_img',1)->first(); @endphp
@@ -645,9 +658,9 @@
                         <p clss="m-0"><a href="{{route('singleVehicle',['brand'=>$r->b_slug,'subBrand'=>$r->sb_slug,'stock_id'=>$r->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $r->name) }}</a></p>
                         <p class="m-0">{{$r->chassis_no}}</p>
                         @php
-                          $actual_price = $v->price;
-                          $dis_price = $v->price*$v->discount/100;
-                          $price = $actual_price - $dis_price;
+                        $actual_price = $v->price;
+                        $dis_price = $v->price*$v->discount/100;
+                        $price = $actual_price - $dis_price;
                         @endphp
                         <p>Price :</p>
                         <p>USD {{$price}}</p>
@@ -658,8 +671,8 @@
                       </div>
                     </div>
                   </div>
-                @empty
-                @endforelse
+                  @empty
+                  @endforelse
                 </div>
               </div>
             </div>
@@ -751,10 +764,10 @@
                     </div><!-- #car_thumbnail_car_navigation -->
                   </div>
                   <!--Car Details  -->
-                  <div class="bg-light shadow">
-                    <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
+                  <div class="">
+                    <table class="table table-sm detl">
                       <thead>
-                        <tr class="table-dark">
+                        <tr>
                           <th class="text-center" colspan="4" scope="col">
                             {{$v->fullName}} - Details
                           </th>
@@ -783,7 +796,7 @@
                           <th scope="row">Package</th>
                           <td>{{ $v->package }}</td>
                           <th scope="row">Location</th>
-                          <td>{{ optional($v->inv_loc)->name }}</td>
+                          <td>{{ optional($v->inv_loc)->name }} | {{ optional($v->inv_port)->name }}</td>
                         </tr>
                         <tr>
                           <th scope="row">Chassis</th>
@@ -834,8 +847,8 @@
                           <td>{{ $v->m3 }}</td>
                         </tr>
                         <tr>
-                          <th scope="row">Int. Color</th>
-                          <td>{{ optional($v->int_color)->name }}</td>
+                          {{--<th scope="row">Int. Color</th>
+                          <td>{{ optional($v->int_color)->name }}</td>--}}
                           <th scope="row">Condition</th>
                           <td>{{ optional($v->condition)->name }}</td>
                         </tr>
@@ -863,10 +876,10 @@
                     </table>
                   </div>
                   @endif
-                  @if($v->cd_player)
+
                   <!--Accessories  -->
-                  <div class="bg-light shadow my-4">
-                    <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
+                  <div class="mt-2">
+                    <table class="m-0 table table-hover table-sm table-bordered boder border-danger-subtle">
                       <thead>
                         <tr class="table-dark">
                           <th class="text-center" colspan="4" scope="col">
@@ -874,63 +887,56 @@
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          @if($v->cd_player ==1)<td>CD Player</td> @else <td></td> @endif
-                          @if($v->sun_roof ==1)<td>Sun Roof</td> @else <td></td> @endif
-                          @if($v->leather_seat ==1)<td>Leather Seat</td> @else <td></td>@endif
-                          @if($v->alloy_wheels ==1)<td>Alloy Wheels</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->power_steering ==1)<td>Power Steering</td> @else <td></td> @endif
-                          @if($v->power_windows ==1)<td>Power Windows</td> @else <td></td> @endif
-                          @if($v->air_con ==1)<td>Air Con</td> @else <td></td> @endif
-                          @if($v->anti_lock_brake_system ==1)<td>ABS lock_brake_system</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->air_bag ==1)<td>Air Bag</td> @else <td></td> @endif
-                          @if($v->radio ==1)<td>Radio</td> @else <td></td> @endif
-                          @if($v->cd_changer ==1)<td>Cd Changer</td> @else <td></td> @endif
-                          @if($v->dvd ==1)<td>DVD</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->tv ==1)<td>TV</td> @else <td></td> @endif
-                          @if($v->power_seat ==1)<td>Power Seat</td> @else <td></td> @endif
-                          @if($v->back_tire ==1)<td>Back Tire</td>@else <td></td> @endif
-                          @if($v->grill_guard ==1)<td>Grill Guard</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->rear_spoiler ==1)<td>Rear Spoiler</td> @else <td></td> @endif
-                          @if($v->central_locking ==1)<td>Central Locking</td> @else <td></td> @endif
-                          @if($v->jack ==1)<td>Jack</td> @else <td></td> @endif
-                          @if($v->spare_tire ==1)<td>Spare Tire</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->wheel_spanner ==1)<td>Wheel Spanner</td> @else <td></td> @endif
-                          @if($v->fog_lights ==1)<td>Fog Lights</td> @else <td></td> @endif
-                          @if($v->back_camera ==1)<td>Back Camera</td> @else <td></td> @endif
-                          @if($v->push_start ==1)<td>Push Start</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->keyless_entry ==1)<td>Keyless Entry</td> @else <td></td> @endif
-                          @if($v->esc ==1)<td>ESC</td> @else <td>-</td> @endif
-                          @if($v->deg_360_cam ==1)<td>360 Degree Camera</td> @else <td></td> @endif
-                          @if($v->body_kit ==1)<td>Body Kit</td> @else <td></td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->side_airbag ==1)<td>Side Airbag</td> @else <td></td> @endif
-                          @if($v->power_mirror ==1)<td>Power Mirror</td> @else <td></td> @endif
-                          @if($v->side_skirts ==1)<td>Side Skirts</td> @else <td></td> @endif
-                          @if($v->front_lip_spoiler ==1)<td>Front Lip Spoiler</td> @else <td>-</td> @endif
-                        </tr>
-                        <tr>
-                          @if($v->navigation ==1)<td>Navigation</td> @else <td></td> @endif
-                          @if($v->turbo ==1)<td>Turbo</td> @else <td>-</td> @endif
-                        </tr>
-                      </tbody>
                     </table>
+                    <div class="row gx-0">
+                
+                        @if($v->cd_player ==1) <div class="col-md-3 bg-danger-subtle">CD Player</div> @endif
+                        @if($v->sun_roof ==1) <div class="col-md-3 bg-danger-subtle">Sun Roof</div> @endif
+                        @if($v->leather_seat ==1)<div class="col-md-3 bg-danger-subtle">Leather Seat</div>@endif
+                        @if($v->alloy_wheels ==1)<div class="col-md-3 bg-danger-subtle">Alloy Wheels</div> @endif
+                      
+                        @if($v->power_steering ==1)<div class="col-md-3 bg-danger-subtle">Power Steering</div> @endif
+                        @if($v->power_windows ==1)<div class="col-md-3 bg-danger-subtle">Power Windows</div> @endif
+                        @if($v->air_con ==1)<div class="col-md-3 bg-danger-subtle">Air Con</div> @endif
+                        @if($v->anti_lock_brake_system ==1)<div class="col-md-3 bg-danger-subtle">Anti lock Brake System</div> @endif
+                     
+                        @if($v->air_bag ==1)<div class="col-md-3 bg-danger-subtle">Air Bag</div> @endif
+                        @if($v->radio ==1)<div class="col-md-3 bg-danger-subtle">Radio</div> @endif
+                        @if($v->cd_changer ==1)<div class="col-md-3 bg-danger-subtle">Cd Changer</div> @endif
+                        @if($v->dvd ==1)<div class="col-md-3 bg-danger-subtle">DVD</div>@endif
+                     
+                        @if($v->tv ==1)<div class="col-md-3 bg-danger-subtle">TV</div> @endif
+                        @if($v->power_seat ==1)<div class="col-md-3 bg-danger-subtle">Power Seat</div> @endif
+                        @if($v->back_tire ==1)<div class="col-md-3 bg-danger-subtle">Back Tire </div>@endif
+                        @if($v->grill_guard ==1)<div class="col-md-3 bg-danger-subtle">Grill Guard</div> @endif
+                     
+                        @if($v->rear_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Rear Spoiler</div> @endif
+                        @if($v->central_locking ==1)<div class="col-md-3 bg-danger-subtle">Central Locking</div> @endif
+                        @if($v->jack ==1)<div>Jack</div class="col-md-3 bg-danger-subtle"> </div>@endif
+                        @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
+                      
+                        @if($v->wheel_spanner ==1)<div class="col-md-3 bg-danger-subtle">Wheel Spanner</div> @endif
+                        @if($v->fog_lights ==1)<div class="col-md-3 bg-danger-subtle">Fog Lights</div> @endif
+                        @if($v->back_camera ==1)<div class="col-md-3 bg-danger-subtle">Back Camera</div> @endif
+                        @if($v->push_start ==1)<div class="col-md-3 bg-danger-subtle">Push Start</div> @endif
+                      
+                        @if($v->keyless_entry ==1)<div class="col-md-3 bg-danger-subtle">Keyless Entry</div> @endif
+                        @if($v->esc ==1)<div class="col-md-3 bg-danger-subtle">ESC</div> @endif
+                        @if($v->deg_360_cam ==1)<div class="col-md-3 bg-danger-subtle">360 Degree Camera</div> @endif
+                        @if($v->body_kit ==1)<div class="col-md-3 bg-danger-subtle">Body Kit</div> @endif
+                    
+                        @if($v->side_airbag ==1)<div class="col-md-3 bg-danger-subtle">Side Airbag</div>@endif
+                        @if($v->power_mirror ==1)<div class="col-md-3 bg-danger-subtle">Power Mirror</div> @endif
+                        @if($v->side_skirts ==1)<div class="col-md-3 bg-danger-subtle">Side Skirts</div> @endif
+                        @if($v->front_lip_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Front Lip Spoiler</div> @endif
+                      
+                        @if($v->navigation ==1)<div class="col-md-3 bg-danger-subtle">Navigation</div> @endif
+                        @if($v->turbo ==1)<div class="col-md-3 bg-danger-subtle">Turbo</div> @endif
+                     
+               
+                        </div>
                   </div>
-                  @endif
+
                   <!-- Customer's Photo Gallery  -->
                   <div class="card shadow radious-10 my-3">
                     <h5 class="card-title bg-black text-white">
@@ -1116,9 +1122,10 @@
                             $price_after_dis = ($actual_price-$dis_price);
                             @endphp
                             <tr>
-                              <th scope="row">Vehicle Price</th>
-                              <td>USD {{$price_after_dis}}</td>
+                              <th scope="row" class="fs-6">Vehicle Price</th>
+                              <td><strong class="fs-5">USD {{$price_after_dis}}</strong></td>
                             </tr>
+                            @if($dis_price > 0)
                             <tr>
                               <th scope="row"></th>
                               <td><del>USD {{$actual_price}}</del></td>
@@ -1127,9 +1134,10 @@
                               <th scope="row">Save</th>
                               <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
                             </tr>
+                            @endif
                             <tr>
                               <th scope="row">Approx.</th>
-                              <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$dis_price), 2, '.', ',')}}</td>
+                              <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
                               <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
                             </tr>
                             <tr>
@@ -1153,11 +1161,11 @@
                                 </select>
                               </td>
                             </tr>
-                            <tr>
+                            {{--<tr>
                               <th colspan="2" id="table-bg" scope="row">
                                 {{$v->note}}
                               </th>
-                            </tr>
+                            </tr>--}}
                             <tr>
                               <th scope="row">Destination Port</th>
                               <td>
@@ -1171,7 +1179,7 @@
                                 }
 
                                 @endphp
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <select class="des_port form-select form-select-sm" aria-label=".form-select-sm example">
                                   <option value="">Select Port</option>
                                   @if(count($des_port) > 0)
                                   @forelse($des_port as $key => $dp)
@@ -1186,39 +1194,40 @@
                               <th scope="row">Shipment</th>
                               <td>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" id="chk1" checked name="shipment">
+                                  <input class="form-check-input" type="radio" id="chk1" value="1" checked name="shipment">
                                   <label class="form-check-label" for="chk1">RoRo</label>
-                                 
+
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="chk2" name="shipment">
+                                  <input class="form-check-input" type="radio" id="chk2"  value="2" name="shipment">
                                   <label class="form-check-label" for="chk2">Container</label>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">Freight</th>
-                              <td>Ask</td>
+                              <td class="fr_txt"></td>
+                              <input type="text" class="fr_val">
                             </tr>
                             <tr>
                               <th scope="row">Vanning</th>
-                              <td>N/A</td>
+                              <td class="van_txt">N/A</td>
                             </tr>
                             <tr>
-                              <th scope="row">Inspection</th>
-                              <td>USD 200.00</td>
+                              <th scope="row">Inspection<input type="checkbox" class="mx-2 ins"></th>
+                              <td class="ins_txt">USD 200.00</td>
                               <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*200)}}" class="ins_val">
                             </tr>
-                            <tr>
+                            <tr class="tr-hide">
                               <th scope="row"></th>
                               <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
                             </tr>
                             <tr>
-                              <th scope="row">Insurance</th>
-                              <td>USD 272</td>
+                              <th scope="row">Insurance<input type="checkbox" class="mx-2 insu"></th>
+                              <td class="insu_txt">USD 272</td>
                               <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*272)}}" class="insur">
                             </tr>
-                            <tr>
+                            <tr class="tr-hide">
                               <th scope="row"></th>
                               <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
                             </tr>
@@ -1504,23 +1513,88 @@
       }
     });
 
-    /*==Payment Calculation==*/
-    var actual_price = "{{$v->price}}";
-    var dis_price = "{{$v->price*$v->discount/100}}";
-    var price_after_dis = "{{$actual_price-$dis_price}}";
+      $('.ins').click(function(){
+        var total = parseFloat($('.total').text());
+          total += parseFloat($('.ins_val').val());
+          $('.total').text('Approx. BDT ' + (total));
+        });
+        $('.insu').on('click',function(){
+          convert_price += parseFloat($('.insur').val());
+        });
+
     var convert_price = parseFloat($('.convert_price').val());
-    var inspection = parseFloat($('.ins_val').val());
-    var insurance = parseFloat($('.insur').val());
-    console.log(convert_price);
-    console.log(inspection);
-    console.log(insurance);
-    $('.total').text('Approx. BDT ' + (convert_price + inspection + insurance));
+    function total(type){
+      /*==Payment Calculation==*/
+      var actual_price = "{{$v->price}}";
+      var dis_price = "{{$v->price*$v->discount/100}}";
+      var price_after_dis = "{{$actual_price-$dis_price}}";
+     
+  
+      console.log(convert_price);
+      if(type == 1){
+        var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
+        var fr_val = parseFloat($('.fr_val').val());
+        var fr =  parseFloat(currency_rate)*parseFloat(fr_val);
+        fr.toFixed(2)
+        convert_price += fr;
+
+
+   
+        $('.total').text('Approx. BDT ' + (convert_price));
+      }else{
+        $('.total').text('Approx. BDT ' + (convert_price));
+      }
+    }
+
 
     /*===Country Wise Port  */
     $('select[name="country_id"]').on('change', function() {
       $('#my-form').submit();
     });
 
+
+      var shipment = $('input[name="shipment"]:checked').val();
+      $('input[name="shipment"]').change(function() {
+        var shipment = $('input[name="shipment"]:checked').val();
+        if(shipment ==1){
+          $('.tr-hide').show();
+          total(1);
+          m3Charge();
+        }else{
+          total(2);
+          $('.tr-hide').hide();
+          $('.fr_txt').text('Ask');
+          $('.van_txt').text('Ask');
+          $('.ins_txt').text('Ask');
+          $('.insu_txt').text('Ask');
+        }
+      });
+      function m3Charge(){
+        /*Destination port*/
+        var des_port_id = $('.des_port option:selected').val();
+          if(des_port_id) {
+              $.ajax({
+                  url: "{{route('m3Charge')}}",
+                  type: 'GET',
+                  data: {
+                      id: des_port_id,
+                  },
+                  success: function(m3) {
+                      if(m3){
+                        /*M3 Calculation */
+                        var charge = m3
+                        var value = "{{ $v->m3 }}";
+                        $('.fr_txt').text(charge*value);
+                        $('.fr_val').val(charge*value);
+                        alert(convert_price);
+                        alert(charge*value);
+                        $('.total').text('Approx. BDT ' + ((charge*value)+convert_price));
+                      }
+                  }
+              });
+          }
+      }
+      m3Charge();
   });
 </script>
 @endpush

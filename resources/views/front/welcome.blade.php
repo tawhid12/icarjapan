@@ -42,10 +42,13 @@
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <i class="bi bi-geo-alt-fill"></i> {{$location['geoplugin_city']}}
+                <i class="bi bi-geo-alt-fill"></i> Japan{{--$location['geoplugin_city']--}}
               </p>
               <p class="card-text">
                 <i class="bi bi-telephone-fill"></i> {{$com_acc_info->tel}}
+              </p>
+              <p class="card-text">
+                <i class="bi bi-telephone-fill"></i> {{$com_acc_info->whatsup}}
               </p>
             </div>
           </div>
