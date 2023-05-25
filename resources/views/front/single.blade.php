@@ -1207,7 +1207,7 @@
                             <tr>
                               <th scope="row">Freight</th>
                               <td class="fr_txt"></td>
-                              <input type="text" class="fr_val">
+                              <input type="hidden" class="fr_val">
                             </tr>
                             <tr>
                               <th scope="row">Vanning</th>
