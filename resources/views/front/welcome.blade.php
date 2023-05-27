@@ -3,6 +3,17 @@
 @section('pageSubTitle','HOME')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
+<style>
+  .rating i.fa {
+    color: #f9cc00;
+}
+
+.rating-count {
+    font-size: 12px;
+    color: red;
+    font-weight: 700;
+}
+</style>
 @endpush
 @section('content')
 
@@ -38,11 +49,11 @@
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-black text-white">
-            {{$com_acc_info->c_name}} {{--$countryName->name--}}
+            {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <i class="bi bi-geo-alt-fill"></i> Japan{{--$location['geoplugin_city']--}}
+                <i class="bi bi-geo-alt-fill"></i> JAPAN{{--$location['geoplugin_city']--}}
               </p>
               <p class="card-text">
                 <i class="bi bi-telephone-fill"></i> {{$com_acc_info->tel}}
@@ -125,6 +136,14 @@
                   <div class="product-card-body">
                   <p clss="m-0"><a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
                     <p class="m-0">{{$v->chassis_no}}</p>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                    </div>
+                    <div class="rating-count">25 Reviews</div>
                     @php
                       $actual_price = $v->price;
                       $dis_price = $v->price*$v->discount/100;

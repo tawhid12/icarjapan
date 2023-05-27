@@ -124,7 +124,7 @@ class FrontController extends Controller
             ->get();
         /*echo '<pre>';
         print_r($sub_prefix->toArray());die;*/
-        
+
         return view('front.brand', compact('brand', 'sub_prefix'));
     }
     /*@if($vehicle->images)
@@ -200,15 +200,17 @@ class FrontController extends Controller
     }
     public function search_by_data(Request $request)
     {
-        if(isEmpty($request->all)){
+        if(empty($request->filled('brand')) || empty($request->filled('sub_brand')) ){
             $vehicles = DB::table('vehicles')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
+            return view('front.search',compact('vehicles'));
         }
         elseif ($request->filled('brand') && !$request->filled('sub_brand')) {
+            
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_prefix = DB::table('sub_brands')
                 ->select(DB::raw('substring(`name`,1,1) as cat'), DB::raw('GROUP_CONCAT(`id`) ids'))
@@ -221,7 +223,7 @@ class FrontController extends Controller
            
         }
        
-        return view('front.search',compact('vehicles'));
+       
         /*print_r($request->toArray());
         die;*/
     }

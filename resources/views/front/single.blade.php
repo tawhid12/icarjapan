@@ -606,19 +606,38 @@
   div#social-links ul li:nth-child(3) a {
     background-color: #25d366;
   }
+
   .bg-danger-subtle {
     border: 1px solid #d6d6d6;
     font-size: 14px;
     text-align: center;
     height: 30px;
-}
-.detl th,td{
-  background-color: #f8f8f8;
-}
-.detl th,td{
-  border: 1px solid #d6d6d6;
-}
+  }
 
+  .detl th,
+  td {
+    background-color: #f8f8f8;
+  }
+
+  .detl th,
+  td {
+    border: 1px solid #d6d6d6;
+  }
+
+  .bg-button {
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    background-color: red;
+    color: #fff;
+    padding: 6px 42px;
+  }
+
+  .bg-button:hover {
+    outline: 1px solid red;
+    color: #fff;
+    background-color: red;
+  }
 </style>
 
 
@@ -717,6 +736,7 @@
             <div class="prodcut-title">
               {{--<span>Stock Id: {{$v->stock_id}} </span>--}}
               <p>{{$v->fullName}}</p>
+
               <span>4 Review <i class="bi bi-star-half"></i> </span> <br />
               <span>{{$v->description}}</span>
             </div>
@@ -889,170 +909,171 @@
                       </thead>
                     </table>
                     <div class="row gx-0">
-                
-                        @if($v->cd_player ==1) <div class="col-md-3 bg-danger-subtle">CD Player</div> @endif
-                        @if($v->sun_roof ==1) <div class="col-md-3 bg-danger-subtle">Sun Roof</div> @endif
-                        @if($v->leather_seat ==1)<div class="col-md-3 bg-danger-subtle">Leather Seat</div>@endif
-                        @if($v->alloy_wheels ==1)<div class="col-md-3 bg-danger-subtle">Alloy Wheels</div> @endif
-                      
-                        @if($v->power_steering ==1)<div class="col-md-3 bg-danger-subtle">Power Steering</div> @endif
-                        @if($v->power_windows ==1)<div class="col-md-3 bg-danger-subtle">Power Windows</div> @endif
-                        @if($v->air_con ==1)<div class="col-md-3 bg-danger-subtle">Air Con</div> @endif
-                        @if($v->anti_lock_brake_system ==1)<div class="col-md-3 bg-danger-subtle">Anti lock Brake System</div> @endif
-                     
-                        @if($v->air_bag ==1)<div class="col-md-3 bg-danger-subtle">Air Bag</div> @endif
-                        @if($v->radio ==1)<div class="col-md-3 bg-danger-subtle">Radio</div> @endif
-                        @if($v->cd_changer ==1)<div class="col-md-3 bg-danger-subtle">Cd Changer</div> @endif
-                        @if($v->dvd ==1)<div class="col-md-3 bg-danger-subtle">DVD</div>@endif
-                     
-                        @if($v->tv ==1)<div class="col-md-3 bg-danger-subtle">TV</div> @endif
-                        @if($v->power_seat ==1)<div class="col-md-3 bg-danger-subtle">Power Seat</div> @endif
-                        @if($v->back_tire ==1)<div class="col-md-3 bg-danger-subtle">Back Tire </div>@endif
-                        @if($v->grill_guard ==1)<div class="col-md-3 bg-danger-subtle">Grill Guard</div> @endif
-                     
-                        @if($v->rear_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Rear Spoiler</div> @endif
-                        @if($v->central_locking ==1)<div class="col-md-3 bg-danger-subtle">Central Locking</div> @endif
-                        @if($v->jack ==1)<div>Jack</div class="col-md-3 bg-danger-subtle"> </div>@endif
-                        @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
-                      
-                        @if($v->wheel_spanner ==1)<div class="col-md-3 bg-danger-subtle">Wheel Spanner</div> @endif
-                        @if($v->fog_lights ==1)<div class="col-md-3 bg-danger-subtle">Fog Lights</div> @endif
-                        @if($v->back_camera ==1)<div class="col-md-3 bg-danger-subtle">Back Camera</div> @endif
-                        @if($v->push_start ==1)<div class="col-md-3 bg-danger-subtle">Push Start</div> @endif
-                      
-                        @if($v->keyless_entry ==1)<div class="col-md-3 bg-danger-subtle">Keyless Entry</div> @endif
-                        @if($v->esc ==1)<div class="col-md-3 bg-danger-subtle">ESC</div> @endif
-                        @if($v->deg_360_cam ==1)<div class="col-md-3 bg-danger-subtle">360 Degree Camera</div> @endif
-                        @if($v->body_kit ==1)<div class="col-md-3 bg-danger-subtle">Body Kit</div> @endif
-                    
-                        @if($v->side_airbag ==1)<div class="col-md-3 bg-danger-subtle">Side Airbag</div>@endif
-                        @if($v->power_mirror ==1)<div class="col-md-3 bg-danger-subtle">Power Mirror</div> @endif
-                        @if($v->side_skirts ==1)<div class="col-md-3 bg-danger-subtle">Side Skirts</div> @endif
-                        @if($v->front_lip_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Front Lip Spoiler</div> @endif
-                      
-                        @if($v->navigation ==1)<div class="col-md-3 bg-danger-subtle">Navigation</div> @endif
-                        @if($v->turbo ==1)<div class="col-md-3 bg-danger-subtle">Turbo</div> @endif
-                     
-               
-                        </div>
-                  </div>
 
-                  <!-- Customer's Photo Gallery  -->
-                  <div class="card shadow radious-10 my-3">
-                    <h5 class="card-title bg-black text-white">
-                      Customer's Photo Gallery
-                    </h5>
-                    <div class="p-2 customer-gallery">
-                      <div class="row">
-                        <div class="col-sm-4">
-                          <a href="">
-                            <img src="./resource/img/client-galary.png" alt="" />
-                          </a>
-                        </div>
-                        <div class="col-sm-4">
-                          <a href="">
-                            <img src="./resource/img/client-galary.png" alt="" />
-                          </a>
-                        </div>
-                        <div class="col-sm-4">
-                          <a href="">
-                            <img src="./resource/img/client-galary.png" alt="" />
-                          </a>
-                        </div>
+                      @if($v->cd_player ==1) <div class="col-md-3 bg-danger-subtle">CD Player</div> @endif
+                      @if($v->sun_roof ==1) <div class="col-md-3 bg-danger-subtle">Sun Roof</div> @endif
+                      @if($v->leather_seat ==1)<div class="col-md-3 bg-danger-subtle">Leather Seat</div>@endif
+                      @if($v->alloy_wheels ==1)<div class="col-md-3 bg-danger-subtle">Alloy Wheels</div> @endif
+
+                      @if($v->power_steering ==1)<div class="col-md-3 bg-danger-subtle">Power Steering</div> @endif
+                      @if($v->power_windows ==1)<div class="col-md-3 bg-danger-subtle">Power Windows</div> @endif
+                      @if($v->air_con ==1)<div class="col-md-3 bg-danger-subtle">Air Con</div> @endif
+                      @if($v->anti_lock_brake_system ==1)<div class="col-md-3 bg-danger-subtle">Anti lock Brake System</div> @endif
+
+                      @if($v->air_bag ==1)<div class="col-md-3 bg-danger-subtle">Air Bag</div> @endif
+                      @if($v->radio ==1)<div class="col-md-3 bg-danger-subtle">Radio</div> @endif
+                      @if($v->cd_changer ==1)<div class="col-md-3 bg-danger-subtle">Cd Changer</div> @endif
+                      @if($v->dvd ==1)<div class="col-md-3 bg-danger-subtle">DVD</div>@endif
+
+                      @if($v->tv ==1)<div class="col-md-3 bg-danger-subtle">TV</div> @endif
+                      @if($v->power_seat ==1)<div class="col-md-3 bg-danger-subtle">Power Seat</div> @endif
+                      @if($v->back_tire ==1)<div class="col-md-3 bg-danger-subtle">Back Tire </div>@endif
+                      @if($v->grill_guard ==1)<div class="col-md-3 bg-danger-subtle">Grill Guard</div> @endif
+
+                      @if($v->rear_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Rear Spoiler</div> @endif
+                      @if($v->central_locking ==1)<div class="col-md-3 bg-danger-subtle">Central Locking</div> @endif
+                      @if($v->jack ==1)<div>Jack</div class="col-md-3 bg-danger-subtle">
+                    </div>@endif
+                    @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
+
+                    @if($v->wheel_spanner ==1)<div class="col-md-3 bg-danger-subtle">Wheel Spanner</div> @endif
+                    @if($v->fog_lights ==1)<div class="col-md-3 bg-danger-subtle">Fog Lights</div> @endif
+                    @if($v->back_camera ==1)<div class="col-md-3 bg-danger-subtle">Back Camera</div> @endif
+                    @if($v->push_start ==1)<div class="col-md-3 bg-danger-subtle">Push Start</div> @endif
+
+                    @if($v->keyless_entry ==1)<div class="col-md-3 bg-danger-subtle">Keyless Entry</div> @endif
+                    @if($v->esc ==1)<div class="col-md-3 bg-danger-subtle">ESC</div> @endif
+                    @if($v->deg_360_cam ==1)<div class="col-md-3 bg-danger-subtle">360 Degree Camera</div> @endif
+                    @if($v->body_kit ==1)<div class="col-md-3 bg-danger-subtle">Body Kit</div> @endif
+
+                    @if($v->side_airbag ==1)<div class="col-md-3 bg-danger-subtle">Side Airbag</div>@endif
+                    @if($v->power_mirror ==1)<div class="col-md-3 bg-danger-subtle">Power Mirror</div> @endif
+                    @if($v->side_skirts ==1)<div class="col-md-3 bg-danger-subtle">Side Skirts</div> @endif
+                    @if($v->front_lip_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Front Lip Spoiler</div> @endif
+
+                    @if($v->navigation ==1)<div class="col-md-3 bg-danger-subtle">Navigation</div> @endif
+                    @if($v->turbo ==1)<div class="col-md-3 bg-danger-subtle">Turbo</div> @endif
+
+
+                  </div>
+                </div>
+
+                <!-- Customer's Photo Gallery  -->
+                <div class="card shadow radious-10 my-3">
+                  <h5 class="card-title bg-black text-white">
+                    Customer's Photo Gallery
+                  </h5>
+                  <div class="p-2 customer-gallery">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <a href="">
+                          <img src="./resource/img/client-galary.png" alt="" />
+                        </a>
+                      </div>
+                      <div class="col-sm-4">
+                        <a href="">
+                          <img src="./resource/img/client-galary.png" alt="" />
+                        </a>
+                      </div>
+                      <div class="col-sm-4">
+                        <a href="">
+                          <img src="./resource/img/client-galary.png" alt="" />
+                        </a>
                       </div>
                     </div>
                   </div>
-                  <!-- REVIEW HIGHLIGHTS  -->
-                  <div class="card shadow radious-10 my-3">
-                    <h5 class="card-title bg-black text-white">
-                      REVIEW HIGHLIGHTS
-                    </h5>
-                    <div class="p-2 customer-highlights text-center">
-                      <div class="row">
-                        <div class="top-hlights">
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <p>"I Ready love this color"</p>
-                        </div>
-                        <div class="dis-lights">
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <p>"Purchase RAB-01"</p>
-                          <p>
-                            Lorem ipsum dolor, sit amet consectetur
-                            adipisicing elit. Blanditiis quibusdam aut
-                            corporis velit dolore eum illum dicta, ipsa
-                            doloremque possimus facilis odit asperiores odio
-                            similique aspernatur, natus, deserunt qui
-                            incidunt.
-                          </p>
-                          <p>Mr. John</p>
-                          <a href="">More Review</a>
-                        </div>
+                </div>
+                <!-- REVIEW HIGHLIGHTS  -->
+                <div class="card shadow radious-10 my-3">
+                  <h5 class="card-title bg-black text-white">
+                    REVIEW HIGHLIGHTS
+                  </h5>
+                  <div class="p-2 customer-highlights text-center">
+                    <div class="row">
+                      <div class="top-hlights">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <p>"I Ready love this color"</p>
+                      </div>
+                      <div class="dis-lights">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <p>"Purchase RAB-01"</p>
+                        <p>
+                          Lorem ipsum dolor, sit amet consectetur
+                          adipisicing elit. Blanditiis quibusdam aut
+                          corporis velit dolore eum illum dicta, ipsa
+                          doloremque possimus facilis odit asperiores odio
+                          similique aspernatur, natus, deserunt qui
+                          incidunt.
+                        </p>
+                        <p>Mr. John</p>
+                        <a href="">More Review</a>
                       </div>
                     </div>
                   </div>
-                  <!-- Review Section -->
-                  <div class="card shadow radious-10 my-3">
-                    <h5 class="card-title bg-black text-white">REVIEWS</h5>
-                    <div class="p-2 customer-highlights text-center">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <select class="form-select" aria-label="Default select example">
-                            <option selected>Rating</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6">
-                          <select class="form-select" aria-label="Default select example">
-                            <option selected>Images & Videos</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div>
+                </div>
+                <!-- Review Section -->
+                <div class="card shadow radious-10 my-3">
+                  <h5 class="card-title bg-black text-white">REVIEWS</h5>
+                  <div class="p-2 customer-highlights text-center">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Rating</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
                       </div>
-                      <hr />
-                      <div class="review-user-body my-3">
-                        <div class="row">
-                          <div class="col-sm-3 review-user-p-img">
-                            <img class="img-fluid" src="{{asset('uploads/default/review.png')}}" alt="" />
-                          </div>
-                          <div class="col-sm-6 review-user">
-                            <div class="d-flex">
-                              <img class="img-fluid" src="{{asset('uploads/default/bdf.png')}}" alt="" />
-                              <div>
-                                <p>Shibly S.</p>
-                                <p>Nov 14, 2020</p>
-                              </div>
-                            </div>
-                            <p>2018 Premio F EX grade 5</p>
-                            <p>Wonderful car and amazing price. Thanks ICARJAPAN</p>
-                          </div>
-                          <div class="col-sm-3 review-status d-flex justify-content-end">
+                      <div class="col-sm-6">
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Images & Videos</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="review-user-body my-3">
+                      <div class="row">
+                        <div class="col-sm-3 review-user-p-img">
+                          <img class="img-fluid" src="{{asset('uploads/default/review.png')}}" alt="" />
+                        </div>
+                        <div class="col-sm-6 review-user">
+                          <div class="d-flex">
+                            <img class="img-fluid" src="{{asset('uploads/default/bdf.png')}}" alt="" />
                             <div>
-                              <p>Review on -</p>
-                              <p>Toyota Premio</p>
+                              <p>Shibly S.</p>
+                              <p>Nov 14, 2020</p>
                             </div>
+                          </div>
+                          <p>2018 Premio F EX grade 5</p>
+                          <p>Wonderful car and amazing price. Thanks ICARJAPAN</p>
+                        </div>
+                        <div class="col-sm-3 review-status d-flex justify-content-end">
+                          <div>
+                            <p>Review on -</p>
+                            <p>Toyota Premio</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- REVIEW HIGHLIGHTS  -->
-                  <div class="card shadow radious-10 my-3">
-                    <h5 class="card-title bg-black text-white">
-                      Recently Viewed Cars
-                    </h5>
-                    <div class="p-2 customer-highlights text-center">
-                      <div class="row">
-                        {{--<div class="col-sm-4">
+                </div>
+                <!-- REVIEW HIGHLIGHTS  -->
+                <div class="card shadow radious-10 my-3">
+                  <h5 class="card-title bg-black text-white">
+                    Recently Viewed Cars
+                  </h5>
+                  <div class="p-2 customer-highlights text-center">
+                    <div class="row">
+                      {{--<div class="col-sm-4">
                         <div class="product-card my-3">
                           <img class="img-fluid" src="./resource/img/product-img.png" alt="" />
                           <div class="product-card-body">
@@ -1067,323 +1088,325 @@
                           </div>
                         </div>
                       </div>--}}
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-4">
-                  <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
-                  <div class="row">
-                    <div class="d-flex view-port">
-                      <div class="col-sm-4">
-                        <div class="w-100">
-                          <div class="page-view">Page View</div>
-                          <div>712</div>
-                        </div>
-                      </div>
-                      <div class="col-sm-5">
-                        <div class="w-100">
-                          <div class="page-view">Free Quote</div>
-                          <div>712</div>
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="w-100">
-                          <div class="page-view">Favorites</div>
-                          <div>712</div>
-                        </div>
+              </div>
+              <div class="col-sm-4">
+                <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
+                <div class="row">
+                  <div class="d-flex view-port">
+                    <div class="col-sm-4">
+                      <div class="w-100">
+                        <div class="page-view">Page View</div>
+                        <div>712</div>
                       </div>
                     </div>
+                    <div class="col-sm-5">
+                      <div class="w-100">
+                        <div class="page-view">Free Quote</div>
+                        <div>712</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="w-100">
+                        <div class="page-view">Favorites</div>
+                        <div>712</div>
+                      </div>
+                    </div>
+                  </div>
 
 
-                    <!-- price table -->
-                    <form class="p-0" id="my-form">
-                      <div class="my-2 price-table bg-light">
-                        <table class="table table-bordered m-0">
-                          <thead>
-                            <tr>
-                              <th class="table-dark" colspan="2" scope="col">
-                                Total Price Calculator
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">Currency</th>
-                              <td>
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                  <option value="1">USD</option>
-                                </select>
-                              </td>
-                            </tr>
-                            @php
-                            $actual_price = $v->price;
-                            $dis_price = $v->price*$v->discount/100;
-                            $price_after_dis = ($actual_price-$dis_price);
-                            @endphp
-                            <tr>
-                              <th scope="row" class="fs-6">Vehicle Price</th>
-                              <td><strong class="fs-5">USD {{$price_after_dis}}</strong></td>
-                            </tr>
-                            @if($dis_price > 0)
-                            <tr>
-                              <th scope="row"></th>
-                              <td><del>USD {{$actual_price}}</del></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Save</th>
-                              <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
-                            </tr>
-                            @endif
-                            <tr>
-                              <th scope="row">Approx.</th>
-                              <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
-                              <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
-                            </tr>
-                            <tr>
-                              <th scope="row">Destination Country</th>
-                              <td>
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
-                                  <option value="">Selet Country</option>
-                                  @if(count($countries) > 0)
-                                  @forelse($countries as $c)
-                                  @if(\Session::get('country_id') && empty(request('country_id')))
-                                  <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
-                                  @elseif(!empty(request('country_id')))
-                                  <option value="{{$c->id}}" @if(request('country_id')==$c->id) selected @endif>{{$c->name}}</option>
-                                  @else
-                                  <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
-                                  @endif
+                  <!-- price table -->
+                  <form class="p-0" id="my-form">
+                    <div class="my-2 price-table bg-light">
+                      <table class="table table-bordered m-0">
+                        <thead>
+                          <tr>
+                            <th class="table-dark" colspan="2" scope="col">
+                              Total Price Calculator
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Currency</th>
+                            <td>
+                              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="1">USD</option>
+                              </select>
+                            </td>
+                          </tr>
+                          @php
+                          $actual_price = $v->price;
+                          $dis_price = $v->price*$v->discount/100;
+                          $price_after_dis = ($actual_price-$dis_price);
+                          @endphp
+                          <tr>
+                            <th scope="row" class="fs-6">Vehicle Price</th>
+                            <td><strong class="fs-5">USD {{$price_after_dis}}</strong></td>
+                          </tr>
+                          @if($dis_price > 0)
+                          <tr>
+                            <th scope="row"></th>
+                            <td><del>USD {{$actual_price}}</del></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Save</th>
+                            <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
+                          </tr>
+                          @endif
+                          <tr>
+                            <th scope="row">Approx.</th>
+                            <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
+                            <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination Country</th>
+                            <td>
+                              <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
+                                <option value="">Selet Country</option>
+                                @if(count($countries) > 0)
+                                @forelse($countries as $c)
+                                @if(\Session::get('country_id') && empty(request('country_id')))
+                                <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                                @elseif(!empty(request('country_id')))
+                                <option value="{{$c->id}}" @if(request('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                                @else
+                                <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
+                                @endif
 
-                                  @empty
-                                  @endforelse
-                                  @endif
-                                </select>
-                              </td>
-                            </tr>
-                            {{--<tr>
+                                @empty
+                                @endforelse
+                                @endif
+                              </select>
+                            </td>
+                          </tr>
+                          {{--<tr>
                               <th colspan="2" id="table-bg" scope="row">
                                 {{$v->note}}
-                              </th>
-                            </tr>--}}
-                            <tr>
-                              <th scope="row">Destination Port</th>
-                              <td>
-                                @php
-                                if(\Session::get('country_id') && empty(request('country_id'))){
-                                $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
-                                }elseif(!empty(request('country_id'))){
-                                $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
-                                }else{
-                                $des_port = \DB::table('ports')->where('inv_loc_id',$countryName->id)->get();
-                                }
+                          </th>
+                          </tr>--}}
+                          <tr>
+                            <th scope="row">Destination Port</th>
+                            <td>
+                              @php
+                              if(\Session::get('country_id') && empty(request('country_id'))){
+                              $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
+                              $des_country = \DB::table('countries')->where('id',\Session::get('country_id'))->first();
+                              }elseif(!empty(request('country_id'))){
+                               
+                              $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
+                              $des_country = \DB::table('countries')->where('id',request('country_id'))->first();
+                              }else{
+                              $des_port = \DB::table('ports')->where('inv_loc_id',$countryName->id)->get();
+                              $des_country = \DB::table('countries')->where('id',$countryName->id)->first();
+                              }
 
-                                @endphp
-                                <select class="des_port form-select form-select-sm" aria-label=".form-select-sm example">
-                                  <option value="">Select Port</option>
-                                  @if(count($des_port) > 0)
-                                  @forelse($des_port as $key => $dp)
-                                  <option value="{{$dp->id}}" @if($key==0) selected @endif>{{$dp->name}}</option>
-                                  @empty
-                                  @endforelse
-                                  @endif
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Shipment</th>
-                              <td>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" id="chk1" value="1" checked name="shipment">
-                                  <label class="form-check-label" for="chk1">RoRo</label>
+                              @endphp
+                              <select class="des_port form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="">Select Port</option>
+                                @if(count($des_port) > 0)
+                                @forelse($des_port as $key => $dp)
+                                <option value="{{$dp->id}}" @if($key==0) selected @endif>{{$dp->name}}</option>
+                                @empty
+                                @endforelse
+                                @endif
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Shipment</th>
+                            <td>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="chk1" value="1" checked name="shipment">
+                                <label class="form-check-label" for="chk1">RoRo</label>
 
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" id="chk2"  value="2" name="shipment">
-                                  <label class="form-check-label" for="chk2">Container</label>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Freight</th>
-                              <td class="fr_txt"></td>
-                              <input type="hidden" class="fr_val">
-                            </tr>
-                            <tr>
-                              <th scope="row">Vanning</th>
-                              <td class="van_txt">N/A</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Inspection<input type="checkbox" class="mx-2 ins"></th>
-                              <td class="ins_txt">USD 200.00</td>
-                              <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*200)}}" class="ins_val">
-                            </tr>
-                            <tr class="tr-hide">
-                              <th scope="row"></th>
-                              <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Insurance<input type="checkbox" class="mx-2 insu"></th>
-                              <td class="insu_txt">USD 272</td>
-                              <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*272)}}" class="insur">
-                            </tr>
-                            <tr class="tr-hide">
-                              <th scope="row"></th>
-                              <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
-                            </tr>
-                            <tr>
-                              <th scope="row"></th>
-                              <td class="total"></td>
-                            </tr>
-                            <tr>
-                              <th colspan="2" scope="row">
-                                ICARJAPAN ships a car upon receiving Deposit(Down
-                                payment agreed). A customer shall pay within 7
-                                days after BL copy shown as an evidence of export.
-                                Please give us an inquiry if you have any concern.
-                              </th>
-                            </tr>
-                            <tr>
-                              <th colspan="2" scope="row">
-                                Production Year/month is provided by Suppliers.
-                                ICARJAPAN shall not be responsible for any loss, damages
-                                and troubles caused by this information.
-                              </th>
-                            </tr>
-                            <tr class="table-dark">
-                              <th class="h5 fw-bold" scope="row">Total Price</th>
-                              <td class="fw-bold">Ask</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <!-- Contact Us  -->
-                      </div>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="chk2" value="2" name="shipment">
+                                <label class="form-check-label" for="chk2">Container</label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Freight</th>
+                            <td class="fr_txt"></td>
+                            <input type="hidden" class="fr_val">
+                          </tr>
+                          <tr>
+                            <th scope="row">Vanning</th>
+                            <td class="van_txt">N/A</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Inspection<input type="checkbox" class="mx-2 ins"></th>
+                            <td class="ins_txt">USD {{($des_country->inspection)}}</td>
+                          </tr>
+                          <tr class="tr-hide">
+                            <th scope="row"></th>
+                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Insurance<input type="checkbox" class="mx-2 insu"></th>
+                            <td class="insu_txt">USD {{($des_country->insurance)}}</td>
+                          </tr>
+                          <tr class="tr-hide">
+                            <th scope="row"></th>
+                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row"></th>
+                            <td class="total"></td>
+                          </tr>
+                          <tr>
+                            <th colspan="2" scope="row">
+                              ICARJAPAN ships a car upon receiving Deposit(Down
+                              payment agreed). A customer shall pay within 7
+                              days after BL copy shown as an evidence of export.
+                              Please give us an inquiry if you have any concern.
+                            </th>
+                          </tr>
+                          <tr>
+                            <th colspan="2" scope="row">
+                              Production Year/month is provided by Suppliers.
+                              ICARJAPAN shall not be responsible for any loss, damages
+                              and troubles caused by this information.
+                            </th>
+                          </tr>
+                          <tr class="table-dark">
+                            <th class="h5 fw-bold" scope="row">Total Price</th>
+                            <td class="fw-bold">Ask</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- Contact Us  -->
+                    </div>
+                  </form>
+                </div>
+                @if(currentUser() == 'user')
+                <div class="card shadow radious-10 my-3 contact-us-section">
+                  <h5 class="card-title bg-brand text-white">Contact Us</h5>
+                  <div class="p-2 customer-highlights text-center">
+                    <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#inquiry"><i class="bi bi-envelope-at-fill"></i> inquiry
+                    </a>
+
+                    <p class="">OR</p>
+                    <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
+                      @csrf
+                      <input name="vehicle_id" type="hidden" value="{{$v->id}}">
+                      <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
                     </form>
-                  </div>
-                  @if(currentUser() == 'user')
-                  <div class="card shadow radious-10 my-3 contact-us-section">
-                    <h5 class="card-title bg-brand text-white">Contact Us</h5>
-                    <div class="p-2 customer-highlights text-center">
-                      <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#inquiry"><i class="bi bi-envelope-at-fill"></i> inquiry
-                      </a>
-
-                      <p class="">OR</p>
-                      <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
-                        @csrf
-                        <input name="vehicle_id" type="hidden" value="{{$v->id}}">
-                        <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
-                      </form>
-                      <!-- <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Buy Now</a> -->
-                      <div class="my-3">
-                        <img src="./resource/img/atm.jpg" alt="" />
-                      </div>
+                    <!-- <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Buy Now</a> -->
+                    <div class="my-3">
+                      <img src="./resource/img/atm.jpg" alt="" />
                     </div>
                   </div>
-                  @endif
-                  <!-- Inquiry Form -->
-                  <div class="modal fade" id="inquiry" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <div class="row">
-                            @if(count($v_images) > 0)
-                            <div class="col-md-2">
-                              <img style="max-width:80px;" class="img-fluid single-image" src="{{asset('uploads/vehicle_images/'.$v_images->first()->image)}}" alt="" />
-                            </div>
-                            @endif
-                            <div class="col-md-10">
-                              <p>{{$v->fullName}}</p>
-                              <p>Stock Id: {{$v->stock_id}} </p>
-                            </div>
-                            <form class="form" method="post" enctype="multipart/form-data" action="{{route('user.inquiry.store')}}">
-                              @csrf
-                              <div class="row">
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="userName">Name <span class="text-danger">*</span></label>
-                                    <input type="text" id="name" class="form-control" value="{{ old('name')}}" name="name" required>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="userName">Country <span class="text-danger">*</span></label>
-                                    <select name="country_id" required class="form-control">
-                                      <option value="">Select</option>
-                                      @forelse($countries as $c)
-                                      <option value="{{$c->id}}">{{$c->name}}</option>
-                                      @empty
-                                      @endforelse
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="userName">City <span class="text-danger">*</span></label>
-                                    <input type="text" id="city" class="form-control" value="{{ old('city')}}" name="city" required>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="userName">Email <span class="text-danger">*</span></label>
-                                    <input type="text" id="email" class="form-control" value="{{ old('email')}}" name="email" required>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="userName">Phone <span class="text-danger">*</span></label>
-                                    <input type="text" id="phone" class="form-control" value="{{ old('phone')}}" name="phone" required>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-group">
-                                    <label for="remarks">Remarks <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="remarks" required>{{ old('remarks')}}</textarea>
-                                  </div>
-                                </div>
-                                <small class="text-danger">Please click "Inquiry" to receive your quote from us. You need to provide us with your contact details to receive a free quote.</small>
-                                <div class="form-check">
-                                  <input type="checkbox" class="form-check-input" id="remember-me">
-                                  <label class="form-check-label" for="remember-me">Remember me</label>
-                                </div>
-
-
-                                <div class="modal-footer">
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
+                </div>
+                @endif
+                <!-- Inquiry Form -->
+                <div class="modal fade" id="inquiry" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="row">
+                          @if(count($v_images) > 0)
+                          <div class="col-md-2">
+                            <img style="max-width:80px;" class="img-fluid single-image" src="{{asset('uploads/vehicle_images/'.$v_images->first()->image)}}" alt="" />
+                          </div>
+                          @endif
+                          <div class="col-md-10">
+                            <p>{{$v->fullName}}</p>
+                            <p>Stock Id: {{$v->stock_id}} </p>
+                          </div>
+                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('user.inquiry.store')}}">
+                            @csrf
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Name <span class="text-danger">*</span></label>
+                                  <input type="text" id="name" class="form-control" value="{{ old('name')}}" name="name" required>
                                 </div>
                               </div>
-                            </form>
-                          </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Country <span class="text-danger">*</span></label>
+                                  <select name="country_id" required class="form-control">
+                                    <option value="">Select</option>
+                                    @forelse($countries as $c)
+                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                    @empty
+                                    @endforelse
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">City <span class="text-danger">*</span></label>
+                                  <input type="text" id="city" class="form-control" value="{{ old('city')}}" name="city" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Email <span class="text-danger">*</span></label>
+                                  <input type="text" id="email" class="form-control" value="{{ old('email')}}" name="email" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Phone <span class="text-danger">*</span></label>
+                                  <input type="text" id="phone" class="form-control" value="{{ old('phone')}}" name="phone" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="remarks">Remarks <span class="text-danger">*</span></label>
+                                  <textarea class="form-control" name="remarks" required>{{ old('remarks')}}</textarea>
+                                </div>
+                              </div>
+                              <small class="text-danger">Please click "Inquiry" to receive your quote from us. You need to provide us with your contact details to receive a free quote.</small>
+                              <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember-me">
+                                <label class="form-check-label" for="remember-me">Remember me</label>
+                              </div>
+
+
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                              </div>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Close Inquiry Form-->
-
-                  <!-- Buy Now Form -->
-                  <div class="modal fade" id="buy_now" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <div class="d-flex justify-content-center">
-                            <a href="{{route('login')}}" class="btn btn-primary">Login</a>
-                            <a href="{{route('register')}}" class="btn btn-secondary">Register</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Close Buy Now Form-->
-
-
                 </div>
+                <!-- Close Inquiry Form-->
+
+                <!-- Buy Now Form -->
+                <div class="modal fade" id="buy_now" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="d-flex justify-content-center">
+                          <a href="{{route('login')}}" class="btn btn-primary">Login</a>
+                          <a href="{{route('register')}}" class="btn btn-secondary">Register</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Close Buy Now Form-->
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </main>
 <!-- main seciton end -->
@@ -1513,35 +1536,35 @@
       }
     });
 
-      $('.ins').click(function(){
-        var total = parseFloat($('.total').text());
-          total += parseFloat($('.ins_val').val());
-          $('.total').text('Approx. BDT ' + (total));
-        });
-        $('.insu').on('click',function(){
-          convert_price += parseFloat($('.insur').val());
-        });
+    var insurance = "{{$des_country->insurance}}";
+    var inspection = "{{$des_country->inspection}}";
+    $('.ins').click(function() {
+
+    });
+    $('.insu').on('click', function() {
+    });
 
     var convert_price = parseFloat($('.convert_price').val());
-    function total(type){
+
+    function total(type) {
       /*==Payment Calculation==*/
       var actual_price = "{{$v->price}}";
       var dis_price = "{{$v->price*$v->discount/100}}";
       var price_after_dis = "{{$actual_price-$dis_price}}";
-     
-  
+
+
       console.log(convert_price);
-      if(type == 1){
+      if (type == 1) {
         var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
         var fr_val = parseFloat($('.fr_val').val());
-        var fr =  parseFloat(currency_rate)*parseFloat(fr_val);
+        var fr = parseFloat(currency_rate) * parseFloat(fr_val);
         fr.toFixed(2)
         convert_price += fr;
 
 
-   
+
         $('.total').text('Approx. BDT ' + (convert_price));
-      }else{
+      } else {
         $('.total').text('Approx. BDT ' + (convert_price));
       }
     }
@@ -1553,48 +1576,59 @@
     });
 
 
-      var shipment = $('input[name="shipment"]:checked').val();
-      $('input[name="shipment"]').change(function() {
-        var shipment = $('input[name="shipment"]:checked').val();
-        if(shipment ==1){
-          $('.tr-hide').show();
-          total(1);
-          m3Charge();
-        }else{
-          total(2);
-          $('.tr-hide').hide();
-          $('.fr_txt').text('Ask');
-          $('.van_txt').text('Ask');
-          $('.ins_txt').text('Ask');
-          $('.insu_txt').text('Ask');
-        }
-      });
-      function m3Charge(){
-        /*Destination port*/
-        var des_port_id = $('.des_port option:selected').val();
-          if(des_port_id) {
-              $.ajax({
-                  url: "{{route('m3Charge')}}",
-                  type: 'GET',
-                  data: {
-                      id: des_port_id,
-                  },
-                  success: function(m3) {
-                      if(m3){
-                        /*M3 Calculation */
-                        var charge = m3
-                        var value = "{{ $v->m3 }}";
-                        $('.fr_txt').text(charge*value);
-                        $('.fr_val').val(charge*value);
-                        alert(convert_price);
-                        alert(charge*value);
-                        $('.total').text('Approx. BDT ' + ((charge*value)+convert_price));
-                      }
-                  }
-              });
-          }
-      }
+    var shipment = $('input[name="shipment"]:checked').val();
+    if (shipment == 1) {
       m3Charge();
+    } else {
+      total(2);
+      $('.tr-hide').hide();
+      $('.fr_txt').text('Ask');
+      $('.van_txt').text('Ask');
+      $('.ins_txt').text('Ask');
+      $('.insu_txt').text('Ask');
+    }
+
+    $('input[name="shipment"]').change(function() {
+      var shipment = $('input[name="shipment"]:checked').val();
+      if (shipment == 1) {
+        $('.tr-hide').show();
+        total(1);
+        m3Charge();
+
+      } else {
+        total(2);
+        $('.tr-hide').hide();
+        $('.fr_txt').text('Ask');
+        $('.van_txt').text('Ask');
+        $('.ins_txt').text('Ask');
+        $('.insu_txt').text('Ask');
+      }
+    });
+
+    function m3Charge() {
+      /*Destination port*/
+      var des_port_id = $('.des_port option:selected').val();
+      if (des_port_id) {
+        $.ajax({
+          url: "{{route('m3Charge')}}",
+          type: 'GET',
+          data: {
+            id: des_port_id,
+          },
+          success: function(m3) {
+            console.log(m3)
+            if (m3) {
+              /*M3 Calculation */
+              var charge = m3
+              var value = "{{ $v->m3 }}";
+              $('.fr_txt').text('USD ' + charge * value);
+              $('.fr_val').val(charge * value);
+              $('.total').text('Approx. BDT ' + ((charge * value) + convert_price));
+            }
+          }
+        });
+      }
+    }
   });
 </script>
 @endpush

@@ -6,9 +6,11 @@
             </h5>
             <div class="card-body">
               @forelse($trans as $t)
+              @if($t->vehicles_count > 0)
               <p class="card-text">
                 <i class="bi bi-arrows-move"></i>{{$t->name}} ({{$t->vehicles_count}})
               </p>
+              @endif
               @empty
               @endforelse
             </div>

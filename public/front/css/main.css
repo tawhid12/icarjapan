@@ -479,10 +479,8 @@ body {
 .right-row-serarch{
   background-color: #353535 !important;
 }
-/*Nav*/
-.top-nav li.nav-item {
-    margin: 0px 40px;
-}
+
+
 /*Logo Image*/
 .header-top .logo .img-fluid{
     max-width: 100%;
@@ -492,8 +490,9 @@ body {
 }
 .header-top h4{
   color:#000;
-  font-size:20px;
-  letter-spacing: 2px;
+  font-size:16px;
+  /*letter-spacing: 2px;*/
+  font-weight: bold;
 }
 .navbar-nav ,.navbar{
   padding:0px !important;

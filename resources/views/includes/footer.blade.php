@@ -69,9 +69,11 @@
                   <div class="my-3">
                       <ul class="navbar-nav">
                           @forelse($brands as $b)
+                          @if($b->vehicles_count > 0)
                           <li class="nav-item">
                               <a class="nav-link" href="{{route('brand',strtolower($b->name))}}">{{$b->name}}</a>
                           </li>
+                          @endif
                           @empty
                           @endforelse
                       </ul>
@@ -83,15 +85,14 @@
                   </div>
                   <div class="my-3">
                       <ul>
-                          @php
-                          for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 3000) {
-                              @endphp
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">Under USD {{$i}} </a>
-                              </li>
-                              @php
-                              }
-                              @endphp
+
+                          <li class="nav-item"><a class="nav-link" href="#">Under USD 500 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Under USD 1000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Under USD 2000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Under USD 3000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Under USD 4000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">Over USD 5000 </a></li>
+
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -99,15 +100,16 @@
                   </div>
                   <div class="my-3">
                       <ul>
-                          @php
-                          for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                              @endphp
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">90%~ OFF </a>
-                              </li>
-                              @php
-                              }
-                              @endphp
+                        <li class="nav-item"><a class="nav-link" href="">90%~ Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">80%~89% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">70%~79% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">40%~49% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">30%~39% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">1%~29% Off</a></li>
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -117,7 +119,7 @@
                       <ul>
                           @forelse($inv_loc as $inv)
                           <li class="nav-item">
-                              <a class="nav-link" href="#">{{$inv->name}} Inventory </a>
+                              <a class="nav-link" href="#">{{$inv->country->name}} </a>
                           </li>
                           @empty
                           @endforelse

@@ -565,7 +565,7 @@ class VehicleController extends Controller
         });
 
         // Apply the watermark to the original image
-        $image->insert($watermark, 'bottom-right', 100, 60);
+        $image->insert($watermark, 'top-left', 100, 60);
 
         // Save the modified image
         $image->save(public_path('uploads/test.jpg'));
@@ -593,7 +593,7 @@ class VehicleController extends Controller
                     $constraint->aspectRatio();
                 });
                 // Apply the watermark to the original image
-                $image->insert($watermark, 'bottom-right', 10, 10);
+                $image->insert($watermark, 'top-left', 10, 10);
                 // Save the modified image
                 $image->save(public_path('uploads/vehicle_images/' . $file->getFilename()));
             }

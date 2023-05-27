@@ -1,6 +1,6 @@
 @extends('layout.landing')
 @section('pageTitle','ICARJAPAN')
-@section('pageSubTitle','HOME')
+@section('pageSubTitle','Search')
 @push('styles')
 <style>
   .form-select-sm {
@@ -9,9 +9,172 @@
   }
 
   .custom-table td {
-    padding: 10px !important;
-    /* Adjust spacing as needed */
+    background-color: #d0f0ed;
+    border-right: 2px solid #ddd;
+    font-size: 12px;
   }
+
+  .search-body-upper {
+    background-color: #EDEDED;
+    padding: 3px 5px 6px;
+    border: 1px solid #d3d3d3;
+    box-shadow: 1px 1px 5px #dfdede, 1px 1px 3px #dfdede;
+  }
+
+  .price-calc {
+    background-color: #d3d3d3;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+
+  .price-label {
+    font-size: 12px;
+  }
+
+  .price-calc p {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .form-select {
+    font-size: 14px;
+    padding: 4px;
+    background-position: right 4px center;
+    background-size: 8px;
+    color: #000;
+  }
+
+  .form-select-md option {
+    font-size: 12px;
+  }
+
+  .custom-border-bottom-dark {
+    border: 1px #808080 solid;
+  }
+
+  .price-heading,
+  .more-details a {
+    font-size: 16px;
+    color: navy;
+    font-weight: 700;
+  }
+
+  label.form-check-label {
+    font-size: 14px;
+  }
+
+  .sbt-stock {
+    background-color: #e60012;
+    color: #ffffff;
+  }
+
+  .sbt-checkbox {
+    font-weight: 600;
+    display: inline-block;
+    font-size: 11px !important;
+    min-width: 99px;
+    vertical-align: 1px;
+    text-align: center;
+    line-height: 21px;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .partner {
+    background-color: #009de6;
+  }
+
+  .new {
+    background-color: #ff9e00;
+    color: #000a9a;
+  }
+
+  .img-360 {
+    background-image:url("{{asset('uploads/default/360.png')}}");
+    width: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #e7f40b;
+    font-weight: 700;
+    -moz-box-shadow: 1px 0 0 #ea8b00 inset, -1px 0 0 #ea8b00 inset, 0 1px 0 #ea8b00 inset, 0 -1px 0 #ea8b00 inset;
+    -webkit-box-shadow: 1px 0 0 #ea8b00 inset, -1px 0 0 #ea8b00 inset, 0 1px 0 #ea8b00 inset, 0 -1px 0 #ea8b00 inset;
+    -ms-box-shadow: 1px 0 0 #ea8b00 inset, -1px 0 0 #ea8b00 inset, 0 1px 0 #ea8b00 inset, 0 -1px 0 #ea8b00 inset;
+    -o-box-shadow: 1px 0 0 #ea8b00 inset, -1px 0 0 #ea8b00 inset, 0 1px 0 #ea8b00 inset, 0 -1px 0 #ea8b00 inset;
+    box-shadow: 2px 0 0 #574b4b inset, -2px 0 0 #574b4b inset, 0 2px 0 #574b4b inset, 0 -2px 0 #574b4b inset;
+    width: 62px;
+    height: 20px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+
+  .single-vehicle {
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  .single-vehicle:hover {
+    background-color: #ffeddf;
+  }
+
+  .v-tag {
+    background-color: #ff9e00;
+    font-size: 12px !important;
+    text-align: center !important;
+    padding: 3px 3px 2px;
+  }
+  .v-tag a{
+    color: #1167a8;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .v-heading {
+    font-size: 24px;
+  }
+
+  .v-heading a {
+    color: #1167a8;
+    font-weight: 700;
+  }
+
+  .stock-text {
+    color: #D3D3D3;
+    font-size: 14px;
+  }
+  a.fav {
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .price-text {
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.price-text span {
+    color: red;
+}
+.feature-text {
+    font-size: 14px;
+}
+.bg-button {
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: none;
+  background-color: red;
+  color: #fff;
+  padding: 6px 42px;
+  border-radius: 0;
+}
+
+.bg-button:hover {
+  outline: 1px solid red;
+  color: #fff;
+  background-color: red;
+}
 </style>
 @endpush
 @section('content')
@@ -26,92 +189,15 @@
             <img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />
           </a>
         </div>
-        <!-- left row 3 -->
-        <div class="left-row left-row-3 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search by Brands</h5>
-            <div class="card-body">
-              @forelse($brands as $b)
-              <p class="card-text">
-                <a href="{{route('brand',strtolower($b->name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}}</a>
-              </p>
-              @empty
-              @endforelse
-            </div>
-          </div>
-        </div>
-        <!-- left row 4 -->
-        <div class="left-row left-row-4 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              Search By Inventory Location
-            </h5>
-            <div class="card-body">
-              <p class="card-text">
-                @forelse($inv_loc as $inv)
-              <p class="card-text">
-                <a href="" style="text-decoration:none;color:#000;"><img src="" alt="" /> {{$inv->name}}</a>
-              </p>
-              @empty
-              @endforelse
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- left row 5 -->
-        <div class="left-row left-row-5 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Price</h5>
-            <div class="card-body">
-              @php
-              for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
-                @endphp
-                <p class="card-text">
-                  <i class="bi bi-currency-dollar"></i> Under USD {{$i}}
-                </p>
-                @php
-                }
-                @endphp
-            </div>
-          </div>
-        </div>
-        <!-- left row 6 -->
-        <div class="left-row left-row-6 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
-              Search By Discount
-            </h5>
-            <div class="card-body">
-              @php
-              for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                @endphp
-                <p class="card-text">
-                  <i class="bi bi-funnel"></i> Up to {{$i}}%
-                </p>
-                @php
-                }
-                @endphp
-            </div>
-          </div>
-        </div>
-        <!-- left row 7 -->
-        <div class="left-row left-row-7 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Search By Type</h5>
-            <div class="card-body">
-              @forelse($body_types as $bt)
-              <p class="card-text">
-                <a href="" style="text-decoration:none;color:#000;"><i class="bi bi-car-front-fill"></i>{{$bt->name}} (2798)</a>
-              </p>
-              @empty
-              @endforelse
-            </div>
-          </div>
-        </div>
+        @include('front.partial.brand-side-bar')
+        @include('front.partial.inventory-side-bar')
+        @include('front.partial.price-side-bar')
+        @include('front.partial.discount-side-bar')
+        @include('front.partial.type-side-bar')
         <!-- left row 8 -->
         <div class="left-row left-row-8 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">
+            <h5 class="card-title bg-black text-white">
               Search By Category
             </h5>
             <div class="card-body">
@@ -126,588 +212,621 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-10 container-xl-7">
-        <!-- left row 1 -->
-        <div class="search-left-1">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="./index.html">Home</a>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Serarch
-              </li>
-            </ol>
-          </nav>
-        </div>
-        <!-- left row 2 -->
-        <div class="search-left-2">
-          <div class="input-group mb-3 shadow">
-            <span class="input-group-text">Search Car</span>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
-          </div>
-        </div>
-        <!-- left row 3 -->
-        <div class="search-left-3">
-          <p>Used Cars for Sale</p>
-          <div class="search-body bg-dark-subtle shadow p-2">
-            <div class="row gx-1">
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Make:</option>
-                  @forelse($brands as $b)
-                  <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Model:</option>
-                  @forelse($sub_brands as $sb)
-                  <option value="{{$sb->id}}" @if(!empty($sub_brand_id)) @if($sb->id == $sub_brand_id->id) selected @endif @endif>{{$sb->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Model Code:</option>
-                  @forelse($vehicle_models as $vm)
-                  <option value="{{$vm->id}}">{{$vm->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Steering:</option>
-                  <option value="1">Right Hand Drive</option>
-                  <option value="2">Left Hand Drive</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Body Type</option>
-                  @forelse($body_types as $bt)
-                  <option value="{{$bt->id}}">{{$bt->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Sub Body Type</option>
-                  @forelse($sub_body_types as $sb)
-                  <option value="{{$sb->id}}">{{$sb->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Drive</option>
-                  @forelse($drive_types as $dt)
-                  <option value="{{$dt->id}}">{{$dt->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Year</option>
+        <!-- breadcrumb -->
+        @include('partials.breadcrumbs')
+        @include('front.search-box')
+        <div class="search-body-upper shadow p-3">
+          <div class="row gx-1">
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Make:</option>
+                @forelse($brands as $b)
+                <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Model:</option>
+                @forelse($sub_brands as $sb)
+                <option value="{{$sb->id}}" @if(!empty($sub_brand_id)) @if($sb->id == $sub_brand_id->id) selected @endif @endif>{{$sb->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Model Code:</option>
+                @forelse($vehicle_models as $vm)
+                <option value="{{$vm->id}}">{{$vm->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Steering:</option>
+                <option value="1">Right Hand Drive</option>
+                <option value="2">Left Hand Drive</option>
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Body Type:</option>
+                @forelse($body_types as $bt)
+                <option value="{{$bt->id}}">{{$bt->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Sub Body Type:</option>
+                @forelse($sub_body_types as $sb)
+                <option value="{{$sb->id}}">{{$sb->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3">
+              <select class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option value="">Drive:</option>
+                @forelse($drive_types as $dt)
+                <option value="{{$dt->id}}">{{$dt->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="date-filter form-select form-select-md">
+                <option value="">Year:</option>
+                @php
+                for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                  @endphp
+                  <option value="{{$i}}">{{$i}}</option>
                   @php
-                  for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                  }
+                  @endphp
+              </select>
+              <select class="form-select form-select-md">
+                <option value="">Mon:</option>
+                @php
+                for ($i =1; $i <= 12; $i++) { @endphp <option value="{{$i}}">{{$i}}</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+              <span>~</span>
+              <select class="date-filtler form-select form-select-md">
+                <option value="">Year:</option>
+                @php
+                for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                  @endphp
+                  <option value="{{$i}}">{{$i}}</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+              <select class="date-filtler form-select form-select-md">
+                <option value="">Mon:</option>
+                @php
+                for ($i =1; $i <= 12; $i++) { @endphp <option value="{{$i}}">{{$i}}</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+            </div>
+            <div class="custom-border-bottom-dark mb-2"></div>
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="">Price Range:</option>
+                <option value="501">USD 501</option>
+                @php
+                for ($i = 1001; $i <= 30001; $i +=1000) { @endphp <option value="{{$i}}">USD {{$i}}</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+
+              <span>~</span>
+              <select class="form-select form-select-md">
+                <option value="">Price Range:</option>
+                <option value="500">USD 500</option>
+                @php
+                for ($i = 1000; $i <= 30000; $i +=1000) { @endphp <option value="{{$i}}">USD {{$i}}</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+            </div>
+
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="0">Engine Size (CC):</option>
+                <option value="661">661 CC</option>
+                <option value="1001">1001 CC</option>
+                <option value="1501">1501 CC</option>
+                <option value="1801">1801 CC</option>
+                <option value="2001">2001 CC</option>
+                <option value="2501">2501 CC</option>
+                <option value="3001">3001 CC</option>
+                <option value="4001">4001 CC</option>
+              </select>
+
+              <span>~</span>
+              <select class="form-select form-select-md">
+                <option value="0">Engine Size (CC):</option>
+                <option value="660">660 CC</option>
+                <option value="1000">1000 CC</option>
+                <option value="1500">1500 CC</option>
+                <option value="1800">1800 CC</option>
+                <option value="2000">2000 CC</option>
+                <option value="2500">2500 CC</option>
+                <option value="3000">3000 CC</option>
+                <option value="4000">4000 CC</option>
+              </select>
+            </div>
+
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="0">Mileage:</option>
+                @php for ($i = 10001; $i <= 100001; $i +=10000) { @endphp <option value="{{$i}}">{{$i}} km</option>
+                  @php
+                  }
+                  @endphp
+                  <option value="150001">150001 km</option>
+                  <option value="200001">200001 km</option>
+                  <option value="300001">300001 km</option>
+              </select>
+
+              <span>~</span>
+              <select class="form-select form-select-md">
+                <option value="0">Milege:</option>
+                @php for ($i = 10000; $i <= 100000; $i +=10000) { @endphp <option value="{{$i}}">{{$i}} km</option>
+                  @php
+                  }
+                  @endphp
+                  <option value="150000">150000 km</option>
+                  <option value="200000">200000 km</option>
+                  <option value="300000">300000 km</option>
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="">Transmission:</option>
+                @forelse($trans as $t)
+                <option value="{{$t->id}}">{{$t->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="0">Discount:</option>
+                <option value="1">1%</option>
+                @php for ($i = 10; $i <= 90; $i +=10) { @endphp <option value="{{$i}}">{{$i}}%</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+
+              <span>~</span>
+              <select class="form-select form-select-md">
+                <option value="0">Discount:</option>
+                @php for ($i = 9; $i < 100; $i +=10) { @endphp <option value="{{$i}}">{{$i}}%</option>
+                  @php
+                  }
+                  @endphp
+              </select>
+            </div>
+
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option vale="">Fuel:</option>
+                @forelse($fuel as $f)
+                <option value="{{$f->id}}">{{$f->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="">Exterior Color:</option>
+                @forelse($colors as $c)
+                <option value="{{$c->id}}">{{$c->name}}</option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <div class="col-sm-3 mb-3 d-flex more-details">
+              <a href="#myCollapsible" data-bs-toggle="collapse">+ More Details</a>
+            </div>
+            <!-- Collapsible section that is initially collapsed -->
+            <div class="collapse" id="myCollapsible">
+              <div class="row gx-1">
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="0">Body Length:</option>
+                    <option value="1">Under 3400 MM</option>
+                    <option value="2">3400 to 4000 MM</option>
+                    <option value="3">4500 to 4700 MM</option>
+                    <option value="4">4700 to 4950 MM</option>
+                    <option value="5">4950 to 5000 MM</option>
+                    <option value="6">5000 to 5001 MM</option>
+                    <option value="7">Over 5000 MM</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="">Max Loading Cepacity:</option>
+                    <option value="1">Under 1 Ton</option>
+                    <option value="2">1 to 2 Ton</option>
+                    <option value="3">2 to 2.5 Ton</option>
+                    <option value="4">3 to 4 Ton</option>
+                    <option value="5">4 to 5 Ton</option>
+                    <option value="6">5 to 6 Ton</option>
+                    <option value="6">6 to 7 Ton</option>
+                    <option value="6">7 to 8 Ton</option>
+                    <option value="6">8 to 9 Ton</option>
+                    <option value="6">9 to 10 Ton</option>
+                    <option value="7">Over 10 Ton</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="">Engine Type:</option>
+                  </select>
+                </div>
+                @if($max_manu_Year && $min_manu_Year)
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="">Prod Year:</option>
+                    @php
+                    for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
                     @endphp
                     <option value="{{$i}}">{{$i}}</option>
                     @php
                     }
                     @endphp
-                </select>
-                <select class="form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Mon</option>
-                  @php
-                  for ($i =1; $i <= 12; $i++) { @endphp <option value="{{$i}}">{{$i}}</option>
+                  </select>
+                  <span>~</span>
+                  <select class="form-select form-select-md">
+                    <option value="">Prod Year:</option>
                     @php
-                    }
-                    @endphp
-                </select>
-                <span>~</span>
-                <select class="form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Year</option>
-                  @php
-                  for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
+                    for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
                     @endphp
                     <option value="{{$i}}">{{$i}}</option>
                     @php
                     }
                     @endphp
-                </select>
-                <select class="form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Mon</option>
-                  @php
-                  for ($i =1; $i <= 12; $i++) { @endphp <option value="{{$i}}">{{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
+                  </select>
+                </div>
+                @endif
+                <div class="custom-border-bottom-dark mb-3"></div>
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="0">Truck Size:</option>
+                    <option value="1">Large Truck</option>
+                    <option value="2">Medium Truck</option>
+                    <option value="3">Small Truck</option>
+                    <option value="4">Multicab</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="0">Inventory Location:</option>
+                    @forelse($inv_loc as $inv)
+                    <option value="{{$inv->id}}">{{$inv->name}}</option>
+                    @empty
+                    @endforelse
+                  </select>
+                </div>
+                <div class="col-sm-3 mb-3 d-flex">
+                  <select class="form-select form-select-md">
+                    <option value="0">Port:</option>
+                  </select>
+                </div>
               </div>
-              <hr />
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Price Range</option>
-                  @php
-                  for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
-                    @endphp
-                    <option value="{{$i}}">USD {{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-
-                <span>~</span>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Price Range</option>
-                  @php
-                  for ($i = $price_range[0]->minprice; $i <= $price_range[0]->maxprice; $i += 500) {
-                    @endphp
-                    <option value="{{$i}}">USD {{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value>Engine CC:</option>
-                  @php
-                  for ($i = $cc_range[0]->mincc; $i <= $cc_range[0]->maxcc; $i += 500) {
-                    @endphp
-                    <option value="{{$i+1}}">{{$i+1}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-                <span>~</span>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value>Engine CC:</option>
-                  @php
-                  for ($i = $cc_range[0]->mincc; $i <= $cc_range[0]->maxcc; $i += 500) {
-                    @endphp
-                    <option value="{{$i}}">{{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Milege</option>
-                  @php
-                  for ($i = $mileage_range[0]->min_mileage; $i <= $mileage_range[0]->max_mileage; $i += 10000) {
-                    @endphp
-                    <option value="{{$i+1}}">{{$i+1}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-
-                <span>~</span>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Milege</option>
-                  @php
-                  for ($i = $mileage_range[0]->min_mileage; $i <= $mileage_range[0]->max_mileage; $i += 10000) {
-                    @endphp
-                    <option value="{{$i}}">{{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Transmission:</option>
-                  @forelse($trans as $t)
-                  <option value="{{$t->id}}">{{$t->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value>Discount</option>
-                  <option value="1">1%</option>
-                  @php
-                  for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                    @endphp
-                    <option value="{{$i}}">{{$i}}%</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-
-                <span>~</span>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value>Discount</option>
-                  @php
-                  for ($i = $discount_range[0]->mindis; $i <= $discount_range[0]->maxdis; $i += 10) {
-                    @endphp
-                    <option value="{{$i-1}}">{{$i-1}}%</option>
-                    @php
-                    }
-                    @endphp
-                </select>
-              </div>
-
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option vale="">Fuel</option>
-                  @forelse($fuel as $f)
-                  <option value="{{$f->id}}">{{$f->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="">Color</option>
-                  @forelse($colors as $c)
-                  <option value="{{$c->id}}">{{$c->name}}</option>
-                  @empty
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex more-details">
-                <a href="#myCollapsible" data-bs-toggle="collapse">+ More Details</a>
-              </div>
-              <!-- Collapsible section that is initially collapsed -->
-              <div class="collapse" id="myCollapsible">
-                <div class="row gx-1">
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Body Length</option>
-                      @php
-                      for ($i = $b_length_range[0]->b_length_min; $i <= $b_length_range[0]->b_length_max; $i += 500) {
-                        @endphp
-                        <option value="{{$i-1}}">{{$i}}</option>
-                        @php
-                        }
-                        @endphp
-                    </select>
-                  </div>
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Max Loading Cepacity</option>
-                      @php
-                      for ($i = $max_loading_range[0]->loading_min; $i <= $max_loading_range[0]->loading_max; $i += 500) {
-                        @endphp
-                        <option value="{{$i}}">{{$i}}</option>
-                        @php
-                        }
-                        @endphp
-                    </select>
-                  </div>
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Engine Type</option>
-                      @forelse($engine_types as $e)
-                      <option value="{{$e->e_type}}">{{$e->e_type}}</option>
-                      @empty
-                      @endforelse
-                    </select>
-                  </div>
-                  @if($max_manu_Year && $min_manu_Year)
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Priod Year</option>
-                      @php
-                      for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
-                      @endphp
-                      <option value="{{$i}}">{{$i}}</option>
-                      @php
-                      }
-                      @endphp
-                    </select>
-                    <span>~</span>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Priod Year</option>
-                      @php
-                      for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
-                      @endphp
-                      <option value="{{$i}}">{{$i}}</option>
-                      @php
-                      }
-                      @endphp
-                    </select>
-                  </div>
-                  @endif
-                  <hr />
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option value="">Truck Size</option>
-                      <option value="1">Large Truck</option>
-                      <option value="2">Medium Truck</option>
-                      <option value="3">Small Truck</option>
-                      <option value="4">Multicab</option>
-                    </select>
-                  </div>
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option selected>Inventory Location</option>
-                      @forelse($inv_loc as $inv)
-                      <option value="{{$inv->id}}">{{$inv->name}}</option>
-                      @empty
-                      @endforelse
-                    </select>
-                  </div>
-                  <div class="col-sm-3 mb-3 d-flex">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      <option selected>Port</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <hr />
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Air Bag</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Anti-Lock Brake System</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Alloy Wheels</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Back Tire</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Fog Lights</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Grill Guard</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Leather Seats</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Navigation</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Power Steering</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Power Windows</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Roof Rails</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Rear Spoiler</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Sun Roof</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">TV</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 mb-3 d-flex">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                      <label class="form-check-label" for="exampleCheck1">Dual Air Bags</label>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="col-sm-12 mb-3">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label me-3" for="exampleCheck1">New Arrival</label>
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label me-3" for="exampleCheck1">360° Image</label>
-                  </div>
-                  <div class="col-sm-3 mb-3">
-                    <button type="button" class="btn btn-primary btn-sm">
-                      Submit
-                    </button>
-                    <button type="button" class="btn btn-dark btn-sm">
-                      Reset
-                    </button>
+              <div class="custom-border-bottom-dark mb-1"></div>
+              <div class="row gx-1">
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_bag" />
+                    <label class="form-check-label" for="exampleCheck1">Air Bag</label>
                   </div>
                 </div>
-
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="anti_lock_brake_system" />
+                    <label class="form-check-label" for="exampleCheck1">Anti-Lock Brake System</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="	air_con" />
+                    <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="alloy_wheels" />
+                    <label class="form-check-label" for="exampleCheck1">Alloy Wheels</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="back_tire" />
+                    <label class="form-check-label" for="exampleCheck1">Back Tire</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="fog_lights" />
+                    <label class="form-check-label" for="exampleCheck1">Fog Lights</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="grill_guard" />
+                    <label class="form-check-label" for="exampleCheck1">Grill Guard</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="leather_seat" />
+                    <label class="form-check-label" for="exampleCheck1">Leather Seats</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="navigation" />
+                    <label class="form-check-label" for="exampleCheck1">Navigation</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_steering" />
+                    <label class="form-check-label" for="exampleCheck1">Power Steering</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_windows" />
+                    <label class="form-check-label" for="exampleCheck1">Power Windows</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                    <label class="form-check-label" for="exampleCheck1">Roof Rails</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rear_spoiler" />
+                    <label class="form-check-label" for="exampleCheck1">Rear Spoiler</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="sun_roof" />
+                    <label class="form-check-label" for="exampleCheck1">Sun Roof</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="tv" />
+                    <label class="form-check-label" for="exampleCheck1">TV</label>
+                  </div>
+                </div>
+                <div class="col-sm-2 my-1 d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                    <label class="form-check-label" for="exampleCheck1">Dual Air Bags</label>
+                  </div>
+                </div>
               </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- left row 4-->
-        <div class="search-left-4 my-3">
-          <div class="search-body bg-dark-subtle shadow p-2">
-            <div class="row">
+              <div class="custom-border-bottom-dark my-2"></div>
               <div class="col-sm-12 mb-3">
-                <span>Total Price Calculator</span>
+                <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
+                <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">Sbt Stocks</label>
+
+                <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
+                <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
+
+                <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
+                <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
+
+                <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
+
+                <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
+                <label class="form-check-label me-3 img-360" for="360_img"></label>
+
+
               </div>
-              <div class="col-sm-6 mb-3 note">
-                <span>Estimate the price of the vehicle(s) based on your
-                  destination.</span>
-              </div>
-              <div class="col-sm-6 mb-3 note">
-                <span>Note: In some cases the total price cannot be estimated.
-                </span>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Destination Country</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Destination Port</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Shipment</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                  <option selected>Freight ( Included )</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Currency</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Inspection</option>
-                  <option value="1">YES</option>
-                  <option value="2">NO</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3 d-flex">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option selected>Insurance</option>
-                  <option value="1">YES</option>
-                  <option value="2">NO</option>
-                </select>
-              </div>
-              <div class="col-sm-3 mb-3">
-                <button type="button" class="btn btn-primary btn-sm">
-                  Submit
-                </button>
-                <button type="button" class="btn btn-dark btn-sm">
+              <div class="d-flex align-items-center justify-content-center">
+
+                <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
                   Reset
                 </button>
+                <button type="button" class="col-md-4 btn btn-primary btn-sm">
+                  Submit
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- left row 4-->
+        <div class="search-left-4 my-3">
+          <div class="price-calc search-body shadow p-2">
+            <div class="row gx-1">
+              <div class="col-3">
+                <div class="col-sm-12">
+                  <span class="price-heading">Total Price Calculator</span>
+                </div>
+                <p>
+                  Estimate the price of the vehicle(s) based on your destination.
+                  <span>Note:</span> In some cases the total price cannot be estimated.
+                </p>
+              </div>
+              <div class="col-md-4">
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Destination Country:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <select class="price-select form-select form-select-sm">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Destination Port:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <select class="price-select form-select form-select-sm">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Shipment:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <select class="price-select form-select form-select-sm">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Freight:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="" value="1">
+                      <label class="form-check-label" for="">Roro</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="" value="2">
+                      <label class="form-check-label" for="">Container</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Currency:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <select class="price-select form-select form-select-sm">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Inspection:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input checkinp" type="radio" id="" value="1">
+                      <label class="form-check-label" for="">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="" value="2">
+                      <label class="form-check-label" for="">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-md-5">
+                    <label class="price-label">Insurance:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input checkinp" type="radio" id="" value="1">
+                      <label class="form-check-label" for="">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="" value="2">
+                      <label class="form-check-label" for="">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-primary btn-sm">
+                  Calculate
+                </button>
               </div>
             </div>
           </div>
         </div>
-        
+
         <!-- Vehicles -->
         @forelse($vehicles as $v)
-        <div class="single-vehicle my-3">
-          <div class="row d-flex align-items-center">
-            <div class="col-md-12 d-flex justify-content-end"><a href=""><i class="fa fa-heart"></i>Add to Favorites</a></div>
+        <div class="single-vehicle p-2 2my-3">
+          <div class="row">
 
-            <div class="col-md-2">
-              <img src="{{asset('front/img/product-img.png')}}" alt="" />
-              <p>Stock ID : {{$v->stock_id}}</p>
+
+            <div class="col-md-3">
+              @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
+              @if($cover_img)
+              <img src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" width="210px" height="140px" />
+              @else
+              <img src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" alt="" width="210px" height="140px" />
+              @endif
+
+              <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
+            <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <span class="v-tag"><a href="">New Arival</a></span>
+              <a href="" class="fav"><i class="fa fa-heart"></i>Add to Favorites</a>
+            </div>
               <div class="heading d-flex justify-content-between">
-                <h6><a href="">{{$v->fullName}}</a></h5>
+
+                <h6 class="v-heading"><a href="">{{strtoupper($v->fullName)}}</a></h5>
                   @if($v->inv_locatin_id)
                   @php $inventory_loc = \DB::table('countries')->where('id',$v->inv_locatin_id)->first();@endphp
-                  <p>Inventory Location <i class="fa fa-flag"></i><span>{{$inventory_loc->name}}</span></p>
+                  <p class="m-0 stock-text" style="font-size:medium">Inventory Location <i class="fa fa-flag"></i><span>{{$inventory_loc->name}}</span></p>
                   @endif
               </div>
-              <div class="row">
+              <div class="row gx-1">
                 <div class="col-md-3">
-                  <div class="d-flex align-items-center">
+                  <div class="">
                     @php
                     $actual_price = $v->price;
                     $dis_price = $v->price*$v->discount/100;
                     $price_after_dis = ($actual_price-$dis_price);
                     @endphp
-                    <p>Price</p>
-                    <div>
+                    <p class="price-text m-0">Vehicle Price:
+           
+                    
+                      <span>USD {{$price_after_dis}}</span></p>
                       @if($v->discount > 0)
                       <del>USD {{$actual_price}}</del>
                       @endif
-                      <p>USD {{$price_after_dis}}</p>
-                    </div>
+
                   </div>
+                  <p class="price-text m-0">Total Price: <span>USD 2,238</span></p>
                   @if($v->discount > 0)
-                  <p>Save: $v->discount/100%</p>
+                  <p>Save: {{$v->discount}}</p>
                   @endif
-                  <p>Total Price: USD 2,238</p>
+                  
                 </div>
                 <div class="col-md-9">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered m-0">
                     <thead class="table-light">
                       <tr>
                         <th>Production Year</th>
@@ -725,8 +844,8 @@
                       </tr>
                     </tbody>
                   </table>
-                  <table class="table custom-table">
-                    <tr class="table-secondary">
+                  <table class="table mt-2 custom-table">
+                    <tr>
                       <td>DBA-L175S</td>
                       <td>
                         @if($v->fuel_id)
@@ -742,13 +861,13 @@
                         @endif
                       </td>
                       <td>4 Seats</td>
-                      <td>{{$v->door}}</td>
+                      <td>5 Doors</td>
                     </tr>
                   </table>
                 </div>
               </div>
 
-              <p>
+              <p class="m-0 feature-text">
                 @if($v->power_steering ==1)
                 <span class="px-1" style="border-right:1px solid #ddd;">Power Steering</span>
                 @endif
@@ -771,7 +890,7 @@
               </p>
 
             </div>
-            <div class="col-md-12 d-flex justify-content-end"><a href="">
+            <div class="col-md-12 d-flex justify-content-end my-2"><a href="">
                 <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#inquiry"><i class="bi bi-envelope-at-fill"></i> inquiry
                 </a>
             </div>
@@ -786,6 +905,7 @@
         <!-- Vehicles -->
       </div>
     </div>
+  </div>
   </div>
 </main>
 @endsection

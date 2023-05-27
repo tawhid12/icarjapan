@@ -48,6 +48,8 @@ class CountryController extends Controller
             $c->code=$request->code;
             $c->afford_range=$request->afford_range;
             $c->high_grade_range	=$request->high_grade_range	;
+            $c->inspection	=$request->inspection;
+            $c->insurance	=$request->insurance;
             $c->created_by=currentUserId();
             if($request->has('image')) $b->image = $this->uploadImage($request->file('image'), 'uploads/brands');
             if($c->save()){
@@ -100,6 +102,8 @@ class CountryController extends Controller
             $c->code=$request->code;
             $c->afford_range=$request->afford_range;
             $c->high_grade_range	=$request->high_grade_range	;
+            $c->inspection	=$request->inspection;
+            $c->insurance	=$request->insurance;
             $c->updated_by=currentUserId();
             if($request->has('image')) $c->image = $this->uploadImage($request->file('image'), 'uploads/country');
             if($c->save()){
