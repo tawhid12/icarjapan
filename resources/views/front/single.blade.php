@@ -1195,7 +1195,7 @@
                               $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
                               $des_country = \DB::table('countries')->where('id',\Session::get('country_id'))->first();
                               }elseif(!empty(request('country_id'))){
-                               
+
                               $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
                               $des_country = \DB::table('countries')->where('id',request('country_id'))->first();
                               }else{
@@ -1232,27 +1232,27 @@
                           <tr>
                             <th scope="row">Freight</th>
                             <td class="fr_txt"></td>
-                            <input type="hidden" class="fr_val">
+                            <input type="text" class="fr_val">
                           </tr>
                           <tr>
                             <th scope="row">Vanning</th>
                             <td class="van_txt">N/A</td>
                           </tr>
                           <tr>
-                            <th scope="row">Inspection<input type="checkbox" class="mx-2 ins"></th>
-                            <td class="ins_txt">USD {{($des_country->inspection)}}</td>
+                            <th scope="row">Inspection<input type="checkbox" class="mx-2 chk" value="{{$des_country->inspection}}"></th>
+                            <td class="ins_txt">USD {{$des_country->inspection}}</td>
                           </tr>
                           <tr class="tr-hide">
                             <th scope="row"></th>
-                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
+                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*$des_country->inspection)}}</td>
                           </tr>
                           <tr>
-                            <th scope="row">Insurance<input type="checkbox" class="mx-2 insu"></th>
-                            <td class="insu_txt">USD {{($des_country->insurance)}}</td>
+                            <th scope="row">Insurance<input type="checkbox" class="mx-2 chk" value="{{$des_country->insurance}}"></th>
+                            <td class="insu_txt">USD {{$des_country->insurance}}</td>
                           </tr>
                           <tr class="tr-hide">
                             <th scope="row"></th>
-                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
+                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*$des_country->insurance)}}</td>
                           </tr>
                           <tr>
                             <th scope="row"></th>
@@ -1536,72 +1536,46 @@
       }
     });
 
-    var insurance = "{{$des_country->insurance}}";
-    var inspection = "{{$des_country->inspection}}";
-    $('.ins').click(function() {
-
-    });
-    $('.insu').on('click', function() {
-    });
-
-    var convert_price = parseFloat($('.convert_price').val());
-
-    function total(type) {
-      /*==Payment Calculation==*/
-      var actual_price = "{{$v->price}}";
-      var dis_price = "{{$v->price*$v->discount/100}}";
-      var price_after_dis = "{{$actual_price-$dis_price}}";
-
-
-      console.log(convert_price);
-      if (type == 1) {
-        var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
-        var fr_val = parseFloat($('.fr_val').val());
-        var fr = parseFloat(currency_rate) * parseFloat(fr_val);
-        fr.toFixed(2)
-        convert_price += fr;
-
-
-
-        $('.total').text('Approx. BDT ' + (convert_price));
-      } else {
-        $('.total').text('Approx. BDT ' + (convert_price));
-      }
-    }
-
-
     /*===Country Wise Port  */
-    $('select[name="country_id"]').on('change', function() {
+      $('select[name="country_id"]').on('change', function() {
       $('#my-form').submit();
     });
 
+    var convert_price = parseFloat($('.convert_price').val());
+    var insurance = "{{$des_country->insurance}}";
+    var inspection = "{{$des_country->inspection}}";
+    var m3_value  = "{{ $v->m3 }}";
+    var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
 
-    var shipment = $('input[name="shipment"]:checked').val();
-    if (shipment == 1) {
+    function roro(){
+      $('.tr-hide').show();
+      $('.van_txt').text('N/A');
+      $('.ins_txt').text(inspection);
+      $('.insu_txt').text(insurance);
       m3Charge();
-    } else {
-      total(2);
+    }
+    function container(){
       $('.tr-hide').hide();
       $('.fr_txt').text('Ask');
       $('.van_txt').text('Ask');
       $('.ins_txt').text('Ask');
       $('.insu_txt').text('Ask');
+      $('.total').text('Approx. BDT ' + (convert_price));
+    }
+
+    var shipment = $('input[name="shipment"]:checked').val();
+    if (shipment == 1) {
+      roro();
+    } else {
+      container();
     }
 
     $('input[name="shipment"]').change(function() {
       var shipment = $('input[name="shipment"]:checked').val();
       if (shipment == 1) {
-        $('.tr-hide').show();
-        total(1);
-        m3Charge();
-
+        roro();
       } else {
-        total(2);
-        $('.tr-hide').hide();
-        $('.fr_txt').text('Ask');
-        $('.van_txt').text('Ask');
-        $('.ins_txt').text('Ask');
-        $('.insu_txt').text('Ask');
+        container();
       }
     });
 
@@ -1623,12 +1597,24 @@
               var value = "{{ $v->m3 }}";
               $('.fr_txt').text('USD ' + charge * value);
               $('.fr_val').val(charge * value);
-              $('.total').text('Approx. BDT ' + ((charge * value) + convert_price));
+              $('.total').text(((charge * value * currency_rate) + convert_price));
             }
           }
         });
       }
     }
+    $('.chk').on('change', function() {
+      var sum = parseFloat($('.total').text());
+      var checkboxValue = parseFloat($(this).val());
+      if ($(this).is(':checked')) {
+      // Checkbox is checked, add its value to the total
+      sum += checkboxValue
+      } else {
+      // Checkbox is unchecked, subtract its value from the total
+      sum -= checkboxValue;
+    }
+      $('.total').text(sum);
+    })
   });
 </script>
 @endpush
