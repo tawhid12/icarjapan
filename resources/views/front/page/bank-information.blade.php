@@ -18,26 +18,40 @@
         <div class="col-md-12">
             @php $com_info = \DB::table('company_account_infos')->first();@endphp
 
-            <h6>Company Info</h6>
+            <h4>Bank Account information</h4>
             @if($com_info)
             <table class="table table-bordered">
                 <tr>
-                    <th>Bank</th>
-                    <td>
-                        <p class="m-0">Bank: {{$com_info->bank_name}}</p>
-                        <p class="m-0">Account: {{$com_info->account_name}}</p>
-                        <p class="m-0">Branch: {{$com_info->branch_name}}</p>
-                        <p class="m-0">Account: {{$com_info->account_number}}</p>
-                        <p class="m-0">Swift Code: {{$com_info->swift_code}}</p>
-                    </td>
+                    <th>Bank Name</th>
+                    <td>{{$com_info->bank_name}}</td>
                 </tr>
                 <tr>
-                    <th>Bank Address</th>
-                    <td>{{$com_info->bank_address}}</td>
+                    <th>Bank Code</th>
+                    <td>{{$com_info->bank_code}}</td>
                 </tr>
                 <tr>
-                    <th>Website</th>
-                    <td>{{$com_info->website}}</td>
+                    <th>Swift Code</th>
+                    <td>{{$com_info->swift_code}}</td>
+                </tr>
+                <tr>
+                    <th>Branch Code & Name</th>
+                    <td>{{$com_info->branch_name}} {{$com_info->bank_code}}</td>
+                </tr>
+                <tr>
+                    <th>Account Number</th>
+                    <td>{{$com_info->account_number}}</td>
+                </tr>
+                <tr>
+                    <th>Account Number</th>
+                    <td>{{$com_info->account_number}}</td>
+                </tr>
+                <tr>
+                    <th>Beneficiary’s Name</th>
+                    <td>{{$com_info->beni_name}}</td>
+                </tr>
+                <tr>
+                    <th>Company Address</th>
+                    <td>{{$com_info->c_address}}</td>
                 </tr>
             </table>
             @endif

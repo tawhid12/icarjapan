@@ -149,12 +149,16 @@
                       $dis_price = $v->price*$v->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
+                    @if($price > 0)
                     <p class="m-0">Price :</p>
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p class="m-0">Approx.</p>
-                      <p class="m-0">BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p class="m-0">{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
+                    @else
+                    <p class="m-0">Ask</p>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -205,7 +209,7 @@
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>
@@ -249,7 +253,7 @@
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>
@@ -290,7 +294,7 @@
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>

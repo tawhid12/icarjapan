@@ -351,7 +351,7 @@
                                             <input type="text" id="b_height" value="{{old('b_height',$v->b_height)}}" class="form-control" placeholder="Height" name="b_height">
                                             </div>
                                             <div class="col">
-                                            <input type="text" id="b_width" value="{{old('b_width',$v->b_height)}}" class="form-control" placeholder="Width" name="b_width">
+                                            <input type="text" id="b_width" value="{{old('b_width',$v->b_width)}}" class="form-control" placeholder="Width" name="b_width">
                                             </div>
                                         </div>
                                         

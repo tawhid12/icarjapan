@@ -71,6 +71,24 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
+                                                <label for="bank_code">Bank Code<span class="text-danger">*</span></label>
+                                                <input type="text" id="bank_code" class="form-control" value="{{ old('bank_code',$com_acc_info->bank_code)}}" name="bank_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="bank_code">Bank Code<span class="text-danger">*</span></label>
+                                                <input type="text" id="bank_code" class="form-control" value="{{ old('bank_code',$com_acc_info->bank_code)}}" name="bank_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="beni_name">Beneficiary’s Name<span class="text-danger">*</span></label>
+                                                <input type="text" id="beni_name" class="form-control" value="{{ old('beni_name',$com_acc_info->beni_name)}}" name="beni_name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
                                                 <label for="bank_address">Tel<span class="text-danger">*</span></label>
                                                 <input type="text" id="tel" class="form-control" value="{{ old('tel',$com_acc_info->tel)}}" name="tel">
                                             </div>

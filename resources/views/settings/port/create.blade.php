@@ -32,6 +32,15 @@
                                         @endif
                                     </div>
                                     <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Aditional Cost</label>
+                                            <input type="text" id="aditional_cost" class="form-control" placeholder="Aditional Cost" name="aditional_cost">
+                                        </div>
+                                        @if($errors->has('aditional_cost'))
+                                        <span class="text-danger"> {{ $errors->first('aditional_cost') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 col-12">
                                       <div class="form-group">
                                           <label for="inv_loc_id">Select Country</label>
                                           <select name="inv_loc_id" class="form-control">

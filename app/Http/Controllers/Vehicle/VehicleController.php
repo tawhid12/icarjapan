@@ -93,7 +93,13 @@ class VehicleController extends Controller
             $vehicle->package = $request->package;
             /*$vehicle->v_model_id = $request->v_model_id;
             $vehicle->version = $request->version;*/
-            $vehicle->m3 = $request->b_length * $request->b_width * $request->b_height/*$request->m3*/;
+            $m3 = $request->b_length * $request->b_width * $request->b_height;
+            if ($m3 > 0.5) {
+                $roundedValue = ceil($m3);
+            } else {
+                $roundedValue = floor($m3);
+            }
+            $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
             //$vehicle->v_model = $request->v_model;
             $vehicle->chassis_no = $request->chassis_no;
@@ -337,7 +343,13 @@ class VehicleController extends Controller
             $vehicle->brand_id = $request->brand_id;
             $vehicle->sub_brand_id = $request->sub_brand_id;
             $vehicle->package = $request->package;
-            $vehicle->m3 = $request->b_length * $request->b_width * $request->b_height/*$request->m3*/;
+            $m3 = $request->b_length * $request->b_width * $request->b_height;
+            if ($m3 > 0.5) {
+                $roundedValue = ceil($m3);
+            } else {
+                $roundedValue = floor($m3);
+            }
+            $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
             $vehicle->chassis_no = $request->chassis_no;
             $vehicle->fob = $request->fob;
@@ -569,8 +581,8 @@ class VehicleController extends Controller
 
         // Save the modified image
         $image->save(public_path('uploads/test.jpg'));
-
-        return 'Watermark added successfully.';
+        return true;
+        //return 'Watermark added successfully.';
     }
     public function addWatermarkall()
     {

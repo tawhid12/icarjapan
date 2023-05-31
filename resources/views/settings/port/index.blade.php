@@ -28,6 +28,7 @@
                                 <th scope="col">{{__('Name')}}</th>
                                 <th scope="col">{{__('Inventor Location')}}</th>
                                 <th scope="col">{{__('M3 Charge')}}</th>
+                                <th scope="col">{{__('Aditional Cost')}}</th>
                                 <!-- <th scope="col">{{__('Status')}}</th> -->
                                 <th class="white-space-nowrap">{{__('ACTION')}}</th>
                             </tr>
@@ -39,6 +40,7 @@
                                 <td>{{$p->name}}</td>
                                 <td>{{$p->inv_loc->name}}</td>
                                 <td>{{$p->m3}}</td>
+                                <td>{{$p->aditional_cost}}</td>
                                 <!-- <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td> -->
                                 <td class="white-space-nowrap">
                                     <a href="{{route(currentUser().'.port.edit',encryptor('encrypt',$p->id))}}">

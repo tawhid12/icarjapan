@@ -56,6 +56,7 @@ class PortController extends Controller
             $p=new Port();
             $p->name=$request->name;
             $p->m3=$request->m3;
+            $p->aditional_cost=$request->aditional_cost;
             $p->inv_loc_id=$request->inv_loc_id;
             $p->created_by=currentUserId();
             if($p->save()){
@@ -105,6 +106,7 @@ class PortController extends Controller
         try{
             $p=Port::findOrFail(encryptor('decrypt',$id));
             $p->m3=$request->m3;
+            $p->aditional_cost=$request->aditional_cost;
             $p->inv_loc_id=$request->inv_loc_id;
             $p->updated_by=currentUserId();
             if($p->save())
@@ -145,8 +147,6 @@ class PortController extends Controller
     public function get_m3_charge_by_port_id(Request $request){
         $m3 = Port::where('id',$request->id)->first();
         if($m3)
-        echo $m3->m3;
-        else
-        echo $m3 = 0;
+        echo json_encode($m3);
     }
 }

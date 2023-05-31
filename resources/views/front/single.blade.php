@@ -681,12 +681,16 @@
                         $dis_price = $v->price*$v->discount/100;
                         $price = $actual_price - $dis_price;
                         @endphp
+                        @if($price > 0)
                         <p>Price :</p>
                         <p>USD {{$price}}</p>
                         <div class="product-card-currency">
                           <p>Approx.</p>
-                          <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                          <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                         </div>
+                        @else
+                        <p>Ask</p>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -826,7 +830,7 @@
                         </tr>
                         <tr>
                           <th scope="row">Manufacture Year</th>
-                          <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->manu_year))->format('Y')}}</td>
+                          <td>{{$v->manu_year}}</td>
                           <th scope="row">Registration Year</th>
                           <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}</td>
                         </tr>
@@ -1083,7 +1087,7 @@
                             <p>USD 13,000.00</p>
                             <div class="product-card-currency">
                               <p>Approx.</p>
-                              <p>BDT 1,13,000.00</p>
+                              <p>{{$location['geoplugin_currencyCode']}} 1,13,000.00</p>
                             </div>
                           </div>
                         </div>
@@ -1142,10 +1146,12 @@
                           $dis_price = $v->price*$v->discount/100;
                           $price_after_dis = ($actual_price-$dis_price);
                           @endphp
+                          @if($price_after_dis > 0)
                           <tr>
                             <th scope="row" class="fs-6">Vehicle Price</th>
-                            <td><strong class="fs-5">USD {{$price_after_dis}}</strong></td>
+                            <td><strong class="fs-5 veh-pr"></strong></td>
                           </tr>
+                          @endif
                           @if($dis_price > 0)
                           <tr>
                             <th scope="row"></th>
@@ -1156,11 +1162,13 @@
                             <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
                           </tr>
                           @endif
+                          @if($price_after_dis > 0)
                           <tr>
                             <th scope="row">Approx.</th>
-                            <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
+                            <td>{{$location['geoplugin_currencyCode']}} {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
                             <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
                           </tr>
+                          @endif
                           <tr>
                             <th scope="row">Destination Country</th>
                             <td>
@@ -1244,7 +1252,7 @@
                           </tr>
                           <tr class="tr-hide">
                             <th scope="row"></th>
-                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*$des_country->inspection)}}</td>
+                            <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->inspection)}}</td>
                           </tr>
                           <tr>
                             <th scope="row">Insurance<input type="checkbox" class="mx-2 chk" value="{{$des_country->insurance}}"></th>
@@ -1252,7 +1260,7 @@
                           </tr>
                           <tr class="tr-hide">
                             <th scope="row"></th>
-                            <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*$des_country->insurance)}}</td>
+                            <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->insurance)}}</td>
                           </tr>
                           <tr>
                             <th scope="row"></th>
@@ -1283,7 +1291,7 @@
                     </div>
                   </form>
                 </div>
-                @if(currentUser() == 'user')
+                {{--@if(currentUser() == 'user')--}}
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
                   <div class="p-2 customer-highlights text-center">
@@ -1294,15 +1302,19 @@
                     <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
                       @csrf
                       <input name="vehicle_id" type="hidden" value="{{$v->id}}">
+                      @if(currentUserId())
                       <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @else
+                      <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @endif
                     </form>
-                    <!-- <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Buy Now</a> -->
+                    
                     <div class="my-3">
                       <img src="./resource/img/atm.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                @endif
+                {{--@endif--}}
                 <!-- Inquiry Form -->
                 <div class="modal fade" id="inquiry" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
                   <div class="modal-dialog">
@@ -1389,8 +1401,13 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-body">
-                        <div class="d-flex justify-content-center">
-                          <a href="{{route('login')}}" class="btn btn-primary">Login</a>
+                        <p class="m-0 text-center">
+                        Login is required before making a reservation.(Login >>)
+                        Please sign up if you don't have an account yet.(Create Account >>)
+                        </p>
+                        <div class="d-flex justify-content-center mt-2">
+                       
+                          <a href="{{route('login')}}" class="btn btn-primary me-2">Login</a>
                           <a href="{{route('register')}}" class="btn btn-secondary">Register</a>
                         </div>
                       </div>
@@ -1541,17 +1558,17 @@
       $('#my-form').submit();
     });
 
-    var convert_price = parseFloat($('.convert_price').val());
-    var insurance = "{{$des_country->insurance}}";
-    var inspection = "{{$des_country->inspection}}";
+    var convert_price = parseFloat($('.convert_price').val())?parseFloat($('.convert_price').val()):0;
+    var insurance = "{{$des_country->insurance}}"?"{{$des_country->insurance}}":0;
+    var inspection = "{{$des_country->inspection}}"?"{{$des_country->inspection}}":0;
     var m3_value  = "{{ $v->m3 }}";
     var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
 
     function roro(){
       $('.tr-hide').show();
       $('.van_txt').text('N/A');
-      $('.ins_txt').text(inspection);
-      $('.insu_txt').text(insurance);
+      $('.ins_txt').text('USD '+inspection);
+      $('.insu_txt').text('USD '+insurance);
       m3Charge();
     }
     function container(){
@@ -1560,7 +1577,12 @@
       $('.van_txt').text('Ask');
       $('.ins_txt').text('Ask');
       $('.insu_txt').text('Ask');
-      $('.total').text('Approx. BDT ' + (convert_price));
+      if(convert_price >0){
+        $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " + (convert_price));
+      }else{
+        $('.total').text('Ask');
+      }
+      
     }
 
     var shipment = $('input[name="shipment"]:checked').val();
@@ -1586,18 +1608,30 @@
         $.ajax({
           url: "{{route('m3Charge')}}",
           type: 'GET',
+          dataType: 'json',
           data: {
             id: des_port_id,
           },
-          success: function(m3) {
-            console.log(m3)
-            if (m3) {
+          success: function(res) {
+            console.log(res)
+            if (res) {
               /*M3 Calculation */
-              var charge = m3
+              var charge = res.m3
               var value = "{{ $v->m3 }}";
+              var ad_cost = parseFloat(res.aditional_cost);
               $('.fr_txt').text('USD ' + charge * value);
               $('.fr_val').val(charge * value);
-              $('.total').text(((charge * value * currency_rate) + convert_price));
+              $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " +(Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
+              /* To Show Vehicle Price */
+              var v_price = parseFloat("{{$price_after_dis}}");
+              $('.veh-pr').text('USD '+(v_price+ad_cost));
+            }else{
+              $('.fr_val').val(0);
+              $('.fr_txt').text('USD 0');
+              $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " + convert_price + arseFloat(ad_cost* currency_rate));
+              /* To Show Vehicle Price */
+              var v_price = "{{$price_after_dis}}";
+              $('.veh-pr').text('USD '+(v_price+ad_cost));
             }
           }
         });

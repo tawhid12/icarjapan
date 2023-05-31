@@ -74,7 +74,7 @@ th,td{
                             </tr>
                             <tr>
                                 <th class="bg" scope="row">Manufacture Year</th>
-                                <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->manu_year))->format('Y')}}</td>
+                                <td>{{$v->manu_year}}</td>
                                 <th class="bg" scope="row">Registration Year</th>
                                 <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}</td>
                             </tr>

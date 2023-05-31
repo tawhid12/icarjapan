@@ -775,6 +775,83 @@
 
         <!-- Vehicles -->
         @forelse($vehicles as $v)
+
+                    <!-- Inquiry Form -->
+                    <div class="modal fade" id="inquiry" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-10">
+                            <p>{{$v->fullName}}</p>
+                            <p>Stock Id: {{$v->stock_id}} </p>
+                          </div>
+                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('user.inquiry.store')}}">
+                            @csrf
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Name <span class="text-danger">*</span></label>
+                                  <input type="text" id="name" class="form-control" value="{{ old('name')}}" name="name" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Country <span class="text-danger">*</span></label>
+                                  <select name="country_id" required class="form-control">
+                                    <option value="">Select</option>
+                                    @forelse($countries as $c)
+                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                    @empty
+                                    @endforelse
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">City <span class="text-danger">*</span></label>
+                                  <input type="text" id="city" class="form-control" value="{{ old('city')}}" name="city" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Email <span class="text-danger">*</span></label>
+                                  <input type="text" id="email" class="form-control" value="{{ old('email')}}" name="email" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="userName">Phone <span class="text-danger">*</span></label>
+                                  <input type="text" id="phone" class="form-control" value="{{ old('phone')}}" name="phone" required>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="remarks">Remarks <span class="text-danger">*</span></label>
+                                  <textarea class="form-control" name="remarks" required>{{ old('remarks')}}</textarea>
+                                </div>
+                              </div>
+                              <small class="text-danger">Please click "Inquiry" to receive your quote from us. You need to provide us with your contact details to receive a free quote.</small>
+                              <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember-me">
+                                <label class="form-check-label" for="remember-me">Remember me</label>
+                              </div>
+
+
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Close Inquiry Form-->
+
         <div class="single-vehicle p-2 2my-3">
           <div class="row">
 
@@ -908,4 +985,7 @@
   </div>
   </div>
 </main>
+
+
+    
 @endsection

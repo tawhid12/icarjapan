@@ -200,6 +200,7 @@ class FrontController extends Controller
     }
     public function search_by_data(Request $request)
     {
+        $countries = Country::all();
         if(empty($request->filled('brand')) || empty($request->filled('sub_brand')) ){
             $vehicles = DB::table('vehicles')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
@@ -207,7 +208,7 @@ class FrontController extends Controller
             ->whereNull('r_status')->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
-            return view('front.search',compact('vehicles'));
+            return view('front.search',compact('vehicles','countries'));
         }
         elseif ($request->filled('brand') && !$request->filled('sub_brand')) {
             
@@ -217,7 +218,7 @@ class FrontController extends Controller
                 ->where('brand_id', $brand->id)
                 ->groupBy('cat')
                 ->get();
-            return view('front.brand', compact('brand', 'sub_prefix'));
+            return view('front.brand', compact('brand', 'sub_prefix','countries'));
         }
         elseif($request->filled('brand') && $request->filled('sub_brand')){
            
