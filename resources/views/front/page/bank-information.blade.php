@@ -35,11 +35,11 @@
                 </tr>
                 <tr>
                     <th>Branch Code & Name</th>
-                    <td>{{$com_info->branch_name}} {{$com_info->bank_code}}</td>
+                    <td>{{$com_info->bank_code}} {{$com_info->branch_name}}</td>
                 </tr>
                 <tr>
-                    <th>Account Number</th>
-                    <td>{{$com_info->account_number}}</td>
+                    <th>Account Name</th>
+                    <td>{{$com_info->account_name}}</td>
                 </tr>
                 <tr>
                     <th>Account Number</th>
