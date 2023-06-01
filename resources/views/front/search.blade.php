@@ -630,7 +630,7 @@
               <div class="custom-border-bottom-dark my-2"></div>
               <div class="col-sm-12 mb-3">
                 <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
-                <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">Sbt Stocks</label>
+                <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
 
                 <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
                 <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>

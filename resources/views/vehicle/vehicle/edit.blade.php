@@ -680,7 +680,11 @@
         }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
+        }).on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            $(this).trigger('change');
         });
+        
 
         /*Brand|Subbrand */
         $('#brand_id').on('change', function() {

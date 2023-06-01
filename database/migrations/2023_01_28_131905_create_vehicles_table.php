@@ -47,7 +47,7 @@ return new class extends Migration
             $table->integer('fuel_id')->nullable();
             $table->integer('ext_color_id')->nullable();
             $table->integer('int_color_id')->nullable();
-            $table->integer('b_length')->comment('body_length')->nullable();
+            $table->double('b_length',8,2)->comment('body_length')->nullable();
             //$table->integer('truck_size')->comment('truck size')->nullable();
             $table->integer('max_loading_capacity')->nullable();
             $table->string('e_size')->comment('engine size cc')->nullable();

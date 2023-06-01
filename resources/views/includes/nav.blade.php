@@ -17,8 +17,8 @@
                   <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <p class="text-white mb-2"><strong>Today's Deal</strong></p>
                     <div class="list-group list-group-flush">
-                      <a href="" class="list-group-item list-group-item-action">SBT Buyer's Selection</a>
-                      <a href="" class="list-group-item list-group-item-action">SBT Outlet Mall</a>
+                      <a href="" class="list-group-item list-group-item-action">ICAR JAPAN Buyer's Selection</a>
+                      <a href="" class="list-group-item list-group-item-action">ICAR JAPAN Outlet Mall</a>
                     </div>
                     <p class="text-white mb-2"><strong>Search By Price</strong></p>
                     <div class="list-group list-group-flush">

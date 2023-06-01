@@ -1,5 +1,22 @@
 @extends('layout.landing')
 @section('pageTitle','ICARJAPAN')
+@section('meta')
+<meta name="description" content="iCar Japan is the biggest used car marketplace from Japan. More than 30 brands such as Toyota, Nissan, Honda, any kind of SUV, trucks, buses etc. We ensure high quality Japanese used cars for our customers. Worldwide shipping.">
+<meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
+best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback, suv">
+<meta property="og:title" content="ICAR JAPAN">
+<meta property="og:description" content="iCar Japan is the biggest used car marketplace from Japan. More than 30 brands such as Toyota, Nissan, Honda, any kind of SUV, trucks, buses etc. We ensure high quality Japanese used cars for our customers. Worldwide shipping.">
+<meta property="og:site_name" content="ICAR JAPAN">
+<meta property="fb:app_id" content="800032724610621" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{asset('front/img/header-logo.png')}}">
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="120" />
+<meta property="og:image:alt" content="icar japan" />
+<meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
+best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback, suv">
+@endsection
 @section('pageSubTitle','HOME')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
@@ -312,7 +329,7 @@
                   <p>Customer Review</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
-                  <p>2,337 Reviews</p>
+                  <p><!--2,337--> Reviews</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-end">
                   <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
@@ -322,9 +339,9 @@
             <div class="review-user-body my-3">
               <div class="row">
                 <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
+                  {{--<img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />--}}
                 </div>
-                <div class="col-sm-6 review-user">
+                {{--<div class="col-sm-6 review-user">
                   <div class="d-flex">
                     <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
                     <div>
@@ -333,86 +350,14 @@
                     </div>
                   </div>
                   <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
+                  <p>Wonderful car and amazing price. Thanks ICAR JAPAN</p>
+                </div>--}}
+                {{--<div class="col-sm-3 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
                     <p>Toyota Premio</p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
+                </div>--}}
               </div>
             </div>
           </div>

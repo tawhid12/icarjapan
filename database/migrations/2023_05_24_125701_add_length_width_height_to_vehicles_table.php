@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->integer('b_width')->after('b_length')->nullable();
-            $table->integer('b_height')->after('b_width')->nullable();
+            $table->double('b_width',8,2)->after('b_length')->nullable();
+            $table->double('b_height',8,2)->after('b_width')->nullable();
         });
     }
 

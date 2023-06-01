@@ -94,10 +94,13 @@ class VehicleController extends Controller
             /*$vehicle->v_model_id = $request->v_model_id;
             $vehicle->version = $request->version;*/
             $m3 = $request->b_length * $request->b_width * $request->b_height;
-            if ($m3 > 0.5) {
+            $rounded = floor($m3); // Get the integer part of the value
+            $decimal = $m3 - $rounded; // Get the decimal part of the value
+            if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
-            } else {
-                $roundedValue = floor($m3);
+            }
+            else{
+                $roundedValue = $m3;
             }
             $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
@@ -128,7 +131,7 @@ class VehicleController extends Controller
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
             //$vehicle->year = $request->year;
-            $vehicle->reg_year = Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d');
+            $vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;    
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->inv_port_id = $request->inv_port_id;
@@ -203,6 +206,23 @@ class VehicleController extends Controller
                         $vehicleImagesArr['vehicle_id'] = $vehicle->id;
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
+
+                        $image = Image::make(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
+                        // Load the watermark image
+                        $watermark = Image::make(public_path('uploads/watermark.png'));
+                        
+                        // Increase the size of the watermark image
+                        $watermark->resize(1000, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+
+                        // Apply the watermark to the original image
+                        $image->insert($watermark, 'top-left', 0, 0);
+
+                        // Save the modified image
+                        $image->save(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
+                        //return true;
+                        //return 'Watermark added successfully.';
                     }
 
                     /*if ($request->hasFile('image')) {
@@ -344,10 +364,13 @@ class VehicleController extends Controller
             $vehicle->sub_brand_id = $request->sub_brand_id;
             $vehicle->package = $request->package;
             $m3 = $request->b_length * $request->b_width * $request->b_height;
-            if ($m3 > 0.5) {
+            $rounded = floor($m3); // Get the integer part of the value
+            $decimal = $m3 - $rounded; // Get the decimal part of the value
+            if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
-            } else {
-                $roundedValue = floor($m3);
+            }
+            else{
+                $roundedValue = $m3;
             }
             $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
@@ -374,7 +397,7 @@ class VehicleController extends Controller
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
 
-            $vehicle->reg_year = Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d');
+            $vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->inv_port_id = $request->inv_port_id;
@@ -438,6 +461,23 @@ class VehicleController extends Controller
                         $vehicleImagesArr['vehicle_id'] = $vehicle->id;
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
+
+                        $image = Image::make(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
+                        // Load the watermark image
+                        $watermark = Image::make(public_path('uploads/watermark.png'));
+
+                        // Increase the size of the watermark image
+                        $watermark->resize(1000, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+
+                        // Apply the watermark to the original image
+                        $image->insert($watermark, 'top-left', 0, 0);
+
+                        // Save the modified image
+                        $image->save(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
+                        //return true;
+                        //return 'Watermark added successfully.';
                     }
                 }
                 /*== Vehicle Country Wise */
@@ -565,7 +605,7 @@ class VehicleController extends Controller
     public function addWatermark()
     {
         // Load the original image
-        $image = Image::make(public_path('uploads/vehicle_images/test.jpg'));
+        //$image = Image::make(public_path('uploads/vehicle_images/test.jpg'));
         //print_r($image);die;
 
         // Load the watermark image

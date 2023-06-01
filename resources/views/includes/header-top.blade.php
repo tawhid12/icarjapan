@@ -29,11 +29,11 @@
             </div>
             <div class="col-6 col-md-2 text-center">
               <p><span><i class="bi bi-headset"></i></span>Support</p>
-              <select class="form-select" id="lang_id" aria-label="Default select example">
+              {{--<select class="form-select" id="lang_id" aria-label="Default select example">
                 <option value=""></option>
                 <option value="1" selected>EN</option>
                 <option value="2">BN</option>
-              </select>
+              </select>--}}
             </div>
             <!-- <div class="col-sm-1 col-lg-1 mb-3">
               <select class="form-select" id="country_id" aria-label="Default select example">

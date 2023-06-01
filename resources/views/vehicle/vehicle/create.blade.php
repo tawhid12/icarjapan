@@ -710,13 +710,16 @@
             singleDatePicker: true,
             startDate: moment().format('DD/MM/YYYY'),
             showDropdowns: true,
-            autoUpdateInput: true,
+            autoUpdateInput: false,
             locale: {
                 format: 'DD/MM/YYYY'
             }
         }).on('changeDate', function(e) {
             var date = moment(e.date).format('YYYY/MM/DD');
             $(this).val(date);
+        }).on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            $(this).trigger('change');
         });
 
         /*Brand|Subbrand */
