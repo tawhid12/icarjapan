@@ -271,7 +271,17 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="reg_year">Registration Year</label>
-                                        <input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year">
+                                        <select name="reg_year" class="form-control js-example-basic-single">
+                                            <option value="">Select Registration Year</option>
+                                            @php
+                                            for($i=date('Y');$i>=1980;$i--){
+                                            @endphp
+                                            <option value="{{$i}}">{{$i}}</option>
+                                            @php
+                                            }
+                                            @endphp
+                                        </select>
+                                        <!--<input type="text" id="reg_year" value="{{old('reg_year')}}" class="form-control" name="reg_year">-->
                                     </div>
                                 </div>
 
@@ -706,7 +716,7 @@
         $('.js-example-basic-multiple').select2({
             placeholder: "Select Country"
         });
-        $('#reg_year').daterangepicker({
+        /*$('#reg_year').daterangepicker({
             singleDatePicker: true,
             startDate: moment().format('DD/MM/YYYY'),
             showDropdowns: true,
@@ -720,7 +730,7 @@
         }).on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
             $(this).trigger('change');
-        });
+        });*/
 
         /*Brand|Subbrand */
         $('#brand_id').on('change', function() {

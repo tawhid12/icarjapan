@@ -55,7 +55,7 @@ return new class extends Migration
             $table->string('e_code')->comment('engine code')->nullable();
             //$table->year('year')->comment('year')->nullable();
             //$table->string('year_count')->comment('year count value')->nullable();
-            $table->date('reg_year')->comment('REGISTRATION YEAR/MONTH')->nullable();
+            $table->year('reg_year')->comment('REGISTRATION YEAR/MONTH')->nullable();
             $table->year('manu_year')->comment('MANUFACTURE YEAR/MONTH')->nullable();
             $table->integer('inv_locatin_id')->nullable();;
             $table->tinyInteger('cd_player')->comment('1 for yes 0 for no')->nullable();

@@ -297,7 +297,17 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="reg_year">Registration Year</label>
-                                        <input type="text" id="reg_year" class="form-control" placeholder="dd/mm/yyyy" name="reg_year">
+                                        <select name="reg_year" class="form-control js-example-basic-single">
+                                            <option value="">Select Registration Year</option>
+                                            @php
+                                            for($i=date('Y');$i>=1980;$i--){
+                                            @endphp
+                                            <option value="{{$i}}" @if($v->reg_year == $i) selected @endif>{{$i}}</option>
+                                            @php
+                                            }
+                                            @endphp
+                                        </select>
+                                        <!--<input type="text" id="reg_year" class="form-control" placeholder="dd/mm/yyyy" name="reg_year">-->
                                     </div>
                                 </div>
 
@@ -665,7 +675,7 @@
         $('.js-example-basic-multiple').select2({
             placeholder: "Select Country Arival"
         });
-        if ('{{$v->reg_year}}')
+        /*if ('{{$v->reg_year}}')
             date = '{{$v->reg_year}}'
         else
             date = new Date();
@@ -683,7 +693,7 @@
         }).on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
             $(this).trigger('change');
-        });
+        });*/
         
 
         /*Brand|Subbrand */

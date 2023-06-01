@@ -39,12 +39,12 @@
                                                 <input type="text" id="bank_name" class="form-control" value="{{ old('bank_name',$com_acc_info->bank_name)}}" name="bank_name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-12">
+                                        <!-- <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="c_name">Account Name<span class="text-danger">*</span></label>
                                                 <input type="text" id="account_name" class="form-control" value="{{ old('account_name',$com_acc_info->account_name)}}" name="account_name">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="c_name">Branch Name<span class="text-danger">*</span></label>

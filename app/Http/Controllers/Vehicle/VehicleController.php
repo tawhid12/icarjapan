@@ -130,8 +130,8 @@ class VehicleController extends Controller
             $vehicle->e_size = $request->e_size;
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
-            //$vehicle->year = $request->year;
-            $vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;    
+            $vehicle->reg_year = $request->reg_year;
+            //$vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;    
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->inv_port_id = $request->inv_port_id;
@@ -396,8 +396,8 @@ class VehicleController extends Controller
             $vehicle->e_size = $request->e_size;
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
-
-            $vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;
+            $vehicle->reg_year = $request->reg_year;
+            //$vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
             $vehicle->inv_port_id = $request->inv_port_id;

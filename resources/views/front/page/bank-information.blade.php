@@ -34,13 +34,13 @@
                     <td>{{$com_info->swift_code}}</td>
                 </tr>
                 <tr>
-                    <th>Branch Code & Name</th>
-                    <td>{{$com_info->bank_code}} {{$com_info->branch_name}}</td>
+                    <th>Branch Name</th>
+                    <td>{{--$com_info->bank_code--}} {{$com_info->branch_name}}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>Account Name</th>
                     <td>{{$com_info->account_name}}</td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th>Account Number</th>
                     <td>{{$com_info->account_number}}</td>
@@ -50,7 +50,7 @@
                     <td>{{$com_info->beni_name}}</td>
                 </tr>
                 <tr>
-                    <th>Company Address</th>
+                    <th>Beneficiaries Address</th>
                     <td>{{$com_info->c_address}}</td>
                 </tr>
             </table>
