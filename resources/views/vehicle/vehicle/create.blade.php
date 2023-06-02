@@ -678,17 +678,7 @@
     <div class="col-md-6 col-12 mt-3">
         <div class="form-group">
             <h4>Gallery Image</h4>
-            <input type="file" id="image[]" class="form-control" name="image[]" multiple>
-            @if ($errors->any())
-            <div class="">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li><span class="text-danger"> {{ $error }}</span></li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-
+            <input type="file" id="image[]" class="form-control" name="image[]" multiple accept="image/*">
         </div>
         {{--<div class="form-group mt-3">
                     <label for="name">Video Link</label>

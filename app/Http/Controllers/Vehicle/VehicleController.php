@@ -98,8 +98,7 @@ class VehicleController extends Controller
             $decimal = $m3 - $rounded; // Get the decimal part of the value
             if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
-            }
-            else{
+            } else {
                 $roundedValue = $m3;
             }
             $vehicle->m3 = $roundedValue/*$request->m3*/;
@@ -185,47 +184,52 @@ class VehicleController extends Controller
 
             if ($vehicle->save()) {
                 if ($request->hasFile('image')) {
-                    // Define custom error messages
-                    $customMessages = [
-                        'image.*.required' => 'Please select at least one image.',
-                        'image.*.image' => 'Invalid image format.',
-                        'image.*.mimes' => 'Allowed image formats: jpeg, png, jpg, gif.',
-                        'image.*.max' => 'The maximum allowed file size is 2MB.',
-                    ];
-                    $validator = Validator::make($request->all(), [
-                        'image.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                    ], $customMessages);
-
-                    if ($validator->fails()) {
-                        return redirect()->back()->withErrors($validator)->withInput();
-                    }
-
                     $images = $request->file('image');
-                    foreach ($images as  $val) {
-                        $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
-                        $vehicleImagesArr['vehicle_id'] = $vehicle->id;
-                        $vehicleImagesArr['created_at'] = Carbon::now();
-                        DB::table('vehicle_images')->insert($vehicleImagesArr);
+                    foreach ($images as  $index => $val) {
+                        if ($val->isValid()) {
+                            $validator = Validator::make(
+                                ['image' => $val],
+                                ['image' => 'required|image|mimes:jpeg,png,jpg|max:2048'],
+                                [
+                                    'image.required' => 'Please select at least one image.',
+                                    'image.image' => 'Invalid image format.',
+                                    'image.mimes' => 'Allowed image formats: jpeg, png, jpg.',
+                                    'image.max' => 'The maximum allowed file size is 2MB.',
+                                ]
+                            );
 
-                        $image = Image::make(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
-                        // Load the watermark image
-                        $watermark = Image::make(public_path('uploads/watermark.png'));
-                        
-                        // Increase the size of the watermark image
-                        $watermark->resize(1000, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
+                            if ($validator->fails()) {
+                                $failedUploads[] = [
+                                    'file' => 'File Name: ' . $val->getClientOriginalName(),
+                                    'error' => $validator->errors()->first('image'),
+                                ];
+                                continue; // Skip this iteration if validation fails
+                            }
 
-                        // Apply the watermark to the original image
-                        $image->insert($watermark, 'top-left', 0, 0);
+                            $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
+                            $vehicleImagesArr['vehicle_id'] = $vehicle->id;
+                            $vehicleImagesArr['created_at'] = Carbon::now();
+                            DB::table('vehicle_images')->insert($vehicleImagesArr);
 
-                        // Save the modified image
-                        $image->save(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
-                        //return true;
-                        //return 'Watermark added successfully.';
-                    }
+                            $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            // Load the watermark image
+                            $watermark = Image::make(public_path('uploads/watermark.png'));
 
-                    /*if ($request->hasFile('image')) {
+                            // Increase the size of the watermark image
+                            $watermark->resize(1000, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+
+                            // Apply the watermark to the original image
+                            $image->insert($watermark, 'top-left', 0, 0);
+
+                            // Save the modified image
+                            $image->save(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            //return true;
+                            //return 'Watermark added successfully.';
+                        }
+
+                        /*if ($request->hasFile('image')) {
                     $images = $request->file('image');
                     $imagePaths = [];
                     foreach ($images as $image) {
@@ -235,7 +239,7 @@ class VehicleController extends Controller
                     foreach ($imagePaths as $imagePath) {
                         $image = Image::make(storage_path('app/' . $imagePath));*/
 
-                    /*$image->text('ICAR JAPAN', 100, 100, function($font) {
+                        /*$image->text('ICAR JAPAN', 100, 100, function($font) {
                             $font->file('path/to/font.ttf');
                             $font->size(24);
                             $font->color('#ffffff');
@@ -243,8 +247,8 @@ class VehicleController extends Controller
                             $font->valign('bottom');
                         });*/
 
-                    //$image->resize(640, 480);
-                    /*$image->resize(640, null, function ($constraint) {
+                        //$image->resize(640, 480);
+                        /*$image->resize(640, null, function ($constraint) {
                             $constraint->aspectRatio();
                         });
                         $image->fit(640, 480);
@@ -252,12 +256,13 @@ class VehicleController extends Controller
                         \Storage::delete($imagePath);
                     }*/
 
-                    /*foreach($images as  $val){
+                        /*foreach($images as  $val){
                         $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
                         $vehicleImagesArr['vehicle_id'] = $vehicle->id;
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
                     }*/
+                    }
                 }
 
 
@@ -343,7 +348,6 @@ class VehicleController extends Controller
         $v_images = DB::table('vehicle_images')->where('vehicle_id', encryptor('decrypt', $id))->get();
         $vehicle_avaliable_country = array_values(DB::table('countries_vehicles')->where('vehicle_id', encryptor('decrypt', $id))->pluck('country_id')->toArray());
         $new_arivals = array_values(DB::table('new_arivals')->where('vehicle_id', encryptor('decrypt', $id))->pluck('country_id')->toArray());
-
         return view('vehicle.vehicle.edit', compact('doors', 'seats', 'cons', 'vehicle_avaliable_country', 'sub_brands', 'new_arivals', 'countries', 'v_images', 'v', 'body_types', 'drive_types', 'inv_loc', 'sub_body_types', 'brands', 'fuel', 'colors', 'trans', 'vehicle_models'));
     }
 
@@ -368,8 +372,7 @@ class VehicleController extends Controller
             $decimal = $m3 - $rounded; // Get the decimal part of the value
             if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
-            }
-            else{
+            } else {
                 $roundedValue = $m3;
             }
             $vehicle->m3 = $roundedValue/*$request->m3*/;
@@ -452,32 +455,54 @@ class VehicleController extends Controller
 
             /*Short Name */
             $vehicle->name = DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " . $request->manu_year;
-
+            $failedUploads = [];
             if ($vehicle->save()) {
                 if ($request->hasFile('image')) {
                     $images = $request->file('image');
-                    foreach ($images as  $val) {
-                        $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
-                        $vehicleImagesArr['vehicle_id'] = $vehicle->id;
-                        $vehicleImagesArr['created_at'] = Carbon::now();
-                        DB::table('vehicle_images')->insert($vehicleImagesArr);
+                    foreach ($images as $val) {
+                        if ($val->isValid()) {
+                            $validator = Validator::make(
+                                ['image' => $val],
+                                ['image' => 'required|image|mimes:jpeg,png,jpg|max:2048'],
+                                [
+                                    'image.required' => 'Please select at least one image.',
+                                    'image.image' => 'Invalid image format.',
+                                    'image.mimes' => 'Allowed image formats: jpeg, png, jpg.',
+                                    'image.max' => 'The maximum allowed file size is 2MB.',
+                                ]
+                            );
 
-                        $image = Image::make(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
-                        // Load the watermark image
-                        $watermark = Image::make(public_path('uploads/watermark.png'));
+                            if ($validator->fails()) {
+                                $failedUploads[] = [
+                                    'file' => 'File Name: ' . $val->getClientOriginalName(),
+                                    'error' => $validator->errors()->first('image'),
+                                ];
+                                continue; // Skip this iteration if validation fails
+                            }
 
-                        // Increase the size of the watermark image
-                        $watermark->resize(1000, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
 
-                        // Apply the watermark to the original image
-                        $image->insert($watermark, 'top-left', 0, 0);
+                            $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
+                            $vehicleImagesArr['vehicle_id'] = $vehicle->id;
+                            $vehicleImagesArr['created_at'] = Carbon::now();
+                            DB::table('vehicle_images')->insert($vehicleImagesArr);
 
-                        // Save the modified image
-                        $image->save(public_path('uploads/vehicle_images/'.$vehicleImagesArr['image']));
-                        //return true;
-                        //return 'Watermark added successfully.';
+                            $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            // Load the watermark image
+                            $watermark = Image::make(public_path('uploads/watermark.png'));
+
+                            // Increase the size of the watermark image
+                            $watermark->resize(1000, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+
+                            // Apply the watermark to the original image
+                            $image->insert($watermark, 'top-left', 0, 0);
+
+                            // Save the modified image
+                            $image->save(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            //return true;
+                            //return 'Watermark added successfully.';
+                        }
                     }
                 }
                 /*== Vehicle Country Wise */
@@ -528,6 +553,12 @@ class VehicleController extends Controller
                         DB::rollBack();
                     }
                 }
+                if (count($failedUploads) > 0) {
+                    return redirect()->route(currentUser() . '.vehicle.edit', encryptor('encrypt', $vehicle->id))->with('failedUploads', $failedUploads);
+                }
+
+
+
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -547,7 +578,7 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         try {
-            $vehicle = Vehicle::find(encryptor('decrypt', $id));
+            /*$vehicle = Vehicle::find(encryptor('decrypt', $id));
             $vehicle_images = DB::table('vehicle_images')->where('vehicle_id', $id)->get();
             foreach ($vehicle_images as $v) {
                 if (File::exists(public_path($v->image))) {
@@ -556,10 +587,12 @@ class VehicleController extends Controller
             }
             DB::table('vehicle_images')->where('vehicle_id', $id)->delete();
             if ($vehicle->delete()) {
+                DB::table('new_arivals')->where('vehicle_id', $id)->delete();
+                DB::table('countries_vehicles')->where('vehicle_id', $id)->delete();
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
-            } else {
+            } else {*/
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
-            }
+            //}
         } catch (Exception $e) {
             //dd($e);
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -588,7 +621,7 @@ class VehicleController extends Controller
                 DB::table('vehicle_images')->delete($id);
                 return redirect()->back()->with('success', "Vehicle Image Deleted successfully");
             } else {
-                return redirect()->route('vehicle.index')->with('error', "Something Went Worng!");
+                return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         }
     }
@@ -599,13 +632,13 @@ class VehicleController extends Controller
         if (DB::table('vehicle_images')->where('id', $id)->update(['is_cover_img' => 1])) {
             return redirect()->back()->with('success', "Vehicle Image Deleted successfully");
         } else {
-            return redirect()->route('vehicle.index')->with('error', "Something Went Worng!");
+            return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
     }
     public function addWatermark()
     {
         // Load the original image
-        //$image = Image::make(public_path('uploads/vehicle_images/test.jpg'));
+        $image = Image::make(public_path('uploads/vehicle_images/test.jpg'));
         //print_r($image);die;
 
         // Load the watermark image
@@ -661,4 +694,23 @@ class VehicleController extends Controller
 
         return 'Watermark added successfully.';
     }
+
+        /*
+    $files = DB::table('vehicle_images')->pluck('image'); // Retrieve all file names from the database
+        $directory = public_path('uploads/vehicle_images');
+        foreach ($files as $file) {
+            $filePath = $directory . '/' . $file;
+        
+            if (File::exists($filePath)) {
+                // The file exists in the directory
+                echo "File {$file} exists."."<br>";
+            } else {
+                // The file doesn't exist in the directory
+                echo "File {$file} does not exist.";
+                DB::table('vehicle_images')->where('image', $file)->delete();
+
+            }
+        }
+    
+    */
 }

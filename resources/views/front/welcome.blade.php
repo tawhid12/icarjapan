@@ -63,7 +63,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <!-- left row 1 -->
         <div class="left-row-1 mb-3">
           <a href="#">
-            <img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />
+            <!--<img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />-->
           </a>
         </div>
         <!-- left row 2 -->
@@ -435,7 +435,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <!-- right row 2 -->
           <div class="right-row-2 mb-3">
             <a href="#">
-              <img class="img-fluid" src="{{asset('front/img/Shipping-Shedule.png')}}" alt="" />
+              <!--<img class="img-fluid" src="{{asset('front/img/Shipping-Shedule.png')}}" alt="" />-->
             </a>
           </div>
           <!-- right row 3 -->

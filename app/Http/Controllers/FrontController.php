@@ -69,8 +69,8 @@ class FrontController extends Controller
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')
             ->where('new_arivals.country_id', $countryName->id)
-            ->orWhereNotNull('new_arivals.country_id')
-            ->inRandomOrder()->take(10)->get();
+            ->orWhereNull('new_arivals.country_id')->orderBy('vehicles.id','desc')->get();
+            //->inRandomOrder()->take(10);
         //print_r($new_arivals);die;
         $country_price_range = DB::table('countries')->select('afford_range', 'high_grade_range')->where('id', $countryName->id)->first();
 
@@ -83,7 +83,8 @@ class FrontController extends Controller
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')
             ->where('countries_vehicles.country_id', $countryName->id)
-            ->where('price', '<=', $country_price_range->afford_range)->inRandomOrder()->take(10)->get();
+            ->where('price', '<=', $country_price_range->afford_range)->orderBy('vehicles.id','desc')->get();
+            //->inRandomOrder()->take(10)
 
         /*==High Grade Vehicle==*/
         $high_grade_by_country = DB::table('vehicles')
@@ -93,7 +94,8 @@ class FrontController extends Controller
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')
             ->where('countries_vehicles.country_id', $countryName->id)
-            ->where('price', '>=', $country_price_range->high_grade_range)->inRandomOrder()->take(10)->get();
+            ->where('price', '>=', $country_price_range->high_grade_range)->orderBy('vehicles.id','desc')->get();
+            //->inRandomOrder()->take(10)
 
         $vehicles = Vehicle::latest()->take(10)->get();
         /*=Most Viewed Vehicle in Bangladesh==*/
@@ -103,7 +105,8 @@ class FrontController extends Controller
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('vehicles.r_status')
-            ->where('most_views.country_id', $countryName->id)->inRandomOrder()->take(10)->get();
+            ->where('most_views.country_id', $countryName->id)->orderBy('vehicles.id','desc')->get();
+            //->inRandomOrder()->take(10)
         //print_r($most_views);die;
 
         $countries = DB::table('countries')

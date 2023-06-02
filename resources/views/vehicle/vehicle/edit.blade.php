@@ -159,7 +159,7 @@
                                             <option value="">Select</option>
                                             @if(count($seats))
                                             @foreach($seats as $s)
-                                            <option value="{{ $s->id}}" @if($v->door_id == $s->id) selected @endif>{{$s->name}}</option>
+                                            <option value="{{ $s->id}}" @if($v->seat_id == $s->id) selected @endif>{{$s->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -623,10 +623,26 @@
                                         <input type="text" id="v_link" value="{{old('v_link',$v->v_link)}}" class="form-control" placeholder="Video Link" name="v_link">
         </div>
     </div>--}}
+
+
+
+    @if (session('failedUploads'))
+    <h2>Failed Uploads:</h2>
+    
+  <ul class="list-unstyled">
+        @foreach (session('failedUploads') as $failedUpload)
+            <li class="text-danger">{{ $failedUpload['file'] }}: {{ $failedUpload['error'] }}</li>
+        @endforeach
+            </ul>
+@endif
+
+<!-- Additional content or form for retrying the failed uploads -->
+
+
     <div class="col-md-6 col-12 mt-3">
         <div class="form-group">
             <h4>Gallery Image</h4>
-            <input type="file" id="image" class="form-control" name="image[]" multiple>
+            <input type="file" id="image" class="form-control" name="image[]" multiple accept="image/*">
         </div>
     </div>
 

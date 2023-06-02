@@ -2,16 +2,24 @@
 
 @section('pageSubTitle','ICAR JAPAN')
 @section('meta')
+@if(!empty($v->name))
 <meta property="og:title" content="{{$v->name}}">
+@endif
+@if(!empty($v->description))
 <meta property="og:description" content="{{$v->description}}">
+@endif
 <meta property="og:site_name" content="ICAR JAPAN">
 <meta property="fb:app_id" content="800032724610621" />
 <meta property="og:type" content="website" />
+@if(!empty($cover_img->image))
 <meta property="og:image" content="{{asset('uploads/vehicle_images/'.$cover_img->image)}}">
+@endif
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="640" />
 <meta property="og:image:height" content="480" />
+@if(!empty($v->name))
 <meta property="og:image:alt" content="{{$v->name}}" />
+@endif
 <meta name="keywords" content="">
 @endsection
 @push('styles')
@@ -310,9 +318,6 @@
   #contents_detail #car_MainIMG_car_display:not(.slick-slider) {
     width: 640px;
     height: 480px;
-    background-image: url(../images/comingsoon_l.png);
-    background-repeat: no-repeat;
-    background-size: contain;
     overflow: hidden
   }
 
@@ -712,7 +717,9 @@
                   <p>
                     <span>
                       @if($v->inv_loc)
+                      @if($v->inv_loc->image)
                       <img src="{{asset('uploads/country/'.$v->inv_loc->image)}}" alt="" />
+                      @endif
                       @endif
                     </span>
                     Inventory
@@ -753,7 +760,8 @@
                       <div id="car_MainIMG_car_display">
                         @forelse($v_images as $v_img)
                         <div>
-                          <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />
+                          <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />-->
+                          <img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />
                         </div>
                         @empty
                         @endforelse
@@ -940,9 +948,8 @@
 
                       @if($v->rear_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Rear Spoiler</div> @endif
                       @if($v->central_locking ==1)<div class="col-md-3 bg-danger-subtle">Central Locking</div> @endif
-                      @if($v->jack ==1)<div>Jack</div class="col-md-3 bg-danger-subtle">
-                    </div>@endif
-                    @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
+                      @if($v->jack ==1)<div class="col-md-3 bg-danger-subtle">Jack</div>@endif
+                      @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
 
                     @if($v->wheel_spanner ==1)<div class="col-md-3 bg-danger-subtle">Wheel Spanner</div> @endif
                     @if($v->fog_lights ==1)<div class="col-md-3 bg-danger-subtle">Fog Lights</div> @endif
@@ -975,17 +982,7 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
-                        </a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
-                        </a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
+                          <!--<img src="./resource/img/client-galary.png" alt="" />-->
                         </a>
                       </div>
                     </div>
@@ -1083,7 +1080,7 @@
                     <div class="row">
                       {{--<div class="col-sm-4">
                         <div class="product-card my-3">
-                          <img class="img-fluid" src="./resource/img/product-img.png" alt="" />
+                          <!--<img class="img-fluid" src="./resource/img/product-img.png" alt="" />-->
                           <div class="product-card-body">
                             <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
                             <p>DBA-NZT260</p>
@@ -1314,7 +1311,7 @@
                     </form>
                     
                     <div class="my-3">
-                      <img src="./resource/img/atm.jpg" alt="" />
+                      <!--<img src="./resource/img/atm.jpg" alt="" />-->
                     </div>
                   </div>
                 </div>
@@ -1532,9 +1529,9 @@
         effect: 'fadeIn',
         effectspeed: 1000
       });
-      $(".carDetails img.lazy").lazyload({
+      /*$("#car_MainIMG_car_display img.lazy").lazyload({
         effect: 'fadeIn',
-      });
+      });*/
     });
 
     /*==Most Viewed Vehicle Data save with ajax request==*/
