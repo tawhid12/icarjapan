@@ -226,12 +226,16 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       $dis_price = $n->price*$n->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
+                    @if($price > 0)
                     <p class="m-0">Price :</p>
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
                       <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
+                    @else
+                    <p class="m-0">Ask</p>
+                    @endif
                   </div>
                 </div>
               </div>
