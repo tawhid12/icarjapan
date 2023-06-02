@@ -39,7 +39,7 @@
                             <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$v->id)}}">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p><Strong>Vehicle :- {{$v->fullName}}</Strong></p>
+                                    <p><Strong>Vehicle :- {{$v->fullName}}</Strong></p>{{$v->id}}
                                 </div>
 
 
@@ -355,18 +355,18 @@
                                         <label for="b_length">Dimention (L*H*W)</label>
                                         <div class="row">
                                             <div class="col">
-                                            <input type="text" id="b_length" value="{{old('b_length',$v->b_length)}}" class="form-control" placeholder="Length" name="b_length">
+                                                <input type="text" id="b_length" value="{{old('b_length',$v->b_length)}}" class="form-control" placeholder="Length" name="b_length">
                                             </div>
                                             <div class="col">
-                                            <input type="text" id="b_height" value="{{old('b_height',$v->b_height)}}" class="form-control" placeholder="Height" name="b_height">
+                                                <input type="text" id="b_height" value="{{old('b_height',$v->b_height)}}" class="form-control" placeholder="Height" name="b_height">
                                             </div>
                                             <div class="col">
-                                            <input type="text" id="b_width" value="{{old('b_width',$v->b_width)}}" class="form-control" placeholder="Width" name="b_width">
+                                                <input type="text" id="b_width" value="{{old('b_width',$v->b_width)}}" class="form-control" placeholder="Width" name="b_width">
                                             </div>
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="col-md-3 col-12">
@@ -628,15 +628,15 @@
 
     @if (session('failedUploads'))
     <h2>Failed Uploads:</h2>
-    
-  <ul class="list-unstyled">
-        @foreach (session('failedUploads') as $failedUpload)
-            <li class="text-danger">{{ $failedUpload['file'] }}: {{ $failedUpload['error'] }}</li>
-        @endforeach
-            </ul>
-@endif
 
-<!-- Additional content or form for retrying the failed uploads -->
+    <ul class="list-unstyled">
+        @foreach (session('failedUploads') as $failedUpload)
+        <li class="text-danger">{{ $failedUpload['file'] }}: {{ $failedUpload['error'] }}</li>
+        @endforeach
+    </ul>
+    @endif
+
+    <!-- Additional content or form for retrying the failed uploads -->
 
 
     <div class="col-md-6 col-12 mt-3">
@@ -710,7 +710,7 @@
             $(this).val('');
             $(this).trigger('change');
         });*/
-        
+
 
         /*Brand|Subbrand */
         $('#brand_id').on('change', function() {
