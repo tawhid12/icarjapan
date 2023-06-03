@@ -710,7 +710,7 @@ class VehicleController extends Controller
                 DB::table('vehicle_images')->where('image', $file)->delete();
 
             }
-        }
+        }*/
     
     
 }
