@@ -712,5 +712,5 @@ class VehicleController extends Controller
             }
         }
     
-    */
+    
 }

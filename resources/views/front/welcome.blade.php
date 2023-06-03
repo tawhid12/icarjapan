@@ -204,10 +204,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <!-- product card -->
             <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center align-items-stretch">
               @forelse($new_arivals as $n)
-             {{$n->vid}}
+             {{--$n->vid--}}
               <div class="col">
                 <div class="product-card mb-3">
-                  <a href="">
+                  <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />

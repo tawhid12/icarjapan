@@ -73,7 +73,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="sub_brand_id">Model</label>
-                                        <select name="sub_brand_id" class="form-control js-example-basic-single" id="sub_brand">
+                                        <select name="sub_brand_id" class="form-control" id="sub_brand">
                                             {{--<option value="">Select</option>
                                             @if(count($sub_brands))
                                             @foreach($sub_brands as $sb)
