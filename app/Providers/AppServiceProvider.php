@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
 
         
 
-        View::composer(['front.welcome','front.single','front.brand','front.search'], function($view)
+        View::composer(['front.welcome','front.single','front.brand','front.search','front.page.why-choose-us','front.page.how-to-order-from-auction','front.page.how-to-buy-from-stock','front.page.shipping','front.page.inspection-services','front.page.overview','front.page.company-profile','front.page.bank-information','front.page.faq','front.page.contact-us'], function($view)
         {
             $body_types = BodyType::withCount('vehicles')->get();
             $drive_types = DriveType::all();
@@ -92,9 +92,10 @@ class AppServiceProvider extends ServiceProvider
             $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
 
             $japan_locale_data = Carbon::now('Asia/Tokyo');
+
         
-            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])); print_r($location);
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168'));//210.138.184.59//122.152.55.168
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168'));//210.138.184.59//122.152.55.168
     
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code',$location['geoplugin_countryCode'])->first();

@@ -1,14 +1,46 @@
 @extends('layout.landing')
 @section('pageTitle','ICARJAPAN')
+@section('meta')
+<meta name="description" content="iCar Japan is the biggest used car marketplace from Japan. More than 30 brands such as Toyota, Nissan, Honda, any kind of SUV, trucks, buses etc. We ensure high quality Japanese used cars for our customers. Worldwide shipping.">
+<meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
+best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback, suv">
+<meta property="og:title" content="ICAR JAPAN">
+<meta property="og:description" content="iCar Japan is the biggest used car marketplace from Japan. More than 30 brands such as Toyota, Nissan, Honda, any kind of SUV, trucks, buses etc. We ensure high quality Japanese used cars for our customers. Worldwide shipping.">
+<meta property="og:site_name" content="ICAR JAPAN">
+<meta property="fb:app_id" content="800032724610621" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{asset('front/img/header-logo.png')}}">
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="120" />
+<meta property="og:image:alt" content="icar japan" />
+<meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
+best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback, suv">
+@endsection
 @section('pageSubTitle','HOME')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
+<style>
+  .rating i.fa {
+    color: #f9cc00;
+}
+
+.rating-count {
+    font-size: 12px;
+    color: red;
+    font-weight: 700;
+}
+</style>
 @endpush
 @section('content')
 
 <!-- main section -->
 <main class="">
   <div class="container">
+    <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+    <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
     <!-- Important Notice -->
     <div class="row text-brand">
        <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
@@ -31,21 +63,24 @@
         <!-- left row 1 -->
         <div class="left-row-1 mb-3">
           <a href="#">
-            <img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />
+            <!--<img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />-->
           </a>
         </div>
         <!-- left row 2 -->
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-black">
-            {{$com_acc_info->c_name}} {{--$countryName->name--}}
+            <h5 class="card-title bg-black text-white">
+            {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <i class="bi bi-geo-alt-fill"></i> {{$location['geoplugin_city']}}
+                <i class="bi bi-geo-alt-fill"></i> JAPAN{{--$location['geoplugin_city']--}}
               </p>
               <p class="card-text">
                 <i class="bi bi-telephone-fill"></i> {{$com_acc_info->tel}}
+              </p>
+              <p class="card-text">
+                <i class="bi bi-telephone-fill"></i> {{$com_acc_info->whatsup}}
               </p>
             </div>
           </div>
@@ -59,30 +94,45 @@
       <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
         @include('front.search-box')
         <!-- mid row 2 -->
-        <div class="mid-row-2">
-          <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner mb-3 d-flex justify-content-center">
-              <img class="img-fluid shadow" src="{{asset('front/img/slide3.png')}}" alt="" />
+        <style>
+           .mid-sm-banner img{
+    width: 172px;
+    aspect-ratio: auto 172 / 104;
+    height: 104px;
+}
+        </style>
+        <div class="mid-row-2 mb-3">
+          <div class="row gx-2 d-flex align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
+              <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner mb-3">
-              <img class="img-fluid mb-3 shadow mb-3" src="{{asset('front/img/slide1.png')}}" alt="" />
-              <img class="img-fluid shadow" src="{{asset('front/img/image_3.png')}}" alt="" />
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt=""/>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner mb-3 justify-content-center">
-              <img class="img-fluid mb-3 shadow" src="{{asset('front/img/image_3.png')}}" alt="" />
-              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt="" />
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt=""/>
             </div>
           </div>
         </div>
         <!-- mid row 3 -->
-        <div class="d-flex justify-content-center">
-          <div class="d-flex mid-row-3">
-            <a class="shadow" href="#">My Accounts Status</a>
-            <a class="shadow" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
-            <a class="shadow" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
-            <a class="shadow" href="#"><i class="bi bi-search"></i>My Search History</a>
+    
+          <div class="mid-row-3">
+            <div class="row">
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
+              </div>
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
+              </div>
+              <div class="col-md-4">
+              <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
+              </div>
+            </div>
+            {{--<a class="shadow" href="#">My Accounts Status</a>--}}
           </div>
-        </div>
+       
         <!-- mid row 4 product row 1 -->
         <div class="mid-row-4 my-4">
           <!-- product row title -->
@@ -107,17 +157,29 @@
                   <div class="product-card-body">
                   <p clss="m-0"><a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
                     <p class="m-0">{{$v->chassis_no}}</p>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                    </div>
+                    <div class="rating-count">25 Reviews</div>
                     @php
                       $actual_price = $v->price;
                       $dis_price = $v->price*$v->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
+                    @if($price > 0)
                     <p class="m-0">Price :</p>
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p class="m-0">Approx.</p>
-                      <p class="m-0">BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p class="m-0">{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
+                    @else
+                    <p class="m-0">Ask</p>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -142,10 +204,10 @@
             <!-- product card -->
             <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center align-items-stretch">
               @forelse($new_arivals as $n)
-             
+             {{--$n->vid--}}
               <div class="col">
                 <div class="product-card mb-3">
-                  <a href="">
+                  <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
@@ -164,12 +226,16 @@
                       $dis_price = $n->price*$n->discount/100;
                       $price = $actual_price - $dis_price;
                     @endphp
+                    @if($price > 0)
                     <p class="m-0">Price :</p>
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
+                    @else
+                    <p class="m-0">Ask</p>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -212,7 +278,7 @@
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>
@@ -253,7 +319,7 @@
                     <p class="m-0">USD {{$price}}</p>
                     <div class="product-card-currency">
                       <p>Approx.</p>
-                      <p>BDT {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
                     </div>
                   </div>
                 </div>
@@ -271,7 +337,7 @@
                   <p>Customer Review</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
-                  <p>2,337 Reviews</p>
+                  <p><!--2,337--> Reviews</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-end">
                   <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
@@ -281,9 +347,9 @@
             <div class="review-user-body my-3">
               <div class="row">
                 <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
+                  {{--<img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />--}}
                 </div>
-                <div class="col-sm-6 review-user">
+                {{--<div class="col-sm-6 review-user">
                   <div class="d-flex">
                     <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
                     <div>
@@ -292,86 +358,14 @@
                     </div>
                   </div>
                   <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
+                  <p>Wonderful car and amazing price. Thanks ICAR JAPAN</p>
+                </div>--}}
+                {{--<div class="col-sm-3 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
                     <p>Toyota Premio</p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="review-user-body my-3">
-              <div class="row">
-                <div class="col-sm-3 review-user-p-img">
-                  <img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />
-                </div>
-                <div class="col-sm-6 review-user">
-                  <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
-                    <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
-                    </div>
-                  </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks SBT</p>
-                </div>
-                <div class="col-sm-3 review-status d-flex justify-content-end">
-                  <div>
-                    <p>Review on -</p>
-                    <p>Toyota Premio</p>
-                  </div>
-                </div>
+                </div>--}}
               </div>
             </div>
           </div>
@@ -445,7 +439,7 @@
           <!-- right row 2 -->
           <div class="right-row-2 mb-3">
             <a href="#">
-              <img class="img-fluid" src="{{asset('front/img/Shipping-Shedule.png')}}" alt="" />
+              <!--<img class="img-fluid" src="{{asset('front/img/Shipping-Shedule.png')}}" alt="" />-->
             </a>
           </div>
           <!-- right row 3 -->
@@ -570,4 +564,28 @@
 		//loader end
 	});
   </script>
+
+<script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "2464933096867027");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v17.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
   @endpush

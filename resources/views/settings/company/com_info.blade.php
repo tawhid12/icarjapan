@@ -39,12 +39,12 @@
                                                 <input type="text" id="bank_name" class="form-control" value="{{ old('bank_name',$com_acc_info->bank_name)}}" name="bank_name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-12">
+                                        <!-- <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="c_name">Account Name<span class="text-danger">*</span></label>
                                                 <input type="text" id="account_name" class="form-control" value="{{ old('account_name',$com_acc_info->account_name)}}" name="account_name">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="c_name">Branch Name<span class="text-danger">*</span></label>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="account_number">Account Name<span class="text-danger">*</span></label>
+                                                <label for="account_number">Account code<span class="text-danger">*</span></label>
                                                 <input type="text" id="account_number" class="form-control" value="{{ old('account_number',$com_acc_info->account_number)}}" name="account_number">
                                             </div>
                                         </div>
@@ -67,6 +67,18 @@
                                             <div class="form-group">
                                                 <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
                                                 <input type="text" id="bank_address" class="form-control" value="{{ old('bank_address',$com_acc_info->bank_address)}}" name="bank_address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="bank_code">Bank Code<span class="text-danger">*</span></label>
+                                                <input type="text" id="bank_code" class="form-control" value="{{ old('bank_code',$com_acc_info->bank_code)}}" name="bank_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="beni_name">Beneficiary’s Name<span class="text-danger">*</span></label>
+                                                <input type="text" id="beni_name" class="form-control" value="{{ old('beni_name',$com_acc_info->beni_name)}}" name="beni_name">
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">

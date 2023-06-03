@@ -32,6 +32,12 @@
         </a>
     </li>
     <li class="menu-item">
+        <a href="{{route(currentUser().'.payment.create')}}" class='menu-link'>
+            <i class="bi bi-shop"></i>
+            <span>{{__('Make Deposit')}}</span>
+        </a>
+    </li>
+    <li class="menu-item">
         <a href="{{route(currentUser().'.payment.index')}}" class='menu-link'>
             <i class="bi bi-shop"></i>
             <span>{{__('Payment List')}}</span>

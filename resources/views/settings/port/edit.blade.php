@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('pageTitle','Edit Brand')
+@section('pageTitle','Edit Port')
 @section('pageSubTitle','Create')
 
 @section('content')
@@ -11,29 +11,52 @@
               <div class="card">
                   <div class="card-content">
                       <div class="card-body">
-                          <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.brand.update',encryptor('encrypt',$b->id))}}">
+                          <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.port.update',encryptor('encrypt',$p->id))}}">
                               @csrf
                               @method('patch')
-                              <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$b->id)}}">
+                              <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$p->id)}}">
                               <div class="row">
                                   <div class="col-md-6 col-12">
                                       <div class="form-group">
-                                          <label for="name">Brand</label>
-                                          <input type="text" id="name" value="{{ $b->name }}" class="form-control" placeholder="Brand Name" name="name">
+                                          <label for="name">Port</label>
+                                          <input type="text" id="name" value="{{ $p->name }}" class="form-control" placeholder="Port Name" name="name">
                                       </div>
                                   </div>
                                   <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="image">Image</label>
-                                            <input type="file" id="image" class="form-control"
-                                                placeholder="Image" name="image">
+                                            <label for="name">RORO M3 Charge</label>
+                                            <input type="text" id="m3" value="{{ $p->m3 }}" class="form-control" placeholder="M3 charge" name="m3">
                                         </div>
+                                        @if($errors->has('m3'))
+                                        <span class="text-danger"> {{ $errors->first('m3') }}</span>
+                                        @endif
                                     </div>
-                                  
-                                  <div class="col-12 d-flex justify-content-end">
-                                        <img width="50px" height="30px" class="float-first m-2" src="{{asset('uploads/brands/'.$b->image)}}" alt="">
-                                        <button type="submit" class="btn btn-primary mb-1">Save</button>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Aditional Cost</label>
+                                            <input type="text" id="aditional_cost" value="{{ $p->aditional_cost }}" class="form-control" placeholder="Aditional Cost" name="aditional_cost">
+                                        </div>
+                                        @if($errors->has('aditional_cost'))
+                                        <span class="text-danger"> {{ $errors->first('aditional_cost') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                      <div class="form-group">
+                                          <label for="inv_loc_id">Select Country</label>
+                                          <select name="inv_loc_id" class="form-control">
+                                              <option value="">Select</option>
+                                              @if(count($countries))
+                                              @foreach($countries as $c)
+                                              <option value="{{ $c->id}}" @if($p->inv_loc_id == $c->id) selected @endif>{{$c->name}}</option>
+                                              @endforeach
+                                              @endif
+                                          </select>
+                                      </div>
                                   </div>
+                                  <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+                                        
+                                    </div>
                               </div>
                           </form>
                       </div>

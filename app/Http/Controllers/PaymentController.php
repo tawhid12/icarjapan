@@ -32,11 +32,16 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-
+        if($request->filled('id')){
+            $invoice = Invoice::find($request->id);
+            return view('user.payment.create-payment',compact('invoice'));
+        }
         $invoices = Invoice::where('executive_id', currentUserId())->get();
         return view('user.payment.create', compact('invoices'));
+        
+
     }
 
     /**
@@ -50,12 +55,17 @@ class PaymentController extends Controller
         try {
             $payment = new Payment();
             
-            $payment->invoice_id = 1;
+            $payment->invoice_id = $request->invoice_id;
+            $payment->user_id = $request->user_id;
             $payment->receive_date = date('Y-m-d',strtotime($request->receive_date));
             $payment->currency = $request->currency;
             $payment->amount = $request->amount;
             $payment->allocated = $request->allocated;
-            $payment->deposit = $request->deposit;
+            if($request->allocated && $request->amount >= $request->allocated){
+                $payment->deposit = $request->amount - $request->allocated;
+            }else{
+                $payment->deposit = $request->deposit;
+            }
             $payment->security_deposit	 = $request->security_deposit;
             $payment->type	 = $request->type;
             $payment->customer_id = 3;

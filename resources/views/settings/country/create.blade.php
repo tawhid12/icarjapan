@@ -40,6 +40,18 @@
                                             <input type="text" id="high_grade_range" class="form-control" placeholder="High Grade Range" name="high_grade_range">
                                         </div>
                                     </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Inspection</label>
+                                            <input type="text" id="inspection" class="form-control" placeholder="Inspection" name="inspection">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Insurance</label>
+                                            <input type="text" id="insurance" class="form-control" placeholder="Insurance" name="insurance">
+                                        </div>
+                                    </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="image">Image</label>

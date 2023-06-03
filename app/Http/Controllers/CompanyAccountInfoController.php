@@ -80,6 +80,8 @@ class CompanyAccountInfoController extends Controller
             $cinfo->account_number=$request->account_number;
             $cinfo->swift_code=$request->swift_code;
             $cinfo->bank_address=$request->bank_address;
+            $cinfo->bank_code=$request->bank_code;
+            $cinfo->beni_name=$request->beni_name;
             $cinfo->tel=$request->tel;
             $cinfo->fax=$request->fax;
             $cinfo->whatsup=$request->whatsup;

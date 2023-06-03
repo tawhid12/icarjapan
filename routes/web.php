@@ -173,6 +173,21 @@ Route::group(['middleware'=>isAdmin::class],function(){
 Route::post('gallery/delete',[vehicle::class, 'deleteImg'])->name('gallery.delete');
 Route::get('gallery/cover/{id}',[vehicle::class, 'galleryCover'])->name('gallery.cover');
 Route::get('subBrand',[subBrand::class, 'get_sub_brand_by_id'])->name('subBrandbyId');
+Route::get('port',[port::class, 'get_port_by_id'])->name('portById');
+Route::get('m3',[port::class, 'get_m3_charge_by_port_id'])->name('m3Charge');
+Route::get('/watermark',[vehicle::class, 'addWatermarkall']);
 
+/*=== Page ===*/
+Route::get('/why-choose-us',function(){ return view('front.page.why-choose-us'); });
+Route::get('/how-to-order-from-auction',function(){ return view('front.page.how-to-order-from-auction'); });
+Route::get('/how-to-buy-from-stock',function(){ return view('front.page.how-to-buy-from-stock'); });
+Route::get('/shipping',function(){ return view('front.page.shipping'); });
+Route::get('/inspection-services',function(){ return view('front.page.inspection-services'); });
+Route::get('/overview',function(){ return view('front.page.overview'); });
+Route::get('/company-profile',function(){ return view('front.page.company-profile'); });
+Route::get('/customer-review',function(){ return view('front.page.customer-review'); });
+Route::get('/bank-information',function(){ return view('front.page.bank-information'); });
+Route::get('/faq',function(){ return view('front.page.faq'); })->name('faq');
+Route::get('/contact-us',function(){ return view('front.page.contact-us'); });
 
 

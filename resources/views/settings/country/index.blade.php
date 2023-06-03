@@ -22,6 +22,8 @@
                                         <th scope="col">{{__('Code')}}</th>
                                         <th scope="col">{{__('Affordable Range')}}</th>
                                         <th scope="col">{{__('High Grade Range')}}</th>
+                                        <th scope="col">{{__('Inspection')}}</th>
+                                        <th scope="col">{{__('Insurance')}}</th>
                                         <th scope="col">{{__('Image')}}</th>
                                         <th scope="col">{{__('Status')}}</th>
                                         <th class="white-space-nowrap">{{__('ACTION')}}</th>
@@ -35,6 +37,8 @@
                                         <td>{{$c->code}}</td>
                                         <td>{{$c->afford_range}}</td>
                                         <td>{{$c->high_grade_range}}</td>
+                                        <td>{{$c->inspection}}</td>
+                                        <td>{{$c->insurance}}</td>
                                         <td><img src="{{asset('uploads/country/'.$c->image)}}" alt="no-image"></td>
                                         <td>@if($c->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                         <td class="white-space-nowrap">

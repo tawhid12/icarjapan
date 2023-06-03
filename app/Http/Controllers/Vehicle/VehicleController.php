@@ -33,6 +33,7 @@ use File;
 use App\Http\Traits\ImageHandleTraits;
 use App\Models\Vehicle\NewArival;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class VehicleController extends Controller
 {
@@ -70,7 +71,7 @@ class VehicleController extends Controller
         $doors = Door::all();
         $seats = Seat::all();
         $cons = Condition::all();
-        return view('vehicle.vehicle.create', compact('doors','seats','cons','sub_brands', 'countries', 'body_types', 'drive_types', 'inv_loc', 'sub_body_types', 'brands', 'fuel', 'colors', 'trans', 'vehicle_models'));
+        return view('vehicle.vehicle.create', compact('doors', 'seats', 'cons', 'sub_brands', 'countries', 'body_types', 'drive_types', 'inv_loc', 'sub_body_types', 'brands', 'fuel', 'colors', 'trans', 'vehicle_models'));
     }
 
     /**
@@ -79,7 +80,7 @@ class VehicleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddNewRequest $request)
     {
         /*echo '<pre>';
         print_r($request->toArray());die;*/
@@ -92,7 +93,15 @@ class VehicleController extends Controller
             $vehicle->package = $request->package;
             /*$vehicle->v_model_id = $request->v_model_id;
             $vehicle->version = $request->version;*/
-            $vehicle->m3 = $request->m3;
+            $m3 = $request->b_length * $request->b_width * $request->b_height;
+            $rounded = floor($m3); // Get the integer part of the value
+            $decimal = $m3 - $rounded; // Get the decimal part of the value
+            if ($decimal >= 0.50) {
+                $roundedValue = ceil($m3);
+            } else {
+                $roundedValue = $m3;
+            }
+            $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
             //$vehicle->v_model = $request->v_model;
             $vehicle->chassis_no = $request->chassis_no;
@@ -114,14 +123,17 @@ class VehicleController extends Controller
             $vehicle->ext_color_id = $request->ext_color_id;
             $vehicle->int_color_id = $request->int_color_id;
             $vehicle->b_length = $request->b_length;
+            $vehicle->b_width = $request->b_width;
+            $vehicle->b_height = $request->b_height;
             $vehicle->max_loading_capacity = $request->max_loading_capacity;
             $vehicle->e_size = $request->e_size;
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
-            //$vehicle->year = $request->year;
-            $vehicle->reg_year = date('Y-m-d', strtotime($request->reg_year));
+            $vehicle->reg_year = $request->reg_year;
+            //$vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;    
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
+            $vehicle->inv_port_id = $request->inv_port_id;
             $vehicle->description = $request->description;
             //$vehicle->note = $request->note;
             $vehicle->option = $request->option;
@@ -164,23 +176,60 @@ class VehicleController extends Controller
             $vehicle->created_by = currentUserId();
 
             /*Long Name */
-            $vehicle_name =DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " .str_replace(' ', '-', $request->package)." ". $request->manu_year;
+            $vehicle_name = DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " . str_replace(' ', '-', $request->package) . " " . $request->manu_year;
             $vehicle->fullName = $vehicle_name;
 
             /*Short Name */
             $vehicle->name = DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " . $request->manu_year;
 
             if ($vehicle->save()) {
-                if($request->hasFile('image')) {
+                if ($request->hasFile('image')) {
                     $images = $request->file('image');
-                    foreach($images as  $val){
-                        $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
-                        $vehicleImagesArr['vehicle_id'] = $vehicle->id;
-                        $vehicleImagesArr['created_at'] = Carbon::now();
-                        DB::table('vehicle_images')->insert($vehicleImagesArr);
-                    }
-                
-                /*if ($request->hasFile('image')) {
+                    foreach ($images as  $index => $val) {
+                        if ($val->isValid()) {
+                            $validator = Validator::make(
+                                ['image' => $val],
+                                ['image' => 'required|image|mimes:jpeg,png,jpg|max:2048'],
+                                [
+                                    'image.required' => 'Please select at least one image.',
+                                    'image.image' => 'Invalid image format.',
+                                    'image.mimes' => 'Allowed image formats: jpeg, png, jpg.',
+                                    'image.max' => 'The maximum allowed file size is 2MB.',
+                                ]
+                            );
+
+                            if ($validator->fails()) {
+                                $failedUploads[] = [
+                                    'file' => 'File Name: ' . $val->getClientOriginalName(),
+                                    'error' => $validator->errors()->first('image'),
+                                ];
+                                continue; // Skip this iteration if validation fails
+                            }
+
+                            $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
+                            $vehicleImagesArr['vehicle_id'] = $vehicle->id;
+                            $vehicleImagesArr['created_at'] = Carbon::now();
+                            DB::table('vehicle_images')->insert($vehicleImagesArr);
+
+                            $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            // Load the watermark image
+                            $watermark = Image::make(public_path('uploads/watermark.png'));
+
+                            // Increase the size of the watermark image
+                            $watermark->resize(1000, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+
+                            // Apply the watermark to the original image
+                            $image->insert($watermark, 'top-left', 0, 0);
+
+                            // Save the modified image
+                            $image->save(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            //return true;
+                            //return 'Watermark added successfully.';
+                        }
+
+                        /*if ($request->hasFile('image')) {
                     $images = $request->file('image');
                     $imagePaths = [];
                     foreach ($images as $image) {
@@ -207,12 +256,13 @@ class VehicleController extends Controller
                         \Storage::delete($imagePath);
                     }*/
 
-                    /*foreach($images as  $val){
+                        /*foreach($images as  $val){
                         $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
                         $vehicleImagesArr['vehicle_id'] = $vehicle->id;
                         $vehicleImagesArr['created_at'] = Carbon::now();
                         DB::table('vehicle_images')->insert($vehicleImagesArr);
                     }*/
+                    }
                 }
 
 
@@ -231,6 +281,9 @@ class VehicleController extends Controller
                             $v_data->arival_country()->attach($arival_country_data[$key]);
                         }
                     }
+                } else {
+                    DB::table('countries_vehicles')->insert(['country_id' => null, 'vehicle_id' => $vehicle->id]);
+                    DB::table('new_arivals')->insert(['country_id' => null, 'vehicle_id' => $vehicle->id]);
                 }
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
@@ -295,8 +348,7 @@ class VehicleController extends Controller
         $v_images = DB::table('vehicle_images')->where('vehicle_id', encryptor('decrypt', $id))->get();
         $vehicle_avaliable_country = array_values(DB::table('countries_vehicles')->where('vehicle_id', encryptor('decrypt', $id))->pluck('country_id')->toArray());
         $new_arivals = array_values(DB::table('new_arivals')->where('vehicle_id', encryptor('decrypt', $id))->pluck('country_id')->toArray());
-
-        return view('vehicle.vehicle.edit', compact('doors','seats','cons','vehicle_avaliable_country', 'sub_brands', 'new_arivals', 'countries', 'v_images', 'v', 'body_types', 'drive_types', 'inv_loc', 'sub_body_types', 'brands', 'fuel', 'colors', 'trans', 'vehicle_models'));
+        return view('vehicle.vehicle.edit', compact('doors', 'seats', 'cons', 'vehicle_avaliable_country', 'sub_brands', 'new_arivals', 'countries', 'v_images', 'v', 'body_types', 'drive_types', 'inv_loc', 'sub_body_types', 'brands', 'fuel', 'colors', 'trans', 'vehicle_models'));
     }
 
     /**
@@ -315,7 +367,15 @@ class VehicleController extends Controller
             $vehicle->brand_id = $request->brand_id;
             $vehicle->sub_brand_id = $request->sub_brand_id;
             $vehicle->package = $request->package;
-            $vehicle->m3 = $request->m3;
+            $m3 = $request->b_length * $request->b_width * $request->b_height;
+            $rounded = floor($m3); // Get the integer part of the value
+            $decimal = $m3 - $rounded; // Get the decimal part of the value
+            if ($decimal >= 0.50) {
+                $roundedValue = ceil($m3);
+            } else {
+                $roundedValue = $m3;
+            }
+            $vehicle->m3 = $roundedValue/*$request->m3*/;
             $vehicle->weight = $request->weight;
             $vehicle->chassis_no = $request->chassis_no;
             $vehicle->fob = $request->fob;
@@ -333,14 +393,17 @@ class VehicleController extends Controller
             $vehicle->ext_color_id = $request->ext_color_id;
             $vehicle->int_color_id = $request->int_color_id;
             $vehicle->b_length = $request->b_length;
+            $vehicle->b_width = $request->b_width;
+            $vehicle->b_height = $request->b_height;
             $vehicle->max_loading_capacity = $request->max_loading_capacity;
             $vehicle->e_size = $request->e_size;
             $vehicle->e_info = $request->e_info;
             $vehicle->e_code = $request->e_code;
-            
-            $vehicle->reg_year = date('Y-m-d', strtotime($request->reg_year));
+            $vehicle->reg_year = $request->reg_year;
+            //$vehicle->reg_year = $request->reg_year?Carbon::createFromFormat('d/m/Y', $request->reg_year)->format('Y-m-d'):null;
             $vehicle->manu_year = $request->manu_year;
             $vehicle->inv_locatin_id = $request->inv_locatin_id;
+            $vehicle->inv_port_id = $request->inv_port_id;
             $vehicle->description = $request->description;
             //$vehicle->note = $request->note;
             $vehicle->option = $request->option;
@@ -387,20 +450,59 @@ class VehicleController extends Controller
 
 
             /*Long Name */
-            $vehicle_name =DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " .str_replace(' ', '-', $request->package)." ". $request->manu_year;
+            $vehicle_name = DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " . str_replace(' ', '-', $request->package) . " " . $request->manu_year;
             $vehicle->fullName = $vehicle_name;
-            
+
             /*Short Name */
             $vehicle->name = DB::table('brands')->where('id', $request->brand_id)->first()->name . " " . DB::table('sub_brands')->where('id', $request->sub_brand_id)->first()->name . " " . $request->manu_year;
-            
+            $failedUploads = [];
             if ($vehicle->save()) {
                 if ($request->hasFile('image')) {
                     $images = $request->file('image');
-                    foreach ($images as  $val) {
-                        $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
-                        $vehicleImagesArr['vehicle_id'] = $vehicle->id;
-                        $vehicleImagesArr['created_at'] = Carbon::now();
-                        DB::table('vehicle_images')->insert($vehicleImagesArr);
+                    foreach ($images as $val) {
+                        if ($val->isValid()) {
+                            $validator = Validator::make(
+                                ['image' => $val],
+                                ['image' => 'required|image|mimes:jpeg,png,jpg|max:2048'],
+                                [
+                                    'image.required' => 'Please select at least one image.',
+                                    'image.image' => 'Invalid image format.',
+                                    'image.mimes' => 'Allowed image formats: jpeg, png, jpg.',
+                                    'image.max' => 'The maximum allowed file size is 2MB.',
+                                ]
+                            );
+
+                            if ($validator->fails()) {
+                                $failedUploads[] = [
+                                    'file' => 'File Name: ' . $val->getClientOriginalName(),
+                                    'error' => $validator->errors()->first('image'),
+                                ];
+                                continue; // Skip this iteration if validation fails
+                            }
+
+
+                            $vehicleImagesArr['image'] = $this->uploadImage($val, 'uploads/vehicle_images');
+                            $vehicleImagesArr['vehicle_id'] = $vehicle->id;
+                            $vehicleImagesArr['created_at'] = Carbon::now();
+                            DB::table('vehicle_images')->insert($vehicleImagesArr);
+
+                            $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            // Load the watermark image
+                            $watermark = Image::make(public_path('uploads/watermark.png'));
+
+                            // Increase the size of the watermark image
+                            $watermark->resize(1000, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+
+                            // Apply the watermark to the original image
+                            $image->insert($watermark, 'top-left', 0, 0);
+
+                            // Save the modified image
+                            $image->save(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            //return true;
+                            //return 'Watermark added successfully.';
+                        }
                     }
                 }
                 /*== Vehicle Country Wise */
@@ -412,6 +514,20 @@ class VehicleController extends Controller
                         $data = $country_data[$key];
                     }
                     $v_data->countries()->sync($country_data);
+                } else {
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('countries_vehicles')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        DB::table('countries_vehicles')->insert(['country_id' => null, 'vehicle_id' => $vehicle->id]);
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
+                    }
                 }
                 /*== Vehicle Arival Wise */
                 if ($request->post('arival_country_id')) {
@@ -422,7 +538,27 @@ class VehicleController extends Controller
                         $data = $arival_country_data[$key];
                     }
                     $v_data->arival_country()->sync($arival_country_data);
+                } else {
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('new_arivals')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        DB::table('new_arivals')->insert(['country_id' => null, 'vehicle_id' => $vehicle->id]);
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
+                    }
                 }
+                if (count($failedUploads) > 0) {
+                    return redirect()->route(currentUser() . '.vehicle.edit', encryptor('encrypt', $vehicle->id))->with('failedUploads', $failedUploads);
+                }
+
+
+
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -442,7 +578,7 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         try {
-            $vehicle = Vehicle::find(encryptor('decrypt', $id));
+            /*$vehicle = Vehicle::find(encryptor('decrypt', $id));
             $vehicle_images = DB::table('vehicle_images')->where('vehicle_id', $id)->get();
             foreach ($vehicle_images as $v) {
                 if (File::exists(public_path($v->image))) {
@@ -451,10 +587,12 @@ class VehicleController extends Controller
             }
             DB::table('vehicle_images')->where('vehicle_id', $id)->delete();
             if ($vehicle->delete()) {
+                DB::table('new_arivals')->where('vehicle_id', $id)->delete();
+                DB::table('countries_vehicles')->where('vehicle_id', $id)->delete();
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
-            } else {
+            } else {*/
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
-            }
+            //}
         } catch (Exception $e) {
             //dd($e);
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -483,7 +621,7 @@ class VehicleController extends Controller
                 DB::table('vehicle_images')->delete($id);
                 return redirect()->back()->with('success', "Vehicle Image Deleted successfully");
             } else {
-                return redirect()->route('vehicle.index')->with('error', "Something Went Worng!");
+                return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         }
     }
@@ -491,10 +629,88 @@ class VehicleController extends Controller
     {
         $cover_img = DB::table('vehicle_images')->where('id', $id)->first();
         DB::table('vehicle_images')->where('vehicle_id', $cover_img->vehicle_id)->update(['is_cover_img' => null]);
-        if(DB::table('vehicle_images')->where('id', $id)->update(['is_cover_img' => 1])) {
+        if (DB::table('vehicle_images')->where('id', $id)->update(['is_cover_img' => 1])) {
             return redirect()->back()->with('success', "Vehicle Image Deleted successfully");
         } else {
-            return redirect()->route('vehicle.index')->with('error', "Something Went Worng!");
+            return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
     }
+    public function addWatermark()
+    {
+        // Load the original image
+        $image = Image::make(public_path('uploads/vehicle_images/test.jpg'));
+        //print_r($image);die;
+
+        // Load the watermark image
+        $watermark = Image::make(public_path('uploads/watermark.png'));
+
+        // Increase the size of the watermark image
+        $watermark->resize(600, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        // Apply the watermark to the original image
+        $image->insert($watermark, 'top-left', 100, 60);
+
+        // Save the modified image
+        $image->save(public_path('uploads/test.jpg'));
+        return true;
+        //return 'Watermark added successfully.';
+    }
+    public function addWatermarkall()
+    {
+        $directory = public_path('uploads/vehicle_images');
+
+        if (File::isDirectory($directory)) {
+            $files = File::files($directory);
+
+            foreach ($files as $file) {
+                /*echo $file->getFilename() . '<br>';
+                die;*/
+                // Load the original image
+                $image = Image::make(public_path('uploads/vehicle_images/' . $file->getFilename()));
+
+                // Load the watermark image
+                $watermark = Image::make(public_path('uploads/watermark.png'));
+
+                // Increase the size of the watermark image
+                $watermark->resize(100, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                // Apply the watermark to the original image
+                $image->insert($watermark, 'top-left', 10, 10);
+                // Save the modified image
+                $image->save(public_path('uploads/vehicle_images/' . $file->getFilename()));
+            }
+        }
+
+
+
+
+
+
+
+
+
+        return 'Watermark added successfully.';
+    }
+
+        /*
+    $files = DB::table('vehicle_images')->pluck('image'); // Retrieve all file names from the database
+        $directory = public_path('uploads/vehicle_images');
+        foreach ($files as $file) {
+            $filePath = $directory . '/' . $file;
+        
+            if (File::exists($filePath)) {
+                // The file exists in the directory
+                echo "File {$file} exists."."<br>";
+            } else {
+                // The file doesn't exist in the directory
+                echo "File {$file} does not exist.";
+                DB::table('vehicle_images')->where('image', $file)->delete();
+
+            }
+        }*/
+    
+    
 }

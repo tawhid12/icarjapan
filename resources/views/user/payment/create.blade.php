@@ -13,15 +13,14 @@
                           <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.payment.store')}}">
                               @csrf
                               <div class="row">
-
                                   <div class="col-md-4 col-12">
                                       <div class="form-group">
-                                          <label for="invoice_id">Select Invoice Id</label>
-                                          <select name="invoice_id" class="form-control">
+                                          <label for="user_id">Select Customer Id</label>
+                                          <select name="user_id" class="form-control" required>
                                               <option value="">Select</option>
                                               @if(count($invoices))
                                               @foreach($invoices as $in)
-                                              <option value="{{ $in->id}}">Invoice No # {{$in->id}}-Customer Name # {{optional($in->user)->name}}</option>
+                                              <option value="{{ $in->customer_id}}">Customer Id # {{$in->customer_id}} & Name # {{optional($in->user)->name}}</option>
                                               @endforeach
                                               @endif
                                           </select>
@@ -31,10 +30,10 @@
                                       <div class="form-group">
                                           <label for="type">Payment Type</label>
                                           <select name="type" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="1">Deposit</option>
-                                            <option value="2">Allocated</option>
-                                            <option value="3">Security Deposit</option>
+                                              <option value="">Select</option>
+                                              <option value="1" selected>Deposit</option>
+                                              {{--<option value="2">Allocated</option>
+                                            <option value="3">Security Deposit</option>--}}
                                           </select>
                                       </div>
                                   </div>
@@ -42,8 +41,8 @@
                                       <div class="form-group">
                                           <label for="currency">Currency</label>
                                           <select name="currency" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="1">USD</option>
+                                              <option value="">Select</option>
+                                              <option value="1">USD</option>
                                           </select>
                                       </div>
                                   </div>
@@ -59,12 +58,12 @@
                                           <input type="text" id="amount" class="form-control" placeholder="Amount" name="amount">
                                       </div>
                                   </div>
-                                  <div class="col-md-3 col-12">
+                                  {{--<div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="allocated">Allocated</label>
                                           <input type="text" id="allocated" class="form-control" placeholder="Allocated" name="allocated">
                                       </div>
-                                  </div>
+                                  </div>--}}
                                   <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="deposit">Deposit</label>
@@ -73,10 +72,10 @@
                                   </div>
                               </div>
                               <div class="row my-3">
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
-                                </div>
-                            </div>
+                                  <div class="col-12 d-flex justify-content-end">
+                                      <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+                                  </div>
+                              </div>
                           </form>
                       </div>
                   </div>
@@ -88,16 +87,16 @@
   </div>
   @endsection
   @push('scripts')
-<script>
-    $("input[name='receive_date']").daterangepicker({
-        singleDatePicker: true,
-        startDate: new Date(),
-        showDropdowns: true,
-        autoUpdateInput: true,
-        format: 'dd/mm/yyyy',
-    }).on('changeDate', function(e) {
-        var date = moment(e.date).format('YYYY/MM/DD');
-        $(this).val(date);
-    });
-</script>
-@endpush
+  <script>
+      $("input[name='receive_date']").daterangepicker({
+          singleDatePicker: true,
+          startDate: new Date(),
+          showDropdowns: true,
+          autoUpdateInput: true,
+          format: 'dd/mm/yyyy',
+      }).on('changeDate', function(e) {
+          var date = moment(e.date).format('YYYY/MM/DD');
+          $(this).val(date);
+      });
+  </script>
+  @endpush

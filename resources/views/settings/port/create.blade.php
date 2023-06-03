@@ -1,6 +1,6 @@
   @extends('layout.app')
 
-  @section('pageTitle','Create Brand')
+@section('pageTitle','Create Port')
 @section('pageSubTitle','Create')
 
   @section('content')
@@ -20,6 +20,24 @@
                                         </div>
                                         @if($errors->has('name'))
                                         <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">RORO M3 Charge</label>
+                                            <input type="text" id="m3" class="form-control" placeholder="M3 charge" name="m3">
+                                        </div>
+                                        @if($errors->has('m3'))
+                                        <span class="text-danger"> {{ $errors->first('m3') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Aditional Cost</label>
+                                            <input type="text" id="aditional_cost" class="form-control" placeholder="Aditional Cost" name="aditional_cost">
+                                        </div>
+                                        @if($errors->has('aditional_cost'))
+                                        <span class="text-danger"> {{ $errors->first('aditional_cost') }}</span>
                                         @endif
                                     </div>
                                     <div class="col-md-6 col-12">

@@ -126,6 +126,7 @@ class ReservedVehicleController extends Controller
                 $resv->status = $request->status;
 
                 /*Insert To Invoice */
+                if(Invoice::where('vehicle_id',$resv->vehicle_id)->doesntExist()){
                 $invoice = New Invoice();
                 $invoice->invoice_date = date('Y-m-d');
                 $invoice->reserve_id =  $resv->id;
@@ -133,6 +134,7 @@ class ReservedVehicleController extends Controller
                 $invoice->customer_id = $resv->user_id;
                 $invoice->executive_id = $resv->assign_user_id;
                 $invoice->save();
+                }
             }
             $resv->updated_by = currentUserId();
             if ($resv->save()) {

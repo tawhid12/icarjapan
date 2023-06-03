@@ -2,17 +2,25 @@
 
 @section('pageSubTitle','ICAR JAPAN')
 @section('meta')
-  <meta property="og:title" content="{{$v->name}}">
-  <meta property="og:description" content="{{$v->description}}">
-  <meta property="og:site_name" content="ICAR JAPAN">
-  <meta property="fb:app_id" content="800032724610621" /> 
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="{{asset('uploads/vehicle_images/'.$cover_img->image)}}">
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="640" />
-  <meta property="og:image:height" content="480" />
-  <meta property="og:image:alt" content="{{$v->name}}" />
-  <meta name="keywords" content="">
+@if(!empty($v->name))
+<meta property="og:title" content="{{$v->name}}">
+@endif
+@if(!empty($v->description))
+<meta property="og:description" content="{{$v->description}}">
+@endif
+<meta property="og:site_name" content="ICAR JAPAN">
+<meta property="fb:app_id" content="800032724610621" />
+<meta property="og:type" content="website" />
+@if(!empty($cover_img->image))
+<meta property="og:image" content="{{asset('uploads/vehicle_images/'.$cover_img->image)}}">
+@endif
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="480" />
+@if(!empty($v->name))
+<meta property="og:image:alt" content="{{$v->name}}" />
+@endif
+<meta name="keywords" content="">
 @endsection
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -32,9 +40,9 @@
     }
   }
 
-  
 
-.slick-slider {
+
+  .slick-slider {
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -47,92 +55,112 @@
     -ms-touch-action: pan-y;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent
-}
-.slick-list {
+  }
+
+  .slick-list {
     position: relative;
     display: block;
     overflow: hidden;
     margin: 0;
     padding: 0
-}
-.slick-list:focus {
+  }
+
+  .slick-list:focus {
     outline: none
-}
-.slick-list.dragging {
+  }
+
+  .slick-list.dragging {
     cursor: pointer;
     cursor: hand
-}
-.slick-slider .slick-track,
-.slick-slider .slick-list {
+  }
+
+  .slick-slider .slick-track,
+  .slick-slider .slick-list {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0)
-}
-.slick-track {
+  }
+
+  .slick-track {
     position: relative;
     top: 0;
     left: 0;
     display: block;
     margin-left: auto;
     margin-right: auto
-}
-.slick-track:before,
-.slick-track:after {
+  }
+
+  .slick-track:before,
+  .slick-track:after {
     display: table;
     content: ''
-}
-.slick-track:after {
+  }
+
+  .slick-track:after {
     clear: both
-}
-.slick-loading .slick-track {
+  }
+
+  .slick-loading .slick-track {
     visibility: hidden
-}
-.slick-slide {
+  }
+
+  .slick-slide {
     display: none;
     float: left;
     height: 100%;
     min-height: 1px
-}
-[dir='rtl'] .slick-slide {
+  }
+
+  [dir='rtl'] .slick-slide {
     float: right
-}
-.slick-slide img {
+  }
+
+  .slick-slide img {
     display: block
-}
-.slick-slide.slick-loading img {
+  }
+
+  .slick-slide.slick-loading img {
     display: none
-}
-.slick-slide.dragging img {
+  }
+
+  .slick-slide.dragging img {
     pointer-events: none
-}
-.slick-initialized .slick-slide {
+  }
+
+  .slick-initialized .slick-slide {
     display: block
-}
-.slick-loading .slick-slide {
+  }
+
+  .slick-loading .slick-slide {
     visibility: hidden
-}
-.slick-vertical .slick-slide {
+  }
+
+  .slick-vertical .slick-slide {
     display: block;
     height: auto;
     border: 1px solid transparent
-}
-.slick-arrow.slick-hidden {
+  }
+
+  .slick-arrow.slick-hidden {
     display: none;
-}
-.slick-loading .slick-list {
+  }
+
+  .slick-loading .slick-list {
     background: #fff url({{url('public/assets/images/ajax-loader.gif')}}) center center no-repeat;
-}
-@font-face {
+  }
+
+  @font-face {
     font-family: 'slick';
     font-weight: normal;
     font-style: normal;
     src: url("./fonts/slick.eot");
     src: url("./fonts/slick.eot?#iefix") format("embedded-opentype"), url("./fonts/slick.woff") format("woff"), url("./fonts/slick.ttf") format("truetype"), url("./fonts/slick.svg#slick") format("svg")
-}
-.slick-prev,
-.slick-next {
+  }
+
+  .slick-prev,
+  .slick-next {
     font-size: 0;
     line-height: 0;
     position: absolute;
@@ -147,27 +175,31 @@
     border: 0;
     outline: 0;
     background: transparent
-}
-.slick-prev:hover,
-.slick-prev:focus,
-.slick-next:hover,
-.slick-next:focus {
+  }
+
+  .slick-prev:hover,
+  .slick-prev:focus,
+  .slick-next:hover,
+  .slick-next:focus {
     color: transparent;
     outline: 0;
     background: transparent
-}
-.slick-prev:hover:before,
-.slick-prev:focus:before,
-.slick-next:hover:before,
-.slick-next:focus:before {
+  }
+
+  .slick-prev:hover:before,
+  .slick-prev:focus:before,
+  .slick-next:hover:before,
+  .slick-next:focus:before {
     opacity: 1
-}
-.slick-prev.slick-disabled:before,
-.slick-next.slick-disabled:before {
+  }
+
+  .slick-prev.slick-disabled:before,
+  .slick-next.slick-disabled:before {
     opacity: 0.25
-}
-.slick-prev:before,
-.slick-next:before {
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
     font-family: 'slick';
     font-size: 20px;
     line-height: 1;
@@ -175,11 +207,11 @@
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
-}
+  }
 
 
 
-.slick-dots {
+  .slick-dots {
     position: absolute;
     bottom: -45px;
     display: block;
@@ -187,8 +219,9 @@
     padding: 0;
     list-style: none;
     text-align: center
-}
-.slick-dots li {
+  }
+
+  .slick-dots li {
     position: relative;
     display: inline-block;
     width: 20px;
@@ -196,8 +229,9 @@
     margin: 0 5px;
     padding: 0;
     cursor: pointer
-}
-.slick-dots li button {
+  }
+
+  .slick-dots li button {
     font-size: 0;
     line-height: 39px;
     display: block;
@@ -209,16 +243,19 @@
     border: 0;
     outline: 0;
     background: transparent
-}
-.slick-dots li button:hover,
-.slick-dots li button:focus {
+  }
+
+  .slick-dots li button:hover,
+  .slick-dots li button:focus {
     outline: 0
-}
-.slick-dots li button:hover:before,
-.slick-dots li button:focus:before {
+  }
+
+  .slick-dots li button:hover:before,
+  .slick-dots li button:focus:before {
     opacity: 1
-}
-.slick-dots li button:before {
+  }
+
+  .slick-dots li button:before {
     font-family: 'slick';
     position: absolute;
     top: -10px;
@@ -231,30 +268,35 @@
     color: #000;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
-}
-@media screen and (min-width: 1024px) {
-    .slick-dots li button:before {
-        font-size: 79px
-    }
-}
-@media screen and (max-width: 1023px) {
-    .slick-dots li button:before {
-        font-size: 45px !important
-    }
-}
-.slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: black
-}
+  }
 
-	
-#contents_detail .car_detail_car_navigation li {
+  @media screen and (min-width: 1024px) {
+    .slick-dots li button:before {
+      font-size: 79px
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .slick-dots li button:before {
+      font-size: 45px !important
+    }
+  }
+
+  .slick-dots li.slick-active button:before {
+    opacity: 0.75;
+    color: black;
+  }
+
+
+  #contents_detail .car_detail_car_navigation li {
     display: block
-}
-#contents_detail .car_display_area {
-    position: relative
-}
-#contents_detail .car_display_area #pager_display {
+  }
+
+  #contents_detail .car_display_area {
+    position: relative;
+  }
+
+  #contents_detail .car_display_area #pager_display {
     position: absolute;
     width: 58px;
     font-size: 12px;
@@ -267,19 +309,19 @@
     border-radius: 4px;
     margin-left: -29px !important;
     z-index: 3
-}
-#contents_detail .car_display_area #car_MainIMG_car_display {
+  }
+
+  #contents_detail .car_display_area #car_MainIMG_car_display {
     margin-bottom: 6px
-}
-#contents_detail #car_MainIMG_car_display:not(.slick-slider) {
+  }
+
+  #contents_detail #car_MainIMG_car_display:not(.slick-slider) {
     width: 640px;
     height: 480px;
-    background-image: url(../images/comingsoon_l.png);
-    background-repeat: no-repeat;
-    background-size: contain;
     overflow: hidden
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow {
     position: absolute;
     width: 7.94259375%;
     height: 100%;
@@ -295,24 +337,28 @@
     appearance: none;
     background-color: transparent;
     z-index: 2
-}
-#contents_detail #car_MainIMG_car_display.playingYoutube button.slick-arrow {
+  }
+
+  #contents_detail #car_MainIMG_car_display.playingYoutube button.slick-arrow {
     bottom: 164px;
     height: 316px
-}
-#contents_detail #car_MainIMG_car_display.playingVR button.slick-arrow {
+  }
+
+  #contents_detail #car_MainIMG_car_display.playingVR button.slick-arrow {
     position: absolute;
     top: 50%;
     margin: -21px auto;
     z-index: 10;
     height: 42px;
     width: 44px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.slick-disabled {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow.slick-disabled {
     opacity: .2;
     cursor: default
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow i {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow i {
     display: block;
     font-size: 41px;
     width: .4544em;
@@ -324,52 +370,62 @@
     position: absolute;
     top: 50%;
     margin-top: -.2272em
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow i {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow i {
     margin-top: 13px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow:not(.slick-disabled):hover i {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow:not(.slick-disabled):hover i {
     border-color: transparent transparent #fff #fff
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton {
     left: 0
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton i {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_prevbutton i {
     -moz-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     left: 16px
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton {
     right: 0
-}
-#contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton i {
+  }
+
+  #contents_detail #car_MainIMG_car_display button.slick-arrow.main_slide_nextbutton i {
     -moz-transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
     -ms-transform: rotate(-135deg);
     transform: rotate(-135deg);
     right: 16px
-}
-#contents_detail #car_thumbnail_car_navigation:not(.slick-slider) {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation:not(.slick-slider) {
     width: 590px;
     margin: auto
-}
-#contents_detail #car_thumbnail_car_navigation:not(.slick-slider) div {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation:not(.slick-slider) div {
     width: 75px !important;
     height: 56.25px;
     float: left;
     margin-left: 8px;
     margin-bottom: 5px
-}
-#contents_detail #car_thumbnail_car_navigation {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation {
     overflow: hidden;
     padding-top: 4px
-}
-#contents_detail #car_thumbnail_car_navigation:after,
-#contents_detail #car_thumbnail_car_navigation:before {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation:after,
+  #contents_detail #car_thumbnail_car_navigation:before {
     content: "";
     display: block;
     background-color: #fff;
@@ -379,8 +435,9 @@
     top: -1px;
     z-index: 1;
     visibility: visible
-}
-#contents_detail #car_thumbnail_car_navigation:before {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation:before {
     background: -moz-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0, #fff), color-stop(100%, rgba(255, 255, 255, 0)));
     background: -webkit-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
@@ -388,8 +445,9 @@
     background: -ms-linear-gradient(left, #fff 0, rgba(255, 255, 255, 0) 100%);
     background: linear-gradient(to right, #fff 0, rgba(255, 255, 255, 0) 100%);
     left: 0
-}
-#contents_detail #car_thumbnail_car_navigation:after {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation:after {
     background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(100%, #fff));
     background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
@@ -397,8 +455,9 @@
     background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
     background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, #fff 100%);
     right: 0
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation button.original_slick-arrow {
     width: 25px;
     height: 66px;
     background-color: rgba(0, 0, 0, .5);
@@ -414,12 +473,14 @@
     -moz-appearance: none;
     appearance: none;
     z-index: 2
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled {
     background-color: rgba(0, 0, 0, .2);
     cursor: default
-}
-#contents_detail #car_thumbnail_car_navigation .original_slick-arrow i {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation .original_slick-arrow i {
     font-size: 25px;
     display: block;
     width: .34512em;
@@ -429,14 +490,17 @@
     border-color: transparent transparent #fff #fff;
     border-radius: .5px;
     line-height: 33px
-}
-#contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled i {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation button.original_slick-arrow.slick-disabled i {
     opacity: .54
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow {
     left: 0
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow i {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation #thum_slide_prevbutton.original_slick-arrow i {
     -moz-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -o-transform: rotate(45deg);
@@ -444,11 +508,13 @@
     transform: rotate(45deg);
     float: left;
     margin-left: 8px
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow {
     right: 0
-}
-#contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow i {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation #thum_slide_nextbutton.original_slick-arrow i {
     -moz-transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
@@ -456,74 +522,127 @@
     transform: rotate(-135deg);
     float: right;
     margin-right: 8px
-}
-#contents_detail #car_thumbnail_car_navigation .slick-list {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation .slick-list {
     width: 590px;
     margin: auto;
     overflow: visible
-}
-@media all and (-ms-high-contrast:none) {
+  }
+
+  @media all and (-ms-high-contrast:none) {
     #contents_detail #car_thumbnail_car_navigation .slick-list {
-        overflow: hidden;
-        padding-top: 2px
+      overflow: hidden;
+      padding-top: 2px
     }
-}
-#contents_detail #car_thumbnail_car_navigation div.slick-slide > div > div {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation div.slick-slide>div>div {
     width: 75px !important;
     height: 56.25px;
     float: left;
     margin-left: 8px;
     margin-bottom: 5px;
     cursor: pointer
-}
-#contents_detail #car_thumbnail_car_navigation div.slick-slide > div > div.now_imgDisplay img{
+  }
+
+  #contents_detail #car_thumbnail_car_navigation div.slick-slide>div>div.now_imgDisplay img {
     outline: 1px solid #e60012;
     -moz-box-shadow: 0 0 2px #e60012;
     -webkit-box-shadow: 0 0 2px #e60012;
     -o-box-shadow: 0 0 2px #e60012;
     -ms-box-shadow: 0 0 2px #e60012;
     box-shadow: 0 0 2px #e60012
-}
-#contents_detail #car_thumbnail_car_navigation div img {
+  }
+
+  #contents_detail #car_thumbnail_car_navigation div img {
     max-height: 56.25px;
     width: auto;
     max-width: 100%;
     margin: auto;
     display: block
-}
-#contents_detail .car_display_area {
+  }
+
+  #contents_detail .car_display_area {
     position: relative;
-}
-#contents_detail .car_display_area #pager_display {
+  }
+
+  #contents_detail .car_display_area #pager_display {
     position: absolute;
     width: 58px;
     font-size: 12px;
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0, 0, 0, .4);
     color: #fff;
     line-height: 1.5405;
     text-align: center;
     bottom: 17px;
     left: 50%;
     border-radius: 4px;
-    margin-left: -29px!important;
+    margin-left: -29px !important;
     z-index: 3;
-}
-/*Share */
-div#social-links {
-                margin: 0 auto;
-                max-width: 500px;
-            }
-            div#social-links ul li {
-                display: inline-block;
-            }          
-            div#social-links ul li a {
-                padding: 20px;
-                border: 1px solid #ccc;
-                margin: 1px;
-                font-size: 30px;
-                color: #222;
-                background-color: #ccc;
-            }
+  }
+
+  /*Share */
+  div#social-links ul {
+    margin: 0;
+  }
+
+  div#social-links ul li {
+    display: inline-block;
+  }
+
+  div#social-links ul li a {
+    color: #fff;
+    font-size: 18px;
+    margin: 0 2px;
+    padding: 0px 22px;
+    display: block;
+
+  }
+
+  div#social-links ul li:nth-child(1) a {
+    background-color: #32529f;
+  }
+
+  div#social-links ul li:nth-child(2) a {
+    background-color: #1da1f2;
+  }
+
+  div#social-links ul li:nth-child(3) a {
+    background-color: #25d366;
+  }
+
+  .bg-danger-subtle {
+    border: 1px solid #d6d6d6;
+    font-size: 14px;
+    text-align: center;
+    height: 30px;
+  }
+
+  .detl th,
+  td {
+    background-color: #f8f8f8;
+  }
+
+  .detl th,
+  td {
+    border: 1px solid #d6d6d6;
+  }
+
+  .bg-button {
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    background-color: red;
+    color: #fff;
+    padding: 6px 42px;
+  }
+
+  .bg-button:hover {
+    outline: 1px solid red;
+    color: #fff;
+    background-color: red;
+  }
 </style>
 
 
@@ -533,325 +652,337 @@ div#social-links {
 <main class="my-4">
   <div class="container">
     <div class="row gx-3">
-      <div class="col-sm-2 col-md-2 col-lg-2 container-xl-2 left-col">
-        <!-- left row  -->
-        <div class="left-row-2 mb-3">
-          <div class="card shadow radious-10">
-            <h5 class="card-title bg-brand text-white">Recommend Car</h5>
-            <div class="p-2">
-              <!-- product card -->
-              <div class="row justify-content-center">
-                <div class="col-12">
-                  <div class="product-card my-3">
-                    <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                    <div class="product-card-body">
-                      <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
-                      <p>DBA-NZT260</p>
-                      <p>Price :</p>
-                      <p>USD 13,000.00</p>
-                      <div class="product-card-currency">
-                        <p>Approx.</p>
-                        <p>BDT 1,13,000.00</p>
+      <div class="col-md-12">
+        <!-- breadcrumb -->
+        @include('partials.breadcrumbs',['model' => $brand])
+      </div>
+      <div class="col-md-10 offset-md-1">
+        <!-- Product Search -->
+        @include('front.search-box')
+      </div>
+      <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2 container-xl-2 left-col">
+          <!-- left row  -->
+          <div class="left-row-2 mb-3">
+            <div class="card shadow radious-10">
+              <h5 class="card-title bg-brand text-white">Recommend Car</h5>
+              <div class="p-2">
+                <!-- product card -->
+                <div class="row justify-content-center">
+                  @forelse($recomended as $r)
+                  <div class="col-12">
+                    <div class="product-card my-3">
+                      @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$r->vid)->where('is_cover_img',1)->first(); @endphp
+                      @if($cover_img)
+                      <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+                      @else
+                      <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                      @endif
+                      <div class="product-card-body">
+                        <p clss="m-0"><a href="{{route('singleVehicle',['brand'=>$r->b_slug,'subBrand'=>$r->sb_slug,'stock_id'=>$r->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $r->name) }}</a></p>
+                        <p class="m-0">{{$r->chassis_no}}</p>
+                        @php
+                        $actual_price = $v->price;
+                        $dis_price = $v->price*$v->discount/100;
+                        $price = $actual_price - $dis_price;
+                        @endphp
+                        @if($price > 0)
+                        <p>Price :</p>
+                        <p>USD {{$price}}</p>
+                        <div class="product-card-currency">
+                          <p>Approx.</p>
+                          <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                        </div>
+                        @else
+                        <p>Ask</p>
+                        @endif
                       </div>
                     </div>
                   </div>
+                  @empty
+                  @endforelse
                 </div>
-
-
-
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-10 col-md-10 col-lg-10 container-xl-7">
-        <!-- mid row 1 -->
-        <div class="sg-mid-row-1">
-          <!-- breadcrumb -->
-          @include('partials.breadcrumbs',['model' => $brand])
-          <!-- Product Search -->
-          <div class="row">
-            <div class="col-sm-12 col-md-8 col-lg-8 container-xl-8">
-              @include('front.search-box')
-            </div>
-          </div>
-          <!-- Status -->
-          <div class="d-flex status">
-            <div class="hg-box inv">
-              <p>
-                <span>
-                  @if($v->inv_loc)
-                  <img src="{{asset('uploads/country/'.$v->inv_loc->image)}}" alt="" />
-                  @endif
-                </span>
-                Inventory
-              </p>
-            </div>
-            <div class="hg-box deg mx-2">
-              <p>
-                <span>
-                  <img src="{{asset('uploads/default/360.png')}}" alt="" />
-                </span>
-                360 <sup>o</sup> Images
-              </p>
-            </div>
-            <div class="hg-box new-arival">
-              <p class="text-primary">New Arrival</p>
-            </div>
-          </div>
-          {!! $shareComponent !!}
-          <!-- Product Title -->
-          <div class="prodcut-title">
-            {{--<span>Stock Id: {{$v->stock_id}} </span>--}}
-            <p>{{$v->fullName}}</p>
-            <span>4 Review <i class="bi bi-star-half"></i> </span> <br />
-            <span>{{$v->description}}</span>
-          </div>
-          <!-- Product Galary & View  -->
-          <div class="product-view">
-            <div class="row">
-              <div class="col-sm-8">
-              <div id="contents_detail" class="single">
-                <div class="car_display_area">
-              <div id="car_MainIMG_car_display">
-              @forelse($v_images as $v_img)
-                <div>
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="640" height="480" />
+        <div class="col-sm-10 col-md-10 col-lg-10 container-xl-7">
+          <!-- mid row 1 -->
+          <div class="sg-mid-row-1">
+
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Status -->
+              <div class="d-flex status">
+                <div class="hg-box inv">
+                  <p>
+                    <span>
+                      @if($v->inv_loc)
+                      @if($v->inv_loc->image)
+                      <img src="{{asset('uploads/country/'.$v->inv_loc->image)}}" alt="" />
+                      @endif
+                      @endif
+                    </span>
+                    Inventory
+                  </p>
                 </div>
-                @empty
-                    @endforelse
+                <div class="hg-box deg mx-2">
+                  <p>
+                    <span>
+                      <img src="{{asset('uploads/default/360.png')}}" alt="" />
+                    </span>
+                    360 <sup>o</sup> Images
+                  </p>
+                </div>
+                <div class="hg-box new-arival">
+                  <p class="text-primary">New Arrival</p>
+                </div>
 
-
-
-
-            </div><!-- #car_MainIMG_car_display -->
-            <p id="pager_display" class="nopointer_event nowrap_txt"><span
-                    id="currentPage_display">1</span>&nbsp;/&nbsp;<span id="totalPages_display">00</span></p>
               </div>
-            <div>
-                                    <span class="centre bluecolor">Click on thumbnails to enlarge</span>
-                                </div>
-          
+              {!! $shareComponent !!}
+            </div>
+
+
+
+            <!-- Product Title -->
+            <div class="prodcut-title">
+              {{--<span>Stock Id: {{$v->stock_id}} </span>--}}
+              <p>{{$v->fullName}}</p>
+
+              <span>4 Review <i class="bi bi-star-half"></i> </span> <br />
+              <span>{{$v->description}}</span>
+            </div>
+            <!-- Product Galary & View  -->
+            <div class="product-view">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div id="contents_detail" class="single">
+                    <div class="car_display_area">
+                      <div id="car_MainIMG_car_display">
+                        @forelse($v_images as $v_img)
+                        <div>
+                          <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />-->
+                          <img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />
+                        </div>
+                        @empty
+                        @endforelse
+
+
+
+
+                      </div><!-- #car_MainIMG_car_display -->
+                      <p id="pager_display" class="nopointer_event nowrap_txt"><span id="currentPage_display">1</span>&nbsp;/&nbsp;<span id="totalPages_display">00</span></p>
+                    </div>
+                    <div>
+                      <span class="centre bluecolor">Click on thumbnails to enlarge</span>
+                    </div>
+
 
                     <div id="car_thumbnail_car_navigation" class="clearfix car_detail_car_navigation">
-                    @forelse($v_images as $key => $v_img)
-                    @if($key == 0)
-                    
-              
-                    <div id="imgdisp_select{{$key}}" class="now_imgDisplay">
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt=""/>
+                      @forelse($v_images as $key => $v_img)
+                      @if($key == 0)
+
+
+                      <div id="imgdisp_select{{$key}}" class="now_imgDisplay">
+                        <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt="" />
+                      </div>
+                      @else
+                      <div id="imgdisp_select{{$key}}">
+                        <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt="" />
+                      </div>
+                      @endif
+
+                      @empty
+                      @endforelse
+                    </div><!-- #car_thumbnail_car_navigation -->
+                  </div>
+                  <!--Car Details  -->
+                  <div class="">
+                    <table class="table table-sm detl">
+                      <thead>
+                        <tr>
+                          <th class="text-center" colspan="4" scope="col">
+                            {{$v->fullName}} - Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">STOCK ID</th>
+                          <td>{{$v->stock_id}}</td>
+                          <th scope="row">Engine Size (CC)</th>
+                          <td>{{$v->e_size}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Maker</th>
+                          <td>{{ optional($v->brand)->name }}</td>
+                          <th scope="row">Engine Info</th>
+                          <td>{{$v->e_info}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Model</th>
+                          <td>{{ optional($v->sub_brand)->name }}</td>
+                          <th scope="row">Engine Code</th>
+                          <td>{{$v->e_code}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Package</th>
+                          <td>{{ $v->package }}</td>
+                          <th scope="row">Location</th>
+                          <td>{{ optional($v->inv_loc)->name }} | {{ optional($v->inv_port)->name }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Chassis</th>
+                          <td>{{ $v->chassis_no }}</td>
+                          <th scope="row">Drive</th>
+                          <td>{{ optional($v->drive_type)->name }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Manufacture Year</th>
+                          <td>{{$v->manu_year}}</td>
+                          <th scope="row">Registration Year</th>
+                          <td>
+                            @if($v->reg_year)
+                              {{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}
+                            @endif
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Mileage (KM)</th>
+                          <td>{{ $v->mileage }}</td>
+                          <th scope="row">Transmission</th>
+                          <td>{{ optional($v->trans)->name }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Ext. Color</th>
+                          <td>{{ optional($v->ext_color)->name }}</td>
+                          <th scope="row">Steering</th>
+                          <td>@if($v->steering == 1) RHD @else LHD @endif</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Door</th>
+                          <td>{{ optional($v->door)->name }}</td>
+                          <th scope="row">Weight</th>
+                          <td>{{ $v->weight }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Seats</th>
+                          <td>{{ optional($v->seat)->name }}</td>
+                          <th scope="row">Capacity</th>
+                          <td>{{ $v->max_loading_capacity }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Body Type</th>
+                          <td>{{ optional($v->body_type)->name }}</td>
+                          <th scope="row">Dimention (L*H*W)</th>
+                          <td>{{ $v->body_length }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Fuel Type</th>
+                          <td>{{ optional($v->fuel)->name }}</td>
+                          <th scope="row">M3</th>
+                          <td>{{ $v->m3 }}</td>
+                        </tr>
+                        <tr>
+                          {{--<th scope="row">Int. Color</th>
+                          <td>{{ optional($v->int_color)->name }}</td>--}}
+                          <th scope="row">Condition</th>
+                          <td>{{ optional($v->condition)->name }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  @if($v->option)
+                  <!--Options  -->
+                  <div class="bg-light shadow my-4">
+                    <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
+                      <thead>
+                        <tr class="table-dark">
+                          <th class="text-center" colspan="4" scope="col">
+                            Options
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="p-2" colspan="4">
+                            {{$v->option}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  @endif
+
+                  <!--Accessories  -->
+                  <div class="mt-2">
+                    <table class="m-0 table table-hover table-sm table-bordered boder border-danger-subtle">
+                      <thead>
+                        <tr class="table-dark">
+                          <th class="text-center" colspan="4" scope="col">
+                            Features
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div class="row gx-0">
+
+                      @if($v->cd_player ==1) <div class="col-md-3 bg-danger-subtle">CD Player</div> @endif
+                      @if($v->sun_roof ==1) <div class="col-md-3 bg-danger-subtle">Sun Roof</div> @endif
+                      @if($v->leather_seat ==1)<div class="col-md-3 bg-danger-subtle">Leather Seat</div>@endif
+                      @if($v->alloy_wheels ==1)<div class="col-md-3 bg-danger-subtle">Alloy Wheels</div> @endif
+
+                      @if($v->power_steering ==1)<div class="col-md-3 bg-danger-subtle">Power Steering</div> @endif
+                      @if($v->power_windows ==1)<div class="col-md-3 bg-danger-subtle">Power Windows</div> @endif
+                      @if($v->air_con ==1)<div class="col-md-3 bg-danger-subtle">Air Con</div> @endif
+                      @if($v->anti_lock_brake_system ==1)<div class="col-md-3 bg-danger-subtle">Anti lock Brake System</div> @endif
+
+                      @if($v->air_bag ==1)<div class="col-md-3 bg-danger-subtle">Air Bag</div> @endif
+                      @if($v->radio ==1)<div class="col-md-3 bg-danger-subtle">Radio</div> @endif
+                      @if($v->cd_changer ==1)<div class="col-md-3 bg-danger-subtle">Cd Changer</div> @endif
+                      @if($v->dvd ==1)<div class="col-md-3 bg-danger-subtle">DVD</div>@endif
+
+                      @if($v->tv ==1)<div class="col-md-3 bg-danger-subtle">TV</div> @endif
+                      @if($v->power_seat ==1)<div class="col-md-3 bg-danger-subtle">Power Seat</div> @endif
+                      @if($v->back_tire ==1)<div class="col-md-3 bg-danger-subtle">Back Tire </div>@endif
+                      @if($v->grill_guard ==1)<div class="col-md-3 bg-danger-subtle">Grill Guard</div> @endif
+
+                      @if($v->rear_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Rear Spoiler</div> @endif
+                      @if($v->central_locking ==1)<div class="col-md-3 bg-danger-subtle">Central Locking</div> @endif
+                      @if($v->jack ==1)<div class="col-md-3 bg-danger-subtle">Jack</div>@endif
+                      @if($v->spare_tire ==1)<div class="col-md-3 bg-danger-subtle">Spare Tire</div> @endif
+
+                    @if($v->wheel_spanner ==1)<div class="col-md-3 bg-danger-subtle">Wheel Spanner</div> @endif
+                    @if($v->fog_lights ==1)<div class="col-md-3 bg-danger-subtle">Fog Lights</div> @endif
+                    @if($v->back_camera ==1)<div class="col-md-3 bg-danger-subtle">Back Camera</div> @endif
+                    @if($v->push_start ==1)<div class="col-md-3 bg-danger-subtle">Push Start</div> @endif
+
+                    @if($v->keyless_entry ==1)<div class="col-md-3 bg-danger-subtle">Keyless Entry</div> @endif
+                    @if($v->esc ==1)<div class="col-md-3 bg-danger-subtle">ESC</div> @endif
+                    @if($v->deg_360_cam ==1)<div class="col-md-3 bg-danger-subtle">360 Degree Camera</div> @endif
+                    @if($v->body_kit ==1)<div class="col-md-3 bg-danger-subtle">Body Kit</div> @endif
+
+                    @if($v->side_airbag ==1)<div class="col-md-3 bg-danger-subtle">Side Airbag</div>@endif
+                    @if($v->power_mirror ==1)<div class="col-md-3 bg-danger-subtle">Power Mirror</div> @endif
+                    @if($v->side_skirts ==1)<div class="col-md-3 bg-danger-subtle">Side Skirts</div> @endif
+                    @if($v->front_lip_spoiler ==1)<div class="col-md-3 bg-danger-subtle">Front Lip Spoiler</div> @endif
+
+                    @if($v->navigation ==1)<div class="col-md-3 bg-danger-subtle">Navigation</div> @endif
+                    @if($v->turbo ==1)<div class="col-md-3 bg-danger-subtle">Turbo</div> @endif
+
+
+                  </div>
                 </div>
-                    @else
-                    <div id="imgdisp_select{{$key}}">
-                    <img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt=""/>
-                </div>
-                    @endif
-                
-                @empty
-                    @endforelse
-            </div><!-- #car_thumbnail_car_navigation -->
-            </div>
-                <!--Car Details  -->
-                <div class="bg-light shadow">
-                  <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
-                    <thead>
-                      <tr class="table-dark">
-                        <th class="text-center" colspan="4" scope="col">
-                          {{$v->fullName}} - Details
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">STOCK ID</th>
-                        <td>{{$v->stock_id}}</td>
-                        <th scope="row">Engine Size (CC)</th>
-                        <td>{{$v->e_size}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maker</th>
-                        <td>{{ optional($v->brand)->name }}</td>
-                        <th scope="row">Engine Info</th>
-                        <td>{{$v->e_info}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Model</th>
-                        <td>{{ optional($v->sub_brand)->name }}</td>
-                        <th scope="row">Engine Code</th>
-                        <td>{{$v->e_code}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Package</th>
-                        <td>{{ $v->package }}</td>
-                        <th scope="row">Location</th>
-                        <td>{{ optional($v->inv_loc)->name }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Chassis</th>
-                        <td>{{ $v->chassis_no }}</td>
-                        <th scope="row">Drive</th>
-                        <td>{{ optional($v->drive_type)->name }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Manufacture Year</th>
-                        <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->manu_year))->format('Y')}}</td>
-                        <th scope="row">Registration Year</th>
-                        <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Mileage (KM)</th>
-                        <td>{{ $v->mileage }}</td>
-                        <th scope="row">Transmission</th>
-                        <td>{{ optional($v->trans)->name }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Ext. Color</th>
-                        <td>{{ optional($v->ext_color)->name }}</td>
-                        <th scope="row">Steering</th>
-                        <td>@if($v->steering == 1) RHD @else LHD @endif</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Door</th>
-                        <td>{{ optional($v->door)->name }}</td>
-                        <th scope="row">Weight</th>
-                        <td>{{ $v->weight }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Seats</th>
-                        <td>{{ optional($v->seat)->name }}</td>
-                        <th scope="row">Capacity</th>
-                        <td>{{ $v->max_loading_capacity }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Body Type</th>
-                        <td>{{ optional($v->body_type)->name }}</td>
-                        <th scope="row">Dimention (L*H*W)</th>
-                        <td>{{ $v->body_length }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Fuel Type</th>
-                        <td>{{ optional($v->fuel)->name }}</td>
-                        <th scope="row">M3</th>
-                        <td>{{ $v->m3 }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Int. Color</th>
-                        <td>{{ optional($v->int_color)->name }}</td>
-                        <th scope="row">Condition</th>
-                        <td>{{ optional($v->condition)->name }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                @if($v->option)
-                <!--Options  -->
-                <div class="bg-light shadow my-4">
-                  <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
-                    <thead>
-                      <tr class="table-dark">
-                        <th class="text-center" colspan="4" scope="col">
-                          Options
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="p-2" colspan="4">
-                          {{$v->option}}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                @endif
-                @if($v->cd_player)
-                <!--Accessories  -->
-                <div class="bg-light shadow my-4">
-                  <table class="table table-hover table-sm table-bordered boder border-danger-subtle">
-                    <thead>
-                      <tr class="table-dark">
-                        <th class="text-center" colspan="4" scope="col">
-                          Features
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        @if($v->cd_player ==1)<td>CD Player</td> @else <td></td> @endif
-                        @if($v->sun_roof ==1)<td>Sun Roof</td> @else <td></td> @endif
-                        @if($v->leather_seat ==1)<td>Leather Seat</td> @else <td></td>@endif
-                        @if($v->alloy_wheels ==1)<td>Alloy Wheels</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->power_steering ==1)<td>Power Steering</td> @else <td></td> @endif
-                        @if($v->power_windows ==1)<td>Power Windows</td> @else <td></td> @endif
-                        @if($v->air_con ==1)<td>Air Con</td> @else <td></td> @endif
-                        @if($v->anti_lock_brake_system ==1)<td>ABS lock_brake_system</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->air_bag ==1)<td>Air Bag</td> @else <td></td> @endif
-                        @if($v->radio ==1)<td>Radio</td> @else <td></td> @endif
-                        @if($v->cd_changer ==1)<td>Cd Changer</td> @else <td></td> @endif
-                        @if($v->dvd ==1)<td>DVD</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->tv ==1)<td>TV</td> @else <td></td> @endif
-                        @if($v->power_seat ==1)<td>Power Seat</td> @else <td></td> @endif
-                        @if($v->back_tire ==1)<td>Back Tire</td>@else <td></td> @endif
-                        @if($v->grill_guard ==1)<td>Grill Guard</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->rear_spoiler ==1)<td>Rear Spoiler</td> @else <td></td> @endif
-                        @if($v->central_locking ==1)<td>Central Locking</td> @else <td></td> @endif
-                        @if($v->jack ==1)<td>Jack</td> @else <td></td> @endif
-                        @if($v->spare_tire ==1)<td>Spare Tire</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->wheel_spanner ==1)<td>Wheel Spanner</td> @else <td></td> @endif
-                        @if($v->fog_lights ==1)<td>Fog Lights</td> @else <td></td> @endif
-                        @if($v->back_camera ==1)<td>Back Camera</td> @else <td></td> @endif
-                        @if($v->push_start ==1)<td>Push Start</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->keyless_entry ==1)<td>Keyless Entry</td> @else <td></td> @endif
-                        @if($v->esc ==1)<td>ESC</td> @else <td>-</td> @endif
-                        @if($v->deg_360_cam ==1)<td>360 Degree Camera</td> @else <td></td> @endif
-                        @if($v->body_kit ==1)<td>Body Kit</td> @else <td></td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->side_airbag ==1)<td>Side Airbag</td> @else <td></td> @endif
-                        @if($v->power_mirror ==1)<td>Power Mirror</td> @else <td></td> @endif
-                        @if($v->side_skirts ==1)<td>Side Skirts</td> @else <td></td> @endif
-                        @if($v->front_lip_spoiler ==1)<td>Front Lip Spoiler</td> @else <td>-</td> @endif
-                      </tr>
-                      <tr>
-                        @if($v->navigation ==1)<td>Navigation</td> @else <td></td> @endif
-                        @if($v->turbo ==1)<td>Turbo</td> @else <td>-</td> @endif
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                @endif
+
                 <!-- Customer's Photo Gallery  -->
                 <div class="card shadow radious-10 my-3">
-                  <h5 class="card-title bg-brand text-white">
+                  <h5 class="card-title bg-black text-white">
                     Customer's Photo Gallery
                   </h5>
                   <div class="p-2 customer-gallery">
                     <div class="row">
                       <div class="col-sm-4">
                         <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
-                        </a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
-                        </a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a href="">
-                          <img src="./resource/img/client-galary.png" alt="" />
+                          <!--<img src="./resource/img/client-galary.png" alt="" />-->
                         </a>
                       </div>
                     </div>
@@ -859,7 +990,7 @@ div#social-links {
                 </div>
                 <!-- REVIEW HIGHLIGHTS  -->
                 <div class="card shadow radious-10 my-3">
-                  <h5 class="card-title bg-brand text-white">
+                  <h5 class="card-title bg-black text-white">
                     REVIEW HIGHLIGHTS
                   </h5>
                   <div class="p-2 customer-highlights text-center">
@@ -893,7 +1024,7 @@ div#social-links {
                 </div>
                 <!-- Review Section -->
                 <div class="card shadow radious-10 my-3">
-                  <h5 class="card-title bg-brand text-white">REVIEWS</h5>
+                  <h5 class="card-title bg-black text-white">REVIEWS</h5>
                   <div class="p-2 customer-highlights text-center">
                     <div class="row">
                       <div class="col-sm-6">
@@ -942,14 +1073,14 @@ div#social-links {
                 </div>
                 <!-- REVIEW HIGHLIGHTS  -->
                 <div class="card shadow radious-10 my-3">
-                  <h5 class="card-title bg-brand text-white">
+                  <h5 class="card-title bg-black text-white">
                     Recently Viewed Cars
                   </h5>
                   <div class="p-2 customer-highlights text-center">
                     <div class="row">
                       {{--<div class="col-sm-4">
                         <div class="product-card my-3">
-                          <img class="img-fluid" src="./resource/img/product-img.png" alt="" />
+                          <!--<img class="img-fluid" src="./resource/img/product-img.png" alt="" />-->
                           <div class="product-card-body">
                             <p>TOYOTA ALLION 2018TOYOTA ALLION 2018</p>
                             <p>DBA-NZT260</p>
@@ -957,7 +1088,7 @@ div#social-links {
                             <p>USD 13,000.00</p>
                             <div class="product-card-currency">
                               <p>Approx.</p>
-                              <p>BDT 1,13,000.00</p>
+                              <p>{{$location['geoplugin_currencyCode']}} 1,13,000.00</p>
                             </div>
                           </div>
                         </div>
@@ -970,184 +1101,198 @@ div#social-links {
                 <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
                 <div class="row">
                   <div class="d-flex view-port">
-                  <div class="col-sm-4">
-                    <div class="w-100">
-                      <div class="page-view">Page View</div>
-                      <div>712</div>
+                    <div class="col-sm-4">
+                      <div class="w-100">
+                        <div class="page-view">Page View</div>
+                        <div>712</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="w-100">
+                        <div class="page-view">Free Quote</div>
+                        <div>712</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="w-100">
+                        <div class="page-view">Favorites</div>
+                        <div>712</div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-5">
-                    <div class="w-100">
-                      <div class="page-view">Free Quote</div>
-                      <div>712</div>
+
+
+                  <!-- price table -->
+                  <form class="p-0" id="my-form">
+                    <div class="my-2 price-table bg-light">
+                      <table class="table table-bordered m-0">
+                        <thead>
+                          <tr>
+                            <th class="table-dark" colspan="2" scope="col">
+                              Total Price Calculator
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Currency</th>
+                            <td>
+                              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="1">USD</option>
+                              </select>
+                            </td>
+                          </tr>
+                          @php
+                          $actual_price = $v->price;
+                          $dis_price = $v->price*$v->discount/100;
+                          $price_after_dis = ($actual_price-$dis_price);
+                          @endphp
+                          @if($price_after_dis > 0)
+                          <tr>
+                            <th scope="row" class="fs-6">Vehicle Price</th>
+                            <td><strong class="fs-5 veh-pr"></strong></td>
+                          </tr>
+                          @endif
+                          @if($dis_price > 0)
+                          <tr>
+                            <th scope="row"></th>
+                            <td><del>USD {{$actual_price}}</del></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Save</th>
+                            <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
+                          </tr>
+                          @endif
+                          @if($price_after_dis > 0)
+                          <tr>
+                            <th scope="row">Approx.</th>
+                            <td>{{$location['geoplugin_currencyCode']}} {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
+                            <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
+                          </tr>
+                          @endif
+                          <tr>
+                            <th scope="row">Destination Country</th>
+                            <td>
+                              <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
+                                <option value="">Selet Country</option>
+                                @if(count($countries) > 0)
+                                @forelse($countries as $c)
+                                @if(\Session::get('country_id') && empty(request('country_id')))
+                                <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                                @elseif(!empty(request('country_id')))
+                                <option value="{{$c->id}}" @if(request('country_id')==$c->id) selected @endif>{{$c->name}}</option>
+                                @else
+                                <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
+                                @endif
+
+                                @empty
+                                @endforelse
+                                @endif
+                              </select>
+                            </td>
+                          </tr>
+                          {{--<tr>
+                              <th colspan="2" id="table-bg" scope="row">
+                                {{$v->note}}
+                          </th>
+                          </tr>--}}
+                          <tr>
+                            <th scope="row">Destination Port</th>
+                            <td>
+                              @php
+                              if(\Session::get('country_id') && empty(request('country_id'))){
+                              $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
+                              $des_country = \DB::table('countries')->where('id',\Session::get('country_id'))->first();
+                              }elseif(!empty(request('country_id'))){
+
+                              $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
+                              $des_country = \DB::table('countries')->where('id',request('country_id'))->first();
+                              }else{
+                              $des_port = \DB::table('ports')->where('inv_loc_id',$countryName->id)->get();
+                              $des_country = \DB::table('countries')->where('id',$countryName->id)->first();
+                              }
+
+                              @endphp
+                              <select class="des_port form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="">Select Port</option>
+                                @if(count($des_port) > 0)
+                                @forelse($des_port as $key => $dp)
+                                <option value="{{$dp->id}}" @if($key==0) selected @endif>{{$dp->name}}</option>
+                                @empty
+                                @endforelse
+                                @endif
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Shipment</th>
+                            <td>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="chk1" value="1" checked name="shipment">
+                                <label class="form-check-label" for="chk1">RoRo</label>
+
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="chk2" value="2" name="shipment">
+                                <label class="form-check-label" for="chk2">Container</label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Freight</th>
+                            <td class="fr_txt"></td>
+                            <input type="hidden" class="fr_val">
+                          </tr>
+                          <tr>
+                            <th scope="row">Vanning</th>
+                            <td class="van_txt">N/A</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Inspection<input type="checkbox" class="mx-2 chk" value="{{$des_country->inspection}}"></th>
+                            <td class="ins_txt">USD {{$des_country->inspection}}</td>
+                          </tr>
+                          <tr class="tr-hide">
+                            <th scope="row"></th>
+                            <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->inspection)}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Insurance<input type="checkbox" class="mx-2 chk" value="{{$des_country->insurance}}"></th>
+                            <td class="insu_txt">USD {{$des_country->insurance}}</td>
+                          </tr>
+                          <tr class="tr-hide">
+                            <th scope="row"></th>
+                            <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->insurance)}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row"></th>
+                            <td class="total"></td>
+                          </tr>
+                          <tr>
+                            <th colspan="2" scope="row">
+                              ICARJAPAN ships a car upon receiving Deposit(Down
+                              payment agreed). A customer shall pay within 7
+                              days after BL copy shown as an evidence of export.
+                              Please give us an inquiry if you have any concern.
+                            </th>
+                          </tr>
+                          <tr>
+                            <th colspan="2" scope="row">
+                              Production Year/month is provided by Suppliers.
+                              ICARJAPAN shall not be responsible for any loss, damages
+                              and troubles caused by this information.
+                            </th>
+                          </tr>
+                          <tr class="table-dark">
+                            <th class="h5 fw-bold" scope="row">Total Price</th>
+                            <td class="fw-bold">Ask</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- Contact Us  -->
                     </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="w-100">
-                      <div class="page-view">Favorites</div>
-                      <div>712</div>
-                    </div>
-                  </div>
-                  </div>
-
-                
-                <!-- price table -->
-                <form class="p-0" id="my-form">
-                  <div class="my-2 price-table bg-light">
-                    <table class="table table-bordered m-0">
-                      <thead>
-                        <tr>
-                          <th class="table-dark" colspan="2" scope="col">
-                            Total Price Calculator
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Currency</th>
-                          <td>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                              <option value="1">USD</option>
-                            </select>
-                          </td>
-                        </tr>
-                        @php
-                        $actual_price = $v->price;
-                        $dis_price = $v->price*$v->discount/100;
-                        $price_after_dis = ($actual_price-$dis_price);
-                        @endphp
-                        <tr>
-                          <th scope="row">Vehicle Price</th>
-                          <td>USD {{$price_after_dis}}</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td><del>USD {{$actual_price}}</del></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Save</th>
-                          <td>USD {{$dis_price}} ({{$v->discount}}%)</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Approx.</th>
-                          <td>BDT {{number_format(round($location['geoplugin_currencyConverter']*$dis_price), 2, '.', ',')}}</td>
-                          <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
-                        </tr>
-                        <tr>
-                          <th scope="row">Destination Country</th>
-                          <td>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
-                              <option value="">Selet Country</option>
-                              @if(count($countries) > 0)
-                              @forelse($countries as $c)
-                              @if(\Session::get('country_id') && empty(request('country_id')))
-                              <option value="{{$c->id}}" @if(\Session::get('country_id')==$c->id) selected @endif>{{$c->name}}</option>
-                              @elseif(!empty(request('country_id')))
-                              <option value="{{$c->id}}" @if(request('country_id')==$c->id) selected @endif>{{$c->name}}</option>
-                              @else
-                              <option value="{{$c->id}}" @if($countryName->id == $c->id) selected @endif>{{$c->name}}</option>
-                              @endif
-
-                              @empty
-                              @endforelse
-                              @endif
-                            </select>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th colspan="2" id="table-bg" scope="row">
-                            {{$v->note}}
-                          </th>
-                        </tr>
-                        <tr>
-                          <th scope="row">Destination Port</th>
-                          <td>
-                            @php
-                            if(\Session::get('country_id') && empty(request('country_id'))){
-                            $des_port = \DB::table('ports')->where('inv_loc_id',\Session::get('country_id'))->get();
-                            }elseif(!empty(request('country_id'))){
-                            $des_port = \DB::table('ports')->where('inv_loc_id',request('country_id'))->get();
-                            }else{
-                            $des_port = \DB::table('ports')->where('inv_loc_id',$countryName->id)->get();
-                            }
-
-                            @endphp
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                              <option value="">Select Port</option>
-                              @if(count($des_port) > 0)
-                              @forelse($des_port as $key => $dp)
-                              <option value="{{$dp->id}}" @if($key==0) selected @endif>{{$dp->name}}</option>
-                              @empty
-                              @endforelse
-                              @endif
-                            </select>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Shipment</th>
-                          <td>
-                            <div class="mb-3 form-check">
-                              <input type="radio" class="form-check-input" id="exampleCheck1" checked />
-                              <label class="form-check-label" for="exampleCheck1">RoRo</label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Freight</th>
-                          <td>Ask</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Vanning</th>
-                          <td>N/A</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Inspection</th>
-                          <td>USD 200.00</td>
-                          <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*200)}}" class="ins_val">
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*200)}}</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Insurance</th>
-                          <td>USD 272</td>
-                          <input type="hidden" value="{{round($location['geoplugin_currencyConverter']*272)}}" class="insur">
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td>Approx. BDT {{round($location['geoplugin_currencyConverter']*272)}}</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td class="total"></td>
-                        </tr>
-                        <tr>
-                          <th colspan="2" scope="row">
-                            ICARJAPAN ships a car upon receiving Deposit(Down
-                            payment agreed). A customer shall pay within 7
-                            days after BL copy shown as an evidence of export.
-                            Please give us an inquiry if you have any concern.
-                          </th>
-                        </tr>
-                        <tr>
-                          <th colspan="2" scope="row">
-                            Production Year/month is provided by Suppliers.
-                            ICARJAPAN shall not be responsible for any loss, damages
-                            and troubles caused by this information.
-                          </th>
-                        </tr>
-                        <tr class="table-dark">
-                          <th class="h5 fw-bold" scope="row">Total Price</th>
-                          <td class="fw-bold">Ask</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <!-- Contact Us  -->
-                  </div>
-                </form>
+                  </form>
                 </div>
-                @if(currentUser() == 'user')
+                {{--@if(currentUser() == 'user')--}}
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
                   <div class="p-2 customer-highlights text-center">
@@ -1158,15 +1303,19 @@ div#social-links {
                     <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
                       @csrf
                       <input name="vehicle_id" type="hidden" value="{{$v->id}}">
+                      @if(currentUserId())
                       <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @else
+                      <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @endif
                     </form>
-                    <!-- <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Buy Now</a> -->
+                    
                     <div class="my-3">
-                      <img src="./resource/img/atm.jpg" alt="" />
+                      <!--<img src="./resource/img/atm.jpg" alt="" />-->
                     </div>
                   </div>
                 </div>
-                @endif
+                {{--@endif--}}
                 <!-- Inquiry Form -->
                 <div class="modal fade" id="inquiry" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
                   <div class="modal-dialog">
@@ -1253,8 +1402,13 @@ div#social-links {
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-body">
-                        <div class="d-flex justify-content-center">
-                          <a href="{{route('login')}}" class="btn btn-primary">Login</a>
+                        <p class="m-0 text-center">
+                        Login is required before making a reservation.(Login >>)
+                        Please sign up if you don't have an account yet.(Create Account >>)
+                        </p>
+                        <div class="d-flex justify-content-center mt-2">
+                       
+                          <a href="{{route('login')}}" class="btn btn-primary me-2">Login</a>
                           <a href="{{route('register')}}" class="btn btn-secondary">Register</a>
                         </div>
                       </div>
@@ -1270,6 +1424,7 @@ div#social-links {
         </div>
       </div>
     </div>
+  </div>
   </div>
 </main>
 <!-- main seciton end -->
@@ -1301,83 +1456,83 @@ div#social-links {
 <script>
   $(document).ready(function() {
     $(function() {
-    "use strict";
-    var e = $("#car_MainIMG_car_display > .ytslide").length;
-    $("#car_MainIMG_car_display").on("init", function(e, t) {
-        $("#currentPage_display").text(t.currentSlide + 1), $("#totalPages_display").text(t.slideCount)
-    }).slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        initialSlide: e,
-        lazyLoad: "progressive",
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100
-    }).on("afterChange", function(e, t, r) {
-        ($("#currentPage_display").text(r + 1), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $("div#imgdisp_select" + r).addClass("now_imgDisplay"), $(".slick-current").hasClass("ytonly")) ? ($("#car_MainIMG_car_display .ytslide.slick-current > iframe")[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide.slick-current > iframe").addClass("playingYoutube")) : $("#car_MainIMG_car_display .ytslide > iframe").hasClass("playingYoutube") && ($("#car_MainIMG_car_display .ytslide > iframe")[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide > iframe").removeClass("playingYoutube")), $(".slick-current").hasClass("vronly") ? $("#car_MainIMG_car_display").addClass("playingVR") : $("#car_MainIMG_car_display").removeClass("playingVR")
-    })
-}), $(function() {
-    "use strict";
-    $("#car_thumbnail_car_navigation").slick({
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button id="thum_slide_prevbutton" class="original_slick-arrow"><i class="fa-chevron-originecssleft" aria-hidden="true">&nbsp;</i></button>',
-        nextArrow: '<button id="thum_slide_nextbutton" class="original_slick-arrow"><i class="fa-chevron-originecssright" aria-hidden="true">&nbsp;</i></button>',
-        rows: 2,
-        slidesPerRow: 7,
-        speed: 330,
-        touchMove: !1,
-        cssEase: "linear",
-        focusOnSelect: !0,
-        zIndex: 100
-    }), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').on("click", function() {
-        var e = $(this).attr("id").replace("imgdisp_select", "");
-        $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $(this).addClass("now_imgDisplay"), $("#car_MainIMG_car_display").slick("slickSetOption", "lazyLoad", "ondemand", !0).slick("slickGoTo", e)
-    })
-}), $(function() {
-    "use strict";
-    $("#also_viewed_car_list").slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    })
-}), 
-$(function() {
-    "use strict";
-    $("#recently_viewed_car_list").slick({
-        adaptiveHeight: !0,
-        edgeFriction: .2,
-        infinite: !1,
-        prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
-        nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
-        speed: 330,
-        zIndex: 100,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    })
-});
+        "use strict";
+        var e = $("#car_MainIMG_car_display > .ytslide").length;
+        $("#car_MainIMG_car_display").on("init", function(e, t) {
+          $("#currentPage_display").text(t.currentSlide + 1), $("#totalPages_display").text(t.slideCount)
+        }).slick({
+          adaptiveHeight: !0,
+          edgeFriction: .2,
+          infinite: !1,
+          initialSlide: e,
+          lazyLoad: "progressive",
+          prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
+          nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
+          speed: 330,
+          zIndex: 100
+        }).on("afterChange", function(e, t, r) {
+          ($("#currentPage_display").text(r + 1), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $("div#imgdisp_select" + r).addClass("now_imgDisplay"), $(".slick-current").hasClass("ytonly")) ? ($("#car_MainIMG_car_display .ytslide.slick-current > iframe")[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide.slick-current > iframe").addClass("playingYoutube")) : $("#car_MainIMG_car_display .ytslide > iframe").hasClass("playingYoutube") && ($("#car_MainIMG_car_display .ytslide > iframe")[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*"), $("#car_MainIMG_car_display, #car_MainIMG_car_display .ytslide > iframe").removeClass("playingYoutube")), $(".slick-current").hasClass("vronly") ? $("#car_MainIMG_car_display").addClass("playingVR") : $("#car_MainIMG_car_display").removeClass("playingVR")
+        })
+      }), $(function() {
+        "use strict";
+        $("#car_thumbnail_car_navigation").slick({
+          edgeFriction: .2,
+          infinite: !1,
+          prevArrow: '<button id="thum_slide_prevbutton" class="original_slick-arrow"><i class="fa-chevron-originecssleft" aria-hidden="true">&nbsp;</i></button>',
+          nextArrow: '<button id="thum_slide_nextbutton" class="original_slick-arrow"><i class="fa-chevron-originecssright" aria-hidden="true">&nbsp;</i></button>',
+          rows: 2,
+          slidesPerRow: 7,
+          speed: 330,
+          touchMove: !1,
+          cssEase: "linear",
+          focusOnSelect: !0,
+          zIndex: 100
+        }), $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').on("click", function() {
+          var e = $(this).attr("id").replace("imgdisp_select", "");
+          $('#car_thumbnail_car_navigation div[id^="imgdisp_select"]').removeClass("now_imgDisplay"), $(this).addClass("now_imgDisplay"), $("#car_MainIMG_car_display").slick("slickSetOption", "lazyLoad", "ondemand", !0).slick("slickGoTo", e)
+        })
+      }), $(function() {
+        "use strict";
+        $("#also_viewed_car_list").slick({
+          adaptiveHeight: !0,
+          edgeFriction: .2,
+          infinite: !1,
+          prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
+          nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
+          speed: 330,
+          zIndex: 100,
+          slidesToShow: 3,
+          slidesToScroll: 3
+        })
+      }),
+      $(function() {
+        "use strict";
+        $("#recently_viewed_car_list").slick({
+          adaptiveHeight: !0,
+          edgeFriction: .2,
+          infinite: !1,
+          prevArrow: '<button class="main_slide_prevbutton"><i class="fa-chevron-originecssleft" aria-hidden="true"></i></button>',
+          nextArrow: '<button class="main_slide_nextbutton"><i class="fa-chevron-originecssright" aria-hidden="true"></i></button>',
+          speed: 330,
+          zIndex: 100,
+          slidesToShow: 3,
+          slidesToScroll: 3
+        })
+      });
 
-jQuery(function($){
-    $("#contents_detail img.lazy").lazyload({
+    jQuery(function($) {
+      $("#contents_detail img.lazy").lazyload({
         effect: 'fadeIn',
         effectspeed: 1000
-    });
-    $(".car_detail_car_navigation img.lazy").lazyload({
+      });
+      $(".car_detail_car_navigation img.lazy").lazyload({
         effect: 'fadeIn',
         effectspeed: 1000
-    });
-    $(".carDetails img.lazy").lazyload({
+      });
+      /*$("#car_MainIMG_car_display img.lazy").lazyload({
         effect: 'fadeIn',
+      });*/
     });
-});
 
     /*==Most Viewed Vehicle Data save with ajax request==*/
     var csrfToken = "{{ csrf_token() }}";
@@ -1399,23 +1554,102 @@ jQuery(function($){
       }
     });
 
-    /*==Payment Calculation==*/
-    var actual_price = "{{$v->price}}";
-    var dis_price = "{{$v->price*$v->discount/100}}";
-    var price_after_dis = "{{$actual_price-$dis_price}}";
-    var convert_price = parseFloat($('.convert_price').val());
-    var inspection = parseFloat($('.ins_val').val());
-    var insurance = parseFloat($('.insur').val());
-    console.log(convert_price);
-    console.log(inspection);
-    console.log(insurance);
-    $('.total').text('Approx. BDT ' + (convert_price + inspection + insurance));
-
     /*===Country Wise Port  */
-    $('select[name="country_id"]').on('change', function() {
+      $('select[name="country_id"]').on('change', function() {
       $('#my-form').submit();
     });
 
+    var convert_price = parseFloat($('.convert_price').val())?parseFloat($('.convert_price').val()):0;
+    var insurance = "{{$des_country->insurance}}"?"{{$des_country->insurance}}":0;
+    var inspection = "{{$des_country->inspection}}"?"{{$des_country->inspection}}":0;
+    var m3_value  = "{{ $v->m3 }}";
+    var currency_rate = parseFloat("{{$location['geoplugin_currencyConverter']}}").toFixed(2);
+
+    function roro(){
+      $('.tr-hide').show();
+      $('.van_txt').text('N/A');
+      $('.ins_txt').text('USD '+inspection);
+      $('.insu_txt').text('USD '+insurance);
+      m3Charge();
+    }
+    function container(){
+      $('.tr-hide').hide();
+      $('.fr_txt').text('Ask');
+      $('.van_txt').text('Ask');
+      $('.ins_txt').text('Ask');
+      $('.insu_txt').text('Ask');
+      if(convert_price >0){
+        $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " + (convert_price));
+      }else{
+        $('.total').text('Ask');
+      }
+      
+    }
+
+    var shipment = $('input[name="shipment"]:checked').val();
+    if (shipment == 1) {
+      roro();
+    } else {
+      container();
+    }
+
+    $('input[name="shipment"]').change(function() {
+      var shipment = $('input[name="shipment"]:checked').val();
+      if (shipment == 1) {
+        roro();
+      } else {
+        container();
+      }
+    });
+
+    function m3Charge() {
+      /*Destination port*/
+      var des_port_id = $('.des_port option:selected').val();
+      if (des_port_id) {
+        $.ajax({
+          url: "{{route('m3Charge')}}",
+          type: 'GET',
+          dataType: 'json',
+          data: {
+            id: des_port_id,
+          },
+          success: function(res) {
+            console.log(res)
+            if (res) {
+              /*M3 Calculation */
+              var charge = res.m3
+              var value = "{{ $v->m3 }}";
+              var ad_cost = parseFloat(res.aditional_cost);
+              $('.fr_txt').text('USD ' + charge * value);
+              $('.fr_val').val(charge * value);
+              $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " +(Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
+              /* To Show Vehicle Price */
+              var v_price = parseFloat("{{$price_after_dis}}");
+              $('.veh-pr').text('USD '+(v_price+ad_cost));
+            }else{
+              $('.fr_val').val(0);
+              $('.fr_txt').text('USD 0');
+              $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " + convert_price + arseFloat(ad_cost* currency_rate));
+              /* To Show Vehicle Price */
+              var v_price = "{{$price_after_dis}}";
+              $('.veh-pr').text('USD '+(v_price+ad_cost));
+            }
+          }
+        });
+      }
+    }
+    $('.chk').on('change', function() {
+      var sum = parseFloat($('.total').text());
+      var checkboxValue = parseFloat($(this).val());
+      if ($(this).is(':checked')) {
+      // Checkbox is checked, add its value to the total
+      sum += checkboxValue
+      } else {
+      // Checkbox is unchecked, subtract its value from the total
+      sum -= checkboxValue;
+    }
+      $('.total').text(sum);
+    })
   });
 </script>
 @endpush

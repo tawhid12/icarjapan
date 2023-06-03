@@ -11,4 +11,5 @@ class Port extends Model
     public function inv_loc(){
         return $this->belongsTo(Country::class);
     }
+
 }
