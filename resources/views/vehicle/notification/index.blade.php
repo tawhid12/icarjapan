@@ -35,7 +35,7 @@
                                             <a href="{{route(currentUser().'.notification.edit',$n->id)}}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <!-- <a href="javascript:void()" onclick="$('#form{{$b->id}}').submit()">
+                                            <!-- <a href="javascript:void()" onclick="$('#form{{$n->id}}').submit()">
                                                 <i class="bi bi-trash"></i>
                                             </a> -->
                                             <form id="form{{$n->id}}" action="{{route(currentUser().'.notification.destroy',$n->id)}}" method="post">

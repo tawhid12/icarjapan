@@ -212,6 +212,9 @@ class VehicleController extends Controller
                             DB::table('vehicle_images')->insert($vehicleImagesArr);
 
                             $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            $image->resize(640, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
                             // Load the watermark image
                             $watermark = Image::make(public_path('uploads/watermark.png'));
 
@@ -487,11 +490,14 @@ class VehicleController extends Controller
                             DB::table('vehicle_images')->insert($vehicleImagesArr);
 
                             $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                            $image->resize(640, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
                             // Load the watermark image
                             $watermark = Image::make(public_path('uploads/watermark.png'));
 
                             // Increase the size of the watermark image
-                            $watermark->resize(1000, null, function ($constraint) {
+                            $watermark->resize(180, null, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
 
@@ -507,13 +513,26 @@ class VehicleController extends Controller
                 }
                 /*== Vehicle Country Wise */
                 if ($request->post('country_id')) {
-                    $country_data = $request->post('country_id');
-
-                    foreach ($country_data as $key => $c) {
-                        $v_data = Vehicle::find($vehicle->id); //any user we want to find 
-                        $data = $country_data[$key];
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('countries_vehicles')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        $country_data = $request->post('country_id');
+                        foreach ($country_data as $key => $c) {
+                            $data = array(
+                                'country_id' => $country_data[$key],
+                                'vehicle_id' => $vehicle->id
+                            );
+                            DB::table('countries_vehicles')->insert($data);
+                        }
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
                     }
-                    $v_data->countries()->sync($country_data);
                 } else {
                     // start the transaction
                     DB::beginTransaction();
@@ -531,13 +550,26 @@ class VehicleController extends Controller
                 }
                 /*== Vehicle Arival Wise */
                 if ($request->post('arival_country_id')) {
-                    $arival_country_data = $request->post('arival_country_id');
-
-                    foreach ($arival_country_data as $key => $c) {
-                        $v_data = Vehicle::find($vehicle->id); //any user we want to find 
-                        $data = $arival_country_data[$key];
+                    // start the transaction
+                    DB::beginTransaction();
+                    try {
+                        // delete the data
+                        DB::table('new_arivals')->where('vehicle_id', '=', $vehicle->id)->delete();
+                        // insert new data
+                        $arival_country_data = $request->post('arival_country_id');
+                        foreach ($arival_country_data as $key => $c) {
+                            $data = array(
+                                'country_id' => $arival_country_data[$key],
+                                'vehicle_id' => $vehicle->id
+                            );
+                            DB::table('new_arivals')->insert($data);
+                        }
+                        // commit the transaction
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        // something went wrong, roll back the transaction
+                        DB::rollBack();
                     }
-                    $v_data->arival_country()->sync($arival_country_data);
                 } else {
                     // start the transaction
                     DB::beginTransaction();
@@ -591,7 +623,7 @@ class VehicleController extends Controller
                 DB::table('countries_vehicles')->where('vehicle_id', $id)->delete();
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {*/
-                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             //}
         } catch (Exception $e) {
             //dd($e);
@@ -695,7 +727,7 @@ class VehicleController extends Controller
         return 'Watermark added successfully.';
     }
 
-        /*
+    /*
     $files = DB::table('vehicle_images')->pluck('image'); // Retrieve all file names from the database
         $directory = public_path('uploads/vehicle_images');
         foreach ($files as $file) {
@@ -711,6 +743,4 @@ class VehicleController extends Controller
 
             }
         }*/
-    
-    
 }

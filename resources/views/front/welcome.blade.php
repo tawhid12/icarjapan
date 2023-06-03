@@ -41,6 +41,21 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     <div id="fb-root"></div>
     <!-- Your Chat plugin code -->
     <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+<!-- Mainteance Mode -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="m-0 text-center text-danger">THE WEBSITE IS UNDER PROCESSING. YOU MAY FACE SOME ERRORS WHEN BROWSING. THANKS FOR VISITING US.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Important Notice -->
     <div class="row text-brand">
        <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
@@ -587,5 +602,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+
+      $(document).ready(function() {
+        $('#myModal').modal('show');
+    });
     </script>
   @endpush

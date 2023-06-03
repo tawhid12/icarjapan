@@ -15,7 +15,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notification = Notification::orderBy('id', 'DESC')->paginate(25);
-        return view('vehicle.notification.index',compact('notificaiton'));
+        return view('vehicle.notification.index',compact('notification'));
     }
 
     /**
