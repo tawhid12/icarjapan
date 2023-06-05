@@ -1634,7 +1634,7 @@
               
               /* To Show Vehicle Price */
               var v_price = parseFloat("{{$price_after_dis}}");
-              $('.veh-pr').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
+              $('.veh-pr').text('USD '+v_price);
               $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
               $('.non_con_total').val((Math.round((charge * value) + v_price + ad_cost)));
             }else{
@@ -1645,7 +1645,7 @@
              
               /* To Show Vehicle Price */
               var v_price = "{{$price_after_dis}}";
-              $('.veh-pr').text('USD '+(v_price+ad_cost));
+              $('.veh-pr').text('USD '+(v_price));
               $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
               $('.non_con_total').val(v_price + ad_cost);
             }
