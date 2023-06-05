@@ -110,7 +110,7 @@ th,td{
                                 <th class="bg" scope="row">Body Type</th>
                                 <td>{{ optional($v->body_type)->name }}</td>
                                 <th class="bg" scope="row">Dimention (L*H*W)</th>
-                                <td>{{ $v->body_length }}</td>
+                                <td>{{ $v->b_length }} x {{ $v->b_height }} x {{ $v->b_width }}</td>
                             </tr>
                             <tr>
                                 <th class="bg" scope="row">Fuel Type</th>

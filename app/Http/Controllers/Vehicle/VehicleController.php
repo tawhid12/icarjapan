@@ -651,11 +651,11 @@ class VehicleController extends Controller
             $image = DB::table('vehicle_images')->where('id', $id)->first();
             if (File::delete(public_path('uploads/vehicle_images/' . $image->image))) {
                 DB::table('vehicle_images')->delete($id);
-                return redirect()->back()->with('success', "Vehicle Image Deleted successfully");
             } else {
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         }
+        return redirect()->back()->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
     }
     public function galleryCover($id)
     {
