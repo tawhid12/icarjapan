@@ -1608,7 +1608,10 @@
         container();
       }
     });
-
+    /**/
+    $('.des_port').change(function() {
+      m3Charge()
+    });
     function m3Charge() {
       /*Destination port*/
       var des_port_id = $('.des_port option:selected').val();
