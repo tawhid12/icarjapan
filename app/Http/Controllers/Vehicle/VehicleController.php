@@ -101,6 +101,7 @@ class VehicleController extends Controller
             } else {
                 $roundedValue = $m3;
             }*/
+
             $vehicle->m3 = $m3;
             $vehicle->weight = $request->weight;
             //$vehicle->v_model = $request->v_model;
@@ -378,7 +379,7 @@ class VehicleController extends Controller
             } else {
                 $roundedValue = $m3;
             }*/
-            $vehicle->m3 = $request->m3;
+            $vehicle->m3 = $m3;
             $vehicle->weight = $request->weight;
             $vehicle->chassis_no = $request->chassis_no;
             $vehicle->fob = $request->fob;
