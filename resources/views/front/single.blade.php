@@ -1271,8 +1271,8 @@
                           <tr>
                             <th scope="row"></th>
                             <td class="total"></td>
-                            <input type="hidden" class="con_total">
-                            <input type="hidden" class="non_con_total">
+                            <input type="text" class="con_total">
+                            <input type="text" class="non_con_total">
                           </tr>
                           <tr>
                             <th colspan="2" scope="row">
@@ -1634,8 +1634,8 @@
               
               /* To Show Vehicle Price */
               var v_price = parseFloat("{{$price_after_dis}}");
-              $('.veh-pr').text('USD '+(v_price+ad_cost));
-              $('.h-t-price').text('USD '+(v_price+ad_cost));
+              $('.veh-pr').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
+              $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
               $('.non_con_total').val((Math.round((charge * value) + v_price + ad_cost)));
             }else{
               $('.fr_val').val(0);
@@ -1646,7 +1646,7 @@
               /* To Show Vehicle Price */
               var v_price = "{{$price_after_dis}}";
               $('.veh-pr').text('USD '+(v_price+ad_cost));
-              $('.h-t-price').text('USD '+(v_price+ad_cost));
+              $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
               $('.non_con_total').val(v_price + ad_cost);
             }
           }
@@ -1658,15 +1658,18 @@
       var sum = parseFloat($('.con_total').val());
       var non_con_sum = parseFloat($('.non_con_total').val())?parseFloat($('.non_con_total').val()):0;
       var checkboxValue = parseFloat($(this).val())?parseFloat($(this).val()):0;
-      alert(checkboxValue);
       if ($(this).is(':checked')) {
       // Checkbox is checked, add its value to the total
       sum += checkboxValue;
       non_con_sum += checkboxValue;
+      $('.con_total').val(sum);
+      $('.non_con_total').val(non_con_sum);
       } else {
       // Checkbox is unchecked, subtract its value from the total
       sum -= checkboxValue;
       non_con_sum -= checkboxValue;
+      $('.con_total').val(sum);
+      $('.non_con_total').val(non_con_sum);
     }
       $('.total').text(sum);
       if(non_con_sum > 0){
