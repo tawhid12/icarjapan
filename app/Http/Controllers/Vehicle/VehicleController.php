@@ -94,14 +94,14 @@ class VehicleController extends Controller
             /*$vehicle->v_model_id = $request->v_model_id;
             $vehicle->version = $request->version;*/
             $m3 = $request->b_length * $request->b_width * $request->b_height;
-            $rounded = floor($m3); // Get the integer part of the value
+            /*$rounded = floor($m3); // Get the integer part of the value
             $decimal = $m3 - $rounded; // Get the decimal part of the value
             if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
             } else {
                 $roundedValue = $m3;
-            }
-            $vehicle->m3 = $roundedValue/*$request->m3*/;
+            }*/
+            $vehicle->m3 = $m3;
             $vehicle->weight = $request->weight;
             //$vehicle->v_model = $request->v_model;
             $vehicle->chassis_no = $request->chassis_no;
@@ -371,14 +371,14 @@ class VehicleController extends Controller
             $vehicle->sub_brand_id = $request->sub_brand_id;
             $vehicle->package = $request->package;
             $m3 = $request->b_length * $request->b_width * $request->b_height;
-            $rounded = floor($m3); // Get the integer part of the value
+            /*$rounded = floor($m3); // Get the integer part of the value
             $decimal = $m3 - $rounded; // Get the decimal part of the value
             if ($decimal >= 0.50) {
                 $roundedValue = ceil($m3);
             } else {
                 $roundedValue = $m3;
-            }
-            $vehicle->m3 = $roundedValue/*$request->m3*/;
+            }*/
+            $vehicle->m3 = $request->m3;
             $vehicle->weight = $request->weight;
             $vehicle->chassis_no = $request->chassis_no;
             $vehicle->fob = $request->fob;
