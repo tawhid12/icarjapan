@@ -875,7 +875,11 @@
                           <th scope="row">Body Type</th>
                           <td>{{ optional($v->body_type)->name }}</td>
                           <th scope="row">Dimention (L*H*W)</th>
-                          <td>{{ $v->b_length }} x {{ $v->b_height }} x {{ $v->b_width }}</td>
+                          <td>
+                            @if($v->b_length && $v->b_height && $v->b_width)
+                            {{ $v->b_length }} x {{ $v->b_height }} x {{ $v->b_width }}
+                            @endif
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Fuel Type</th>
