@@ -1178,7 +1178,7 @@
                           <tr>
                             <th scope="row">Destination Country</th>
                             <td>
-                              <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="country_id">
+                              <select class="form-select form-select-sm country" name="country_id">
                                 <option value="">Selet Country</option>
                                 @if(count($countries) > 0)
                                 @forelse($countries as $c)
@@ -1562,7 +1562,7 @@
     });
 
     /*===Country Wise Port  */
-      $('select[name="country_id"]').on('change', function() {
+      $('.country').on('change', function() {
       $('#my-form').submit();
     });
 
