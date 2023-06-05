@@ -23,13 +23,13 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 <style>
   .rating i.fa {
     color: #f9cc00;
-  }
+}
 
-  .rating-count {
+.rating-count {
     font-size: 12px;
     color: red;
     font-weight: 700;
-  }
+}
 </style>
 @endpush
 @section('content')
@@ -42,23 +42,23 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     <!-- Your Chat plugin code -->
     <div id="fb-customer-chat" class="fb-customerchat"></div>
 
-    <!-- Mainteance Mode -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+<!-- Mainteance Mode -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-body">
-            <p class="m-0 text-center text-danger">THE WEBSITE IS UNDER PROCESSING. YOU MAY FACE SOME ERRORS WHEN BROWSING. THANKS FOR VISITING US.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Acknowledge</button>
-          </div>
+            <div class="modal-body">
+                <p class="m-0 text-center text-danger">THE WEBSITE IS UNDER PROCESSING. YOU MAY FACE SOME ERRORS WHEN BROWSING. THANKS FOR VISITING US.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Acknowledge</button>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
     <!-- Important Notice -->
     <div class="row text-brand">
-      <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
+       <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
         <p class="m-0 notice-text">
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
           Beware of Scams Advising Fake Money Transfer Instructions! <a class="text-primary font-bold" href="">See Details</a>
@@ -71,7 +71,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
           About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
         </p>
-      </div>
+      </div>  
     </div>
     <div class="row gx-4">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
@@ -85,7 +85,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-black text-white">
-              {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
+            {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
@@ -106,61 +106,60 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         @include('front.partial.discount-side-bar')
         @include('front.partial.type-side-bar')
         @include('front.partial.category-side-bar')
-        <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
-          @include('front.search-box')
-          <!-- mid row 2 -->
-          <style>
-            .mid-sm-banner img {
-              width: 172px;
-              aspect-ratio: auto 172 / 104;
-              height: 104px;
-            }
-          </style>
-          <div class="mid-row-2 mb-3">
-            <div class="row gx-2 d-flex align-items-center">
-              <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
-                <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
-                <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt="" />
-                <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt="" />
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
-                <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt="" />
-                <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt="" />
-              </div>
+      <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
+        @include('front.search-box')
+        <!-- mid row 2 -->
+        <style>
+           .mid-sm-banner img{
+    width: 172px;
+    aspect-ratio: auto 172 / 104;
+    height: 104px;
+}
+        </style>
+        <div class="mid-row-2 mb-3">
+          <div class="row gx-2 d-flex align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
+              <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt=""/>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt=""/>
             </div>
           </div>
-          <!-- mid row 3 -->
-
+        </div>
+        <!-- mid row 3 -->
+    
           <div class="mid-row-3">
             <div class="row">
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
+              <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
               </div>
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
+              <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
               </div>
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
+              <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
               </div>
             </div>
             {{--<a class="shadow" href="#">My Accounts Status</a>--}}
           </div>
-
-          <!-- mid row 4 product row 1 -->
-          <div class="mid-row-4 my-4">
-            <!-- product row title -->
-            <div class="d-flex product-row-title">
-              <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
-              <div class="ms-auto">
-                <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
-              </div>
+       
+        <!-- mid row 4 product row 1 -->
+        <div class="mid-row-4 my-4">
+          <!-- product row title -->
+          <div class="d-flex product-row-title">
+            <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
+            <div class="ms-auto">
+              <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
             </div>
-            <!-- product card -->
-            <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
-              @php //echo '
-              <pre>'; print_r($most_views->toArray());die;@endphp
+          </div>
+          <!-- product card -->
+          <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            @php //echo '<pre>'; print_r($most_views->toArray());die;@endphp
               @forelse($most_views as $v)
               <div class="col">
                 <div class="product-card mb-3">
@@ -458,16 +457,6 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <!--<img class="img-fluid" src="{{asset('front/img/Shipping-Shedule.png')}}" alt="" />-->
             </a>
           </div>
-          <!-- right row 4 -->
-          <div class="right-row-4 mb-3">
-            <div class="card shadow radious-10">
-              <div class="fb-page" data-href="https://www.facebook.com/icarjapanofficial" data-tabs="timeline" data-max-width="300" data-height="130" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <blockquote cite="https://www.facebook.com/icarjapanofficial" class="fb-xfbml-parse-ignore">
-                  <a href="https://www.facebook.com/icarjapanofficial">ICAR JAPAN</a>
-                </blockquote>
-              </div>
-            </div>
-          </div>
           <!-- right row 3 -->
           <div class="right-row-3 mb-3">
             <div class="card shadow radious-10">
@@ -483,6 +472,16 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 </p>
                 @empty
                 @endforelse
+              </div>
+            </div>
+          </div>
+          <!-- right row 4 -->
+          <div class="right-row-4 mb-3">
+            <div class="card shadow radious-10">
+              <div class="fb-page" data-href="https://www.facebook.com/icarjapanofficial" data-tabs="timeline" data-max-width="300" data-height="130" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/icarjapanofficial" class="fb-xfbml-parse-ignore">
+                  <a href="https://www.facebook.com/icarjapanofficial">ICAR JAPAN</a>
+                </blockquote>
               </div>
             </div>
           </div>
