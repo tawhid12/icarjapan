@@ -366,7 +366,7 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="discount">Discount</label>
+                                        <label for="discount">Discount (Percentage Value)</label>
                                         <input type="text" id="discount" value="{{old('discount')}}" class="form-control" placeholder="discount" name="discount">
                                     </div>
                                 </div>
