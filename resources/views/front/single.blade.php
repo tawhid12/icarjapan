@@ -1628,7 +1628,7 @@
               var value = "{{ $v->m3 }}";
               var ad_cost = parseFloat(res.aditional_cost);
               $('.fr_txt').text('USD ' + charge * value);
-              $('.fr_val').val(charge * value);
+              $('.fr_val').val(Math.round(charge * value,2));
               $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " +(Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
               $('.con_total').val((Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
               
