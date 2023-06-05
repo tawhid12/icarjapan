@@ -458,6 +458,16 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             </a>
           </div>
           <!-- right row 3 -->
+          <div class="right-row-4 mb-3">
+            <div class="card shadow radious-10">
+              <div class="fb-page" data-href="https://www.facebook.com/icarjapanofficial" data-tabs="timeline" data-max-width="300" data-height="130" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/icarjapanofficial" class="fb-xfbml-parse-ignore">
+                  <a href="https://www.facebook.com/icarjapanofficial">ICAR JAPAN</a>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <!-- right row 4 -->
           <div class="right-row-3 mb-3">
             <div class="card shadow radious-10">
               <h5 class="right-row-title text-white">
@@ -472,16 +482,6 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 </p>
                 @empty
                 @endforelse
-              </div>
-            </div>
-          </div>
-          <!-- right row 4 -->
-          <div class="right-row-4 mb-3">
-            <div class="card shadow radious-10">
-              <div class="fb-page" data-href="https://www.facebook.com/icarjapanofficial" data-tabs="timeline" data-max-width="300" data-height="130" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <blockquote cite="https://www.facebook.com/icarjapanofficial" class="fb-xfbml-parse-ignore">
-                  <a href="https://www.facebook.com/icarjapanofficial">ICAR JAPAN</a>
-                </blockquote>
               </div>
             </div>
           </div>
