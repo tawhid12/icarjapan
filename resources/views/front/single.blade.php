@@ -1271,8 +1271,8 @@
                           <tr>
                             <th scope="row"></th>
                             <td class="total"></td>
-                            <input type="text" class="con_total">
-                            <input type="text" class="non_con_total">
+                            <input type="hidden" class="con_total">
+                            <input type="hidden" class="non_con_total">
                           </tr>
                           <tr>
                             <th colspan="2" scope="row">
