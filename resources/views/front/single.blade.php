@@ -1629,7 +1629,7 @@
               var ad_cost = parseFloat(res.aditional_cost);
               $('.fr_txt').text('USD ' + (charge * value).toFixed(2));
               alert(ad_cost);
-              $('.fr_val').val((charge * value + ad_cost).toFixed(2));
+              $('.fr_val').val(((charge * value) + ad_cost).toFixed(2));
               $('.total').text('Approx.  '+"{{$location['geoplugin_currencyCode']}} " +(Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
               $('.con_total').val((Math.round((charge * value * currency_rate) + convert_price + (ad_cost* currency_rate))));
               
