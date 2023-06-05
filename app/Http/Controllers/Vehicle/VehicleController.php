@@ -219,7 +219,7 @@ class VehicleController extends Controller
                             $watermark = Image::make(public_path('uploads/watermark.png'));
 
                             // Increase the size of the watermark image
-                            $watermark->resize(1000, null, function ($constraint) {
+                            $watermark->resize(180, null, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
 
