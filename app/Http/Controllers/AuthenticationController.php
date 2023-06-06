@@ -31,7 +31,7 @@ class AuthenticationController extends Controller
             $country_id = DB::table('countries')->where('code',$request->country_id)->first()->id;
             $user->country_id=$country_id;
             $user->password=Hash::make($request->password);
-            $user->role_id=3;
+            $user->role_id=4;
             if($user->save())
                 return redirect('login')->with($this->resMessageHtml(true,null,'Successfully Registred'));
             else
