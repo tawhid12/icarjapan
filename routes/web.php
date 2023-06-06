@@ -115,6 +115,7 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::post('/change_password', [userprofile::class,'change_password_store'])->name('salesexecutive.change_password.store');
 
         Route::resource('inquiry', inquiry::class,['as'=>'salesexecutive']);
+        Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive'])->only(['index','show','create']);
 
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);

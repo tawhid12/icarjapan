@@ -41,9 +41,11 @@
                                         <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-eye"></i>
                                         </a>
+                                        @if(currentUser() != 'salesexecutive')
                                         <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+                                       
                                         <a href="javascript:void()" onclick="$('#form{{$v->id}}').submit()">
                                             <i class="bi bi-trash"></i>
                                         </a>
@@ -51,6 +53,7 @@
                                             @csrf
                                             @method('delete')
                                         </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @empty

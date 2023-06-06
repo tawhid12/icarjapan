@@ -25,8 +25,9 @@ th,td{
         <div class="col-12">
             <div class="card">
                 <div class="col-md-12">
-                    
+                    @if(currentUser() != 'salesexecutive')
                     <a class="btn btn-sm btn-info float-start" href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}"><i class="bi bi-pencil-square"></i> Edit Vehicle</a>
+                    @endif
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.vehicle.index')}}"><i class="bi bi-plus-square"></i> All Vehicle</a>
                 </div>
                 <!-- table bordered -->
