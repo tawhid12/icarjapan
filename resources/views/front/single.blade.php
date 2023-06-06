@@ -1638,7 +1638,11 @@
               /* To Show Vehicle Price */
               var v_price = parseFloat("{{$price_after_dis}}");
               $('.veh-pr').text('USD '+v_price);
+              if((Math.round((charge * value) + v_price + ad_cost)) > 0){
               $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
+              }else{
+                $('.h-t-price').text('Ask');
+              }
               $('.non_con_total').val((Math.round((charge * value) + v_price + ad_cost)));
             }else{
               $('.fr_val').val(0);
@@ -1649,7 +1653,11 @@
               /* To Show Vehicle Price */
               var v_price = "{{$price_after_dis}}";
               $('.veh-pr').text('USD '+(v_price));
+              if((v_price + ad_cost) > 0){
               $('.h-t-price').text('USD '+(Math.round((charge * value) + v_price + ad_cost)));
+              }else{
+                $('.h-t-price').text('Ask');
+              }
               $('.non_con_total').val(v_price + ad_cost);
             }
           }
@@ -1675,9 +1683,8 @@
       $('.non_con_total').val(non_con_sum);
     }
       $('.total').text(sum);
-      console.log(non_con_sum)
+     
       if(non_con_sum > 0){
-       
         $('.h-t-price').text('USD '+non_con_sum);
       }else{
         $('.h-t-price').text('Ask');
