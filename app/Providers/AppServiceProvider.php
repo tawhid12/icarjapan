@@ -94,8 +94,8 @@ class AppServiceProvider extends ServiceProvider
             $japan_locale_data = Carbon::now('Asia/Tokyo');
 
         
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
-            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168'));//210.138.184.59//122.152.55.168
+            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168'));//210.138.184.59//122.152.55.168
     
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code',$location['geoplugin_countryCode'])->first();

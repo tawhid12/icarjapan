@@ -48,54 +48,9 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-sm-4 col-12">
-                                        <div class="form-group">
-                                            <label for="company_id">Company <span class="text-danger">*</span></label>
-                                            <select id="company_id" class="form-control" name="company_id">
-                                                <option value="">Select Company</option>
-                                                @forelse($company as $data)
-                                                    <option {{old('company_id',$user->company_id)==$data->id?"selected":""}} value="{{$data->id}}">{{$data->name}}</option>
-                                                @empty
-                                                    <option value="">No Data Found</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                        @if($errors->has('company_id'))
-                                            <span class="text-danger"> {{ $errors->first('company_id') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="col-sm-4 col-12">
-                                        <div class="form-group">
-                                            <label for="department_id">Department <span class="text-danger">*</span></label>
-                                            <select id="department_id" class="form-control" name="department_id">
-                                                <option value="">Select Department</option>
-                                                @forelse($department as $data)
-                                                    <option {{old('department_id',$user->department_id)==$data->id?"selected":""}} value="{{$data->id}}">{{$data->name}}</option>
-                                                @empty
-                                                    <option value="">No Data Found</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                        @if($errors->has('department_id'))
-                                            <span class="text-danger"> {{ $errors->first('department_id') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="col-sm-4 col-12">
-                                        <div class="form-group">
-                                            <label for="designation_id">Designation <span class="text-danger">*</span></label>
-                                            <select id="designation_id" class="form-control" name="designation_id">
-                                                <option value="">Select Designation</option>
-                                                @forelse($designation as $data)
-                                                    <option {{old('designation_id',$user->designation_id)==$data->id?"selected":""}} value="{{$data->id}}">{{$data->name}}</option>
-                                                @empty
-                                                    <option value="">No Data Found</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                        @if($errors->has('designation_id'))
-                                            <span class="text-danger"> {{ $errors->first('designation_id') }}</span>
-                                        @endif
-                                    </div>
+
+
+  
                                     <div class="col-sm-4 col-12">
                                         <div class="form-group">
                                             <label for="role_id">Role <span class="text-danger">*</span></label>
