@@ -1675,7 +1675,9 @@
       $('.non_con_total').val(non_con_sum);
     }
       $('.total').text(sum);
+     
       if(non_con_sum > 0){
+        console.log(non_con_sum)
         $('.h-t-price').text('USD '+non_con_sum);
       }else{
         $('.h-t-price').text('Ask');
