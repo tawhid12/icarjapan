@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
     {
         $id=encryptor('decrypt',$r->uptoken);
         return [
-            'name'=>'required|unique:sub_brands,name,'.$id,
+            'name'=>'required|unique:sub_brands,name,'.$this->id. ',id,brand_id,' . $r->brand_id,
             'brand_id'=>'required'
         ];
     }
