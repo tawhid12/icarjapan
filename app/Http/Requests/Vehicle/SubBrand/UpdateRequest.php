@@ -26,13 +26,13 @@ class UpdateRequest extends FormRequest
     {
         $id=encryptor('decrypt',$r->uptoken);
         return [
-            'name'=>'required|unique:sub_brands,name,'.$id,
-            'brand_id' => [
-                'required',
-                Rule::unique('sub_brands')->where(function ($query) {
-                    return $query->where('brand_id', $this->brand_id);
-                })->ignore($this->id),
-            ],
+            'name'=>[
+                    'required',
+                    Rule::unique('sub_brands')->where(function ($query) use ($r){
+                        return $query->where('brand_id', $r->brand_id);
+                    })->ignore($id),
+                ],
+            'brand_id' => 'required',
         ];
     }
 
