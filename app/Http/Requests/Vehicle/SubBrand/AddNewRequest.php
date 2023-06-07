@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Vehicle\SubBrand;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AddNewRequest extends FormRequest
 {
@@ -22,10 +24,15 @@ class AddNewRequest extends FormRequest
      * @return array<string, mixed>
      */
     
-    public function rules()
-    {
+    public function rules(Request $r)
+    { 
         return [
-            'name'  =>'required|unique:sub_brands,name',
+            'name'=>[
+                'required',
+                Rule::unique('sub_brands')->where(function ($query) use ($r){
+                    return $query->where('brand_id', $r->brand_id);
+                }),
+            ],
             'brand_id'=>'required',
             'slug'  => 'unique:sub_brands,slug',
         ];
