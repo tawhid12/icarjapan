@@ -37,6 +37,9 @@
                                             @endforeach
                                             @endif
                                         </select>
+                                        @if($errors->has('brand_id'))
+                                        <span class="text-danger"> {{ $errors->first('brand_id') }}</span>
+                                        @endif
                                     </div>
                                 </div>
 

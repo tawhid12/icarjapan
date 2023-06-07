@@ -37,6 +37,9 @@
                                               @endif
                                           </select>
                                       </div>
+                                      @if($errors->has('brand_id'))
+                                      <span class="text-danger"> {{ $errors->first('brand_id') }}</span>
+                                      @endif
                                   </div>
 
                                   <div class="col-md-4 col-12">

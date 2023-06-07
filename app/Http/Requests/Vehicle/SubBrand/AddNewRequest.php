@@ -26,6 +26,7 @@ class AddNewRequest extends FormRequest
     {
         return [
             'name'  =>'required|unique:sub_brands,name',
+            'brand_id'=>'required',
             'slug'  => 'unique:sub_brands,slug',
         ];
     }
