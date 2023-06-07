@@ -31,7 +31,7 @@
                                 <th scope="row">{{ ++$loop->index }}</th>
                                 <td>{{$sb->name}}</td>
                                 <td><img src="{{asset('uploads/sub_brands/'.$sb->image)}}" alt="no-image" width="80px"></td>
-                                <td>{{($sb->brand)->name}}</td>
+                                <td>{{optional($sb->brand)->name}}</td>
                                 <td>@if($sb->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                 <td class="white-space-nowrap">
                                     <a href="{{route(currentUser().'.subBrand.edit',encryptor('encrypt',$sb->id))}}">
