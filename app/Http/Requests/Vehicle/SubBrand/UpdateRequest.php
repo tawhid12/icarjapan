@@ -4,7 +4,7 @@ namespace App\Http\Requests\Vehicle\SubBrand;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 class UpdateRequest extends FormRequest
 {
     /**
@@ -27,7 +27,12 @@ class UpdateRequest extends FormRequest
         $id=encryptor('decrypt',$r->uptoken);
         return [
             'name'=>'required|unique:sub_brands,name,'.$this->id. ',id,brand_id,' . $r->brand_id,
-            'brand_id'=>'required'
+            'brand_id' => [
+                'required',
+                Rule::unique('sub_brands')->where(function ($query) {
+                    return $query->where('brand_id', $this->brand_id);
+                })->ignore($this->id),
+            ],
         ];
     }
 
