@@ -20,6 +20,9 @@
                                     <div class="form-group">
                                         <label for="name">Brand</label>
                                         <input type="text" id="name" value="{{ $sb->name }}" class="form-control" placeholder="Brand Name" name="name">
+                                        @if($errors->has('name'))
+                                        <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                        @endif
                                     </div>
                                 </div>
 

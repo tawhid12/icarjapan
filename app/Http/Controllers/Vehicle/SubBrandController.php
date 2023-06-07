@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Vehicle\Brand;
 use App\Models\Vehicle\SubBrand;
-use App\Http\Requests\StoreSubBrandRequest;
-use App\Http\Requests\UpdateSubBrandRequest;
+use App\Http\Requests\Vehicle\SubBrand\AddNewRequest;
+use App\Http\Requests\Vehicle\SubBrand\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageHandleTraits;
 use Toastr;
@@ -21,7 +21,7 @@ class SubBrandController extends Controller
      */
     public function index()
     {
-        $sub_brands=SubBrand::latest()->paginate(15);
+        $sub_brands=SubBrand::latest()->paginate(20);
         return view('vehicle.sub_brand.index',compact('sub_brands'));
     }
 
@@ -42,7 +42,7 @@ class SubBrandController extends Controller
      * @param  \App\Http\Requests\StoreSubBrandRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddNewRequest $request)
     {
         try{
             $sb=new SubBrand();
@@ -94,7 +94,7 @@ class SubBrandController extends Controller
      * @param  \App\Models\SubBrand  $subBrand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         try{
             $sb=SubBrand::findOrFail(encryptor('decrypt',$id));

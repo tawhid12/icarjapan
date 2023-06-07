@@ -6,62 +6,64 @@
 @section('content')
 
 
-    <!-- Bordered table start -->
-    <section class="section">
-        <div class="row" id="table-bordered">
-            <div class="col-12">
-                <div class="card">
-                        <!-- table bordered -->
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                            <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.subBrand.create')}}"><i class="bi bi-pencil-square"></i></a>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">{{__('#SL')}}</th>
-                                        <th scope="col">{{__('Name')}}</th>
-                                        <th scope="col">{{__('Image')}}</th>
-                                        <th scope="col">{{__('Brand')}}</th>
-                                        <th scope="col">{{__('Status')}}</th>
-                                        <th class="white-space-nowrap">{{__('ACTION')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($sub_brands as $sb)
-                                    <tr>
-                                    <th scope="row">{{ ++$loop->index }}</th>
-                                        <td>{{$sb->name}}</td>
-                                        <td><img src="{{asset('uploads/sub_brands/'.$sb->image)}}" alt="no-image" width="80px"></td>
-                                        <td>{{($sb->brand)->name}}</td>
-                                        <td>@if($sb->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
-                                        <td class="white-space-nowrap">
-                                            <a href="{{route(currentUser().'.subBrand.edit',encryptor('encrypt',$sb->id))}}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            <!-- <a href="javascript:void()" onclick="$('#form{{$sb->id}}').submit()">
+<!-- Bordered table start -->
+<section class="section">
+    <div class="row" id="table-bordered">
+        <div class="col-12">
+            <div class="card">
+                <!-- table bordered -->
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.subBrand.create')}}"><i class="bi bi-pencil-square"></i></a>
+                        <thead>
+                            <tr>
+                                <th scope="col">{{__('#SL')}}</th>
+                                <th scope="col">{{__('Name')}}</th>
+                                <th scope="col">{{__('Image')}}</th>
+                                <th scope="col">{{__('Brand')}}</th>
+                                <th scope="col">{{__('Status')}}</th>
+                                <th class="white-space-nowrap">{{__('ACTION')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($sub_brands as $sb)
+                            <tr>
+                                <th scope="row">{{ ++$loop->index }}</th>
+                                <td>{{$sb->name}}</td>
+                                <td><img src="{{asset('uploads/sub_brands/'.$sb->image)}}" alt="no-image" width="80px"></td>
+                                <td>{{($sb->brand)->name}}</td>
+                                <td>@if($sb->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
+                                <td class="white-space-nowrap">
+                                    <a href="{{route(currentUser().'.subBrand.edit',encryptor('encrypt',$sb->id))}}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <!-- <a href="javascript:void()" onclick="$('#form{{$sb->id}}').submit()">
                                                 <i class="bi bi-trash"></i>
                                             </a> -->
-                                            <form id="form{{$sb->id}}" action="{{route(currentUser().'.subBrand.destroy',encryptor('encrypt',$sb->id))}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <th colspan="4" class="text-center">No Sub Brand Found</th>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                    <form id="form{{$sb->id}}" action="{{route(currentUser().'.subBrand.destroy',encryptor('encrypt',$sb->id))}}" method="post">
+                                        @csrf
+                                        @method('delete')
+
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <th colspan="4" class="text-center">No Sub Brand Found</th>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="pt-2">
+                        {{ $sub_brands->links() }}
                     </div>
                 </div>
-            
+            </div>
         </div>
-    </section>
-    <!-- Bordered table end -->
+
+    </div>
+</section>
+<!-- Bordered table end -->
 </div>
 
 @endsection
-
