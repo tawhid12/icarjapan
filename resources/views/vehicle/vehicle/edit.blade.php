@@ -383,7 +383,7 @@
                                             <option value="">Select</option>
                                             @if(count($cons))
                                             @foreach($cons as $c)
-                                            <option value="{{ $c->id}}">{{$c->name}}</option>
+                                            <option value="{{ $c->id}}" @if( $c->id == $v->con_id) selected @endif>{{$c->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>

@@ -20,7 +20,13 @@ class ReservedVehicleController extends Controller
      */
     public function index()
     {
-        $resrv = ReservedVehicle::orderBy('id', 'DESC')->paginate(25);
+        if(currentUser() == 'superadmin'){
+            $resrv = ReservedVehicle::orderBy('id', 'DESC')->paginate(25);
+        }elseif(currentUser() == 'salesexecutive'){
+            $resrv = ReservedVehicle::where('assign_user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+        }else{
+            $resrv = ReservedVehicle::where('user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+        }
         return view('vehicle.resrv_vehicle.index', compact('resrv'));
     }
 

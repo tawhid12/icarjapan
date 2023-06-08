@@ -26,7 +26,14 @@ class SignupRequest extends FormRequest
         return [
             'FullName'=>'required|max:255',
             'PhoneNumber'=>'required|unique:users,contact_no',
+            'EmailAddress'=>'required|unique:users,email',
             'password'=>'required|confirmed'
+        ];
+    }
+    public function messages(){
+        return [
+            'required' => "The :attribute filed is required",
+            'unique' => "The :attribute already used. Please try another",
         ];
     }
 }

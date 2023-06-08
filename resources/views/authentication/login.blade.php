@@ -8,9 +8,9 @@
 <form action="{{route('login.check')}}" method="post">
     @csrf
     <div class="form-group position-relative has-icon-left mb-3">
-        <input name="PhoneNumber" value="{{old('PhoneNumber')}}" type="text" class="form-control form-control-sm" placeholder="Phone Number">
+        <input name="PhoneNumber" value="{{old('PhoneNumber')}}" type="text" class="form-control form-control-sm" placeholder="Email">
         <div class="form-control-icon">
-            <i class="bi bi-phone"></i>
+            <i class="bi bi-envelope"></i>
         </div>
         @if($errors->has('PhoneNumber'))
             <small class="d-block text-danger">
