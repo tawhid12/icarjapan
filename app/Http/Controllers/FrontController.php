@@ -299,7 +299,7 @@ class FrontController extends Controller
         ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
         ->where('sub_brands.brand_id', $brand->id)
         ->groupBy('cat')
-        ->paginate(10);
+        ->get();
 
             return view('front.brand', compact('brand', 'sub_prefix','countries'));
         }
