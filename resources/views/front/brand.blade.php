@@ -193,7 +193,7 @@
             <div class="rating-count">25 Reviews</div>
 
             <p class="m-0">Price:</p>
-            <strong>USD 760 ~ 29,320</strong>
+            <!-- <strong>USD 760 ~ 29,320</strong> -->
           </div>
          @endif
           @empty
