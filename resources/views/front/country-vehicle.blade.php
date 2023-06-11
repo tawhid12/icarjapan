@@ -115,21 +115,16 @@
         
 
 
-          <div class="col-md-4">
+          <div class="col-md-4 my-2">
+            
+
+            <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
             @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
             @if($cover_img)
             <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
             @else
-            <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+            <img class="img-fluid" src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" />
             @endif
-
-            <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
-              @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
-              @if($cover_img)
-              <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
-              @else
-              <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-              @endif
             </a>
 
 
