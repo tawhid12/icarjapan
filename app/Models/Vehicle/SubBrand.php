@@ -15,6 +15,10 @@ class SubBrand extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
     public function getSlugAttribute()
     {
         return \Illuminate\Support\Str::slug($this->slug_name);

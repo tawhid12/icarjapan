@@ -21,6 +21,7 @@
     <!-- Font Awesome 6.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('front/fontawesome/css/all.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
     <style>
         .top-menu .dropdown-menu {
             background-color: var(--brand-color) !important;
@@ -73,6 +74,9 @@
             font-size: 16px;
             letter-spacing: 0;
             font-weight: bold;
+        }
+        .ui-menu-item{
+            font-size:14px;
         }
     </style>
     <!--begin::Page Scripts(used by this page)-->

@@ -118,14 +118,42 @@ class FrontController extends Controller
 
         return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'japan_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
     }
+    public function countrywiseVehicle(Country $country){
+        //print_r($country->toArray());
+        $country_wise_vehicles = DB::table('vehicles')
+        ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+        ->join('brands', 'vehicles.brand_id', 'brands.id')
+        ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+        ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
+        ->whereNull('r_status')
+        ->where('countries_vehicles.country_id', $country->id)
+        ->orderBy('vehicles.id','desc')->get();
+        /*echo '<pre>';
+        print_r($country_wise_vehicles);die;*/
+        return view('front.country-vehicle', compact('country_wise_vehicles','country'));
+    }
     public function brand(Brand $brand)
     {
-        $sub_prefix = DB::table('sub_brands')
-            ->select(DB::raw('substring(`name`,1,1) as cat'), DB::raw('GROUP_CONCAT(`id`) ids'))
-            ->where('brand_id', $brand->id)
-            ->groupBy('cat')
+        $sub_prefix =  DB::table('sub_brands')
+        ->select(
+            DB::raw('SUBSTRING(sub_brands.name, 1, 1) as cat'),
+            DB::raw('GROUP_CONCAT(sub_brands.id) as ids'),
+            DB::raw('COUNT(vehicles.id) as vehicles_count')
+        )
+        ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+        ->where('sub_brands.brand_id', $brand->id)
+        ->groupBy('cat')
+        ->get();
+        
+        
+        
+        /*DB::table('sub_brands')
+            ->select(DB::raw('substring(`sub_brands.name`,1,1) as cat'), 'sub_brands.id', DB::raw('GROUP_CONCAT(`sub_brands.id`) ids'),DB::raw('COUNT(vehicles.id) as vehicles_count'))
+            ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+            ->where('sub_brands.brand_id', $brand->id)
+            ->groupBy('sub_brands.cat')
             ->get();
-        /*echo '<pre>';
+        echo '<pre>';
         print_r($sub_prefix->toArray());die;*/
 
         return view('front.brand', compact('brand', 'sub_prefix'));
@@ -135,6 +163,7 @@ class FrontController extends Controller
   @endif*/
     public function subBrand(Brand $brand, SubBrand $subBrand)
     {
+        $countries = Country::all();
         $brand = Brand::where('name', $brand->name)->firstOrFail();
        
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
@@ -143,11 +172,11 @@ class FrontController extends Controller
         ->join('brands', 'vehicles.brand_id', 'brands.id')
         ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
         ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id)
-        ->whereNull('r_status')->inRandomOrder()->get();
+        ->whereNull('r_status')->inRandomOrder()->paginate(10);
 
-        echo '<pre>';
-        print_r($vehicles);die;
-        return view('front.search', compact('vehicles', 'brand', 'sub_brand_id'));
+       /* echo '<pre>';
+        print_r($vehicles);die;*/
+        return view('front.search', compact('vehicles', 'brand', 'sub_brand_id','countries'));
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
@@ -180,31 +209,76 @@ class FrontController extends Controller
     public function searchStData(Request $request)
     {
         $search_data = DB::table('vehicles')
+            ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+            ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+            ->select('vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no','brands.name as b_name', 'sub_brands.name as sb_name')
+            ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
+            ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
+            ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
+            ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
+            ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
+            ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+            ->get();
+            $search_keywords = [];
+
+            foreach ($search_data as $sd) {
+                $search_keywords[] = $sd->v_name;
+                $search_keywords[] = $sd->v_full_name;
+                $search_keywords[] = $sd->stock_id;
+                $search_keywords[] = $sd->b_name;
+                $search_keywords[] = $sd->sb_name;
+                $search_keywords[] = $sd->chassis_no;
+            }
+            $unique_keyword = array_values(array_unique($search_keywords));
+            $unique_keyword = array_filter($unique_keyword, function($value) use ($request){
+                return stripos($value, $request->sdata) === 0;
+            });
+            $unique_keyword = array_values($unique_keyword);
+            return response()->json($unique_keyword);
+    }
+    public function searchpostStData(Request $request){
+        $countries = Country::all();
+        $vehicles = DB::table('vehicles')
+        ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+        ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+        ->select('vehicles.*')
+        ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
+        ->orWhere('vehicles.fullName', $request->sdata)
+        ->orWhere('vehicles.stock_id', $request->sdata)
+        ->orWhere('brands.name', $request->sdata)
+        ->orWhere('sub_brands.name', $request->sdata)
+        ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+        ->inRandomOrder()->paginate(10);
+        return view('front.search',compact('vehicles','countries'));
+    }
+    /*Search Backup code By Search Keyword */
+    /*$search_data = DB::table('vehicles')
             //->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             //->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             //->select('vehicles.name as v_name', 'vehicles.fullName as v_full_bame', 'vehicles.stock_id', 'brands.name as b_name', 'sub_brands.name as sb_name')
             ->select('search_keyword')
             ->where('vehicles.r_status', 0)
-            ->whereRaw("FIND_IN_SET('$request->sdata', search_keyword)")
+            ->whereRaw("FIND_IN_SET('$request->sdata', search_keyword)")*/
             /*->orWhere('vehicles.name', 'like', '%' . $request->sdata . '%')
             ->orWhere('vehicles.fullName', $request->sdata)
             ->orWhere('vehicles.stock_id', $request->sdata)
             ->orWhere('brands.name', $request->sdata)
             ->orWhere('sub_brands.name', $request->sdata)*/
-            ->get();
-        $search_keyword = array();
+            //->get();
+        /*$search_keyword = array();
         foreach ($search_data as $sd) {
             foreach (explode(',', $sd->search_keyword) as $e) {
                 $search_keyword[] = $e;
             }
         }
         $unique_keyword = array_values(array_unique($search_keyword));  // remove any duplicate values and index array from 0
-        return response()->json($unique_keyword);
-    }
+        return response()->json($unique_keyword);*/
     public function search_by_data(Request $request)
     {
+       /* print_r($request->toArray());
+        echo 'ok';die;*/
         $countries = Country::all();
-        if(empty($request->filled('brand')) || empty($request->filled('sub_brand')) ){
+        if(empty($request->brand) && empty($request->sub_brand) ){
             $vehicles = DB::table('vehicles')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
@@ -214,22 +288,40 @@ class FrontController extends Controller
             return view('front.search',compact('vehicles','countries'));
         }
         elseif ($request->filled('brand') && !$request->filled('sub_brand')) {
-            
+           
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_prefix = DB::table('sub_brands')
-                ->select(DB::raw('substring(`name`,1,1) as cat'), DB::raw('GROUP_CONCAT(`id`) ids'))
-                ->where('brand_id', $brand->id)
-                ->groupBy('cat')
-                ->get();
+        ->select(
+            DB::raw('SUBSTRING(sub_brands.name, 1, 1) as cat'),
+            DB::raw('GROUP_CONCAT(sub_brands.id) as ids'),
+            DB::raw('COUNT(vehicles.id) as vehicles_count')
+        )
+        ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+        ->where('sub_brands.brand_id', $brand->id)
+        ->groupBy('cat')
+        ->get();
+
             return view('front.brand', compact('brand', 'sub_prefix','countries'));
         }
-        elseif($request->filled('brand') && $request->filled('sub_brand')){
-           
+        elseif($request->filled('brand') && $request->filled('sub_brand') || $request->filled('body_type') || $request->filled('steering') || $request->filled('from_year') || $request->filled('to_year')){
+            $brand = Brand::where('id', $request->brand)->firstOrFail();
+            $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
+            $vehicles = DB::table('vehicles')
+            ->join('brands', 'vehicles.brand_id', 'brands.id')
+            ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+            ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id);
+            if($request->filled('body_type')){
+                $vehicles = $vehicles->where('vehicles.body_type_id', $request->body_type);
+            }
+            if($request->filled('steering')){
+                $vehicles = $vehicles->where('vehicles.steering', $request->steering);
+            }
+            if($request->filled('from_year') && $request->filled('to_year')){
+                $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year,$request->to_year]);
+            }
+            $vehicles = $vehicles->whereNull('r_status')->inRandomOrder()->paginate(10);
+            return view('front.search', compact('vehicles', 'brand', 'sub_brand_id','countries'));
         }
-       
-       
-        /*print_r($request->toArray());
-        die;*/
     }
     
 

@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
     public function vehicles(){
         return $this->belongsToMany(Vehicle::class,'countries_vehicles','country_id','vehicle_id');
     }

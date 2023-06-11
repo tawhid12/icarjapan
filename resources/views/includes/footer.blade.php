@@ -251,6 +251,68 @@
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=425979584449354&autoLogAppEvents=1" nonce="lQcO9Eh9"></script>
   <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="{{ asset('front/js/jquery-ui.min.js') }}"></script>
+  <script>
+    $("#item_search").autocomplete({
+		source: function(data, cb) {
+			//console.log(data);
+			$.ajax({
+				autoFocus: true,
+				url: "{{route('searchStData')}}", //To Get Data
+				method: 'GET',
+				dataType: 'json',
+				data: {
+					sdata: data.term
+				},
+				success: function(res) {
+					console.log(res);
+					var result;
+					result = {
+						label: 'No Records Found ',
+						value: ''
+					};
+					if (res.length) {
+						result = $.map(res, function(el) {
+              console.log(el);
+							return {
+								label: el,
+								value: '',
+								id: el
+							};
+						});
+					}
+					cb(result);
+				},
+				error: function(e) {
+					console.log(e);
+				}
+			});
+		},
+		response: function(e, ui) {
+			/*if (ui.content.length == 1) {
+				$(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+				$(this).autocomplete("close");
+			}*/
+			//console.log(ui);
+		},
+		//loader start
+		search: function(e, ui) {},
+		select: function(e, ui) {
+			if (typeof ui.content != 'undefined') {
+				if (isNaN(ui.content[0].id)) {
+					return;
+				}
+				//var student_id = ui.content[0].id;
+			} else {
+				//var student_id = ui.item.id;
+			}
+
+			//return_row_with_data(student_id);
+			$("#item_search").val('');
+		},
+		//loader end
+	});
+  </script>
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')
   <!--end::Page Scripts-->

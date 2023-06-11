@@ -19,7 +19,6 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 @endsection
 @section('pageSubTitle','HOME')
 @push('styles')
-<link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
 <style>
   .rating i.fa {
     color: #f9cc00;
@@ -38,9 +37,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 <main class="">
   <div class="container">
     <!-- Messenger Chat plugin Code -->
-    <div id="fb-root"></div>
+    <!-- <div id="fb-root"></div> -->
     <!-- Your Chat plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat"></div>
+    <!-- <div id="fb-customer-chat" class="fb-customerchat"></div> -->
 
 <!-- Mainteance Mode -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -399,14 +398,14 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <div class="right-row-serarch card shadow rounded">
               <h5 class="right-row-1-title">Search By Category</h5>
               <div class="p-2">
-                <select name="brand" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                <select name="brand" class="form-select form-select-sm mb-3">
                   <option value="" selected>Brands</option>
                   @forelse($brands as $b)
                   <option value="{{$b->id}}">{{$b->name}}</option>
                   @empty
                   @endforelse
                 </select>
-                <select name="sub_brand" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                <select name="sub_brand" class="form-select form-select-sm mb-3">
                   <option value="" selected>Model</option>
                   @php  $sub_brands = \DB::table('sub_brands')->where('brand_id',1)->get(); @endphp
                   @forelse($sub_brands as $v)
@@ -414,21 +413,21 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   @empty
                   @endforelse
                 </select>
-                <select name="body_type" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                <select name="body_type" class="form-select form-select-sm mb-3">
                   <option value="" selected>Body Type</option>
                   @forelse($body_types as $bt)
-                  <option value="{{$bt->id}}">{{$bt->id}}</option>
+                  <option value="{{$bt->id}}">{{$bt->name}}</option>
                   @empty
                   @endforelse
                 </select>
-                <select name="steering" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                <select name="steering" class="form-select form-select-sm mb-3">
                   <option value="" selected>RHL / LHS</option>
                   <option value="1">Right Hand Drive</option>
                   <option value="2">Left Hand Drive</option>
                 </select>
                 <div class="d-flex search-to">
-                  <select value="" name="from_year" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                    <option selected>Year</option>
+                  <select name="from_year" class="form-select form-select-sm mb-3">
+                    <option value="" selected>Year</option>
                     @php 
                     for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
                     @endphp
@@ -438,7 +437,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     @endphp
                   </select>
                   <span>To</span>
-                  <select name="to_year" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                  <select name="to_year" class="form-select form-select-sm mb-3">
                     <option value="" selected>Year</option>
                     @php 
                     for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
@@ -449,7 +448,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     @endphp
                   </select>
                 </div>
-                <input class="form-control form-control-sm mb-3" type="text" placeholder="Search ID or Keywords" aria-label=".form-control-sm example" />
+                <input class="form-control form-control-sm mb-3" type="text" name="stock_or_keyword" placeholder="Stock ID or Keywords"/>
                 <div class="text-center my-3">
                   <button type="submit" class="search-btn shadow">Search Car</button>
                 </div>
@@ -484,7 +483,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="card-body">
                 @forelse($countries as $c)
                 <p class="card-text">
-                  <img src="{{asset('front/img/japan2.png')}}" alt="" />{{$c->name}}
+                  <a href="{{route('countrywiseVehicle',strtolower($c->name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('front/img/japan2.png')}}" alt="" />{{$c->name}}</a>
                 </p>
                 @empty
                 @endforelse
@@ -523,68 +522,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   </main>
   @endsection
   @push('scripts')
-  <script src="{{ asset('front/js/jquery-ui.min.js') }}"></script>
-  <script>
-    $("#item_search").autocomplete({
-		source: function(data, cb) {
-			//console.log(data);
-			$.ajax({
-				autoFocus: true,
-				url: "{{route('searchStData')}}", //To Get Data
-				method: 'GET',
-				dataType: 'json',
-				data: {
-					sdata: data.term
-				},
-				success: function(res) {
-					//console.log(res);
-					var result;
-					result = {
-						label: 'No Records Found ',
-						value: ''
-					};
-					if (res.length) {
-						result = $.map(res, function(el) {
-              console.log(el);
-							return {
-								label: el,
-								value: '',
-								id: el
-							};
-						});
-					}
-					cb(result);
-				},
-				error: function(e) {
-					console.log(e);
-				}
-			});
-		},
-		response: function(e, ui) {
-			if (ui.content.length == 1) {
-				$(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
-				$(this).autocomplete("close");
-			}
-			//console.log(ui);
-		},
-		//loader start
-		search: function(e, ui) {},
-		select: function(e, ui) {
-			if (typeof ui.content != 'undefined') {
-				if (isNaN(ui.content[0].id)) {
-					return;
-				}
-				//var student_id = ui.content[0].id;
-			} else {
-				//var student_id = ui.item.id;
-			}
-
-			//return_row_with_data(student_id);
-			$("#item_search").val('');
-		},
-		//loader end
-	});
-  </script>
+  
 
 <script>
       var chatbox = document.getElementById('fb-customer-chat');
@@ -594,7 +532,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 
     <!-- Your SDK code -->
     <script>
-      window.fbAsyncInit = function() {
+      /*window.fbAsyncInit = function() {
         FB.init({
           xfbml            : true,
           version          : 'v17.0'
@@ -611,6 +549,6 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 
       $(document).ready(function() {
         $('#myModal').modal('show');
-    });
+    });*/
     </script>
   @endpush

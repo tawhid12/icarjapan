@@ -117,7 +117,8 @@
         <div class="row row-cols-5">
           <!-- Image Single Category-->
           @forelse ($brand->sub_brand as $key => $sub_brand)
-          @if($key <10) <div class="col mt-1">
+          @if($key <10) 
+          {{--<div class="col mt-1">
             <a class="brand-heading" href="{{route('subBrand',['brand' => strtolower($brand->slug_name),'subBrand' => strtolower($sub_brand->slug_name)])}}">
               @if(empty($sub_brand->image))
               <img src="{{asset('uploads/default/comingsoon_l.png')}}" class="card-img-top" alt="{{$sub_brand->name}}">
@@ -139,7 +140,7 @@
 
             <p class="m-0">Price:</p>
             <strong>USD 760 ~ 29,320</strong>
-        </div>
+        </div>--}}
         @endif
         @empty
         @endforelse
@@ -162,12 +163,16 @@
 
 
       @forelse ($sub_prefix as $sp)
+      @if($sp->vehicles_count)
       <div id="tab-{{$sp->cat}}" class="tab-content">
         <h2>{{$sp->cat}}</h2>
         <div class="row">
-          @php $subp=\App\Models\Vehicle\SubBrand::where('brand_id', $brand->id)->whereIn('id',explode(',',$sp->ids))->get(); @endphp
+          @php 
+            $subp=\App\Models\Vehicle\SubBrand::where('brand_id', $brand->id)->whereIn('id',explode(',',$sp->ids))->withCount('vehicles')->get(); 
+          @endphp
           @forelse ($subp as $key => $sub_brand)
           <!-- Add more content areas for other letters -->
+          @if($sub_brand->vehicles_count > 0)
           <div class="col-md-2">
             <!-- <h4>{{substr($sub_brand->name, 0, 1)}}</h4> -->
             <a class="brand-heading" href="{{route('subBrand',['brand' => strtolower($brand->name),'subBrand' => strtolower($sub_brand->name)])}}">
@@ -176,7 +181,7 @@
               @else
               <img src="{{asset('uploads/sub_brands/'.$sub_brand->image)}}" class="card-img-top" alt="{{$sub_brand->name}}">
               @endif
-              {{$sub_brand->name}}
+              {{$sub_brand->name}}<span>({{$sub_brand->vehicles_count}})</span>
             </a>
             <div class="rating">
               <span><i class="fa fa-star"></i></span>
@@ -190,10 +195,12 @@
             <p class="m-0">Price:</p>
             <strong>USD 760 ~ 29,320</strong>
           </div>
+         @endif
           @empty
           @endforelse
         </div>
       </div>
+      @endif
       @empty
       @endforelse
 
