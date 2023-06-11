@@ -110,52 +110,54 @@
       <div class="col-sm-12 col-md-12 col-lg-10 container-xl-10">
         @include('front.search-box')
         <h4 class="cat-heading">{{$country->name}} Cars for Sale</h4>
-      @forelse ($country_wise_vehicles as $n)
+        @forelse ($country_wise_vehicles as $n)
+        <div class="row">
+
 
           <div class="col-md-4">
-          @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
-          @if($cover_img)
-                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
-                  @else
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  @endif
+            @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
+            @if($cover_img)
+            <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+            @else
+            <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+            @endif
 
-          <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
-                  @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
-                  @if($cover_img)
-                  <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
-                  @else
-                  <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
-                  @endif
-                  </a>
+            <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
+              @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
+              @if($cover_img)
+              <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
+              @else
+              <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+              @endif
+            </a>
 
 
-     
+
             @php
-                      $actual_price = $n->price;
-                      $dis_price = $n->price*$n->discount/100;
-                      $price = $actual_price - $dis_price;
-                    @endphp
-                    @if($price > 0)
-                    <p class="m-0">Price :</p>
-                    <p class="m-0">USD {{$price}}</p>
-                    <div class="product-card-currency">
-                      <p>Approx.</p>
-                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
-                    </div>
-                    @else
-                    <p class="m-0">Ask</p>
-                    @endif
+            $actual_price = $n->price;
+            $dis_price = $n->price*$n->discount/100;
+            $price = $actual_price - $dis_price;
+            @endphp
+            @if($price > 0)
+            <p class="m-0">Price :</p>
+            <p class="m-0">USD {{$price}}</p>
+            <div class="product-card-currency">
+              <p>Approx.</p>
+              <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+            </div>
+            @else
+            <p class="m-0">Ask</p>
+            @endif
           </div>
-    
 
-    
-
-      @empty
-      @endforelse
+        </div>
 
 
+        @empty
+        @endforelse
+
+
+      </div>
     </div>
-  </div>
 </main>
 @endsection
