@@ -110,8 +110,9 @@
       <div class="col-sm-12 col-md-12 col-lg-10 container-xl-10">
         @include('front.search-box')
         <h4 class="cat-heading">{{$country->name}} Cars for Sale</h4>
-        @forelse ($country_wise_vehicles as $n)
         <div class="row">
+        @forelse ($country_wise_vehicles as $n)
+        
 
 
           <div class="col-md-4">
@@ -150,12 +151,12 @@
             @endif
           </div>
 
-        </div>
+      
 
 
         @empty
         @endforelse
-
+        </div>
 
       </div>
     </div>
