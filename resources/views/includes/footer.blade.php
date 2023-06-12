@@ -337,6 +337,28 @@
                 $('#sub_brand').empty();
             }
         });
+        var sub_brand_id = "{{request()->get('sub_brand_id')}}";
+        if (brand_id) {
+            $.ajax({
+                url: "{{route('subBrandbyId')}}",
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    id: brand_id,
+                },
+                success: function(data) {
+                    //console.log(data);
+                    $.each(data, function(key, value) {
+                        if (sub_brand_id == value.id) {
+                            $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                        } else {
+                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        }
+
+                    });
+                }
+            });
+        }
     });
 
   </script>
