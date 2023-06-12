@@ -9,9 +9,6 @@
                         @forelse($inv_loc as $inv)
                     <p class="card-text">
                         <a href="" style="text-decoration:none;color:#000;">
-                        @if(!empty($inv->image))
-                        <img src="{{asset('uploads/brands/'.$inv->image)}}" alt="" /> 
-                        @endif
                         {{optional($inv->country)->name}}
                         </a>
                     </p>
