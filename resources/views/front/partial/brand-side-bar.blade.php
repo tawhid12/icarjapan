@@ -6,7 +6,11 @@
             @forelse($brands as $b)
             @if($b->vehicles_count > 0)
             <p class="card-text">
-                <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;"><img src="{{asset('uploads/brands/'.$b->image)}}" alt="" /> {{$b->name}} ({{$b->vehicles_count}})</a>
+                <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;">
+                @if($b->image)
+                <img src="{{asset('uploads/brands/'.$b->image)}}" alt="" />
+                @endif
+                 {{$b->name}} ({{$b->vehicles_count}})</a>
             </p>
             @endif
             @empty
