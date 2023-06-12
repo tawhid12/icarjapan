@@ -521,11 +521,11 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   @push('scripts')
   
 
-<script>
+    <!-- <script>
       var chatbox = document.getElementById('fb-customer-chat');
       chatbox.setAttribute("page_id", "2464933096867027");
       chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
+    </script> -->
 
     <!-- Your SDK code -->
     <script>
