@@ -65,9 +65,13 @@ Route::resource('mostview',mostView::class);
 Route::get('/used-cars-search/{brand}', [front::class,'brand'])->name('brand');
 Route::get('/used-cars-search/{brand}/{subBrand}', [front::class,'subBrand'])->name('subBrand');
 Route::get('/used-cars-search/{brand}/{subBrand}/{stock_id}', [front::class,'singleVehicle'])->name('singleVehicle');
+
 Route::get('/used-cars-search',[front::class,'searchStData'])->name('searchStData');
-Route::post('/used-cars-search',[front::class,'searchpostStData'])->name('searchStData');
-Route::get('/vehicle/search/data/',[front::class,'search_by_data'])->name('search_by_data');
+Route::get('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');
+Route::get('/vehicle/advance/search/data/',[front::class,'front_adv_search_by_data'])->name('front_adv_search_by_data');
+
+/*Route::get('/search',[front::class,'search_by_data'])->name('searchStData');
+Route::post('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');*/
 
 /* Country Wise Vehicle */
 Route::get('/icar-{country}', [front::class,'countrywiseVehicle'])->name('countrywiseVehicle');

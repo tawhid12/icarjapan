@@ -877,7 +877,7 @@
             </div>
               <div class="heading d-flex justify-content-between">
 
-                <h6 class="v-heading"><a href="">{{strtoupper($v->fullName)}}</a></h5>
+                <h6 class="v-heading"><a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}">{{strtoupper($v->fullName)}}</a></h5>
                   @if($v->inv_locatin_id)
                   @php $inventory_loc = \DB::table('countries')->where('id',$v->inv_locatin_id)->first();@endphp
                   <p class="m-0 stock-text" style="font-size:medium">Inventory Location <i class="fa fa-flag"></i><span>{{$inventory_loc->name}}</span></p>

@@ -233,6 +233,7 @@ class FrontController extends Controller
             $unique_keyword = array_filter($unique_keyword, function($value) use ($request){
                 return stripos($value, $request->sdata) === 0;
             });
+            $unique_keyword = array_slice($unique_keyword, 0, 10);
             $unique_keyword = array_values($unique_keyword);
             return response()->json($unique_keyword);
     }
@@ -241,7 +242,7 @@ class FrontController extends Controller
         $vehicles = DB::table('vehicles')
         ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
         ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-        ->select('vehicles.*')
+        ->select('vehicles.*','brands.slug_name as b_slug','sub_brands.slug_name as sb_slug')
         ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
         ->orWhere('vehicles.fullName', $request->sdata)
         ->orWhere('vehicles.stock_id', $request->sdata)
@@ -273,13 +274,14 @@ class FrontController extends Controller
         }
         $unique_keyword = array_values(array_unique($search_keyword));  // remove any duplicate values and index array from 0
         return response()->json($unique_keyword);*/
-    public function search_by_data(Request $request)
+    public function front_adv_search_by_data(Request $request)
     {
        /* print_r($request->toArray());
         echo 'ok';die;*/
         $countries = Country::all();
         if(empty($request->brand) && empty($request->sub_brand) ){
             $vehicles = DB::table('vehicles')
+            ->select('vehicles.*','brands.slug_name as b_slug','sub_brands.slug_name as sb_slug')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->whereNull('r_status')->inRandomOrder()->paginate(10);
@@ -307,6 +309,7 @@ class FrontController extends Controller
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
             $vehicles = DB::table('vehicles')
+            ->select('vehicles.*','brands.slug_name as b_slug','sub_brands.slug_name as sb_slug')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id);

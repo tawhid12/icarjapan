@@ -312,6 +312,33 @@
 		},
 		//loader end
 	});
+    $(document).ready(function() {
+            /*Brand|Subbrand */
+            $('#brand_id').on('change', function() {
+            var brand_id = $(this).val();
+            if (brand_id) {
+                $.ajax({
+                    url: "{{route('subBrandbyId')}}",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id: brand_id,
+                    },
+                    success: function(data) {
+                        //console.log(data);
+                        $('#sub_brand').empty();
+                        $('#sub_brand').append('<option value="">Select a Model</option>');
+                        $.each(data, function(key, value) {
+                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#sub_brand').empty();
+            }
+        });
+    });
+
   </script>
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')

@@ -1,4 +1,4 @@
-<form action="{{route('searchStData')}}" method="post">
+<form action="{{route('search_by_data')}}" method="post">
 @csrf()
 <!-- mid row 1 -->
 <div class="mid-row-1">

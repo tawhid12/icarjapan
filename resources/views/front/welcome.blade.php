@@ -391,27 +391,28 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-3 container-xl-3">
-          <form action="{{route('search_by_data')}}">
+          <form action="{{route('front_adv_search_by_data')}}">
             @csrf
           <!-- right row 1 -->
           <div class="right-row-1 mb-3">
             <div class="right-row-serarch card shadow rounded">
               <h5 class="right-row-1-title">Search By Category</h5>
               <div class="p-2">
-                <select name="brand" class="form-select form-select-sm mb-3">
+                <select name="brand" class="form-select form-select-sm mb-3" id="brand_id">
                   <option value="" selected>Brands</option>
                   @forelse($brands as $b)
                   <option value="{{$b->id}}">{{$b->name}}</option>
                   @empty
                   @endforelse
                 </select>
-                <select name="sub_brand" class="form-select form-select-sm mb-3">
+                <select name="sub_brand" class="form-select form-select-sm mb-3" id="sub_brand">
                   <option value="" selected>Model</option>
+                  {{--<option value="" selected>Model</option>
                   @php  $sub_brands = \DB::table('sub_brands')->where('brand_id',1)->get(); @endphp
                   @forelse($sub_brands as $v)
                   <option value="{{$v->id}}">{{$v->name}}</option>
                   @empty
-                  @endforelse
+                  @endforelse--}}
                 </select>
                 <select name="body_type" class="form-select form-select-sm mb-3">
                   <option value="" selected>Body Type</option>
