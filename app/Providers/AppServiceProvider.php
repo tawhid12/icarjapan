@@ -101,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
             $countryName = Country::where('code',$location['geoplugin_countryCode'])->first();
 
             $com_acc_info = CompanyAccountInfo::first();
-            $total_cars = Vehicle::whereNull('r_status')->count();
+            $total_cars = Vehicle::/*whereNull('r_status')->*/count();
 
             $view->with(['total_cars' => $total_cars, 'com_acc_info' => $com_acc_info,'countryName' => $countryName,'location' => $location, 'current_locale_data' => $current_locale_data,'japan_locale_data' => $japan_locale_data,'max_manu_Year'=> $max_manu_Year,'min_manu_Year'=> $min_manu_Year,'engine_types'=>$engine_types,'max_loading_range'=>$max_loading_range,'b_length_range'=>$b_length_range,'mileage_range'=>$mileage_range,'cc_range'=>$cc_range,'year_range' => $year_range,'discount_range' => $discount_range,'price_range' => $price_range,'body_types' =>$body_types,'drive_types' => $drive_types,'inv_loc'=> $inv_loc,'sub_body_types' => $sub_body_types,'brands' => $brands,'sub_brands'=> $sub_brands,'fuel' =>$fuel,'colors' => $colors,'trans' => $trans,'vehicle_models' => $vehicle_models]);
            

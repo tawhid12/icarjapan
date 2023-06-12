@@ -67,7 +67,7 @@ class FrontController extends Controller
             ->join('new_arivals', 'vehicles.id', 'new_arivals.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('r_status')
+            //->whereNull('r_status')
             ->where('new_arivals.country_id', $countryName->id)
             ->orWhereNull('new_arivals.country_id')->orderBy('vehicles.id','desc')->get();
             //->inRandomOrder()->take(10);
@@ -81,7 +81,7 @@ class FrontController extends Controller
             ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('r_status')
+            //->whereNull('r_status')
             ->where('countries_vehicles.country_id', $countryName->id)
             ->where('price', '<=', $country_price_range->afford_range)->orderBy('vehicles.id','desc')->get();
             //->inRandomOrder()->take(10)
@@ -92,7 +92,7 @@ class FrontController extends Controller
             ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('r_status')
+            //->whereNull('r_status')
             ->where('countries_vehicles.country_id', $countryName->id)
             ->where('price', '>=', $country_price_range->high_grade_range)->orderBy('vehicles.id','desc')->get();
             //->inRandomOrder()->take(10)
@@ -104,7 +104,7 @@ class FrontController extends Controller
             ->join('most_views', 'vehicles.id', 'most_views.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('vehicles.r_status')
+            //->whereNull('vehicles.r_status')
             ->where('most_views.country_id', $countryName->id)->orderBy('vehicles.id','desc')->get();
             //->inRandomOrder()->take(10)
         //print_r($most_views);die;
@@ -125,7 +125,7 @@ class FrontController extends Controller
         ->join('brands', 'vehicles.brand_id', 'brands.id')
         ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
         ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
-        ->whereNull('r_status')
+        //->whereNull('r_status')
         ->where('countries_vehicles.country_id', $country->id)
         ->orderBy('vehicles.id','desc')->get();
         /*echo '<pre>';
@@ -172,7 +172,8 @@ class FrontController extends Controller
         ->join('brands', 'vehicles.brand_id', 'brands.id')
         ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
         ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id)
-        ->whereNull('r_status')->inRandomOrder()->paginate(10);
+        //->whereNull('r_status')
+        ->inRandomOrder()->paginate(10);
 
        /* echo '<pre>';
         print_r($vehicles);die;*/
@@ -192,7 +193,7 @@ class FrontController extends Controller
         ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
         ->join('brands', 'vehicles.brand_id', 'brands.id')
         ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-        ->whereNull('r_status')
+        //->whereNull('r_status')
         ->orWhere('countries_vehicles.country_id', $countryName->id)
         ->where('brands.id', $v->brand_id)
         ->where('sub_brands.id', $v->sub_brand_id)
@@ -284,7 +285,8 @@ class FrontController extends Controller
             ->select('vehicles.*','brands.slug_name as b_slug','sub_brands.slug_name as sb_slug')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->whereNull('r_status')->inRandomOrder()->paginate(10);
+            //->whereNull('r_status')
+            ->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
             return view('front.search',compact('vehicles','countries'));
@@ -310,8 +312,8 @@ class FrontController extends Controller
             $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
             $vehicles = DB::table('vehicles')
             ->select('vehicles.*','brands.slug_name as b_slug','sub_brands.slug_name as sb_slug')
-            ->join('brands', 'vehicles.brand_id', 'brands.id')
-            ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+            ->leftjoin('brands', 'vehicles.brand_id', 'brands.id')
+            ->leftjoin('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id);
             if($request->filled('body_type')){
                 $vehicles = $vehicles->where('vehicles.body_type_id', $request->body_type);
@@ -322,7 +324,9 @@ class FrontController extends Controller
             if($request->filled('from_year') && $request->filled('to_year')){
                 $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year,$request->to_year]);
             }
-            $vehicles = $vehicles->whereNull('r_status')->inRandomOrder()->paginate(10);
+            $vehicles = $vehicles
+            //->whereNull('r_status')
+            ->inRandomOrder()->paginate(10);
             return view('front.search', compact('vehicles', 'brand', 'sub_brand_id','countries'));
         }
     }
