@@ -9,7 +9,7 @@ class TestController extends Controller
     public function index(){
         \Mail::send('mail.reply_body', [], function ($message) {
             $message->from('tawhid8995@gmail.com', 'VVMETHOD')
-                    ->to('test@icarjapan.com')
+                    ->to('tawhid102@gmail.com')
                     ->subject('Test');
         });
         
