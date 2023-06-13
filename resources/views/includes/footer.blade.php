@@ -363,10 +363,11 @@
     });
 
   </script>
+  <script src="{{ asset('/assets/extensions/laravel-toster/toastr.min.js') }}"></script>
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')
   <!--end::Page Scripts-->
-
+  {!! Toastr::message() !!}
   </body>
 
   </html>

@@ -1338,8 +1338,9 @@
                             <p>{{$v->fullName}}</p>
                             <p>Stock Id: {{$v->stock_id}} </p>
                           </div>
-                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('user.inquiry.store')}}">
+                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('inquiry.store')}}">
                             @csrf
+                            <input type="hidden" name="vehicle_id" value="{{$v->id}}">
                             <div class="row">
                               <div class="col-12">
                                 <div class="form-group">
@@ -1384,10 +1385,10 @@
                                 </div>
                               </div>
                               <small class="text-danger">Please click "Inquiry" to receive your quote from us. You need to provide us with your contact details to receive a free quote.</small>
-                              <div class="form-check">
+                              <!-- <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="remember-me">
                                 <label class="form-check-label" for="remember-me">Remember me</label>
-                              </div>
+                              </div> -->
 
 
                               <div class="modal-footer">

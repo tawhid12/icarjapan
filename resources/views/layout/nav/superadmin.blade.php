@@ -94,6 +94,7 @@
                 <ul class="submenu-group">
                     <li class="submenu-item"><a href="{{route(currentUser().'.buy.index')}}" class='submenu-link'>{{__('Buy')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.inquiry.index')}}" class='submenu-link'>{{__('Inquiry')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.contactus.index')}}" class='submenu-link'>{{__('Contact Us')}}</a></li>
                 </ul>  
             </div>
         </div>

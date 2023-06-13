@@ -790,7 +790,7 @@
                             <p>{{$v->fullName}}</p>
                             <p>Stock Id: {{$v->stock_id}} </p>
                           </div>
-                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('user.inquiry.store')}}">
+                          <form class="form" method="post" enctype="multipart/form-data" action="{{route('inquiry.store')}}">
                             @csrf
                             <div class="row">
                               <div class="col-12">

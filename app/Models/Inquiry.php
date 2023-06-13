@@ -12,6 +12,6 @@ class Inquiry extends Model
         return $this->hasOne(Country::class,'id','country_id');
     }
     public function user(){
-        return $this->hasOne(User::class,'id','reply_id');
+        return $this->hasOne(User::class,'id','replied_by');
     }
 }

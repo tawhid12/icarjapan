@@ -48,6 +48,7 @@ class InquiryController extends Controller
             $in->email=$request->email;
             $in->phone=$request->phone;
             $in->remarks=$request->remarks;
+            $in->vehicle_id=$request->vehicle_id;
             $in->created_by=currentUserId();
             
             if($in->save()){

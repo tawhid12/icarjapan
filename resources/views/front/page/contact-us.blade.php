@@ -51,5 +51,46 @@
             <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
         </div>
     </div>
+    <h4 class="text-center my-4">Contact Us</h4>
+    <form class="form" method="post" enctype="multipart/form-data" action="{{route('contactus.store')}}">
+        @csrf
+        <div class="row">
+
+            <div class="col-6">
+                <div class="form-group mb-3">
+
+                    <input type="text" id="name" class="form-control" value="{{ old('name')}}" name="name" placeholder="name" required>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group mb-3">
+
+                    <input type="text" id="email" class="form-control" value="{{ old('email')}}" placeholder="email" name="email" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group mb-3">
+
+                    <input type="text" id="subject" class="form-control" value="{{ old('subject')}}" placeholder="Subject" name="subject" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group mb-3">
+
+                    <textarea class="form-control" name="message" rows="8" placeholder="Message" required>{{ old('message')}}</textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+
+
+
+
+        </div>
+
+    </form>
+
 </div>
 @endsection

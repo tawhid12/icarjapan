@@ -100,7 +100,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Auction</a>
+            <a class="nav-link" href="http://auc.tmtcarz.com/">Auction</a>
           </li>
         </ul>
       </div>

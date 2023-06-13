@@ -44,6 +44,7 @@ use App\Http\Controllers\NotificationController as notification;
 use App\Http\Controllers\InvoiceController as invoice;
 use App\Http\Controllers\PaymentController as payment;
 use App\Http\Controllers\TestController as test;
+use App\Http\Controllers\ContactUsController as contactus;
 
 /* Middleware */
 use App\Http\Middleware\isAdmin;
@@ -81,6 +82,9 @@ Route::post('/vehicle/search/data/',[front::class,'searchpostStData'])->name('se
 Route::get('/icar-{country}', [front::class,'countrywiseVehicle'])->name('countrywiseVehicle');
 
 Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeImage'])->name('resizeImage');
+
+Route::resource('inquiry', inquiry::class)->only(['store']);
+Route::resource('contactus', contactus::class)->only(['store']);
 
 
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
@@ -127,6 +131,8 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::post('/change_password', [userprofile::class,'change_password_store'])->name('salesexecutive.change_password.store');
 
         Route::resource('inquiry', inquiry::class,['as'=>'salesexecutive']);
+        Route::resource('contactus', contactus::class,['as'=>'salesexecutive']);
+
         Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive'])->only(['index','show','create','store']);
 
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
@@ -169,6 +175,7 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('vehicle',vehicle::class,['as'=>'superadmin']);
         Route::resource('buy',buy::class,['as'=>'superadmin']);
         Route::resource('inquiry', inquiry::class,['as'=>'superadmin']);
+        Route::resource('contactus', contactus::class,['as'=>'superadmin']);
         Route::resource('notification', notification::class,['as'=>'superadmin']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'superadmin']);
         Route::resource('invoice', invoice::class,['as'=>'superadmin']);

@@ -70,6 +70,8 @@ class AppServiceProvider extends ServiceProvider
             $vehicle_models = VehicleModel::all();
             $trans = Transmission::withCount('vehicles')->get();
 
+            $countries = Country::all();
+
             /*====Price====Max===Min*/
             $price_range = DB::table('vehicles')->select(\DB::raw('MIN(price) AS minprice, MAX(price) AS maxprice'))->get()->toArray();
             /*====Discount====Max===Min*/
