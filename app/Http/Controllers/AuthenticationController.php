@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\Settings\Country;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Requests\Authentication\SignupRequest;
@@ -33,7 +34,13 @@ class AuthenticationController extends Controller
             $user->password=Hash::make($request->password);
             $user->role_id=4;
             if($user->save())
+            {
+                $userd = new UserDetail;
+				$userd->user_id = $user->id;
+                $userd->save();
                 return redirect('login')->with($this->resMessageHtml(true,null,'Successfully Registred'));
+            }
+                
             else
                 return redirect('login')->with($this->resMessageHtml(false,'error','Please try again'));
         }catch(Exception $e){
