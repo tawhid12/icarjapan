@@ -43,6 +43,7 @@ use App\Http\Controllers\AuctionVehicleController as aucvehicle;
 use App\Http\Controllers\NotificationController as notification;
 use App\Http\Controllers\InvoiceController as invoice;
 use App\Http\Controllers\PaymentController as payment;
+use App\Http\Controllers\TestController as test;
 
 /* Middleware */
 use App\Http\Middleware\isAdmin;
@@ -59,6 +60,9 @@ use App\Http\Middleware\isUser;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Test controler */
+Route::get('/mail', [test::class,'index'])->name('mail');
+
 /*========FrontEnd==== */
 Route::get('/', [front::class,'index'])->name('front');
 Route::resource('mostview',mostView::class);
