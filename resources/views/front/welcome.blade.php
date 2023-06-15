@@ -34,8 +34,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 }
 
 .vehicle-text .img_inner_sold_disp_text {
+    text-align: center;
     position: absolute;
-    bottom: 0;
+    top: 80px;
     left: 0;
     width: 100%;
     color: #f03;
