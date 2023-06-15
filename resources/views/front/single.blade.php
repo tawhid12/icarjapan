@@ -1330,7 +1330,12 @@
                       @if(currentUserId())
                       <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
                       @else
+                      @if($v->r_status)
+                      <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#reserve_info"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @endif
                       <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
+                      @else
+                      
                       @endif
                     </form>
                     
@@ -1436,6 +1441,21 @@
                           <a href="{{route('login')}}" class="btn btn-primary me-2">Login</a>
                           <a href="{{route('register')}}" class="btn btn-secondary">Register</a>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Close Buy Now Form-->
+
+                                <!-- Buy Now Form -->
+                                <div class="modal fade" id="reserved_info" tabindex="-1" aria-labelledby="my-modal-label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <p class="m-0 text-center">
+                        This Vehicle Is Already Reserved
+                        </p>
+
                       </div>
                     </div>
                   </div>
