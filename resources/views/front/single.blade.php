@@ -320,6 +320,7 @@
     text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
     font-weight: 700;
     line-height: 2;
+    z-index: 3
 }
 
   #contents_detail .car_display_area #car_MainIMG_car_display {
@@ -774,9 +775,7 @@
                         <div>
                           <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />-->
                           <img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />
-                          @if($v->r_status)
-                          <p class="img_inner_sold_disp_text mx-auto">Reserved</p>
-                          @endif
+                          
                         </div>
                         @empty
                         @endforelse
@@ -785,6 +784,9 @@
 
 
                       </div><!-- #car_MainIMG_car_display -->
+                      @if($v->r_status)
+                          <p class="img_inner_sold_disp_text">Reserved</p>
+                          @endif
                       <p id="pager_display" class="nopointer_event nowrap_txt"><span id="currentPage_display">1</span>&nbsp;/&nbsp;<span id="totalPages_display">00</span></p>
                     </div>
                     <div>
