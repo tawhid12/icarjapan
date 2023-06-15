@@ -310,12 +310,7 @@
     margin-left: -29px !important;
     z-index: 3
   }
-
-  #contents_detail .car_display_area #car_MainIMG_car_display {
-    margin-bottom: 6px;
-    position:relative;
-  }
-  #contents_detail .car_display_area #car_MainIMG_car_display .img_inner_sold_disp_text {
+  #contents_detail .car_display_area .img_inner_sold_disp_text {
     text-align: center;
     position: absolute;
     top: 34px;
@@ -326,6 +321,11 @@
     font-weight: 700;
     line-height: 2;
 }
+
+  #contents_detail .car_display_area #car_MainIMG_car_display {
+    margin-bottom: 6px;
+  }
+
 
   #contents_detail #car_MainIMG_car_display:not(.slick-slider) {
     width: 640px;
