@@ -312,13 +312,25 @@
   }
 
   #contents_detail .car_display_area #car_MainIMG_car_display {
-    margin-bottom: 6px
+    margin-bottom: 6px;
+    position:relative;
   }
+  #contents_detail .car_display_area #car_MainIMG_car_display .img_inner_sold_disp_text {
+    text-align: center;
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 100%;
+    color: #f03;
+    text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
+    font-weight: 700;
+    line-height: 2;
+}
 
   #contents_detail #car_MainIMG_car_display:not(.slick-slider) {
     width: 640px;
     height: 480px;
-    overflow: hidden
+    overflow: hidden;
   }
 
   #contents_detail #car_MainIMG_car_display button.slick-arrow {
@@ -762,6 +774,9 @@
                         <div>
                           <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />-->
                           <img src="{{asset('uploads/vehicle_images/'.$v_img->image)}}" alt="" width="592" height="480" />
+                          @if($v->r_status)
+                          <p class="img_inner_sold_disp_text mx-auto">Reserved</p>
+                          @endif
                         </div>
                         @empty
                         @endforelse
