@@ -29,11 +29,11 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     color: red;
     font-weight: 700;
 }
-.vehicle-text {
+.product-card img {
     position: relative;
 }
 
-.vehicle-text p.img_inner_sold_disp_text {
+p.img_inner_sold_disp_text {
     position: absolute;
     top: 0;
     left: 0;
@@ -234,7 +234,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
              {{--$n->vid--}}
               <div class="col">
                 <div class="product-card mb-3">
-                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
+                  <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
@@ -291,7 +291,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="col">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$af->vid)->where('is_cover_img',1)->first(); @endphp
-                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">
+                  <a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
                   @else
@@ -337,7 +337,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="col">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$hg->vid)->where('is_cover_img',1)->first(); @endphp
-                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">
+                  <a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
                   @else
