@@ -308,19 +308,20 @@
     left: 50%;
     border-radius: 4px;
     margin-left: -29px !important;
-    z-index: 3
+    z-index: 3;
   }
   #contents_detail .car_display_area .img_inner_sold_disp_text {
     text-align: center;
     position: absolute;
-    top: 34px;
+    bottom: 0px;
     left: 0;
     width: 100%;
     color: #f03;
     text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
     font-weight: 700;
     line-height: 2;
-    z-index: 3
+    z-index: 3;
+    font-size:18px;
 }
 
   #contents_detail .car_display_area #car_MainIMG_car_display {
