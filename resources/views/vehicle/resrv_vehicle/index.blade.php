@@ -38,7 +38,7 @@
                                         </td>
                                         <td>
                                             <p class="m-0"><strong>Customer Id: </strong>{{$rsv->user_id}}</p>
-                                            <p class="m-0"><strong>Name: </strong>{{$rsv->res_user->name}}</p>
+                                            <p class="m-0"><strong>Name: </strong>{{optional($rsv->res_user)->name}}</p>
                                         </td>
                                         <td>
                                             @if($rsv->assign_user_id)
