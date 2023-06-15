@@ -311,7 +311,6 @@
     z-index: 3;
   }
   #contents_detail .car_display_area .img_inner_sold_disp_text {
-    text-align: center;
     position: absolute;
     bottom: 0px;
     left: 0;
