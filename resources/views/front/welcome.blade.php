@@ -29,19 +29,19 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     color: red;
     font-weight: 700;
 }
-.product-card {
+.vehicle-text {
     position: relative;
 }
 
-.img_inner_sold_disp_text {
+.vehicle-text .img_inner_sold_disp_text {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
     color: #f03;
     text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
     font-weight: 700;
-    line-height: 1;
+    line-height: 2;
 }
 </style>
 @endpush
@@ -171,14 +171,16 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             @php //echo '<pre>'; print_r($most_views->toArray());die;@endphp
               @forelse($most_views as $v)
               <div class="col">
-                {{$v->r_status}}
                 <div class="product-card mb-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->vid)->where('is_cover_img',1)->first(); @endphp
-                  <a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">
+                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
                   @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
+                  @if($v->r_status)
+                  <p class="img_inner_sold_disp_text">Sold</p>
+                  @endif
                   @endif
                   </a>
                   <div class="product-card-body">
@@ -234,7 +236,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
              {{--$n->vid--}}
               <div class="col">
                 <div class="product-card mb-3">
-                  <a href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
+                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
@@ -242,7 +244,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
                   @endif
                   @if($n->r_status)
-                  <p class="img_inner_sold_disp_text mx-auto">Reserved</p>
+                  <p class="img_inner_sold_disp_text">Reserved</p>
                   @endif
                   </a>
                   <div class="product-card-body">
@@ -291,13 +293,13 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="col">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$af->vid)->where('is_cover_img',1)->first(); @endphp
-                  <a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">
+                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
                   @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
                   @if($af->r_status)
-                  <p class="img_inner_sold_disp_text mx-auto">Reserved</p>
+                  <p class="img_inner_sold_disp_text">Reserved</p>
                   @endif
                   </a>
                   @endif
@@ -337,14 +339,14 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="col">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$hg->vid)->where('is_cover_img',1)->first(); @endphp
-                  <a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">
+                  <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">
                   @if($cover_img)
                   <img class="img-fluid" src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" />
                   @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
                   @endif
                   @if($hg->r_status)
-                  <p class="img_inner_sold_disp_text mx-auto">Reserved</p>
+                  <p class="img_inner_sold_disp_text">Reserved</p>
                   @endif
                   </a>
                   <div class="product-card-body">
