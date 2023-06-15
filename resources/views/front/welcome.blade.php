@@ -180,7 +180,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   @else
                   <img class="img-fluid" src="{{asset('front/img/product-img.png')}}" alt="" />
                   @if($v->r_status)
-                  <p class="img_inner_sold_disp_text">Sold</p>
+                  <p class="img_inner_sold_disp_text">Reserved</p>
                   @endif
                   @endif
                   </a>
