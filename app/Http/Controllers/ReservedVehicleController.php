@@ -70,7 +70,7 @@ class ReservedVehicleController extends Controller
                     $notification->type = 1;
                     $notification->save();
                     // Redirect user to intended URL
-                    return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));;
+                    return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));
                 } else {
                     return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
                 }
@@ -78,6 +78,9 @@ class ReservedVehicleController extends Controller
                 //dd($e);
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
+        }else{
+            // Redirect user to intended URL
+            return redirect()->back()->with(Toastr::success('Vehicle Already Reserved !', 'Success', ["positionClass" => "toast-top-right"]));
         }
     }
 
