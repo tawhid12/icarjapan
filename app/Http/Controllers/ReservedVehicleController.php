@@ -80,7 +80,7 @@ class ReservedVehicleController extends Controller
             }
         }else{
             // Redirect user to intended URL
-            return redirect()->back()->with(Toastr::success('Vehicle Already Reserved !', 'Success', ["positionClass" => "toast-top-right"]));
+            return redirect()->back()->with(Toastr::error('Vehicle  Reserved !!', 'Success', ["positionClass" => "toast-top-right"]));
         }
     }
 
