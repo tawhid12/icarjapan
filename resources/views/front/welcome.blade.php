@@ -29,11 +29,11 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     color: red;
     font-weight: 700;
 }
-.product-card img {
+.product-card {
     position: relative;
 }
 
-p.img_inner_sold_disp_text {
+.img_inner_sold_disp_text {
     position: absolute;
     top: 0;
     left: 0;
