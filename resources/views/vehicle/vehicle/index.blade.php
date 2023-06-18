@@ -41,11 +41,11 @@
                                         <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        @if(currentUser() != 'salesexecutive')
+                                       {{currentUserId}}{{ session()->get('userId') }}
                                         <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                       
+                                        @if(currentUser() != 'salesexecutive')
                                         <a href="javascript:void()" onclick="$('#form{{$v->id}}').submit()">
                                             <i class="bi bi-trash"></i>
                                         </a>
