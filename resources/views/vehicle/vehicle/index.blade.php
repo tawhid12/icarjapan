@@ -41,6 +41,11 @@
                                         <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-eye"></i>
                                         </a>
+                                        @if(currentUser() == 'superadmin')
+                                        <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        @endif
                                         @if(currentUser() == 'salesexecutive' && currentUserId() == $v->created_by)
                                         <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-pencil-square"></i>
