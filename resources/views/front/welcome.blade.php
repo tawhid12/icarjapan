@@ -542,9 +542,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   </main>
   @endsection
   @push('scripts')
-  
-
-    
+    <script>
       $(document).ready(function() {
         $('#myModal').modal('show');
     });
