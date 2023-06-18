@@ -11,6 +11,13 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
+                <ul class="pagination justify-content-end">
+                    <form action="{{route(currentUser().'.subBrand.index')}}" role="search" class="d-flex">
+                        @csrf
+                        <input type="text" placeholder="Search Sub Brand.." name="search" class="form-control">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </form>
+                </ul>
                 <!-- table bordered -->
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">
@@ -30,7 +37,7 @@
                             <tr>
                                 <th scope="row">{{ ++$loop->index }}</th>
                                 <td>{{$sb->name}}</td>
-                                <td><img src="{{asset('uploads/sub_brands/'.$sb->image)}}" alt="no-image" width="80px"></td>
+                                <td><img src="{{asset('uploads/sub_brands/'.$sb->image)}}" alt="no-image" width="40px" height="40px"></td>
                                 <td>{{optional($sb->brand)->name}}</td>
                                 <td>@if($sb->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                 <td class="white-space-nowrap">

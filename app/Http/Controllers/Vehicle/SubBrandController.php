@@ -19,8 +19,17 @@ class SubBrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+        if($search != ''){
+            $sub_brands = SubBrand::where('name','like', '%' .$search. '%')->paginate(25);
+            $sub_brands->appends(array('search'=> $search,));
+            if(count($sub_brands )>0){
+            return view('vehicle.sub_brand.index',['sub_brands'=>$sub_brands]);
+            }
+            return back()->with('error','No results Found');
+        } 
         $sub_brands=SubBrand::latest()->paginate(20);
         return view('vehicle.sub_brand.index',compact('sub_brands'));
     }

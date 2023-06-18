@@ -18,8 +18,17 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+        if($search != ''){
+            $countries = Country::where('name','like', '%' .$search. '%')->paginate(25);
+            $countries->appends(array('search'=> $search,));
+            if(count($countries )>0){
+            return view('settings.country.index',['countries'=>$countries]);
+            }
+            return back()->with('error','No results Found');
+        } 
         $countries=Country::latest()->paginate(15);
         return view('settings.country.index',compact('countries'));
     }

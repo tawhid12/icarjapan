@@ -12,6 +12,13 @@
         <div class="col-12">
             <div class="card">
                 @include('partials.breadcrumbs',['model' => 'Brand'])
+                <ul class="pagination justify-content-end">
+                    <form action="{{route(currentUser().'.brand.index')}}" role="search" class="d-flex">
+                        @csrf
+                        <input type="text" placeholder="Search Brand.." name="search" class="form-control">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </form>
+                </ul>
                 <!-- table bordered -->
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">
@@ -30,7 +37,7 @@
                             <tr>
                                 <th scope="row">{{ ++$loop->index }}</th>
                                 <td>{{$b->name}}</td>
-                                <td><img src="{{asset('uploads/brands/'.$b->image)}}" alt="no-image"></td>
+                                <td><img src="{{asset('uploads/brands/'.$b->image)}}" alt="no-image" width="40px" height="40px"></td>
                                 <td>@if($b->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                 <td class="white-space-nowrap">
                                     <a href="{{route(currentUser().'.brand.edit',encryptor('encrypt',$b->id))}}">

@@ -18,8 +18,17 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+        if($search != ''){
+            $brands = Brand::where('name','like', '%' .$search. '%')->paginate(25);
+            $brands->appends(array('search'=> $search,));
+            if(count($brands )>0){
+            return view('vehicle.brand.index',['brands'=>$brands]);
+            }
+            return back()->with('error','No results Found');
+        } 
         $brands=Brand::latest()->paginate(15);
         return view('vehicle.brand.index',compact('brands'));
     }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('confirm_on')->comment('Order Confirm On')->nullable();
             $table->decimal('settle_price',8,2)->comment('vehicle Settle Price')->nullable();
             $table->text('note')->nullable();
-            $table->boolean('status')->default(1)->comment('1=>reserved 2=>confirmed');
+            $table->boolean('status')->default(1)->comment('1=>reserved 2=>confirmed 3=> Cancelled');
             $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable()->index()->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

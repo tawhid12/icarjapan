@@ -55,6 +55,9 @@
                                             <option value="">Select Status</option>
                                             <option value="1" @if($resv->status == 1) selected @endif>Reserved</option>
                                             <option value="2" @if($resv->status == 2) selected @endif>Confirmed</option>
+                                            @if(currentUser() == 'superadmin')
+                                            <option value="3" @if($resv->status == 3) selected @endif>Cencelled</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>

@@ -57,7 +57,7 @@
                                             @endif
                                         </td>
                                         <td>{{$rsv->note}}</td>
-                                        <td>@if($rsv->status == 1) {{__('Reserved') }} @else {{__('Confirmed') }} @endif</td>
+                                        <td>@if($rsv->status == 1) {{__('Reserved') }} @elseif($rsv->status == 2) {{__('Confirmed') }} @else {{__('Cancelled') }}@endif</td>
                                         <td class="white-space-nowrap">
                                             <a href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">
                                                 <i class="bi bi-pencil-square"></i>

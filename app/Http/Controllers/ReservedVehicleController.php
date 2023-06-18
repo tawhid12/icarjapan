@@ -10,7 +10,8 @@ use App\Models\Vehicle\Vehicle;
 
 use Illuminate\Http\Request;
 use Toastr;
-
+use Carbon\Carbon;
+use DB;
 class ReservedVehicleController extends Controller
 {
     /**
@@ -128,8 +129,13 @@ class ReservedVehicleController extends Controller
             if (currentUser() == 'superadmin') {
                 $resv->assign_user_id = $request->assign_user_id;
             }
-            if (currentUser() == 'salesexecutive') {
-                $resv->confirm_on = date('Y-m-d', strtotime($request->confirm_on));
+            if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin') {
+                /* Reserve Cancel */
+                if($request->status == 3){
+                    DB::table('Vehicles')->where('id',$resv->vehicle_id)
+                    ->update(['r_status' => null,'updated_by' => currentUserId(),'updated_at' => Carbon::now()]);
+                }
+                $resv->confirm_on = $request->confirm_on?Carbon::createFromFormat('d/m/Y', $request->confirm_on)->format('Y-m-d'):null;
                 $resv->settle_price = $request->settle_price;
                 $resv->note = $request->note;
                 $resv->status = $request->status;

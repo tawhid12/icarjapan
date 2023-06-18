@@ -169,6 +169,7 @@ class FrontController extends Controller
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
 
         $vehicles = DB::table('vehicles')
+        ->select('vehicles.*','brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
         ->join('brands', 'vehicles.brand_id', 'brands.id')
         ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
         ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id)
