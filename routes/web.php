@@ -133,7 +133,7 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::resource('inquiry', inquiry::class,['as'=>'salesexecutive']);
         Route::resource('contactus', contactus::class,['as'=>'salesexecutive']);
 
-        Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive'])->only(['index','show','create','store']);
+        Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive']);
 
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
