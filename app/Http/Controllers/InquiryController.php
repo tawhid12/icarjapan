@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
-use App\Models\vehicle\Vehicle;
+use App\Models\Vehicle\Vehicle;
 use Illuminate\Http\Request;
 use Toastr;
 class InquiryController extends Controller
