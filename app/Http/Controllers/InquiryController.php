@@ -68,10 +68,10 @@ class InquiryController extends Controller
                             ->to('tawhid8995@gmail.com')
                             ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
                 });
-            }
                 // Redirect user to intended URL
                 return redirect()->back()->with(Toastr::success('Inquiry Received!', 'Success', ["positionClass" => "toast-top-right"]));;
                 //return redirect()->route(currentUser().'.brand.index')
+            }
             else{
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
