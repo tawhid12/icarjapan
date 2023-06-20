@@ -29,17 +29,19 @@
 <body>
     <h4>Inquiry Received</h4>
     <div class="wrapper" style="display:flex;">
-        <table style="width:50%;boder:1px solid #000;">
+        <table style="width:100%;border:1px solid #000;">
             <tr><th colspan="4">Inquiry Details</th</tr>
             <tr>
                 <td><strong>Name:{{$inquiry->name}}</strong></td>
                 <td><strong>Email:{{$inquiry->email}}</strong></td>
+            </tr>
+            <tr>
                 <td><strong>Email:{{$inquiry->phone}}</strong></td>
                 <td><strong>Email:{{$inquiry->remarks}}</strong></td>
             </tr>
         </table>
-        <table style="width:50%;boder:1px solid #000;">
-            <tr><th colspan="3">Vehicle Details</th</tr>
+        <table style="width:100%;border:1px solid #000;">
+            <tr><th>Vehicle Details</th</tr>
             <tr>
                 <td><strong>Vehicle Name:{{$v_data->name}}</strong></td>
                 <td><strong>Stock ID:{{$v_data->stock_id}}</strong></td>
