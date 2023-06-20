@@ -41,8 +41,24 @@
                 <td colspan="2"><strong>Phone:{{$inquiry->phone}}</strong></td>
             </tr>
             <tr>
-                <td><strong>User Query</strong></td>
-                <td><strong>Email:{{$inquiry->remarks}}</strong></td>
+                <td>
+                    <strong>
+                    @if($type == 1)
+                    User Query
+                    @else
+                    Replied
+                    @endif
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                    @if($type == 1)
+                    Inquiry:{{$inquiry->remarks}}
+                    @else
+                    Replied:{{$inquiry->remarks}}
+                    @endif
+                    </strong>
+                </td>
             </tr>
         </table>
         <table style="width:80%;border:1px solid #000;">

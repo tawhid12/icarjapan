@@ -30,7 +30,12 @@
     <div class="wrapper">
         <h4>Inquiry Received</h4>
         <p>
-            Dear <strong>{{$inquiry->name}}</strong>, We Have Recceived Your Query. Our Sales Executive Team Will Contact to you soon.
+            Dear <strong>{{$inquiry->name}}</strong>
+            @if($type == 1)
+            , We Have Recceived Your Query. Our Sales Executive Team Will Contact to you soon.
+            @else
+            {{$inquiry->reply}}
+            @endif
         </p>
     </div>
 </body>
