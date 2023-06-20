@@ -53,6 +53,22 @@ class InquiryController extends Controller
             $in->created_by=currentUserId();
             
             if($in->save()){
+                $inquiry = Inquiry::findOrFail($in->id);
+                $v_data = Vehicle::where('id',$inquiry->vehicle_id)->first();
+                /*To User */
+                \Mail::send('mail.reply_user_body', ['inquiry' => $inquiry], function ($message) use ($inquiry,$v_data){
+                    $message->from('info@icarjapan.com', 'Icarjapan')
+                            ->to($inquiry->email)
+                            ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
+                });
+                /*To Admin */
+                \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry], function ($message) use ($v_data){
+                    $message->from('info@icarjapan.com', 'Icarjapan')
+                            //->to('dev@icarjapan.com')
+                            ->to('tawhid8995@gmail.com')
+                            ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
+                });
+            }
                 // Redirect user to intended URL
                 return redirect()->back()->with(Toastr::success('Inquiry Received!', 'Success', ["positionClass" => "toast-top-right"]));;
                 //return redirect()->route(currentUser().'.brand.index')
