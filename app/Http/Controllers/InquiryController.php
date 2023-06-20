@@ -72,7 +72,7 @@ class InquiryController extends Controller
                 // Redirect user to intended URL
                 return redirect()->back()->with(Toastr::success('Inquiry Received!', 'Success', ["positionClass" => "toast-top-right"]));;
                 //return redirect()->route(currentUser().'.brand.index')
-            }else{
+            else{
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         }catch(Exception $e){
