@@ -27,9 +27,9 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h4>Inquiry Received</h4>
-        <table style="border:none;width:50%">
+    <h4>Inquiry Received</h4>
+    <div class="wrapper" style="display:flex;">
+        <table style="width:50%;boder:1px solid #000;">
             <tr><th colspan="4">Inquiry Details</th</tr>
             <tr>
                 <td><strong>Name:{{$inquiry->name}}</strong></td>
@@ -38,7 +38,7 @@
                 <td><strong>Email:{{$inquiry->remarks}}</strong></td>
             </tr>
         </table>
-        <table style="border:none;width:50%">
+        <table style="width:50%;boder:1px solid #000;">
             <tr><th colspan="3">Vehicle Details</th</tr>
             <tr>
                 <td><strong>Vehicle Name:{{$v_data->name}}</strong></td>
