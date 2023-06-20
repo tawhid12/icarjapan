@@ -55,8 +55,9 @@ class InquiryController extends Controller
             if($in->save()){
                 $inquiry = Inquiry::findOrFail($in->id);
                 $v_data = Vehicle::where('id',$inquiry->vehicle_id)->first();
+                $type = 1;//Inquiry Received
                 /*To User */
-                \Mail::send('mail.reply_user_body', ['inquiry' => $inquiry], function ($message) use ($inquiry,$v_data){
+                \Mail::send('mail.reply_user_body', ['inquiry' => $inquiry,'type' => $type], function ($message) use ($inquiry,$v_data){
                     $message->from('info@icarjapan.com', 'Icarjapan')
                             ->to($inquiry->email)
                             ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
@@ -64,7 +65,8 @@ class InquiryController extends Controller
                 /*To Admin */
                 \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry,'v_data' => $v_data], function ($message) use ($v_data){
                     $message->from('info@icarjapan.com', 'Icarjapan')
-                            ->to('dev@icarjapan.com')
+                            //->to('dev@icarjapan.com')
+                            ->to('tawhid8995@gmail.com')
                             ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
                 });
                 // Redirect user to intended URL
@@ -120,7 +122,8 @@ class InquiryController extends Controller
                 $inquiry = Inquiry::findOrFail($inquiry->id);
                 $v_data = Vehicle::where('id',$inquiry->vehicle_id)->first();
                 /*To User */
-                \Mail::send('mail.reply_user_body', ['inquiry' => $inquiry], function ($message) use ($inquiry,$v_data){
+                $type = 2;//reply
+                \Mail::send('mail.reply_user_body', ['inquiry' => $inquiry,'type' => $type], function ($message) use ($inquiry,$v_data){
                     $message->from('info@icarjapan.com', 'Icarjapan')
                             ->to($inquiry->email)
                             ->subject('Reply For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
