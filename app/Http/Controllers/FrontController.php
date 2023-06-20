@@ -34,33 +34,15 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
-
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
         //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
-        /*Use try catch or if else if location data found then data show either default data show or internet not found problem solving issue */
-        /*
-        $data = @file_get_contents($location);
-            if (!$data) {
-            // Handle error when there is no internet connection
-            } else {
-            // Process the data when the request is successful
-            }
-
-            or 
-            if (get_headers('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])) {
-    $geoLocationData = file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']);
-    // Process the $geoLocationData as needed
-} else {
-    // Handle the case when internet connectivity is not available
-}
-
-        */
-        $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-
-        $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-        //echo '<pre>';
-        //print_r($countryName);die;
-
+        if ($location && isset($location['geoplugin_timezone'])) {
+            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+            $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+        }else{
+            $current_locale_data = Carbon::now('Asia/Tokyo');
+            $countryName = Country::where('code', 'JP')->first();
+        }
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
             ->select('vehicles.id as vid', 'vehicles.r_status','vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
