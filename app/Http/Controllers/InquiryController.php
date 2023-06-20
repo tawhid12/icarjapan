@@ -63,7 +63,7 @@ class InquiryController extends Controller
                             ->subject('Inquiry For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
                 });
                 /*To Admin */
-                \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry,'v_data' => $v_data], function ($message) use ($v_data){
+                \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry,'v_data' => $v_data,'type' => $type], function ($message) use ($v_data){
                     $message->from('info@icarjapan.com', 'Icarjapan')
                             //->to('dev@icarjapan.com')
                             ->to('tawhid8995@gmail.com')
@@ -129,7 +129,7 @@ class InquiryController extends Controller
                             ->subject('Reply For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
                 });
                 /*To Admin */
-                \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry], function ($message) use ($v_data){
+                \Mail::send('mail.reply_admin_body', ['inquiry' => $inquiry,'v_data' => $v_data,'type' => $type], function ($message) use ($v_data){
                     $message->from('info@icarjapan.com', 'Icarjapan')
                             //->to('dev@icarjapan.com')
                             ->to('tawhid8995@gmail.com')
