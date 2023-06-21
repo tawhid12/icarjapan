@@ -31,7 +31,7 @@ class FrontController extends Controller
     {
         $this->geoLocationService = $geoLocationService;
     }
-    public function index(Request $request)
+public function index(Request $request)
     {
         $japan_locale_data = Carbon::now('Asia/Tokyo');
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
@@ -39,9 +39,28 @@ class FrontController extends Controller
         if ($location && isset($location['geoplugin_timezone'])) {
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+            $request->session()->put('countryName',$countryName);
+            $request->session()->put('location',$location);
         }else{
-            $current_locale_data = Carbon::now('Asia/Tokyo');
-            $countryName = Country::where('code', 'JP')->first();
+            if(!$request->filled('code')){
+                $countries = Country::all();
+                return view('front.country-select',compact('countries'));
+            }else if($request->filled('code')){
+                $countryName = Country::where('code', $request->code)->first();
+                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$countryName->ip_address));
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $request->session()->put('countryName',$countryName);
+                $request->session()->put('location',$location);
+            }else{
+                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+                /*echo '<pre>';
+                print_r($location);die;*/
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                $request->session()->put('countryName',$countryName);
+                $request->session()->put('location',$location);
+            }
+
         }
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
@@ -164,7 +183,7 @@ class FrontController extends Controller
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
-        $countryName = $this->geoLocationService->getCountry();
+        $countryName = request()->session()->get('countryName');
         $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
         $v = Vehicle::where('stock_id', $stock_id)->first();

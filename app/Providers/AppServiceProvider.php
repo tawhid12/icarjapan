@@ -96,18 +96,10 @@ class AppServiceProvider extends ServiceProvider
             $japan_locale_data = Carbon::now('Asia/Tokyo');
 
         
-            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168'));//210.138.184.59//122.152.55.168
-           echo '<pre>';
-            print_r($location);die;
-            if ($location && isset($location['geoplugin_timezone'])) {
-                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-            }else{
-                $current_locale_data = Carbon::now('Asia/Tokyo');
-                $countryName = Country::where('code', 'JP')->first();
-            }
-           
+            $location =  request()->session()->get('location');
+    
+            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+            $countryName =  request()->session()->get('countryName');
 
             $com_acc_info = CompanyAccountInfo::first();
             $total_cars = Vehicle::/*whereNull('r_status')->*/count();

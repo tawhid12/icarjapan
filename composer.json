@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "brian2694/laravel-toastr": "^5.57",
         "geocoder-php/geo-plugin-provider": "^4.3",
+        "geoip2/geoip2": "^2.13",
         "intervention/image": "^2.7",
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.19",
