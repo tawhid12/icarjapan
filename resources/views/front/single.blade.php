@@ -1011,7 +1011,7 @@
                   </div>
                 </div>
                 <!-- REVIEW HIGHLIGHTS  -->
-                <div class="card shadow radious-10 my-3">
+                <!-- <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">
                     REVIEW HIGHLIGHTS
                   </h5>
@@ -1043,9 +1043,9 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- Review Section -->
-                <div class="card shadow radious-10 my-3">
+                <!-- <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">REVIEWS</h5>
                   <div class="p-2 customer-highlights text-center">
                     <div class="row">
@@ -1092,7 +1092,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- REVIEW HIGHLIGHTS  -->
                 <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">
