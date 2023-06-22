@@ -1001,7 +1001,7 @@
                 @endphp
                 <div class="card shadow radious-10 my-3">
                 <h5 class="card-title bg-black text-white">Reviews On {{$v->fullName}}</h5>
-                  <div class="yotpo yotpo-main-widget"  data-product-id="{{$v->stock_id}}" data-price="{{$price_after_dis}}" data-currency="{{$location['geoplugin_currencyCode']}}" data-name="{{ str_replace('-', ' ', $v->name) }}" data-url="{{route('singleVehicle',['brand'=>$brand->slug_name,'subBrand'=>$sub_brand_id->slug_name,'stock_id'=>$v->stock_id])}}" data-image-url="@if(!empty($cover_img->image)) {{asset('uploads/vehicle_images/'.$cover_img->image)}} @endif"></div>
+                  <div class="yotpo yotpo-main-widget"  data-product-id="{{$v->vid}}" data-price="{{$price_after_dis}}" data-currency="{{$location['geoplugin_currencyCode']}}" data-name="{{ str_replace('-', ' ', $v->name) }}" data-url="{{route('singleVehicle',['brand'=>$brand->slug_name,'subBrand'=>$sub_brand_id->slug_name,'stock_id'=>$v->stock_id])}}" data-image-url="@if(!empty($cover_img->image)) {{asset('uploads/vehicle_images/'.$cover_img->image)}} @endif"></div>
                 </div>
                 <!-- Customer's Photo Gallery  -->
                 <div class="card shadow radious-10 my-3">
