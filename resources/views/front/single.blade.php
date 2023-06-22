@@ -994,7 +994,15 @@
 
                   </div>
                 </div>
-
+                @php
+                  $actual_price = $v->price;
+                  $dis_price = $v->price*$v->discount/100;
+                  $price_after_dis = ($actual_price-$dis_price);
+                @endphp
+                <div class="card shadow radious-10 my-3">
+                <h5 class="card-title bg-black text-white">Reviews On {{$v->fullName}}</h5>
+                  <div class="yotpo yotpo-main-widget"  data-product-id="{{$v->stock_id}}" data-price="{{$price_after_dis}}" data-currency="{{$location['geoplugin_currencyCode']}}" data-name="{{ str_replace('-', ' ', $v->name) }}" data-url="{{route('singleVehicle',['brand'=>$brand->slug_name,'subBrand'=>$sub_brand_id->slug_name,'stock_id'=>$v->stock_id])}}" data-image-url="{{asset('uploads/vehicle_images/'.$cover_img->image)}}"></div>
+                </div>
                 <!-- Customer's Photo Gallery  -->
                 <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">
@@ -1010,6 +1018,7 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- REVIEW HIGHLIGHTS  -->
                 <!-- <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">
@@ -1164,11 +1173,6 @@
                               </select>
                             </td>
                           </tr>
-                          @php
-                          $actual_price = $v->price;
-                          $dis_price = $v->price*$v->discount/100;
-                          $price_after_dis = ($actual_price-$dis_price);
-                          @endphp
                           @if($price_after_dis > 0)
                           <tr>
                             <th scope="row" class="fs-6">Vehicle Price</th>
@@ -1316,6 +1320,7 @@
                     </div>
                   </form>
                 </div>
+
                 {{--@if(currentUser() == 'user')--}}
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
