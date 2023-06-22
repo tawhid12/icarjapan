@@ -27,9 +27,13 @@ use App\Services\GeoLocationService;
 class FrontController extends Controller
 {
     protected $geoLocationService;
-    public function __construct(Request $request)
+    public function __construct(GeoLocationService $geoLocationService)
     {
-                /*$request->session()->forget('countryName');
+        $this->geoLocationService = $geoLocationService;
+    }
+public function index(Request $request)
+    {
+        /*$request->session()->forget('countryName');
         $request->session()->forget('location');*/
 
         $japan_locale_data = Carbon::now('Asia/Tokyo');
@@ -64,11 +68,6 @@ class FrontController extends Controller
         }
         $request->session()->put('countryName',$countryName);
         $request->session()->put('location',$location);
-    }
-public function index(Request $request)
-    {
-        $location =  request()->session()->get('location');
-        $countryName =  request()->session()->get('countryName');
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
             ->select('vehicles.id as vid', 'vehicles.r_status','vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
