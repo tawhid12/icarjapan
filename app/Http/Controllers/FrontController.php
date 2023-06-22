@@ -33,35 +33,41 @@ class FrontController extends Controller
     }
 public function index(Request $request)
     {
+        /*$request->session()->forget('countryName');
+        $request->session()->forget('location');*/
+
         $japan_locale_data = Carbon::now('Asia/Tokyo');
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
         //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
         if ($location && isset($location['geoplugin_timezone'])) {
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-            $request->session()->put('countryName',$countryName);
-            $request->session()->put('location',$location);
         }else{
             if(!$request->filled('code')){
                 $countries = Country::all();
                 return view('front.country-select',compact('countries'));
             }else if($request->filled('code')){
                 $countryName = Country::where('code', $request->code)->first();
-                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$countryName->ip_address));
-                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                $request->session()->put('countryName',$countryName);
-                $request->session()->put('location',$location);
+                if($countryName->ip_address){
+                    $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$countryName->ip_address));
+                    $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                }else{
+                    $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+                    /*echo '<pre>';
+                    print_r($location);die;*/
+                    $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                    $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                }
             }else{
                 $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
                 /*echo '<pre>';
                 print_r($location);die;*/
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-                $request->session()->put('countryName',$countryName);
-                $request->session()->put('location',$location);
             }
-
         }
+        $request->session()->put('countryName',$countryName);
+        $request->session()->put('location',$location);
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
             ->select('vehicles.id as vid', 'vehicles.r_status','vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
