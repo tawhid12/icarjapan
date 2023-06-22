@@ -65,8 +65,11 @@ use App\Http\Middleware\isUser;
 Route::get('/mail', [test::class,'index'])->name('mail');
 
 /*========FrontEnd==== */
-
 Route::get('/', [front::class,'index'])->name('front');
+Route::group(['middleware' => 'country.selection'], function () {
+    // Your protected routes
+
+
 Route::resource('mostview',mostView::class);
 Route::get('/used-cars-search/{brand}', [front::class,'brand'])->name('brand');
 Route::get('/used-cars-search/{brand}/{subBrand}', [front::class,'subBrand'])->name('subBrand');
@@ -86,7 +89,7 @@ Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeIma
 
 Route::resource('inquiry', inquiry::class)->only(['store']);
 Route::resource('contactus', contactus::class)->only(['store']);
-
+});
 
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');

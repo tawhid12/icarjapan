@@ -30,7 +30,14 @@ class FrontController extends Controller
     protected $geoLocationService;
     public function __construct(Request $request)
     {
-        if (!session()->has('countryName') && session()->has('location')) {
+
+
+
+    }
+    public function index(Request $request)
+    {
+        $japan_locale_data = Carbon::now('Asia/Tokyo');
+        if (!session()->has('countryName') && !session()->has('location')) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
             if ($location && isset($location['geoplugin_timezone'])) {
@@ -63,14 +70,9 @@ class FrontController extends Controller
             session()->put('countryName', $countryName);
             session()->put('location', $location);
         }
-
-
-    }
-    public function index(Request $request)
-    {
-        $japan_locale_data = Carbon::now('Asia/Tokyo');
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
+
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
