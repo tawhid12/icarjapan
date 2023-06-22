@@ -65,8 +65,6 @@ use App\Http\Middleware\isUser;
 Route::get('/mail', [test::class,'index'])->name('mail');
 
 /*========FrontEnd==== */
-//Route::group(['middleware' => 'country.selection'], function () {
-    // Your protected routes
 
 Route::get('/', [front::class,'index'])->name('front');
 Route::resource('mostview',mostView::class);
@@ -88,7 +86,7 @@ Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeIma
 
 Route::resource('inquiry', inquiry::class)->only(['store']);
 Route::resource('contactus', contactus::class)->only(['store']);
-//});
+
 
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
