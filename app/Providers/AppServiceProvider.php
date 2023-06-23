@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
 
         
 
-        View::composer(['front.welcome','front.single','front.brand','front.search','front.page.why-choose-us','front.page.how-to-order-from-auction','front.page.how-to-buy-from-stock','front.page.shipping','front.page.inspection-services','front.page.overview','front.page.company-profile','front.page.bank-information','front.page.faq','front.page.contact-us','front.country-vehicle'], function($view)
+        View::composer(['front.welcome','front.single','front.brand','front.search','front.page.why-choose-us','front.page.how-to-order-from-auction','front.page.how-to-buy-from-stock','front.page.shipping','front.page.inspection-services','front.page.overview','front.page.company-profile','front.page.bank-information','front.page.faq','front.page.contact-us','front.page.customer-review','front.country-vehicle'], function($view)
         {
             $body_types = BodyType::withCount('vehicles')->get();
             $drive_types = DriveType::all();
