@@ -551,4 +551,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         $('#myModal').modal('show');
     });
     </script>
+    <script type="text/javascript">
+          (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,
+              e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0];
+              t.parentNode.insertBefore(e,t)})();
+          </script>
+          <div id='yotpo-testimonials-custom-tab'></div>
   @endpush
