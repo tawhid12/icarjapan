@@ -10,6 +10,7 @@
 <div class="container my-4">
     <div class="row">
         <div class="col-md-12">
+            <h2>Customer Review</h2>
             <div id='yotpo-testimonials-custom-tab'></div>
         </div>
     </div>
