@@ -392,6 +392,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               </div>
             </div>
             <div class="review-user-body my-3">
+            <div id='yotpo-testimonials-custom-tab'></div>
               <div class="row">
                 <div class="col-sm-3 review-user-p-img">
                   {{--<img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />--}}
@@ -553,4 +554,5 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     });
     </script>
     <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
   @endpush
