@@ -67,7 +67,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 </div>
 
     <!-- Important Notice -->
-    <div class="row text-brand">
+    <!--<div class="row text-brand">
        <div class="col-sm-12 col-md-7 offset-md-2 col-lg-7 container-xl-7">
         <p class="m-0 notice-text">
           <span class="me-1"><i class="bi bi-exclamation-triangle"></span></i><strong class="me-2">Important Notice : </strong>
@@ -82,7 +82,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           About space for vessels. <a class="text-primary font-bold" href="">See Details</a>
         </p>
       </div>  
-    </div>
+    </div>-->
     <div class="row gx-4">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
         <!-- left row 1 -->
