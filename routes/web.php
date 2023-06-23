@@ -99,7 +99,7 @@ Route::get('/shipping',function(){ return view('front.page.shipping'); });
 Route::get('/inspection-services',function(){ return view('front.page.inspection-services'); });
 Route::get('/overview',function(){ return view('front.page.overview'); });
 Route::get('/company-profile',function(){ return view('front.page.company-profile'); });
-//Route::get('/customer-review',function(){ return view('front.page.customer-review'); });
+Route::get('/customer-review',function(){ return view('front.page.customer-review'); });
 Route::get('/bank-information',function(){ return view('front.page.bank-information'); });
 Route::get('/faq',function(){ return view('front.page.faq'); })->name('faq');
 Route::get('/contact-us',function(){ return view('front.page.contact-us'); });

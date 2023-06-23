@@ -93,7 +93,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{url('/overview')}}">Overview</a></li>
               <li><a class="dropdown-item" href="{{url('/company-profile')}}">Company Profile</a></li>
-              <li><a class="dropdown-item" href="#">Customer Reviews</a></li>
+              <li><a class="dropdown-item" href="{{url('/customer-review')}}">Customer Reviews</a></li>
               <li><a class="dropdown-item" href="{{url('/bank-information')}}">Bank Information</a></li>
               <li><a class="dropdown-item" href="{{url('/faq')}}">FAQ</a></li>
               <li><a class="dropdown-item" href="{{url('/contact-us')}}">Contact Us</a></li>
