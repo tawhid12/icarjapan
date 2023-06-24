@@ -860,7 +860,7 @@
                           <th scope="row">Registration Year</th>
                           <td>
                             @if($v->reg_year)
-                              {{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}
+                              {{$v->reg_year}}
                             @endif
                           </td>
                         </tr>
