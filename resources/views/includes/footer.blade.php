@@ -245,7 +245,8 @@
   <div class="top-scroll">
       <a href="#"><i class="bi bi-caret-up"></i></a>
   </div>
-  <div class="elfsight-app-ed7b024d-0ad6-4d25-b068-993b0f508422"></div>
+  <!--Chat -->
+  <!-- <div class="elfsight-app-ed7b024d-0ad6-4d25-b068-993b0f508422"></div> -->
   <!-- Bootstrap 5.3 -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <!-- fb page js -->
@@ -368,7 +369,8 @@
   <!-- Customer Review By Yotpo-->
   <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
   <!--Chat -->
-  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script> -->
+
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')
   <!--end::Page Scripts-->
