@@ -105,7 +105,7 @@
             right: 50px;
             text-decoration: none;
         }
-        .chat-whatsapp {
+        .chat-facebook {
             background-color: #1877F2;
             width: 50px;
             height: 50px;
