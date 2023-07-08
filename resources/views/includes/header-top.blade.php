@@ -1,3 +1,6 @@
+<a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank">
+  <span><i class="fab fa-whatsapp"></i></span>
+</a>
   <!-- Header top start -->
   <div class="header-top">
     <header class="container fw-bold">

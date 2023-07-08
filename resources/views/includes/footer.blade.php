@@ -245,6 +245,11 @@
   <div class="top-scroll">
       <a href="#"><i class="bi bi-caret-up"></i></a>
   </div>
+  <!--What up Chat option-->
+    <a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank" class="chat-whatsapp">
+        <span><i class="fab fa-whatsapp"></i></span>
+    </a>
+
   <!--Chat -->
   <!-- <div class="elfsight-app-ed7b024d-0ad6-4d25-b068-993b0f508422"></div> -->
   <!-- Bootstrap 5.3 -->

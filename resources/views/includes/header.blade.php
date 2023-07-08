@@ -91,6 +91,23 @@
         .ui-menu-item{
             font-size:14px;
         }
+        .chat-whatsapp {
+            background-color: green;
+            width: 50px;
+            height: 50px;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px 10px 10px;
+            text-align: center;
+            font-size: 25px;
+            position: fixed;
+            bottom: 50px;
+            left: 50px;
+            text-decoration: none;
+        }
+        .chat-whatsapp i.fa{
+            color: #fff;
+        }
     </style>
     <!--begin::Page Scripts(used by this page)-->
     @stack('styles')
