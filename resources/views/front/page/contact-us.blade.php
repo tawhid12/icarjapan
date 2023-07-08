@@ -26,29 +26,23 @@
             <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
         </div>
         <div class="col-md-4 text-center my-3">
-            <h6 class="m-0">Customer Service Department (Japan)</h6>
-            <p class="m-0">934-0025 Toyama-Ken, Imizu-Shi</p>
-            <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
+            <h6 class="m-0">Regional Head Office (Bangladesh)</h6>
+            <p class="m-0">Address: Nilachal (1st floor), Plot# 14, Block# B Main Road, Banashree, Dhaka 1219</p>
+            <p class="m-0">Contact: +81 50 5539 4712 (Hotline)</p>
         </div>
         <div class="col-md-4 text-center my-3">
-            <h6 class="m-0">Customer Service Department (Japan)</h6>
-            <p class="m-0">934-0025 Toyama-Ken, Imizu-Shi</p>
-            <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
+            <h6 class="m-0">Regional Office (Russia)</h6>
+            <p class="m-0">Primorskij Kraj g. Nakhodka Krasnoarmejskaya 15 n</p>
         </div>
         <div class="col-md-4 text-center my-3">
-            <h6 class="m-0">Customer Service Department (Japan)</h6>
-            <p class="m-0">934-0025 Toyama-Ken, Imizu-Shi</p>
-            <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
+            <h6 class="m-0">Regional Agent Office (Kiribati)</h6>
+            <p class="m-0">Address: Bakarurunao,Temaiku, Tarawa, Kiribati.</p>
+            <p class="m-0">Phone: 73048971 / 73081610 / 73050692 </p>
         </div>
         <div class="col-md-4 text-center my-3">
-            <h6 class="m-0">Customer Service Department (Japan)</h6>
-            <p class="m-0">934-0025 Toyama-Ken, Imizu-Shi</p>
-            <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
-        </div>
-        <div class="col-md-4 text-center my-3">
-            <h6 class="m-0">Customer Service Department (Japan)</h6>
-            <p class="m-0">934-0025 Toyama-Ken, Imizu-Shi</p>
-            <p class="m-0">Hachimanmachi 3-5-22 3F Japan</p>
+            <h6 class="m-0">Regional Agent Office (Tonga)</h6>
+            <p class="m-0">Address: Hala Hihifo, Puke, Tonga </p>
+            <p class="m-0">Phone: 7771219 / 8762767</p>
         </div>
     </div>
     <h4 class="text-center my-4">Contact Us</h4>
