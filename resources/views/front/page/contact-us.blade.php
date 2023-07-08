@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4 text-center my-3">
             <h6 class="m-0">Regional Office (Russia)</h6>
-            <p class="m-0">Primorskij Kraj g. Nakhodka Krasnoarmejskaya 15 n</p>
+            <p class="m-0">Primorskij Kraj g.Nakhodka Krasnoarmejskaya 15 n</p>
         </div>
         <div class="col-md-4 text-center my-3">
             <h6 class="m-0">Regional Agent Office (Kiribati)</h6>
