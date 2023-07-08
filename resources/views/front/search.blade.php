@@ -921,7 +921,7 @@
                         <td>{{$v->manu_year}}</td>
                         <td>{{$v->mileage}}</td>
                         <td>{{$v->e_code}}</td>
-                        <td>{{optional($v->trans)->name}}</td>
+                        <td>{{$v->tname}}</td>
                       </tr>
                     </tbody>
                   </table>
