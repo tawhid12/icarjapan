@@ -191,7 +191,7 @@ class FrontController extends Controller
             //->whereNull('r_status')
             ->inRandomOrder()->paginate(10);
 
-        /* echo '<pre>';
+        /*echo '<pre>';
         print_r($vehicles);die;*/
         return view('front.search', compact('vehicles', 'brand', 'sub_brand_id', 'countries'));
     }
@@ -260,7 +260,8 @@ class FrontController extends Controller
         $vehicles = DB::table('vehicles')
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
+            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug','transmissions.name as tname')
             ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
             ->orWhere('vehicles.fullName', $request->sdata)
             ->orWhere('vehicles.stock_id', $request->sdata)
