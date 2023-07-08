@@ -115,11 +115,11 @@
             text-align: center;
             font-size: 25px;
             position: fixed;
-            bottom: 120px;
+            bottom: 110px;
             right: 50px;
             text-decoration: none;
         }
-        .chat-whatsapp i.fab{
+        .chat-whatsapp i.fab,.chat-whatsapp i.fa{
             color: #fff;
         }
     </style>
