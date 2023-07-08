@@ -900,7 +900,7 @@
                       @endif
 
                   </div>
-                  <p class="price-text m-0">Total Price: <span>USD 2,238</span></p>
+                  <p class="price-text m-0">Total Price: <span>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price_after_dis, 2, ',', ',')}}</span></p>
                   @if($v->discount > 0)
                   <p>Save: {{$v->discount}}</p>
                   @endif
@@ -921,7 +921,7 @@
                         <td>{{$v->manu_year}}</td>
                         <td>{{$v->mileage}}</td>
                         <td>{{$v->e_code}}</td>
-                        <td>{{$v->transmission_id}}</td>
+                        <td>{{optional($v->trans)->name}}</td>
                       </tr>
                     </tbody>
                   </table>
