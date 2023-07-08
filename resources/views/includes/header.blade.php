@@ -102,7 +102,7 @@
             font-size: 25px;
             position: fixed;
             bottom: 50px;
-            left: 50px;
+            right: 50px;
             text-decoration: none;
         }
         .chat-whatsapp i.fab{
