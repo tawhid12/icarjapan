@@ -247,11 +247,11 @@
   </div>
     <!--Facebook Chat option-->
       <a href="" target="_blank" class="chat-facebook">
-        <span><i class="fa fa-facebook"></i></span>
+        <span><i class="fab fa-facebook-square"></i></span>
     </a>
     <!--What app Chat option-->
     <a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank" class="chat-whatsapp">
-        <span><i class="fab fa-facebook-square"></i></span>
+        <span><i class="fab fa-whatsapp"></i></span>
     </a>
 
   <!--Chat -->
