@@ -245,7 +245,11 @@
   <div class="top-scroll">
       <a href="#"><i class="bi bi-caret-up"></i></a>
   </div>
-  <!--What up Chat option-->
+    <!--Facebook Chat option-->
+      <a href="" target="_blank" class="chat-facebook">
+        <span><i class="fa fa-facebook"></i></span>
+    </a>
+    <!--What app Chat option-->
     <a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank" class="chat-whatsapp">
         <span><i class="fab fa-whatsapp"></i></span>
     </a>
