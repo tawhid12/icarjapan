@@ -115,7 +115,7 @@
             text-align: center;
             font-size: 25px;
             position: fixed;
-            bottom: 1000px;
+            bottom: 120px;
             right: 50px;
             text-decoration: none;
         }
