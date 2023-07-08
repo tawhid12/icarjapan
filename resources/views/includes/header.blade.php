@@ -119,7 +119,7 @@
             right: 50px;
             text-decoration: none;
         }
-        .chat-whatsapp i.fab,.chat-whatsapp i.fa{
+        .chat-whatsapp i.fab{
             color: #fff;
         }
     </style>
