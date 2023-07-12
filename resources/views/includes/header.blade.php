@@ -93,16 +93,16 @@
         }
         .chat-whatsapp {
             background-color: green;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             font-weight: bold;
             border-radius: 50%;
             padding: 5px 10px 10px 10px;
             text-align: center;
-            font-size: 25px;
+            font-size: 30px;
             position: fixed;
-            bottom: 50px;
-            right: 50px;
+            bottom: 100px;
+            right: 30px;
             text-decoration: none;
         }
         .chat-facebook {
