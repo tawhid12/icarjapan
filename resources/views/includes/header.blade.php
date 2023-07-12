@@ -20,7 +20,12 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <!-- Font Awesome 6.0 -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <link rel="stylesheet" href="{{asset('front/fontawesome/css/all.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="" type="text/css" />
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="{{asset('front/fontawesome/css/all.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front/fontawesome/css/brands.css')}}" rel="stylesheet">
+    <link href="{{asset('front/fontawesome/css/solid.css')}}" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/extensions/laravel-toster/toastr.min.css') }}">
     <!-- Google tag (gtag.js) -->
