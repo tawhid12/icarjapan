@@ -124,7 +124,7 @@
             right: 50px;
             text-decoration: none;
         }
-        .chat-whatsapp i.fab, .chat-facebook i.fab{
+        .chat-whatsapp i.fa-brands, .chat-facebook i.fab{
             color: #fff;
         }
     </style>
