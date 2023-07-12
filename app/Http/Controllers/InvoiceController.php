@@ -23,12 +23,14 @@ class InvoiceController extends Controller
     {
         if (currentUser() == 'salesexecutive') {
             $invoices = Invoice::where('executive_id',currentUserId())->paginate(10);
+            return view('sales.invoice.index',compact('invoices'));
         }else if(currentUser() == 'user'){
             $invoices = Invoice::where('customer_id',currentUserId())->paginate(10);
+            return view('user.invoice.index',compact('invoices'));
         }else{
             $invoices = Invoice::paginate(10);
         }
-        return view('user.invoice.index',compact('invoices'));
+        
     }
 
     /**

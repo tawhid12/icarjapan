@@ -23,12 +23,15 @@ class ReservedVehicleController extends Controller
     {
         if(currentUser() == 'superadmin'){
             $resrv = ReservedVehicle::orderBy('id', 'DESC')->paginate(25);
+            return view('vehicle.resrv_vehicle.index', compact('resrv'));
         }elseif(currentUser() == 'salesexecutive'){
             $resrv = ReservedVehicle::where('assign_user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+            return view('vehicle.resrv_vehicle.index', compact('resrv'));
         }else{
             $resrv = ReservedVehicle::where('user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+            return view('user.resrv_vehicle.index', compact('resrv'));
         }
-        return view('vehicle.resrv_vehicle.index', compact('resrv'));
+       
     }
 
     /**

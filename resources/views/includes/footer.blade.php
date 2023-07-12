@@ -246,9 +246,9 @@
       <a href="#"><i class="bi bi-caret-up"></i></a>
   </div>
     <!--Facebook Chat option-->
-      <a href="" target="_blank" class="chat-facebook">
+      <!-- <a href="" target="_blank" class="chat-facebook">
         <span><i class="fab fa-facebook-square"></i></span>
-    </a>
+    </a> -->
     <!--What app Chat option-->
     <a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank" class="chat-whatsapp">
         <span><i class="fab fa-whatsapp"></i></span>
@@ -260,7 +260,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <!-- fb page js -->
   <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=425979584449354&autoLogAppEvents=1" nonce="lQcO9Eh9"></script>
+  <!-- Your Chat plugin code -->
+  <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+  <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=425979584449354&autoLogAppEvents=1" nonce="lQcO9Eh9"></script> -->
   <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="{{ asset('front/js/jquery-ui.min.js') }}"></script>
   <script>
@@ -375,6 +378,31 @@
 
   </script>
   <script src="{{ asset('/assets/extensions/laravel-toster/toastr.min.js') }}"></script>
+  
+  <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "2464933096867027");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v17.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
   <!-- Customer Review By Yotpo-->
   <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
   <!--Chat -->

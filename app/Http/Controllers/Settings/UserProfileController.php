@@ -28,7 +28,12 @@ class UserProfileController extends Controller
         $countries=Country::where('id',$user->country_id)->get();
         $ports=Port::where('inv_loc_id',$user->country_id)->get();
         $com_info = CompanyAccountInfo::first();
-        return view('settings.user.profile',compact('user','countries','ports','com_info'));
+        if(currentUser() == 'superadmin' || currentUser() == 'salesexecutive'){
+            return view('settings.general.profile',compact('user','countries','ports','com_info'));
+        }else{
+            return view('settings.user.profile',compact('user','countries','ports','com_info'));
+        }
+        
     }
 
     /**

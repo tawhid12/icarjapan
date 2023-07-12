@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-4 text-center my-3">
             <h6 class="m-0">Regional Head Office (Bangladesh)</h6>
-            <p class="m-0">Address: Nilachal (1st floor), Plot# 14, Block# B Main Road, Banashree, Dhaka 1219</p>
+            <p class="m-0">Address: Nilachal (5th floor), Plot# 14, Block# B Main Road, Banashree, Dhaka 1219</p>
             <p class="m-0">Contact: +81 50 5539 4712 (Hotline)</p>
         </div>
         <div class="col-md-4 text-center my-3">

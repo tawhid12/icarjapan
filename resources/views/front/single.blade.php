@@ -1324,10 +1324,23 @@
                 {{--@if(currentUser() == 'user')--}}
                 <div class="card shadow radious-10 my-3 contact-us-section">
                   <h5 class="card-title bg-brand text-white">Contact Us</h5>
+                  @if($v->r_status)
+                  <div class="p-2 customer-highlights text-center">
+                  <form id="notify-active-form" method="POST" action="{{route('user.notifyvehicle.store')}}" style="display: inline;">
+                      @csrf
+                      <input name="vehicle_id" type="hidden" value="{{$v->id}}">                    
+                      <p>When Unreserved This Vehicle</p>
+                      @if(currentUserId())
+                      <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="notify mr-2 bg-button" data-toggle="tooltip" title="Notify Me"><i class="bi bi-cart-check-fill"></i>Notify Me</a>
+                      @else
+                      <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Notify Me</a>
+                      @endif
+                  </form>
+                  </div>
+                  @else
                   <div class="p-2 customer-highlights text-center">
                     <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#inquiry"><i class="bi bi-envelope-at-fill"></i> inquiry
-                    </a>
-
+                    </a>       
                     <p class="">OR</p>
                     <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
                       @csrf
@@ -1343,6 +1356,7 @@
                       <!--<img src="./resource/img/atm.jpg" alt="" />-->
                     </div>
                   </div>
+                  @endif
                 </div>
                 {{--@endif--}}
                 <!-- Inquiry Form -->
@@ -1475,6 +1489,22 @@
       .then((willDelete) => {
         if (willDelete) {
           $('#active-form').submit();
+        }
+      });
+  });
+
+  $('.notify').on('click', function(event) {
+    var name = $(this).data("name");
+    event.preventDefault();
+    swal({
+        title: `Are want to get Notify for this ${name}?`,
+        icon: "success",
+        buttons: true,
+        dangerMode: false,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          $('#notify-active-form').submit();
         }
       });
   });

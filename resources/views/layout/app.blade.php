@@ -68,6 +68,8 @@
                                   <li><a class="dropdown-item" href="{{route(currentUser().'.profile')}}">{{__('My Account') }}</a></li>
                                   <li><a class="dropdown-item" href="{{route(currentUser().'.change_password')}}">{{__('Change Password') }}</a></li>
                                   <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="{{url('/')}}">{{__('Site') }}</a><span class="badge bg-secondary">Link</span></li>
+                                  <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('logOut')}}">{{__('Logout') }}</a></li>
                                 </ul>
                             </div>

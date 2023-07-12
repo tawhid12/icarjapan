@@ -17,10 +17,12 @@ class InquiryController extends Controller
     {
         if(currentUser() == 'user'){
             $all_in = Inquiry::where('created_by',currentUserId())->get();
+            return view('user.inquiry.index',compact('all_in'));
         }else{
             $all_in = Inquiry::all();
+            return view('settings.inquiry.index',compact('all_in'));
         }
-        return view('settings.inquiry.index',compact('all_in'));
+        
     }
 
     /**

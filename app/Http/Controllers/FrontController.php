@@ -205,7 +205,7 @@ class FrontController extends Controller
         $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
         $countries = Country::all();
         $recomended = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+            ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
             ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')

@@ -46,6 +46,8 @@ use App\Http\Controllers\PaymentController as payment;
 use App\Http\Controllers\TestController as test;
 use App\Http\Controllers\ContactUsController as contactus;
 
+use App\Http\Controllers\NotifyController as notify;
+
 /* Middleware */
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isSuperadmin;
@@ -113,7 +115,7 @@ Route::get('/login', [auth::class,'signInForm'])->name('login');
 Route::post('/login', [auth::class,'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class,'singOut'])->name('logOut');
 
-Route::group(['middleware'=>isUser::class],function(){
+Route::group(['middleware'=>[isUser::class,'country.selection']],function(){
     Route::prefix('user')->group(function(){
         Route::get('/dashboard', [dash::class,'userDashboard'])->name('user.dashboard');
 
@@ -129,6 +131,7 @@ Route::group(['middleware'=>isUser::class],function(){
         Route::resource('consigdetl', consigdetl::class,['as'=>'user']);
         Route::resource('favourvehicle', favourvehicle::class,['as'=>'user']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'user']);
+        Route::resource('notifyvehicle', notify::class,['as'=>'user']);
         Route::resource('purvehicle', purvehicle::class,['as'=>'user']);
         Route::resource('aucvehicle', aucvehicle::class,['as'=>'user']);
         

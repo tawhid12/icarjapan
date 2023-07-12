@@ -1,85 +1,75 @@
-<ul>
-    <li class="menu-item  ">
-        <a href="{{route(currentUser().'.dashboard')}}" class='menu-link'>
-            <i class="bi bi-grid-fill"></i>
-            <span>{{__('dashboard') }}</span>
-        </a>
-    </li>
+@push('styles')
+<style>
+    #user-nav .dropdown-menu {
+        background-color: var(--bs-body-color);
+    }
+    #user-nav .dropdown-menu .dropdown-item a {
+        text-decoration: none;
+    }
+    .dropdown-item:focus,
+    .dropdown-item:hover {
+        background-color: var(--brand-color);
+    }
+</style>
+@endpush
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="user-nav">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </i>Profile
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-item"><a href="{{route(currentUser().'.usercontact.index')}}" class='submenu-link'>{{__('Contact Information')}}</a></li>
+                        <li class="dropdown-item"><a href="{{route(currentUser().'.userpref.index')}}" class='submenu-link'>{{__('Preference')}}</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       My Account Info
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-item"><a href="{{route(currentUser().'.consigdetl.index')}}" class='submenu-link'>{{__('Consignee List')}}</a></li>
+                        <li class="dropdown-item"><a href="{{route(currentUser().'.consigdetl.create')}}" class='submenu-link'>{{__('Add Consignee')}}</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route(currentUser().'.favourvehicle.index')}}" class='nav-link'>
+                        <span>{{__('Favourite Vehicle')}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route(currentUser().'.inquiry.index')}}" class='nav-link'>
+                        <span>{{__('Inquiry')}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route(currentUser().'.invoice.index')}}" class='nav-link'>
+                        <span>{{__('Invoice List')}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route(currentUser().'.payment.index')}}" class='nav-link'>
+                        <span>{{__('Payment List')}}</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Vehicles
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item"><a href="{{route(currentUser().'.reservevehicle.index')}}" class='nav-link'>{{__('Reserved Vehicle')}}</a></li>
+                        <li class="nav-item"><a href="{{route(currentUser().'.purvehicle.index')}}" class='nav-link'>{{__('Purchase Vehicle')}}</a></li>
+                        <li class="nav-item"><a href="{{route(currentUser().'.aucvehicle.index')}}" class='nav-link'>{{__('Auction Vehicle')}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <li class="menu-item has-sub">
-        <a href="" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('My Profile')}}</span>
-        </a>
-        <div class="submenu">
-            <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-            <div class="submenu-group-wrapper">
-                <ul class="submenu-group">
-                    <li class="submenu-item"><a href="{{route(currentUser().'.usercontact.index')}}" class='submenu-link'>{{__('Contact Information')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.userpref.index')}}" class='submenu-link'>{{__('Preference')}}</a></li>
-                </ul>
-            </div>
-        </div>
-    </li>
-    <li class="menu-item">
-        <a href="{{route(currentUser().'.profile')}}" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('My Account Info')}}</span>
-        </a>
-    </li>
-    <li class="menu-item has-sub">
-        <a href="" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('Consignee')}}</span>
-        </a>
-        <div class="submenu ">
-            <div class="submenu-group-wrapper">
-                <ul class="submenu-group">
-                    <li class="submenu-item"><a href="{{route(currentUser().'.consigdetl.index')}}" class='submenu-link'>{{__('Consignee List')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.consigdetl.create')}}" class='submenu-link'>{{__('Add Consignee')}}</a></li>
-                </ul>
-            </div>
-        </div>
-    </li>
-    <li class="menu-item">
-        <a href="{{route(currentUser().'.favourvehicle.index')}}" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('Favourite Vehicle')}}</span>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="{{route(currentUser().'.inquiry.index')}}" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('Inquiry')}}</span>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="{{route(currentUser().'.invoice.index')}}" class='menu-link'>
-            <i class="bi bi-shop"></i>
-            <span>{{__('Invoice List')}}</span>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="{{route(currentUser().'.payment.index')}}" class='menu-link'>
-            <i class="bi bi-shop"></i>
-            <span>{{__('Payment List')}}</span>
-        </a>
-    </li>
-    <li class="menu-item has-sub">
-        <a href="#" class='menu-link'>
-            <i class="bi bi-gear"></i>
-            <span>{{__('Vehicles')}}</span>
-        </a>
-        <div class="submenu ">
-            <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-            <div class="submenu-group-wrapper">
-                <ul class="submenu-group">
-                    <li class="submenu-item"><a href="{{route(currentUser().'.reservevehicle.index')}}" class='submenu-link'>{{__('Reserved Vehicle')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.purvehicle.index')}}" class='submenu-link'>{{__('Purchase Vehicle')}}</a></li>
-                    <li class="submenu-item"><a href="{{route(currentUser().'.aucvehicle.index')}}" class='submenu-link'>{{__('Auction Vehicle')}}</a></li>
-                </ul>
-            </div>
-        </div>
-    </li>
-
-</ul>
+    

@@ -1,14 +1,13 @@
-@extends('layout.landing')
+@extends('layout.app')
 
 @section('pageTitle','Invoice List')
 @section('pageSubTitle','List')
 
 @section('content')
-@include('layout.nav.user')
+
 
 <!-- Bordered table start -->
 <section class="section">
-    <div class="container">
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
@@ -90,8 +89,6 @@
         </div>
 
     </div>
-    </div>
-
 </section>
 <!-- Bordered table end -->
 </div>

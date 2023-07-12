@@ -18,13 +18,15 @@ class PaymentController extends Controller
     {
         if(currentUser() == 'salesexecutive'){
             $payments = Payment::where('created_by',currentUserId())->get();
+            return view('sales.payment.index', compact('payments'));
         }elseif(currentUser() == 'user'){
             $payments = Payment::where('customer_id',3)->get();
+            return view('user.payment.index', compact('payments'));
         }else{
             $payments = Payment::all();
         }
         
-        return view('user.payment.index', compact('payments'));
+        
     }
 
     /**

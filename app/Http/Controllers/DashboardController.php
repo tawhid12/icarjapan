@@ -11,27 +11,27 @@ class DashboardController extends Controller
     * admin dashboard
     */
     public function superadminDashboard(){
-        return view('dasbhoard.superadmin');
+        return view('dashboard.superadmin');
     }
     /*
     * admin dashboard
     */
     public function adminDashboard(){
-        return view('dasbhoard.admin');
+        return view('dashboard.admin');
     }
 
     /*
     * owner dashboard
     */
     public function userDashboard(){
-        return view('dasbhoard.user');
+        return view('dashboard.user');
     }
     
     /*
     * sales manager dashboard
     */
     public function salesexecutiveDashboard (){
-        return view('dasbhoard.salesexecutive');
+        return view('dashboard.salesexecutive');
     }
 
     /*
