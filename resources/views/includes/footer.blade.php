@@ -251,7 +251,7 @@
     </a> -->
     <!--What app Chat option-->
     <a href="https://api.whatsapp.com/send?phone=819080991615" target="_blank" class="chat-whatsapp">
-        <span><i class="fa-brands fa-whatsapp"></i></span>
+        <span><i class="bi bi-whatsapp"></i></span>
     </a>
 
   <!--Chat -->
