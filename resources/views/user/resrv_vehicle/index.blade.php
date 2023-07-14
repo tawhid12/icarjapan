@@ -75,7 +75,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <th colspan="4" class="text-center">No Reserved Or Purchased Found</th>
+                                    <th colspan="4" class="text-center">No Reserved Found</th>
                                 </tr>
                                 @endforelse
                             </tbody>

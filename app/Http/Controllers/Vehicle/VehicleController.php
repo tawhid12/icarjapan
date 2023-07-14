@@ -491,6 +491,7 @@ class VehicleController extends Controller
                             DB::table('vehicle_images')->insert($vehicleImagesArr);
 
                             $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
+                         
                             $image->resize(640, null, function ($constraint) {
                                 $constraint->aspectRatio();
                             });

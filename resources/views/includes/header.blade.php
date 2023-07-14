@@ -37,6 +37,7 @@
 
     gtag('config', 'UA-182321313-1');
     </script>
+    <!-- Review Yotp -->
     <script type="text/javascript">
         (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
     </script>

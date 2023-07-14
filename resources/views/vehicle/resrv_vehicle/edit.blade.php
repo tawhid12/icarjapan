@@ -16,6 +16,7 @@
                             @method('patch')
                             <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$resv->id)}}">
                             <div class="row">
+                                @if(currentUser() == 'superadmin')
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="name">Assign Sales Executive </label>
@@ -23,17 +24,19 @@
                                             <option value="">Select Sales Executive</option>
                                             @if(count($users) > 0)
                                             @forelse($users as $u)
-                                            <option value="{{$u->id}}">{{$u->name}}</option>
+                                            <option value="{{$u->id}}" @if($resv->assign_user_id) == $u->id) selected @endif>{{$u->name}}</option>
                                             @empty
                                             @endforelse
                                             @endif
                                         </select>
                                     </div>
                                 </div>
+                                @endif
+                                @if(currentUser() == 'salesexecutive')
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="name">Confirmed On</label>
-                                        <input type="date" class="form-control" name="confirm_on">
+                                        <input type="date" class="form-control" name="confirm_on" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-12">
@@ -45,15 +48,17 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="name">Settle Price</label>
-                                        <input type="text" class="form-control" name="settle_price">
+                                        <input type="text" class="form-control" name="settle_price" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="name">Satus</label>
-                                        <select class="form-control" name="status">
+                                        <select class="form-control" name="status" reuired>
                                             <option value="">Select Status</option>
+                                            @if(currentUser() == 'superadmin')
                                             <option value="1" @if($resv->status == 1) selected @endif>Reserved</option>
+                                            @endif
                                             <option value="2" @if($resv->status == 2) selected @endif>Confirmed</option>
                                             @if(currentUser() == 'superadmin')
                                             <option value="3" @if($resv->status == 3) selected @endif>Cencelled</option>
@@ -61,9 +66,10 @@
                                         </select>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
-                                        <label for="name">Note</label>
+                                        <label for="name">Confirmation Note</label>
                                         <textarea class="form-control" name="note" rows="5"></textarea>
                                     </div>
                                 </div>

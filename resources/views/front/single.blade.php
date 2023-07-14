@@ -2,6 +2,7 @@
 
 @section('pageSubTitle','ICAR JAPAN')
 @section('meta')
+<meta property="og:url" content="{{ request()->url() }}" />
 @if(!empty($v->name))
 <meta property="og:title" content="{{$v->name}}">
 @endif
