@@ -104,6 +104,58 @@
     <!-- Bordered table end -->
 </div>
 
+
+
+<div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-xl" role="document">
+						<div class="modal-content">
+							<form action="" method="POST">
+								@csrf
+								<input type="hidden" value="{{ Session::get('user') }}" name="userId">
+								<div class="modal-header">
+									<h5 class="modal-title" id="addNoteModalLabel">Add Note For <span id="student_name"></span></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="note">Student Id:</label>
+										<input type="text" id="student_id" name="student_id" class="form-control" readonly>
+									</div>
+									<div class="form-group">
+										<label for="note">Re Call Date:</label>
+										<input type="text" id="re_call_date" name="re_call_date" class="form-control" placeholder="dd/mm/yyyy">
+									</div>
+									<div class="form-group">
+										<label for="note">Note:</label>
+										<textarea class="form-control" id="note" name="note" rows="3"></textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary" onclick="disableButton(this)">Add Note</button>
+								</div>
+							</form>
+							<div class="col-md-12">
+								<h5 class="page-title">Note History</h5>
+								<table class="mt-3 responsive-datatable table table-bordered table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+									<thead>
+										<tr>
+											<th>Sl.</th>
+											<th>Recall Date</th>
+											<th>Note</th>
+											<th>Notes By</th>
+											<th>Posted On</th>
+										</tr>
+									</thead>
+									<tbody id="note-history">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 @endsection
 @push('scripts')
 <script>
