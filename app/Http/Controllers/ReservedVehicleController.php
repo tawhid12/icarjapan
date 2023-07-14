@@ -137,17 +137,19 @@ class ReservedVehicleController extends Controller
                 $resv->settle_price = $request->settle_price;
                 $resv->note = $request->note;
                 $resv->status = $request->status;
-
-                /*Insert To Invoice */
-                if(Invoice::where('vehicle_id',$resv->vehicle_id)->doesntExist()){
-                    $invoice = New Invoice();
-                    $invoice->invoice_date = date('Y-m-d');
-                    $invoice->reserve_id =  $resv->id;
-                    $invoice->vehicle_id = $resv->vehicle_id;
-                    $invoice->customer_id = $resv->user_id;
-                    $invoice->executive_id = $resv->assign_user_id;
-                    $invoice->save();
+                if($request->status == 2){
+                    /*Insert To Invoice */
+                    if(Invoice::where('vehicle_id',$resv->vehicle_id)->doesntExist()){
+                        $invoice = New Invoice();
+                        $invoice->invoice_date = date('Y-m-d');
+                        $invoice->reserve_id =  $resv->id;
+                        $invoice->vehicle_id = $resv->vehicle_id;
+                        $invoice->customer_id = $resv->user_id;
+                        $invoice->executive_id = $resv->assign_user_id;
+                        $invoice->save();
+                    }
                 }
+
             }
             $resv->updated_by = currentUserId();
             if ($resv->save()) {

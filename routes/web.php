@@ -161,6 +161,7 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
         Route::resource('invoice', invoice::class,['as'=>'salesexecutive']);
         Route::resource('payment', payment::class,['as'=>'salesexecutive']);
+        Route::get('/note/history', [NoteController::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
     });
 });
 
@@ -202,6 +203,7 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'superadmin']);
         Route::resource('invoice', invoice::class,['as'=>'superadmin']);
         Route::resource('payment', payment::class,['as'=>'superadmin']);
+        Route::get('/note/history', [NoteController::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
     });
 });
 Route::group(['middleware'=>isAdmin::class],function(){

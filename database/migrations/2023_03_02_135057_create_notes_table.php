@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('student_id')->unsigned();
-			$table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->bigInteger('reserve_id')->unsigned();
+			$table->bigInteger('executive_id')->unsigned();
             $table->date("re_call_date")->nullable();
             $table->text("note")->nullable();
             $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

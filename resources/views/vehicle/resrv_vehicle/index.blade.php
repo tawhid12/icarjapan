@@ -82,7 +82,7 @@
                                             @if( $rsv->status == 2)
                                            
                                             @endif
-                                            <a data-vehicke-id="" data-vehicle-name="" href="#" data-toggle="modal" data-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Note</strong></a>
+                                            <a data-reserve-id="{{$rsv->id}}" data-vehicle-name="{{optional($rsv->vehicle)->fullName}}" href="#" data-toggle="modal" data-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Note</strong></a>
                                         </td>
                                     </tr>
                                     @empty
@@ -105,4 +105,33 @@
 </div>
 
 @endsection
+@push('scripts')
+<script>
+	$('#addNoteModal').on('show.bs.modal', function(event) {
+		$('#note-history').empty();
+		var button = $(event.relatedTarget);
+		var reserveId = button.data('reserve-id');
+		var vehicleName = button.data('vehicle-name');
+
+		var modal = $(this);
+		modal.find('#reserve').val(reserve);
+		modal.find('#vehicleName').text(vehicleName);
+		$.ajax({
+			url: "{{route(currentUser().'.noteHistoryByvehicleId')}}",
+			method: 'GET',
+			dataType: 'json',
+			data: {
+				reserveId: reserveId,
+			},
+			success: function(res) {
+				console.log(res.data);
+				$('#note-history').append(res.data);
+			},
+			error: function(e) {
+				console.log(e);
+			}
+		});
+	});
+	</script>
+@endpush
 
