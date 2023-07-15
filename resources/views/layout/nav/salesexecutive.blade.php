@@ -15,6 +15,20 @@
     </li>
     <li class="menu-item has-sub">
         <a href="#" class='menu-link'>
+            <i class="bi bi-gear"></i>
+            <span>{{__('Settings')}}</span>
+        </a>
+        <div class="submenu ">
+            <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+            <div class="submenu-group-wrapper">
+                <ul class="submenu-group">
+                    <li class="submenu-item"><a href="{{route(currentUser().'.admin.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <li class="menu-item has-sub">
+        <a href="#" class='menu-link'>
             <i class="bi bi-car-front-fill"></i>
             <span>{{__('Vehicles')}}</span>
         </a>
@@ -30,7 +44,7 @@
     <li class="menu-item">
         <a href="{{route(currentUser().'.reservevehicle.index')}}" class='menu-link'>
             <i class="bi bi-shop"></i>
-            <span>{{__('Reserved Vehicle List')}}</span>
+            <span>{{__('Reserved List')}}</span>
         </a>
     </li>
     <li class="menu-item">

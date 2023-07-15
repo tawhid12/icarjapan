@@ -19,13 +19,20 @@
                                   <div class="col-md-3 col-12">
                                       <p class="m-0"><strong>Invoice No : {{$invoice->id}}</strong></p>
                                   </div>
+                                  <div class="col-md-3 col-12">
+                                      <p class="m-0"><strong>Invoice Amount : {{$invoice->fob_amt}}</strong></p>
+                                  </div>
+                                  <div class="col-md-3 col-12">
+                                      <p class="m-0"><strong>Due Amount : </strong></p>
+                                  </div>
                                   <hr>
-                                  <input type="hidden" value="{{$invoice->customer_id}}" name="user_id">
+                                  <input type="hidden" value="{{$invoice->customer_id}}" name="customer_id">
+                                  <input type="hidden" value="{{$invoice->id}}" name="invoice_id">
                                   <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="type">Payment Type</label>
                                           <select name="type" class="form-control">
-                                              <option value="">Select</option>
+                                              <!-- <option value="">Select</option> -->
                                               <option value="2" selected>Allocated</option>
                                           </select>
                                       </div>
@@ -35,7 +42,7 @@
                                           <label for="currency">Currency</label>
                                           <select name="currency" class="form-control">
                                               <option value="">Select</option>
-                                              <option value="1">USD</option>
+                                              <option value="1" selected>USD</option>
                                           </select>
                                       </div>
                                   </div>
@@ -52,13 +59,17 @@
                                       </div>
                                   </div>
                                   {{--value="optional($invoice->res_vehicle)->settle_price"--}}
-                                  <div class="col-md-3 col-12">
+                                  <!-- <div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="allocated">Allocated</label>
                                           <input type="text" id="allocated" class="form-control" placeholder="Allocated" name="allocated">
                                       </div>
-                                  </div>
+                                  </div> -->
                               </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="adjust_deposit" name="adjust_deposit" value="1">
+                                    <label class="form-check-label" for="adjust_deposit">Adjust Deposit</label>
+                                </div>
                               <div class="row my-3">
                                   <div class="col-12 d-flex justify-content-end">
                                       <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>

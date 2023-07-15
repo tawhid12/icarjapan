@@ -7,6 +7,7 @@ use App\Models\ReservedVehicle;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Vehicle\Vehicle;
+use App\Models\Notify;
 
 use Illuminate\Http\Request;
 use Toastr;
@@ -145,6 +146,7 @@ class ReservedVehicleController extends Controller
                         $invoice->reserve_id =  $resv->id;
                         $invoice->vehicle_id = $resv->vehicle_id;
                         $invoice->customer_id = $resv->user_id;
+                        $invoice->fob_amt = $resv->settle_price;
                         $invoice->executive_id = $resv->assign_user_id;
                         $invoice->save();
                     }
@@ -169,8 +171,37 @@ class ReservedVehicleController extends Controller
      * @param  \App\Models\ReservedVehicle  $reservedVehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservedVehicle $reservedVehicle)
+    public function destroy($id)
     {
-        //
+        $notify = Notify::where(['vehicle_id' => $id,'status' => 2])->get();
+        foreach($notify as $n){
+            /*To User */
+            $user = User::where('id',$n->user_id)->first();
+            $v_data = Vehicle::where('id',$n->vehicle_id)->first();
+            echo $user->email;die;
+            \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n,$v_data,$user){
+                $message->from('info@icarjapan.com', 'Icarjapan')
+                        ->to($user->email)
+                        ->subject('Reserved Free For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
+            });
+            /*== Notify Cancel Update ==*/
+            $notify  =  Notify::find($n->id);
+            $notify->status = 1;
+            $notify->save();
+
+            /*== Reserve Vehicle Cancel ==*/
+            $resv = ReservedVehicle::findOrFail($id);
+            $resv->status = 3;
+            $resv->save();
+        }
+        
+        /*== Notify Vehicle Cancel Update ==*/
+        $vehicle = Vehicle::findOrFail($id);
+        $vehicle->r_status = null;
+        if ($vehicle->save()) {
+            return redirect()->route(currentUser() . '.reservevehicle.index')->with(Toastr::success('Reserve Cancel!', 'Success', ["positionClass" => "toast-top-right"]));
+        } else {
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 }

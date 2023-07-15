@@ -15,8 +15,8 @@
                               <div class="row">
                                   <div class="col-md-4 col-12">
                                       <div class="form-group">
-                                          <label for="user_id">Select Customer Id</label>
-                                          <select name="user_id" class="form-control" required>
+                                          <label for="customer_id">Select Customer Id</label>
+                                          <select name="customer_id" class="form-control" required>
                                               <option value="">Select</option>
                                               @if(count($invoices))
                                               @foreach($invoices as $in)
@@ -30,7 +30,7 @@
                                       <div class="form-group">
                                           <label for="type">Payment Type</label>
                                           <select name="type" class="form-control">
-                                              <option value="">Select</option>
+                                              <!-- <option value="">Select</option> -->
                                               <option value="1" selected>Deposit</option>
                                               {{--<option value="2">Allocated</option>
                                             <option value="3">Security Deposit</option>--}}
@@ -41,8 +41,8 @@
                                       <div class="form-group">
                                           <label for="currency">Currency</label>
                                           <select name="currency" class="form-control">
-                                              <option value="">Select</option>
-                                              <option value="1">USD</option>
+                                              <!-- <option value="">Select</option> -->
+                                              <option value="1" selected>USD</option>
                                           </select>
                                       </div>
                                   </div>
@@ -52,16 +52,10 @@
                                           <input type="text" id="receive_date" class="form-control" name="receive_date">
                                       </div>
                                   </div>
-                                  <div class="col-md-3 col-12">
+                                  {{--<div class="col-md-3 col-12">
                                       <div class="form-group">
                                           <label for="amount">Amount</label>
                                           <input type="text" id="amount" class="form-control" placeholder="Amount" name="amount">
-                                      </div>
-                                  </div>
-                                  {{--<div class="col-md-3 col-12">
-                                      <div class="form-group">
-                                          <label for="allocated">Allocated</label>
-                                          <input type="text" id="allocated" class="form-control" placeholder="Allocated" name="allocated">
                                       </div>
                                   </div>--}}
                                   <div class="col-md-3 col-12">

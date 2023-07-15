@@ -1132,7 +1132,7 @@
               <div class="col-sm-4">
                 <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
                 <div class="row">
-                  <div class="d-flex view-port">
+                  <!-- <div class="d-flex view-port">
                     <div class="col-sm-4">
                       <div class="w-100">
                         <div class="page-view">Page View</div>
@@ -1151,7 +1151,7 @@
                         <div>712</div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
 
                   <!-- price table -->

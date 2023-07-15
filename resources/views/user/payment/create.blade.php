@@ -15,8 +15,8 @@
                               <div class="row">
                                   <div class="col-md-4 col-12">
                                       <div class="form-group">
-                                          <label for="user_id">Select Customer Id</label>
-                                          <select name="user_id" class="form-control" required>
+                                          <label for="customer_id">Select Customer Id</label>
+                                          <select name="customer_id" class="form-control" required>
                                               <option value="">Select</option>
                                               @if(count($invoices))
                                               @foreach($invoices as $in)

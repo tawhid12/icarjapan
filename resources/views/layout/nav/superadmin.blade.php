@@ -28,6 +28,7 @@
             <div class="submenu-group-wrapper">
                 <ul class="submenu-group">
                     <li class="submenu-item"><a href="{{route(currentUser().'.admin.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
+                    <li class="submenu-item"><a href="" class='submenu-link'>{{__('Transfer User')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.bodytype.index')}}" class='submenu-link'>{{__('Body Type')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.subbodytype.index')}}" class='submenu-link'>{{__('Sub Body Type')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.drivetype.index')}}" class='submenu-link'>{{__('Drive Type')}}</a></li>
@@ -80,7 +81,7 @@
     <li class="menu-item">
         <a href="{{route(currentUser().'.reservevehicle.index')}}" class='menu-link'>
             <i class="bi bi-shop"></i>
-            <span>{{__('Reserved Vehicle List')}}</span>
+            <span>{{__('Reserved List')}}</span>
         </a>
     </li>
     <li class="menu-item has-sub">
@@ -99,15 +100,15 @@
             </div>
         </div>
     </li>
-    <li class="menu-item has-sub">
+    <!-- <li class="menu-item has-sub">
         <a href="#" class='menu-link'>
             <i class="bi bi-list"></i>
             <span>{{__('Reports')}}</span>
         </a>
         <div class="submenu ">
-            <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+            
 
         </div>
-    </li>
+    </li> -->
 
 </ul>

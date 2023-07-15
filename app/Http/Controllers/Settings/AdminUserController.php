@@ -22,13 +22,16 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-
-        if(companyAccess()){
+        if(currentUser() == 'salesexecutive'){
+            $users=User::where('created_by',currentUserId())->paginate(10);
+        }else{
+            $users=User::paginate(10);
+        }
+        /*if(companyAccess()){
             $users=User::paginate(10);
         }else{
             $users=User::where(company())->paginate(10);
-        }
-        
+        }*/
         return view('settings.adminusers.index',compact('users'));
     }
 
@@ -56,10 +59,16 @@ class AdminUserController extends Controller
             $user->name=$request->userName;
             $user->contact_no=$request->contactNumber;
             $user->email=$request->userEmail;
-            $user->role_id=$request->role_id;
+            if(currentUser() == 'salesexecutive'){
+                $user->role_id=4;
+            }else{
+                $user->role_id=$request->role_id;
+            }
+            
             $user->password=Hash::make($request->password);
             $user->all_company_access=$request->all_company_access;
-
+            if(currentUser() == 'salesexecutive' || currentUser() == 'superadmin')
+            $user->created_by=currentUserId();
 
             if($request->has('image')) $user->image = $this->uploadImage($request->file('image'), 'uploads/admin');
 

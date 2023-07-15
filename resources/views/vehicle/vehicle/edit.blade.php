@@ -4,6 +4,7 @@
 @section('pageSubTitle','Edit')
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="{{asset('assets/dropify/dropify.min.css')}}" rel="stylesheet" type="text/css" />
 <style>
     .main-img {
         position: relative;
@@ -639,11 +640,29 @@
     <!-- Additional content or form for retrying the failed uploads -->
 
 
-    <div class="col-md-6 col-12 mt-3">
+    <div class="col-md-12 col-12 mt-3">
         <div class="form-group">
             <h4>Gallery Image</h4>
-            <input type="file" id="image" class="form-control" name="image[]" multiple accept="image/*">
-        </div>
+            <!-- <input type="file" id="image" class="form-control" name="image[]" multiple accept="image/*"> -->
+
+            <div class="row add_image">
+                <div class="col-3 mb-3">
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>
+                </div> <!-- end col -->
+                <div class="col-3 mb-3">
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>
+                </div>
+                <div class="col-3 mb-3">
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>
+                </div> <!-- end col -->
+                <div class="col-3 mb-3">
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>
+                </div>  <!-- end col -->
+            </div> <!-- end row -->
+            </div>
+            <button class="btn btn-info" onclick="add_image()" type="button">Add More</button>
+
+       
     </div>
 
 
@@ -684,6 +703,7 @@
 </div>
 @endsection
 @push('scripts')
+<script src="{{ asset('/assets/dropify/dropify.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -808,5 +828,13 @@
             });
         }
     });
+
+    $(".dropify").dropify({messages:{default:"Drag and drop a file here or click",replace:"Drag and drop or click to replace",remove:"Remove",error:"Ooops, something wrong appended."},error:{fileSize:"The file size is too big (1M max)."}});
+    function add_image(){
+        $('.add_image').append('<div class="col-3 mb-3">\
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>\
+                </div>');
+                $(".dropify").dropify({messages:{default:"Drag and drop a file here or click",replace:"Drag and drop or click to replace",remove:"Remove",error:"Ooops, something wrong appended."},error:{fileSize:"The file size is too big (1M max)."}});
+    }
 </script>
 @endpush

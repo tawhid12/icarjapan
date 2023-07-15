@@ -50,11 +50,11 @@
                                     
 
 
-  
+                                    @if(currentUser() == 'superadmin')
                                     <div class="col-sm-4 col-12">
                                         <div class="form-group">
                                             <label for="role_id">Role <span class="text-danger">*</span></label>
-                                            <select id="role_id" class="form-control" name="role_id">
+                                            <select id="role_id" class="form-control" name="role_id" required>
                                                 <option value="">Select Role</option>
                                                 @forelse($role as $data)
                                                     <option {{old('role_id',$user->role_id)==$data->id?"selected":""}} value="{{$data->id}}">{{$data->type}}</option>
@@ -93,6 +93,7 @@
                                             <span class="text-danger"> {{ $errors->first('all_company_access') }}</span>
                                         @endif
                                     </div>
+                                    @endif
                                     <div class="col-sm-4 col-12">
                                         <div class="form-group">
                                             <label for="show_price">Product Price Access <span class="text-danger">*</span></label>

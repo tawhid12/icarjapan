@@ -47,6 +47,7 @@ use App\Http\Controllers\TestController as test;
 use App\Http\Controllers\ContactUsController as contactus;
 
 use App\Http\Controllers\NotifyController as notify;
+use App\Http\Controllers\NoteController as note;
 
 /* Middleware */
 use App\Http\Middleware\isAdmin;
@@ -157,12 +158,15 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
 
         Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive']);
 
+        /* settings */
+        Route::resource('admin',admin::class,['as'=>'salesexecutive']);
+
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
         Route::resource('invoice', invoice::class,['as'=>'salesexecutive']);
         Route::resource('payment', payment::class,['as'=>'salesexecutive']);
-        Route::resource('/notes', NoteController::class, ["as" => "salesexecutive"]);
-        Route::get('/note/history', [NoteController::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
+        Route::resource('/notes', note::class, ["as" => "salesexecutive"]);
+        Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
     });
 });
 
@@ -204,8 +208,8 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'superadmin']);
         Route::resource('invoice', invoice::class,['as'=>'superadmin']);
         Route::resource('payment', payment::class,['as'=>'superadmin']);
-        Route::resource('/notes', NoteController::class, ["as" => "superadmin"]);
-        Route::get('/note/history', [NoteController::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
+        Route::resource('/notes', note::class, ["as" => "superadmin"]);
+        Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
     });
 });
 Route::group(['middleware'=>isAdmin::class],function(){

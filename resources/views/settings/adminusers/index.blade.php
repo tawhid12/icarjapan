@@ -42,6 +42,7 @@
                                     <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
+                                    @if(currentUser() == 'superadmin')
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                         <i class="bi bi-trash"></i>
                                     </a>
@@ -49,6 +50,7 @@
                                         @csrf
                                         @method('delete')
                                     </form>
+                                    @endif
                                 </td>
                                 
                             </tr>

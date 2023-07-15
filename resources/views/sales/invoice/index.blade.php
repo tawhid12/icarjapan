@@ -64,7 +64,12 @@
                                 {{--<td>@if($inv->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>--}}
                                 <td class="white-space-nowrap">
                                     @if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin')
-                                    <a title="payment" href="{{route(currentUser().'.payment.create')}}?id={{$inv->id}}"><i class="bi bi-box-arrow-in-right"></i></a>
+                                    @php $vehicle = \DB::table('vehicles')->where('id',$inv->vehicle_id)->first(); @endphp
+                                    @if(!$vehicle->sold_status)
+                                        <a title="payment" href="{{route(currentUser().'.payment.create')}}?id={{$inv->id}}"><i class="bi bi-box-arrow-in-right"></i></a>
+                                    @else
+                                    <strong>Paid</strong>    
+                                    @endif
                                     <a href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}"><i class="bi bi-pencil-square"></i></a>
                                     <a href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$inv->id))}}"><i class="bi bi-eye"></i></a>
                                     @endif
