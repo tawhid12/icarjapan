@@ -19,12 +19,13 @@
                                 @if(currentUser() == 'superadmin')
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
+                                        
                                         <label for="name">Assign Sales Executive </label>
                                         <select class="form-control" name="assign_user_id">
                                             <option value="">Select Sales Executive</option>
                                             @if(count($users) > 0)
                                             @forelse($users as $u)
-                                            <option value="{{$u->id}}" @if($resv->assign_user_id) == $u->id) selected @endif>{{$u->name}}</option>
+                                            <option value="{{$u->id}}">{{$u->name}}</option>
                                             @empty
                                             @endforelse
                                             @endif
