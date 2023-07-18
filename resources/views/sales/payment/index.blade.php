@@ -55,9 +55,9 @@
                                     <!-- <td>{{$p->security_deposit}}</td> -->
                                     @if(currentUser() == 'superadmin' || currentUser() == 'salesexecutive')
                                     <td class="white-space-nowrap">
-                                        <a href="{{route(currentUser().'.payment.edit',encryptor('encrypt',$p->id))}}">
+                                        <!-- <a href="{{route(currentUser().'.payment.edit',encryptor('encrypt',$p->id))}}">
                                             <i class="bi bi-pencil-square"></i>
-                                        </a>
+                                        </a> -->
                                         <!-- <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                                 <i class="bi bi-trash"></i>
                                             </a> -->

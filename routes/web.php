@@ -141,6 +141,8 @@ Route::group(['middleware'=>[isUser::class,'country.selection']],function(){
         Route::resource('inquiry', inquiry::class,['as'=>'user']);
         Route::resource('invoice', invoice::class,['as'=>'user']);
         Route::resource('payment', payment::class,['as'=>'user']);
+
+
     });
 });
 
@@ -210,6 +212,8 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('payment', payment::class,['as'=>'superadmin']);
         Route::resource('/notes', note::class, ["as" => "superadmin"]);
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
+
+       
     });
 });
 Route::group(['middleware'=>isAdmin::class],function(){

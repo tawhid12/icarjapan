@@ -28,7 +28,7 @@
             <div class="submenu-group-wrapper">
                 <ul class="submenu-group">
                     <li class="submenu-item"><a href="{{route(currentUser().'.admin.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
-                    <li class="submenu-item"><a href="" class='submenu-link'>{{__('Transfer User')}}</a></li>
+                    <li class="submenu-item"><a href="" class='submenu-link'>{{__('Transfer Client')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.bodytype.index')}}" class='submenu-link'>{{__('Body Type')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.subbodytype.index')}}" class='submenu-link'>{{__('Sub Body Type')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.drivetype.index')}}" class='submenu-link'>{{__('Drive Type')}}</a></li>

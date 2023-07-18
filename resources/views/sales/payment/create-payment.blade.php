@@ -23,7 +23,7 @@
                                       <p class="m-0"><strong>Invoice Amount : {{$invoice->fob_amt}}</strong></p>
                                   </div>
                                   <div class="col-md-3 col-12">
-                                      <p class="m-0"><strong>Due Amount : </strong></p>
+                                      <p class="m-0"><strong>Due Amount : {{$invoice->fob_amt-\DB::table('payments')->where('invoice_id',$invoice->id)->sum('amount')}}</strong></p>
                                   </div>
                                   <hr>
                                   <input type="hidden" value="{{$invoice->customer_id}}" name="customer_id">
