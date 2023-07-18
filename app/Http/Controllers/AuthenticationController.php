@@ -60,7 +60,12 @@ class AuthenticationController extends Controller
             if($user){
                 if(Hash::check($request->password , $user->password)){
                     $this->setSession($user);
-                    return redirect()->route($user->role->identity.'.dashboard')->with($this->resMessageHtml(true,null,'Successfully login'));
+                    if(currentUser() == 'user'){
+                        return redirect()->route('front')->with($this->resMessageHtml(true,null,'Successfully login'));
+                    }else{
+                        return redirect()->route($user->role->identity.'.dashboard')->with($this->resMessageHtml(true,null,'Successfully login'));
+                    }
+                    
                 }else
                     return redirect()->route('login')->with($this->resMessageHtml(false,'error','Your phone number or password is wrong!'));
             }else
