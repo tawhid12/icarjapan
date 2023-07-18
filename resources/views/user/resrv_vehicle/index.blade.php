@@ -7,14 +7,14 @@
 
 @include('layout.nav.user')
 <!-- Bordered table start -->
-<section class="section">
+<section class="section m-5">
     <div class="container">
-        <div class="row" id="table-bordered">
+        <div class="row" id="table-bordered" style="background-color: #eee">
             <div class="col-12">
-                <div class="card">
+              <h4>All Reserved</h4>
                     <!-- table bordered -->
                     <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+                        <table class="table table-sm table-bordered mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">{{__('#SL')}}</th>
@@ -84,13 +84,12 @@
                             {{ $resrv->links() }}
                         </div>
                     </div>
-                </div>
+              
             </div>
 
         </div>
     </div>
 </section>
-<!-- Bordered table end -->
-</div>
+
 
 @endsection

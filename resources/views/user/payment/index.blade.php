@@ -6,13 +6,14 @@
 @include('layout.nav.user')
 
 <!-- Bordered table start -->
-<section class="section">
-    <div class="row" id="table-bordered">
+<section class="section m-5">
+<div class="container">
+    <div class="row" id="table-bordered" style="background-color: #eee">
         <div class="col-12">
-            <div class="card">
+        <h4>All Payments</h4>
                 <!-- table bordered -->
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
+                    <table class="table table-sm table-bordered mb-0">
                         @if(currentUser() == 'superadmin' || currentUser() == 'salesexecutive')
                         {{--<a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.payment.create')}}"><i class="bi bi-pencil-square"></i></a>--}}
                         @endif
@@ -48,12 +49,11 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            
         </div>
 
     </div>
+    </div>
 </section>
-<!-- Bordered table end -->
-</div>
 
 @endsection

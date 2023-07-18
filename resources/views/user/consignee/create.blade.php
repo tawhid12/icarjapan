@@ -2,14 +2,21 @@
 
   @section('pageTitle','Create Consignee')
   @section('pageSubTitle','Create')
-
+  @push('styles')
+  <style>
+      .form-group,
+      .form-control {
+          font-size: 12px;
+      }
+  </style>
+  @endpush
   @section('content')
   @include('layout.nav.user')
   <section id="multiple-column-form">
       <div class="container">
-          <div class="row match-height">
+          <div class="row match-height mb-5 p-3" style="background:#eee">
               <div class="col-12">
-
+                    <h4>Consignee Information </h4>
                   <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.consigdetl.store')}}">
                       @csrf
                       <div class="row">

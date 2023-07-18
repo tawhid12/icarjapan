@@ -9,7 +9,7 @@
 <!-- Bordered table start -->
 <section class="section">
     <div class="container">
-        <div class="row" id="table-bordered">
+        <div class="row" id="table-bordered" style="background-color:#eee">
             <div class="col-12">
                 <!-- table bordered -->
                 <div class="table-responsive">

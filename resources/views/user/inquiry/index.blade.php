@@ -5,18 +5,19 @@
 @section('content')
 @include('layout.nav.user')
 <!-- Bordered table start -->
-<section class="section">
+<section class="section m-5">
     <div class="container">
-        <div class="row" id="table-bordered">
+        <div class="row" id="table-bordered" style="background-color: #eee">
             <div class="col-12">
-                <div class="card">
+                
                     @include('layout.message')
                     <!-- <div>
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.inquiry.create')}}"><i class="bi bi-pencil-square"></i></a>
                 </div> -->
+                    <h4>All Inquiry</h4>
                     <!-- table bordered -->
                     <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+                        <table class="table table-sm table-bordered mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">{{__('#SL')}}</th>
@@ -57,7 +58,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+             
             </div>
         </div>
     </div>
