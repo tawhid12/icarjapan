@@ -7,7 +7,7 @@
 
 @include('layout.nav.user')
 <!-- Bordered table start -->
-<section class="section">
+<section class="section mb-3">
     <div class="container">
         <div class="row" id="table-bordered" style="background-color:#eee">
             <div class="col-12">
