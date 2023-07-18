@@ -2,14 +2,22 @@
 
 @section('pageTitle',trans('Change Password'))
 @section('pageSubTitle',trans('Change Password'))
+@push('styles')
+<style>
+    .form-group,form-control{
+        font-size: 14px;;
+    }
+</style>
+@endpush
 
 @section('content')
 @include('layout.nav.user')
 <!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form" style="margin:30px 0px">
     <div class="container">
-        <div class="row match-height">
+        <div class="row match-height" style="background:#eee;">
             <div class="col-12">
+            <h4>Change Password</h4>
                 <form class="form" method="post" action="{{route(currentUser().'.change_password.store')}}">
                     @csrf
                     <div class="row">
@@ -43,7 +51,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+                            <button type="submit" class="btn btn-sm btn-primary me-1 mb-1">Save</button>
 
                         </div>
                     </div>

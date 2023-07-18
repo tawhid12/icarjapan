@@ -23,6 +23,7 @@
         <div class="row">
             <div class="match-height p-3 m-3">
                 <div class="col-12">
+                    <h4>Account Information</h4>
                     @if(Session::has('response'))
                     {!!Session::get('response')['message']!!}
                     @endif
