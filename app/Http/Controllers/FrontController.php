@@ -309,7 +309,6 @@ class FrontController extends Controller
             print_r($vehicles);die;*/
             return view('front.search', compact('vehicles', 'countries'));
         } elseif ($request->filled('brand') && !$request->filled('sub_brand')) {
-
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_prefix = DB::table('sub_brands')
                 ->select(
@@ -327,9 +326,10 @@ class FrontController extends Controller
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
             $vehicles = DB::table('vehicles')
-                ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+                ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug','transmissions.name as tname')
                 ->leftjoin('brands', 'vehicles.brand_id', 'brands.id')
                 ->leftjoin('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->leftjoin('transmissions', 'vehicles.transmission_id', 'transmissions.id')
                 ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id);
             if ($request->filled('body_type')) {
                 $vehicles = $vehicles->where('vehicles.body_type_id', $request->body_type);
