@@ -12,8 +12,9 @@ use App\Models\CompanyAccountInfo;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\ImageHandleTraits;
 use Exception;
+use DB;
 use Toastr;
-
+use Illuminate\Support\Carbon;
 class UserProfileController extends Controller
 {
     use ImageHandleTraits;
@@ -100,5 +101,77 @@ class UserProfileController extends Controller
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
     }
+
+
+        /*Student Transfer */
+        public function clientTransfer()
+        {
+            $allUser = User::where('role_id',4)->get();
+            return view('client.clientTransfer', compact('allUser'));
+        }
+        public function clientExecutive(Request $request)
+        {
+            $old_ex = User::where('id',$request->id)->first();
+            
+            $ex_list = User::where('role_id',3)->whereNot('id','=',$old_ex->created_by)->get();
+      
+            $old_ex_data = User::find($old_ex->created_by);
+            /*echo '<pre>';
+            print_r($old_ex_data->toArray());die;*/
+            $data = '
+            <label for="curexId" class="col-sm-3">Old Executive</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" value="'.$old_ex_data->name.'" readonly>
+            <input type="hidden" class="form-control" value="'.$old_ex_data->id.'" name="curexId">
+            </div>
+        ';
+            //return response()->json(array('data' => $ex_list));
+            $data2 = '<label for="newexId" class="col-sm-3">To Executive</label>
+                <div class="col-sm-9">
+                <select class="js-example-basic-single form-control" id="newexId" name="newexId" required>
+                <option value="">Select</option>';
+            foreach ($ex_list as $e) {
+                $data2 .= '<option value="' . $e->id . '">' . $e->name . '</option>';
+            }
+            $data2 .= '</select></div>';
+    
+    
+            return response()->json(array('data' => $data,'data2' =>$data2));
+        }
+        public function clTransfer(Request $request)
+        {
+            DB::beginTransaction();
+    
+            try {
+                $data = array(
+                    'created_by' => $request->newexId
+                );
+                DB::table('users')->where('id',$request->user_id)->update($data);
+                $data2 = array(
+                    'user_id' => $request->user_id,
+                    'curexId' => $request->curexId,
+                    'newexId' =>  $request->newexId,
+                    'created_by' => currentUserId(),
+                    'note' => $request->note,
+                    'created_at' => Carbon::now()
+                );
+                DB::table('client_transfers')->insert($data2);
+                DB::commit();
+                return redirect()->back()->withInput()->with(Toastr::succes('Update Successful', 'Fail', ["positionClass" => "toast-top-right"]));
+            } catch (\Exception $e) {
+                DB::rollback();
+                // something went wrong
+                dd($e);
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+                return false;
+            }
+        }
+        public function clientTransferList(){
+            $client_transfers = DB::table('client_transfers')
+            ->join('users','client_transfers.created_by','users.id')
+            ->select('client_transfers.*','users.name as uname')
+            ->get();
+            return view('client.clientTransferList',compact('client_transfers'));
+        }
 
 }

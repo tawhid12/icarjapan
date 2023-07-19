@@ -1,6 +1,6 @@
   @extends('layout.app')
 
-  @section('pageTitle','Create Brand')
+  @section('pageTitle','Reserve Vehicle For User')
 @section('pageSubTitle','Create')
 
   @section('content')
@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.brand.store')}}">
+                            <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.reservevehicle.store')}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">

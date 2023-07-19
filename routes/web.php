@@ -213,6 +213,13 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('/notes', note::class, ["as" => "superadmin"]);
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
 
+
+        /*==Client Transfer==*/
+        Route::get('/client/transfer/list', [userprofile::class, 'clientTransferList'])->name('superadmin.clientTransferList');
+        Route::get('/client/transfer', [userprofile::class, 'clientTransfer'])->name('superadmin.clientTransfer');
+        Route::get('/client/executive', [userprofile::class, 'clientExecutive'])->name('superadmin.clientExecutive');
+        Route::post('/client/transfer/save', [userprofile::class, 'clTransfer'])->name('superadmin.clTransfer');
+
        
     });
 });

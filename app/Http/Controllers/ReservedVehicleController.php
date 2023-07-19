@@ -42,7 +42,10 @@ class ReservedVehicleController extends Controller
      */
     public function create()
     {
-        //
+        if(currentUser() == 'salesexecutive'){
+            $users=User::where('created_by',currentUserId())->paginate(10);
+        }
+        return view('vehicle.resrv_vehicle.create', compact('users'));
     }
 
     /**
