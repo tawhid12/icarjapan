@@ -36,6 +36,14 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
+        if (session()->has('countryName')) {
+            session()->forget('countryName');
+        }
+        
+        if (session()->has('location')) {
+            session()->forget('location');
+        }
+        
         $japan_locale_data = Carbon::now('Asia/Tokyo');
         if (!session()->has('countryName') && !session()->has('location')) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
