@@ -80,9 +80,11 @@ class FrontController extends Controller
             session()->put('countryName', $countryName);
             session()->put('location', $location);
         }else{
-            $location =  request()->session()->get('location');
-            $countryName =  request()->session()->get('countryName');
-            //echo $countryName->id;
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+            $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+            session()->put('countryName', $countryName);
+            session()->put('location', $location);
         }
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
