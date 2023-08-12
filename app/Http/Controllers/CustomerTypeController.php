@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FavouriteVehicle;
+use App\Models\CustomerType;
 use Illuminate\Http\Request;
-use Toastr;
-class FavouriteVehicleController extends Controller
+
+class CustomerTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,27 +35,16 @@ class FavouriteVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $fav = New FavouriteVehicle();
-            $fav->vehicle_id = $request->vehicle_id;
-            $fav->user_id=currentUserId();
-            $fav->created_by=currentUserId();
-            if($fav->save())
-            return redirect()->back()->with(Toastr::success('Favourite Added Successfully!', 'Success', ["positionClass" => "toast-top-right"]));;
-        }catch(Exception $e){
-            //dd($e);
-            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
-        }
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FavouriteVehicle  $favouriteVehicle
+     * @param  \App\Models\CustomerType  $customerType
      * @return \Illuminate\Http\Response
      */
-    public function show(FavouriteVehicle $favouriteVehicle)
+    public function show(CustomerType $customerType)
     {
         //
     }
@@ -63,10 +52,10 @@ class FavouriteVehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FavouriteVehicle  $favouriteVehicle
+     * @param  \App\Models\CustomerType  $customerType
      * @return \Illuminate\Http\Response
      */
-    public function edit(FavouriteVehicle $favouriteVehicle)
+    public function edit(CustomerType $customerType)
     {
         //
     }
@@ -75,10 +64,10 @@ class FavouriteVehicleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FavouriteVehicle  $favouriteVehicle
+     * @param  \App\Models\CustomerType  $customerType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FavouriteVehicle $favouriteVehicle)
+    public function update(Request $request, CustomerType $customerType)
     {
         //
     }
@@ -86,10 +75,10 @@ class FavouriteVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FavouriteVehicle  $favouriteVehicle
+     * @param  \App\Models\CustomerType  $customerType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FavouriteVehicle $favouriteVehicle)
+    public function destroy(CustomerType $customerType)
     {
         //
     }

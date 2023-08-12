@@ -11,7 +11,11 @@
             <div class="card">
                 @include('layout.message')
                 <div>
+                    @if(currentUser() == 'superadmin')
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.admin.create')}}"><i class="bi bi-pencil-square"></i></a>
+                    @else
+                    <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.client.create')}}"><i class="bi bi-pencil-square"></i></a>
+                    @endif
                 </div>
                 <!-- table bordered -->
                 <div class="table-responsive">
@@ -39,9 +43,15 @@
                                 <td>{{optional($p->role)->identity}}</td>
                                 <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                 <td class="white-space-nowrap">
+                                    @if(currentUser() == 'superadmin')
                                     <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
+                                    @else
+                                    <a href="{{route(currentUser().'.client.edit',encryptor('encrypt',$p->id))}}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    @endif
                                     @if(currentUser() == 'superadmin')
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                         <i class="bi bi-trash"></i>

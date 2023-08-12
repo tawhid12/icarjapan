@@ -30,10 +30,10 @@ return new class extends Migration
             $table->integer('designation_id')->nullable();
             $table->integer('show_price')->nullable();
             $table->boolean('all_company_access')->nullable()->default(0)->comment('1=>active 2=>inactive');
-            $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
+            $table->boolean('status')->default(1)->comment('1=>active 2=>Semi Active 0 => Inactive');
             $table->string('last_login')->nullable();
             $table->string('last_login_ip')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('created_by')->comment('Assigned SalesExecutive =salesexecutiveId | Free = 0')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->rememberToken();
             $table->timestamps();

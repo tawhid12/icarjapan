@@ -285,6 +285,9 @@ class FrontController extends Controller
             ->orWhere('sub_brands.name', $request->sdata)
             ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
             ->inRandomOrder()->paginate(10);
+        if($request->sales_search == 'search')
+        return view('sales_module.search_vehicle', compact('vehicles', 'countries'));
+        else    
         return view('front.search', compact('vehicles', 'countries'));
     }
     /*Search Backup code By Search Keyword */

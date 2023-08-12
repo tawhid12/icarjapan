@@ -68,8 +68,11 @@ class UserProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function change_password()
-    {
+    { 
+        if(currentUser() == 'user')
         return view('settings.user.change_password');
+        else
+        return view('settings.general.change_password');
     }
 
     /**

@@ -119,32 +119,6 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="country_id">Import Country<span class="text-danger">*</span></label>
-                                                <select id="country_id" class="form-control" name="country_id" disabled>
-                                                    @if(count($countries) > 0)
-                                                    @forelse($countries as $c)
-                                                    <option value="{{$c->id}}" @if($user->country_id == $c->id) selected @endif>{{$c->name}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                    @endif
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="country_id">Port<span class="text-danger">*</span></label>
-                                                <select id="port_id" class="form-control" name="port_id">
-                                                    @if(count($ports) > 0)
-                                                    @forelse($ports as $p)
-                                                    <option value="{{$p->id}}" @if($user->port_id == $p->id) selected @endif>{{$p->name}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                    @endif
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
                                                 <label for="image">Image</label>
                                                 <input type="file" id="image" class="form-control" placeholder="Image" name="image">
                                             </div>
@@ -156,7 +130,7 @@
                                 </form>
                             </div>
 
-                            <h6 class="text-center">Update User Details Information</h6>
+                            {{--<h6 class="text-center">Update User Details Information</h6>
                             <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.store')}}">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$user->userDetl->id}}">
@@ -195,7 +169,7 @@
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form>--}}
 
                         </div>
                     </div>

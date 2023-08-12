@@ -49,6 +49,9 @@ use App\Http\Controllers\ContactUsController as contactus;
 use App\Http\Controllers\NotifyController as notify;
 use App\Http\Controllers\NoteController as note;
 
+use App\Http\Controllers\ClientModuleController as clientmodule;
+use App\Http\Controllers\SalesModuleController as salesmodule;
+
 /* Middleware */
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isSuperadmin;
@@ -160,14 +163,23 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
 
         Route::resource('vehicle',vehicle::class,['as'=>'salesexecutive']);
 
-        /* settings */
-        Route::resource('admin',admin::class,['as'=>'salesexecutive']);
+        /*Cm Module */
+        Route::get('all-client-list',[clientmodule::class,'all_client_list'])->name('salesexecutive.all_client_list');
+        Route::get('client-individual',[clientmodule::class,'client_individual'])->name('salesexecutive.client_individual');
+        /*Sales Module */
+        Route::get('all-client-list-json',[salesmodule::class,'all_client_list_json'])->name('salesexecutive.all_client_list_json');
+        Route::get('favourite-list',[salesmodule::class,'favourite_list'])->name('salesexecutive.favourite_list');
+        Route::get('search',[salesmodule::class,'search'])->name('salesexecutive.search');
+        Route::get('sales-module',[salesmodule::class,'sales_module'])->name('salesexecutive.sales_module');
 
+        /* settings */
+        Route::resource('client',admin::class,['as'=>'salesexecutive']);
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
         Route::resource('invoice', invoice::class,['as'=>'salesexecutive']);
         Route::resource('payment', payment::class,['as'=>'salesexecutive']);
         Route::resource('/notes', note::class, ["as" => "salesexecutive"]);
+        Route::resource('favourvehicle', favourvehicle::class,['as'=>'salesexecutive']);
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
     });
 });
