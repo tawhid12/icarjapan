@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Settings\Country;
 
 class CountrySelectionMiddleware
 {
@@ -20,8 +19,7 @@ class CountrySelectionMiddleware
         // Check if the user has selected a country (e.g., using session or user profile)
         if (!session()->has('countryName') && !session()->has('location')) {
             //return redirect()->route('front');
-            $countries = Country::all();
-            return view('front.country-select', compact('countries'));
+            return redirect()->route('countrySelect');
         }
 
         return $next($request);

@@ -34,6 +34,10 @@ class FrontController extends Controller
 
 
     }
+    public function countrySelect(){
+        $countries = Country::all();
+        return view('front.country-select', compact('countries'));
+    }
     public function index(Request $request)
     {
         

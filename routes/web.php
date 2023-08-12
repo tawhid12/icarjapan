@@ -71,6 +71,7 @@ use App\Http\Middleware\isUser;
 Route::get('/mail', [test::class,'index'])->name('mail');
 
 /*========FrontEnd==== */
+Route::get('/country-select', [front::class,'index'])->name('front.countrySelect');
 Route::get('/', [front::class,'index'])->name('front');
 Route::group(['middleware' => 'country.selection'], function () {
     // Your protected routes
