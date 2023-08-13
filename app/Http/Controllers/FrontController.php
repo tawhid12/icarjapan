@@ -92,6 +92,9 @@ class FrontController extends Controller
         }
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
+        if(empty($location) && empty($countryName)){
+            return redirect()->route('front.countrySelect');
+        }
 
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         /*==New Arival== | New Affordable==*/
