@@ -42,7 +42,7 @@ class FrontController extends Controller
             session()->put('location', $location);
         }
         echo '<pre>';
-        print_r($_SESSION);die;
+        print_r(session());die;
         return redirect()->route('front');
     }
     public function countrySelect(){
