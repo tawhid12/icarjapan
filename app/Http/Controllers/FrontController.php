@@ -41,6 +41,8 @@ class FrontController extends Controller
             session()->put('countryName', $countryName);
             session()->put('location', $location);
         }
+        echo '<pre>';
+        print_r($_SESSION);die;
         return redirect()->route('front');
     }
     public function countrySelect(){
