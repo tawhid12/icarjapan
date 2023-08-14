@@ -43,7 +43,7 @@
       <div class="col-md-12 text-center">
         <h1 class="m-0 text-primary">Welcome To ICARJAPAN</h1>
         <p class="text-danger m-0"><strong>We Can Not Detect Your Country Please Select Your Country First.</strong></p>
-        <form action="{{route('front')}}">
+        <form action="{{route('countrySelectpost')}}">
           @csrf
 
           <div class="col-md-12 col-12 ">
