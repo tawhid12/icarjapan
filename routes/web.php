@@ -72,10 +72,10 @@ Route::get('/mail', [test::class,'index'])->name('mail');
 
 /*========FrontEnd==== */
 Route::get('/country-select', [front::class,'index'])->name('front.countrySelect');
-Route::get('/', [front::class,'index'])->name('front');
-Route::group(['middleware' => 'country.selection'], function () {
-    // Your protected routes
 
+Route::group(['middleware' => 'country.selection'], function () {
+// Your protected routes
+Route::get('/', [front::class,'index'])->name('front');
 
 Route::resource('mostview',mostView::class);
 Route::get('/used-cars-search/{brand}', [front::class,'brand'])->name('brand');
