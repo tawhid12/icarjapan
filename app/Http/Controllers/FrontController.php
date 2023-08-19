@@ -55,8 +55,18 @@ class FrontController extends Controller
         return redirect()->route('front');
 }
     public function countrySelect(){
-        $countries = Country::all();
-        return view('front.country-select', compact('countries'));
+        if($_SERVER['REMOTE_ADDR']){
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+            if ($location && isset($location['geoplugin_timezone'])) {
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                session()->put('countryName', $countryName);
+                session()->put('location', $location);
+            }
+        }else{
+            $countries = Country::all();
+            return view('front.country-select', compact('countries'));
+        }
     }
     public function index(Request $request)
     {
@@ -82,15 +92,12 @@ class FrontController extends Controller
                     $countries = Country::all();
                     return view('front.country-select', compact('countries'));
                 } else*/ if ($request->filled('code')) {
-                    echo 1;die;
                     $countryName = Country::where('code', $request->code)->first();
                     echo $countryName->ip_address;
                     if ($countryName->ip_address) {
-                        echo 2;die;
                         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
                         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                     } else {
-                        echo 3;die;
                         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
                         /*echo '<pre>';
                     print_r($location);die;*/
@@ -98,7 +105,6 @@ class FrontController extends Controller
                         $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     }
                 } else {
-                    echo 4;die;
                     $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
                     /*echo '<pre>';
                 print_r($location);die;*/
