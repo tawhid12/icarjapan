@@ -56,6 +56,7 @@ class FrontController extends Controller
 }
     public function countrySelect(){
         if($_SERVER['REMOTE_ADDR']){
+            echo 'ok';die;
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             if ($location && isset($location['geoplugin_timezone'])) {
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
@@ -64,6 +65,7 @@ class FrontController extends Controller
                 session()->put('location', $location);
             }
         }else{
+            echo 'no';die;
             $countries = Country::all();
             return view('front.country-select', compact('countries'));
         }
