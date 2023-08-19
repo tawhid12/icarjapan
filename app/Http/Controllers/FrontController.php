@@ -56,16 +56,15 @@ class FrontController extends Controller
 }
     public function countrySelect(){
         if($_SERVER['REMOTE_ADDR']){
-            echo 'ok';die;
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             if ($location && isset($location['geoplugin_timezone'])) {
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
+                return redirect()->route('front');
             }
         }else{
-            echo 'no';die;
             $countries = Country::all();
             return view('front.country-select', compact('countries'));
         }
