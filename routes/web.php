@@ -73,10 +73,10 @@ Route::get('/mail', [test::class,'index'])->name('mail');
 
 /*========FrontEnd==== */
 
-Route::group(['middleware' => unknownCountryMiddleware::class], function () {
+//Route::group(['middleware' => unknownCountryMiddleware::class], function () {
 Route::get('/country-select', [front::class,'countrySelect'])->name('front.countrySelect');
 Route::get('/country-select-post', [front::class,'countrySelectpost'])->name('countrySelectpost');
-});
+//});
 
 Route::group(['middleware' => 'country.selection'], function () {
 // Your protected routes
