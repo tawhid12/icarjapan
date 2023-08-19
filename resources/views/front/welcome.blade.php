@@ -53,7 +53,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   <div class="container">
 
 <!-- Mainteance Mode -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -64,7 +64,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
     <!-- Important Notice -->
     <!--<div class="row text-brand">
@@ -307,9 +307,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   </a>
                   @endif
                   <div class="product-card-body">
-                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
-                    <p class="m-0">{{$v->chassis_no}}</p>
-                    <div class="yotpo bottomLine" data-yotpo-product-id="{{$v->vid}}"></div>
+                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $af->name) }}</a></p>
+                    <p class="m-0">{{$af->chassis_no}}</p>
+                    <div class="yotpo bottomLine" data-yotpo-product-id="{{$af->vid}}"></div>
                     @php
                       $actual_price = $af->price;
                       $dis_price = $af->price*$af->discount/100;
@@ -354,9 +354,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   @endif
                   </a>
                   <div class="product-card-body">
-                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $v->name) }}</a></p>
-                    <p class="m-0">{{$v->chassis_no}}</p>
-                    <div class="yotpo bottomLine" data-yotpo-product-id="{{$v->vid}}"></div>
+                    <p class="m-0"><a href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">{{ str_replace('-', ' ', $hg->name) }}</a></p>
+                    <p class="m-0">{{$hg->chassis_no}}</p>
+                    <div class="yotpo bottomLine" data-yotpo-product-id="{{$hg->vid}}"></div>
                     @php
                       $actual_price = $hg->price;
                       $dis_price = $hg->price*$hg->discount/100;
@@ -549,9 +549,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   @endsection
   @push('scripts')
     <script>
-      $(document).ready(function() {
-        $('#myModal').modal('show');
-    });
+    //   $(document).ready(function() {
+    //     $('#myModal').modal('show');
+    // });
     </script>
 
   @endpush
