@@ -18,10 +18,11 @@ class unknownCountryMiddleware
     {
         
         if (!session()->has('countryName') && !session()->has('location')) {
-            return $next($request);
-            //return redirect()->route('front.countrySelect');
+           
+            return redirect()->route('front.countrySelect');
         }/*else{
             return redirect()->route('front');
         }*/
+        return $next($request);
     }
 }
