@@ -30,17 +30,19 @@ class FrontController extends Controller
     protected $geoLocationService;
     public function __construct(Request $request)
     {
-    }
-    public function countrySelectpost(Request $request)
-    {
 
+
+
+    }
+    public function countrySelectpost(Request $request){
+        
         $countryName = Country::where('code', $request->code)->first();
         if ($countryName->ip_address) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
         }
         if (session()->has('countryName')) {
             unset($_SESSION['countryName']);
-        }
+        }            
         if (session()->has('location')) {
             unset($_SESSION['location']);
         }
@@ -51,10 +53,9 @@ class FrontController extends Controller
         print_r(session()->get('location'));
         die;*/
         return redirect()->route('front');
-    }
-    public function countrySelect()
-    {
-        if ($_SERVER['REMOTE_ADDR']) {
+}
+    public function countrySelect(){
+        if($_SERVER['REMOTE_ADDR']){
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             if ($location && isset($location['geoplugin_timezone'])) {
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
@@ -63,33 +64,24 @@ class FrontController extends Controller
                 session()->put('location', $location);
                 return redirect()->route('front');
             }
-        } else {
+        }else{
             $countries = Country::all();
             return view('front.country-select', compact('countries'));
         }
     }
     public function index(Request $request)
     {
-        if ($_SERVER['REMOTE_ADDR']) {
-            $userIpAddress = request()->ip();
-            session(['previousIpAddress' => $_SERVER['REMOTE_ADDR']]);
-            $previousIpAddress = session('previousIpAddress');
-            if ($previousIpAddress !== $userIpAddress) {
-                if (session()->has('countryName')) {
-                    unset($_SESSION['countryName']);
-                    //session()->forget('countryName');
-                }
-
-                if (session()->has('location')) {
-                    unset($_SESSION['location']);
-                    //session()->forget('location');
-                }
-            }
-        }
-
-
-
-
+        
+        
+        /*if (session()->has('countryName')) {
+            unset($_SESSION['countryName']);*/
+            //session()->forget('countryName');
+        //}
+        
+        /*if (session()->has('location')) {
+            unset($_SESSION['location']);*/
+            //session()->forget('location');
+        //}
         $japan_locale_data = Carbon::now('Asia/Tokyo');
         if (!session()->has('countryName') && !session()->has('location')) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
@@ -101,8 +93,7 @@ class FrontController extends Controller
                 /*if (!$request->filled('code')) {
                     $countries = Country::all();
                     return view('front.country-select', compact('countries'));
-                } else*/
-                if ($request->filled('code')) {
+                } else*/ if ($request->filled('code')) {
                     $countryName = Country::where('code', $request->code)->first();
                     echo $countryName->ip_address;
                     if ($countryName->ip_address) {
@@ -242,7 +233,7 @@ class FrontController extends Controller
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
 
         $vehicles = DB::table('vehicles')
-            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug','transmissions.name as tname')
             ->join('brands', 'vehicles.brand_id', 'brands.id')
             ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
@@ -320,7 +311,7 @@ class FrontController extends Controller
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
-            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+            ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug','transmissions.name as tname')
             ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
             ->orWhere('vehicles.fullName', $request->sdata)
             ->orWhere('vehicles.stock_id', $request->sdata)
@@ -328,10 +319,10 @@ class FrontController extends Controller
             ->orWhere('sub_brands.name', $request->sdata)
             ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
             ->inRandomOrder()->paginate(10);
-        if ($request->sales_search == 'search')
-            return view('sales_module.search_vehicle', compact('vehicles', 'countries'));
-        else
-            return view('front.search', compact('vehicles', 'countries'));
+        if($request->sales_search == 'search')
+        return view('sales_module.search_vehicle', compact('vehicles', 'countries'));
+        else    
+        return view('front.search', compact('vehicles', 'countries'));
     }
     /*Search Backup code By Search Keyword */
     /*$search_data = DB::table('vehicles')
@@ -388,7 +379,7 @@ class FrontController extends Controller
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
             $vehicles = DB::table('vehicles')
-                ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+                ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug','transmissions.name as tname')
                 ->leftjoin('brands', 'vehicles.brand_id', 'brands.id')
                 ->leftjoin('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
                 ->leftjoin('transmissions', 'vehicles.transmission_id', 'transmissions.id')
