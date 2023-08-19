@@ -19,9 +19,9 @@ class CountrySelectionMiddleware
         // Check if the user has selected a country (e.g., using session or user profile)
         if (session()->has('countryName') && session()->has('location')) {
             return redirect()->route('front');
-        }/*else{
+        }else{
             return redirect()->route('front.countrySelect');
-        }*/
+        }
         //return $next($request);
     }
 }
