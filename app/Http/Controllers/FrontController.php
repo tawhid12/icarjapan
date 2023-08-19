@@ -55,7 +55,6 @@ class FrontController extends Controller
         return redirect()->route('front');
 }
     public function countrySelect(){
-        echo 'ok';die;
         if($_SERVER['REMOTE_ADDR']){
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             if ($location && isset($location['geoplugin_timezone'])) {
