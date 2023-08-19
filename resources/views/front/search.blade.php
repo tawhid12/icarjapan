@@ -792,6 +792,7 @@
                           </div>
                           <form class="form" method="post" enctype="multipart/form-data" action="{{route('inquiry.store')}}">
                             @csrf
+                            <input type="hidden" name="vehicle_id" value="{{$v->id}}">
                             <div class="row">
                               <div class="col-12">
                                 <div class="form-group">
