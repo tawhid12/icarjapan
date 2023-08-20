@@ -34,6 +34,8 @@ print_r($favourites->toArray());die;*/
         ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
         ->select('reserved_vehicles.*', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
         ->where('reserved_vehicles.assign_user_id',currentUserId())->orderBy('reserved_vehicles.id', 'DESC')
+        ->where('reserved_vehicles.assign_user_id',currentUserId())
+        ->where('reserved_vehicles.created_by',currentUserId())
         ->paginate(25);
         return view('sales_module.sales_list',compact('reserve_vehicle'));
     }
