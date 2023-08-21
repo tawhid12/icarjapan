@@ -7,7 +7,7 @@
 
 
 
-        <div class="row gx-2 mb-3">
+        <div class="row gx-2 mb-3 border">
             <div class="col-md-6">
                 <div class="border p-3">
                     <div class="row gx-1">
@@ -176,7 +176,7 @@
                             <td colspan="3"></td>
                         </tr>
                     </table>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between my-2">
                         <h6>Documents</h6>
                         <a class="btn btn-sm btn-primary" href="">Upload</a>
                     </div>
