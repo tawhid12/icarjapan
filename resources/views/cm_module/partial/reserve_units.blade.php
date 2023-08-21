@@ -7,7 +7,7 @@
 
 
 
-        <div class="row gx-1">
+        <div class="row gx-2 my-2">
             <div class="col-md-6">
                 <div class="border p-3">
                     <div class="row gx-1">
