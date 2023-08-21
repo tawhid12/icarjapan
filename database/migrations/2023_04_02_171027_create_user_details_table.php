@@ -15,13 +15,19 @@ return new class extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->text('acc_type')->default(1)->nullable();
+            $table->integer('user_id');
+            $table->string('wife_husband_name')->nullable();
+            $table->string('father_name')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('whatsapp')->unique()->nullable();
+            $table->string('facebook')->unique()->nullable();
+            $table->string('viver')->unique()->nullable();
+            $table->string('instagram')->unique()->nullable();
+            $table->string('gmail')->unique()->nullable();
+            $table->string('contact_no')->unique()->nullable();
             $table->text('address1')->nullable();
             $table->text('address2')->nullable();
-            $table->text('city')->nullable();
-            $table->text('state')->nullable();
-            $table->text('zip')->nullable();
-            $table->integer('user_id');
+            $table->integer('division_id')->nullable();
             $table->timestamps();
         });
     }

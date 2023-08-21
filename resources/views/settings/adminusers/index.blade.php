@@ -11,11 +11,7 @@
             <div class="card">
                 @include('layout.message')
                 <div>
-                    @if(currentUser() == 'superadmin')
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.admin.create')}}"><i class="bi bi-pencil-square"></i></a>
-                    @else
-                    <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.client.create')}}"><i class="bi bi-pencil-square"></i></a>
-                    @endif
                 </div>
                 <!-- table bordered -->
                 <div class="table-responsive">
@@ -48,7 +44,7 @@
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     @else
-                                    <a href="{{route(currentUser().'.client.edit',encryptor('encrypt',$p->id))}}">
+                                    <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     @endif

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Toastr;
 use Carbon\Carbon;
 use DB;
+
 class ReservedVehicleController extends Controller
 {
     /**
@@ -22,17 +23,16 @@ class ReservedVehicleController extends Controller
      */
     public function index()
     {
-        if(currentUser() == 'superadmin'){
+        if (currentUser() == 'superadmin') {
             $resrv = ReservedVehicle::orderBy('id', 'DESC')->paginate(25);
             return view('vehicle.resrv_vehicle.index', compact('resrv'));
-        }elseif(currentUser() == 'salesexecutive'){
-            $resrv = ReservedVehicle::where('assign_user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+        } elseif (currentUser() == 'salesexecutive') {
+            $resrv = ReservedVehicle::where('assign_user_id', currentUserId())->orderBy('id', 'DESC')->paginate(25);
             return view('vehicle.resrv_vehicle.index', compact('resrv'));
-        }else{
-            $resrv = ReservedVehicle::where('user_id',currentUserId())->orderBy('id', 'DESC')->paginate(25);
+        } else {
+            $resrv = ReservedVehicle::where('user_id', currentUserId())->orderBy('id', 'DESC')->paginate(25);
             return view('user.resrv_vehicle.index', compact('resrv'));
         }
-       
     }
 
     /**
@@ -42,8 +42,8 @@ class ReservedVehicleController extends Controller
      */
     public function create()
     {
-        if(currentUser() == 'salesexecutive'){
-            $users=User::where('created_by',currentUserId())->paginate(10);
+        if (currentUser() == 'salesexecutive') {
+            $users = User::where('created_by', currentUserId())->paginate(10);
         }
         return view('vehicle.resrv_vehicle.create', compact('users'));
     }
@@ -62,8 +62,14 @@ class ReservedVehicleController extends Controller
             try {
                 $b = new ReservedVehicle();
                 $b->vehicle_id = $request->vehicle_id;
-                $b->user_id = currentUserId();
-                $b->created_by = currentUserId();
+                if (currentUser() == 'user') {
+                    $b->user_id = currentUserId();
+                    $b->created_by = currentUserId();
+                } else{
+                    $b->user_id = $request->user_id;
+                    $b->created_by = currentUserId();
+                }
+    
 
                 if ($b->save()) {
 
@@ -86,7 +92,7 @@ class ReservedVehicleController extends Controller
                 //dd($e);
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
-        }else{
+        } else {
             // Redirect user to intended URL
             return redirect()->back()->with(Toastr::error('Vehicle  Reserved !!', 'Success', ["positionClass" => "toast-top-right"]));
         }
@@ -133,18 +139,18 @@ class ReservedVehicleController extends Controller
         $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
         try {
             $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
-            if (currentUser() == 'superadmin') {
+            /*if (currentUser() == 'superadmin') {
                 $resv->assign_user_id = $request->assign_user_id;
-            }
+            }*/
             if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin') {
-                $resv->confirm_on = $request->confirm_on?Carbon::createFromFormat('Y-m-d', $request->confirm_on)->format('Y-m-d'):null;
+                $resv->confirm_on = $request->confirm_on ? Carbon::createFromFormat('Y-m-d', $request->confirm_on)->format('Y-m-d') : null;
                 $resv->settle_price = $request->settle_price;
                 $resv->note = $request->note;
                 $resv->status = $request->status;
-                if($request->status == 2){
-                    /*Insert To Invoice */
-                    if(Invoice::where('vehicle_id',$resv->vehicle_id)->doesntExist()){
-                        $invoice = New Invoice();
+                if ($request->status == 2) {
+                    /*Insert To Proforma Invoice */
+                    if (Invoice::where('vehicle_id', $resv->vehicle_id)->where('inv_type', 1)->doesntExist()) {
+                        $invoice = new Invoice();
                         $invoice->invoice_date = date('Y-m-d');
                         $invoice->reserve_id =  $resv->id;
                         $invoice->vehicle_id = $resv->vehicle_id;
@@ -153,12 +159,13 @@ class ReservedVehicleController extends Controller
                         $invoice->executive_id = $resv->assign_user_id;
                         $invoice->save();
                     }
+                    /* Send Proforma Invoice To User with mail */
                 }
-
             }
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
-                return redirect()->route(currentUser() . '.reservevehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+                return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));
+                //return redirect()->route(currentUser() . '.reservevehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
@@ -176,16 +183,17 @@ class ReservedVehicleController extends Controller
      */
     public function destroy($id)
     {
-        $notify = Notify::where(['vehicle_id' => $id,'status' => 2])->get();
-        foreach($notify as $n){
+        $notify = Notify::where(['vehicle_id' => $id, 'status' => 2])->get();
+        foreach ($notify as $n) {
             /*To User */
-            $user = User::where('id',$n->user_id)->first();
-            $v_data = Vehicle::where('id',$n->vehicle_id)->first();
-            echo $user->email;die;
-            \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n,$v_data,$user){
+            $user = User::where('id', $n->user_id)->first();
+            $v_data = Vehicle::where('id', $n->vehicle_id)->first();
+            echo $user->email;
+            die;
+            \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n, $v_data, $user) {
                 $message->from('info@icarjapan.com', 'Icarjapan')
-                        ->to($user->email)
-                        ->subject('Reserved Free For '.$v_data->name.' and Stock Id '.$v_data->stock_id);
+                    ->to($user->email)
+                    ->subject('Reserved Free For ' . $v_data->name . ' and Stock Id ' . $v_data->stock_id);
             });
             /*== Notify Cancel Update ==*/
             $notify  =  Notify::find($n->id);
@@ -197,7 +205,7 @@ class ReservedVehicleController extends Controller
             $resv->status = 3;
             $resv->save();
         }
-        
+
         /*== Notify Vehicle Cancel Update ==*/
         $vehicle = Vehicle::findOrFail($id);
         $vehicle->r_status = null;

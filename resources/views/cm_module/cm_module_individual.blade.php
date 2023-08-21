@@ -22,7 +22,7 @@
                     <tbody>
                         <tr>
                             <th scope="col">{{__('CM ID')}} :- 1</th>
-                            <th scope="col" colspan="2">{{__('CM Name')}} :- Md Tawhidul Alam</th>
+                            <th scope="col" colspan="2">{{__('CM Name')}} :- {{$client_data->name}}</th>
                         </tr>
                     </tbody>
                 </table>
@@ -55,81 +55,7 @@
 
                 <div class="tab-content text-muted" id="myTabContent">
                     <div class="tab-pane fade show active" id="basic_info" role="tabpanel" aria-labelledby="baisc-info-tab">
-                        <div class="table-responsive my-3">
-                            <table class="table table-bordered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">{{__('Customer Type')}}</th>
-                                        <td>Individual</td>
-                                        <th rowspan="2" scope="col">{{__('Sales Rank')}}</th>
-                                        <td rowspan="2">N</td>
-                                        <th scope="col">{{__('ShipOK cars')}}</th>
-                                        <td>0</td>
-                                        <th scope="col">{{__('Catagory')}}</th>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">{{__('Customer Name')}}</th>
-                                        <td>Md . Tawhidul Alam</td>
-                                        <th scope="col">{{__('ReleaseOK Cars')}}</th>
-                                        <td>0</td>
-                                        <th rowspan="3" scope="col">{{__('Sales Note')}}</th>
-                                        <td rowspan="3">-</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">{{__('Country')}}</th>
-                                        <td>Bangladesh</td>
-                                        <th rowspan="2" scope="col">{{__('Port')}}</th>
-                                        <td rowspan="2">Nakulfa</td>
-                                        <th scope="col">{{__('CM Reserve Cras')}}</th>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">{{__('Division')}}</th>
-                                        <td>Chittagong</td>
-                                        <th scope="col">{{__('Cancel Cars')}}</th>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="4" scope="col">{{__('Address')}}</th>
-                                        <td rowspan="4" colspan="3">Bahadarhat</td>
-                                        <th rowspan="3" scope="col">{{__('Delay Payment Cars')}}</th>
-                                        <td rowspan="3">0</td>
-                                        <th rowspan="3" scope="col">{{__('Why not buy')}}</th>
-                                        <td rowspan="3">-</td>
-                                    </tr>
-                                    <tr height="50px"></tr>
-                                    <tr height="50px"></tr>
-                                    <tr>
-                                        <th scope="col">{{__('Deal Status')}}</th>
-                                        <td>-</td>
-                                        <th rowspan="3" scope="col">{{__('How can he buy again')}}</th>
-                                        <td rowspan="3">-</td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="4" scope="col">{{__('Language')}}</th>
-                                        <td rowspan="4">English</td>
-                                        <th scope="col">{{__('Currency')}}</th>
-                                        <td>$</td>
-                                        <th scope="col">{{__('Watch CM')}}</th>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3" scope="col">{{__('Deposit Radio')}}</th>
-                                        <td rowspan="3">%</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">SP *</td>
-                                        <td rowspan="2">CM **</td>
-                                        <td colspan="2">Update User</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Md Tawhidul Alam</td>
-                                        <td>Update Date</td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        @include('cm_module.partial.basic_info')
                     </div>
 
                     <div class="tab-pane fade" id="contact_history" role="tabpanel" aria-labelledby="contact-history-tab">
@@ -141,11 +67,11 @@
                     </div>
 
                     <div class="tab-pane fade" id="courier" role="tabpanel" aria-labelledby="courier-tab">
-                        <p><strong>C'nee & courier</strong></p>
+                        @include('cm_module.partial.contact_info')
                     </div>
 
                     <div class="tab-pane fade" id="profoma_inovice" role="tabpanel" aria-labelledby="profoma-invoice-tab">
-                        <p><strong>Profoma Invoice</strong></p>
+                        @include('cm_module.partial.proforma_invoice')
                     </div>
 
                     <div class="tab-pane fade" id="final_inovice" role="tabpanel" aria-labelledby="final-invoice-tab">
@@ -153,7 +79,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="reserve_units" role="tabpanel" aria-labelledby="reserve-units-tab">
-                        <p><strong>Reserved Units</strong></p>
+                        @include('cm_module.partial.reserve_units')
                     </div>
 
                 </div>

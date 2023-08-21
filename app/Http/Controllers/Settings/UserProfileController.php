@@ -116,9 +116,9 @@ class UserProfileController extends Controller
         {
             $old_ex = User::where('id',$request->id)->first();
             
-            $ex_list = User::where('role_id',3)->whereNot('id','=',$old_ex->created_by)->get();
+            $ex_list = User::where('role_id',3)->whereNot('id','=',$old_ex->executiveId)->get();
       
-            $old_ex_data = User::find($old_ex->created_by);
+            $old_ex_data = User::find($old_ex->executiveId);
             /*echo '<pre>';
             print_r($old_ex_data->toArray());die;*/
             $data = '
@@ -160,7 +160,7 @@ class UserProfileController extends Controller
                 );
                 DB::table('client_transfers')->insert($data2);
                 DB::commit();
-                return redirect()->back()->withInput()->with(Toastr::succes('Update Successful', 'Fail', ["positionClass" => "toast-top-right"]));
+                return redirect()->route(currentUser().'.clientTransferList')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             } catch (\Exception $e) {
                 DB::rollback();
                 // something went wrong

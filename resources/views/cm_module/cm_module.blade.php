@@ -12,7 +12,7 @@
             <div class="card">
                 @include('layout.message')
                 <div>
-                    <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.client.create')}}"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.admin.create')}}"><i class="bi bi-pencil-square"></i></a>
                 </div>
                 <div class="col-md-12 text-center">
                     <h5>Client List</h5>
@@ -97,7 +97,7 @@
                                 @forelse($users as $cm)
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
-                                    <td>**</td>
+                                    <td>{{$cm->cmType}}</td>
                                     <td>{{$cm->id}}</td>
                                     <td>{{$cm->name}}</td>
                                     <td>{{$cm->country_id}}</td>
@@ -116,14 +116,14 @@
                                         <a target="blank" class="btn btn-sm btn-success"href="{{route(currentUser().'.client_individual',encryptor('encrypt',$cm->id))}}">
                                            CM Individual
                                         </a>
-                                        <!-- <a href="{{route(currentUser().'.client.edit',encryptor('encrypt',$cm->id))}}">
+                                        <!-- <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$cm->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a> -->
                                         @if(currentUser() == 'superadmin')
                                         <a href="javascript:void()" onclick="$('#form{{$cm->id}}').submit()">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                        <form id="form{{$cm->id}}" action="{{route(currentUser().'.client.destroy',encryptor('encrypt',$cm->id))}}" method="post">
+                                        <form id="form{{$cm->id}}" action="{{route(currentUser().'.admin.destroy',encryptor('encrypt',$cm->id))}}" method="post">
                                             @csrf
                                             @method('delete')
                                         </form>

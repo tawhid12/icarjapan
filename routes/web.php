@@ -171,7 +171,7 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
 
         /*Cm Module */
         Route::get('all-client-list',[clientmodule::class,'all_client_list'])->name('salesexecutive.all_client_list');
-        Route::get('client-individual',[clientmodule::class,'client_individual'])->name('salesexecutive.client_individual');
+        Route::get('client-individual/{id}',[clientmodule::class,'client_individual'])->name('salesexecutive.client_individual');
         /*Sales Module */
         Route::get('all-client-list-json',[salesmodule::class,'all_client_list_json'])->name('salesexecutive.all_client_list_json');
         Route::get('favourite-list',[salesmodule::class,'favourite_list'])->name('salesexecutive.favourite_list');
@@ -179,7 +179,7 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::get('sales-module',[salesmodule::class,'sales_module'])->name('salesexecutive.sales_module');
 
         /* settings */
-        Route::resource('client',admin::class,['as'=>'salesexecutive']);
+        Route::resource('admin',admin::class,['as'=>'salesexecutive']);
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
         Route::resource('invoice', invoice::class,['as'=>'salesexecutive']);

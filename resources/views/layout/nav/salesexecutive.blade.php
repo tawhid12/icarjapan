@@ -22,7 +22,7 @@
             <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
             <div class="submenu-group-wrapper">
                 <ul class="submenu-group">
-                    <li class="submenu-item"><a href="{{route(currentUser().'.client.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.admin.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
                 </ul>
             </div>
         </div>

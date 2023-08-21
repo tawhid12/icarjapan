@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$transfer->user_id}}</td>
-                                    <td>{{$transfer->uname}}</td>
+                                    <td>{{\DB::table('users')->where('id',$transfer->user_id)->first()->name}}</td>
                                     <td>{{\DB::table('users')->where('id',$transfer->curexId)->first()->name}}</td>
                                     <td>{{\DB::table('users')->where('id',$transfer->newexId)->first()->name}}</td>
                                     <td>{{$transfer->note}}</td>
