@@ -6,7 +6,7 @@
         @forelse($reserve_vehicle as $v)
 
 
-        <div class="border py-2 mb-3">
+        <div class="border p-2 mb-3">
             <div class="row gx-2">
                 <div class="col-md-6">
                     <div class="border p-2">
