@@ -6,13 +6,12 @@
         @forelse($reserve_vehicle as $v)
 
 
-
-        <div class="row gx-2 mb-3">
-            <div class="border p-3">
+        <div class="border p-3">
+            <div class="row gx-2 mb-3">
                 <div class="col-md-6">
                     <div class="border p-3">
                         <div class="row gx-1">
-                            <h6 class="border-bottom">Reserved Details</h6>
+                            <h6 class="border-bottom">{{ ++$loop->index }}.Reserved Details</h6>
                             <div class="col-md-3">
                                 @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
                                 @if($cover_img)
