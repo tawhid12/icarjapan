@@ -178,7 +178,7 @@
                         </table>
                         <div class="d-flex justify-content-between my-2">
                             <h6>Documents</h6>
-                            <a class="btn btn-sm btn-primary" href="">Upload</a>
+                            <a class="btn btn-sm btn-primary" href="">Add Shipment Details</a>
                         </div>
                         <table class="table table-bordered m-0">
                             <tr>
