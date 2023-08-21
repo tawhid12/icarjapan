@@ -7,11 +7,11 @@
 
 
 
-        <div class="row gx-2 my-2">
+        <div class="row gx-2 mb-3">
             <div class="col-md-6">
                 <div class="border p-3">
                     <div class="row gx-1">
-                        <h6>Reserved Details</h6>
+                        <h6 class="border-bottom">Reserved Details</h6>
                         <div class="col-md-3">
                             @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
                             @if($cover_img)
@@ -149,7 +149,7 @@
             </div>
             <div class="col-md-6">
                 <div class="border p-2">
-                    <h6>Shipment Details/ Prepaid</h6>
+                    <h6 class="border-bottom">Shipment Details/ Prepaid</h6>
                     <table class="table table-bordered m-0">
                         <tr>
                             <th>ATD</th>
