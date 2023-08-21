@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->string('wife_husband_name')->nullable();
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();
