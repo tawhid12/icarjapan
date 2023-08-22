@@ -40,7 +40,14 @@ class ClientModuleController extends Controller
         ->where('reserved_vehicles.user_id',encryptor('decrypt',$id))->orderBy('reserved_vehicles.id', 'DESC')
         ->paginate(25);
         /* Proforma Invoice For Confirm Order */
-        $resrv = ReservedVehicle::where('user_id', encryptor('decrypt',$id))->where('status',2)->orderBy('id', 'DESC')->paginate(25);
+        $resrv = DB::table('reserved_vehicles')
+        ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
+        ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+        ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+        ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
+        ->select('reserved_vehicles.status as reserve_status', 'reserved_vehicles.id as reserveId', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+        ->where('reserved_vehicles.user_id',encryptor('decrypt',$id))->where('reserved_vehicles.status',2)->orderBy('reserved_vehicles.id', 'DESC')
+        ->paginate(25);
         return view('cm_module.cm_module_individual',compact('client_data','sales_rank','countries','ports','client_details','reserve_vehicle','resrv'));
     }
 }
