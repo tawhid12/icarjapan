@@ -140,10 +140,10 @@
                 </div>
                 <div class="col-md-6">
                     <div class="border p-2">
-                        <h6 class="border-bottom">Prepare Proforma Invoice</h6>
+                        <h6 class="border-bottom">Prepare Final Invoice</h6>
                         <table class="table table-bordered m-0">
 
-                         
+                            
                                 @php
 
                                 if($client_data->country_id && empty(request('country_id'))){
@@ -157,11 +157,14 @@
 
                                 @endphp
                                 @if(currentUser() != 'accountant')
-                                <form method="post" action="{{route(currentUser().'.reservevehicle.update',encryptor('encrypt',$v->reserveId))}}">
+                                <form method="post" action="{{route(currentUser().'.invoice.store')}}">
                                     @endif
                                     @csrf
-                                    @method('patch')
-                                    <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$v->reserveId)}}">
+
+                                    <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
+                                    <input type="hidden" name="vehicle_id" value="{{$v->id}}">
+                                    <input type="hidden" name="client_id" value="{{$client_data->id}}">
+                                    <input type="hidden" name="inv_amount" value="{{$v->total}}">
                             <tr>
                                 <th>FOB Amount:</th>
                                 <td>USD</td>
@@ -256,23 +259,40 @@
                                 <td colspan="2">{{$v->total}}</td>
                             </tr>
                             <tr>
+                                <th>Total Paid:</th>
+                                <td>USD</td>
+                                <td colspan="2">{{\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Due:</th>
+                                <td>USD</td>
+                                <td colspan="2">{{$v->total-\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}</td>
+                            </tr>
+                            <tr>
                                 <td> <button class="btn btn-sm btn-success" type="submit">Submit</button></td>
                             </tr>
 
                             </form>
                         </table>
                         <div class="d-flex justify-content-between my-2">
-                            @php 
-                                $proforma_invoice = \DB::table('invoices')->where('invoice_type',1)->where('reserve_id',$v->reserveId)->first(); 
-                                $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count(); 
-                                //echo $proforma_payment_count ;
-                            @endphp
-                            @if(currentUser() != 'accountant' && $proforma_payment_count == 0)
+                            @if(currentUser() != 'accountant')
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             @endif
                             @if(currentUser() == 'accountant')
-                                @if($proforma_invoice->id && $proforma_payment_count == 0)
-                                <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.payment.show',$proforma_invoice->id)}}">Paid</a>
+                                @php 
+                                $total_payable = \DB::table('invoices')->where('reserve_id',$v->reserveId)->first(); 
+                               // print_r($total_payable);die;
+                                $total_paid = DB::table('payments')
+                                ->join('invoices','payments.reserve_id','invoices.reserve_id')
+                                ->where('payments.reserve_id',$v->reserveId)
+                                ->sum('payments.amount');
+                                @endphp
+                                @php 
+                                $final_invoice_id = \DB::table('invoices')->where('invoice_type',4)->where('reserve_id',$v->reserveId)->first();
+                                //print_r($final_invoice_id);die; 
+                                @endphp
+                                @if(!empty($final_invoice_id) && $total_paid < $total_payable->inv_amount)
+                                <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.payment.show',$final_invoice_id->id)}}">Paid</a>
                                 @endif
                             @endif
                         </div>

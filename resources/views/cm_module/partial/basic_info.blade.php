@@ -48,7 +48,7 @@
                         @endforelse
                     </select>
                 </td>
-                <th scope="col">{{__('CM Reserve Cras')}}</th>
+                <th scope="col">{{__('CM Reserve Cars')}}</th>
                 <td>0</td>
             </tr>
             <tr>

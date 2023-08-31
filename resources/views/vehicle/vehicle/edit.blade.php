@@ -640,30 +640,30 @@
     <!-- Additional content or form for retrying the failed uploads -->
 
 
-    <div class="col-md-12 col-12 mt-3">
+    <!-- <div class="col-md-12 col-12 mt-3">
         <div class="form-group">
-            <h4>Gallery Image</h4>
+            <h4>Gallery Image</h4> -->
             <!-- <input type="file" id="image" class="form-control" name="image[]" multiple accept="image/*"> -->
 
-            <div class="row add_image">
-                <div class="col-3 mb-3">
-                    <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div> <!-- end col -->
+            <!-- <div class="row add_image">
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
                 </div>
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div> <!-- end col -->
+                </div>
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div>  <!-- end col -->
-            </div> <!-- end row -->
+                </div> 
+                <div class="col-3 mb-3">
+                    <input type="file" class="dropify" data-height="300" name="image[]"/>
+                </div>  
+            </div> 
             </div>
             <button class="btn btn-info" onclick="add_image()" type="button">Add More</button>
 
        
-    </div>
+    </div> -->
 
 
     <div class="col-12 d-flex justify-content-end">
@@ -674,9 +674,9 @@
     <div class="col-md-12 col-12 mt-3">
         <form action="{{ route('gallery.delete') }}" method="post">
             @csrf
-            <div class="col-12 d-flex justify-content-end">
+            <!-- <div class="col-12 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary m-1">Delete selected images</button>
-            </div>
+            </div> -->
             <div class="row gx-1">
                 @forelse($v_images as $v_img)
                 <div class="col col-md-1 mt-1 main-img">

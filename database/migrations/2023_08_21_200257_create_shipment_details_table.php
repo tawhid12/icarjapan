@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('ins_pass_date')->comment('Inspection Pass Date')->nullable();
 
             /*Shipping Details */
+            $table->integer('dep_country_id')->comment('Departure Port')->nullable();
             $table->integer('dep_port_id')->comment('Departure Port')->nullable();
             $table->integer('des_port_id')->comment('Destination Port')->nullable();
             $table->string('ship_name')->comment('Ship Name')->nullable();
@@ -46,7 +47,9 @@ return new class extends Migration
             $table->string('bill_of_land_2_url')->comment('Bill of Lading Release File')->nullable();
             $table->string('exp_can_cer_url_1')->comment('Export Cancellation Certificate File English')->nullable();
             $table->string('exp_can_cer_url_2')->comment('Export Cancellation Certificate File Other Language')->nullable();
+            $table->string('shipment_note')->nullable();
 
+            $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable()->index()->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

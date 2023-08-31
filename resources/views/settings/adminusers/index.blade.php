@@ -11,7 +11,9 @@
             <div class="card">
                 @include('layout.message')
                 <div>
+                    @if(currentUser() != 'accountant')
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.admin.create')}}"><i class="bi bi-pencil-square"></i></a>
+                    @endif
                 </div>
                 <!-- table bordered -->
                 <div class="table-responsive">
@@ -44,9 +46,11 @@
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     @else
-                                    <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
+                                        @if(currentUser() != 'accountant')
+                                        <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        @endif
                                     @endif
                                     @if(currentUser() == 'superadmin')
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">

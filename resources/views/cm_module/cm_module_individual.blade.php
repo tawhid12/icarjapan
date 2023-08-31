@@ -21,7 +21,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="col">{{__('CM ID')}} :- 1</th>
+                            <th scope="col">{{__('CM ID')}} :- {{$client_data->id}}</th>
                             <th scope="col" colspan="2">{{__('CM Name')}} :- {{$client_data->name}}</th>
                         </tr>
                     </tbody>
@@ -51,6 +51,12 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reserve-units-tab" data-bs-toggle="tab" href="#reserve_units" role="tab" aria-controls="reserve_units">Reserved Units</a>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="accounts-tab" data-bs-toggle="tab" href="#accounts" role="tab" aria-controls="accounts">Account</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="consignee-tab" data-bs-toggle="tab" href="#consignee" role="tab" aria-controls="consignee">Consignee</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content text-muted" id="myTabContent">
@@ -75,11 +81,17 @@
                     </div>
 
                     <div class="tab-pane fade" id="final_inovice" role="tabpanel" aria-labelledby="final-invoice-tab">
-                        <p><strong>Final Invoice</strong></p>
+                        @include('cm_module.partial.final_invoice')
                     </div>
 
                     <div class="tab-pane fade" id="reserve_units" role="tabpanel" aria-labelledby="reserve-units-tab">
                         @include('cm_module.partial.reserve_units')
+                    </div>
+                    <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accounts-tab">
+                        @include('cm_module.partial.accounts')
+                    </div>
+                    <div class="tab-pane fade" id="consignee" role="tabpanel" aria-labelledby="consignee-tab">
+                        @include('cm_module.partial.consignee')
                     </div>
 
                 </div>

@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Toastr;
+use DB;
 
 class PaymentController extends Controller
 {
@@ -57,14 +58,14 @@ class PaymentController extends Controller
         try {
             $inv = Invoice::where('id', $request->invoice_id)->first();
             if ($inv)
-                $fob_amt  = $inv->fob_amt;
+                $fob_amt  = $inv->inv_amount;
             else
                 $fob_amt = 0;
-            $paid_amt = Payment::where(['invoice_id' => $request->invoice_id, 'customer_id' => $request->customer_id])->sum('amount');
+            $paid_amt = Payment::where(['reserve_id' => $request->reserve_id, 'client_id' => $request->client_id])->sum('amount');
             /*echo $fob_amt . '<br>';
             echo $request->amount + $paid_amt;
             die;*/
-            $deposit_amt = Payment::whereNull('invoice_id')->where('customer_id', $request->customer_id)->sum('deposit');
+            //$deposit_amt = Payment::whereNull('invoice_id')->where('customer_id', $request->customer_id)->sum('deposit');
 
             /*echo '<pre>';
             print_r($inv->toArray());die;*/
@@ -73,46 +74,69 @@ class PaymentController extends Controller
             } else {
                 $payment = new Payment();
                 if ($request->adjust_deposit == 1) {
+
+                    $vehicle = Vehicle::find($inv->vehicle_id);
+                    $vehicle->sold_status = 1;
+                    $vehicle->save();
+
+                    $payment->invoice_id = $request->invoice_id;
+                    $payment->created_by  = currentUserId();
+                    $payment->receive_date = date('Y-m-d', strtotime($request->receive_date));
+                    $payment->currency_type = $request->currency_type;
+                    $payment->reserve_id = $request->reserve_id;
+                    $payment->amount = $request->amount;
                     /*=== user balance will be duduct ===*/
-    
+                    $deposit_update = DB::table('deposits')->where('client_id', $request->client_id)->update(['deduction' => -$request->deduction, 'merged_by' => currentUserId(), 'merge_date' => date('Y-m-d', strtotime($request->receive_date)), 'payment_id' => $request->payment_id, 'updated_by' => currentUser()]);
                     /*== deposit+$request->amount+$paid_amt == fob_amt (vechicle sold out) and data insert to purchased table==*/
+                    if ($deposit_update) {
+                        $deposit_merge = new Payment();
+                        $deposit_merge->invoice_id = $request->invoice_id;
+                        $deposit_merge->created_by  = currentUserId();
+                        $deposit_merge->receive_date = date('Y-m-d', strtotime($request->receive_date));
+                        $deposit_merge->currency_type = $request->currency_type;
+                        $deposit_merge->reserve_id = $request->reserve_id;
+                        $deposit_merge->type = 2;
+                        $deposit_merge->amount = $request->deduction;
+                        $deposit_merge->save();
+                    }
                 } elseif ($fob_amt == $request->amount + $paid_amt) {
                     /*===Vehicle Will Be Sold Out ===*/
-                    if($request->amount){
+                    if ($request->amount) {
                         $vehicle = Vehicle::find($inv->vehicle_id);
                         $vehicle->sold_status = 1;
                         $vehicle->save();
-                    
 
-    
-                    /* Insert Data Into Purchase Table */
-                    $pur_vehicle = new PurchasedVehicle();
+
+
+                        /* Insert Data Into Purchase Table */
+                        /*$pur_vehicle = new PurchasedVehicle();
                     $pur_vehicle->vehicle_id = $inv->vehicle_id;
                     $pur_vehicle->reserve_id = $inv->reserve_id;
                     $pur_vehicle->invoice_id = $inv->id;
                     $pur_vehicle->executive_id = $inv->executive_id;
                     $pur_vehicle->customer_id = $inv->customer_id;
                     $pur_vehicle->sale_date = date('Y-m-d', strtotime($request->receive_date));
-                    $pur_vehicle->save();
+                    $pur_vehicle->save();*/
+                    }
                 }
-    
-                    $payment->invoice_id = $request->invoice_id;
-                    $payment->created_by  = currentUserId();
-                    $payment->receive_date = date('Y-m-d', strtotime($request->receive_date));
-                    $payment->currency = $request->currency;
-                    $payment->amount = $request->amount;
-                    $payment->allocated = $request->allocated;
-                    /*if($request->allocated && $request->amount >= $request->allocated){
+                $payment->invoice_id = $request->invoice_id;
+                $payment->created_by  = currentUserId();
+                $payment->receive_date = date('Y-m-d', strtotime($request->receive_date));
+                $payment->currency_type = $request->currency_type;
+                $payment->reserve_id = $request->reserve_id;
+                $payment->amount = $request->amount;
+                //$payment->allocated = $request->allocated;
+                /*if($request->allocated && $request->amount >= $request->allocated){
                     $payment->deposit = $request->amount - $request->allocated;
                 }else{
                     $payment->deposit = $request->deposit;
                 }*/
-                    //$payment->security_deposit	 = $request->security_deposit;
-                    $payment->deposit = $request->deposit;
-                    $payment->type     = $request->type;
-                    $payment->customer_id = $request->customer_id;
-                    $payment->created_by = currentUserId();
-                }
+                //$payment->security_deposit	 = $request->security_deposit;
+                //$payment->deposit = $request->deposit;
+                $payment->type     = $request->type;
+                $payment->client_id = $request->client_id;
+                $payment->paid_by = currentUserId();
+                $payment->created_by = currentUserId();
             }
 
 
@@ -125,7 +149,7 @@ class PaymentController extends Controller
                     $user->deposit_bal +=  $request->deposit;
                     $user->save();
                 }
-                return redirect()->route(currentUser() . '.payment.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+                return redirect()->route(currentUser().'.client_individual',encryptor('encrypt', $request->client_id))->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
@@ -141,9 +165,10 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show($id)
     {
-        //
+        $invoice = Invoice::find($id);
+        return view('sales.payment.create-payment', compact('invoice', 'id'));
     }
 
     /**

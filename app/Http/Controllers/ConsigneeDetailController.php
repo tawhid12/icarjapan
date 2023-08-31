@@ -26,10 +26,13 @@ class ConsigneeDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id = null)
     {
         $countries = Country::all();
+        if(currentUser() == 'user')
         return view('user.consignee.create',compact('countries'));
+        else
+        return view('cm_module.consignee.create',compact('countries'));
     }
 
     /**
@@ -44,7 +47,10 @@ class ConsigneeDetailController extends Controller
         print_r($request->toArray());die;*/
         try{
             $con=new ConsigneeDetail();
+            if(currentUser() == 'user')
             $con->user_id=currentUserId();
+            else
+            $con->user_id=$request->user_id;
             $con->c_name=$request->c_name;
             $con->c_country_id=$request->c_country_id;
             $con->c_state=$request->c_state;

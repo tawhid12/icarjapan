@@ -59,6 +59,22 @@ print_r($favourites->toArray());die;*/
         $data .= '</select>';
         $data .= '</div>';
         $data .= '</div>';
+
+        $data .= '<div class="col-md-4 col-12">';
+        $data .= '<div class="form-group">';
+        $data .= '<label for="shipment_type">Shipment Type</label>';
+        $data .= '<select name="shipment_type" class="form-control" required>';
+        $data .= '<option value="">Select</option>';
+
+       
+            $data .= '<option value="1">RORO</option>';
+            $data .= '<option value="2">Container</option>';
+      
+
+        $data .= '</select>';
+        $data .= '</div>';
+        $data .= '</div>';
+
         $data .= '</div>';
       
       

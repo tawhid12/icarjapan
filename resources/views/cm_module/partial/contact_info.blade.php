@@ -1,6 +1,8 @@
 <div class="border p-2">
     <h5 class="text-center border-bottom my-3">Account Information</h5>
+    @if(currentUser() != 'accountant')
     <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.update',encryptor('encrypt',$client_data->id))}}">
+    @endif    
         @csrf
         @method('patch')
         <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$client_details->id)}}">

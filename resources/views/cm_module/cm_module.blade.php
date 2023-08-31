@@ -12,7 +12,9 @@
             <div class="card">
                 @include('layout.message')
                 <div>
+                    @if(currentUser() != 'accountant')
                     <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.admin.create')}}"><i class="bi bi-pencil-square"></i></a>
+                    @endif
                 </div>
                 <div class="col-md-12 text-center">
                     <h5>Client List</h5>
@@ -116,9 +118,11 @@
                                         <a target="blank" class="btn btn-sm btn-success"href="{{route(currentUser().'.client_individual',encryptor('encrypt',$cm->id))}}">
                                            CM Individual
                                         </a>
+                                        @if(currentUser() != 'accountant')
                                         <!-- <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$cm->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a> -->
+                                        @endif
                                         @if(currentUser() == 'superadmin')
                                         <a href="javascript:void()" onclick="$('#form{{$cm->id}}').submit()">
                                             <i class="bi bi-trash"></i>
@@ -127,6 +131,11 @@
                                             @csrf
                                             @method('delete')
                                         </form>
+                                        @endif
+                                        @if(currentUser() == 'accountant')
+                                        <a target="blank" class="btn btn-sm btn-primary"href="{{route(currentUser().'.deposit.show',encryptor('encrypt',$cm->id))}}">
+                                          Deposit
+                                        </a>
                                         @endif
                                     </td>
 

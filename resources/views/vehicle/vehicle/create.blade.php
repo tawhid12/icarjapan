@@ -676,30 +676,30 @@
         </div>
 
     </div>
-    <div class="col-md-12 col-12 mt-3">
+    <!-- <div class="col-md-12 col-12 mt-3">
         <div class="form-group">
             <h4>Gallery Image</h4>
             <div class="row add_image">
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div> <!-- end col -->
+                </div> 
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
                 </div>
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div> <!-- end col -->
+                </div>
                 <div class="col-3 mb-3">
                     <input type="file" class="dropify" data-height="300" name="image[]"/>
-                </div>  <!-- end col -->
-            </div> <!-- end row -->
+                </div>  
+            </div>
             
-            <button class="btn btn-info" onclick="add_image()" type="button">Add More</button>
+            <button class="btn btn-info" onclick="add_image()" type="button">Add More</button> -->
         {{--<div class="form-group mt-3">
                     <label for="name">Video Link</label>
                     <input type="text" id="v_link" value="{{old('v_link')}}" class="form-control" placeholder="Video Link" name="v_link">
     </div>--}}
-    </div>
+    <!-- </div> -->
 
     <div class="col-12 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>

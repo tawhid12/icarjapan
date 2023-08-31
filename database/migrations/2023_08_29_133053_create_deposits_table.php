@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('deposits', function (Blueprint $table) {
             $table->id();
-            $table->integer('invoice_id')->nullable();
-            $table->integer('reserve_id')->nullable();
-            $table->date('receive_date')->nullable();
-            $table->integer('currency_type')->nullable();
-            $table->decimal('amount',10,2)->nullable();
-            $table->tinyInteger('type')->comment('1 => Regular, 2=> Merge from Deposit')->nullable();
-            $table->integer('client_id')->nullable();
-            $table->integer('paid_by')->nullable();
-            $table->string('payment_note')->nullable();
+            $table->integer('client_id');
+            $table->tinyInteger('deposit_type')->comment('1 => Regular , 2=> Others')->default(1);
+            $table->decimal('deposit_amt',10,2)->nullable();
+            $table->date('deposit_date')->nullable();
+            $table->integer('deposit_by')->nullable();
+            $table->decimal('deduction',10,2)->nullable();
+            $table->date('merge_date')->nullable();
+            $table->integer('merged_by')->nullable();
+            $table->integer('payment_id')->nullable();
+            $table->string('deposit_note')->nullable();
             $table->unsignedBigInteger('created_by')->index()->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable()->index()->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('deposits');
     }
 };

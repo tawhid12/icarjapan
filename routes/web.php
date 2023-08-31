@@ -52,11 +52,17 @@ use App\Http\Controllers\NoteController as note;
 use App\Http\Controllers\ClientModuleController as clientmodule;
 use App\Http\Controllers\SalesModuleController as salesmodule;
 
+use App\Http\Controllers\ShipmentDetailController as shipment;
+use App\Http\Controllers\DepositController as deposit;
+
+use App\Http\Controllers\PhotoGallaryController as pGallery;
+
 /* Middleware */
-use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isAccountant;
 use App\Http\Middleware\isSuperadmin;
 use App\Http\Middleware\isSalesexecutive;
 use App\Http\Middleware\isUser;
+
 use App\Http\Middleware\unknownCountryMiddleware;
 /*
 |--------------------------------------------------------------------------
@@ -154,6 +160,28 @@ Route::group(['middleware'=>[isUser::class,'country.selection']],function(){
 
     });
 });
+Route::group(['middleware'=>isAccountant::class],function(){
+    Route::prefix('accountant')->group(function(){
+        Route::get('/dashboard', [dash::class,'accountantDashboard'])->name('accountant.dashboard');
+
+        Route::get('/profile', [userprofile::class,'profile'])->name('accountant.profile');
+        Route::post('/profile', [userprofile::class,'store'])->name('accountant.profile.store');
+        Route::get('/change_password', [userprofile::class,'change_password'])->name('accountant.change_password');
+        Route::post('/change_password', [userprofile::class,'change_password_store'])->name('accountant.change_password.store');
+
+        /*Cm Module */
+        Route::get('all-client-list',[clientmodule::class,'all_client_list'])->name('accountant.all_client_list');
+        Route::get('client-individual/{id}',[clientmodule::class,'client_individual'])->name('accountant.client_individual');
+
+      
+        Route::resource('vehicle',vehicle::class,['as'=>'accountant'])->only(['show']);
+        Route::resource('invoice', invoice::class,['as'=>'accountant'])->only(['show']);
+        Route::resource('payment', payment::class,['as'=>'accountant']);
+        Route::resource('reservevehicle', reservevehicle::class,['as'=>'accountant']);
+        Route::resource('deposit', deposit::class,['as'=>'accountant']);
+
+    });
+});
 
 Route::group(['middleware'=>isSalesexecutive::class],function(){
     Route::prefix('salesexecutive')->group(function(){
@@ -178,7 +206,11 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::get('search',[salesmodule::class,'search'])->name('salesexecutive.search');
         Route::get('sales-module',[salesmodule::class,'sales_module'])->name('salesexecutive.sales_module');
 
+        /*Shipment Details */
+        Route::resource('shipment',shipment::class,['as'=>'salesexecutive']);
+
         /* settings */
+        Route::resource('consigdetl', consigdetl::class,['as'=>'salesexecutive']);
         Route::resource('admin',admin::class,['as'=>'salesexecutive']);
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
@@ -202,6 +234,9 @@ Route::group(['middleware'=>isSuperadmin::class],function(){
         Route::resource('userdetl', userdetl::class,['as'=>'superadmin']);
         Route::resource('compaccinfo', compaccinfo::class,['as'=>'superadmin']);
 
+     
+        Route::resource('pGallery',pGallery::class,['as'=>'superadmin']);
+        Route::get('pGallerydelete', [pGallery::class, 'delete'])->name('superadmin.image.delete'); 
         /* settings */
         Route::resource('admin',admin::class,['as'=>'superadmin']);
         Route::resource('bodytype',bodytype::class,['as'=>'superadmin']);

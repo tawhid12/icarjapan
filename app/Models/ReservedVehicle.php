@@ -17,4 +17,12 @@ class ReservedVehicle extends Model
     public function vehicle(){
         return $this->hasOne(Vehicle::class,'id','vehicle_id');
     }
+    protected $fillable = ['total']; // Make sure 'total' is fillable
+    public function total()
+    {
+        $sum = $this->fob_amt + ($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt;
+        $sum -=  $this->fob_amt*($this->discount/100);
+        $this->total = $sum;
+        $this->save();
+    }
 }

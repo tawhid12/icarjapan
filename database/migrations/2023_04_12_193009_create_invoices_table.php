@@ -25,14 +25,11 @@ return new class extends Migration
 
 
             /*Pricing Details */
-            /*$table->decimal('fob_amt',10,2)->default(0.00);
-            $table->decimal('freight_amt',10,2)->default(0.00);
-            $table->decimal('insu_amt',10,2)->comment('Insurance Amount')->default(0.00);
-            $table->decimal('insp_amt',10,2)->comment('Inspect Amount')->default(0.00);
+           
             $table->decimal('van_amt',10,2)->comment('Vanning Amount')->default(0.00);
-            $table->decimal('v_bus_amt',10,2)->comment('Virus Busters Amount:')->default(0.00);*/
+            $table->decimal('v_bus_amt',10,2)->comment('Virus Busters Amount:')->default(0.00);
             $table->decimal('other_cost',10,2)->default(0.00);
-            //$table->decimal('discount',10,2)->default(0.00);
+            $table->decimal('discount',10,2)->default(0.00);
             $table->decimal('inv_amount',10,2)->default(0.00);
             $table->text('note')->nullable();
             

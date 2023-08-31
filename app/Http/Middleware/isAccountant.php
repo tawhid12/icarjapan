@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Session; // custome
 
 use App\Http\Traits\ResponseTrait; // custome
-class isAdmin
+class isAccountant
 {
     use ResponseTrait;
     /**
@@ -26,7 +26,7 @@ class isAdmin
             $user=User::findOrFail(currentUserId());
             if(!$user){
                 return redirect()->route('logOut');
-            }else if(currentUser() != 'admin'){
+            }else if(currentUser() != 'accountant'){
                 return redirect()->back()->with($this->resMessageHtml(false,'error','Access Denied'));
             }else{
                 return $next($request);

@@ -108,6 +108,7 @@
                                     <p><i class="badge bg-danger">Cancelled</i></p>
                                     @endif
                                     @if($v->reserve_status == 1)
+                                    @if(currentUser() != 'accountant')
                                     <form method="post" action="{{route(currentUser().'.reservevehicle.update',encryptor('encrypt',$v->reserveId))}}">
                                         @csrf
                                         @method('patch')
@@ -115,6 +116,7 @@
                                         <input type="hidden" name="status" value="2">
                                         <button type="submit" class="btn btn-primary btn-sm">Confirm Order</button>
                                     </form>
+                                    @endif
                                     @endif
                                 </div>
 
@@ -160,8 +162,23 @@
                             <tr>
                                 <th>Consignee name</th>
                                 <td></td>
-                                <th>Ship Type</th>
-                                <td>RORO/ CONTAINER</td>
+                                @if(currentUser() != 'accountant')
+                                <th>Shipment Type</th>
+                                <td>
+                                    <!-- <form action="{{route(currentUser().'.shipment.store')}}" method="post" class="d-flex"> -->
+                                        @csrf
+                                        <input type="hidden" name="vehicle_id" value="{{$v->id}}">
+                                        <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
+                                        <input type="hidden" name="client_id" value="{{$client_data->id}}">
+                                        <select class="form-control" name="shipment_type" style="width:150px;">
+                                            <option value="">Select</option>
+                                            <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
+                                            <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
+                                        </select>
+                                        <!-- <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
+                                    </form> -->
+                                </td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Consignee Address</th>
@@ -175,10 +192,27 @@
                                 <th>Note</th>
                                 <td colspan="3"></td>
                             </tr>
+                            <tr>
+                                <th>Allocate Amount</th>
+                                <th>{{$v->allocated}}</th>
+                                @if(currentUser() == 'accountant')
+                                <th>Allocate</th>
+                                <td>
+                                    <form action="{{route(currentUser().'.reservevehicle.update',encryptor('encrypt',$v->reserveId))}}" method="post" class="d-flex">
+                                        @csrf
+                                        @method('patch')
+                                        <input type="text" name="allocate" class="form-control">
+                                        <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
+                                    </form>
+                                </td>
+                                @endif
+                            </tr>
                         </table>
                         <div class="d-flex justify-content-between my-2">
                             <h6>Documents</h6>
-                            <a class="btn btn-sm btn-primary" href="">Add Shipment Details</a>
+                            @if(currentUser() != 'accountant')
+                            <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
+                            @endif
                         </div>
                         <table class="table table-bordered m-0">
                             <tr>

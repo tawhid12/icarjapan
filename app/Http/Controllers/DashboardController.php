@@ -16,8 +16,8 @@ class DashboardController extends Controller
     /*
     * admin dashboard
     */
-    public function adminDashboard(){
-        return view('dashboard.admin');
+    public function accountantDashboard(){
+        return view('dashboard.accountant');
     }
 
     /*

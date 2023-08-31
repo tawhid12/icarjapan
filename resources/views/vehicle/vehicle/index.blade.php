@@ -41,15 +41,13 @@
                                         <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        @if(currentUser() == 'superadmin')
-                                        <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        @endif
+
                                         @if(currentUser() == 'salesexecutive' && currentUserId() == $v->created_by)
                                         <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+                                     
+                                        <a class="btn btn-sm btn-info" href="{{route(currentUser().'.pGallery.show',encryptor('encrypt',$v->id))}}">Photo</a>
                                         @endif
                                         @if(currentUser() != 'salesexecutive')
                                         <a href="javascript:void()" onclick="$('#form{{$v->id}}').submit()">
@@ -59,6 +57,13 @@
                                             @csrf
                                             @method('delete')
                                         </form>
+                                        @endif
+                                        @if(currentUser() == 'superadmin')
+                                        <a href="{{route(currentUser().'.vehicle.edit',encryptor('encrypt',$v->id))}}">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        
+                                        <a class="" href="{{route(currentUser().'.pGallery.show',encryptor('encrypt',$v->id))}}"><i class="bi bi-upload"></i></a>
                                         @endif
                                     </td>
                                 </tr>
