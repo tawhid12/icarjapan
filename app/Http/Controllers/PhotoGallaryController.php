@@ -10,6 +10,7 @@ use App\Models\Vehicle\VehicleImage;
 use Illuminate\Support\Facades\Storage;
 use Exception;
 use DB;
+use Intervention\Image\Facades\Image;
 class PhotoGallaryController extends Controller
 {
     use ImageHandleTraits;
@@ -20,20 +21,20 @@ class PhotoGallaryController extends Controller
      */
     public function index(Request $request)
     {
-        $images = VehicleImage::where('vehicle_id',$request->gid)->get()->toArray();
-        foreach($images as $image){
+        $images = VehicleImage::where('vehicle_id', $request->gid)->get()->toArray();
+        foreach ($images as $image) {
             $tableImages[] = $image['image'];
         }
-        $data=array();
+        $data = array();
         $storeFolder = public_path('uploads/vehicle_images');
         $file_path = public_path('uploads/vehicle_images/');
         $files = scandir($storeFolder);
-        foreach ( $files as $file ) {
-            if ($file !='.' && $file !='..' && in_array($file,$tableImages)) {       
+        foreach ($files as $file) {
+            if ($file != '.' && $file != '..' && in_array($file, $tableImages)) {
                 $obj['name'] = $file;
-                $file_path = public_path('uploads/vehicle_images/').$file;
-                $obj['size'] = filesize($file_path);          
-                $obj['path'] = url('public/uploads/vehicle_images/'.$file);
+                $file_path = public_path('uploads/vehicle_images/') . $file;
+                $obj['size'] = filesize($file_path);
+                $obj['path'] = url('public/uploads/vehicle_images/' . $file);
                 $data[] = $obj;
             }
         }
@@ -48,7 +49,6 @@ class PhotoGallaryController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -63,17 +63,33 @@ class PhotoGallaryController extends Controller
         $fileInfo = $image->getClientOriginalName();
         $filename = pathinfo($fileInfo, PATHINFO_FILENAME);
         $extension = pathinfo($fileInfo, PATHINFO_EXTENSION);
-        $file_name= $filename.'-'.time().'.'.$extension;
-        $image->move(public_path('uploads/vehicle_images'),$file_name);
-            
+        $file_name = $filename . '-' . time() . '.' . $extension;
+        $image->move(public_path('uploads/vehicle_images'), $file_name);
+        $image = Image::make(public_path('uploads/vehicle_images/' . $file_name));
+        $image->resize(640, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        // Load the watermark image
+        $watermark = Image::make(public_path('uploads/watermark.png'));
+
+        // Increase the size of the watermark image
+        $watermark->resize(180, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        // Apply the watermark to the original image
+        $image->insert($watermark, 'top-left', 0, 0);
+        // Save the modified image
+        $image->save(public_path('uploads/vehicle_images/' . $file_name));
+
         $imageUpload = new VehicleImage;
-        $imageUpload->vehicle_id=$request->vehicle_id;
+        $imageUpload->vehicle_id = $request->vehicle_id;
         $imageUpload->image = $file_name;
         $imageUpload->save();
-        return response()->json(['success'=>$file_name]);
+        return response()->json(['success' => $file_name]);
     }
 
-    
+
     /**
      * Display the specified resource.
      *
@@ -82,8 +98,8 @@ class PhotoGallaryController extends Controller
      */
     public function show($id)
     {
-        $pGalleryCat= encryptor('decrypt',$id);
-        return view('pGallery.photo',compact('pGalleryCat'));
+        $pGalleryCat = encryptor('decrypt', $id);
+        return view('pGallery.photo', compact('pGalleryCat'));
     }
 
     /**
@@ -94,7 +110,6 @@ class PhotoGallaryController extends Controller
      */
     public function edit($id)
     {
-       
     }
 
     /**
@@ -106,16 +121,16 @@ class PhotoGallaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
     }
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $filename =  $request->get('filename');
-        VehicleImage::where('image',$filename)->delete();
-        $path = public_path('uploads/vehicle_images/').$filename;
+        VehicleImage::where('image', $filename)->delete();
+        $path = public_path('uploads/vehicle_images/') . $filename;
         if (file_exists($path)) {
             unlink($path);
         }
-        return response()->json(['success'=>$filename]);
+        return response()->json(['success' => $filename]);
     }
     /**
      * Remove the specified resource from storage.
@@ -125,6 +140,5 @@ class PhotoGallaryController extends Controller
      */
     public function destroy($id)
     {
-        
     }
 }
