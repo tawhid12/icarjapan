@@ -32,7 +32,7 @@
               <div class="card">
                   <div class="card-content">
                       <div class="card-body">
-                      <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.vehicle.index')}}"><i class="bi bi-plus-square"></i>Back All Vehicle</a>
+                      <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.vehicle.index')}}">Back All Vehicle</a>
                         <label for="image"><b>{{__('Vehicle Photo')}}</b></label>
                         <form action="{{route(currentUser().'.pGallery.store')}}" method="post" enctype="multipart/form-data" id="image-upload" class="mt-3 dropzone">
                             @csrf
