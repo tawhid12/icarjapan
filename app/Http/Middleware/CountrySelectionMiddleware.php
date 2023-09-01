@@ -21,7 +21,7 @@ class CountrySelectionMiddleware
             //return $next($request);
             return redirect()->route('front.countrySelect');
         }else{
-            return redirect()->route('front.countrySelect');
+            return redirect()->route('front');
         }
         //return $next($request);
     }
