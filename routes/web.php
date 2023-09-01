@@ -209,6 +209,8 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         /*Shipment Details */
         Route::resource('shipment',shipment::class,['as'=>'salesexecutive']);
 
+        Route::resource('pGallery',pGallery::class,['as'=>'salesexecutive']);
+        Route::get('pGallerydelete', [pGallery::class, 'delete'])->name('salesexecutive.image.delete'); 
         /* settings */
         Route::resource('consigdetl', consigdetl::class,['as'=>'salesexecutive']);
         Route::resource('admin',admin::class,['as'=>'salesexecutive']);

@@ -97,9 +97,13 @@ class AppServiceProvider extends ServiceProvider
 
         
             $location =  request()->session()->get('location');
-    
-            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-            $countryName =  request()->session()->get('countryName');
+            if(!is_null($location)){
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $countryName =  request()->session()->get('countryName');
+            }else{
+                return redirect()->route('front');
+            }
+            
 
             $com_acc_info = CompanyAccountInfo::first();
             $total_cars = Vehicle::/*whereNull('r_status')->*/count();

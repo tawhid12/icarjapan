@@ -250,7 +250,9 @@ class FrontController extends Controller
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
+        
         $countryName = request()->session()->get('countryName');
+        if(!is_null($location)){
         $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
         $v = Vehicle::where('stock_id', $stock_id)->first();
@@ -275,6 +277,9 @@ class FrontController extends Controller
             ->twitter()
             ->whatsapp();
         return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+        }else{
+            return redirect()->route('front');
+        }
     }
     public function searchStData(Request $request)
     {
