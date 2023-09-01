@@ -94,8 +94,7 @@ Route::get('/used-cars-search/{brand}/{subBrand}', [front::class,'subBrand'])->n
 Route::get('/used-cars-search/{brand}/{subBrand}/{stock_id}', [front::class,'singleVehicle'])->name('singleVehicle');
 
 Route::get('/used-cars-search',[front::class,'searchStData'])->name('searchStData');
-Route::get('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');
-Route::get('/vehicle/advance/search/data/',[front::class,'front_adv_search_by_data'])->name('front_adv_search_by_data');
+
 
 /*Route::get('/search',[front::class,'search_by_data'])->name('searchStData');
 Route::post('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');*/
@@ -123,6 +122,10 @@ Route::get('/faq',function(){ return view('front.page.faq'); })->name('faq');
 Route::get('/contact-us',function(){ return view('front.page.contact-us'); });
 
 });
+
+Route::get('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');
+Route::get('/vehicle/advance/search/data/',[front::class,'front_adv_search_by_data'])->name('front_adv_search_by_data');
+
 
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
