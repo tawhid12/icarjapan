@@ -101,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName =  request()->session()->get('countryName');
             }else{
-                return redirect()->route('front');
+                return redirect()->route('front.countrySelect');
             }
             
 
