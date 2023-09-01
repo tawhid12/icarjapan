@@ -252,7 +252,7 @@ class FrontController extends Controller
     {
         
         $countryName = request()->session()->get('countryName');
-        if(!is_null($location)){
+        if(!is_null($countryName)){
         $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
         $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
         $v = Vehicle::where('stock_id', $stock_id)->first();
