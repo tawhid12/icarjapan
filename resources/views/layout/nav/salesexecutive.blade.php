@@ -56,12 +56,12 @@
             </div>
         </div>
     </li> -->
-    <li class="menu-item">
+    <!-- <li class="menu-item">
         <a href="{{route(currentUser().'.invoice.index')}}" class='menu-link'>
             <i class="bi bi-shop"></i>
             <span>{{__('Invoice List')}}</span>
         </a>
-    </li>
+    </li> -->
     <li class="menu-item">
         <a href="{{route(currentUser().'.inquiry.index')}}" class='menu-link'>
             <i class="bi bi-shop"></i>
