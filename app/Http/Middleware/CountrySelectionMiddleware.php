@@ -23,6 +23,6 @@ class CountrySelectionMiddleware
         }else{
             return redirect()->route('front');
         }
-        //return $next($request);
+        return $next($request);
     }
 }
