@@ -10,24 +10,7 @@
             <th>Due Amount</th>
         </tr>
         <tr>
-            <td>USD</td>
-            <td>
-                @if(\DB::table('payments')->where('client_id',$client_data->id)->first())
-                {{\DB::table('payments')->where('client_id',$client_data->id)->sum('amount')}}
-                @endif
-            </td>
-            <td>
-                @if(DB::table('reserved_vehicles')->where('user_id',$client_data->id)->first())
-                {{\DB::table('reserved_vehicles')->where('user_id',$client_data->id)->sum('allocated')}}
-                @endif
-            </td>
-            <td>{{\DB::table('deposits')->where('client_id',$client_data->id)->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}</td>
-            <td>-</td>
-            <td>
-                @if(\DB::table('invoices')->where('client_id',$client_data->id)->where('invoice_type',4)->first() && \DB::table('payments')->where('client_id',$client_data->id)->first())
-                {{\DB::table('invoices')->where('client_id',$client_data->id)->where('invoice_type',4)->sum('inv_amount')-\DB::table('payments')->where('client_id',$client_data->id)->sum('amount')}}
-                @endif
-            </td>
+            
         </tr>
     </table>
     <h5 class="my-2">Payment History</h5>
