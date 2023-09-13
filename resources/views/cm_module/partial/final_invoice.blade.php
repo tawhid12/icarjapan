@@ -268,9 +268,12 @@
                                 <td>USD</td>
                                 <td colspan="2">{{$v->total-\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}</td>
                             </tr>
+                            @php $final_invoice_id = \DB::table('invoices')->where('invoice_type',4)->where('reserve_id',$v->reserveId)->first(); @endphp
+                            @if(!$final_invoice_id)
                             <tr>
                                 <td> <button class="btn btn-sm btn-success" type="submit">Submit</button></td>
                             </tr>
+                            @endif
 
                             </form>
                         </table>
@@ -288,7 +291,7 @@
                                 ->sum('payments.amount');
                                 @endphp
                                 @php 
-                                $final_invoice_id = \DB::table('invoices')->where('invoice_type',4)->where('reserve_id',$v->reserveId)->first();
+                                
                                 //print_r($final_invoice_id);die; 
                                 @endphp
                                 @if(!empty($final_invoice_id) && $total_paid < $total_payable->inv_amount)
