@@ -36,12 +36,12 @@
             <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->invoice_date))->format('d/m/Y')}}</td>
             <td>USD</td>
             <td>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount}}</td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount:0}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount:0}}</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->id}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->id:-}}</td>
             
         </tr>
         @empty
