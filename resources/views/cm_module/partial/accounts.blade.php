@@ -12,7 +12,7 @@
         <tr>
             <td>USD</td>
             <td>
-                @if(\DB::table('payments')->where('client_id',$client_data->id)->sum('amount'))
+                @if(\DB::table('payments')->where('client_id',$client_data->id)->exixts())
                 {{\DB::table('payments')->where('client_id',$client_data->id)->sum('amount')}}
                 @endif
             </td>
