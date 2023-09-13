@@ -250,23 +250,26 @@
                                     @endif
                                 </td>
                             </tr> -->
-                            <tr>
-                                <th>Total:</th>
-                                <td>USD</td>
-                                <td colspan="2">{{$v->total}}</td>
-                            </tr>
-                            <tr>
-                                <td> <button class="btn btn-sm btn-success" type="submit">Submit</button></td>
-                            </tr>
-
-                            </form>
-                        </table>
-                        <div class="d-flex justify-content-between my-2">
                             @php 
                                 $proforma_invoice = \DB::table('invoices')->where('invoice_type',1)->where('reserve_id',$v->reserveId)->first(); 
                                 $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count(); 
                                 //echo $proforma_payment_count ;
                             @endphp
+                            <tr>
+                                <th>Total:</th>
+                                <td>USD</td>
+                                <td colspan="2">{{$v->total}}</td>
+                            </tr>
+                            @if(currentUser() != 'accountant' && $proforma_payment_count == 0)
+                            <tr>
+                                <td> <button class="btn btn-sm btn-success" type="submit">Submit</button></td>
+                            </tr>
+                            @endif
+
+                            </form>
+                        </table>
+                        <div class="d-flex justify-content-between my-2">
+                        
                             @if(currentUser() != 'accountant' && $proforma_payment_count == 0)
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             @endif
