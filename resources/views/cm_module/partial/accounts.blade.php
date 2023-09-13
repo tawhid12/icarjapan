@@ -11,11 +11,11 @@
         </tr>
         <tr>
             <td>USD</td>
-            <td>@if($payment_total) {{$payment_total}} @else - @endif}}</td>
-            <td>@if($allocated_total) {{$allocated_total}} @else - @endif</td>
-            <td>@if($deposit_total) {{$deposit_total}} @else - @endif</td>
+            <td>@if(!empty($payment_total)) {{$payment_total}} @else - @endif}}</td>
+            <td>@if(!empty($allocated_total)) {{$allocated_total}} @else - @endif</td>
+            <td>@if(!empty($deposit_total)) {{$deposit_total}} @else - @endif</td>
             <td>-</td>
-            <td>@if($invoice_total) {{$invoice_total}} @else - @endif</td>
+            <td>@if(!empty($invoice_total)) {{$invoice_total}} @else - @endif</td>
         </tr>
     </table>
     <h5 class="my-2">Payment History</h5>
