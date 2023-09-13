@@ -56,8 +56,9 @@
                             <th>INVOICE NO :</th>
                             <th>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</th>
                         </tr>
+                        
+                        @if($shipment->consignee_id)
                         @php $consignee = \DB::table('consignee_details')->where('id',$shipment->consignee_id)->first(); @endphp
-                        @if($consignee)
                         <tr>
                             <th>CONSIGNEE NAME :</th>
                             <th>{{$consignee->c_name}}</th>
