@@ -11,11 +11,11 @@
         </tr>
         <tr>
             <td>USD</td>
-            <td>{{$payment_total}}</td>
-            <td>{{$allocated_total}}</td>
-            <td>{{$deposit_total}}</td>
+            <td>{{$payment_total?$payment_total:0}}</td>
+            <td>{{$allocated_total?$allocated_total:0}}</td>
+            <td>{{$deposit_total?$deposit_total:0}}</td>
             <td>-</td>
-            <td>{{$invoice_total}}</td>
+            <td>{{$invoice_total?$deposit_total:0}}</td>
         </tr>
     </table>
     <h5 class="my-2">Payment History</h5>

@@ -47,6 +47,8 @@ class ClientModuleController extends Controller
 
         /*====== Total ===========*/
         $payment_total = DB::table('payments')->where('client_id',encryptor('decrypt',$id))->sum('amount');
+        if(!$payment_total)
+        $payment_total = 0;
         $allocated_total = DB::table('reserved_vehicles')->where('user_id',encryptor('decrypt',$id))->sum('allocated');
         $deposit_total = DB::table('deposits')->where('client_id',encryptor('decrypt',$id))->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum');
         $invoice_total = DB::table('invoices')->where('client_id',encryptor('decrypt',$id))->where('invoice_type',4)->sum('inv_amount')-DB::table('payments')->where('client_id',encryptor('decrypt',$id))->sum('amount');
