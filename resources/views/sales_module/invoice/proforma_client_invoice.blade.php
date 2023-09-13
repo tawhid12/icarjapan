@@ -57,7 +57,7 @@
                             <th>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</th>
                         </tr>
                         
-                        @if($shipment->consignee_id != null)
+                        @if($shipment)
                         @php $consignee = \DB::table('consignee_details')->where('id',$shipment->consignee_id)->first(); @endphp
                         <tr>
                             <th>CONSIGNEE NAME :</th>
