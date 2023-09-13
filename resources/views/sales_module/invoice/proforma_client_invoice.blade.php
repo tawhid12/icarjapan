@@ -57,6 +57,7 @@
                             <th>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</th>
                         </tr>
                         @php $consignee = \DB::table('consignee_details')->where('id',$shipment->consignee_id)->first(); @endphp
+                        @if($consignee)
                         <tr>
                             <th>CONSIGNEE NAME :</th>
                             <th>{{$consignee->c_name}}</th>
@@ -77,11 +78,20 @@
                                 @endif
                             </th>
                         </tr>
+                        @endif
                         <tr>
                             <th>Country:</th>
-                            <th>{{DB::table('countries')->where('id',$client_data->country_id)->first()->name}}</th>
+                            <th>
+                                @if(DB::table('countries')->where('id',$client_data->country_id)->first())
+                                {{DB::table('countries')->where('id',$client_data->country_id)->first()->name}}
+                                @endif
+                            </th>
                             <th>Agent Name:</th>
-                            <th>{{DB::table('users')->where('id',$client_data->executiveId)->first()->name}}</th>
+                            <th>
+                                @if(DB::table('users')->where('id',$client_data->executiveId)->first())
+                                {{DB::table('users')->where('id',$client_data->executiveId)->first()->name}}
+                                @endif
+                            </th>
                         </tr>
                         <tr style="background-color: #C00000;text-align:center;">
                             <th style="font-size:14px;color:#fff;" rowspan="2">IMPORTANT NOTICE</th>
