@@ -90,8 +90,7 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        $inv = Invoice::where('reserve_id',encryptor('decrypt', $id));
-        print_r($inv);die;
+        $inv = Invoice::where('reserve_id',encryptor('decrypt', $id))->first();
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
         $client_details = UserDetail::where('user_id', $inv->client_id)->first();
