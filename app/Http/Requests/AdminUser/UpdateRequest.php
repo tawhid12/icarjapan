@@ -24,16 +24,22 @@ class UpdateRequest extends FormRequest
      */
     public function rules(Request $r)
     {
-        $id=encryptor('decrypt',$r->uptoken);
-        return [
-            'userName'=>'required',
-            'role_id'=>'required',
-            'userEmail'=>'nullable|unique:users,email,'.$id,
-            'contactNumber'=>'required|unique:users,contact_no,'.$id
+        $id = encryptor('decrypt', $r->uptoken);
+        $rules = [
+            'userEmail' => 'nullable|unique:users,email,' . $id,
+            'contactNumber' => 'nullable|unique:users,contact_no,' . $id
         ];
+        // Check if the current user is 'superadmin' and conditionally add validation rules.
+        if (currentUser() == 'superadmin') {
+            $rules['userName'] = 'required';
+            $rules['role_id'] = 'required';
+        }
+
+        return $rules;
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'required' => "The :attribute filed is required",
             'unique' => "The :attribute already used. Please try another",

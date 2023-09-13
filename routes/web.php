@@ -209,6 +209,9 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::get('search',[salesmodule::class,'search'])->name('salesexecutive.search');
         Route::get('sales-module',[salesmodule::class,'sales_module'])->name('salesexecutive.sales_module');
 
+        /* == Free Client Assign by Salesexecutive ==*/
+        Route::post('/client/assign/save', [userprofile::class, 'clAssign'])->name('salesexecutive.clAssign');
+
         /*Shipment Details */
         Route::resource('shipment',shipment::class,['as'=>'salesexecutive']);
 
@@ -217,6 +220,8 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         /* settings */
         Route::resource('consigdetl', consigdetl::class,['as'=>'salesexecutive']);
         Route::resource('admin',admin::class,['as'=>'salesexecutive']);
+        Route::patch('cm_category/{id}',[admin::class,'cm_category'])->name('salesexecutive.cm_category');
+        Route::patch('cm_type/{id}',[admin::class,'cm_type'])->name('salesexecutive.cm_type');
         Route::resource('userdetl', userdetl::class,['as'=>'salesexecutive']);
         Route::resource('reservevehicle', reservevehicle::class,['as'=>'salesexecutive']);
         Route::resource('invoice', invoice::class,['as'=>'salesexecutive']);

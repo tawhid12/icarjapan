@@ -270,6 +270,7 @@
                             @if(currentUser() != 'accountant' && $proforma_payment_count == 0)
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             @endif
+                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             @if(currentUser() == 'accountant')
                                 @if($proforma_invoice->id && $proforma_payment_count == 0)
                                 <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.payment.show',$proforma_invoice->id)}}">Paid</a>

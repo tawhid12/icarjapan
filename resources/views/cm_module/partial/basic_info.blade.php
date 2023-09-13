@@ -1,4 +1,10 @@
+
 <div class="table-responsive my-3">
+@if(currentUser() == 'salesexecutive')
+                    <form class="d-flex" action="{{route(currentUser().'.cm_category',encryptor('encrypt',$client_data->id))}}" method="post">
+                        @csrf
+                        @method('patch')
+                    @endif
     <table class="table table-bordered mb-0">
         <thead>
             <tr>
@@ -11,13 +17,16 @@
                 <td>0</td>
                 <th scope="col">{{__('Catagory')}}</th>
                 <td>
-                    <select class="form-control" name="cmType">
-                        <option value="">Select</option>
-                        <option value="1">Dealer</option>
-                        <option value="2">Individual</option>
-                        <option value="3">Broker</option>
-                    </select>
+
+                        <select class="form-control" name="cm_category">
+                            <option value="">Select</option>
+                            <option value="1" @if($client_data->cm_category == 1) selected @endif>Dealer</option>
+                            <option value="2" @if($client_data->cm_category == 2) selected @endif>Individual</option>
+                            <option value="3" @if($client_data->cm_category == 3) selected @endif>Broker</option>
+                        </select>
+                  
                 </td>
+
             </tr>
             <tr>
                 <th scope="col">{{__('Customer Name')}}</th>
@@ -94,6 +103,16 @@
                 <td>Md Tawhidul Alam</td>
                 <td>Update Date</td>
             </tr>
+            @if(currentUser() == 'salesexecutive')
+            <tr>
+                <td colspan="8"><button type="submit" class="ms-2 btn btn-primary my-2">Update</button></td>
+            </tr>
+            @endif
         </thead>
     </table>
-</div>
+    </form>
+
+
+                        
+                  
+                    </div>

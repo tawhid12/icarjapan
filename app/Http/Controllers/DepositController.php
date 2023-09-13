@@ -43,8 +43,8 @@ class DepositController extends Controller
             $deposit->deposit_amt  = $request->deposit_amt;
             $deposit->deposit_type  = $request->deposit_type;
             $deposit->deposit_date = date('Y-m-d', strtotime($request->deposit_date));
-            $deposit->deposit_by = $request->deposit_by;
-            $deposit->created_by = currentUser();
+            $deposit->deposit_by = currentUserId();
+            $deposit->created_by = currentUserId();
             if ($deposit->save())
                 return redirect()->back()->with(Toastr::success('Amount Deposit!', 'Success', ["positionClass" => "toast-top-right"]));
         } catch (Exception $e) {

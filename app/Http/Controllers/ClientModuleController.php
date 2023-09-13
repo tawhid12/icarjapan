@@ -23,7 +23,7 @@ class ClientModuleController extends Controller
     public function all_client_list(){
         if(currentUser() == 'salesexecutive'){
             $countries = Country::all();
-            $users=User::where('created_by',currentUserId())->paginate(50);
+            $users=User::where('executiveId',currentUserId())->orWhere('executiveId',0)->where('role_id',4)->paginate(50);
             return view('cm_module.cm_module',compact('users','countries'));
         }elseif(currentUser() == 'accountant'){
             $countries = Country::all();
@@ -37,7 +37,8 @@ class ClientModuleController extends Controller
     public function client_individual($id){
         $client_data = User::where('id',encryptor('decrypt',$id))->first();
         $client_details = UserDetail::where('user_id',encryptor('decrypt',$id))->first();
-        $sales_rank = ReservedVehicle::where('id',encryptor('decrypt',$id))->count();
+        $sales_rank = ReservedVehicle::where('user_id',encryptor('decrypt',$id))->where('status','2')->count();
+        $user_status = ReservedVehicle::where('user_id',encryptor('decrypt',$id))->count();
         $con_detl = ConsigneeDetail::where('user_id',encryptor('decrypt',$id))->get();
 
         $invoices = Invoice::where('client_id',encryptor('decrypt',$id))->get();

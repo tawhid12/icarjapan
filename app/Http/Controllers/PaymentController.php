@@ -69,7 +69,7 @@ class PaymentController extends Controller
 
             /*echo '<pre>';
             print_r($inv->toArray());die;*/
-            if ($request->amount + $paid_amt > $fob_amt) {
+            if ($request->amount + $paid_amt + $request->deduction > $fob_amt) {
                 return redirect()->back()->withInput()->with(Toastr::error('Paid Amount Greater Than Due Amount!', 'Fail', ["positionClass" => "toast-top-right"]));
             } else {
                 $payment = new Payment();
@@ -86,7 +86,7 @@ class PaymentController extends Controller
                     $payment->reserve_id = $request->reserve_id;
                     $payment->amount = $request->amount;
                     /*=== user balance will be duduct ===*/
-                    $deposit_update = DB::table('deposits')->where('client_id', $request->client_id)->update(['deduction' => -$request->deduction, 'merged_by' => currentUserId(), 'merge_date' => date('Y-m-d', strtotime($request->receive_date)), 'payment_id' => $request->payment_id, 'updated_by' => currentUser()]);
+                    $deposit_update = DB::table('deposits')->where('client_id', $request->client_id)->update(['deduction' => -$request->deduction, 'merged_by' => currentUserId(), 'merge_date' => date('Y-m-d', strtotime($request->receive_date)), 'payment_id' => $request->payment_id, 'updated_by' => currentUserId()]);
                     /*== deposit+$request->amount+$paid_amt == fob_amt (vechicle sold out) and data insert to purchased table==*/
                     if ($deposit_update) {
                         $deposit_merge = new Payment();
@@ -99,6 +99,17 @@ class PaymentController extends Controller
                         $deposit_merge->amount = $request->deduction;
                         $deposit_merge->save();
                     }
+                    if ($fob_amt == $request->amount + $request->deduction) {
+                        /* Insert Data Into Purchase Table */
+                        $pur_vehicle = new PurchasedVehicle();
+                        $pur_vehicle->vehicle_id = $inv->vehicle_id;
+                        $pur_vehicle->reserve_id = $inv->reserve_id;
+                        $pur_vehicle->invoice_id = $inv->id;
+                        $pur_vehicle->executive_id = $request->executive_id;
+                        $pur_vehicle->customer_id = $inv->client_id;
+                        $pur_vehicle->sale_date = date('Y-m-d', strtotime($request->receive_date));
+                        $pur_vehicle->save();
+                    }
                 } elseif ($fob_amt == $request->amount + $paid_amt) {
                     /*===Vehicle Will Be Sold Out ===*/
                     if ($request->amount) {
@@ -109,14 +120,14 @@ class PaymentController extends Controller
 
 
                         /* Insert Data Into Purchase Table */
-                        /*$pur_vehicle = new PurchasedVehicle();
-                    $pur_vehicle->vehicle_id = $inv->vehicle_id;
-                    $pur_vehicle->reserve_id = $inv->reserve_id;
-                    $pur_vehicle->invoice_id = $inv->id;
-                    $pur_vehicle->executive_id = $inv->executive_id;
-                    $pur_vehicle->customer_id = $inv->customer_id;
-                    $pur_vehicle->sale_date = date('Y-m-d', strtotime($request->receive_date));
-                    $pur_vehicle->save();*/
+                        $pur_vehicle = new PurchasedVehicle();
+                        $pur_vehicle->vehicle_id = $inv->vehicle_id;
+                        $pur_vehicle->reserve_id = $inv->reserve_id;
+                        $pur_vehicle->invoice_id = $inv->id;
+                        $pur_vehicle->executive_id = $request->executive_id;
+                        $pur_vehicle->customer_id = $inv->client_id;
+                        $pur_vehicle->sale_date = date('Y-m-d', strtotime($request->receive_date));
+                        $pur_vehicle->save();
                     }
                 }
                 $payment->invoice_id = $request->invoice_id;
@@ -149,7 +160,7 @@ class PaymentController extends Controller
                     $user->deposit_bal +=  $request->deposit;
                     $user->save();
                 }
-                return redirect()->route(currentUser().'.client_individual',encryptor('encrypt', $request->client_id))->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+                return redirect()->route(currentUser() . '.client_individual', encryptor('encrypt', $request->client_id))->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }

@@ -211,7 +211,13 @@
                         <div class="d-flex justify-content-between my-2">
                             <h6>Documents</h6>
                             @if(currentUser() != 'accountant')
-                            <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
+                            @php $shipment_data = \DB::table('shipment_details')->where('reserve_id',$v->reserveId)->first(); //print_r($shipment_data);@endphp
+                                @if(!$shipment_data)
+                                <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
+                                @else
+                                <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.edit',encryptor('encrypt',$shipment_data->id))}}">Update Shipment Details</a>
+                                @endif
+                            @else
                             @endif
                         </div>
                         <table class="table table-bordered m-0">

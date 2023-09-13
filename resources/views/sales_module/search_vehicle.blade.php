@@ -46,8 +46,13 @@
                             @else
                             <img src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" alt="" width="210px" height="140px" />
                             @endif
-
                             <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
+                            @if($v->r_status != null)
+                            <p class="m-0 text-danger"><strong>Reserved For | CM ID:-{{\DB::table('reserved_vehicles')->where('vehicle_id',$v->id)->first()->user_id}}</strong></p>
+                            @endif
+                            @if($v->sold_status)
+                            <p class="m-0 text-success"><strong>SOLD</strong></p>
+                            @endif
                         </div>
                         <div class="col-md-10">
                             <div class="col-md-12 d-flex justify-content-between align-items-center">

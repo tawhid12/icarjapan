@@ -10,8 +10,10 @@ use App\Models\Invoice;
 use App\Models\ReservedVehicle;
 use App\Models\Settings\Country;
 use App\Models\Settings\Port;
+
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageHandleTraits;
+use App\Models\ShipmentDetail;
 use Toastr;
 use DB;
 
@@ -66,7 +68,7 @@ class InvoiceController extends Controller
             $invoice->reserve_id =  $request->reserve_id;
             $invoice->vehicle_id = $request->vehicle_id;
             $invoice->client_id     = $request->client_id;
-            $invoice->executiveId = currentUser();
+            $invoice->executiveId = currentUserId();
             $invoice->inv_amount = $request->inv_amount;
             //($request->inv_amount - DB::table('payments')->where('reserve_id', $request->reserve_id)->sum('amount'));
             if ($invoice->save())
@@ -92,7 +94,19 @@ class InvoiceController extends Controller
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
         $client_details = UserDetail::where('user_id', $inv->client_id)->first();
-        return view('sales_module.invoice.proforma_client_invoice', compact('inv', 'com_info', 'client_data', 'client_details'));
+        $account_info = CompanyAccountInfo::first();
+        $shipment = ShipmentDetail::where('client_id', $inv->client_id)->first();
+        $v = DB::table('reserved_vehicles')
+        ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
+        ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+        ->join('body_types', 'body_types.id', '=', 'vehicles.body_type_id')
+        ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
+        ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
+        ->select('vehicles.*','brands.name as bName','body_types.name as btName','fuels.name as fName','transmissions.name as tName')
+        ->where('vehicles.id', $shipment->vehicle_id)->first();
+        //print_r($v);die;
+
+        return view('sales_module.invoice.proforma_client_invoice', compact('v','shipment','account_info', 'inv', 'com_info', 'client_data', 'client_details'));
     }
 
     /**

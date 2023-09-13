@@ -65,12 +65,14 @@ class ReservedVehicleController extends Controller
                 $b->vehicle_id = $request->vehicle_id;
                 if (currentUser() == 'user') {
                     $b->user_id = currentUserId();
-                    $b->assign_user_id = currentUserId();
                     $b->created_by = currentUserId();
                 } else {
                     $b->user_id = $request->user_id;
                     $b->assign_user_id = currentUserId();
                     $b->created_by = currentUserId();
+
+                    /*=== Update Executive Id into  Users Table to assign Executive to user ===*/
+                   $user = User::where('id',$request->user_id)->update(['executiveId' => currentUserId()]);
                 }
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                 if ($request->shipment_type == 1) {
@@ -153,9 +155,10 @@ class ReservedVehicleController extends Controller
     public function update(Request $request, $id)
     {
 
-        $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
+       
         try {
-
+            $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
+           
             if (currentUser() == 'accountant') {
                 DB::connection()->enableQueryLog();
                 $total_paid= DB::table('payments')
@@ -177,7 +180,8 @@ class ReservedVehicleController extends Controller
                 }
             }
             if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin') {
-                $resv->total();
+                //echo '<pre>'; print_r($resv);die;
+               
 
                                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                                 if ($resv->shipment_type == 2) {
@@ -192,12 +196,20 @@ class ReservedVehicleController extends Controller
                                     $resv->discount =  $request->discount;
                                 $resv->fob_amt = $request->fob_amt;
                                 $resv->discount = $request->discount;
-                                $resv->inv_amount = $resv->total;
+
                                 }
                                 
                             
 
                 if ($request->status == 2) {
+                    /* If Reserve By Customer need to update assisgn_user_id of reserve table and executiveId of users table */
+                    if($resv->assign_user_id ==null){
+                        $resv->assign_user_id = currentUserId();
+                        $user = User::find($resv->user_id);
+                        $user->type = 1;
+                        $user->executiveId = currentUserId();
+                        $user->save();
+                    }
                     /*Insert To Proforma Invoice */
                     if (Invoice::where('vehicle_id', $resv->vehicle_id)->where('invoice_type', 1)->doesntExist()) {
                         $invoice = new Invoice();
@@ -209,13 +221,24 @@ class ReservedVehicleController extends Controller
                         //$invoice->fob_amt = $resv->settle_price;
                         $invoice->executiveId = $resv->assign_user_id;
                         
-                        $invoice->inv_amount = $resv->total;
+                        $invoice->inv_amount = $resv->total?$resv->total:0.00;
                         $invoice->save();
                         
                     }
+                       
+                       
+                  
                     $resv->status = 2;
-                    /* Send Proforma Invoice To User with mail */
+                    
+                    
+                   
                 }
+                $resv->total();
+                $invoice = Invoice::where('reserve_id',$resv->id)->where('invoice_type',1)->first();
+                $invoice->inv_amount =  $resv->total?$resv->total:0.00;
+
+                $invoice->save();
+                 /* Send Proforma Invoice To User with mail */
             }
            
             $resv->updated_by = currentUserId();

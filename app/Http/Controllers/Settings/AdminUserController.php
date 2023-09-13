@@ -77,7 +77,7 @@ class AdminUserController extends Controller
             if ($request->has('image')) $user->image = $this->uploadImage($request->file('image'), 'uploads/admin');
 
             if ($user->save()) {
-                UserDetail::insert(['user_id' => $user->id,'created_at' => Carbon::now()]);
+                UserDetail::insert(['user_id' => $user->id, 'created_at' => Carbon::now()]);
                 return redirect()->route(currentUser() . '.admin.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             } else
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -122,6 +122,7 @@ class AdminUserController extends Controller
     {
         try {
             $user = User::findOrFail(encryptor('decrypt', $id));
+
             $user->name = $request->userName;
             $user->contact_no = $request->contactNumber;
             $user->role_id = $request->role_id;
@@ -160,6 +161,34 @@ class AdminUserController extends Controller
             $user = User::findOrFail(encryptor('decrypt', $id));
             if ($user->delete())
                 return redirect()->back()->with(Toastr::success('Successfully deleted!', 'Success', ["positionClass" => "toast-top-right"]));
+            else
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+    }
+    public function cm_category(Request $request, $id)
+    {
+        try {
+            $user = User::findOrFail(encryptor('decrypt', $id));
+            $user->cm_category = $request->cm_category;
+            if ($user->save())
+                return redirect()->back()->with(Toastr::success('Successfully updated!', 'Success', ["positionClass" => "toast-top-right"]));
+            else
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+    }
+    public function cm_type(Request $request, $id)
+    {
+        try {
+            $user = User::findOrFail(encryptor('decrypt', $id));
+            $user->cmType = $request->cm_type;
+            if ($user->save())
+                return redirect()->back()->with(Toastr::success('Successfully updated!', 'Success', ["positionClass" => "toast-top-right"]));
             else
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         } catch (Exception $e) {

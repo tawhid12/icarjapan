@@ -19,138 +19,171 @@
                 <div class="col-md-12 text-center">
                     <h5>Client List</h5>
                 </div>
-                <form action="" method="" role="search">
-                    @csrf
-                    <div class="row my-2">
-                        <div class="col-sm-2">
-                            <label for="name" class="col-form-label"><strong>CM ID</strong></label>
-                            <input type="text" class="form-control" name="userId" placeholder="Search By CM ID">
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="batch_id" class="col-form-label"><strong>Select Country</strong></label>
-                            <select name="batch_id" class="js-example-basic-single form-control">
-                                <option value="">Select</option>
-                                @forelse($countries as $c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
-                                @empty
-                                @endforelse
-                            </select>
-                        </div>
-                        <div class="col-sm-1">
-                            <label for="sort_by" class="col-form-label"><strong>Sort By</strong></label>
-                            <select class="js-example-basic-single form-control" id="sort_by" name="sort_by">
-                                <option value="">Select</option>
-                                <option value="1">ASC</option>
-                                <option value="2">DESC</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="executiveId" class="col-form-label"><strong>Assigned Sales Executive</strong></label>
-                            <select class="js-example-basic-single form-control" id="executiveId" name="executiveId">
-                                <option value="">Select</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-1">
-                            <label for="status" class="col-form-label"><strong>CM Status</strong></label>
-                            <select class="js-example-basic-single form-control" id="status" name="status">
-                                <option value="">Select</option>
-                                <option value="1">Active</option>
-                                <option value="2">Semi Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="name" class="col-form-label"><strong>CM ID Date</strong></label>
-                            <div class="input-group">
-                                <input type="text" name="created_at" class="form-control" placeholder="dd/mm/yyyy">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                                </div>
-                                <input type="text" name="created_at" class="form-control" placeholder="dd/mm/yyyy">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                                </div>
+
+                <div class="row my-2">
+                    <div class="col-sm-2">
+                        <label for="name" class="col-form-label"><strong>CM ID</strong></label>
+                        <input type="text" class="form-control" name="userId" placeholder="Search By CM ID">
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="batch_id" class="col-form-label"><strong>Select Country</strong></label>
+                        <select name="batch_id" class="js-example-basic-single form-control">
+                            <option value="">Select</option>
+                            @forelse($countries as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="sort_by" class="col-form-label"><strong>Sort By</strong></label>
+                        <select class="js-example-basic-single form-control" id="sort_by" name="sort_by">
+                            <option value="">Select</option>
+                            <option value="1">ASC</option>
+                            <option value="2">DESC</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="executiveId" class="col-form-label"><strong>Assigned Sales Executive</strong></label>
+                        <select class="js-example-basic-single form-control" id="executiveId" name="executiveId">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="status" class="col-form-label"><strong>CM Status</strong></label>
+                        <select class="js-example-basic-single form-control" id="status" name="status">
+                            <option value="">Select</option>
+                            <option value="1">Active</option>
+                            <option value="2">Semi Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="name" class="col-form-label"><strong>CM ID Date</strong></label>
+                        <div class="input-group">
+                            <input type="text" name="created_at" class="form-control" placeholder="dd/mm/yyyy">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                            </div>
+                            <input type="text" name="created_at" class="form-control" placeholder="dd/mm/yyyy">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="bi bi-calendar"></i></span>
                             </div>
                         </div>
-                        <div class="col-sm-12 d-flex justify-content-end my-1">
-                            <button type="submit" class="btn btn-primary btn-sm me-1"><i class="bi bi-search"></i></button>
-                            <a href="" class="reset-btn btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i></a>
-                        </div>
                     </div>
+                    <div class="col-sm-12 d-flex justify-content-end my-1">
+                        <button type="submit" class="btn btn-primary btn-sm me-1"><i class="bi bi-search"></i></button>
+                        <a href="" class="reset-btn btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i></a>
+                    </div>
+                </div>
 
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table text-center table-bordered mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">{{__('#SL')}}</th>
-                                    <th scope="col">{{__('Stars')}}</th>
-                                    <th scope="col">{{__('CM ID')}}</th>
-                                    <th scope="col">{{__('CM Name')}}</th>
-                                    <th scope="col">{{__('CM Country')}}</th>
-                                    <th scope="col">{{__('Tlt Ship Ok')}}</th>
-                                    <th scope="col">{{__('Tlt Release Ok')}}</th>
-                                    <th scope="col">{{__('CM Status')}}</th>
-                                    <th scope="col">{{__('Previsous Assigned Sales')}}</th>
-                                    <th class="white-space-nowrap">{{__('Action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($users as $cm)
-                                <tr>
-                                    <th scope="row">{{ ++$loop->index }}</th>
-                                    <td>{{$cm->cmType}}</td>
-                                    <td>{{$cm->id}}</td>
-                                    <td>{{$cm->name}}</td>
-                                    <td>{{$cm->country_id}}</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>@if($cm->status ==1) <button class="btn btn-sm btn-primary">Active</button> @elseif($cm->status ==2) <button class="btn btn-sm btn-warning">In active</button> @else <button class="btn btn-sm btn-danger">Inactive</button> @endif</td>
-                                    <td>
-                                        @php $prev_assign = \DB::table('client_transfers')->where('user_id',$cm->id)->latest('id')->first(); @endphp
-                                        @if($prev_assign)
-                                        {{ \DB::table('users')->where('id',$prev_assign->curexId)->first()->name }}
-                                        @else
-                                        Free
+                <!-- table bordered -->
+                <div class="table-responsive">
+                    <table class="table text-center table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{__('#SL')}}</th>
+                                <!-- <th scope="col">{{__('Stars')}}</th> -->
+                                <th scope="col">{{__('CM ID')}}</th>
+                                <th scope="col">{{__('CM Name')}}</th>
+                                <th scope="col">{{__('CM Type')}}</th>
+                                <th scope="col">{{__('CM Country')}}</th>
+                                <th scope="col">{{__('Tlt Ship Ok')}}</th>
+                                <th scope="col">{{__('Tlt Release Ok')}}</th>
+                                <th scope="col">{{__('CM Type')}}</th>
+                                <th scope="col">{{__('CM Status')}}</th>
+                                <th scope="col">{{__('Previsous Assigned Sales')}}</th>
+                                <th class="white-space-nowrap">{{__('Action') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($users as $cm)
+                            <tr>
+                                <th scope="row">{{ ++$loop->index }}</th>
+                                <!-- <td>{{$cm->cmType}}</td> -->
+                                <td>{{$cm->id}}</td>
+                                <td>{{$cm->name}}</td>
+                                <td>
+                                    @if(currentUser() == 'salesexecutive')
+                                    <form class="d-flex" action="{{route(currentUser().'.cm_type',encryptor('encrypt',$cm->id))}}" method="post">
+                                        @csrf
+                                        @method('patch')
                                         @endif
-                                    </td>
-                                    <td class="white-space-nowrap">
-                                        <a target="blank" class="btn btn-sm btn-success"href="{{route(currentUser().'.client_individual',encryptor('encrypt',$cm->id))}}">
-                                           CM Individual
-                                        </a>
-                                        @if(currentUser() != 'accountant')
-                                        <!-- <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$cm->id))}}">
+                                        <select class="form-control" name="cm_type">
+                                            <option value="">Select</option>
+                                            <option value="1" @if($cm->cmType == 1) selected @endif>SP(*)</option>
+                                            <option value="2" @if($cm->cmType == 2) selected @endif>Extra Special(**)</option>
+                                        </select>
+                                        @if(currentUser() == 'salesexecutive')
+                                        <button type="submit" class="ms-2 btn btn-primary">Submit</button>
+                                        @endif
+                                    </form>
+                                </td>
+                                <td>{{DB::table('countries')->where('id',$cm->country_id)->first()->name}}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <!-- 1 => Active Running Reserve 2 => Before active Order But Now no reserve 0 => for inactive no reserve -->
+                                    @if($cm->type ==1)
+                                    <button class="btn btn-sm btn-primary">Active</button>
+                                    @elseif($cm->type ==2)
+                                    <button class="btn btn-sm btn-warning">Semi Active</button>
+                                    @else
+                                    <button class="btn btn-sm btn-danger">Inactive</button>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($cm->status ==1)
+                                    <button class="btn btn-sm btn-primary">Active</button>
+                                    @else
+                                    <button class="btn btn-sm btn-warning">Inactive</button>
+                                    @endif
+                                </td>
+                                <td>
+                                    @php $prev_assign = \DB::table('client_transfers')->where('user_id',$cm->id)->latest('id')->first(); @endphp
+                                    @if($prev_assign)
+                                    {{ \DB::table('users')->where('id',$prev_assign->curexId)->first()->name }}
+                                    @else
+                                    Free
+                                    @endif
+                                </td>
+                                <td class="white-space-nowrap">
+                                    <a target="blank" class="btn btn-sm btn-success" href="{{route(currentUser().'.client_individual',encryptor('encrypt',$cm->id))}}">
+                                        CM Individual
+                                    </a>
+                                    @if(currentUser() != 'accountant')
+                                    <!-- <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$cm->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a> -->
-                                        @endif
-                                        @if(currentUser() == 'superadmin')
-                                        <a href="javascript:void()" onclick="$('#form{{$cm->id}}').submit()">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                        <form id="form{{$cm->id}}" action="{{route(currentUser().'.admin.destroy',encryptor('encrypt',$cm->id))}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                        @endif
-                                        @if(currentUser() == 'accountant')
-                                        <a target="blank" class="btn btn-sm btn-primary"href="{{route(currentUser().'.deposit.show',encryptor('encrypt',$cm->id))}}">
-                                          Deposit
-                                        </a>
-                                        @endif
-                                    </td>
+                                    @endif
+                                    @if(currentUser() == 'superadmin')
+                                    <a href="javascript:void()" onclick="$('#form{{$cm->id}}').submit()">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                    <form id="form{{$cm->id}}" action="{{route(currentUser().'.admin.destroy',encryptor('encrypt',$cm->id))}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                    @endif
+                                    @if(currentUser() == 'accountant')
+                                    <a target="blank" class="btn btn-sm btn-primary" href="{{route(currentUser().'.deposit.show',encryptor('encrypt',$cm->id))}}">
+                                        Deposit
+                                    </a>
+                                    @endif
+                                </td>
 
-                                </tr>
-                                @empty
-                                <tr>
-                                    <th colspan="8" class="text-center">No Data Found</th>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                        <div class="pt-2">
-                            {{$users->links()}}
-                        </div>
+                            </tr>
+                            @empty
+                            <tr>
+                                <th colspan="8" class="text-center">No Data Found</th>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="pt-2">
+                        {{$users->links()}}
                     </div>
+                </div>
             </div>
         </div>
     </div>

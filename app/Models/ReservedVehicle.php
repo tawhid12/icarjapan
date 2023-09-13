@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Vehicle\Vehicle;
@@ -20,9 +20,14 @@ class ReservedVehicle extends Model
     protected $fillable = ['total']; // Make sure 'total' is fillable
     public function total()
     {
+
         $sum = $this->fob_amt + ($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt;
-        $sum -=  $this->fob_amt*($this->discount/100);
+        if($this->discount > 0){
+            $sum -=  $this->fob_amt*($this->discount/100);
+        }
         $this->total = $sum;
+        // Check if $sum is calculated correctly
+        Log::info("Debugging: total = {$this->total}");
         $this->save();
     }
 }

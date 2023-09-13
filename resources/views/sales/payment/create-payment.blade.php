@@ -26,14 +26,16 @@
                                       <p class="m-0"><strong>Due Amount : {{$invoice->inv_amount-\DB::table('payments')->where('reserve_id',$invoice->reserve_id)->sum('amount')}}</strong></p>
                                   </div>
                                   <div class="col-md-2 col-12">
-                                      <p class="m-0"><strong>Deposit Available : {{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum');}}</strong></p>
+                                      <p class="m-0"><strong>Deposit Available : {{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}</strong></p>
                                   </div>
-                                  
+
                                   <hr>
                                   <input type="hidden" value="{{$invoice->client_id}}" name="client_id">
+                                  <input type="hidden" value="{{$invoice->executiveId}}" name="executive_id">
                                   <input type="hidden" value="{{$invoice->id}}" name="invoice_id">
                                   <input type="hidden" value="{{$invoice->reserve_id}}" name="reserve_id">
-                                  <input type="hidden" value="{{\DB::table('deposits')->where('client_id',$invoice->client_id)->sum('deposit_amt')}}" name="deduction">
+                                  <input type="hidden" value="{{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}" name="deduction" class="dep">
+                                  <input type="hidden" value="{{$invoice->inv_amount-\DB::table('payments')->where('reserve_id',$invoice->reserve_id)->sum('amount')}}" class="due">
                                   <input type="hidden" value="{{$id}}" name="payment_id">
                                   <div class="col-md-3 col-12">
                                       <div class="form-group">
@@ -74,9 +76,9 @@
                                   </div> -->
                               </div>
                               <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="adjust_deposit" name="adjust_deposit" value="1">
-                                    <label class="form-check-label" for="adjust_deposit">Adjust Deposit</label>
-                                </div>
+                                  <input class="form-check-input  adjust_deposit" type="checkbox" id="adjust_deposit" name="adjust_deposit" value="1">
+                                  <label class="form-check-label" for="adjust_deposit">Adjust Deposit</label>
+                              </div>
                               <div class="row my-3">
                                   <div class="col-12 d-flex justify-content-end">
                                       <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
@@ -103,6 +105,17 @@
       }).on('changeDate', function(e) {
           var date = moment(e.date).format('YYYY/MM/DD');
           $(this).val(date);
+      });
+      $('.adjust_deposit').on('click', function() {
+          if ($(this).is(':checked')) {
+              var actual_due = parseInt($('.due').val()) - parseInt($('.dep').val());
+              //alert(actual_due);
+              $('#amount').prop('readonly', true);
+              $('#amount').val(actual_due);
+          } else {
+            $('#amount').val('');
+          }
+
       });
   </script>
   @endpush
