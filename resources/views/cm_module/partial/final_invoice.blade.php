@@ -279,7 +279,7 @@
                         </table>
                         <div class="d-flex justify-content-between my-2">
                             @if(currentUser() != 'accountant')
-                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
+                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Final Invoice To Customer</a>
                             @endif
                             @if(currentUser() == 'accountant')
                                 @php 
