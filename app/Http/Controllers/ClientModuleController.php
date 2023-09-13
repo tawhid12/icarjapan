@@ -45,14 +45,6 @@ class ClientModuleController extends Controller
         $payments = Payment::where('client_id',encryptor('decrypt',$id))->get();
         $deposits = Deposit::where('client_id',encryptor('decrypt',$id))->get();
 
-        /*====== Total ===========*/
-        $payment_total = DB::table('payments')->where('client_id',encryptor('decrypt',$id))->sum('amount');
-        if(!$payment_total)
-        $payment_total = 0;
-        $allocated_total = DB::table('reserved_vehicles')->where('user_id',encryptor('decrypt',$id))->sum('allocated');
-        $deposit_total = DB::table('deposits')->where('client_id',encryptor('decrypt',$id))->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum');
-        $invoice_total = DB::table('invoices')->where('client_id',encryptor('decrypt',$id))->where('invoice_type',4)->sum('inv_amount')-DB::table('payments')->where('client_id',encryptor('decrypt',$id))->sum('amount');
-
         //print_r($con_detl);die;
         $countries = Country::all();
         $ports = Port::all();
@@ -76,6 +68,6 @@ class ClientModuleController extends Controller
         ->paginate(25);
         /*echo '<pre>';
         print_r($resrv->toArray());die;*/
-        return view('cm_module.cm_module_individual',compact('payment_total','allocated_total','deposit_total','invoice_total','client_data','sales_rank','countries','ports','client_details','reserve_vehicle','resrv','con_detl','invoices','payments','deposits'));
+        return view('cm_module.cm_module_individual',compact('client_data','sales_rank','countries','ports','client_details','reserve_vehicle','resrv','con_detl','invoices','payments','deposits'));
     }
 }

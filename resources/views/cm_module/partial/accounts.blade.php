@@ -11,11 +11,15 @@
         </tr>
         <tr>
             <td>USD</td>
-            <td>@if(!empty($payment_total)) {{$payment_total}} @else - @endif}}</td>
-            <td>@if(!empty($allocated_total)) {{$allocated_total}} @else - @endif</td>
-            <td>@if(!empty($deposit_total)) {{$deposit_total}} @else - @endif</td>
+            <td>
+                @if(\DB::table('payments')->where('client_id',$client_data->id)->sum('amount'))
+                {{\DB::table('payments')->where('client_id',$client_data->id)->sum('amount')}}
+                @endif
+            </td>
+            <td>{{DB::table('reserved_vehicles')->where('user_id',$client_data->id)->sum('allocated')}}</td>
+            <td>{{\DB::table('deposits')->where('client_id',$client_data->id)->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}</td>
             <td>-</td>
-            <td>@if(!empty($invoice_total)) {{$invoice_total}} @else - @endif</td>
+            <td>{{\DB::table('invoices')->where('client_id',$client_data->id)->where('invoice_type',4)->sum('inv_amount')-\DB::table('payments')->where('client_id',$client_data->id)->sum('amount')}}</td>
         </tr>
     </table>
     <h5 class="my-2">Payment History</h5>
@@ -36,12 +40,12 @@
             <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->invoice_date))->format('d/m/Y')}}</td>
             <td>USD</td>
             <td>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount:0}}</td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount:0}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->amount}}</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()?\DB::table('payments')->where('invoice_id',$inv->id)->first()->id:-}}</td>
+            <td>{{\DB::table('payments')->where('invoice_id',$inv->id)->first()->id}}</td>
             
         </tr>
         @empty
