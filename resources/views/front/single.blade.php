@@ -801,7 +801,7 @@
 
 
                       <div id="imgdisp_select{{$key}}" class="now_imgDisplay">
-                        <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',[$v_img->image,75,75])}}" alt="" />-->
+                        <!--<img class="lazy" src="{{url('public/uploads/default/comingsoon_l.png')}}" data-original="{{route('resizeImage',['vehicle_images',$v_img->image,75,75])}}" alt="" />-->
                         <img src="{{route('resizeImage',['vehicle_images',$v_img->image,75,75])}}" alt="" />
                       </div>
                       @else
