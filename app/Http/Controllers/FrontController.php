@@ -410,7 +410,7 @@ class FrontController extends Controller
 
 
 
-    public function resizeImage($filename, $foldername, $width, $height)
+    public function resizeImage($foldername, $filename, $width, $height)
     {
         $img = Image::make(public_path('uploads/'.$foldername.'/' . $filename));
         $img->resize($width, $height, function ($constraint) {
