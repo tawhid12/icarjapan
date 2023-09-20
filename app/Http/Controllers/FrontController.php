@@ -410,9 +410,9 @@ class FrontController extends Controller
 
 
 
-    public function resizeImage($filename, $width, $height)
+    public function resizeImage($filename, $foldername, $width, $height)
     {
-        $img = Image::make(public_path('uploads/vehicle_images/' . $filename));
+        $img = Image::make(public_path('uploads/'.$foldername.'/' . $filename));
         $img->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });

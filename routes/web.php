@@ -102,7 +102,7 @@ Route::post('/vehicle/search/data/',[front::class,'searchpostStData'])->name('se
 /* Country Wise Vehicle */
 Route::get('/icar-{country}', [front::class,'countrywiseVehicle'])->name('countrywiseVehicle');
 
-Route::get('/resize-image/{filename}/{width}/{height}', [front::class,'resizeImage'])->name('resizeImage');
+Route::get('/resize-image/{foldername}/{filename}/{width}/{height}', [front::class,'resizeImage'])->name('resizeImage');
 
 Route::resource('inquiry', inquiry::class)->only(['store']);
 Route::resource('contactus', contactus::class)->only(['store']);
