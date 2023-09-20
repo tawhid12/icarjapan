@@ -426,7 +426,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <div class="right-row-serarch card shadow rounded">
               <h5 class="right-row-1-title">Search By Category</h5>
               <div class="p-2">
-                <select name="brand" class="form-select form-select-sm mb-3" id="brand_id">
+                <select name="brand" class="form-select form-select-sm mb-3" id="brand_id" required>
                   <option value="" selected>Brands</option>
                   @forelse($brands as $b)
                   <option value="{{$b->id}}">{{$b->name}}</option>
