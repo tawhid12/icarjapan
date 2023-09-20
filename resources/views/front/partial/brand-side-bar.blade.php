@@ -9,7 +9,7 @@
                 <a href="{{route('brand',strtolower($b->slug_name))}}" style="text-decoration:none;color:#000;">
                 @if(!empty($b->image))
 
-                <img src="{{route('resizeImage',['brands',$v_img->image,18,26])}}" alt="" />
+                <img src="{{route('resizeImage',['brands',$b->image,18,26])}}" alt="" />
                 @endif
                  {{$b->name}} ({{$b->vehicles_count}})</a>
             </p>
