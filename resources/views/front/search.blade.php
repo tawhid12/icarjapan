@@ -220,7 +220,7 @@
         <div class="search-body-upper shadow p-3">
           <div class="row gx-1">
             <div class="col-sm-3 mb-3">
-              <select name="brand" class="form-select-md" id="brand_id">
+              <select name="brand" class="form-select form-select-md" id="brand_id">
                 <option value="">Make:</option>
                 @forelse($brands as $b)
                 <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
@@ -229,7 +229,7 @@
               </select>
             </div>
             <div class="col-sm-3 mb-3">
-              <select name="sub_brand" class="form-select-md" id="sub_brand">
+              <select name="sub_brand" class="form-select form-select-md" id="sub_brand">
                 <option value="" selected>Model</option>
                 {{--@forelse($sub_brands as $sb)
                 <option value="{{$sb->id}}" @if(!empty($sub_brand_id)) @if($sb->id == $sub_brand_id->id) selected @endif @endif>{{$sb->name}}</option>
@@ -247,14 +247,14 @@
               </select>
             </div>-->
             <div class="col-sm-3 mb-3">
-              <select name="steering" class="form-select-md">
+              <select name="steering" class="form-select form-select-md">
                 <option value="">Steering:</option>
                 <option value="1" @if(request()->get('steering') == 1) selected @endif>Right Hand Drive</option>
                 <option value="2" @if(request()->get('steering') == 1) selected @endif>Left Hand Drive</option>
               </select>
             </div>
             <div class="col-sm-3 mb-3">
-              <select name="body_type" class="form-select-md" aria-label=".form-select-sm example">
+              <select name="body_type" class="form-select form-select-md" aria-label=".form-select-sm example">
                 <option value="">Body Type:</option>
                 @forelse($body_types as $bt)
                 <option value="{{$bt->id}}" @if(request()->get('body_type') == $bt->id) selected @endif>{{$bt->name}}</option>
@@ -281,7 +281,7 @@
               </select>
             </div>
             <div class="col-sm-3 mb-3 d-flex">
-              <select name="to_year" class="date-filter form-select-md">
+              <select name="to_year" class="date-filter form-select form-select-md">
                 <option value="">Year:</option>
                 @php
                 for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
@@ -300,7 +300,7 @@
                   @endphp
               </select> -->
               <span>~</span>
-              <select name="from_year" class="date-filtler form-select-md">
+              <select name="from_year" class="date-filtler form-select form-select-md">
                 <option value="">Year:</option>
                 @php
                 for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
@@ -321,7 +321,7 @@
             </div>
             <div class="custom-border-bottom-dark mb-2"></div>
             <div class="col-sm-3 mb-3 d-flex">
-              <select name="from_price"class="form-select-md">
+              <select name="from_price"class="form-select form-select-md">
                 <option value="">Price Range:</option>
                 <option value="501">USD 501</option>
                 @php
