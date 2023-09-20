@@ -97,6 +97,7 @@ class PaymentController extends Controller
                         $deposit_merge->reserve_id = $request->reserve_id;
                         $deposit_merge->type = 2;
                         $deposit_merge->amount = $request->deduction;
+                        $deposit_merge->client_id = $inv->client_id;
                         $deposit_merge->save();
                     }
                     if ($fob_amt == $request->amount + $request->deduction) {
