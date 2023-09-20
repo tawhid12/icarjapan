@@ -806,7 +806,7 @@
                       </div>
                       @else
                       <div id="imgdisp_select{{$key}}">
-                        <img src="{{route('resizeImage',[$v_img->image,75,75])}}" alt="" />
+                        <img src="{{route('resizeImage',['vehicle_images',$v_img->image,75,75])}}" alt="" />
                       </div>
                       @endif
 
