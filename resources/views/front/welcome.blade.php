@@ -58,6 +58,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
   .product-row-title p,.product-row-title a{
     font-size: 14px;
   }
+  .product-row-title a{
+    text-align: right;
+    display: block;
+  }
 }
 </style>
 @endpush
