@@ -345,7 +345,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <!-- product row title -->
             <div class="d-md-flex product-row-title">
               <p><i class="bi bi-binoculars"></i>High Grade for {{$countryName->name}}</p>
-              <div class="ms-auto">
+              <div class="ml-auto">
                 <a href="{{url('/vehicle/advance/search/data')}}?highgrade=desc">See More <i class="bi bi-arrow-right-circle"></i></a>
               </div>
             </div>
