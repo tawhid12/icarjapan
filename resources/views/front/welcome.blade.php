@@ -150,11 +150,11 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
               <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+            <div class="col-6 col-md-6 col-lg-3 mid-sm-banner">
               <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt=""/>
               <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt=""/>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+            <div class="col-6 col-md-6 col-lg-3 mid-sm-banner">
               <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt=""/>
               <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt=""/>
             </div>
