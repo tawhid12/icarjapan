@@ -404,6 +404,11 @@ class FrontController extends Controller
             if ($request->filled('from_year') && $request->filled('to_year')) {
                 $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year, $request->to_year]);
             }
+            /*=== Most Affordable === price desc*/
+            if($request->afford){
+                $vehicles = $vehicles->orderBy('price', 'desc');
+            }
+            
             $vehicles = $vehicles
                 //->whereNull('r_status')
                 ->inRandomOrder()->paginate(10);
