@@ -49,7 +49,7 @@
                       </ul>
                   </div>
               </div>
-              <div class="col-sm-12 col-md-6 col-lg-2 footer-col-2">
+              <div class="col-6 col-md-6 col-lg-2 footer-col-2">
                   <div class="footer-title">
                       <p>Today’s Deals</p>
                   </div>
@@ -79,7 +79,7 @@
                       </ul>
                   </div>--}}
               </div>
-              <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="col-6 col-md-6 col-lg-2">
                   <div class="footer-title">
                       <p>By Prices</p>
                   </div>
@@ -126,7 +126,7 @@
                       </ul>
                   </div>
               </div>
-              <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="col-6 col-md-6 col-lg-2">
                   <div class="footer-title">
                       <p>By Type</p>
                   </div>
@@ -167,7 +167,7 @@
                       </ul>
                   </div>
               </div>
-              <div class="col-sm-12 col-md-6 col-lg-3">
+              <div class="col-6 col-md-6 col-lg-3">
                   <div class="footer-title">
                       <p>Global Office</p>
                   </div>
