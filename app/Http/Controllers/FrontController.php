@@ -383,7 +383,7 @@ class FrontController extends Controller
                 ->get();
 
             return view('front.brand', compact('brand', 'sub_prefix', 'countries'));
-        } elseif ($request->adv_search ) {
+        } elseif ($request->adv_search) {
             echo '<pre>';
             print_r(request()->toArray());
             $brands = Brand::withCount('vehicles')->get();

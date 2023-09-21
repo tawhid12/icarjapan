@@ -218,7 +218,7 @@
         @include('front.search-box')
         <form action="{{route('front_adv_search_by_data')}}">
         @csrf
-        <input type="hidden" name="adv_search">
+        <input type="hidden" name="adv_search" value="search">
         <div class="search-body-upper shadow p-3">
           <div class="row gx-1">
             <div class="col-sm-3 mb-3">
