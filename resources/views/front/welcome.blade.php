@@ -44,6 +44,17 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     font-weight: 700;
     line-height: 2;
 }
+/* ========= Responsive ===========*/
+/*  applies to x-small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .product-card img{
+    width: 100%;
+  }
+  .product-card-body p{
+    font-size: 16px;
+    text-align: center;
+  }
+}
 </style>
 @endpush
 @section('content')
