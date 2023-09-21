@@ -519,7 +519,11 @@
                   <select name="inv_locatin_id" class="form-select form-select-md">
                     <option value="">Inventory Location:</option>
                     @forelse($inv_loc as $inv)
-                    <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>{{$inv->name}}</option>
+                    <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>
+                      @if($inv->id)
+                      {{\DB::table('countries')->where('id',$inv->id)->first()->name}}
+                      @endif
+                    </option>
                     @empty
                     @endforelse
                   </select>
