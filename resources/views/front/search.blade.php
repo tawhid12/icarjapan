@@ -60,7 +60,7 @@
   }
 
   label.form-check-label {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .sbt-stock {
@@ -319,7 +319,7 @@
                   @endphp -->
               </select>
             </div>
-            <div class="custom-border-bottom-dark mb-2"></div>
+      
             <div class="col-sm-3 mb-3 d-flex">
               <select name="from_price"class="form-select form-select-md">
                 <option value="">Price Range:</option>
@@ -533,7 +533,7 @@
                   </select>
                 </div>-->
               </div>
-              <div class="custom-border-bottom-dark mb-1"></div>
+             
               <div class="row gx-1">
                 <div class="col-sm-2 my-1 d-flex">
                   <div class="form-check">
@@ -632,7 +632,7 @@
                   </div>
                 </div>
               </div>
-              <div class="custom-border-bottom-dark my-2"></div>
+             
               <div class="col-sm-12 mb-3">
                 <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
                 <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
