@@ -232,7 +232,7 @@
               <select name="sub_brand" class="form-select form-select-md" id="sub_brand">
                 <option value="" selected>Model</option>
                 {{--@forelse($sub_brands as $sb)
-                <option value="{{$sb->id}}" @if(!empty($sub_brand_id)) @if($sb->id == $sub_brand_id->id) selected @endif @endif>{{$sb->name}}</option>
+                <option value="{{$sb->id}}" @if(!empty($sub_brand)) @if($sb->id == $sub_brand->id) selected @endif @endif>{{$sb->name}}</option>
                 @empty
                 @endforelse--}}
               </select>
