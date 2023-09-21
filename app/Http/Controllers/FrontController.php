@@ -409,7 +409,7 @@ class FrontController extends Controller
                 $vehicles = $vehicles->orderBy('price', 'asc');
             }
             if($request->highgrade){
-                $vehicles = $vehicles->orderBy('price', 'asc');
+                $vehicles = $vehicles->orderBy('price', 'desc');
             }
             
             $vehicles = $vehicles
