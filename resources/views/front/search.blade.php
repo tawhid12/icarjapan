@@ -505,7 +505,6 @@
                   </select>
                 </div>
                 @endif
-                <div class="custom-border-bottom-dark mb-3"></div>
                 <!--<div class="col-sm-3 mb-3 d-flex">
                   <select class="form-select form-select-md">
                     <option value="0">Truck Size:</option>
@@ -550,7 +549,7 @@
                 </div>
                 <div class="col-sm-2 my-1 d-flex">
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="	air_con" />
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_con" />
                     <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
                   </div>
                 </div>
