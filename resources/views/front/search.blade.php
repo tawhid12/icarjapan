@@ -929,7 +929,7 @@
                         <td>{{$v->manu_year}}</td>
                         <td>{{$v->mileage}}</td>
                         <td>{{$v->e_code}}</td>
-                        <td>{{$v->tname}}</td>
+                        <td>{{ optional($v)->tname ??  }}</td>
                       </tr>
                     </tbody>
                   </table>
