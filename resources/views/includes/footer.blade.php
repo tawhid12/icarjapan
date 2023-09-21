@@ -63,7 +63,7 @@
                           </li>
                       </ul>
                   </div>
-                  <div class="footer-title">
+                  {{--<div class="footer-title">
                       <p>By Brands</p>
                   </div>
                   <div class="my-3">
@@ -77,7 +77,7 @@
                           @empty
                           @endforelse
                       </ul>
-                  </div>
+                  </div>--}}
               </div>
               <div class="col-sm-12 col-md-6 col-lg-2">
                   <div class="footer-title">
