@@ -518,15 +518,13 @@
                     <option value="4">Multicab</option>
                   </select>
                 </div>-->
+                @php print_r($inv_loc); @endphp
                 <div class="col-sm-3 mb-3 d-flex">
                   <select name="inv_locatin_id" class="form-select form-select-md">
                     <option value="">Inventory Location:</option>
-                    @php print_r($inv_loc); @endphp
                     @forelse($inv_loc as $inv)
                     <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>
-                      @if($inv->id)
-                      {{\DB::table('countries')->where('id',$inv->id)->first()->name}}
-                      @endif
+                    {{optional($inv->country)->name}}
                     </option>
                     @empty
                     @endforelse
