@@ -668,7 +668,7 @@
           </div>
 
           <!-- left Total Calculation-->
-          <div class="search-left-4 my-3">
+          <!--<div class="search-left-4 my-3">
             <div class="price-calc search-body shadow p-2">
               <div class="row gx-1">
                 <div class="col-3">
@@ -712,7 +712,7 @@
                         <option value="2">Container</option>
                       </select>
                     </div>
-                  </div>
+                  </div>-->
                   <!--<div class="row mb-1">
                     <div class="col-md-5">
                       <label class="price-label">Freight:</label>
@@ -728,7 +728,7 @@
                       </div>
                     </div>
                   </div>-->
-                </div>
+                <!--</div>
                 <div class="col-md-4">
                   <div class="row mb-1">
                     <div class="col-md-5">
@@ -778,7 +778,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
 
      
         </form>
