@@ -250,7 +250,7 @@
               <select name="steering" class="form-select form-select-md">
                 <option value="">Steering:</option>
                 <option value="1" @if(request()->get('steering') == 1) selected @endif>Right Hand Drive</option>
-                <option value="2" @if(request()->get('steering') == 1) selected @endif>Left Hand Drive</option>
+                <option value="2" @if(request()->get('steering') == 2) selected @endif>Left Hand Drive</option>
               </select>
             </div>
             <div class="col-sm-3 mb-3">
