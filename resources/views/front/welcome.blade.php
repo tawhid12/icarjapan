@@ -176,7 +176,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <!-- mid row 4 product row 1 -->
         <div class="mid-row-4 my-4">
           <!-- product row title -->
-          <div class="d-flex product-row-title">
+          <div class="d-md-flex product-row-title">
             <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
             <div class="ms-auto">
               <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
@@ -235,7 +235,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <!-- mid row 5 product row 2 -->
           <div class="mid-row-5 my-4">
             <!-- product row title -->
-            <div class="d-flex product-row-title">
+            <div class="d-md-flex product-row-title">
               <p>
                 <i class="bi bi-binoculars"></i>New Arrival for {{$countryName->name}}
               </p>
@@ -295,7 +295,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <!-- mid row 6 product row 3 -->
           <div class="mid-row-6 my-4">
             <!-- product row title -->
-            <div class="d-flex product-row-title">
+            <div class="d-md-flex product-row-title">
               <p>
                 <i class="bi bi-binoculars"></i>Most Affordable for {{$countryName->name}}
               </p>
@@ -343,7 +343,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <!-- mid row 7 product row 4 -->
           <div class="mid-row-7 my-4">
             <!-- product row title -->
-            <div class="d-flex product-row-title">
+            <div class="d-md-flex product-row-title">
               <p><i class="bi bi-binoculars"></i>High Grade for {{$countryName->name}}</p>
               <div class="ms-auto">
                 <a href="{{url('/vehicle/advance/search/data')}}?highgrade=desc">See More <i class="bi bi-arrow-right-circle"></i></a>
