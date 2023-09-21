@@ -6,7 +6,7 @@
             @forelse($brands as $b)
             @if($b->vehicles_count > 0)
             <p class="card-text">
-                <a href="{{route('brand',strtolower($b->slug_name))}}?search='brand_search'" style="text-decoration:none;color:#000;">
+                <a href="{{route('brand',strtolower($b->slug_name))}}?search=brand" style="text-decoration:none;color:#000;">
                 @if(!empty($b->image))
 
                 <img src="{{route('resizeImage',['brands',$b->image,18,26])}}" alt="" />
