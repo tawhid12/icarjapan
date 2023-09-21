@@ -421,6 +421,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <div class="col-sm-12 col-md-12 col-lg-3 container-xl-3">
           <form action="{{route('front_adv_search_by_data')}}">
             @csrf
+            <input type="hidden" name="adv_search" value="search">
           <!-- right row 1 -->
           <div class="right-row-1 mb-3">
             <div class="right-row-serarch card shadow rounded">
