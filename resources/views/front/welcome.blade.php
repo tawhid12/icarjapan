@@ -181,7 +181,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <div class="mid-row-4 my-4">
           <!-- product row title -->
           <div class="d-md-flex product-row-title">
-            <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
+            <p class="m-0"><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
             <div class="ms-auto">
               <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
             </div>
@@ -240,7 +240,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <div class="mid-row-5 my-4">
             <!-- product row title -->
             <div class="d-md-flex product-row-title">
-              <p>
+              <p class="m-0">
                 <i class="bi bi-binoculars"></i>New Arrival for {{$countryName->name}}
               </p>
               <div class="ms-auto">
@@ -300,7 +300,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <div class="mid-row-6 my-4">
             <!-- product row title -->
             <div class="d-md-flex product-row-title">
-              <p>
+              <p class="m-0">
                 <i class="bi bi-binoculars"></i>Most Affordable for {{$countryName->name}}
               </p>
               <div class="ms-auto">
@@ -348,8 +348,8 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <div class="mid-row-7 my-4">
             <!-- product row title -->
             <div class="d-md-flex product-row-title">
-              <p><i class="bi bi-binoculars"></i>High Grade for {{$countryName->name}}</p>
-              <div class="mx-auto">
+              <p class="m-0"><i class="bi bi-binoculars"></i>High Grade for {{$countryName->name}}</p>
+              <div class="ms-auto">
                 <a href="{{url('/vehicle/advance/search/data')}}?highgrade=desc">See More <i class="bi bi-arrow-right-circle"></i></a>
               </div>
             </div>
