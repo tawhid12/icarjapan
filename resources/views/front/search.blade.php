@@ -654,7 +654,7 @@
 
 
               </div>
-              <div class="d-flex justify-content-center">
+              <div class="d-flex align-items-center justify-content-end">
 
                 <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
                   Reset
