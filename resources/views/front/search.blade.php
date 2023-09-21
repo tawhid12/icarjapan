@@ -441,11 +441,11 @@
                 @endforelse
               </select>
             </div>
-            <div class="col-sm-3 mb-3 d-flex more-details">
+            <!-- <div class="col-sm-3 mb-3 d-flex more-details">
               <a href="#myCollapsible" data-bs-toggle="collapse">+ More Details</a>
-            </div>
+            </div> -->
             <!-- Collapsible section that is initially collapsed -->
-            <div class="collapse" id="myCollapsible">
+            <div class="collapse1" id="myCollapsible">
               <div class="row gx-1">
                 <!--<div class="col-sm-3 mb-3 d-flex">
                   <select name="b_length" class="form-select form-select-md">
