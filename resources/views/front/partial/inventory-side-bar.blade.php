@@ -8,7 +8,7 @@
                     <p class="card-text">
                         @forelse($inv_loc as $inv)
                     <p class="card-text">
-                        <a href="" style="text-decoration:none;color:#000;">
+                        <a href="{{route('front_adv_search_by_data')}}?inv_locatin_id={{$inv->id}}" style="text-decoration:none;color:#000;">
                         {{optional($inv->country)->name}}
                         </a>
                     </p>
