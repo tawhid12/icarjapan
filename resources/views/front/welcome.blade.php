@@ -287,7 +287,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <i class="bi bi-binoculars"></i>Most Affordable for {{$countryName->name}}
               </p>
               <div class="ms-auto">
-                <a href="{{url('/vehicle/advance/search/data')}}?afford=desc">See More <i class="bi bi-arrow-right-circle"></i></a>
+                <a href="{{url('/vehicle/advance/search/data')}}?afford=asc">See More <i class="bi bi-arrow-right-circle"></i></a>
               </div>
             </div>
             <!-- product card -->
@@ -334,7 +334,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <div class="d-flex product-row-title">
               <p><i class="bi bi-binoculars"></i>High Grade for {{$countryName->name}}</p>
               <div class="ms-auto">
-                <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
+                <a href="{{url('/vehicle/advance/search/data')}}?afford=desc">See More <i class="bi bi-arrow-right-circle"></i></a>
               </div>
             </div>
             <!-- product card -->
