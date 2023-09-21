@@ -667,9 +667,7 @@
 
           </div>
 
-        </div>
-        </form>
-        <!-- left row 4-->
+                  <!-- left row 4-->
         <div class="search-left-4 my-3">
           <div class="price-calc search-body shadow p-2">
             <div class="row gx-1">
@@ -781,6 +779,10 @@
             </div>
           </div>
         </div>
+
+        </div>
+        </form>
+
 
         <!-- Vehicles -->
         @forelse($vehicles as $v)
