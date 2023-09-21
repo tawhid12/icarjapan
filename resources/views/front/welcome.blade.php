@@ -22,19 +22,18 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 <style>
   .rating i.fa {
     color: #f9cc00;
-  }
+}
 
-  .rating-count {
+.rating-count {
     font-size: 12px;
     color: red;
     font-weight: 700;
-  }
-
-  .vehicle-text {
+}
+.vehicle-text {
     position: relative;
-  }
+}
 
-  .vehicle-text .img_inner_sold_disp_text {
+.vehicle-text .img_inner_sold_disp_text {
     text-align: center;
     position: absolute;
     top: 34px;
@@ -44,7 +43,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
     font-weight: 700;
     line-height: 2;
-  }
+}
 </style>
 @endpush
 @section('content')
@@ -53,8 +52,8 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 <main class="">
   <div class="container">
 
-    <!-- Mainteance Mode -->
-    <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Mainteance Mode -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -96,7 +95,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-black text-white">
-              {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
+            {{strtoupper($com_acc_info->c_name)}} {{--$countryName->name--}}
             </h5>
             <div class="card-body">
               <p class="card-text">
@@ -117,61 +116,60 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         @include('front.partial.discount-side-bar')
         @include('front.partial.type-side-bar')
         @include('front.partial.category-side-bar')
-        <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
-          @include('front.search-box')
-          <!-- mid row 2 -->
-          <style>
-            .mid-sm-banner img {
-              width: 172px;
-              aspect-ratio: auto 172 / 104;
-              height: 104px;
-            }
-          </style>
-          <div class="mid-row-2 mb-3">
-            <div class="row gx-2 d-flex align-items-center">
-              <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
-                <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
-                <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt="" />
-                <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt="" />
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
-                <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt="" />
-                <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt="" />
-              </div>
+      <div class="col-sm-12 col-md-12 col-lg-7 container-xl-7">
+        @include('front.search-box')
+        <!-- mid row 2 -->
+        <style>
+           .mid-sm-banner img{
+    width: 172px;
+    aspect-ratio: auto 172 / 104;
+    height: 104px;
+}
+        </style>
+        <div class="mid-row-2 mb-3">
+          <div class="row gx-2 d-flex align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 mid-md-banner">
+              <img class="img-fluid" src="{{asset('front/img/slide3.png')}}" alt="" />
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/slide1.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/image_3.png')}}" alt=""/>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mid-sm-banner">
+              <img class="img-fluid mb-2" src="{{asset('front/img/image_3.png')}}" alt=""/>
+              <img class="img-fluid" src="{{asset('front/img/slide1.png')}}" alt=""/>
             </div>
           </div>
-          <!-- mid row 3 -->
-
+        </div>
+        <!-- mid row 3 -->
+    
           <div class="mid-row-3">
             <div class="row">
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
+              <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
               </div>
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
+              <a class="" href="#"><i class="bi bi-binoculars"></i>My Recent Views</a>
               </div>
               <div class="col-md-4">
-                <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
+              <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
               </div>
             </div>
             {{--<a class="shadow" href="#">My Accounts Status</a>--}}
           </div>
-
-          <!-- mid row 4 product row 1 -->
-          <div class="mid-row-4 my-4">
-            <!-- product row title -->
-            <div class="d-flex product-row-title">
-              <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
-              <div class="ms-auto">
-                <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
-              </div>
+       
+        <!-- mid row 4 product row 1 -->
+        <div class="mid-row-4 my-4">
+          <!-- product row title -->
+          <div class="d-flex product-row-title">
+            <p><i class="bi bi-binoculars"></i>Most Viewed in {{$countryName->name}}</p>
+            <div class="ms-auto">
+              <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
             </div>
-            <!-- product card -->
-            <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
-              @php //echo '
-              <pre>'; print_r($most_views->toArray());die;@endphp
+          </div>
+          <!-- product card -->
+          <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            @php //echo '<pre>'; print_r($most_views->toArray());die;@endphp
               @forelse($most_views as $v)
               <div class="col">
                 <div class="product-card mb-3">
@@ -555,30 +553,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
     //     $('#myModal').modal('show');
     // });
 
-    /*Brand|Subbrand */
-    $('#brand_id').on('change', function() {
-        var brand_id = $(this).val();
-        if (brand_id) {
-            $.ajax({
-                url: "{{route('subBrandbyId')}}",
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    id: brand_id,
-                },
-                success: function(data) {
-                    //console.log(data);
-                    $('#sub_brand').empty();
-                    $('#sub_brand').append('<option value="">Select a Sub Brand</option>');
-                    $.each(data, function(key, value) {
-                        $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
-                    });
-                }
-            });
-        } else {
-            $('#sub_brand').empty();
-        }
-    });
+    
     </script>
 
   @endpush
