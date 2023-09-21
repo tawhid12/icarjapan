@@ -83,11 +83,12 @@
 
   .partner {
     background-color: #009de6;
+    color: #ffffff;
   }
 
   .new {
     background-color: #ff9e00;
-    color: #000a9a;
+    color: #ffffff;
   }
 
   .img-360 {
@@ -653,13 +654,13 @@
 
 
               </div>
-              <div class="d-flex align-items-center justify-content-center">
+              <div class="col-md-12 d-flex align-items-center justify-content-center">
 
                 <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
                   Reset
                 </button>
-                <button type="submit" class="col-md-4 btn btn-primary btn-sm">
-                  Submit
+                <button type="submit" class="col-md-2 btn btn-primary btn-sm">
+                  Search
                 </button>
 
               </div>
