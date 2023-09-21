@@ -548,11 +548,35 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 
   @endsection
   @push('scripts')
-    <script>
-    //   $(document).ready(function() {
-    //     $('#myModal').modal('show');
-    // });
-
+  <script>
+  //   $(document).ready(function() {
+  //     $('#myModal').modal('show');
+  // });
+  
+/*==== Brand|Subbrand =====*/
+$('#brand_id').on('change', function() {
+    var brand_id = $(this).val();
+    if (brand_id) {
+        $.ajax({
+            url: "{{route('subBrandbyId')}}",
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                id: brand_id,
+            },
+            success: function(data) {
+                //console.log(data);
+                $('#sub_brand').empty();
+                $('#sub_brand').append('<option value="">Select a Sub Brand</option>');
+                $.each(data, function(key, value) {
+                    $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            }
+        });
+    } else {
+        $('#sub_brand').empty();
+    }
+});
     
     </script>
 
