@@ -518,7 +518,6 @@
                     <option value="4">Multicab</option>
                   </select>
                 </div>-->
-                @php print_r($inv_loc); @endphp
                 <div class="col-sm-3 mb-3 d-flex">
                   <select name="inv_locatin_id" class="form-select form-select-md">
                     <option value="">Inventory Location:</option>
