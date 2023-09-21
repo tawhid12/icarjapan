@@ -667,120 +667,120 @@
 
           </div>
 
-                  <!-- left row 4-->
-        <div class="search-left-4 my-3">
-          <div class="price-calc search-body shadow p-2">
-            <div class="row gx-1">
-              <div class="col-3">
-                <div class="col-sm-12">
-                  <span class="price-heading">Total Price Calculator</span>
+          <!-- left Total Calculation-->
+          <div class="search-left-4 my-3">
+            <div class="price-calc search-body shadow p-2">
+              <div class="row gx-1">
+                <div class="col-3">
+                  <div class="col-sm-12">
+                    <span class="price-heading">Total Price Calculator</span>
+                  </div>
+                  <p>
+                    Estimate the price of the vehicle(s) based on your destination.
+                    <span>Note:</span> In some cases the total price cannot be estimated.
+                  </p>
                 </div>
-                <p>
-                  Estimate the price of the vehicle(s) based on your destination.
-                  <span>Note:</span> In some cases the total price cannot be estimated.
-                </p>
-              </div>
-              <div class="col-md-4">
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Destination Country:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <select class="price-select form-select form-select-sm">
-                      <option value=""></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Destination Port:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <select class="price-select form-select form-select-sm">
-                      <option value=""></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Shipment:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <select class="price-select form-select form-select-sm">
-                      <option value="">Select</option>
-                      <option value="1">Roro</option>
-                      <option value="2">Container</option>
-                    </select>
-                  </div>
-                </div>
-                <!--<div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Freight:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="" value="1">
-                      <label class="form-check-label" for="">Roro</label>
+                <div class="col-md-4">
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Destination Country:</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="" value="2">
-                      <label class="form-check-label" for="">Container</label>
+                    <div class="col-md-7">
+                      <select class="price-select form-select form-select-sm">
+                        <option value=""></option>
+                      </select>
                     </div>
                   </div>
-                </div>-->
-              </div>
-              <div class="col-md-4">
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Currency:</label>
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Destination Port:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <select class="price-select form-select form-select-sm">
+                        <option value=""></option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-7">
-                    <select class="price-select form-select form-select-sm">
-                      <option value=""></option>
-                    </select>
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Shipment:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <select class="price-select form-select form-select-sm">
+                        <option value="">Select</option>
+                        <option value="1">Roro</option>
+                        <option value="2">Container</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--<div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Freight:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="" value="1">
+                        <label class="form-check-label" for="">Roro</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="" value="2">
+                        <label class="form-check-label" for="">Container</label>
+                      </div>
+                    </div>
+                  </div>-->
+                </div>
+                <div class="col-md-4">
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Currency:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <select class="price-select form-select form-select-sm">
+                        <option value=""></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Inspection:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input checkinp" type="radio" id="" value="1">
+                        <label class="form-check-label" for="">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="" value="2">
+                        <label class="form-check-label" for="">No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-1">
+                    <div class="col-md-5">
+                      <label class="price-label">Insurance:</label>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input checkinp" type="radio" id="" value="1">
+                        <label class="form-check-label" for="">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="" value="2">
+                        <label class="form-check-label" for="">No</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Inspection:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input checkinp" type="radio" id="" value="1">
-                      <label class="form-check-label" for="">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="" value="2">
-                      <label class="form-check-label" for="">No</label>
-                    </div>
-                  </div>
+                <div class="col-sm-12 d-flex justify-content-end">
+                  <button type="button" class="btn btn-primary btn-sm">
+                    Calculate
+                  </button>
                 </div>
-                <div class="row mb-1">
-                  <div class="col-md-5">
-                    <label class="price-label">Insurance:</label>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input checkinp" type="radio" id="" value="1">
-                      <label class="form-check-label" for="">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="" value="2">
-                      <label class="form-check-label" for="">No</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-12 d-flex justify-content-end">
-                <button type="button" class="btn btn-primary btn-sm">
-                  Calculate
-                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        </div>
+     
         </form>
 
 
