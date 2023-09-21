@@ -369,7 +369,7 @@ class FrontController extends Controller
             /*echo '<pre>';
             print_r($vehicles);die;*/
             return view('front.search', compact('vehicles', 'countries'));
-        } elseif ($request->filled('brand') && !$request->filled('sub_brand')) {
+        } elseif ($request->filled('brand') && $request->filled('search')) {
             echo 'ok';die;
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_prefix = DB::table('sub_brands')
