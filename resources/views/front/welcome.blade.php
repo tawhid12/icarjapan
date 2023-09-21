@@ -182,7 +182,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
             @php //echo '<pre>'; print_r($most_views->toArray());die;@endphp
               @forelse($most_views as $v)
-              <div class="col">
+              <div class="col-6">
                 <div class="product-card mb-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->vid)->where('is_cover_img',1)->first(); @endphp
                   <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}" style="text-decoration:none!important;">
@@ -247,7 +247,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center align-items-stretch">
               @forelse($new_arivals as $n)
              {{--$n->vid--}}
-              <div class="col">
+              <div class="col-6">
                 <div class="product-card mb-3">
                   <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$n->b_slug,'subBrand'=>$n->sb_slug,'stock_id'=>$n->stock_id])}}">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$n->vid)->where('is_cover_img',1)->first(); @endphp
@@ -304,7 +304,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <!-- product card -->
             <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
               @forelse($afford_by_country as $af)
-              <div class="col">
+              <div class="col-6">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$af->vid)->where('is_cover_img',1)->first(); @endphp
                   <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$af->b_slug,'subBrand'=>$af->sb_slug,'stock_id'=>$af->stock_id])}}" style="text-decoration:none!important;">
@@ -351,7 +351,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             <!-- product card -->
             <div class="row gx-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 justify-content-center">
             @forelse($high_grade_by_country as $hg)
-              <div class="col">
+              <div class="col-6">
                 <div class="product-card my-3">
                   @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$hg->vid)->where('is_cover_img',1)->first(); @endphp
                   <a class="vehicle-text" href="{{route('singleVehicle',['brand'=>$hg->b_slug,'subBrand'=>$hg->sb_slug,'stock_id'=>$hg->stock_id])}}" style="text-decoration:none!important;">
