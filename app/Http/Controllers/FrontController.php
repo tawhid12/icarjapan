@@ -384,8 +384,8 @@ class FrontController extends Controller
 
             return view('front.brand', compact('brand', 'sub_prefix', 'countries'));
         } elseif ($request->filled('brand') && $request->filled('sub_brand') || $request->filled('body_type') || $request->filled('steering') || $request->filled('from_year') || $request->filled('to_year') || $request->filled('to_year')) {
-            echo '<pre>';
-            print_r(request()->toArray());
+            /*echo '<pre>';
+            print_r(request()->toArray());*/
             $brands = Brand::withCount('vehicles')->get();
             $brand = Brand::where('id', $request->brand)->firstOrFail();
             $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
