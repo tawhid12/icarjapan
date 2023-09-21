@@ -406,10 +406,10 @@ class FrontController extends Controller
             }
             /*=== Most Affordable === price desc*/
             if($request->afford){
-                $vehicles = $vehicles->orderBy('price', 'asc');
+                $vehicles = $vehicles->where('price','>',0)->orderBy('price', 'asc');
             }
             if($request->highgrade){
-                $vehicles = $vehicles->orderBy('price', 'desc');
+                $vehicles = $vehicles->where('price','>',0)->orderBy('price', 'desc');
             }
             
             $vehicles = $vehicles
