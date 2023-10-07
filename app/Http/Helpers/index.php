@@ -15,7 +15,7 @@ function countryIp(){
         if (session()->has('location')) {
             unset($_SESSION['location']);
         }
-        return redirect()->route('front.country-select');
+        return redirect()->route('front.countrySelect');
         /*$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();*/
