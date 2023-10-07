@@ -50,7 +50,7 @@ class FrontController extends Controller
         print_r(session()->get('countryName'));
         print_r(session()->get('location'));
         die;*/
-        return redirect()->back();
+        return redirect()->route('front');
     }
     public function countrySelect()
     {
