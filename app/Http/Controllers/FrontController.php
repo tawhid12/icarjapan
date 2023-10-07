@@ -124,7 +124,9 @@ class FrontController extends Controller
                 return redirect()->route('front.countrySelect');
             }*/
         //}
-
+        if(empty($location) && empty($countryName)){
+            return redirect()->route('front.countrySelect');
+        }
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         echo '<pre>';
