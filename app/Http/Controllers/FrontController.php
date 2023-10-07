@@ -83,13 +83,13 @@ class FrontController extends Controller
         //session()->forget('location');
         //}
         $japan_locale_data = Carbon::now('Asia/Tokyo');
-        if (!session()->has('countryName') && !session()->has('location')) {
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+        //if (!session()->has('countryName') && !session()->has('location')) {
+            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
-            if ($location && isset($location['geoplugin_timezone'])) {
+            /*if ($location && isset($location['geoplugin_timezone'])) {
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-            } else {
+            } else {*/
                 /*if (!$request->filled('code')) {
                     $countries = Country::all();
                     return view('front.country-select', compact('countries'));
@@ -108,22 +108,22 @@ class FrontController extends Controller
                         $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     }
                 } else {*/
-                    $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+                    //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
                     /*echo '<pre>';
                 print_r($location);die;*/
-                    $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                    $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                    //$current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                    //$countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                 //}
-            }
+            /*}
             session()->put('countryName', $countryName);
             session()->put('location', $location);
         }else{
             $location =  request()->session()->get('location');
-            $countryName =  request()->session()->get('countryName');
+            $countryName =  request()->session()->get('countryName');*/
             /*if(empty($location) && empty($countryName)){
                 return redirect()->route('front.countrySelect');
             }*/
-        }
+        //}
 
        
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);

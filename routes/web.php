@@ -84,7 +84,7 @@ Route::get('/country-select', [front::class,'countrySelect'])->name('front.count
 Route::get('/country-select-post', [front::class,'countrySelectpost'])->name('countrySelectpost');
 //});
 
-Route::group(['middleware' => 'country.selection'], function () {
+//Route::group(['middleware' => 'country.selection'], function () {
 // Your protected routes
 Route::get('/', [front::class,'index'])->name('front');
 
@@ -121,7 +121,7 @@ Route::get('/bank-information',function(){ return view('front.page.bank-informat
 Route::get('/faq',function(){ return view('front.page.faq'); })->name('faq');
 Route::get('/contact-us',function(){ return view('front.page.contact-us'); });
 
-});
+//});
 
 Route::get('/vehicle/search/data/',[front::class,'searchpostStData'])->name('search_by_data');
 Route::get('/vehicle/advance/search/data/',[front::class,'front_adv_search_by_data'])->name('front_adv_search_by_data');

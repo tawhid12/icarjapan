@@ -1,6 +1,21 @@
 <?php
-
-
+use App\Models\Settings\Country;
+use Carbon\Carbon;
+function countryIp(){
+    if ($_SERVER['REMOTE_ADDR']) {
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+        if ($location && isset($location['geoplugin_timezone'])) {
+            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+            $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+        }
+    }else{
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+        $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+        $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+    }
+    session()->put('countryName', $countryName);
+    session()->put('location', $location);
+}
 function Replace($data) {
     $data = str_replace("!", "", $data);
     $data = str_replace("@", "", $data);
