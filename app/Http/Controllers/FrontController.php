@@ -46,10 +46,10 @@ class FrontController extends Controller
         }*/
         session()->put('countryName', $countryName);
         session()->put('location', $location);
-        echo '<pre>';
+        /*echo '<pre>';
         print_r(session()->get('countryName'));
         print_r(session()->get('location'));
-        die;
+        die;*/
         return redirect()->route('front');
     }
     public function countrySelect()
@@ -124,13 +124,14 @@ class FrontController extends Controller
                 return redirect()->route('front.countrySelect');
             }*/
         //}
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
         if(empty($location) && empty($countryName)){
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
         }
-        $location =  request()->session()->get('location');
-        $countryName =  request()->session()->get('countryName');
+        
         /*echo '<pre>';
 print_r(session()->all());
 die;*/
