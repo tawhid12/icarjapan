@@ -4,7 +4,8 @@ use Carbon\Carbon;
 function countryIp(){
     if ($_SERVER['REMOTE_ADDR']) {
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-        if($location == false){
+        $response = file_get_contents($location);
+        if($response === false){
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
