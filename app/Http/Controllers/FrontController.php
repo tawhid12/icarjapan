@@ -124,7 +124,7 @@ class FrontController extends Controller
                 return redirect()->route('front.countrySelect');
             }*/
         //}
-        countryIp();
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         echo '<pre>';

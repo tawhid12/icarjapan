@@ -2,29 +2,16 @@
 use App\Models\Settings\Country;
 use Carbon\Carbon;
 function countryIp(){
-    /*if ($_SERVER['REMOTE_ADDR']) {
+    if ($_SERVER['REMOTE_ADDR']) {
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
         if ($location && isset($location['geoplugin_timezone'])) {
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
         }
-    }else{*/
-        if (session()->has('countryName')) {
-            unset($_SESSION['countryName']);
-        }
-
-        if (session()->has('location')) {
-            unset($_SESSION['location']);
-        }
-        $countries = Country::all();
-        return view('front.country-select', compact('countries'));
-        /*$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
-        $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-        $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();*/
-    /*}
+    }
     session()->put('countryName', $countryName);
     session()->put('location', $location);
-    session()->put('current_locale_data', $current_locale_data);*/
+    session()->put('current_locale_data', $current_locale_data);
    
 }
 function Replace($data) {
