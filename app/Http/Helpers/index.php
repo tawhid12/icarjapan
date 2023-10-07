@@ -16,8 +16,7 @@ function countryIp(){
     session()->put('countryName', $countryName);
     session()->put('location', $location);
     session()->put('current_locale_data', $current_locale_data);
-    echo '<pre>';
-    print_r(session());die;
+   
 }
 function Replace($data) {
     $data = str_replace("!", "", $data);
