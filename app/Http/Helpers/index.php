@@ -9,6 +9,13 @@ function countryIp(){
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
         }
     }else{*/
+        if (session()->has('countryName')) {
+            unset($_SESSION['countryName']);
+        }
+
+        if (session()->has('location')) {
+            unset($_SESSION['location']);
+        }
         $countries = Country::all();
         return view('front.country-select', compact('countries'));
         /*$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
