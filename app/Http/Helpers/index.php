@@ -4,7 +4,8 @@ use Carbon\Carbon;
 function countryIp(){
     if ($_SERVER['REMOTE_ADDR']) {
         $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']);
-        if($location === false){
+        if($location){
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
             session()->put('countryName', $countryName);
