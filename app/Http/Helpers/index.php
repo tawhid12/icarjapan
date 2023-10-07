@@ -3,20 +3,8 @@ use App\Models\Settings\Country;
 use Carbon\Carbon;
 function countryIp(){
     if ($_SERVER['REMOTE_ADDR']) {
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-        $response = file_get_contents($location);
-        // Get the HTTP response headers
-        $headers = $http_response_header;
-
-        // Check if the HTTP status code is 429 (Too Many Requests)
-        if (strpos($headers[0], '429') !== false) {
-            // Handle 429 status code (Too Many Requests) here
-            //die('API response error: Too Many Requests');
-            unset($_SESSION['countryName']);
-            unset($_SESSION['location']);
-            return redirect()->route('front.countrySelect');
-        }
-        if($response === false){
+        $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']);
+        if($location === false){
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
