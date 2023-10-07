@@ -125,7 +125,8 @@ class FrontController extends Controller
             }*/
         //}
 
-       
+        echo '<pre>';
+    print_r(session());die;
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         /*==New Arival== | New Affordable==*/
         $new_arivals = DB::table('vehicles')
