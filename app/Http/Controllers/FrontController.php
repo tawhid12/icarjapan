@@ -125,6 +125,8 @@ class FrontController extends Controller
             }*/
         //}
         if(empty($location) && empty($countryName)){
+            unset($_SESSION['countryName']);
+            unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
         }
         $location =  request()->session()->get('location');
