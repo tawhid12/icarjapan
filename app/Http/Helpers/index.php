@@ -7,6 +7,10 @@ function countryIp(){
         if ($location && isset($location['geoplugin_timezone'])) {
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+        }else{
+            unset($_SESSION['countryName']);
+            unset($_SESSION['location']);
+            return redirect()->route('front.countrySelect');
         }
     }
     session()->put('countryName', $countryName);
