@@ -64,6 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // Other middleware entries
-    'country.selection' => \App\Http\Middleware\CountrySelectionMiddleware::class,
+    //'country.selection' => \App\Http\Middleware\CountrySelectionMiddleware::class,
     ];
 }
