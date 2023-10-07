@@ -46,10 +46,10 @@ class FrontController extends Controller
         }*/
         session()->put('countryName', $countryName);
         session()->put('location', $location);
-        echo '<pre>';
+        /*echo '<pre>';
         print_r(session()->get('countryName'));
         print_r(session()->get('location'));
-        die;
+        die;*/
         return redirect()->back();
     }
     public function countrySelect()
@@ -131,9 +131,9 @@ class FrontController extends Controller
         }
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        echo '<pre>';
+        /*echo '<pre>';
 print_r(session()->all());
-die;
+die;*/
 
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         /*==New Arival== | New Affordable==*/
