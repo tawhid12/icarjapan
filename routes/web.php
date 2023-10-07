@@ -64,6 +64,7 @@ use App\Http\Middleware\isSalesexecutive;
 use App\Http\Middleware\isUser;
 
 use App\Http\Middleware\unknownCountryMiddleware;
+countryIp();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
