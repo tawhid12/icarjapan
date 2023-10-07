@@ -38,19 +38,19 @@ class FrontController extends Controller
         if ($countryName->ip_address) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
         }
-        if (session()->has('countryName')) {
+        /*if (session()->has('countryName')) {
             unset($_SESSION['countryName']);
         }
         if (session()->has('location')) {
             unset($_SESSION['location']);
-        }
+        }*/
         session()->put('countryName', $countryName);
         session()->put('location', $location);
         /*echo '<pre>';
         print_r(session()->get('countryName'));
         print_r(session()->get('location'));
         die;*/
-        return redirect()->route('front');
+        return redirect()->back();
     }
     public function countrySelect()
     {
