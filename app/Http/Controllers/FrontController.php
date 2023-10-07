@@ -124,10 +124,10 @@ class FrontController extends Controller
                 return redirect()->route('front.countrySelect');
             }*/
         //}
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
 
-        echo '<pre>';
-print_r(session()->all());
-die;
 
         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         /*==New Arival== | New Affordable==*/
