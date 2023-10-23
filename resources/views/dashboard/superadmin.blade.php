@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            {{--<div class="card">
                 <div class="card-header p-2">
                     <h4 class="mb-1 border-bottom">Pending Reserved Vehicle</h4>
                 </div>
@@ -130,7 +130,7 @@
                         <a href="{{route(currentUser().'.notification.index')}}" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>See All Requisition</a>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </section>
 </div>

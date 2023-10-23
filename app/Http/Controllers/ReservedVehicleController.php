@@ -72,7 +72,7 @@ class ReservedVehicleController extends Controller
                     $b->created_by = currentUserId();
 
                     /*=== Update Executive Id into  Users Table to assign Executive to user ===*/
-                   $user = User::where('id',$request->user_id)->update(['executiveId' => currentUserId()]);
+                   $user = User::where('id',$request->user_id)->update(['executiveId' => currentUserId(),'type' => 1]);
                 }
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                 if ($request->shipment_type == 1) {

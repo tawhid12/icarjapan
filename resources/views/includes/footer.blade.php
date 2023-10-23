@@ -346,7 +346,7 @@
             }
         });
         var brand_id = $('#brand_id option:selected').val();
-        var sub_brand_id = "{{request()->get('sub_brand')}}";
+        var sub_brand = "{{request()->get('sub_brand')}}";
         if (brand_id) {
             $.ajax({
                 url: "{{route('subBrandbyId')}}",
@@ -358,7 +358,7 @@
                 success: function(data) {
                     //console.log(data);
                     $.each(data, function(key, value) {
-                        if (sub_brand_id == value.id) {
+                        if (sub_brand == value.id) {
                             $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
                         } else {
                             $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');

@@ -93,6 +93,7 @@
                                 <th scope="col">{{__('CM Type')}}</th>
                                 <th scope="col">{{__('CM Status')}}</th>
                                 <th scope="col">{{__('Previsous Assigned Sales')}}</th>
+                                <th scope="col">{{__('Current Executive')}}</th>
                                 <th class="white-space-nowrap">{{__('Action') }}</th>
                             </tr>
                         </thead>
@@ -144,7 +145,14 @@
                                     @if($prev_assign)
                                     {{ \DB::table('users')->where('id',$prev_assign->curexId)->first()->name }}
                                     @else
-                                    Free
+                                        Free
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($cm->executiveId)
+                                        {{ \DB::table('users')->where('id',$cm->executiveId)->first()->name }}
+                                    @else
+                                        -
                                     @endif
                                 </td>
                                 <td class="white-space-nowrap">
@@ -210,4 +218,6 @@
         });
     });
 </script>
+
+
 @endpush

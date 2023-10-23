@@ -1,10 +1,15 @@
 <?php
 use App\Models\Settings\Country;
+use App\Models\Vehicle\Vehicle;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
 function countryIp(){
     if ($_SERVER['REMOTE_ADDR']) {
-        $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']);
-        if($location){
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+        /*echo '</pre>';
+        print_r($location);die;*/
+        if($location['geoplugin_status'] != 404){
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
@@ -121,4 +126,41 @@ function invoice(){
 		['image'=>'','link'=>''],
 		['image'=>'','link'=>'']
 	];
+}
+
+function get_cancel_date(){
+   
+    //echo $get_cancel_date;die;
+    $rsv = DB::table('reserved_vehicles')
+    ->join('vehicles','reserved_vehicles.vehicle_id','vehicles.id')
+    ->where('vehicles.r_status',1)->where('vehicles.sold_status',0)
+    ->select('reserved_vehicles.created_at','vehicles.id','reserved_vehicles.user_id')
+    ->get();
+    $cancel_day = (int)\App\Models\CompanyAccountInfo::first()->reserve_cancel;
+    foreach($rsv as $r){
+        if (Carbon::today() > Carbon::parse($r->created_at)) {
+            $resv = \App\Models\ReservedVehicle::where('vehicle_id',$r->id)->update(['status' => 3,'note' => "Reserved Date Exapired!!"]);
+            $vehicle = \App\Models\Vehicle\Vehicle::where('id',$r->id)->update(['r_status'=>null]);
+
+            $user = \App\Models\User::where('id',$r->user_id)->update(['type'=>null]);
+        }else{
+            return redirect()->back()->withInput()->with(Toastr::error('Reservation Exists!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+    }
+}
+
+function client_status($id){
+    $count_active_reserve =  $rsv = DB::table('reserved_vehicles')
+    ->join('users','reserved_vehicles.user_id','users.id')
+    ->join('vehicles','reserved_vehicles.vehicle_id','vehicles.id')
+    ->where('vehicles.r_status',1)->where('vehicles.sold_status',0)
+    ->where('users.id',$id)
+    ->count();
+
+    $purchase_count =  $rsv = DB::table('reserved_vehicles')
+    ->join('users','reserved_vehicles.user_id','users.id')
+    ->join('vehicles','reserved_vehicles.vehicle_id','vehicles.id')
+    ->where('vehicles.r_status',1)->where('vehicles.sold_status',1)
+    ->where('users.id',$id)
+    ->count();
 }

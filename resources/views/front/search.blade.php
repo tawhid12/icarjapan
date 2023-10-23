@@ -222,7 +222,7 @@
         <div class="search-body-upper shadow p-3">
           <div class="row gx-1">
             <div class="col-sm-3 mb-3">
-              <select name="brand" class="form-select form-select-md" id="brand_id">
+              <select name="brand" class="form-select form-select-md" id="brand_id" required>
                 <option value="">Make:</option>
                 @forelse($brands as $b)
                 <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
@@ -231,7 +231,7 @@
               </select>
             </div>
             <div class="col-sm-3 mb-3">
-              <select name="sub_brand" class="form-select form-select-md" id="sub_brand">
+              <select name="sub_brand" class="form-select form-select-md" id="sub_brand" required>
                 <option value="" selected>Model</option>
                 {{--@forelse($sub_brands as $sb)
                 <option value="{{$sb->id}}" @if(!empty($sub_brand)) @if($sb->id == $sub_brand->id) selected @endif @endif>{{$sb->name}}</option>

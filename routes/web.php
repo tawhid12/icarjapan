@@ -64,7 +64,7 @@ use App\Http\Middleware\isSalesexecutive;
 use App\Http\Middleware\isUser;
 
 use App\Http\Middleware\unknownCountryMiddleware;
-countryIp();
+//countryIp();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +75,9 @@ countryIp();
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Reserve Cancel controler */
+Route::get('/reserve/cancel', [test::class,'reserve_cancel']);
+
 /*Test controler */
 Route::get('/mail', [test::class,'index'])->name('mail');
 
@@ -230,6 +233,8 @@ Route::group(['middleware'=>isSalesexecutive::class],function(){
         Route::resource('/notes', note::class, ["as" => "salesexecutive"]);
         Route::resource('favourvehicle', favourvehicle::class,['as'=>'salesexecutive']);
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
+        Route::get('/assign/to', [userprofile::class, 'assignTo'])->name('salesexecutive.assignTo');
+        Route::get('/free/user', [userprofile::class, 'freeUser'])->name('salesexecutive.freeUser');
     });
 });
 

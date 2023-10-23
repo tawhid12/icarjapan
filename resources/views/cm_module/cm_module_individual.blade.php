@@ -33,6 +33,7 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="basic-info-tab" data-bs-toggle="tab" href="#basic_info" role="tab" aria-controls="basic_info" aria-selected="true">Basic Info</a>
                     </li>
+                    @if(!is_null($client_data->executiveId))
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="contact-history-tab" data-bs-toggle="tab" href="#contact_history" role="tab" aria-controls="contact_history">Contact History</a>
                     </li>
@@ -57,13 +58,15 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="consignee-tab" data-bs-toggle="tab" href="#consignee" role="tab" aria-controls="consignee">Consignee</a>
                     </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content text-muted" id="myTabContent">
                     <div class="tab-pane fade show active" id="basic_info" role="tabpanel" aria-labelledby="baisc-info-tab">
                         @include('cm_module.partial.basic_info')
                     </div>
-
+                   
+   
                     <div class="tab-pane fade" id="contact_history" role="tabpanel" aria-labelledby="contact-history-tab">
                         <p><strong>Contact History</strong></p>
                     </div>
@@ -93,7 +96,7 @@
                     <div class="tab-pane fade" id="consignee" role="tabpanel" aria-labelledby="consignee-tab">
                         @include('cm_module.partial.consignee')
                     </div>
-
+                    
                 </div>
 
             </div>

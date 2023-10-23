@@ -37,20 +37,22 @@ class FrontController extends Controller
         $countryName = Country::where('code', $request->code)->first();
         if ($countryName->ip_address) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
-        }
-        /*if (session()->has('countryName')) {
+
+
+            /*if (session()->has('countryName')) {
             unset($_SESSION['countryName']);
         }
         if (session()->has('location')) {
             unset($_SESSION['location']);
         }*/
-        session()->put('countryName', $countryName);
-        session()->put('location', $location);
-        /*echo '<pre>';
+            session()->put('countryName', $countryName);
+            session()->put('location', $location);
+            /*echo '<pre>';
         print_r(session()->get('countryName'));
         print_r(session()->get('location'));
         die;*/
-        return redirect()->route('front');
+            return redirect()->route('front');
+        }
     }
     public function countrySelect()
     {
@@ -67,8 +69,8 @@ class FrontController extends Controller
                 return view('front.country-select', compact('countries'));
             }
         } else {*/
-            $countries = Country::all();
-            return view('front.country-select', compact('countries'));
+        $countries = Country::all();
+        return view('front.country-select', compact('countries'));
         //}
     }
     public function index(Request $request)
@@ -84,17 +86,17 @@ class FrontController extends Controller
         //}
         $japan_locale_data = Carbon::now('Asia/Tokyo');
         //if (!session()->has('countryName') && !session()->has('location')) {
-            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-            //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
-            /*if ($location && isset($location['geoplugin_timezone'])) {
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=122.152.55.168')); //210.138.184.59//122.152.55.168
+        /*if ($location && isset($location['geoplugin_timezone'])) {
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
             } else {*/
-                /*if (!$request->filled('code')) {
+        /*if (!$request->filled('code')) {
                     $countries = Country::all();
                     return view('front.country-select', compact('countries'));
                 } else*/
-                /*if ($request->filled('code')) {
+        /*if ($request->filled('code')) {
                     $countryName = Country::where('code', $request->code)->first();
                     echo $countryName->ip_address;
                     if ($countryName->ip_address) {
@@ -102,36 +104,37 @@ class FrontController extends Controller
                         $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                     } else {
                         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));*/
-                        /*echo '<pre>';
+        /*echo '<pre>';
                     print_r($location);die;*/
-                        /*$current_locale_data = Carbon::now($location['geoplugin_timezone']);
+        /*$current_locale_data = Carbon::now($location['geoplugin_timezone']);
                         $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     }
                 } else {*/
-                    //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
-                    /*echo '<pre>';
+        //$location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=210.138.184.59'));
+        /*echo '<pre>';
                 print_r($location);die;*/
-                    //$current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                    //$countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-                //}
-            /*}
+        //$current_locale_data = Carbon::now($location['geoplugin_timezone']);
+        //$countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+        //}
+        /*}
             session()->put('countryName', $countryName);
             session()->put('location', $location);
         }else{
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');*/
-            /*if(empty($location) && empty($countryName)){
+        /*if(empty($location) && empty($countryName)){
                 return redirect()->route('front.countrySelect');
             }*/
         //}
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        if(empty($location) && empty($countryName)){
+        //$location['geoplugin_status'] == 404 || 
+        if ( empty($location) || empty($countryName)) {
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
         }
-        
+
         /*echo '<pre>';
 print_r(session()->all());
 die;*/
@@ -260,34 +263,34 @@ die;*/
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
-        
-        $countryName = request()->session()->get('countryName');
-        if(!is_null($countryName)){
-        $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
-        $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
-        $v = Vehicle::where('stock_id', $stock_id)->first();
-        $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
-        $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
-        $countries = Country::all();
-        $recomended = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
-            ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
-            ->join('brands', 'vehicles.brand_id', 'brands.id')
-            ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            //->whereNull('r_status')
-            ->orWhere('countries_vehicles.country_id', $countryName->id)
-            ->where('brands.id', $v->brand_id)
-            ->where('sub_brands.id', $v->sub_brand_id)
-            ->whereNotIn('vehicles.id', [$v->id])
-            ->inRandomOrder()->take(10)->get();
 
-        $url = url('used-cars-search/' . $brand->slug_name . '/' . $subBrand->slug_name . '/' . $stock_id);
-        $shareComponent = \Share::page($url, 'Share title')
-            ->facebook()
-            ->twitter()
-            ->whatsapp();
-        return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
-        }else{
+        $countryName = request()->session()->get('countryName');
+        if (!is_null($countryName)) {
+            $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
+            $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
+            $v = Vehicle::where('stock_id', $stock_id)->first();
+            $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
+            $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
+            $countries = Country::all();
+            $recomended = DB::table('vehicles')
+                ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+                ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
+                ->join('brands', 'vehicles.brand_id', 'brands.id')
+                ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                //->whereNull('r_status')
+                ->orWhere('countries_vehicles.country_id', $countryName->id)
+                ->where('brands.id', $v->brand_id)
+                ->where('sub_brands.id', $v->sub_brand_id)
+                ->whereNotIn('vehicles.id', [$v->id])
+                ->inRandomOrder()->take(10)->get();
+
+            $url = url('used-cars-search/' . $brand->slug_name . '/' . $subBrand->slug_name . '/' . $stock_id);
+            $shareComponent = \Share::page($url, 'Share title')
+                ->facebook()
+                ->twitter()
+                ->whatsapp();
+            return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+        } else {
             return redirect()->route('front');
         }
     }
@@ -369,7 +372,7 @@ die;*/
         /* print_r($request->toArray());
         echo 'ok';die;*/
         $countries = Country::all();
-        if (empty($request->brand) && empty($request->sub_brand)) {
+        if (!empty($request->brand) && !empty($request->sub_brand)) {
             $vehicles = DB::table('vehicles')
                 ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
@@ -378,22 +381,7 @@ die;*/
                 ->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
-            return view('front.search', compact('vehicles', 'countries'));
-        } elseif ($request->filled('brand') && $request->filled('search')) {
-            $brand = Brand::where('id', $request->brand)->firstOrFail();
-            $sub_prefix = DB::table('sub_brands')
-                ->select(
-                    DB::raw('SUBSTRING(sub_brands.name, 1, 1) as cat'),
-                    DB::raw('GROUP_CONCAT(sub_brands.id) as ids'),
-                    DB::raw('COUNT(vehicles.id) as vehicles_count')
-                )
-                ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-                ->where('sub_brands.brand_id', $brand->id)
-                ->groupBy('cat')
-                ->get();
 
-            return view('front.brand', compact('brand', 'sub_prefix', 'countries'));
-        } elseif ($request->adv_search) {
             /*echo '<pre>';
             print_r(request()->toArray());*/
             $brands = Brand::withCount('vehicles')->get();
@@ -415,25 +403,96 @@ die;*/
                 $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year, $request->to_year]);
             }
             /*=== Most Affordable === price desc*/
-            if($request->afford){
-                $vehicles = $vehicles->where('price','>',0)->orderBy('price', 'asc');
+            if ($request->afford) {
+                $vehicles = $vehicles->where('price', '>', 0)->orderBy('price', 'asc');
             }
-            if($request->highgrade){
-                $vehicles = $vehicles->where('price','>',0)->orderBy('price', 'desc');
+            if ($request->highgrade) {
+                $vehicles = $vehicles->where('price', '>', 0)->orderBy('price', 'desc');
             }
-            
-            $vehicles = $vehicles
-                //->whereNull('r_status')
-                ->inRandomOrder()->paginate(10);
-            return view('front.search', compact('brands','vehicles', 'brand', 'sub_brand_id', 'countries'));
+
+           
+
+
+                if ($request->adv_search == 'sale_module_search'){
+                    $vehicles = $vehicles->paginate(10)->appends([
+                        'adv_search' => $request->adv_search,
+                        'brand' => $request->brand,
+            'sub_brand' => $request->sub_brand,
+            'steering' => $request->steering,
+            'body_type' => $request->body_type,
+            'drive_id' => $request->drive_id,
+            'to_year' => $request->to_year,
+            'from_year' => $request->from_year,
+            'from_price' => $request->from_price,
+            'to_price' => $request->to_price,
+            'e_size_from' => $request->e_size_from,
+            'e_size_to' => $request->e_size_to,
+            'mileage' => $request->mileage,
+            'ext_color_id' => $request->ext_color_id,
+            'max_loading_capacity' => $request->max_loading_capacity,
+            'inv_locatin_id' => $request->inv_locatin_id,
+                    ]);
+                    $brands = Brand::all();
+                    $vehicle_models = VehicleModel::all();
+                    $body_types = BodyType::get();
+                    $sub_body_types = SubBodyType::all();
+                    $drive_types = DriveType::all();
+                    $trans = Transmission::get();
+                    $fuel= Fuel::all();
+                    $colors = Color::all();
+                    $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
+                    $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
+                    $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
+                    $inv_loc = InventoryLocation::all();
+                        return view('sales_module.search_vehicle', compact('vehicles', 'countries','brands','vehicle_models','body_types','sub_body_types','drive_types','year_range','trans','fuel','colors','max_manu_Year','min_manu_Year','inv_loc'));
+                }
+                
+        else
+        $vehicles = $vehicles->paginate(10)->appends([
+            'brand' => $request->brand,
+            'sub_brand' => $request->sub_brand,
+            'steering' => $request->steering,
+            'body_type' => $request->body_type,
+            'drive_id' => $request->drive_id,
+            'to_year' => $request->to_year,
+            'from_year' => $request->from_year,
+            'from_price' => $request->from_price,
+            'to_price' => $request->to_price,
+            'e_size_from' => $request->e_size_from,
+            'e_size_to' => $request->e_size_to,
+            'mileage' => $request->mileage,
+            'ext_color_id' => $request->ext_color_id,
+            'max_loading_capacity' => $request->max_loading_capacity,
+            'inv_locatin_id' => $request->inv_locatin_id,
+        ]);
+            return view('front.search', compact('brands', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
+        
+            //return view('front.search', compact('vehicles', 'countries'));
+        } elseif ($request->filled('brand') && $request->filled('search')) {
+            $brand = Brand::where('id', $request->brand)->firstOrFail();
+            $sub_prefix = DB::table('sub_brands')
+                ->select(
+                    DB::raw('SUBSTRING(sub_brands.name, 1, 1) as cat'),
+                    DB::raw('GROUP_CONCAT(sub_brands.id) as ids'),
+                    DB::raw('COUNT(vehicles.id) as vehicles_count')
+                )
+                ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
+                ->where('sub_brands.brand_id', $brand->id)
+                ->groupBy('cat')
+                ->get();
+
+            return view('front.brand', compact('brand', 'sub_prefix', 'countries'));
+        } elseif ($request->adv_search) {
+
         }
+            
     }
 
 
 
     public function resizeImage($foldername, $filename, $width, $height)
     {
-        $img = Image::make(public_path('uploads/'.$foldername.'/' . $filename));
+        $img = Image::make(public_path('uploads/' . $foldername . '/' . $filename));
         $img->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });

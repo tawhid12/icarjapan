@@ -113,6 +113,7 @@
               $('#amount').prop('readonly', true);
               $('#amount').val(actual_due);
           } else {
+            $('#amount').prop('readonly', false);
             $('#amount').val('');
           }
 

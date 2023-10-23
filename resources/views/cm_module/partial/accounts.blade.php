@@ -30,7 +30,7 @@
             </td>
         </tr>
     </table>
-    <h5 class="my-2">Payment History</h5>
+    {{--<h5 class="my-2">Payment History</h5>
     <table class="table table-bordered m-0">
         <tr>
             <th>Received Date</th>
@@ -70,26 +70,36 @@
         </tr>
         @empty
         @endforelse
-    </table>
+    </table>--}}
 
-    <!-- <h4>Payments</h4>
+    <h4>Payment History</h4>
     <table class="table table-bordered m-0">
         <tr>
-            <th>Invoice Id</th>
-            <th>Reserve Information</th>
-            <th>Date</th>
+            <th>Received Date</th>
+            <th>Currency</th>
+            <th>Invoice ID</th>
             <th>Amount</th>
+            <th>Amount in USD</th>
+            <th>Deposit Ratio</th>
+            <th>Deposit Count</th>
+            <th>Balance Count</th>
+            <th>Payment ID</th>
         </tr>
         @forelse($payments as $p)
         <tr>
-            <td>{{$p->invoice_id}}</td>
-            <td>{{$p->reserve_id}}</td>
-            <td>{{$p->receive_date}}</td>
+            <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->format('d/m/Y')}}</td>
+            <td>USD</td>
+            <td>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->format('Ymd')}}{{$p->invoice_id}}</td>
             <td>{{$p->amount}}</td>
+            <td>{{$p->amount}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{$p->id}}</td>
         </tr>
         @empty
         @endforelse
-    </table> -->
+    </table>
 
     <h5 class="my-2">Deposit</h5>
     <table class="table table-bordered m-0">

@@ -146,9 +146,12 @@ class UserProfileController extends Controller
             DB::beginTransaction();
     
             try {
+                /*== Check Client Has Reservation Exists== */
+                get_cancel_date();
                 $data = array(
-                    'created_by' => $request->newexId
+                    'executiveId' => $request->newexId
                 );
+
                 DB::table('users')->where('id',$request->user_id)->update($data);
                 $data2 = array(
                     'user_id' => $request->user_id,
@@ -175,6 +178,25 @@ class UserProfileController extends Controller
             ->select('client_transfers.*','users.name as uname')
             ->get();
             return view('client.clientTransferList',compact('client_transfers'));
+        }
+        public function assignTo(Request $request){
+            $user = User::where('id',$request->user_id)->first();
+            if(!$user->executiveId){
+                User::where('id',$request->user_id)->update(['executiveId' => currentUserId()]);
+                return redirect()->back()->with(Toastr::success('Assigned to successful!', 'Success', ["positionClass" => "toast-top-right"]));
+            }
+            else
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+        public function freeUser(Request $request){
+            $user = User::where('id',$request->user_id)->first();
+            $reserve_count = DB::table('reserved_vehicles')->where('user_id',$request->user_id)->where('status', 1)->count();
+            if($user->executiveId && $reserve_count == 0){
+                User::where('id',$request->user_id)->update(['executiveId' => null]);
+                return redirect()->back()->with(Toastr::success('User Free Successfull!', 'Success', ["positionClass" => "toast-top-right"]));
+            }
+            else
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
 
 }

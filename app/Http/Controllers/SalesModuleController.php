@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Vehicle\Brand;
+use App\Models\Vehicle\VehicleModel;
+use App\Models\Settings\BodyType;
+use App\Models\Settings\SubBodyType;
+use App\Models\Settings\DriveType;
+use App\Models\Vehicle\Transmission;
+use App\Models\Vehicle\Fuel;
+use App\Models\Vehicle\Color;
+use App\Models\Settings\InventoryLocation;
 use DB;
 
 class SalesModuleController extends Controller
@@ -23,7 +32,19 @@ print_r($favourites->toArray());die;*/
     }
     public function search()
     {
-        return view('sales_module.search_vehicle');
+        $brands = Brand::all();
+        $vehicle_models = VehicleModel::all();
+        $body_types = BodyType::get();
+        $sub_body_types = SubBodyType::all();
+        $drive_types = DriveType::all();
+        $trans = Transmission::get();
+        $fuel= Fuel::all();
+        $colors = Color::all();
+        $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
+        $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
+        $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
+        $inv_loc = InventoryLocation::all();
+        return view('sales_module.search_vehicle',compact('brands','vehicle_models','body_types','sub_body_types','drive_types','year_range','trans','fuel','colors','max_manu_Year','min_manu_Year','inv_loc'));
     }
     public function sales_module()
     {
@@ -41,7 +62,7 @@ print_r($favourites->toArray());die;*/
     }
     public function all_client_list_json()
     {
-        $users = User::where('created_by', currentUserId())->get();
+        $users = User::where('executiveId', currentUserId())->get();
        
       
         $data = '<div class="row">';
