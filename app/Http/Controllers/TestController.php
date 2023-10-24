@@ -30,8 +30,6 @@ class TestController extends Controller
                 $vehicle = \App\Models\Vehicle\Vehicle::where('id', $r->id)->update(['r_status' => null]);
 
                 $user = \App\Models\User::where('id', $r->user_id)->update(['type' => null]);
-            } else {
-                return redirect()->route('front')->withInput()->with(Toastr::error('Reservation Exists!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         }
     }
