@@ -18,6 +18,7 @@ class TestController extends Controller
     }
     public function reserve_cancel()
     {
+        echo 'ok';die;
         $rsv = DB::table('reserved_vehicles')
             ->join('vehicles', 'reserved_vehicles.vehicle_id', 'vehicles.id')
             ->where('vehicles.r_status', 1)->where('vehicles.sold_status', 0)
