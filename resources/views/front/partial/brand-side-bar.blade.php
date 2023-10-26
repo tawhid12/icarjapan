@@ -3,7 +3,7 @@
     <div class="card shadow radious-10">
         <h5 class="card-title bg-black text-white">Search by Brands</h5>
         <div class="card-body">
-            @if($brand)
+            @if(isset($brand))
             @forelse($brands as $b)
             @if($b->vehicles_count > 0)
             <p class="card-text">
