@@ -196,4 +196,40 @@ class AdminUserController extends Controller
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
     }
+
+    public function secretLogin($id)
+    {
+        request()->session()->flush();
+        try {
+            $user = User::find($id);
+            if ($user) {
+                $this->setSession($user);
+                if(currentUser() == 'user'){
+                    return redirect()->route('front')->with(Toastr::success('Successfully Login!', 'Success', ["positionClass" => "toast-top-right"]));
+                }else{
+                    return redirect()->route($user->role->identity.'.dashboard')->with(Toastr::success('Successfully Login!', 'Success', ["positionClass" => "toast-top-right"]));
+                }
+            }
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->route('login')->with(Toastr::success('Invaid!', 'Success', ["positionClass" => "toast-top-right"]));
+        }
+    }
+
+    protected function setSession($user)
+    {
+        return request()->session()->put(
+            [
+                'userId' => encryptor('encrypt', $user->id),
+                'userName' => encryptor('encrypt', $user->name),
+                'role' => encryptor('encrypt', $user->role->type),
+                'roleIdentity' => encryptor('encrypt', $user->role->identity),
+                'country_id' => $user->country_id,
+                /*'language'=>encryptor('encrypt',$user->language),
+                'companyId'=>encryptor('encrypt',$user->company_id),*/
+                'companyAccess' => encryptor('encrypt', $user->all_company_access),
+                'image' => $user->image ? $user->image : 'no-image.png'
+            ]
+        );
+    }
 }

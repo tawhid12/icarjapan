@@ -400,7 +400,7 @@ die;*/
                 $vehicles = $vehicles->where('vehicles.steering', $request->steering);
             }
             if ($request->filled('from_year') && $request->filled('to_year')) {
-                $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year, $request->to_year]);
+                $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->to_year, $request->from_year]);
             }
             /*=== Most Affordable === price desc*/
             if ($request->afford) {
@@ -417,20 +417,20 @@ die;*/
                     $vehicles = $vehicles->paginate(10)->appends([
                         'adv_search' => $request->adv_search,
                         'brand' => $request->brand,
-            'sub_brand' => $request->sub_brand,
-            'steering' => $request->steering,
-            'body_type' => $request->body_type,
-            'drive_id' => $request->drive_id,
-            'to_year' => $request->to_year,
-            'from_year' => $request->from_year,
-            'from_price' => $request->from_price,
-            'to_price' => $request->to_price,
-            'e_size_from' => $request->e_size_from,
-            'e_size_to' => $request->e_size_to,
-            'mileage' => $request->mileage,
-            'ext_color_id' => $request->ext_color_id,
-            'max_loading_capacity' => $request->max_loading_capacity,
-            'inv_locatin_id' => $request->inv_locatin_id,
+                        'sub_brand' => $request->sub_brand,
+                        'steering' => $request->steering,
+                        'body_type' => $request->body_type,
+                        'drive_id' => $request->drive_id,
+                        'to_year' => $request->to_year,
+                        'from_year' => $request->from_year,
+                        'from_price' => $request->from_price,
+                        'to_price' => $request->to_price,
+                        'e_size_from' => $request->e_size_from,
+                        'e_size_to' => $request->e_size_to,
+                        'mileage' => $request->mileage,
+                        'ext_color_id' => $request->ext_color_id,
+                        'max_loading_capacity' => $request->max_loading_capacity,
+                        'inv_locatin_id' => $request->inv_locatin_id,
                     ]);
                     $brands = Brand::all();
                     $vehicle_models = VehicleModel::all();

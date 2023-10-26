@@ -28,6 +28,9 @@
                                 <th scope="col">{{__('Role')}}</th>
                                 <th scope="col">{{__('Status')}}</th>
                                 <th class="white-space-nowrap">{{__('Action') }}</th>
+                                @if(currentUser() == 'superadmin')
+                                <th>Login As</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -46,11 +49,11 @@
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     @else
-                                        @if(currentUser() != 'accountant')
-                                        <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        @endif
+                                    @if(currentUser() != 'accountant')
+                                    <a href="{{route(currentUser().'.admin.edit',encryptor('encrypt',$p->id))}}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    @endif
                                     @endif
                                     @if(currentUser() == 'superadmin')
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
@@ -62,7 +65,12 @@
                                     </form>
                                     @endif
                                 </td>
-                                
+                                @if(currentUser() == 'superadmin')
+                                <td>
+                                    <a href="{{route(currentUser().'.secretLogin',$p->id)}}" class="btn btn-sm btn-success">Login As {{$p->name}}</a>
+                                </td>
+                                @endif
+
                             </tr>
                             @empty
                             <tr>

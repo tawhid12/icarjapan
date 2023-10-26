@@ -11,13 +11,13 @@
             <div class="col-12 col-md-3">
                 <div class="form-group">
                     <label for="userName">First Name<span class="text-danger"></span></label>
-                    <input type="text" id="firstName" class="form-control" name="firstName" value="{{$name[0]}}">
+                    <input type="text" id="firstName" class="form-control" name="firstName" value="{{isset($name[0])?$name[0]:''}}">
                 </div>
             </div>
             <div class="col-12 col-md-3">
                 <div class="form-group">
                     <label for="userName">Last Name<span class="text-danger"></span></label>
-                    <input type="text" id="lastName" class="form-control" name="lastName" value="{{$name[1]}}">
+                    <input type="text" id="lastName" class="form-control" name="lastName" value="{{isset($name[1])?$name[1]:''}}">
                 </div>
             </div>
             <div class="col-12 col-md-3">
