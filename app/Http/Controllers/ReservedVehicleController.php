@@ -81,9 +81,9 @@ class ReservedVehicleController extends Controller
                     $b->insp_amt = $country_data->inspection;
                     $b->insu_amt = $country_data->insurance;
                     $port_data = DB::table('ports')->where('id', $user->port_id)->first();
-                    $b->m3_value = $vehicle->m3;
-                    $b->m3_charge = $port_data->m3;
-                    $b->aditional_cost =  $port_data->aditional_cost;
+                    $b->m3_value = $vehicle->m3?$vehicle->m3:0;
+                    $b->m3_charge = $port_data->m3?$port_data->m3:0;
+                    $b->aditional_cost =  $port_data->aditional_cost?$port_data->aditional_cost:0;
                 }
                 $b->discount =  $vehicle->discount;
                 $b->shipment_type =  $request->shipment_type;
