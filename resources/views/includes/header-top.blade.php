@@ -9,7 +9,7 @@
           <div class="container-fluid">
             <div class="row d-flex align-items-center">
               <div class="col-12 col-md-3">
-              <p class="text-center">{{$japan_locale_data->format('M, d, H:i (T)')}} {{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
+              <p class="text-center">@if ($japan_locale_data){{$japan_locale_data->format('M, d, H:i (T)')}} @endif{{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
               <h4 class="text-center m-0">Total Cars: {{$total_cars}}</h4>
               </div>
               @php //print_r($location);die;@endphp
