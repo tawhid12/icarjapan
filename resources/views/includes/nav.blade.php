@@ -1,4 +1,8 @@
-  <!-- nav start -->
+@php 
+$brands = \App\Models\Vehicle\Brand::withCount('vehicles')->get();
+$body_types = \App\Models\Settings\BodyType::get();
+@endphp
+<!-- nav start -->
   <nav class="navbar navbar-expand-lg bg-brand sticky-top top-nav">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

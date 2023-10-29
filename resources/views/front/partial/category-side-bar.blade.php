@@ -1,4 +1,5 @@
-        <!-- left row 8 -->
+@php  $trans = \App\Models\Vehicle\Transmission::all(); @endphp
+<!-- left row 8 -->
         <div class="left-row left-row-8 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-black text-white">

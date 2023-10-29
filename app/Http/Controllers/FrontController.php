@@ -226,7 +226,6 @@ die;*/
             ->get();
 
 
-
         /*DB::table('sub_brands')
             ->select(DB::raw('substring(`sub_brands.name`,1,1) as cat'), 'sub_brands.id', DB::raw('GROUP_CONCAT(`sub_brands.id`) ids'),DB::raw('COUNT(vehicles.id) as vehicles_count'))
             ->leftJoin('vehicles', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
@@ -243,6 +242,9 @@ die;*/
   @endif*/
     public function subBrand(Brand $brand, SubBrand $subBrand)
     {
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (!is_null($countryName) && !is_null($location)) {
         $countries = Country::all();
         $brand = Brand::where('name', $brand->name)->firstOrFail();
 
@@ -259,13 +261,17 @@ die;*/
 
         /*echo '<pre>';
         print_r($vehicles);die;*/
-        return view('front.search', compact('vehicles', 'brand', 'sub_brand_id', 'countries'));
+        return view('front.search', compact('location','vehicles', 'brand', 'sub_brand_id', 'countries'));
+        } else {
+            return redirect()->route('front.countrySelect');
+        }
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
-
-        $countryName = request()->session()->get('countryName');
-        if (!is_null($countryName)) {
+        $location =  request()->session()->get('location');
+        $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+        $countryName =  request()->session()->get('countryName');
+        if (!is_null($countryName) && !is_null($location)) {
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
             $v = Vehicle::where('stock_id', $stock_id)->first();
@@ -289,9 +295,9 @@ die;*/
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+            return view('front.single', compact('location','countryName','current_locale_data','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         } else {
-            return redirect()->route('front');
+            return redirect()->route('front.countrySelect');
         }
     }
     public function searchStData(Request $request)
@@ -465,7 +471,14 @@ die;*/
             'max_loading_capacity' => $request->max_loading_capacity,
             'inv_locatin_id' => $request->inv_locatin_id,
         ]);
-            return view('front.search', compact('brands', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (!is_null($countryName) && !is_null($location)) {
+            return view('front.search', compact('location','brands', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
+		} else {
+            return redirect()->route('front.countrySelect');
+        }
+            
         
             //return view('front.search', compact('vehicles', 'countries'));
         } elseif ($request->filled('brand') && $request->filled('search')) {

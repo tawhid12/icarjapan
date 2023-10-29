@@ -1,4 +1,21 @@
 @extends('layout.landing')
+@php
+$trans = \App\Models\Vehicle\Transmission::withCount('vehicles')->get();
+$brands = \App\Models\Vehicle\Brand::withCount('vehicles')->get();
+$vehicle_models = \App\Models\Vehicle\VehicleModel::all();
+$body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
+$sub_body_types = \App\Models\Settings\SubBodyType::all();
+$drive_types = \App\Models\Settings\DriveType::all();
+$year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
+$fuel= \App\Models\Vehicle\Fuel::all();
+$colors = \App\Models\Vehicle\Color::all();
+/*====Manufacture year====Max===Min*/
+$max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
+$min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
+
+$inv_loc = \App\Models\Settings\InventoryLocation::all();
+
+@endphp
 @section('pageTitle','ICARJAPAN')
 @section('pageSubTitle','Search')
 @push('styles')

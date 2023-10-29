@@ -111,6 +111,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           </a>
         </div>
         <!-- left row 2 -->
+        @php
+          $com_acc_info = \App\Models\CompanyAccountInfo::first();
+        @endphp
         <div class="left-row-2 mb-3">
           <div class="card shadow radious-10">
             <h5 class="card-title bg-black text-white">
@@ -441,6 +444,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
           <div class="right-row-1 mb-3">
             <div class="right-row-serarch card shadow rounded">
               <h5 class="right-row-1-title">Search By Category</h5>
+              @php $brands = \App\Models\Vehicle\Brand::withCount('vehicles')->get(); @endphp
               <div class="p-2">
                 <select name="brand" class="form-select form-select-sm mb-3" id="brand_id" required>
                   <option value="" selected>Brands</option>
@@ -458,6 +462,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   @empty
                   @endforelse--}}
                 </select>
+                @php $body_types = \App\Models\Settings\BodyType::get(); @endphp
                 <select name="body_type" class="form-select form-select-sm mb-3">
                   <option value="" selected>Body Type</option>
                   @forelse($body_types as $bt)
@@ -470,6 +475,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   <option value="1">Right Hand Drive</option>
                   <option value="2">Left Hand Drive</option>
                 </select>
+                @php   $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray(); @endphp
                 <div class="d-flex search-to">
                   <select name="from_year" class="form-select form-select-sm mb-3">
                     <option value="" selected>Year</option>

@@ -1,3 +1,9 @@
+  @php
+  $inv_loc = \App\Models\Settings\InventoryLocation::all();
+  $drive_types = \App\Models\Settings\DriveType::all();
+  $com_acc_info = \App\Models\CompanyAccountInfo::first();
+  $body_types = \App\Models\Settings\BodyType::get();
+  @endphp
   <!-- footer start -->
   <footer class="footer">
       <div class="container py-4">
