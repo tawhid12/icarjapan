@@ -23,7 +23,7 @@ class InquiryController extends Controller
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('user.inquiry.index', compact('all_in'));
+                return view('user.inquiry.index', compact('all_in','location'));
             }
         } else {
             $all_in = Inquiry::all();
