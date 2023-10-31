@@ -75,7 +75,12 @@ class UserProfileController extends Controller
     public function change_password()
     { 
         if(currentUser() == 'user')
-        return view('settings.user.change_password');
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('settings.user.change_password');
+        }
         else
         return view('settings.general.change_password');
     }
