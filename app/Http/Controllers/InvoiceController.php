@@ -28,8 +28,13 @@ class InvoiceController extends Controller
     public function index()
     {
         if (currentUser() == 'salesexecutive') {
+            countryIp();
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             $invoices = Invoice::where('executive_id', currentUserId())->paginate(10);
-            return view('sales.invoice.index', compact('invoices'));
+            return view('sales.invoice.index', compact('invoices','location'));
+            }
         } else if (currentUser() == 'user') {
             $invoices = Invoice::where('customer_id', currentUserId())->paginate(10);
             return view('user.invoice.index', compact('invoices'));
