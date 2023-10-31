@@ -19,7 +19,14 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
               </div>
               @php //print_r($location);die;@endphp
               <div class="col-12 col-md-2 text-center">
-                <p class="m-0">{{$current_locale_data->format('M, d, H:i (T)')}}</p>
+                <p class="m-0">
+                @if(session()->has('current_locale_data'))
+                    @php
+                    $current_locale_data = session()->get('current_locale_data');
+                    @endphp
+                    {{ $current_locale_data->format('M, d, H:i (T)') }}
+                @endif
+                </p>
                 @php //echo '<pre>';//print_r($location); @endphp
               <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p>
             </div>
