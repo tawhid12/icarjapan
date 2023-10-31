@@ -64,7 +64,7 @@ use App\Http\Middleware\isSalesexecutive;
 use App\Http\Middleware\isUser;
 
 use App\Http\Middleware\unknownCountryMiddleware;
-//countryIp();
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -144,9 +144,7 @@ Route::get('/bank-information', function () {
 Route::get('/faq', function () {
     return view('front.page.faq');
 })->name('faq');
-Route::get('/contact-us', function () {
-    return view('front.page.contact-us');
-});
+Route::get('/contact-us', [front::class, 'contactUs']);
 
 //});
 
