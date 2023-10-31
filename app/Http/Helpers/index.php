@@ -16,7 +16,13 @@ function countryIp(){
             session()->put('countryName', $countryName);
             session()->put('location', $location);
             session()->put('current_locale_data', $current_locale_data);
-            return redirect()->back();
+            // Check if there is a requested URL in the session
+            $requestedUrl = session()->get('requestedUrl');
+            echo $requestedUrl;die;
+            if ($requestedUrl) {
+                // If a requested URL is found in the session, redirect to it
+                return Redirect::to($requestedUrl);
+            }
         }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
