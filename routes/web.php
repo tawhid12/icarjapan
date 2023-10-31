@@ -114,36 +114,17 @@ Route::resource('contactus', contactus::class)->only(['store']);
 
 
 /*=== Page ===*/
-Route::get('/why-choose-us', function () {
-    return view('front.page.why-choose-us');
-});
-Route::get('/how-to-order-from-auction', function () {
-    return view('front.page.how-to-order-from-auction');
-});
-Route::get('/how-to-buy-from-stock', function () {
-    return view('front.page.how-to-buy-from-stock');
-});
-Route::get('/shipping', function () {
-    return view('front.page.shipping');
-});
-Route::get('/inspection-services', function () {
-    return view('front.page.inspection-services');
-});
-Route::get('/overview', function () {
-    return view('front.page.overview');
-});
-Route::get('/company-profile', function () {
-    return view('front.page.company-profile');
-});
-Route::get('/customer-review', function () {
-    return view('front.page.customer-review');
-});
-Route::get('/bank-information', function () {
-    return view('front.page.bank-information');
-});
-Route::get('/faq', function () {
-    return view('front.page.faq');
-})->name('faq');
+
+Route::get('/why-choose-us', [front::class, 'chooseUs']);
+Route::get('/how-to-order-from-auction', [front::class, 'orderfromAuction']);
+Route::get('/how-to-buy-from-stock', [front::class, 'buyfromStock']);
+Route::get('/shipping', [front::class, 'shipping']);
+Route::get('/inspection-services', [front::class, 'inspectionService']);
+Route::get('/overview', [front::class, 'overview']);
+Route::get('/customer-review', [front::class, 'companyProfile']);
+Route::get('/customer-review', [front::class, 'customerReview']);
+Route::get('/bank-information', [front::class, 'bankInformation']);
+Route::get('/faq', [front::class, 'faq'])->name('faq');
 Route::get('/contact-us', [front::class, 'contactUs']);
 
 //});

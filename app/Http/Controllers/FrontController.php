@@ -511,13 +511,102 @@ die;*/
         return $img->response();
     }
 
+    public function chooseUs(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.why-choose-us',compact('location','countryName'));
+        }
+    }
 
+    public function orderfromAuction(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.how-to-order-from-auction',compact('location','countryName'));
+        }
+    }
+
+    public function buyfromStock(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.how-to-buy-from-stock',compact('location','countryName'));
+        }
+    }
+
+    public function shipping(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.shipping',compact('location','countryName'));
+        }
+    }
+
+
+    public function inspectionService(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.inspection-services',compact('location','countryName'));
+        }
+    }
+
+    public function overview(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.overview',compact('location','countryName'));
+        }
+    }
+
+    public function companyProfile(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.company-profile',compact('location','countryName'));
+        }
+    }
+
+    public function customerReview(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.customer-review',compact('location','countryName'));
+        }
+    }
+
+    public function bankInformation(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.bank-information',compact('location','countryName'));
+        }
+    }
+
+    public function faq(){
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.page.faq',compact('location','countryName'));
+        }
+    }
     public function contactUs(){
         countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-        return view('front.page.contact-us',compact('location','countryName'));
+            return view('front.page.contact-us',compact('location','countryName'));
         }
     }
 }
