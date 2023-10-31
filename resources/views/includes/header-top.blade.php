@@ -2,8 +2,6 @@
 use Carbon\Carbon;
 $total_cars = \App\Models\Vehicle\Vehicle::/*where('sold_status',0)->*/count();
 $japan_locale_data = Carbon::now('Asia/Tokyo');
-$location =  request()->session()->get('location');
-$current_locale_data = Carbon::now($location['geoplugin_timezone']);
 @endphp
 <!-- Header top start -->
   <div class="header-top">
