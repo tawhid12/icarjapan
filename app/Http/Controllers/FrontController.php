@@ -264,6 +264,7 @@ die;*/
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
+        countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
@@ -296,8 +297,6 @@ die;*/
                 ->twitter()
                 ->whatsapp();
             return view('front.single', compact('location','countryName','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
-        }else{
-            countryIp();
         }
     }
     public function searchStData(Request $request)
