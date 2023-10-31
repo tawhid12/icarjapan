@@ -135,7 +135,13 @@ class FrontController extends Controller
             ->where('sub_brands.brand_id', $brand->id)
             ->groupBy('cat')
             ->get();
-        return view('front.brand', compact('brand', 'sub_prefix'));
+            countryIp();
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('front.brand', compact('location','brand', 'sub_prefix'));
+            }    
+        
     }
     public function subBrand(Brand $brand, SubBrand $subBrand)
     {
