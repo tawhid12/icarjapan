@@ -17,7 +17,6 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
               <p class="text-center">{{$japan_locale_data->format('M, d, H:i (T)')}} {{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
               <h4 class="text-center m-0">Total Cars: {{$total_cars}}</h4>
               </div>
-              @php //print_r($location);die;@endphp
               <div class="col-12 col-md-2 text-center">
                 <p class="m-0">
                 @if(session()->has('current_locale_data'))
@@ -27,8 +26,9 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
                     {{ $current_locale_data->format('M, d, H:i (T)') }}
                 @endif
                 </p>
-                @php //echo '<pre>';//print_r($location); @endphp
+              @if(session()->has('location'))
               <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p>
+              @endif
             </div>
 
             <div class="col-6 col-md-3 d-grid text-center">
