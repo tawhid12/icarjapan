@@ -28,16 +28,17 @@ class InvoiceController extends Controller
     public function index()
     {
         if (currentUser() == 'salesexecutive') {
+            $invoices = Invoice::where('executive_id', currentUserId())->paginate(10);
+            return view('sales.invoice.index', compact('invoices'));
+        } else if (currentUser() == 'user') {
+            $invoices = Invoice::where('customer_id', currentUserId())->paginate(10);
             countryIp();
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            $invoices = Invoice::where('executive_id', currentUserId())->paginate(10);
-            return view('sales.invoice.index', compact('invoices','location'));
+                $invoices = Invoice::where('executive_id', currentUserId())->paginate(10);
+                return view('user.invoice.index', compact('invoices', 'location'));
             }
-        } else if (currentUser() == 'user') {
-            $invoices = Invoice::where('customer_id', currentUserId())->paginate(10);
-            return view('user.invoice.index', compact('invoices'));
         } else {
             $invoices = Invoice::paginate(10);
         }
@@ -95,23 +96,23 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        $inv = Invoice::where('reserve_id',encryptor('decrypt', $id))->first();
+        $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->first();
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
         $client_details = UserDetail::where('user_id', $inv->client_id)->first();
         $account_info = CompanyAccountInfo::first();
         $shipment = ShipmentDetail::where('client_id', $inv->client_id)->first();
         $v = DB::table('reserved_vehicles')
-        ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
-        ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
-        ->join('body_types', 'body_types.id', '=', 'vehicles.body_type_id')
-        ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
-        ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
-        ->select('vehicles.*','brands.name as bName','body_types.name as btName','fuels.name as fName','transmissions.name as tName')
-        ->where('vehicles.id', $inv->vehicle_id)->first();
+            ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
+            ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+            ->join('body_types', 'body_types.id', '=', 'vehicles.body_type_id')
+            ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
+            ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
+            ->select('vehicles.*', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
+            ->where('vehicles.id', $inv->vehicle_id)->first();
         //print_r($v);die;
 
-        return view('sales_module.invoice.proforma_client_invoice', compact('v','shipment','account_info', 'inv', 'com_info', 'client_data', 'client_details'));
+        return view('sales_module.invoice.proforma_client_invoice', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
     }
 
     /**
