@@ -266,7 +266,7 @@ die;*/
     {
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        if ( $location || $countryName) {
+        if ( $location['geoplugin_currencyCode'] && $location['geoplugin_currencyConverter'] && $countryName) {
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
             $v = Vehicle::where('stock_id', $stock_id)->first();
