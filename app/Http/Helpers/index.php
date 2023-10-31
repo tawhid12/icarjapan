@@ -16,7 +16,7 @@ function countryIp(){
             session()->put('countryName', $countryName);
             session()->put('location', $location);
             session()->put('current_locale_data', $current_locale_data);
-            
+            return redirect()->back();
         }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
