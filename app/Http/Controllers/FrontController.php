@@ -27,10 +27,6 @@ use App\Services\GeoLocationService;
 
 class FrontController extends Controller
 {
-    protected $geoLocationService;
-    public function __construct(Request $request)
-    {
-    }
     public function countrySelectpost(Request $request)
     {
 
@@ -269,9 +265,8 @@ die;*/
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
         $location =  request()->session()->get('location');
-        $current_locale_data = Carbon::now($location['geoplugin_timezone']);
         $countryName =  request()->session()->get('countryName');
-        if (!is_null($countryName) && !is_null($location)) {
+        if ( empty($location) || empty($countryName)) {
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
             $v = Vehicle::where('stock_id', $stock_id)->first();
@@ -295,9 +290,9 @@ die;*/
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            return view('front.single', compact('location','countryName','current_locale_data','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
-        } else {
-            return redirect()->route('front.countrySelect');
+            return view('front.single', compact('current_locale_data','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+        }else{
+            countryIp();
         }
     }
     public function searchStData(Request $request)
