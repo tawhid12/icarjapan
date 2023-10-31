@@ -293,7 +293,7 @@ die;*/
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            return view('front.single', compact('countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+            return view('front.single', compact('location','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         }else{
             countryIp();
         }
