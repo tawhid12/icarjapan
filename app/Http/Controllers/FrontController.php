@@ -267,7 +267,7 @@ class FrontController extends Controller
                 ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-                ->where('vehicles.sold_status,',0)
+                ->where('vehicles.sold_status',0)
                 ->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
