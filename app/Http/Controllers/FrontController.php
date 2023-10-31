@@ -135,13 +135,12 @@ class FrontController extends Controller
             ->where('sub_brands.brand_id', $brand->id)
             ->groupBy('cat')
             ->get();
-            countryIp();
-            $location =  request()->session()->get('location');
-            $countryName =  request()->session()->get('countryName');
-            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('front.brand', compact('location','brand', 'sub_prefix'));
-            }    
-        
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('front.brand', compact('location', 'brand', 'sub_prefix'));
+        }
     }
     public function subBrand(Brand $brand, SubBrand $subBrand)
     {
@@ -259,8 +258,14 @@ class FrontController extends Controller
             ->inRandomOrder()->paginate(10);
         if ($request->sales_search == 'search')
             return view('sales_module.search_vehicle', compact('vehicles', 'countries'));
-        else
-            return view('front.search', compact('vehicles', 'countries'));
+        else {
+            countryIp();
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('front.search', compact('vehicles', 'countries','location'));
+            }
+        }
     }
 
     public function front_adv_search_by_data(Request $request)
@@ -273,7 +278,7 @@ class FrontController extends Controller
                 ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-                ->where('vehicles.sold_status',0)
+                ->where('vehicles.sold_status', 0)
                 ->inRandomOrder()->paginate(10);
             /*echo '<pre>';
             print_r($vehicles);die;*/
