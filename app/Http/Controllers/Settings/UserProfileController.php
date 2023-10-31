@@ -79,7 +79,7 @@ class UserProfileController extends Controller
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            return view('settings.user.change_password');
+            return view('settings.user.change_password',compact('location'));
         }
         else
         return view('settings.general.change_password');
