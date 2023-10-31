@@ -266,7 +266,7 @@ die;*/
     {
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        if ( $location['geoplugin_currencyCode'] && $location['geoplugin_currencyConverter'] && $countryName) {
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && $countryName) {
             echo '</pre>';
             print_r($location);
             die;
