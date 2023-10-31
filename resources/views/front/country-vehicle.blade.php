@@ -88,6 +88,7 @@
         @include('front.partial.price-side-bar')
         @include('front.partial.discount-side-bar')
         @include('front.partial.type-side-bar')
+        @php  $trans = \App\Models\Vehicle\Transmission::withCount('vehicles')->get(); @endphp
         <!-- left row 8 -->
         <div class="left-row left-row-8 mb-3">
           <div class="card shadow radious-10">
