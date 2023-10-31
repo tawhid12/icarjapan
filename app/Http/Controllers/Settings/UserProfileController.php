@@ -32,7 +32,12 @@ class UserProfileController extends Controller
         if(currentUser() == 'superadmin' || currentUser() == 'salesexecutive'){
             return view('settings.general.profile',compact('user','countries','ports','com_info'));
         }else{
-            return view('settings.user.profile',compact('user','countries','ports','com_info'));
+            countryIp();
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('settings.user.profile',compact('user','countries','ports','com_info'));
+            }
         }
         
     }
