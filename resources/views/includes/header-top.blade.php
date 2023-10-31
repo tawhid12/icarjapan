@@ -1,6 +1,6 @@
 @php
 use Carbon\Carbon;
-$total_cars = \App\Models\Vehicle\Vehicle::/*where('sold_status',0)->*/count();
+$total_cars = \App\Models\Vehicle\Vehicle::where('sold_status',0)->count();
 $japan_locale_data = Carbon::now('Asia/Tokyo');
 @endphp
 <!-- Header top start -->
