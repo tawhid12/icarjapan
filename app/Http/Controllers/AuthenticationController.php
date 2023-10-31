@@ -61,7 +61,12 @@ class AuthenticationController extends Controller
                 if(Hash::check($request->password , $user->password)){
                     $this->setSession($user);
                     if(currentUser() == 'user'){
+                        countryIp();
+                        $location =  request()->session()->get('location');
+                        $countryName =  request()->session()->get('countryName');
+                        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
                         return redirect()->route('front')->with($this->resMessageHtml(true,null,'Successfully login'));
+                        }
                     }else{
                         return redirect()->route($user->role->identity.'.dashboard')->with($this->resMessageHtml(true,null,'Successfully login'));
                     }
