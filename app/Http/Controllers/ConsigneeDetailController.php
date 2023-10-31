@@ -18,7 +18,12 @@ class ConsigneeDetailController extends Controller
     public function index()
     {
         $con_detl = ConsigneeDetail::paginate(10);
-        return view('user.consignee.index', compact('con_detl'));
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('user.consignee.index', compact('con_detl', 'location'));
+        }
     }
 
     /**
@@ -30,8 +35,13 @@ class ConsigneeDetailController extends Controller
     {
         $countries = Country::all();
         if (currentUser() == 'user')
-            return view('user.consignee.create', compact('countries'));
-        else
+            $con_detl = ConsigneeDetail::paginate(10);
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('user.consignee.create', compact('countries', 'location'));
+        } else
             return view('cm_module.consignee.create', compact('countries'));
     }
 
@@ -109,8 +119,13 @@ class ConsigneeDetailController extends Controller
         $countries = Country::all();
         $consignee = ConsigneeDetail::find(encryptor('decrypt', $id));
         if (currentUser() == 'user')
-            return view('user.consignee.edit', compact('consignee', 'countries'));
-        else
+            $con_detl = ConsigneeDetail::paginate(10);
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('user.consignee.edit', compact('consignee', 'countries', 'location'));
+        } else
             return view('cm_module.consignee.edit', compact('consignee', 'countries'));
     }
 
