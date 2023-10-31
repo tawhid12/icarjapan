@@ -266,7 +266,7 @@ die;*/
     {
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && $countryName) {
+        if ( isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             echo '</pre>';
             print_r($countryName);
             die;
@@ -293,7 +293,7 @@ die;*/
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            return view('front.single', compact('location','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+            return view('front.single', compact('location','countryName','countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         }else{
             countryIp();
         }
