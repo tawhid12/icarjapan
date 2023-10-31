@@ -36,7 +36,7 @@ class UserProfileController extends Controller
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('settings.user.profile',compact('user','countries','ports','com_info'));
+                return view('settings.user.profile',compact('location','user','countries','ports','com_info'));
             }
         }
         
