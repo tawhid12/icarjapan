@@ -20,10 +20,10 @@ function countryIp(){
             // Check if there is a requested URL in the session
             session()->put('requestedUrl', url()->current());
             $requestedUrl = session()->get('requestedUrl');
-            //echo $requestedUrl;die;
+            
             if ($requestedUrl) {
                 // If a requested URL is found in the session, redirect to it
-                echo 'ok';die;
+                echo $requestedUrl;die;
                 return Redirect::to($requestedUrl);
             }
         }else{
