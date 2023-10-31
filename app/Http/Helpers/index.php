@@ -17,6 +17,7 @@ function countryIp(){
             session()->put('location', $location);
             session()->put('current_locale_data', $current_locale_data);
             // Check if there is a requested URL in the session
+            session()->put('requestedUrl', url()->current());
             $requestedUrl = session()->get('requestedUrl');
             echo $requestedUrl;die;
             if ($requestedUrl) {
