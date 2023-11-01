@@ -189,6 +189,8 @@ class FrontController extends Controller
             print_r($countryName);
             print_r($location);
             die;*/
+            $stock_id = trim($stock_id);
+            
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
             $v = Vehicle::where('stock_id', $stock_id)->first();
