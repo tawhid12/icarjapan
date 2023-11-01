@@ -121,7 +121,12 @@ class FrontController extends Controller
             ->orderBy('vehicles.id', 'desc')->get();
         /*echo '<pre>';
         print_r($country_wise_vehicles);die;*/
-        return view('front.country-vehicle', compact('country_wise_vehicles', 'country'));
+        countryIp();
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+        return view('front.country-vehicle', compact('location','country_wise_vehicles', 'country'));
+        }
     }
     public function brand(Brand $brand)
     {
