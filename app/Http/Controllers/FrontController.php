@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\MostView;
 use Illuminate\Http\Request;
@@ -185,7 +186,7 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         $v = Vehicle::where('stock_id', trim($stock_id))->first();
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id) && isset($v->id)) {
-
+            Log::info("Debugging: total = {$v->id}");
             /*echo '</pre>';
             print_r($countryName);
             print_r($location);
