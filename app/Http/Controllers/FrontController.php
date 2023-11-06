@@ -183,17 +183,18 @@ class FrontController extends Controller
         countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+        $v = Vehicle::where('stock_id', trim($stock_id))->first();
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id) && isset($v->id)) {
 
             /*echo '</pre>';
             print_r($countryName);
             print_r($location);
             die;*/
-            $stock_id = trim($stock_id);
+     
             
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
-            $v = Vehicle::where('stock_id', $stock_id)->first();
+           
             $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
             $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
             $countries = Country::all();
