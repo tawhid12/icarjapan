@@ -186,7 +186,7 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         $v = Vehicle::where('stock_id', trim($stock_id))->first();
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id) && isset($v->id)) {
-            Log::info("Debugging: total = {$v->id}");
+            Log::info("Vehicle Id {$v->id}");
             /*echo '</pre>';
             print_r($countryName);
             print_r($location);
