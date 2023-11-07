@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Log;
 
 use App\Models\MostView;
@@ -111,22 +112,22 @@ class FrontController extends Controller
     }
     public function countrywiseVehicle(Country $country)
     {
-        //print_r($country->toArray());
-        $country_wise_vehicles = DB::table('vehicles')
-            ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
-            ->join('brands', 'vehicles.brand_id', 'brands.id')
-            ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-            ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
-            //->whereNull('r_status')
-            ->where('countries_vehicles.country_id', $country->id)
-            ->orderBy('vehicles.id', 'desc')->get();
-        /*echo '<pre>';
-        print_r($country_wise_vehicles);die;*/
         countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-        return view('front.country-vehicle', compact('location','country_wise_vehicles', 'country'));
+            //print_r($country->toArray());
+            $country_wise_vehicles = DB::table('vehicles')
+                ->select('vehicles.id as vid', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
+                ->join('brands', 'vehicles.brand_id', 'brands.id')
+                ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
+                //->whereNull('r_status')
+                ->where('countries_vehicles.country_id', $country->id)
+                ->orderBy('vehicles.id', 'desc')->get();
+            /*echo '<pre>';
+    print_r($country_wise_vehicles);die;*/
+            return view('front.country-vehicle', compact('location', 'country_wise_vehicles', 'country'));
         }
     }
     public function brand(Brand $brand)
@@ -191,11 +192,11 @@ class FrontController extends Controller
             print_r($countryName);
             print_r($location);
             die;*/
-     
-            
+
+
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
-           
+
             $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
             $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
             $countries = Country::all();
@@ -272,7 +273,7 @@ class FrontController extends Controller
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('front.search', compact('vehicles', 'countries','location'));
+                return view('front.search', compact('vehicles', 'countries', 'location'));
             }
         }
     }
