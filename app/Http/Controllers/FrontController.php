@@ -183,7 +183,7 @@ class FrontController extends Controller
             print_r($vehicles);die;*/
             return view('front.search', compact('location', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
         } else {
-            return redirect()->route('front.countrySelect');
+            countryIp(); 
         }
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)

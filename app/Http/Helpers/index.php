@@ -5,35 +5,87 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
+// function countryIp(){
+//     if ($_SERVER['REMOTE_ADDR']) {
+//         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+//         /*echo '</pre>';
+//         print_r($location);die;*/
+//         if($location['geoplugin_status'] != 404){
+//             Log::info($location);
+//             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+//             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+//             $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+//             session()->put('countryName', $countryName);
+//             session()->put('location', $location);
+//             session()->put('current_locale_data', $current_locale_data);
+
+//             // Check if there is a requested URL in the session
+//             session()->put('requestedUrl', url()->current());
+//             $requestedUrl = session()->get('requestedUrl');
+//             if ($requestedUrl) {
+                
+//                 echo "<script> window.location.href= ' $requestedUrl ' </script>";
+//                 //return redirect()->to($requestedUrl);
+//                 // If a requested URL is found in the session, redirect to it
+//                 //return Redirect::to($requestedUrl);
+//             }else{
+//                 unset($_SESSION['countryName']);
+//                 unset($_SESSION['location']);
+//                 return redirect()->route('front.countrySelect');
+//             }
+//         }else{
+//             unset($_SESSION['countryName']);
+//             unset($_SESSION['location']);
+//             return redirect()->route('front.countrySelect');
+//         }
+//     }else{
+//             unset($_SESSION['countryName']);
+//             unset($_SESSION['location']);
+//             return redirect()->route('front.countrySelect');
+//         }
+// }
+
 function countryIp(){
     if ($_SERVER['REMOTE_ADDR']) {
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-        /*echo '</pre>';
-        print_r($location);die;*/
-        if($location['geoplugin_status'] != 404){
-            Log::info($location);
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-            $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-            $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-            session()->put('countryName', $countryName);
-            session()->put('location', $location);
-            session()->put('current_locale_data', $current_locale_data);
-
-            // Check if there is a requested URL in the session
-            session()->put('requestedUrl', url()->current());
-            $requestedUrl = session()->get('requestedUrl');
-            if ($requestedUrl) {
-                // If a requested URL is found in the session, redirect to it
-                return Redirect::to($requestedUrl);
+        $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']);
+        Log::info($location);
+        if(isset($location) and $location){
+            $location = unserialize($location);
+            if(isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200){
+                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                session()->put('countryName', $countryName);
+                session()->put('location', $location);
+                session()->put('current_locale_data', $current_locale_data);
+    
+                // Check if there is a requested URL in the session
+                session()->put('requestedUrl', url()->current());
+                $requestedUrl = session()->get('requestedUrl');
+                if ($requestedUrl) {
+                    echo "<script> window.location.href= ' $requestedUrl ' </script>";
+                    // If a requested URL is found in the session, redirect to it
+                    //return Redirect::to($requestedUrl);
+                }else{
+                    unset($_SESSION['countryName']);
+                    unset($_SESSION['location']);
+                    return redirect()->route('front.countrySelect');
+                }
+            }else{
+                unset($_SESSION['countryName']);
+                unset($_SESSION['location']);
+                return redirect()->route('front.countrySelect');
             }
         }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
         }
+    }else{
+        unset($_SESSION['countryName']);
+        unset($_SESSION['location']);
+        return redirect()->route('front.countrySelect');
     }
-    
-   
 }
 function Replace($data) {
     $data = str_replace("!", "", $data);
