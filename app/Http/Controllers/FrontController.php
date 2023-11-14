@@ -43,8 +43,14 @@ class FrontController extends Controller
                     session()->put('location', $location);
                     session()->put('current_locale_data', $current_locale_data);
                     return redirect()->route('front');
+                }else {
+                    countryIp();
                 }
+            }else {
+                countryIp();
             }
+        }else {
+            countryIp();
         }
     }
     public function countrySelect()
