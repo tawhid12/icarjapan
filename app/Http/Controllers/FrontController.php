@@ -30,14 +30,13 @@ class FrontController extends Controller
     public function countrySelectpost(Request $request)
     {
         $countryName = Country::where('code', $request->code)->first();
-        $countryName = Country::where('code', $request->code)->first();
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
         Log::info($location);
         Log::info($countryName);
-        /*if ($countryName->ip_address) {
+        if ($countryName->ip_address) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
             return redirect()->route('front');
-        }*/
+        }
     }
     public function countrySelect()
     {
