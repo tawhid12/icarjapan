@@ -31,7 +31,7 @@ class FrontController extends Controller
     {
 
         $countryName = Country::where('code', $request->code)->first();
-        if ($countryName->ip_address) {
+        if ($countryName) {
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
             if(isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200){
                 $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
