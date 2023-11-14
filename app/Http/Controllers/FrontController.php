@@ -42,7 +42,7 @@ class FrontController extends Controller
                 Log::info($c_data);
                 $location = unserialize($location);
                 //print_r($location);
-                if (isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200) {
+                if (isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206) {
                     $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                     $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     session()->put('countryName', $countryName);
