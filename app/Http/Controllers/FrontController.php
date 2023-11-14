@@ -31,17 +31,25 @@ class FrontController extends Controller
     {
         $countryName = Country::where('code', $request->code)->first();
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
-        Log::info($location);
-        Log::info($countryName);
-        if ($countryName->ip_address) {
-            unset($_SESSION['countryName']);
-            unset($_SESSION['location']);
-            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
-            return redirect()->route('front');
+        if (isset($location) and $location) {
+            Log::info($location);
+            Log::info($countryName);
+            $location = unserialize($location);
+            if (isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200) {
+                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
+                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                session()->put('countryName', $countryName);
+                session()->put('location', $location);
+                session()->put('current_locale_data', $current_locale_data);
+                return redirect()->route('index');
+            }
         }
     }
     public function countrySelect()
     {
+        unset($_SESSION['countryName']);
+        unset($_SESSION['location']);
         $countries = Country::all();
         return view('front.country-select', compact('countries'));
     }
@@ -113,8 +121,8 @@ class FrontController extends Controller
 
 
             return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
-        }else{
-            countryIp(); 
+        } else {
+            countryIp();
         }
     }
     public function countrywiseVehicle(Country $country)
@@ -135,8 +143,8 @@ class FrontController extends Controller
             /*echo '<pre>';
     print_r($country_wise_vehicles);die;*/
             return view('front.country-vehicle', compact('location', 'country_wise_vehicles', 'country'));
-        }else{
-            countryIp(); 
+        } else {
+            countryIp();
         }
     }
     public function brand(Brand $brand)
@@ -156,8 +164,8 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.brand', compact('location', 'brand', 'sub_prefix'));
-        }else{
-            countryIp(); 
+        } else {
+            countryIp();
         }
     }
     public function subBrand(Brand $brand, SubBrand $subBrand)
@@ -188,12 +196,12 @@ class FrontController extends Controller
             print_r($vehicles);die;*/
             return view('front.search', compact('location', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
         } else {
-            countryIp(); 
+            countryIp();
         }
     }
     public function singleVehicle(Brand $brand, SubBrand $subBrand, $stock_id)
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         $v = Vehicle::where('stock_id', trim($stock_id))->first();
@@ -229,8 +237,8 @@ class FrontController extends Controller
                 ->twitter()
                 ->whatsapp();
             return view('front.single', compact('location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
-        }else{
-            countryIp(); 
+        } else {
+            countryIp();
         }
     }
     public function searchStData(Request $request)
@@ -286,8 +294,8 @@ class FrontController extends Controller
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
                 return view('front.search', compact('vehicles', 'countries', 'location'));
-            }else{
-                countryIp(); 
+            } else {
+                countryIp();
             }
         }
     }
@@ -438,7 +446,7 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.why-choose-us', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
@@ -449,7 +457,7 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.how-to-order-from-auction', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
@@ -460,19 +468,19 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.how-to-buy-from-stock', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function shipping()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.shipping', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
@@ -480,83 +488,83 @@ class FrontController extends Controller
 
     public function inspectionService()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.inspection-services', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function overview()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.overview', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function companyProfile()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.company-profile', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function customerReview()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.customer-review', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function bankInformation()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.bank-information', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
 
     public function faq()
     {
-        
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.faq', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
     public function contactUs()
     {
-       
+
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('front.page.contact-us', compact('location', 'countryName'));
-        }else{
+        } else {
             countryIp();
         }
     }
