@@ -51,7 +51,7 @@ function countryIp(){
         Log::info($location);
         if(isset($location) and $location){
             $location = unserialize($location);
-            if(isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200){
+            if(isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206){
                 $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
                 $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                 $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
