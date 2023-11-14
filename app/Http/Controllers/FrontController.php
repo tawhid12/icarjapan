@@ -30,19 +30,20 @@ class FrontController extends Controller
     public function countrySelectpost(Request $request)
     {
         $countryName = Country::where('code', $request->code)->first();
-        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
-        if (isset($location) and $location) {
-            Log::info($location);
-            Log::info($countryName);
-            $location = unserialize($location);
-            if (isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200) {
-                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
-                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-                session()->put('countryName', $countryName);
-                session()->put('location', $location);
-                session()->put('current_locale_data', $current_locale_data);
-                return redirect()->route('index');
+        if ($countryName->ip_address) {
+            $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address);
+            if (isset($location) and $location) {
+                Log::info($location);
+                Log::info($countryName);
+                $location = unserialize($location);
+                if (isset($location['geoplugin_status']) and $location['geoplugin_status'] == 200) {
+                    $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                    $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                    session()->put('countryName', $countryName);
+                    session()->put('location', $location);
+                    session()->put('current_locale_data', $current_locale_data);
+                    return redirect()->route('index');
+                }
             }
         }
     }
