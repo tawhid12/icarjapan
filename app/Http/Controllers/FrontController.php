@@ -42,7 +42,7 @@ class FrontController extends Controller
                     session()->put('countryName', $countryName);
                     session()->put('location', $location);
                     session()->put('current_locale_data', $current_locale_data);
-                    return redirect()->route('index');
+                    return redirect()->route('front');
                 }
             }
         }
