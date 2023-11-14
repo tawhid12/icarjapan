@@ -38,11 +38,10 @@ class FrontController extends Controller
             //echo 'ok';die;
             $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $c_data->ip_address);
             if (isset($location) and $location) {
-                Log::info($location);
-                Log::info($c_data);
                 $location = unserialize($location);
                 //print_r($location);
                 if (isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206) {
+                    Log::info($location);
                     $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                     $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     session()->put('countryName', $countryName);
