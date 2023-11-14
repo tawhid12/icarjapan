@@ -34,6 +34,8 @@ class FrontController extends Controller
         Log::info($location);
         Log::info($countryName);
         if ($countryName->ip_address) {
+            unset($_SESSION['countryName']);
+            unset($_SESSION['location']);
             $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $countryName->ip_address));
             return redirect()->route('front');
         }
