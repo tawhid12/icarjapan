@@ -37,7 +37,7 @@ class FrontController extends Controller
 
         // Store the object in the session
         session()->put('countryName', $this->countryName);
-        session()->forget('location');
+        unset($_SESSION['location']);
         $location = array(
             'geoplugin_status' => 200,
             'geoplugin_currencyCode' => 'JPY',
