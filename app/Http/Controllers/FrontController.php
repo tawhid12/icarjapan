@@ -46,7 +46,6 @@ class FrontController extends Controller
 
         );
         session()->put('location', $location);
-        print_r($location);die;
     }
     public function countrySelectpost(Request $request)
     {
