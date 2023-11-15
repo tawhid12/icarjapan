@@ -40,8 +40,9 @@ class FrontController extends Controller
 
         $location = array(
             'geoplugin_status' => 200,
-            'geoplugin_currencyCode' => 'BDT',
-            'geoplugin_currencyConverter' => 110.6323
+            'geoplugin_currencyCode' => 'JPY',
+            'geoplugin_currencyConverter' => 151.699,
+            'geoplugin_timezone' => "Asia/Tokyo"
 
         );
         session()->put('location', $location);
