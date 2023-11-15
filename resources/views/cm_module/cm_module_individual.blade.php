@@ -68,7 +68,7 @@
                    
    
                     <div class="tab-pane fade" id="contact_history" role="tabpanel" aria-labelledby="contact-history-tab">
-                        <p><strong>Contact History</strong></p>
+                        @include('cm_module.partial.contact_history')
                     </div>
 
                     <div class="tab-pane fade" id="purchase_history" role="tabpanel" aria-labelledby="purchase-history-tab">
