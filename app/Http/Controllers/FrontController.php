@@ -27,6 +27,17 @@ use Intervention\Image\Facades\Image;
 
 class FrontController extends Controller
 {
+    protected $countryName;
+    public function __construct()
+    {
+        $this->countryName = new \stdClass(); // or create an instance of your class if it's a specific class
+
+        // Assign a value to the id property
+        $this->countryName->id = 109;
+
+        // Store the object in the session
+        session()->put('countryName', $this->countryName);
+    }
     public function countrySelectpost(Request $request)
     {
         $c_data = Country::where('code', $request->code)->first();
@@ -64,7 +75,13 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
+        $location = array(
+            'geoplugin_status' => 200,
+            'geoplugin_currencyCode' => 'BDT',
+            'geoplugin_currencyConverter' => 110.6323
 
+        );
+        session()->put('location', $location);
         //countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
