@@ -27,26 +27,6 @@ use Intervention\Image\Facades\Image;
 
 class FrontController extends Controller
 {
-    protected $countryName;
-    public function __construct()
-    {
-        $this->countryName = new \stdClass(); // or create an instance of your class if it's a specific class
-
-        // Assign a value to the id property
-        $this->countryName->id = 109;
-
-        // Store the object in the session
-        session()->put('countryName', $this->countryName);
-        unset($_SESSION['location']);
-        $location = array(
-            'geoplugin_status' => 200,
-            'geoplugin_currencyCode' => 'JPY',
-            'geoplugin_currencyConverter' => 151.699,
-            'geoplugin_timezone' => "Asia/Tokyo"
-
-        );
-        session()->put('location', $location);
-    }
     public function countrySelectpost(Request $request)
     {
         $c_data = Country::where('code', $request->code)->first();
@@ -70,10 +50,9 @@ class FrontController extends Controller
                     return redirect()->route('front');
                 }
             }
-        }else{
+        } else {
             return redirect()->route('front.countrySelect');
         }
-
     }
     public function countrySelect()
     {
@@ -84,15 +63,26 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        
+        $countryName = Country::select('id','name')->where('id',109)->first();
+        session()->put('countryName', $countryName);
+
+        $location = array(
+            'geoplugin_status' => 200,
+            'geoplugin_currencyCode' => 'JPY',
+            'geoplugin_currencyConverter' => 151.699,
+            'geoplugin_timezone' => "Asia/Tokyo"
+
+        );
+        session()->put('location', $location);
         //countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         /*echo '<pre>';
-        print_r(session()->all());
+        print_r($countryName);
+        echo $countryName->name;
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-
+          
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
