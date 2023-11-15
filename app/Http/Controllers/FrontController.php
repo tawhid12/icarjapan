@@ -46,6 +46,7 @@ class FrontController extends Controller
 
         );
         session()->put('location', $location);
+        print_r($location);die;
     }
     public function countrySelectpost(Request $request)
     {
@@ -92,7 +93,7 @@ class FrontController extends Controller
         print_r(session()->all());
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-print_r($location);die;
+
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
