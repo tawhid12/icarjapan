@@ -89,7 +89,7 @@ class ReservedVehicleController extends Controller
                     if(isset($port_data->aditional_cost))
                     $b->aditional_cost = $port_data->aditional_cost;
                     else
-                    $b->aditional_cost =  0
+                    $b->aditional_cost =  0;
                 }
                 $b->discount =  $vehicle->discount;
                 $b->shipment_type =  $request->shipment_type;
