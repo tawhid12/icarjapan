@@ -53,8 +53,9 @@
             <header class="mb-1">
                 <div class="header-top">
                     <div class="container">
+                    {{--route(currentUser().'.dashboard')--}}
                         <div class="logo">
-                            <a href="{{route(currentUser().'.dashboard')}}"><img src="{{ asset('assets/images/logo/header-logo.png')}}" alt="Logo"></a>
+                            <a href="{{route('/')}}"><img src="{{ asset('assets/images/logo/header-logo.png')}}" alt="Logo"></a>
                         </div>
                         <div class="header-top-right">
 
