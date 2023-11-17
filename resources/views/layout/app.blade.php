@@ -55,7 +55,7 @@
                     <div class="container">
                     {{--route(currentUser().'.dashboard')--}}
                         <div class="logo">
-                            <a href="{{route('/')}}"><img src="{{ asset('assets/images/logo/header-logo.png')}}" alt="Logo"></a>
+                            <a href="{{route('front')}}"><img src="{{ asset('assets/images/logo/header-logo.png')}}" alt="Logo"></a>
                         </div>
                         <div class="header-top-right">
 
