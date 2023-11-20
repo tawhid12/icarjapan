@@ -173,6 +173,8 @@ class AdminUserController extends Controller
         try {
             $user = User::findOrFail(encryptor('decrypt', $id));
             $user->cm_category = $request->cm_category;
+            $user->port_id = $request->port_id;
+
             if ($user->save())
                 return redirect()->back()->with(Toastr::success('Successfully updated!', 'Success', ["positionClass" => "toast-top-right"]));
             else

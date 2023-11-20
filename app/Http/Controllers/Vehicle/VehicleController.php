@@ -43,8 +43,20 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+        if ($search != '') {
+            $vehicles = Vehicle::where(function ($query) use ($search) {
+                $query->where('fullName', '=', '%' . $search . '%')
+                    ->orWhere('stock_id', '=', $search);
+            })->paginate(25);
+            $vehicles->appends(array('search' => $search,));
+            if (count($vehicles) > 0) {
+                return view('vehicle.vehicle.index', ['vehicles' => $vehicles]);
+            }
+            return back()->with('error', 'No results Found');
+        }
         $vehicles = Vehicle::latest()->paginate(20);
         return view('vehicle.vehicle.index', compact('vehicles'));
     }
@@ -491,7 +503,7 @@ class VehicleController extends Controller
                             DB::table('vehicle_images')->insert($vehicleImagesArr);
 
                             $image = Image::make(public_path('uploads/vehicle_images/' . $vehicleImagesArr['image']));
-                         
+
                             $image->resize(640, null, function ($constraint) {
                                 $constraint->aspectRatio();
                             });

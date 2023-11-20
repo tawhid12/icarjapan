@@ -76,16 +76,27 @@ class ReservedVehicleController extends Controller
                 }
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                 if ($request->shipment_type == 1) {
-                    $user = DB::table('users')->where('id', currentUserId())->first();
+                    $user = DB::table('users')->where('id', $request->user_id)->first();
+
                     $country_data = DB::table('countries')->where('id', $user->country_id)->first();
                     $b->insp_amt = $country_data->inspection;
                     $b->insu_amt = $country_data->insurance;
+                    if(is_null($user->port_id)){
+                        return redirect()->back()->with(Toastr::error('Please Select Port For User!', 'Fail', ["positionClass" => "toast-top-right"]));
+                    }
                     $port_data = DB::table('ports')->where('id', $user->port_id)->first();
+                    
+                    if($vehicle->m3 == 0.00)
+                    {
+                        return redirect()->back()->with(Toastr::error('M3 Value can not be Zero!', 'Fail', ["positionClass" => "toast-top-right"]));
+                    }
                     $b->m3_value = $vehicle->m3?$vehicle->m3:0;
-                    if(isset($port_data->m3))
+                    if($port_data->m3 == 0.00)
+                    {
+                        return redirect()->back()->with(Toastr::error('M3 Charge can not be Zero!', 'Fail', ["positionClass" => "toast-top-right"]));
+                    }
                     $b->m3_charge = $port_data->m3;
-                    else
-                    $b->m3_charge =0;
+                    
                     if(isset($port_data->aditional_cost))
                     $b->aditional_cost = $port_data->aditional_cost;
                     else

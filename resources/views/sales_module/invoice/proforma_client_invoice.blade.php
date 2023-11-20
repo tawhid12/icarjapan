@@ -59,6 +59,7 @@
                         
                         @if($shipment)
                         @php $consignee = \DB::table('consignee_details')->where('id',$shipment->consignee_id)->first(); @endphp
+                        @if($consignee)
                         <tr>
                             <th>CONSIGNEE NAME :</th>
                             <th>{{$consignee->c_name}}</th>
@@ -79,6 +80,7 @@
                                 @endif
                             </th>
                         </tr>
+                        @endif
                         @endif
                         <tr>
                             <th>Country:</th>
