@@ -24,11 +24,20 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (currentUser() == 'salesexecutive') {
             $users = User::where('created_by', currentUserId())->paginate(10);
         } else {
+            $search = $request->get('search');
+            if ($search != '') {
+                $users = User::where('name', 'like', '%' . $search . '%')->paginate(25);
+                $users->appends(array('search' => $search,));
+                if (count($users) > 0) {
+                    return view('settings.adminusers.index', ['users' => $users]);
+                }
+                return back()->with('error', 'No results Found');
+            }
             $users = User::paginate(10);
         }
         /*if(companyAccess()){
@@ -206,10 +215,10 @@ class AdminUserController extends Controller
             $user = User::find($id);
             if ($user) {
                 $this->setSession($user);
-                if(currentUser() == 'user'){
+                if (currentUser() == 'user') {
                     return redirect()->route('front')->with(Toastr::success('Successfully Login!', 'Success', ["positionClass" => "toast-top-right"]));
-                }else{
-                    return redirect()->route($user->role->identity.'.dashboard')->with(Toastr::success('Successfully Login!', 'Success', ["positionClass" => "toast-top-right"]));
+                } else {
+                    return redirect()->route($user->role->identity . '.dashboard')->with(Toastr::success('Successfully Login!', 'Success', ["positionClass" => "toast-top-right"]));
                 }
             }
         } catch (Exception $e) {

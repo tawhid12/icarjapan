@@ -9,6 +9,13 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
+                <ul class="pagination justify-content-end">
+                    <form action="{{route(currentUser().'.admin.index')}}" role="search" class="d-flex">
+                        @csrf
+                        <input type="text" placeholder="Search User.." name="search" class="form-control">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </form>
+                </ul>
                 @include('layout.message')
                 <div>
                     @if(currentUser() != 'accountant')
