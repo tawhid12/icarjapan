@@ -41,7 +41,7 @@ class FrontController extends Controller
                 $location = unserialize($location);
                 //print_r($location);
                 if (isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206) {
-                    Log::info($location);
+                    //Log::info($location);
                     $current_locale_data = Carbon::now($location['geoplugin_timezone']);
                     $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     session()->put('countryName', $countryName);
@@ -225,7 +225,7 @@ class FrontController extends Controller
         $countryName =  request()->session()->get('countryName');
         $v = Vehicle::where('stock_id', trim($stock_id))->first();
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id) && isset($v->id)) {
-            Log::info("Vehicle Id {$v->id}");
+            //Log::info("Vehicle Id {$v->id}");
             /*echo '</pre>';
             print_r($countryName);
             print_r($location);
