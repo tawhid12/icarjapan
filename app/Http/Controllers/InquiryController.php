@@ -61,7 +61,7 @@ class InquiryController extends Controller
             $in->created_by = currentUserId();
 
             if ($in->save()) {
-                $inquiry = Inquiry::findOrFail($in->id);
+                $inquiry = Inquiry::with('country')->findOrFail($in->id);
                 $v_data = Vehicle::where('id', $inquiry->vehicle_id)->first();
                 $type = 1; //Inquiry Received
                 /*To User */

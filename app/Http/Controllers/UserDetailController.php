@@ -85,9 +85,9 @@ class UserDetailController extends Controller
             $userdetl->mother_name=$request->mother_name;
             $userdetl->address1=$request->address1;
             $userdetl->address2=$request->address2;
-            $userdetl->city=$request->city;
+            /*$userdetl->city=$request->city;
             $userdetl->state=$request->state;
-            $userdetl->zip=$request->zip;
+            $userdetl->zip=$request->zip;*/
             $userdetl->whatsapp=$request->whatsapp;
             $userdetl->facebook=$request->facebook;
             $userdetl->viver=$request->viver;

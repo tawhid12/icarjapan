@@ -64,7 +64,10 @@
         <table style="width:80%;border:1px solid #000;">
             <tr><th>Vehicle Details</th</tr>
             <tr>
-                <td><strong>Vehicle Name:{{$v_data->name}}</strong></td>
+                <td>
+                    <strong>Vehicle Name:{{$v_data->name}}</strong>
+                    <p>Country:{{$inquiry->country->?name}}</p>
+                </td>
             </tr>
             <tr>
                 <td><strong>Stock ID:{{$v_data->stock_id}}</strong></td>

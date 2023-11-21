@@ -67,7 +67,7 @@
                 </tr>
                 <tr>
                     <th rowspan="4" scope="col">{{__('Address')}}</th>
-                    <td rowspan="4" colspan="3">Bahadarhat</td>
+                    <td rowspan="4" colspan="3">{{$client_details->address1}}</td>
                     <th rowspan="3" scope="col">{{__('Delay Payment Cars')}}</th>
                     <td rowspan="3">0</td>
                     <th rowspan="3" scope="col">{{__('Why not buy')}}</th>
@@ -94,8 +94,8 @@
                     <td rowspan="3">%</td>
                 </tr>
                 <tr>
-                    <td rowspan="2">SP *</td>
-                    <td rowspan="2">CM **</td>
+                    <td rowspan="2">@if($client_data->cmType==1) SP * @endif</td>
+                    <td rowspan="2">@if($client_data->cmType==2) CM ** @endif</td>
                     <td colspan="2">Update User</td>
                 </tr>
                 <tr>

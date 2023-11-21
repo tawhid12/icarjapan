@@ -178,12 +178,14 @@
                                 <td>USD</td>
                                 <td colspan="2">
                                     @if($v->shipment_type == 1)
-                                    {{$v->freight_amt}}
+                                    {{--$v->freight_amt--}}
+                                    {{($v->m3_value*$v->m3_charge)+$v->aditional_cost}}
                                     @else
                                     <input type="text" name="freight_amt" value="{{$v->freight_amt}}">
                                     @endif
                                 </td>
                             </tr>
+                            @if($v->insu_amt > 0)
                             <tr>
                                 <th>Insurance Amount:</th>
                                 <td>USD</td>
@@ -195,6 +197,8 @@
                                     @endif
                                 </td>
                             </tr>
+                            @endif
+                            @if($v->insp_amt > 0)
                             <tr>
                                 <th>Inspection Amount:</th>
                                 <td>USD</td>
@@ -206,7 +210,8 @@
                                     @endif
                                 </td>
                             </tr>
-                            <tr>
+                            @endif
+                            {{--<tr>
                                 <th>M3 Value</th>
                                 <td>USD</td>
                                 <td colspan="2">
@@ -238,7 +243,7 @@
                                     <input type="text" name="aditional_cost" value="{{$v->aditional_cost}}">
                                     @endif
                                 </td>
-                            </tr>
+                            </tr>--}}
                             <!-- <tr>
                                 <th>Discount:</th>
                                 <td>USD</td>
