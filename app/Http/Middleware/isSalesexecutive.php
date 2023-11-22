@@ -28,7 +28,8 @@ class isSalesexecutive
             if(!$user){
                 return redirect()->route('logOut');
             }else if(currentUser() != 'salesexecutive'){
-                return redirect()->back()->with($this->resMessageHtml(false,'error','Access Denied'));
+                //return redirect()->back()->with($this->resMessageHtml(false,'error','Access Denied'));
+                return redirect()->route('logOut');
             }else{
                 $access=UserAccess::where('user_id',$user->id);
                 return $next($request);
