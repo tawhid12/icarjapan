@@ -12,6 +12,7 @@ use App\Http\Requests\AdminUser\UpdateRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\ImageHandleTraits;
 use App\Models\UserDetail;
+use App\Models\Settings\Country;
 use Carbon\Carbon;
 use Exception;
 use Toastr;
@@ -26,26 +27,33 @@ class AdminUserController extends Controller
      */
     public function index(Request $request)
     {
+        $roles = Role::all();
+        $countries = Country::all();
+        $order_by = 'desc';
         if (currentUser() == 'salesexecutive') {
-            $users = User::where('created_by', currentUserId())->paginate(10);
+            $users = User::with('country')->where('created_by', currentUserId())->paginate(50);
         } else {
-            $search = $request->get('search');
-            if ($search != '') {
-                $users = User::where('name', 'like', '%' . $search . '%')->paginate(25);
-                $users->appends(array('search' => $search,));
-                if (count($users) > 0) {
-                    return view('settings.adminusers.index', ['users' => $users]);
-                }
-                return back()->with('error', 'No results Found');
+            //$users = User::with(['country','role'])->where('role_id', 3)->orderBy('id','desc')->paginate(50);
+            $users = User::with(['country','role']);
+            if ($request->search) {
+                $users = $users->where('name', 'like', '%' . $request->search . '%');
+            } elseif ($request->country_id) {
+                $users = $users->where('country_id', $request->country_id);
+            }elseif ($request->role_id) {
+                $users = $users->where('role_id', $request->role_id);
+            }elseif ($request->order_by) {
+                $order_by = $request->order_by;
             }
-            $users = User::paginate(10);
+            $users = $users->orderBy('id',$order_by)->paginate(50);
+            $users = $users->appends(
+                [
+                    'search' => $request->search,
+                    'country_id' => $request->country_id,
+                    'role_id' => $request->role_id,
+                ]
+            );
         }
-        /*if(companyAccess()){
-            $users=User::paginate(10);
-        }else{
-            $users=User::where(company())->paginate(10);
-        }*/
-        return view('settings.adminusers.index', compact('users'));
+        return view('settings.adminusers.index', compact('users', 'roles', 'countries'));
     }
 
     /**

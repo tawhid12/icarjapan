@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\Settings\Country;
+use App\Models\Role;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
@@ -59,4 +60,8 @@ class User extends Authenticatable
     public function userDetl(){
         return $this->hasOne(UserDetail::class);
     }
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
 }
