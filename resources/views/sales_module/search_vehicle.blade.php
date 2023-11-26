@@ -5,38 +5,38 @@
 <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
-    .form-control:focus {
-        box-shadow: none;
-    }
+  .form-control:focus {
+    box-shadow: none;
+  }
 
-    .ui-widget {
-        font-size: 0.8em;
-    }
+  .ui-widget {
+    font-size: 0.8em;
+  }
 </style>
 @endpush
 @section('content')
 <!-- Bordered table start -->
 <section class="section">
-    <div class="col-12">
-        <div class="card">
-            @include('layout.message')
-            {{--<form action="{{route('search_by_data')}}">
-                @csrf()
-                <!-- mid row 1 -->
-                <div class="mid-row-1">
-                    <div class="input-group d-flex align-items-center mb-2">
-                        <span class="input-group-text">Search Car</span>
-                        <input type="hidden" name="sales_search" value="search">
-                        <input name="sdata" type="text" id="item_search" class="form-control ui-autocomplete-input" style="padding:6px .75rem" />
-                        <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
-                    </div>
-                </div>
-            </form>--}}
+  <div class="col-12">
+    <div class="card">
+      @include('layout.message')
+      {{--<form action="{{route('search_by_data')}}">
+      @csrf()
+      <!-- mid row 1 -->
+      <div class="mid-row-1">
+        <div class="input-group d-flex align-items-center mb-2">
+          <span class="input-group-text">Search Car</span>
+          <input type="hidden" name="sales_search" value="search">
+          <input name="sdata" type="text" id="item_search" class="form-control ui-autocomplete-input" style="padding:6px .75rem" />
+          <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+        </div>
+      </div>
+      </form>--}}
 
 
 
 
-<form action="{{route('front_adv_search_by_data')}}">
+      <form action="{{route('front_adv_search_by_data')}}">
         @csrf
         <input type="hidden" name="adv_search" value="sale_module_search">
         <div class="search-body-upper shadow p-3">
@@ -141,9 +141,9 @@
                   @endphp -->
               </select>
             </div>
-      
+
             <div class="col-sm-3 mb-3 d-flex">
-              <select name="from_price"class="form-select form-select-md">
+              <select name="from_price" class="form-select form-select-md">
                 <option value="">Price Range:</option>
                 <option value="501">USD 501</option>
                 @php
@@ -271,7 +271,7 @@
             <!-- <div class="collapse" id="myCollapsible">
               <div class="row gx-1"> -->
 
-                <!--<div class="col-sm-3 mb-3 d-flex">
+            <!--<div class="col-sm-3 mb-3 d-flex">
                   <select name="b_length" class="form-select form-select-md">
                     <option value="">Body Length:</option>
                     <option value="1">Under 3400 MM</option>
@@ -283,53 +283,53 @@
                     <option value="7">Over 5000 MM</option>
                   </select>
                 </div>-->
-                <div class="col-sm-3 mb-3 d-flex">
-                  <select name="max_loading_capacity" class="form-select form-select-md">
-                    <option value="">Max Loading Cepacity:</option>
-                    <option value="1">Under 1 Ton</option>
-                    <option value="2">1 to 2 Ton</option>
-                    <option value="3">2 to 2.5 Ton</option>
-                    <option value="4">3 to 4 Ton</option>
-                    <option value="5">4 to 5 Ton</option>
-                    <option value="6">5 to 6 Ton</option>
-                    <option value="6">6 to 7 Ton</option>
-                    <option value="6">7 to 8 Ton</option>
-                    <option value="6">8 to 9 Ton</option>
-                    <option value="6">9 to 10 Ton</option>
-                    <option value="7">Over 10 Ton</option>
-                  </select>
-                </div>
-                <!--<div class="col-sm-3 mb-3 d-flex">
+            <div class="col-sm-3 mb-3 d-flex">
+              <select name="max_loading_capacity" class="form-select form-select-md">
+                <option value="">Max Loading Cepacity:</option>
+                <option value="1">Under 1 Ton</option>
+                <option value="2">1 to 2 Ton</option>
+                <option value="3">2 to 2.5 Ton</option>
+                <option value="4">3 to 4 Ton</option>
+                <option value="5">4 to 5 Ton</option>
+                <option value="6">5 to 6 Ton</option>
+                <option value="6">6 to 7 Ton</option>
+                <option value="6">7 to 8 Ton</option>
+                <option value="6">8 to 9 Ton</option>
+                <option value="6">9 to 10 Ton</option>
+                <option value="7">Over 10 Ton</option>
+              </select>
+            </div>
+            <!--<div class="col-sm-3 mb-3 d-flex">
                   <select class="form-select form-select-md">
                     <option value="">Engine Type:</option>
                   </select>
                 </div>-->
-                @if($max_manu_Year && $min_manu_Year)
-                <div class="col-sm-3 mb-3 d-flex">
-                  <select class="form-select form-select-md">
-                    <option value="">Prod Year:</option>
-                    @php
-                    for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
-                    @endphp
-                    <option value="{{$i}}">{{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                  </select>
-                  <span>~</span>
-                  <select class="form-select form-select-md">
-                    <option value="">Prod Year:</option>
-                    @php
-                    for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
-                    @endphp
-                    <option value="{{$i}}">{{$i}}</option>
-                    @php
-                    }
-                    @endphp
-                  </select>
-                </div>
-                @endif
-                <!--<div class="col-sm-3 mb-3 d-flex">
+            @if($max_manu_Year && $min_manu_Year)
+            <div class="col-sm-3 mb-3 d-flex">
+              <select class="form-select form-select-md">
+                <option value="">Prod Year:</option>
+                @php
+                for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
+                @endphp
+                <option value="{{$i}}">{{$i}}</option>
+                @php
+                }
+                @endphp
+              </select>
+              <span>~</span>
+              <select class="form-select form-select-md">
+                <option value="">Prod Year:</option>
+                @php
+                for ($i = $max_manu_Year; $i >= $min_manu_Year; $i --) {
+                @endphp
+                <option value="{{$i}}">{{$i}}</option>
+                @php
+                }
+                @endphp
+              </select>
+            </div>
+            @endif
+            <!--<div class="col-sm-3 mb-3 d-flex">
                   <select class="form-select form-select-md">
                     <option value="0">Truck Size:</option>
                     <option value="1">Large Truck</option>
@@ -338,157 +338,157 @@
                     <option value="4">Multicab</option>
                   </select>
                 </div>-->
-                <div class="col-sm-3 mb-3 d-flex">
-                  <select name="inv_locatin_id" class="form-select form-select-md">
-                    <option value="">Inventory Location:</option>
-                    @forelse($inv_loc as $inv)
-                    <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>
-                    {{optional($inv->country)->name}}
-                    </option>
-                    @empty
-                    @endforelse
-                  </select>
-                </div>
-                <!--<div class="col-sm-3 mb-3 d-flex">
+            <div class="col-sm-3 mb-3 d-flex">
+              <select name="inv_locatin_id" class="form-select form-select-md">
+                <option value="">Inventory Location:</option>
+                @forelse($inv_loc as $inv)
+                <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>
+                  {{optional($inv->country)->name}}
+                </option>
+                @empty
+                @endforelse
+              </select>
+            </div>
+            <!--<div class="col-sm-3 mb-3 d-flex">
                   <select class="form-select form-select-md">
                     <option value="0">Port:</option>
                   </select>
                 </div>-->
-              </div>
-             
-              <div class="row gx-1">
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_bag" />
-                    <label class="form-check-label" for="exampleCheck1">Air Bag</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="anti_lock_brake_system" />
-                    <label class="form-check-label" for="exampleCheck1">Anti-Lock Brake System</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_con" />
-                    <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="alloy_wheels" />
-                    <label class="form-check-label" for="exampleCheck1">Alloy Wheels</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="back_tire" />
-                    <label class="form-check-label" for="exampleCheck1">Back Tire</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="fog_lights" />
-                    <label class="form-check-label" for="exampleCheck1">Fog Lights</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="grill_guard" />
-                    <label class="form-check-label" for="exampleCheck1">Grill Guard</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="leather_seat" />
-                    <label class="form-check-label" for="exampleCheck1">Leather Seats</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="navigation" />
-                    <label class="form-check-label" for="exampleCheck1">Navigation</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_steering" />
-                    <label class="form-check-label" for="exampleCheck1">Power Steering</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_windows" />
-                    <label class="form-check-label" for="exampleCheck1">Power Windows</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Roof Rails</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rear_spoiler" />
-                    <label class="form-check-label" for="exampleCheck1">Rear Spoiler</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="sun_roof" />
-                    <label class="form-check-label" for="exampleCheck1">Sun Roof</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="tv" />
-                    <label class="form-check-label" for="exampleCheck1">TV</label>
-                  </div>
-                </div>
-                <div class="col-sm-2 my-1 d-flex">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Dual Air Bags</label>
-                  </div>
-                </div>
-              </div>
-             
-              <div class="col-sm-12 mb-3">
-                <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
-                <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
-
-                <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
-                <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
-
-                <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
-                <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
-
-                <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
-
-                <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
-                <label class="form-check-label me-3 img-360" for="360_img"></label>
-
-
-              </div>
-              <div class="d-flex align-items-center justify-content-end">
-
-                <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
-                  Reset
-                </button>
-                <button type="submit" class="col-md-2 btn btn-primary btn-sm">
-                  Search
-                </button>
-
-              </div>
-            <!-- </div> -->
-
           </div>
 
-          <!-- left Total Calculation-->
-          <!--<div class="search-left-4 my-3">
+          <div class="row gx-1">
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_bag" />
+                <label class="form-check-label" for="exampleCheck1">Air Bag</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="anti_lock_brake_system" />
+                <label class="form-check-label" for="exampleCheck1">Anti-Lock Brake System</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_con" />
+                <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="alloy_wheels" />
+                <label class="form-check-label" for="exampleCheck1">Alloy Wheels</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="back_tire" />
+                <label class="form-check-label" for="exampleCheck1">Back Tire</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="fog_lights" />
+                <label class="form-check-label" for="exampleCheck1">Fog Lights</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="grill_guard" />
+                <label class="form-check-label" for="exampleCheck1">Grill Guard</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="leather_seat" />
+                <label class="form-check-label" for="exampleCheck1">Leather Seats</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="navigation" />
+                <label class="form-check-label" for="exampleCheck1">Navigation</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_steering" />
+                <label class="form-check-label" for="exampleCheck1">Power Steering</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_windows" />
+                <label class="form-check-label" for="exampleCheck1">Power Windows</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                <label class="form-check-label" for="exampleCheck1">Roof Rails</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rear_spoiler" />
+                <label class="form-check-label" for="exampleCheck1">Rear Spoiler</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="sun_roof" />
+                <label class="form-check-label" for="exampleCheck1">Sun Roof</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="tv" />
+                <label class="form-check-label" for="exampleCheck1">TV</label>
+              </div>
+            </div>
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                <label class="form-check-label" for="exampleCheck1">Dual Air Bags</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 mb-3">
+            <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
+            <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
+
+            <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
+            <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
+
+            <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
+            <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
+
+            <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
+
+            <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
+            <label class="form-check-label me-3 img-360" for="360_img"></label>
+
+
+          </div>
+          <div class="d-flex align-items-center justify-content-end">
+
+            <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
+              Reset
+            </button>
+            <button type="submit" class="col-md-2 btn btn-primary btn-sm">
+              Search
+            </button>
+
+          </div>
+          <!-- </div> -->
+
+        </div>
+
+        <!-- left Total Calculation-->
+        <!--<div class="search-left-4 my-3">
             <div class="price-calc search-body shadow p-2">
               <div class="row gx-1">
                 <div class="col-3">
@@ -533,7 +533,7 @@
                       </select>
                     </div>
                   </div>-->
-                  <!--<div class="row mb-1">
+        <!--<div class="row mb-1">
                     <div class="col-md-5">
                       <label class="price-label">Freight:</label>
                     </div>
@@ -548,7 +548,7 @@
                       </div>
                     </div>
                   </div>-->
-                <!--</div>
+        <!--</div>
                 <div class="col-md-4">
                   <div class="row mb-1">
                     <div class="col-md-5">
@@ -600,190 +600,190 @@
             </div>
           </div>-->
 
-     
-        </form>
 
-            <div class="container">
-                @if(!empty($vehicles) && !empty($countries))
-                <h4>Search Results</h4>
-                <div class="single-vehicle p-2 my-3">
-                    <div class="row">
-                        @forelse($vehicles as $v)
+      </form>
 
-                        <div class="col-md-2">
-                            @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
-                            @if($cover_img)
-                            <img src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" width="210px" height="140px" />
-                            @else
-                            <img src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" alt="" width="210px" height="140px" />
-                            @endif
-                            <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
-                            @if($v->r_status != null)
-                            <p class="m-0 text-danger"><strong>Reserved </strong></p>
-                            {{--For | CM ID:-\DB::table('reserved_vehicles')->where('vehicle_id',$v->id)->first()->user_id--}}
-                            @endif
-                            @if($v->sold_status)
-                            <p class="m-0 text-success"><strong>SOLD</strong></p>
-                            @endif
-                        </div>
-                        <div class="col-md-10">
-                            <div class="col-md-12 d-flex justify-content-between align-items-center">
-                                <span class="v-tag"><a href="">New Arival</a></span>
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <!-- Add | Check Favourite -->
-                                    @php $fav_exixts = \DB::table('favourite_vehicles')->where('vehicle_id',$v->id)->where('user_id',currentUserId())->first(); @endphp
-                                    @if(!$fav_exixts)
-                                    <form method="post" id="withdraw-active-form" action="{{route(currentUser().'.favourvehicle.store')}}" style="display: inline;">
-                                        @csrf
-                                        <input name="vehicle_id" type="hidden" value="{{$v->id}}">
-                                        <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="fav btn btn-secondary btn-sm" data-toggle="tooltip" title="favourite"><i class="fa fa-heart"></i>Add to Favorites</a>
-                                    </form>
-                                    @else
-                                    <button class="btn btn-sm btn-success">Already In Favourite List</button>
-                                    @endif
+      <div class="container">
+        @if(!empty($vehicles) && !empty($countries))
+        <h4>Search Results</h4>
+        <div class="single-vehicle p-2 my-3">
+          <div class="row">
+            @forelse($vehicles as $v)
 
-                                    <!-- Add | Cehck Reserve -->
-                                    @if($v->r_status == null)
-                                    <a data-vehicle-id="{{ $v->id }}" data-fullName="{{ $v->fullName }}" href="#" data-bs-toggle="modal" data-bs-target="#reserveModal" class="ms-2 d-inline-block btn btn-primary btn-sm" title="Reserve">Reserve</a>
-                                    @endif
-                                </div>
-
-
-                            </div>
-                            <div class="heading d-flex justify-content-between">
-
-                                <h6 class="v-heading">{{--<a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}">--}}{{strtoupper($v->fullName)}}{{--</a>--}}</h5>
-                                    @if($v->inv_locatin_id)
-                                    @php $inventory_loc = \DB::table('countries')->where('id',$v->inv_locatin_id)->first();@endphp
-                                    <p class="m-0 stock-text" style="font-size:medium">Inventory Location <i class="fa fa-flag"></i><span>{{$inventory_loc->name}}</span></p>
-                                    @endif
-                            </div>
-                            <div class="row gx-1">
-                                <div class="col-md-3">
-                                    <div class="">
-                                        @php
-                                        $actual_price = $v->price;
-                                        $dis_price = $v->price*$v->discount/100;
-                                        $price_after_dis = ($actual_price-$dis_price);
-                                        @endphp
-                                        <p class="price-text m-0">Vehicle Price:
-
-
-                                            <span>USD {{$price_after_dis}}</span>
-                                        </p>
-                                        @if($v->discount > 0)
-                                        <del>USD {{$actual_price}}</del>
-                                        @endif
-
-                                    </div>
-                                    <p class="price-text m-0">Total Price: <span>${{number_format($price_after_dis, 2, ',', ',')}}</span></p>
-                                    @if($v->discount > 0)
-                                    <p>Save: {{$v->discount}}</p>
-                                    @endif
-
-                                </div>
-                                <div class="col-md-9">
-                                    <table class="table table-bordered m-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Production Year</th>
-                                                <th>Mileage</th>
-                                                <th>Engine</th>
-                                                <th>Trans</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>{{$v->manu_year}}</td>
-                                                <td>{{$v->mileage}}</td>
-                                                <td>{{$v->e_code}}</td>
-                                                <td>{{$v->tname}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table mt-2 custom-table">
-                                        <tr>
-                                            <td>DBA-L175S</td>
-                                            <td>
-                                                @if($v->fuel_id)
-                                                @php $fuel = \DB::table('fuels')->where('id',$v->fuel_id)->first();@endphp
-                                                {{$fuel->name}}
-                                                @endif
-                                            </td>
-                                            <td>@if($v->steering == 1) RHD @else LHD @endif</td>
-                                            <td>
-                                                @if($v->drive_id)
-                                                @php $drive = \DB::table('drive_types')->where('id',$v->drive_id)->first();@endphp
-                                                {{$drive->name}}
-                                                @endif
-                                            </td>
-                                            <td>4 Seats</td>
-                                            <td>5 Doors</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <p class="m-0 feature-text">
-                                @if($v->power_steering ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Power Steering</span>
-                                @endif
-                                @if($v->air_con ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Air Conditioner</span>
-                                @endif
-                                <span class="px-1" style="border-right:1px solid #ddd;">Alloy Wheels</span>
-                                @if($v->navigation ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Navigation</span>
-                                @endif
-                                @if($v->air_bag ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Air Bag</span>
-                                @endif
-                                @if($v->anti_lock_brake_system ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Anti Lock Brake System</span>
-                                @endif
-                                @if($v->power_windows ==1)
-                                <span class="px-1" style="border-right:1px solid #ddd;">Power Windows</span>
-                                @endif
-                            </p>
-
-                        </div>
-                        @empty
-                        @endforelse
-
-                    </div>
-                </div>
-                <div class="pt-2">
-                    {{ $vehicles->links() }}
-                </div>
-                @endif
+            <div class="col-md-2">
+              @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
+              @if($cover_img)
+              <img src="{{asset('uploads/vehicle_images/'.$cover_img->image)}}" alt="" width="210px" height="140px" />
+              @else
+              <img src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" alt="" width="210px" height="140px" />
+              @endif
+              <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
+              @if($v->r_status != null)
+              <p class="m-0 text-danger"><strong>Reserved </strong></p>
+              {{--For | CM ID:-\DB::table('reserved_vehicles')->where('vehicle_id',$v->id)->first()->user_id--}}
+              @endif
+              @if($v->sold_status)
+              <p class="m-0 text-success"><strong>SOLD</strong></p>
+              @endif
             </div>
+            <div class="col-md-10">
+              <div class="col-md-12 d-flex justify-content-between align-items-center">
+                <span class="v-tag"><a href="">New Arival</a></span>
+                <div class="d-flex justify-content-end align-items-center">
+                  <!-- Add | Check Favourite -->
+                  @php $fav_exixts = \DB::table('favourite_vehicles')->where('vehicle_id',$v->id)->where('user_id',currentUserId())->first(); @endphp
+                  @if(!$fav_exixts)
+                  <form method="post" id="withdraw-active-form" action="{{route(currentUser().'.favourvehicle.store')}}" style="display: inline;">
+                    @csrf
+                    <input name="vehicle_id" type="hidden" value="{{$v->id}}">
+                    <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="fav btn btn-secondary btn-sm" data-toggle="tooltip" title="favourite"><i class="fa fa-heart"></i>Add to Favorites</a>
+                  </form>
+                  @else
+                  <button class="btn btn-sm btn-success">Already In Favourite List</button>
+                  @endif
 
+                  <!-- Add | Cehck Reserve -->
+                  @if($v->r_status == null)
+                  <a data-vehicle-id="{{ $v->id }}" data-fullName="{{ $v->fullName }}" href="#" data-bs-toggle="modal" data-bs-target="#reserveModal" class="ms-2 d-inline-block btn btn-primary btn-sm" title="Reserve">Reserve</a>
+                  @endif
+                </div>
+
+
+              </div>
+              <div class="heading d-flex justify-content-between">
+
+                <h6 class="v-heading">{{--<a href="{{route('singleVehicle',['brand'=>$v->b_slug,'subBrand'=>$v->sb_slug,'stock_id'=>$v->stock_id])}}">--}}{{strtoupper($v->fullName)}}{{--</a>--}}</h5>
+                  @if($v->inv_locatin_id)
+                  @php $inventory_loc = \DB::table('countries')->where('id',$v->inv_locatin_id)->first();@endphp
+                  <p class="m-0 stock-text" style="font-size:medium">Inventory Location <i class="fa fa-flag"></i><span>{{$inventory_loc->name}}</span></p>
+                  @endif
+              </div>
+              <div class="row gx-1">
+                <div class="col-md-3">
+                  <div class="">
+                    @php
+                    $actual_price = $v->price;
+                    $dis_price = $v->price*$v->discount/100;
+                    $price_after_dis = ($actual_price-$dis_price);
+                    @endphp
+                    <p class="price-text m-0">Vehicle Price:
+
+
+                      <span>USD {{$price_after_dis}}</span>
+                    </p>
+                    @if($v->discount > 0)
+                    <del>USD {{$actual_price}}</del>
+                    @endif
+
+                  </div>
+                  <p class="price-text m-0">Total Price: <span>${{number_format($price_after_dis, 2, ',', ',')}}</span></p>
+                  @if($v->discount > 0)
+                  <p>Save: {{$v->discount}}</p>
+                  @endif
+
+                </div>
+                <div class="col-md-9">
+                  <table class="table table-bordered m-0">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Production Year</th>
+                        <th>Mileage</th>
+                        <th>Engine</th>
+                        <th>Trans</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{$v->manu_year}}</td>
+                        <td>{{$v->mileage}}</td>
+                        <td>{{$v->e_code}}</td>
+                        <td>{{$v->tname}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table mt-2 custom-table">
+                    <tr>
+                      <td>{{$v->chassis_no}}</td>
+                      <td>
+                        @if($v->fuel_id)
+                        @php $fuel = \DB::table('fuels')->where('id',$v->fuel_id)->first();@endphp
+                        {{$fuel->name}}
+                        @endif
+                      </td>
+                      <td>@if($v->steering == 1) RHD @else LHD @endif</td>
+                      <td>
+                        @if($v->drive_id)
+                        @php $drive = \DB::table('drive_types')->where('id',$v->drive_id)->first();@endphp
+                        {{$drive->name}}
+                        @endif
+                      </td>
+                      <td>4 Seats</td>
+                      <td>5 Doors</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <p class="m-0 feature-text">
+                @if($v->power_steering ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Power Steering</span>
+                @endif
+                @if($v->air_con ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Air Conditioner</span>
+                @endif
+                <span class="px-1" style="border-right:1px solid #ddd;">Alloy Wheels</span>
+                @if($v->navigation ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Navigation</span>
+                @endif
+                @if($v->air_bag ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Air Bag</span>
+                @endif
+                @if($v->anti_lock_brake_system ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Anti Lock Brake System</span>
+                @endif
+                @if($v->power_windows ==1)
+                <span class="px-1" style="border-right:1px solid #ddd;">Power Windows</span>
+                @endif
+              </p>
+
+            </div>
+            @empty
+            @endforelse
+
+          </div>
         </div>
+        <div class="pt-2">
+          {{ $vehicles->links() }}
+        </div>
+        @endif
+      </div>
+
     </div>
+  </div>
 </section>
 
 <div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="reserveModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <form class="form" method="post" action="{{route(currentUser().'.reservevehicle.store')}}" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="vehicle_id" id="vehicle_id">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title" id="addNoteModalLabel"></h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 class="text-primary text-center">Reserve Vehicle :-<span id="fullname"></span></h5>
-                <div class="modal-body" id="clientData">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Reserve</button>
-                </div>
-            </form>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <form class="form" method="post" action="{{route(currentUser().'.reservevehicle.store')}}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="vehicle_id" id="vehicle_id">
+        <div class="modal-header text-center">
+          <h4 class="modal-title" id="addNoteModalLabel"></h4>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <h5 class="text-primary text-center">Reserve Vehicle :-<span id="fullname"></span></h5>
+        <div class="modal-body" id="clientData">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Reserve</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 @endsection
 @push('scripts')
@@ -793,170 +793,170 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    $('#reserveModal').on('show.bs.modal', function(event) {
-        $('#clientData').empty();
-        var button = $(event.relatedTarget);
-        var vehicle_id = button.data('vehicle-id');
-        var fullname = button.data('fullname');
-        var modal = $(this);
-        modal.find('#vehicle_id').val(vehicle_id);
-        modal.find('#fullname').text(fullname);
+  $('#reserveModal').on('show.bs.modal', function(event) {
+    $('#clientData').empty();
+    var button = $(event.relatedTarget);
+    var vehicle_id = button.data('vehicle-id');
+    var fullname = button.data('fullname');
+    var modal = $(this);
+    modal.find('#vehicle_id').val(vehicle_id);
+    modal.find('#fullname').text(fullname);
 
+    $.ajax({
+      url: "{{route(currentUser().'.all_client_list_json')}}",
+      method: 'GET',
+      dataType: 'json',
+      success: function(res) {
+        console.log(res.data);
+        $('#clientData').append(res.data);
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
+
+  });
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+
+    $("#item_search").autocomplete({
+      source: function(data, cb) {
+        //console.log(data);
         $.ajax({
-            url: "{{route(currentUser().'.all_client_list_json')}}",
-            method: 'GET',
-            dataType: 'json',
-            success: function(res) {
-                console.log(res.data);
-                $('#clientData').append(res.data);
-            },
-            error: function(e) {
-                console.log(e);
+          autoFocus: true,
+          url: "{{route('searchStData')}}", //To Get Data
+          method: 'GET',
+          dataType: 'json',
+          data: {
+            sdata: data.term
+          },
+          success: function(res) {
+            console.log(res);
+            var result;
+            result = {
+              label: 'No Records Found ',
+              value: ''
+            };
+            if (res.length) {
+              result = $.map(res, function(el) {
+                console.log(el);
+                return {
+                  label: el,
+                  value: '',
+                  id: el
+                };
+              });
             }
+            cb(result);
+          },
+          error: function(e) {
+            console.log(e);
+          }
         });
-
-    });
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-
-        $("#item_search").autocomplete({
-            source: function(data, cb) {
-                //console.log(data);
-                $.ajax({
-                    autoFocus: true,
-                    url: "{{route('searchStData')}}", //To Get Data
-                    method: 'GET',
-                    dataType: 'json',
-                    data: {
-                        sdata: data.term
-                    },
-                    success: function(res) {
-                        console.log(res);
-                        var result;
-                        result = {
-                            label: 'No Records Found ',
-                            value: ''
-                        };
-                        if (res.length) {
-                            result = $.map(res, function(el) {
-                                console.log(el);
-                                return {
-                                    label: el,
-                                    value: '',
-                                    id: el
-                                };
-                            });
-                        }
-                        cb(result);
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }
-                });
-            },
-            response: function(e, ui) {
-                /*if (ui.content.length == 1) {
-                	$(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
-                	$(this).autocomplete("close");
-                }*/
-                //console.log(ui);
-            },
-            //loader start
-            search: function(e, ui) {},
-            select: function(e, ui) {
-                if (typeof ui.content != 'undefined') {
-                    if (isNaN(ui.content[0].id)) {
-                        return;
-                    }
-                    //var student_id = ui.content[0].id;
-                } else {
-                    //var student_id = ui.item.id;
-                }
-
-                //return_row_with_data(student_id);
-                $("#item_search").val('');
-            },
-            //loader end
-        });
-        /*$("input[name='created_at']").daterangepicker({
-            singleDatePicker: true,
-            startDate: new Date(),
-            showDropdowns: true,
-            autoUpdateInput: true,
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-        }).on('apply.daterangepicker', function(e, picker) {
-            $(this).val(picker.startDate.format('DD/MM/YYYY'));
-        });*/
-
-
-    });
-    $('.fav').on('click', function(event) {
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-                title: `Want to Add this vehicle ${name} As Favourite?`,
-                icon: "success",
-                buttons: true,
-                dangerMode: false,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).parent().submit();
-                }
-            });
-    });
-
-
-    $(document).ready(function() {
-            /*Brand|Subbrand */
-            $('#brand_id').on('change', function() {
-            var brand_id = $(this).val();
-            if (brand_id) {
-                $.ajax({
-                    url: "{{route('subBrandbyId')}}",
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        id: brand_id,
-                    },
-                    success: function(data) {
-                        //console.log(data);
-                        $('#sub_brand').empty();
-                        $('#sub_brand').append('<option value="">Select a Model</option>');
-                        $.each(data, function(key, value) {
-                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('#sub_brand').empty();
-            }
-        });
-        var brand_id = $('#brand_id option:selected').val();
-        var sub_brand = "{{request()->get('sub_brand')}}";
-        if (brand_id) {
-            $.ajax({
-                url: "{{route('subBrandbyId')}}",
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    id: brand_id,
-                },
-                success: function(data) {
-                    //console.log(data);
-                    $.each(data, function(key, value) {
-                        if (sub_brand == value.id) {
-                            $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
-                        } else {
-                            $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
-                        }
-
-                    });
-                }
-            });
+      },
+      response: function(e, ui) {
+        /*if (ui.content.length == 1) {
+        	$(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+        	$(this).autocomplete("close");
+        }*/
+        //console.log(ui);
+      },
+      //loader start
+      search: function(e, ui) {},
+      select: function(e, ui) {
+        if (typeof ui.content != 'undefined') {
+          if (isNaN(ui.content[0].id)) {
+            return;
+          }
+          //var student_id = ui.content[0].id;
+        } else {
+          //var student_id = ui.item.id;
         }
+
+        //return_row_with_data(student_id);
+        $("#item_search").val('');
+      },
+      //loader end
     });
+    /*$("input[name='created_at']").daterangepicker({
+        singleDatePicker: true,
+        startDate: new Date(),
+        showDropdowns: true,
+        autoUpdateInput: true,
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    }).on('apply.daterangepicker', function(e, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY'));
+    });*/
+
+
+  });
+  $('.fav').on('click', function(event) {
+    var name = $(this).data("name");
+    event.preventDefault();
+    swal({
+        title: `Want to Add this vehicle ${name} As Favourite?`,
+        icon: "success",
+        buttons: true,
+        dangerMode: false,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          $(this).parent().submit();
+        }
+      });
+  });
+
+
+  $(document).ready(function() {
+    /*Brand|Subbrand */
+    $('#brand_id').on('change', function() {
+      var brand_id = $(this).val();
+      if (brand_id) {
+        $.ajax({
+          url: "{{route('subBrandbyId')}}",
+          type: 'GET',
+          dataType: 'json',
+          data: {
+            id: brand_id,
+          },
+          success: function(data) {
+            //console.log(data);
+            $('#sub_brand').empty();
+            $('#sub_brand').append('<option value="">Select a Model</option>');
+            $.each(data, function(key, value) {
+              $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+            });
+          }
+        });
+      } else {
+        $('#sub_brand').empty();
+      }
+    });
+    var brand_id = $('#brand_id option:selected').val();
+    var sub_brand = "{{request()->get('sub_brand')}}";
+    if (brand_id) {
+      $.ajax({
+        url: "{{route('subBrandbyId')}}",
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          id: brand_id,
+        },
+        success: function(data) {
+          //console.log(data);
+          $.each(data, function(key, value) {
+            if (sub_brand == value.id) {
+              $('#sub_brand').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+            } else {
+              $('#sub_brand').append('<option value="' + value.id + '">' + value.name + '</option>');
+            }
+
+          });
+        }
+      });
+    }
+  });
 </script>
 @endpush
