@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Settings\Country;
+use App\Models\Settings\Port;
 use App\Models\Role;
 class User extends Authenticatable
 {
@@ -62,6 +63,9 @@ class User extends Authenticatable
     }
     public function country(){
         return $this->belongsTo(Country::class);
+    }
+    public function port(){
+        return $this->belongsTo(Port::class);
     }
     public function executive(){
         return $this->belongsTo(User::class,'executiveId');

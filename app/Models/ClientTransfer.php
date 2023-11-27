@@ -13,4 +13,10 @@ class ClientTransfer extends Model
     {
         return $this->belongsTo(User::class, 'curexId');
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function newexecutiveId(){
+        return $this->belongsTo(User::class,'newexId');
+    }
 }

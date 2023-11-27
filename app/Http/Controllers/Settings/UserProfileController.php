@@ -12,6 +12,7 @@ use App\Models\CompanyAccountInfo;
 
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\ImageHandleTraits;
+use App\Models\ClientTransfer;
 use Exception;
 use DB;
 use Toastr;
@@ -119,7 +120,7 @@ class UserProfileController extends Controller
     /*Student Transfer */
     public function clientTransfer()
     {
-        $allUser = User::where('role_id', 4)->get();
+        $allUser = User::with(['country','port'])->where('role_id', 4)->get();
         return view('client.clientTransfer', compact('allUser'));
     }
     public function clientExecutive(Request $request)
@@ -193,10 +194,13 @@ class UserProfileController extends Controller
     }
     public function clientTransferList()
     {
-        $client_transfers = DB::table('client_transfers')
+        $client_transfers = ClientTransfer::with(['user.country','prevExeutive','newexecutiveId'])->orderBy('client_transfers.id','desc')->paginate(50);
+        
+        /*DB::table('client_transfers')
             ->join('users', 'client_transfers.created_by', 'users.id')
-            ->select('client_transfers.*', 'users.name as uname')
-            ->get();
+            ->select('client_transfers.*', 'users.name as uname')*/
+           
+            
         return view('client.clientTransferList', compact('client_transfers'));
     }
     public function assignTo(Request $request)

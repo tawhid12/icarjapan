@@ -1,6 +1,9 @@
 @extends('layout.app')
 @section('pageTitle','New Client Transfer')
 @section('pageSubTitle','List')
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @section('content')
 <!-- Bordered table start -->
 <section class="section">
@@ -14,11 +17,11 @@
                         <div class="col-lg-4 row">
                             <label for="student_id" class="col-sm-3 col-form-label">Select User</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="user_id">
+                                <select class="js-example-basic-single form-control" name="user_id">
                                     <option value="">Select</option>
                                     @if(count($allUser) > 0)
                                     @foreach($allUser as $u)
-                                    <option value="{{ $u->id }}" {{ old('user_id') == $u->id ? "selected" : "" }}>{{$u->id}}-{{$u->name}}</option>
+                                    <option value="{{ $u->id }}" {{ old('user_id') == $u->id ? "selected" : "" }}>{{$u->id}}-{{$u->name}} | Country:-{{$u->country?->name}} | Port:-{{$u->port?->name}} | Contact:-{{$u->contact_no}}</option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -42,7 +45,7 @@
                                     resize:none;"></textarea>
                         </div>
                     </div>
-                    <div class="form-group text-right mb-0">
+                    <div class="form-group text-right my-2">
                         <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
                             Submit
                         </button>
@@ -54,11 +57,14 @@
 </section>
 @endsection
 @push('scripts')
-<script src="{{asset('backend/libs/multiselect/jquery.multi-select.js')}}"></script>
-<script src="{{asset('backend/libs/select2/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     /*===Student Enroll Batch Data=====*/
     $(document).ready(function() {
+        $('.js-example-basic-single').select2({
+            placeholder: 'Select Option',
+            allowClear: true
+        });
         $('select[name=user_id]').on('change', function() {
             var user_id = $.trim($("select[name=user_id]").children("option:selected").val());
             $.ajax({
