@@ -21,7 +21,7 @@
                                     <option value="">Select</option>
                                     @if(count($allUser) > 0)
                                     @foreach($allUser as $u)
-                                    <option value="{{ $u->id }}" {{ old('user_id') == $u->id ? "selected" : "" }}>{{$u->id}}-{{$u->name}} | Country:-{{$u->country?->name}} | Port:-{{$u->port?->name}} | Contact:-{{$u->contact_no}}</option>
+                                    <option value="{{ $u->id }}" {{ old('user_id') == $u->id ? "selected" : "" }}>ID | Name{{$u->id}}-{{$u->name}} | Country:-{{$u->country?->name}} | Port:-{{$u->port?->name}} | Contact:-{{$u->contact_no}}</option>
                                     @endforeach
                                     @endif
                                 </select>
