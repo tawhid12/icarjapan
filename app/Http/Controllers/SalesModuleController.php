@@ -96,7 +96,7 @@ print_r($favourites->toArray());die;*/
 
         $data = '<div class="row">';
 
-        $data .= '<div class="col-md-4 col-12">';
+        $data .= '<div class="col-md-3 col-12">';
         $data .= '<div class="form-group">';
         $data .= '<label for="user_id">Select Client</label>';
         $data .= '<select name="user_id" class="form-control js-example-basic-single" required>';
@@ -110,7 +110,7 @@ print_r($favourites->toArray());die;*/
         $data .= '</div>';
         $data .= '</div>';
 
-        $data .= '<div class="col-md-4 col-12">';
+        $data .= '<div class="col-md-3 col-12">';
         $data .= '<div class="form-group">';
         $data .= '<label for="shipment_type">Shipment Type</label>';
         $data .= '<select name="shipment_type" class="form-control" required>';
@@ -122,6 +122,20 @@ print_r($favourites->toArray());die;*/
 
 
         $data .= '</select>';
+        $data .= '</div>';
+        $data .= '</div>';
+
+        $data .= '<div class="col-md-2 col-12 mt-3">';
+        $data .= '<div class="form-check form-check-inline">';
+        $data .= '<input class="form-check-input" type="checkbox" id="insp_amt" name="insp_amt" value="1">
+                  <label class="form-check-label" for="insp_amt">Inspection</label>';
+        $data .= '</div>';
+        $data .= '</div>';
+
+        $data .= '<div class="col-md-1 col-12 mt-3">';
+        $data .= '<div class="form-check form-check-inline">';
+        $data .= '<input class="form-check-input" type="checkbox" id="insu_amt" name="insu_amt" value="1">
+                  <label class="form-check-label" for="insu_amt">Insurance</label>';
         $data .= '</div>';
         $data .= '</div>';
 

@@ -79,8 +79,9 @@ class ReservedVehicleController extends Controller
                     $user = DB::table('users')->where('id', $request->user_id)->first();
 
                     $country_data = DB::table('countries')->where('id', $user->country_id)->first();
-                    $b->insp_amt = $country_data->inspection;
-                    $b->insu_amt = $country_data->insurance;
+                    $b->insp_amt =  $request->insp_amt==1?$country_data->inspection:0;
+                    $b->insu_amt =  $request->insu_amt==1?$country_data->insurance:0;
+                  
                     if(is_null($user->port_id)){
                         return redirect()->back()->with(Toastr::error('Please Select Port For User!', 'Fail', ["positionClass" => "toast-top-right"]));
                     }

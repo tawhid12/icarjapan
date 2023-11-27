@@ -112,7 +112,7 @@ class ClientModuleController extends Controller
         ->where('reserved_vehicles.user_id',encryptor('decrypt',$id))->where('reserved_vehicles.status',2)->orderBy('reserved_vehicles.id', 'DESC')
         ->paginate(25);
         /*echo '<pre>';
-        print_r($resrv->toArray());die;*/
+        print_r($reserve_vehicle->toArray());die;*/
         return view('cm_module.cm_module_individual',compact('client_data','sales_rank','countries','ports','client_details','reserve_vehicle','resrv','con_detl','invoices','payments','deposits'));
     }
 }
