@@ -63,5 +63,13 @@ class User extends Authenticatable
     public function country(){
         return $this->belongsTo(Country::class);
     }
+    public function executive(){
+        return $this->belongsTo(User::class,'executiveId');
+    }
+    public function clientTransfers()
+    {
+        return $this->hasMany(ClientTransfer::class);
+    }
+
 
 }

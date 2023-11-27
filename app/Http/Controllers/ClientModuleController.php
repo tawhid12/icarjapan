@@ -20,10 +20,55 @@ use DB;
 
 class ClientModuleController extends Controller
 {
-    public function all_client_list(){
+    public function all_client_list(Request $request){
+        $countries = Country::all();
+        $order_by = $request->order_by?$request->order_by:'desc';
+        $perPage = $request->perPage?$request->perPage:50;
         if(currentUser() == 'salesexecutive'){
-            $countries = Country::all();
-            $users=User::where('executiveId',currentUserId())->orWhere('executiveId',0)->where('role_id',4)->paginate(50);
+            $users = User::with(['country','clientTransfers' => function ($query) {
+                $query->latest('id')->limit(1);
+            }]);
+            if ($request->userId) {
+                $users = $users->where('id',$request->userId);
+            }
+            elseif($request->country_id){
+                $users = $users->where('country_id',$request->country_id);
+            }elseif($request->executiveId){
+                /* Null=> For Free Not Null Assigned (In Database)*/
+                if($request->executiveId == 1)
+                $users = $users->whereNull('executiveId');
+                else
+                $users = $users->where('executiveId',currentUserId());
+            }elseif($request->type){
+                /* 1 => Active (Running deals on going) 2=> Semi Active (Purchased previously but at present no deals is running), 3 => Inactive (No purchase history or no deals is running)*/
+                $users = $users->where('type',$request->type);
+            }elseif($request->created_at){
+                $created_at = explode('-',$request->created_at);
+                $from = \Carbon\Carbon::createFromTimestamp(strtotime($created_at[0]))->format('Y-m-d');
+                $to = \Carbon\Carbon::createFromTimestamp(strtotime($created_at[1]))->format('Y-m-d');
+                $users = $users->whereBetween('created_at',[$from,$to]);
+            }elseif($request->star){
+                $users = $users->where('cmType',$request->star);
+            }
+            
+            $users = $users
+            ->where(function ($query) use ($request){
+                $query->where('executiveId', '=', currentUserId())
+                ->orWhereNull('executiveId');
+            })
+            ->where('role_id',4)->orderBy('id',$order_by)->paginate($perPage);
+            $users = $users->appends(
+                [
+                    'userId' => $request->userId,
+                    'country_id' => $request->country_id,
+                    'order_by' => $request->order_by,
+                    'executiveId' => $request->executiveId,
+                    'type' => $request->type,
+                ]
+            );
+            //$users=User::where('executiveId',currentUserId())->orWhere('executiveId',0)->where('role_id',4)->paginate(50);
+            /*echo '<pre>';
+            print_r($users->toArray());die*/;
             return view('cm_module.cm_module',compact('users','countries'));
         }elseif(currentUser() == 'accountant'){
             $countries = Country::all();

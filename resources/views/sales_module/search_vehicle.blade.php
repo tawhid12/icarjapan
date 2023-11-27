@@ -20,6 +20,23 @@
   <div class="col-12">
     <div class="card">
       @include('layout.message')
+
+      <div class="col-md-12">
+        <div class="reserve-box p-3">
+          <p>Reserve Vehicle</p>
+          <form action="{{route(currentUser().'.reserve_list')}}">
+            @csrf
+            <div class="col-sm-12 d-flex justify-content-between">
+              <div>
+                <button type="submit" class="btn btn-primary btn-sm me-1"><i class="bi bi-search"></i></button>
+                <a href="{{route(currentUser().'.search')}}" class="reset-btn btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i></a>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+      </div>
       {{--<form action="{{route('search_by_data')}}">
       @csrf()
       <!-- mid row 1 -->
@@ -469,19 +486,14 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
 
             <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
-            <label class="form-check-label me-3 img-360" for="360_img"></label>
+            <label class="form-check-label me-3 img-360" for="360_img">360Degree</label>
 
 
           </div>
-          <div class="d-flex align-items-center justify-content-end">
 
-            <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
-              Reset
-            </button>
-            <button type="submit" class="col-md-2 btn btn-primary btn-sm">
-              Search
-            </button>
-
+          <div class="col-sm-12 d-flex justify-content-end my-1">
+            <button type="submit" class="btn btn-primary btn-sm me-1"><i class="bi bi-search"></i></button>
+            <a href="{{route(currentUser().'.search')}}" class="reset-btn btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i></a>
           </div>
           <!-- </div> -->
 
@@ -618,13 +630,7 @@
               <img src="{{asset('uploads/default/comingsoon_l.png')}}" alt="" alt="" width="210px" height="140px" />
               @endif
               <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
-              @if($v->r_status != null)
-              <p class="m-0 text-danger"><strong>Reserved </strong></p>
-              {{--For | CM ID:-\DB::table('reserved_vehicles')->where('vehicle_id',$v->id)->first()->user_id--}}
-              @endif
-              @if($v->sold_status)
-              <p class="m-0 text-success"><strong>SOLD</strong></p>
-              @endif
+
             </div>
             <div class="col-md-10">
               <div class="col-md-12 d-flex justify-content-between align-items-center">
@@ -640,6 +646,13 @@
                   </form>
                   @else
                   <button class="btn btn-sm btn-success">Already In Favourite List</button>
+                  @endif
+                  @if($v->r_status != null && $v->sold_status == 0)
+                  <button class="ms-2 btn btn-sm btn-danger"><strong>Reserved</strong></button>
+                  {{--For | CM ID:-\DB::table('reserved_vehicles')->where('vehicle_id',$v->id)->first()->user_id--}}
+                  @endif
+                  @if($v->sold_status)
+                  <button class="ms-2 btn btn-sm btn-success"><strong>SOLD</strong></button>
                   @endif
 
                   <!-- Add | Cehck Reserve -->

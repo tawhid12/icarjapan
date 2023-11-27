@@ -63,7 +63,7 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        $countryName = Country::select('id','name')->where('id',109)->first();
+        $countryName = Country::select('id', 'name')->where('id', 109)->first();
         session()->put('countryName', $countryName);
 
         $location = array(
@@ -82,7 +82,7 @@ class FrontController extends Controller
         echo $countryName->name;
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-          
+
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
@@ -363,7 +363,16 @@ class FrontController extends Controller
             }
 
 
+
             if ($request->adv_search == 'sale_module_search') {
+                echo 'ok';die;
+                if ($request->resv) {
+                    $vehicles = $vehicles
+                        ->where(function ($query) use ($request) {
+                            $query->where('executiveId', '=', currentUserId())
+                                ->whereNotNull('r_status');
+                        });
+                }
                 $vehicles = $vehicles->paginate(10)->appends([
                     'adv_search' => $request->adv_search,
                     'brand' => $request->brand,

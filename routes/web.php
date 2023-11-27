@@ -209,6 +209,7 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         /*Sales Module */
         Route::get('all-client-list-json', [salesmodule::class, 'all_client_list_json'])->name('salesexecutive.all_client_list_json');
         Route::get('favourite-list', [salesmodule::class, 'favourite_list'])->name('salesexecutive.favourite_list');
+        Route::get('reserve-list', [salesmodule::class, 'reserve_list'])->name('salesexecutive.reserve_list');
         Route::get('search', [salesmodule::class, 'search'])->name('salesexecutive.search');
         Route::get('sales-module', [salesmodule::class, 'sales_module'])->name('salesexecutive.sales_module');
 

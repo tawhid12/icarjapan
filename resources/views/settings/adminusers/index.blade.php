@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-sm-12 d-flex justify-content-end my-1">
                     <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-search"></i></button>
-                    <a href="{{route(currentUser().'.admin.index')}}" class="reset-btn btn btn-sm btn-warning"><i class="bi bi-skip-backward"></i></a>
+                    <a href="{{route(currentUser().'.admin.index')}}" class="reset-btn btn btn-sm btn-warning"><i class="bi bi-arrow-repeat"></i></a>
                 </div>
             </div>
         </form>
