@@ -29,7 +29,7 @@ class TestController extends Controller
             if (Carbon::today() > Carbon::parse($r->created_at)) {
                 $resv = \App\Models\ReservedVehicle::where('vehicle_id', $r->id)->update(['status' => 3, 'note' => "Reserved Date Exapired!!"]);
                 $vehicle = \App\Models\Vehicle\Vehicle::where('id', $r->id)->update(['r_status' => null]);
-
+                $invoice = \App\Models\Invoice::where('reserve_id', $r->id)->update(['is_reserve_cancel' => 1]);
                 $user = \App\Models\User::where('id', $r->user_id)->update(['type' => null]);
             }
         }

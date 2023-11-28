@@ -72,34 +72,36 @@ class ReservedVehicleController extends Controller
                     $b->created_by = currentUserId();
 
                     /*=== Update Executive Id into  Users Table to assign Executive to user ===*/
-                    $user = User::where('id', $request->user_id)->update(['executiveId' => currentUserId(), 'type' => 1]);
+                   $user = User::where('id',$request->user_id)->update(['executiveId' => currentUserId(),'type' => 1]);
                 }
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                 if ($request->shipment_type == 1) {
                     $user = DB::table('users')->where('id', $request->user_id)->first();
 
                     $country_data = DB::table('countries')->where('id', $user->country_id)->first();
-                    $b->insp_amt =  $request->insp_amt == 1 ? $country_data->inspection : 0;
-                    $b->insu_amt =  $request->insu_amt == 1 ? $country_data->insurance : 0;
-
-                    if (is_null($user->port_id)) {
+                    $b->insp_amt =  $request->insp_amt==1?$country_data->inspection:0;
+                    $b->insu_amt =  $request->insu_amt==1?$country_data->insurance:0;
+                  
+                    if(is_null($user->port_id)){
                         return redirect()->back()->with(Toastr::error('Please Select Port For User!', 'Fail', ["positionClass" => "toast-top-right"]));
                     }
                     $port_data = DB::table('ports')->where('id', $user->port_id)->first();
-
-                    if ($vehicle->m3 == 0.00) {
+                    
+                    if($vehicle->m3 == 0.00)
+                    {
                         return redirect()->back()->with(Toastr::error('M3 Value can not be Zero!', 'Fail', ["positionClass" => "toast-top-right"]));
                     }
-                    $b->m3_value = $vehicle->m3 ? $vehicle->m3 : 0;
-                    if ($port_data->m3 == 0.00) {
+                    $b->m3_value = $vehicle->m3?$vehicle->m3:0;
+                    if($port_data->m3 == 0.00)
+                    {
                         return redirect()->back()->with(Toastr::error('M3 Charge can not be Zero!', 'Fail', ["positionClass" => "toast-top-right"]));
                     }
                     $b->m3_charge = $port_data->m3;
-
-                    if (isset($port_data->aditional_cost))
-                        $b->aditional_cost = $port_data->aditional_cost;
+                    
+                    if(isset($port_data->aditional_cost))
+                    $b->aditional_cost = $port_data->aditional_cost;
                     else
-                        $b->aditional_cost =  0;
+                    $b->aditional_cost =  0;
                 }
                 $b->discount =  $vehicle->discount;
                 $b->shipment_type =  $request->shipment_type;
@@ -171,54 +173,55 @@ class ReservedVehicleController extends Controller
     public function update(Request $request, $id)
     {
 
-
+       
         try {
             $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
-
+           
             if (currentUser() == 'accountant') {
                 DB::connection()->enableQueryLog();
-                $total_paid = DB::table('payments')
-                    ->join('invoices', 'payments.client_id', 'invoices.client_id')
-                    ->where('payments.client_id', $resv->user_id)
-                    ->where('invoices.invoice_type', 1)
-                    ->sum('payments.amount');
+                $total_paid= DB::table('payments')
+                ->join('invoices','payments.client_id','invoices.client_id')
+                ->where('payments.client_id',$resv->user_id)
+                ->where('invoices.invoice_type',1)
+                ->sum('payments.amount');
                 $queries = \DB::getQueryLog();
                 //dd($queries);
-                $total_allocate = DB::table('reserved_vehicles')->where('user_id', $resv->user_id)->sum('allocated');
+                $total_allocate = DB::table('reserved_vehicles')->where('user_id',$resv->user_id)->sum('allocated');
                 /*echo $total_paid ."<br>";
                 echo $total_allocate."<br>";
                 echo $request->allocate;
                 die;*/
-                if ($total_paid - $total_allocate > 0 && $request->allocate <= $total_paid - $total_allocate) {
+                if($total_paid-$total_allocate >0 && $request->allocate <= $total_paid-$total_allocate){
                     $resv->allocated = $request->allocate;
-                } else {
-                    return redirect()->back()->with(Toastr::error($total_paid - $total_allocate . ' Allocation Available!', 'error', ["positionClass" => "toast-top-right"]));
+                }else{
+                    return redirect()->back()->with(Toastr::error( $total_paid-$total_allocate.' Allocation Available!', 'error', ["positionClass" => "toast-top-right"]));
                 }
             }
             if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin') {
                 //echo '<pre>'; print_r($resv);die;
+               
 
+                                /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
+                                if ($resv->shipment_type == 2) {
+                                  
+                                    
+                                    $resv->freight_amt = $request->freight_amt;
+                                    $resv->insp_amt = $request->insp_amt;
+                                    $resv->insu_amt = $request->insu_amt;
+                                    $resv->m3_value = $request->m3_value;
+                                    $resv->m3_charge = $request->m3_charge;
+                                    $resv->aditional_cost =  $request->aditional_cost;
+                                    $resv->discount =  $request->discount;
+                                $resv->fob_amt = $request->fob_amt;
+                                $resv->discount = $request->discount;
 
-                /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
-                if ($resv->shipment_type == 2) {
-
-
-                    $resv->freight_amt = $request->freight_amt;
-                    $resv->insp_amt = $request->insp_amt;
-                    $resv->insu_amt = $request->insu_amt;
-                    $resv->m3_value = $request->m3_value;
-                    $resv->m3_charge = $request->m3_charge;
-                    $resv->aditional_cost =  $request->aditional_cost;
-                    $resv->discount =  $request->discount;
-                    $resv->fob_amt = $request->fob_amt;
-                    $resv->discount = $request->discount;
-                }
-
-
+                                }
+                                
+                            
 
                 if ($request->status == 2) {
                     /* If Reserve By Customer need to update assisgn_user_id of reserve table and executiveId of users table */
-                    if ($resv->assign_user_id == null) {
+                    if($resv->assign_user_id ==null){
                         $resv->assign_user_id = currentUserId();
                         $user = User::find($resv->user_id);
                         $user->type = 1;
@@ -226,7 +229,7 @@ class ReservedVehicleController extends Controller
                         $user->save();
                     }
                     /*Insert To Proforma Invoice */
-                    if (Invoice::where('vehicle_id', $resv->vehicle_id)->where('invoice_type', 1)->doesntExist()) {
+                    if (Invoice::where('vehicle_id', $resv->vehicle_id)->where('reserve_id', $resv->id)->where('invoice_type', 1)->doesntExist()) {
                         $invoice = new Invoice();
                         $invoice->invoice_type = 1;
                         $invoice->invoice_date = date('Y-m-d');
@@ -235,35 +238,34 @@ class ReservedVehicleController extends Controller
                         $invoice->client_id     = $resv->user_id;
                         //$invoice->fob_amt = $resv->settle_price;
                         $invoice->executiveId = $resv->assign_user_id;
-
-                        $invoice->inv_amount = $resv->total ? $resv->total : 0.00;
+                        
+                        $invoice->inv_amount = $resv->total?$resv->total:0.00;
                         $invoice->save();
+                        
                     }
-
-
-
+                       
+                       
+                  
                     $resv->status = 2;
+                    
+                    
+                   
                 }
                 $resv->total();
+                
+                $invoice = Invoice::where('reserve_id',$resv->id)->where('invoice_type',1)->first();
+                $invoice->inv_amount =  $resv->total?$resv->total:0.00;
 
-               
-                /* Send Proforma Invoice To User with mail */
-
-
-                $resv->updated_by = currentUserId();
-                if ($resv->save()) {
-
-                    $invoice = Invoice::where('reserve_id', $resv->id)->where('invoice_type', 1)->first();
-                    $get_reserve_amt = ReservedVehicle::where('id', encryptor('decrypt', $id))->first();
-                    $invoice->inv_amount =  $get_reserve_amt->total ? $get_reserve_amt->total : 0.00;
-    
-                    $invoice->save();
-                    
-                    return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));
-                    //return redirect()->route(currentUser() . '.reservevehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
-                } else {
-                    return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
-                }
+                $invoice->save();
+                 /* Send Proforma Invoice To User with mail */
+            }
+           
+            $resv->updated_by = currentUserId();
+            if ($resv->save()) {
+                return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));
+                //return redirect()->route(currentUser() . '.reservevehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+            } else {
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         } catch (Exception $e) {
             //dd($e);
