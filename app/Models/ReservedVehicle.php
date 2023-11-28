@@ -29,6 +29,5 @@ class ReservedVehicle extends Model
         // Check if $sum is calculated correctly
         Log::info("Debugging: total = {$this->total}");
         $this->save();
-        return $this->total;
     }
 }
