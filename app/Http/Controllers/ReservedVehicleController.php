@@ -254,7 +254,7 @@ class ReservedVehicleController extends Controller
                 $resv->total();
                 $invoice = Invoice::where('reserve_id',$resv->id)->where('invoice_type',1)->first();
                 if($resv->total > 0)
-                $invoice->inv_amount =  $resv->total;
+                $invoice->inv_amount =  $resv->total();
                 else
                 $invoice->inv_amount =  0.00;
                 $invoice->save();
