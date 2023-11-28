@@ -257,7 +257,10 @@
                             </tr> -->
                             @php 
                                 $proforma_invoice = \DB::table('invoices')->where('invoice_type',1)->where('reserve_id',$v->reserveId)->first(); 
-                                $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count(); 
+                                if($proforma_invoice)
+                                $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count();
+                                else
+                                $proforma_payment_count = 0
                                 //echo $proforma_payment_count ;
                             @endphp
                             <tr>
