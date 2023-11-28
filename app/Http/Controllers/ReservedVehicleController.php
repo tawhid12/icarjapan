@@ -254,7 +254,7 @@ class ReservedVehicleController extends Controller
                 $resv->total();
 
                 $invoice = Invoice::where('reserve_id',$resv->id)->where('invoice_type',1)->first();
-                $get_reserve_amt = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
+                $get_reserve_amt = ReservedVehicle::where(encryptor('decrypt', $id))->first();
                 $invoice->inv_amount =  $$get_reserve_amt->total?$$get_reserve_amt->total:0.00;
 
                 $invoice->save();
