@@ -1,11 +1,11 @@
 <div class="border p-2">
     <h5 class="text-center border-bottom my-3">Account Information</h5>
     @if(currentUser() != 'accountant')
-    <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.update',encryptor('encrypt',$client_data->id))}}">
+    <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.update',encryptor('encrypt',$client_details->user_id))}}">
     @endif    
         @csrf
         @method('patch')
-        <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$client_details->id)}}">
+        <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$client_details->user_id)}}">
         @php $name = explode(' ',$client_data->name); @endphp
         <div class="row">
             <div class="col-12 col-md-3">

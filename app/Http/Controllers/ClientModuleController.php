@@ -50,13 +50,15 @@ class ClientModuleController extends Controller
             }elseif($request->star){
                 $users = $users->where('cmType',$request->star);
             }
+            if($request->executiveId != 1){
+                $users = $users
+                ->where(function ($query) use ($request){
+                    $query->where('executiveId', '=', currentUserId());
+                    //->orWhereNull('executiveId');
+                });
+            }
             
-            $users = $users
-            ->where(function ($query) use ($request){
-                $query->where('executiveId', '=', currentUserId())
-                ->orWhereNull('executiveId');
-            })
-            ->where('role_id',4)->orderBy('id',$order_by)->paginate($perPage);
+            $users = $users->where('role_id',4)->orderBy('id',$order_by)->paginate($perPage);
             $users = $users->appends(
                 [
                     'userId' => $request->userId,
@@ -82,6 +84,7 @@ class ClientModuleController extends Controller
     public function client_individual($id){
         $client_data = User::where('id',encryptor('decrypt',$id))->first();
         $client_details = UserDetail::where('user_id',encryptor('decrypt',$id))->first();
+        //print_r($client_details->toArray());die;
         $sales_rank = ReservedVehicle::where('user_id',encryptor('decrypt',$id))->where('status','2')->count();
         $user_status = ReservedVehicle::where('user_id',encryptor('decrypt',$id))->count();
         $con_detl = ConsigneeDetail::where('user_id',encryptor('decrypt',$id))->get();

@@ -159,7 +159,12 @@
                                     @elseif($cm->type ==3)
                                     <button class="btn btn-sm btn-danger">Inactive</button>
                                     @else
-                                    <button class="btn btn-sm btn-secondary">Free</button>
+                                        @if($cm->type == 0 && $cm->executiveId == currentUserId())
+                                        -
+                                        @else
+                                        <button class="btn btn-sm btn-secondary">Free</button>
+                                        @endif
+
                                     @endif
                                 </td>
                                 <!-- <td>

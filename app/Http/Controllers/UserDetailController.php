@@ -79,7 +79,8 @@ class UserDetailController extends Controller
             $user->contact_no =  trim($request->firstName).' '.trim($request->lastName);
             $user->save();
 
-            $userdetl=UserDetail::findOrFail(encryptor('decrypt',$id));
+            $userdetl=UserDetail::where('user_id',encryptor('decrypt',$id))->first();
+            //print_r($userdetl->toArray());die;
             $userdetl->wife_husband_name=$request->wife_husband_name;
             $userdetl->father_name=$request->father_name;
             $userdetl->mother_name=$request->mother_name;
