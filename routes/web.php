@@ -227,7 +227,9 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         Route::patch('cm_category/{id}', [admin::class, 'cm_category'])->name('salesexecutive.cm_category');
         Route::patch('cm_type/{id}', [admin::class, 'cm_type'])->name('salesexecutive.cm_type');
         Route::resource('userdetl', userdetl::class, ['as' => 'salesexecutive']);
+        
         Route::resource('reservevehicle', reservevehicle::class, ['as' => 'salesexecutive']);
+        
         Route::resource('invoice', invoice::class, ['as' => 'salesexecutive']);
         Route::resource('payment', payment::class, ['as' => 'salesexecutive']);
         Route::resource('/notes', note::class, ["as" => "salesexecutive"]);
@@ -235,6 +237,7 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('salesexecutive.noteHistoryByvehicleId');
         Route::get('/assign/to', [userprofile::class, 'assignTo'])->name('salesexecutive.assignTo');
         Route::get('/free/user', [userprofile::class, 'freeUser'])->name('salesexecutive.freeUser');
+        Route::get('/reserve-cancel', [reservevehicle::class,'reserve_cancel'])->name('salesexecutive.reservecancel');
     });
 });
 

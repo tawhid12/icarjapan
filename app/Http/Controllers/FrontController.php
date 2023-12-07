@@ -363,7 +363,7 @@ class FrontController extends Controller
             }
 
 
-
+            $vehicles = $vehicles->orderBy('r_status','asc');
             if ($request->adv_search == 'sale_module_search') {
                 $vehicles = $vehicles->paginate(10)->appends([
                     'adv_search' => $request->adv_search,

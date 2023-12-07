@@ -102,8 +102,20 @@
 
                                     @if($v->reserve_status == 1)
                                     <p><i class="badge bg-warning">Reserved</i></p>
+                                    <form id="approve-form" action="{{route(currentUser().'.reservecancel')}}" style="display: inline;">
+                                        @csrf
+                                        <input name="id" type="hidden" value="{{$v->id}}">
+                                        <input name="reserveId" type="hidden" value="{{$v->reserveId}}">
+                                        <a href="javascript:void(0)" data-title="{{strtoupper($v->fullName)}}" class="approve btn btn-warning btn-sm" data-toggle="tooltip" title="Approve">Cancel Reserve</a>
+                                    </form>
                                     @elseif($v->reserve_status == 2)
                                     <p><i class="badge bg-success">Confirmed</i></p>
+                                    <form id="approve-form" action="{{route(currentUser().'.reservecancel')}}" style="display: inline;">
+                                        @csrf
+                                        <input name="id" type="hidden" value="{{$v->id}}">
+                                        <input name="reserveId" type="hidden" value="{{$v->reserveId}}">
+                                        <a href="javascript:void(0)" data-title="{{strtoupper($v->fullName)}}" class="approve btn btn-warning btn-sm" data-toggle="tooltip" title="Approve">Cancel Reserve</a>
+                                    </form>
                                     @else
                                     <p><i class="badge bg-danger">Cancelled</i></p>
                                     @endif
@@ -149,15 +161,21 @@
                         </div>
                     </div>
                 </div>
+                @if($v->reserveId)
+                @php
+                $shipment_detail = \App\Models\ShipmentDetail::where('reserve_id', $v->reserveId)->first();
+                print_r($shipment_detail);
+                @endphp
+                @endif
                 <div class="col-md-6">
                     <div class="border p-2">
                         <h6 class="border-bottom">Shipment Details/ Prepaid</h6>
                         <table class="table table-bordered m-0">
                             <tr>
                                 <th>ATD</th>
-                                <td>Kisarazu (28/07/2023)</td>
+                                <td></td>
                                 <th>ETA</th>
-                                <td>Tarawa (08/08/2023)</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Consignee name</th>
@@ -166,16 +184,16 @@
                                 <th>Shipment Type</th>
                                 <td>
                                     <!-- <form action="{{route(currentUser().'.shipment.store')}}" method="post" class="d-flex"> -->
-                                        @csrf
-                                        <input type="hidden" name="vehicle_id" value="{{$v->id}}">
-                                        <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
-                                        <input type="hidden" name="client_id" value="{{$client_data->id}}">
-                                        <select class="form-control" name="shipment_type" style="width:150px;">
-                                            <option value="">Select</option>
-                                            <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
-                                            <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
-                                        </select>
-                                        <!-- <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
+                                    @csrf
+                                    <input type="hidden" name="vehicle_id" value="{{$v->id}}">
+                                    <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
+                                    <input type="hidden" name="client_id" value="{{$client_data->id}}">
+                                    <select class="form-control" name="shipment_type" style="width:150px;">
+                                        <option value="">Select</option>
+                                        <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
+                                        <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
+                                    </select>
+                                    <!-- <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
                                     </form> -->
                                 </td>
                                 @endif
@@ -212,11 +230,11 @@
                             <h6>Documents</h6>
                             @if(currentUser() != 'accountant')
                             @php $shipment_data = \DB::table('shipment_details')->where('reserve_id',$v->reserveId)->first(); //print_r($shipment_data);@endphp
-                                @if(!$shipment_data)
-                                <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
-                                @else
-                                <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.edit',encryptor('encrypt',$shipment_data->id))}}">Update Shipment Details</a>
-                                @endif
+                            @if(!$shipment_data)
+                            <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
+                            @else
+                            <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.edit',encryptor('encrypt',$shipment_data->id))}}">Update Shipment Details</a>
+                            @endif
                             @else
                             @endif
                         </div>
@@ -247,3 +265,29 @@
     </div>
 </div>
 @endif
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script>
+    /*=========== Approve ============*/
+    $('.approve').on('click', function(event) {
+        var title = $(this).data("title");
+
+        var text = `Are want to  Cancel  this Reserve of ${title}?`;
+        var icon = 'error';
+        var mode = true;
+
+        event.preventDefault();
+        swal({
+                title: text,
+                icon: icon,
+                buttons: true,
+                dangerMode: mode,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $(this).parent().submit();
+                }
+            });
+    });
+</script>
+@endpush
