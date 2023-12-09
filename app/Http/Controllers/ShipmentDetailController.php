@@ -7,12 +7,14 @@ use App\Models\User;
 use App\Models\Settings\Country;
 use App\Models\Settings\Port;
 use App\Models\ConsigneeDetail;
+use App\Http\Traits\ImageHandleTraits;
 use Illuminate\Http\Request;
 use Toastr;
 use DB;
 
 class ShipmentDetailController extends Controller
 {
+    use ImageHandleTraits;
     /**
      * Display a listing of the resource.
      *

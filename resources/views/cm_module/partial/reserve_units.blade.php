@@ -100,22 +100,36 @@
                                     <p>Save: {{$v->discount}}</p>
                                     @endif
 
+                                    <!-- Shipemnt Detail and Payment -->
+                                    @if($v->reserveId)
+                                    @php
+                                    $shipment_detail = \App\Models\ShipmentDetail::where('reserve_id', $v->reserveId)->first();
+                                    $payment = \App\Models\Payment::where('reserve_id', $v->reserveId)->sum('amount');
+                                    $consignee = \App\Models\ConsigneeDetail::where('user_id', $client_details->user_id)->first();
+                                    //var_dump($consignee);
+                                    //print_r($shipment_detail);
+                                    @endphp
+                                    @endif
                                     @if($v->reserve_status == 1)
                                     <p><i class="badge bg-warning">Reserved</i></p>
+                                    @if(currentUser() == 'salesexecutive' && $payment == 0)
                                     <form id="approve-form" action="{{route(currentUser().'.reservecancel')}}" style="display: inline;">
                                         @csrf
                                         <input name="id" type="hidden" value="{{$v->id}}">
                                         <input name="reserveId" type="hidden" value="{{$v->reserveId}}">
                                         <a href="javascript:void(0)" data-title="{{strtoupper($v->fullName)}}" class="approve btn btn-warning btn-sm" data-toggle="tooltip" title="Approve">Cancel Reserve</a>
                                     </form>
+                                    @endif
                                     @elseif($v->reserve_status == 2)
                                     <p><i class="badge bg-success">Confirmed</i></p>
+                                    @if(currentUser() == 'salesexecutive' && $payment == 0)
                                     <form id="approve-form" action="{{route(currentUser().'.reservecancel')}}" style="display: inline;">
                                         @csrf
                                         <input name="id" type="hidden" value="{{$v->id}}">
                                         <input name="reserveId" type="hidden" value="{{$v->reserveId}}">
                                         <a href="javascript:void(0)" data-title="{{strtoupper($v->fullName)}}" class="approve btn btn-warning btn-sm" data-toggle="tooltip" title="Approve">Cancel Reserve</a>
                                     </form>
+                                    @endif
                                     @else
                                     <p><i class="badge bg-danger">Cancelled</i></p>
                                     @endif
@@ -161,12 +175,6 @@
                         </div>
                     </div>
                 </div>
-                @if($v->reserveId)
-                @php
-                $shipment_detail = \App\Models\ShipmentDetail::where('reserve_id', $v->reserveId)->first();
-                print_r($shipment_detail);
-                @endphp
-                @endif
                 <div class="col-md-6">
                     <div class="border p-2">
                         <h6 class="border-bottom">Shipment Details/ Prepaid</h6>
@@ -179,7 +187,7 @@
                             </tr>
                             <tr>
                                 <th>Consignee name</th>
-                                <td></td>
+                                <td>{{$consignee->c_name}}</td>
                                 @if(currentUser() != 'accountant')
                                 <th>Shipment Type</th>
                                 <td>
@@ -200,11 +208,11 @@
                             </tr>
                             <tr>
                                 <th>Consignee Address</th>
-                                <td></td>
+                                <td>{{$consignee->c_address}}</td>
                             </tr>
                             <tr>
                                 <th>Notify Name</th>
-                                <td></td>
+                                <td>{{$consignee->c_name}}</td>
                             </tr>
                             <tr>
                                 <th>Note</th>
@@ -248,7 +256,7 @@
                                 <th>Final In.</th>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

@@ -62,7 +62,7 @@
               <select name="brand" class="form-select form-select-md" id="brand_id" required>
                 <option value="">Make:</option>
                 @forelse($brands as $b)
-                <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
+                <option value="{{$b->id}}" @if(!empty(request()->get('brand'))) @if($b->id == request()->get('brand')) selected @endif @endif>{{$b->name}}</option>
                 @empty
                 @endforelse
               </select>
@@ -372,120 +372,122 @@
                   </select>
                 </div>-->
           </div>
-
+@php
+//dd(request()->all());
+@endphp
           <div class="row gx-1">
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_bag" />
-                <label class="form-check-label" for="exampleCheck1">Air Bag</label>
+                <input type="checkbox" class="form-check-input" id="air_bag" name="air_bag" value="1" {{ request()->get('air_bag') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="air_bag">Air Bag</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="anti_lock_brake_system" />
-                <label class="form-check-label" for="exampleCheck1">Anti-Lock Brake System</label>
+                <input type="checkbox" class="form-check-input" id="anti_lock_brake_system" name="anti_lock_brake_system" value="1" {{ request()->get('anti_lock_brake_system') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="anti_lock_brake_system">Anti-Lock Brake System</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="air_con" />
-                <label class="form-check-label" for="exampleCheck1">Air Conditioner</label>
+                <input type="checkbox" class="form-check-input" id="air_con" name="air_con" value="1" {{ request()->get('air_con') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="air_con">Air Conditioner</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="alloy_wheels" />
-                <label class="form-check-label" for="exampleCheck1">Alloy Wheels</label>
+                <input type="checkbox" class="form-check-input" id="alloy_wheels" name="alloy_wheels" value="1" {{ request()->get('alloy_wheels') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="back_tire" />
-                <label class="form-check-label" for="exampleCheck1">Back Tire</label>
+                <input type="checkbox" class="form-check-input" id="back_tire" name="back_tire" value="1" {{ request()->get('back_tire') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="back_tire">Back Tire</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="fog_lights" />
-                <label class="form-check-label" for="exampleCheck1">Fog Lights</label>
+                <input type="checkbox" class="form-check-input" id="fog_lights" name="fog_lights" value="1" {{ request()->get('fog_lights') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="fog_lights">Fog Lights</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="grill_guard" />
-                <label class="form-check-label" for="exampleCheck1">Grill Guard</label>
+                <input type="checkbox" class="form-check-input" id="grill_guard" name="grill_guard" value="1" {{ request()->get('grill_guard') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="grill_guard">Grill Guard</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="leather_seat" />
-                <label class="form-check-label" for="exampleCheck1">Leather Seats</label>
+                <input type="checkbox" class="form-check-input" id="leather_seat" name="leather_seat" value="1" {{ request()->get('leather_seat') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="leather_seat">Leather Seats</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="navigation" />
-                <label class="form-check-label" for="exampleCheck1">Navigation</label>
+                <input type="checkbox" class="form-check-input" id="navigation" name="navigation" value="1" {{ request()->get('navigation') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="navigation">Navigation</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_steering" />
-                <label class="form-check-label" for="exampleCheck1">Power Steering</label>
+                <input type="checkbox" class="form-check-input" id="power_steering" name="power_steering" value="1" {{ request()->get('power_steering') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="power_steering">Power Steering</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="power_windows" />
-                <label class="form-check-label" for="exampleCheck1">Power Windows</label>
+                <input type="checkbox" class="form-check-input" id="power_windows" name="power_windows" value="1" {{ request()->get('power_windows') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="power_windows">Power Windows</label>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="power_steering" />
+                <label class="form-check-label" for="power_steering">Roof Rails</label>
+              </div>
+            </div> -->
+            <div class="col-sm-2 my-1 d-flex">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rear_spoiler" name="rear_spoiler" value="1" {{ request()->get('rear_spoiler') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                <label class="form-check-label" for="exampleCheck1">Roof Rails</label>
+                <input type="checkbox" class="form-check-input" id="sun_roof" name="sun_roof" value="1" {{ request()->get('sun_roof') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="sun_roof">Sun Roof</label>
               </div>
             </div>
             <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rear_spoiler" />
-                <label class="form-check-label" for="exampleCheck1">Rear Spoiler</label>
+                <input type="checkbox" class="form-check-input" id="tv" name="tv" value="1" {{ request()->get('tv') == 1 ? 'checked' : '' }}/>
+                <label class="form-check-label" for="tv">TV</label>
               </div>
             </div>
-            <div class="col-sm-2 my-1 d-flex">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="sun_roof" />
-                <label class="form-check-label" for="exampleCheck1">Sun Roof</label>
-              </div>
-            </div>
-            <div class="col-sm-2 my-1 d-flex">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="tv" />
-                <label class="form-check-label" for="exampleCheck1">TV</label>
-              </div>
-            </div>
-            <div class="col-sm-2 my-1 d-flex">
+            <!-- <div class="col-sm-2 my-1 d-flex">
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                 <label class="form-check-label" for="exampleCheck1">Dual Air Bags</label>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="col-sm-12 mb-3">
-            <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
+            <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" value="1" {{ request()->get('sbt_stocks') == 1 ? 'checked' : '' }}/>
             <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
 
-            <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
+            <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks value="1" {{ request()->get('partner_stocks') == 1 ? 'checked' : '' }}/>
             <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
 
-            <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
+            <input type="checkbox" class="form-check-input" id="new" class="new-arival" name="new" value="1" {{ request()->get('new') == 1 ? 'checked' : '' }}/>
             <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
 
             <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
 
-            <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
+            <input type="checkbox" class="form-check-input" id="360_img" name="360_img" value="1" {{ request()->get('360_img') == 1 ? 'checked' : '' }}/>
             <label class="form-check-label me-3 img-360" for="360_img">360Degree</label>
 
 
