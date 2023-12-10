@@ -208,11 +208,11 @@
                             </tr>
                             <tr>
                                 <th>Consignee Address</th>
-                                <td>{{$consignee->c_address}}</td>
+                                <td>{{$consignee?->c_address}}</td>
                             </tr>
                             <tr>
                                 <th>Notify Name</th>
-                                <td>{{$consignee->c_name}}</td>
+                                <td>{{$consignee?->c_name}}</td>
                             </tr>
                             <tr>
                                 <th>Note</th>
