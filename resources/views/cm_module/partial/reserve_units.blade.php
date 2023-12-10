@@ -187,7 +187,7 @@
                             </tr>
                             <tr>
                                 <th>Consignee name</th>
-                                <td>{{$consignee->c_name}}</td>
+                                <td>{{$consignee?->c_name}}</td>
                                 @if(currentUser() != 'accountant')
                                 <th>Shipment Type</th>
                                 <td>
