@@ -206,6 +206,7 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         /*Cm Module */
         Route::get('all-client-list', [clientmodule::class, 'all_client_list'])->name('salesexecutive.all_client_list');
         Route::get('client-individual/{id}', [clientmodule::class, 'client_individual'])->name('salesexecutive.client_individual');
+        Route::get('client-proforma-invoice/{id}', [clientmodule::class, 'send_proforma_invoice'])->name('salesexecutive.send_proforma_invoice');
         /*Sales Module */
         Route::get('all-client-list-json', [salesmodule::class, 'all_client_list_json'])->name('salesexecutive.all_client_list_json');
         Route::get('favourite-list', [salesmodule::class, 'favourite_list'])->name('salesexecutive.favourite_list');

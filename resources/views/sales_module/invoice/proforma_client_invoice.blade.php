@@ -25,6 +25,10 @@
 <div class="section">
     <div class="container">
         <div class="col-md-8 offset-md-2">
+            <form method="" action="{{route(currentUser().'.send_proforma_invoice',$id)}}">
+                @csrf
+                <button type="submit" class="btn btn-success">Send Mail</button>
+            </form>
             <div class="card">
                 <div style="background-image:url({{ asset('assets/images/logo/header-logo.png')}});width:320px;height:220px;background-repeat:no-repeat; background-size: contain;transform: rotate(317deg);opacity:0.1;position: absolute;top:55%;left:32%;"></div>
                 <table class="table table-bordered mb-0">
@@ -51,7 +55,7 @@
                             <th>{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->invoice_date))->format('d/m/Y')}}</th>
                         </tr>
                         <tr>
-                            <th>CUSTOMER ADDRESS:</th>
+                            <th width="120px">CUSTOMER ADDRESS:</th>
                             <th>{{$client_details->address1}}</th>
                             <th>INVOICE NO :</th>
                             <th>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($inv->created_at))->format('Ymd')}}{{$inv->id}}</th>
@@ -89,7 +93,7 @@
                                 {{DB::table('countries')->where('id',$client_data->country_id)->first()->name}}
                                 @endif
                             </th>
-                            <th>Agent Name:</th>
+                            <th width="140px">Agent Name:</th>
                             <th>
                                 @if(DB::table('users')->where('id',$client_data->executiveId)->first())
                                 {{DB::table('users')->where('id',$client_data->executiveId)->first()->name}}
@@ -155,7 +159,7 @@
                         <tr>
                             <th colspan="2">PLEASE TRANSFER THE FULL AMOUNT TO LOCAL BANK</th>
                             <th>TOTAL CNF</th>
-                            <th style="background-color:#FFC000"></th>
+                            <th style="background-color:#FFC000">{{$inv->inv_amount}}</th>
                         </tr>
                         <tr>
                             <td class="d-flex" colspan="2">
@@ -234,7 +238,7 @@
 
                     <tr style="background-color: #C00000;">
                         <th colspan="5" style="color:#fff;">TOTAL CNF</th>
-                        <th></th>
+                        <th style="color:#fff">{{$inv->inv_amount}}</th>
                     </tr>
                 </table>
             </div>

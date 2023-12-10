@@ -111,7 +111,7 @@ class InvoiceController extends Controller
             ->where('vehicles.id', $inv->vehicle_id)->first();
         //print_r($v);die;
 
-        return view('sales_module.invoice.proforma_client_invoice', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
+        return view('sales_module.invoice.proforma_client_invoice', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details','id'));
     }
 
     /**
