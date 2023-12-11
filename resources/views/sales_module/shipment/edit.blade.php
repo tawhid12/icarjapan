@@ -195,13 +195,13 @@
                                 <h6 class="mt-3">Documents Details</h6>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label for="bill_of_land_1_url">Bill of Lading (Copy)</label>
+                                        <label for="bill_of_land_1_url"><!--Bill of Lading (Copy)-->Proforma Invoice</label>
                                         <input type="file" id="bill_of_land_1_url" class="form-control" name="bill_of_land_1_url">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label for="bill_of_land_2_url">Bill of Lading (Release)</label>
+                                        <label for="bill_of_land_2_url"><!--Bill of Lading (Release)-->Final Invoice</label>
                                         <input type="file" id="bill_of_land_2_url" class="form-control" name="bill_of_land_2_url">
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label for="exp_can_cer_url_2">Export Cancellation Certificate (Other)</label>
+                                        <label for="exp_can_cer_url_2">Export Cancellation Certificate (Japanese)</label>
                                         <input type="file" id="exp_can_cer_url_2" class="form-control" name="exp_can_cer_url_2">
                                     </div>
                                 </div>
