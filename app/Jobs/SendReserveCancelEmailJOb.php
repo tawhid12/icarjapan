@@ -14,15 +14,15 @@ use Illuminate\Queue\SerializesModels;
 class SendReserveCancelEmailJOb implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $details;
+    protected $n;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($n)
     {
-        $this->details = $details;
+        $this->n = $n;
     }
 
     /**
@@ -32,9 +32,10 @@ class SendReserveCancelEmailJOb implements ShouldQueue
      */
     public function handle()
     {
+        $n = $this->n;
         //print_r($this->details);die;
         /*To User */
-        $user = User::where('id', $n->user_id)->first();
+        $user = User::where('id', $n>user_id)->first();
         $v_data = Vehicle::where('id', $n->vehicle_id)->first();
         \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n, $v_data, $user) {
             $message->from('info@icarjapan.com', 'Icarjapan')
