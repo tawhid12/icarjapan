@@ -39,6 +39,7 @@ class FavouriteVehicleController extends Controller
             $fav = New FavouriteVehicle();
             $fav->vehicle_id = $request->vehicle_id;
             $fav->user_id=currentUserId();
+            $fav->status=2;
             $fav->created_by=currentUserId();
             if($fav->save())
             return redirect()->back()->with(Toastr::success('Favourite Added Successfully!', 'Success', ["positionClass" => "toast-top-right"]));;
@@ -46,7 +47,7 @@ class FavouriteVehicleController extends Controller
             //dd($e);
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
-        
+
     }
 
     /**

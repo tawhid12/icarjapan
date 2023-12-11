@@ -19,4 +19,7 @@ class ClientTransfer extends Model
     public function newexecutiveId(){
         return $this->belongsTo(User::class,'newexId');
     }
+    public function posted_by(){
+        return $this->belongsTo(User::class,'created_by');
+    }
 }

@@ -23,11 +23,13 @@
             <i class="bi bi-gear"></i>
             <span>{{__('Settings')}}</span>
         </a>
+       
         <div class="submenu ">
             <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
             <div class="submenu-group-wrapper">
                 <ul class="submenu-group">
                     <li class="submenu-item"><a href="{{route(currentUser().'.admin.index')}}" class='submenu-link'>{{__('Users')}}</a></li>
+                    <li class="submenu-item"><a href="{{route(currentUser().'.bulk_client_assign')}}" class='submenu-link'>{{__('Bulk Client Assign')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.clientTransferList')}}" class='submenu-link'>{{__('Transfer Client')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.bodytype.index')}}" class='submenu-link'>{{__('Body Type')}}</a></li>
                     <li class="submenu-item"><a href="{{route(currentUser().'.subbodytype.index')}}" class='submenu-link'>{{__('Sub Body Type')}}</a></li>

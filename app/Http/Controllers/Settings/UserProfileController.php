@@ -163,25 +163,28 @@ class UserProfileController extends Controller
     }
     public function clTransfer(Request $request)
     {
+        //print_r($request->toArray());die;
         DB::beginTransaction();
 
         try {
-            /*== Check Client Has Reservation Exists== */
-            get_cancel_date();
-            $data = array(
-                'executiveId' => $request->newexId
-            );
 
-            DB::table('users')->where('id', $request->user_id)->update($data);
-            $data2 = array(
-                'user_id' => $request->user_id,
-                'curexId' => $request->curexId,
-                'newexId' =>  $request->newexId,
-                'created_by' => currentUserId(),
-                'note' => $request->note,
-                'created_at' => Carbon::now()
-            );
-            DB::table('client_transfers')->insert($data2);
+            foreach($request->user_id as $user_id){
+                //echo $user_id;die;
+                $data = array(
+                    'executiveId' => $request->newexId
+                );
+                DB::table('users')->where('id', $request->user_id)->update($data);
+                $data2 = array(
+                    'user_id' => $user_id,
+                    'curexId' => $request->curexId,
+                    'newexId' =>  $request->newexId,
+                    'created_by' => currentUserId(),
+                    'note' => $request->note,
+                    'created_at' => Carbon::now()
+                );
+                DB::table('client_transfers')->insert($data2);
+
+            }
             DB::commit();
             return redirect()->route(currentUser() . '.clientTransferList')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
         } catch (\Exception $e) {
@@ -194,13 +197,13 @@ class UserProfileController extends Controller
     }
     public function clientTransferList()
     {
-        $client_transfers = ClientTransfer::with(['user.country','prevExeutive','newexecutiveId'])->orderBy('client_transfers.id','desc')->paginate(50);
-        
+        $client_transfers = ClientTransfer::with(['user.country','prevExeutive','newexecutiveId'])->orderBy('id','desc')->paginate(50);
+
         /*DB::table('client_transfers')
             ->join('users', 'client_transfers.created_by', 'users.id')
             ->select('client_transfers.*', 'users.name as uname')*/
-           
-            
+
+
         return view('client.clientTransferList', compact('client_transfers'));
     }
     public function assignTo(Request $request)
@@ -221,5 +224,10 @@ class UserProfileController extends Controller
             return redirect()->back()->with(Toastr::success('User Free Successfull!', 'Success', ["positionClass" => "toast-top-right"]));
         } else
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+    }
+    public function bulk_client_assign()
+    {
+        $allUser = User::with(['country','port'])->where('role_id', 4)->whereNull('executiveId')->get();
+        return view('client.bulk_assign', compact('allUser'));
     }
 }

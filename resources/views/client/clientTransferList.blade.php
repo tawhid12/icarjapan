@@ -19,8 +19,8 @@
                                 <th>CM Detail</th>
                                 <th>From Executive Id</th>
                                 <th>To Executive Id</th>
-                                <th>Note</th>
                                 <th>Transferred By</th>
+                                <th>Note</th>
                                 <th>Created On</th>
                             </tr>
                         </thead>
@@ -49,8 +49,8 @@
                                 </td>
                                 <td>{{$transfer->prevExeutive?->name}}</td>
                                 <td>{{$transfer->newexecutiveId?->name}}</td>
-                                <td>{{$transfer->newexecutiveId?->name}}</td>
-                                
+                                <td>{{$transfer->posted_by?->name}}</td>
+
                                 <td>-</td>
                                 <td>{{$transfer->created_at}}</td>
                             </tr>

@@ -143,7 +143,7 @@ class ClientModuleController extends Controller
             'sales_module.invoice.proforma_mail',
             ['inv' => $inv, 'com_info' => $com_info, 'client_data' => $client_data, 'client_details' => $client_details, 'account_info' => $account_info, 'shipment' => $shipment, 'v' => $v],
             function ($message) use ($inv, $com_info, $client_details, $client_data, $account_info, $shipment, $v) {
-                
+
                 $message->from('info@icarjapan.com', 'Icarjapan')
                 ->to($client_data->email)
                 ->subject('Proforma Invoice For ' . $v->fullName . ' and Stock Id ' . $v->stock_id);
@@ -152,6 +152,7 @@ class ClientModuleController extends Controller
                 $pdf = PDF::loadView('sales_module.invoice.proforma_mail', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
                 $message->attachData($pdf->output(), 'proforma.pdf');
                 //return  $pdf->download('proforma.pdf');//To Download For Check View
+                return redirect()->back()->with(Toastr::success('Mail Sent Successful!', 'Success', ["positionClass" => "toast-top-right"]));;
             }
         );
     }

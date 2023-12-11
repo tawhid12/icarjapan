@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('pageTitle','New Client Transfer')
+@section('pageTitle','Bulk Client Transfer')
 @section('pageSubTitle','List')
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -15,9 +15,9 @@
                     @csrf
                     <div class="form-group row">
                         <div class="col-lg-4 row">
-                            <label for="student_id" class="col-sm-3 col-form-label">Select User</label>
+                            <label for="student_id" class="col-sm-3 col-form-label">Select Client</label>
                             <div class="col-sm-9">
-                                <select class="js-example-basic-single form-control" id="user_id" name="user_id[]">
+                                <select class="js-example-basic-multiple form-control" id="user_id" name="user_id[]" multiple="multiple">
                                     <option value="">Select</option>
                                     @if(count($allUser) > 0)
                                     @foreach($allUser as $u)
@@ -38,13 +38,7 @@
                         <div class="col-lg-4 row tobatch"></div>
                     </div>
 
-                    <div class="col-lg-12">
-                        <label for="note" class="col-sm-2 col-form-label">Note</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="operationNote" name="note" rows="5" placeholder="Note" style="
-                                    resize:none;"></textarea>
-                        </div>
-                    </div>
+
                     <div class="form-group text-right my-2">
                         <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
                             Submit
@@ -61,7 +55,7 @@
 <script>
     /*===Student Enroll Batch Data=====*/
     $(document).ready(function() {
-        $('.js-example-basic-single').select2({
+        $('.js-example-basic-multiple').select2({
             placeholder: 'Select Option',
             allowClear: true
         });
