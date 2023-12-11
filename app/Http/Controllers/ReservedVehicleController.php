@@ -318,19 +318,19 @@ class ReservedVehicleController extends Controller
                 print_r($n);die;*/
                 dispatch(New SendReserveCancelEmailJOb($n));
                 /*== Favourite Status Update ==*/
-                /*$notify  =  FavouriteVehicle::find($n->id);
+                $notify  =  FavouriteVehicle::find($n->id);
                 $notify->status = 1;
-                $notify->save();*/
+                $notify->save();
             }
             /*== Reserve Vehicle Cancel ==*/
-            /*$resv = ReservedVehicle::findOrFail($reserveId);
+            $resv = ReservedVehicle::findOrFail($reserveId);
             $resv->status = 3;
-            $resv->save();*/
+            $resv->save();
 
             /*== Notify Vehicle Cancel Update ==*/
-            /*$vehicle = Vehicle::findOrFail($id);
+            $vehicle = Vehicle::findOrFail($id);
             $vehicle->r_status = null;
-            $vehicle->save();*/
+            $vehicle->save();
 
             return redirect()->back()->with(Toastr::success('Reserve Cancel!', 'Success', ["positionClass" => "toast-top-right"]));
         } else {
