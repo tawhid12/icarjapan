@@ -35,7 +35,7 @@ class SendReserveCancelEmailJOb implements ShouldQueue
         $n = $this->n;
         //print_r($this->details);die;
         /*To User */
-        $user = User::where('id', $n>user_id)->first();
+        $user = User::where('id', $n->user_id)->first();
         $v_data = Vehicle::where('id', $n->vehicle_id)->first();
         \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n, $v_data, $user) {
             $message->from('info@icarjapan.com', 'Icarjapan')
