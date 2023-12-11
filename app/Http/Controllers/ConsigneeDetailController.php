@@ -34,16 +34,15 @@ class ConsigneeDetailController extends Controller
     public function create($id = null)
     {
         $countries = Country::all();
-        if (currentUser() == 'user')
+        if (currentUser() == 'user'){
             $con_detl = ConsigneeDetail::paginate(10);
-        if(currentUser() == 'user'){
             countryIp();
-        }
-        $location =  request()->session()->get('location');
-        $countryName =  request()->session()->get('countryName');
-        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            return view('user.consignee.create', compact('countries', 'location'));
-        } else
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('user.consignee.create', compact('countries', 'location'));
+            }
+        }else
             return view('cm_module.consignee.create', compact('countries'));
     }
 
