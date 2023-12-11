@@ -28,11 +28,11 @@
 </head>
 <body>
     <div class="wrapper">
-        <h4>Inquiry Received</h4>
+        <h4>Your Favourite Vehicle Now Available in Stock</h4>
         <p>
             Dear <strong>{{$user->name}}</strong>,
-
         </p>
+        <p>Reserved Free For <strong>{{$v_data->name}} </strong>and Stock Id <strong>{{$v_data->stock_id}}</strong>
     </div>
 </body>
 </html>

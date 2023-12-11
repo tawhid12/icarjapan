@@ -282,7 +282,7 @@ class ReservedVehicleController extends Controller
             $v_data = Vehicle::where('id', $n->vehicle_id)->first();
             /*echo $user->email;
             die;*/
-            \Mail::send('mail.reply_user_body', ['notify' => $n], function ($message) use ($n, $v_data, $user) {
+            \Mail::send('mail.reply_reserve_cancel', ['notify' => $n], function ($message) use ($n, $v_data, $user) {
                 $message->from('info@icarjapan.com', 'Icarjapan')
                     ->to($user->email)
                     ->subject('Reserved Free For ' . $v_data->name . ' and Stock Id ' . $v_data->stock_id);
