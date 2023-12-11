@@ -318,9 +318,9 @@ class ReservedVehicleController extends Controller
                 print_r($n);die;*/
                 dispatch(New SendReserveCancelEmailJOb($n));
                 /*== Favourite Status Update ==*/
-                $notify  =  FavouriteVehicle::find($n->id);
+                /*$notify  =  FavouriteVehicle::find($n->id);
                 $notify->status = 1;
-                $notify->save();
+                $notify->save();*/
             }
             /*== Reserve Vehicle Cancel ==*/
             /*$resv = ReservedVehicle::findOrFail($reserveId);
