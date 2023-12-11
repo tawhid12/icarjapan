@@ -36,7 +36,9 @@ class ConsigneeDetailController extends Controller
         $countries = Country::all();
         if (currentUser() == 'user')
             $con_detl = ConsigneeDetail::paginate(10);
-        countryIp();
+        if(currentUser() == 'user'){
+            countryIp();
+        }
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
