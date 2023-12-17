@@ -99,7 +99,7 @@ class BrandController extends Controller
      * @param  \App\Models\Settimgs\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         try{
             $b=Brand::findOrFail(encryptor('decrypt',$id));

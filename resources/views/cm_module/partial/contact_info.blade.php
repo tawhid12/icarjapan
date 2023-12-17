@@ -5,7 +5,7 @@
     @endif    
         @csrf
         @method('patch')
-        <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$client_details->user_id)}}">
+        <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$client_details->id)}}">
         @php $name = explode(' ',$client_data->name); @endphp
         <div class="row">
             <div class="col-12 col-md-3">

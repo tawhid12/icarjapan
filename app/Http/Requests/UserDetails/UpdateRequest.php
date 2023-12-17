@@ -25,6 +25,7 @@ class UpdateRequest extends FormRequest
     public function rules(Request $r)
     {
         $id=encryptor('decrypt',$r->uptoken);
+        
         return [
             'whatsapp'=>'nullable|unique:user_details,whatsapp,'.$id,
             'facebook'=>'nullable|unique:user_details,facebook,'.$id,
