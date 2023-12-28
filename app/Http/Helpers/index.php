@@ -50,7 +50,7 @@ function countryIp(){
     if ($user_ip) {
         $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
         if(isset($location) and $location){
-            if(isset($location['success']) && $location['success'] == 'success'){
+            if(isset($location->success) && $location->success == 'success'){
                 Log::info($location);
                 $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
                 $currency_data = array(
