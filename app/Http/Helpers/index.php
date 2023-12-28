@@ -63,7 +63,7 @@ function countryIp(){
                     'geoplugin_currencyConverter' => 0,
                 );
                 $location = array_merge($location, $currency_data);
-                
+                print_r($location);die;
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
