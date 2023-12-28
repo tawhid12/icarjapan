@@ -24,7 +24,7 @@ class PaymentController extends Controller
             $payments = Payment::where('created_by', currentUserId())->get();
             return view('sales.payment.index', compact('payments'));
         } elseif (currentUser() == 'user') {
-            $payments = Payment::where('client_id', 3)->get();
+            $payments = Payment::where('client_id', currentUserId())->get();
 
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
