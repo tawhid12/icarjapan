@@ -36,11 +36,13 @@ class FrontController extends Controller
         //die;
         if (isset($c_data->ip_address)) {
             //echo 'ok';die;
-            $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $c_data->ip_address);
-            if (isset($location) and $location) {
-                $location = unserialize($location);
+
+            $api_url = file_get_contents('https://extreme-ip-lookup.com/json/' . $c_data->ip_address . '?key=9x9yyW5zMrdFwAKLH5jO');
+            $jsonData = file_get_contents($api_url);
+            $location = json_decode($jsonData, true);
+            if (isset($location['status']) && $location['status'] == 'success') {
                 //print_r($location);
-                if (isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206) {
+
                     //Log::info($location);
                     if (array_key_exists('timezone', $location)) {
                         $current_locale_data = Carbon::now($location['timezone']);
@@ -52,7 +54,7 @@ class FrontController extends Controller
                     session()->put('location', $location);
                     session()->put('current_locale_data', $current_locale_data);
                     return redirect()->route('front');
-                }
+                
             }
         } else {
             return redirect()->route('front.countrySelect');
