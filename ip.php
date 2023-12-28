@@ -1,17 +1,19 @@
 <?php
 $user_ip = getenv('REMOTE_ADDR');
-/*$location = json_encode(file_get_contents(""));
+$api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
 
-echo '<pre>';
-print_r($location);*/
+// Fetch JSON data from the API
+$jsonData = file_get_contents($api_url);
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_URL, 'https://extreme-ip-lookup.com/json/'.$user_ip.'?key=9x9yyW5zMrdFwAKLH5jO');
-$result = curl_exec($ch);
-curl_close($ch);
-$obj = json_decode($result);
-print_r($obj);
-echo $obj['country'];
+// Convert JSON data to array
+$location = json_decode($jsonData, true);
+
+// Check if decoding was successful
+if ($location !== null) {
+    echo '<pre>';
+    print_r($location);
+} else {
+    echo 'Error decoding JSON data.';
+}
+
 ?>
