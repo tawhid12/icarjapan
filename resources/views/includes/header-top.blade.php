@@ -27,7 +27,7 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
                 @endif
                 </p>
               @if(session()->has('location'))
-              <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p>
+              {{-- <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p> --}}
               @endif
             </div>
 
