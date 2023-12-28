@@ -46,7 +46,7 @@ use Illuminate\Support\Facades\Log;
 // }
 
 function countryIp(){
-    $user_ip = '122.152.55.65';
+    $user_ip = getenv('REMOTE_ADDR');
     $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
     // Fetch JSON data from the API
     $jsonData = file_get_contents($api_url);
