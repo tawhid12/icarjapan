@@ -32,7 +32,16 @@ class ReservedVehicleController extends Controller
             return view('vehicle.resrv_vehicle.index', compact('resrv'));
         } else {
             $resrv = ReservedVehicle::where('user_id', currentUserId())->orderBy('id', 'DESC')->paginate(25);
-            return view('user.resrv_vehicle.index', compact('resrv'));
+
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('user.resrv_vehicle.index', compact('resrv'));
+            }else{
+                countryIp();
+            }
+            
         }
     }
 
