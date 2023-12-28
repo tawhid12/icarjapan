@@ -47,16 +47,23 @@ use Illuminate\Support\Facades\Log;
 
 function countryIp(){
     $user_ip = getenv('REMOTE_ADDR');
+    $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
+    // Fetch JSON data from the API
+    $jsonData = file_get_contents($api_url);
+    $location = json_decode($jsonData, true);
     if ($user_ip) {
-        $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
-        print_r($location);
-        //if(isset($location) and $location){
-            //if(isset($location->success) && $location->success == 'success'){
-                //Log::info($location);
-                //$location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
-                $current_locale_data = Carbon::now($location->timezone);
-                $countryName = Country::where('code', $location->countryCode)->first();
-
+        if(isset($location) and $location){
+            if(isset($location['success']) && $location['success'] == 'success'){
+                Log::info($location);
+                $current_locale_data = Carbon::now($location['timezone']);
+                $countryName = Country::where('code', $location['countryCode'])->first();
+                $currency_data = array(
+                    'geoplugin_status' => 200,
+                    'geoplugin_currencyCode' => 'USD',
+                    'geoplugin_currencyConverter' => 0,
+                );
+                $location = array_merge($location, $currency_data);
+                
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
@@ -73,16 +80,16 @@ function countryIp(){
                     unset($_SESSION['location']);
                     return redirect()->route('front.countrySelect');
                 }
-            /*}else{
+            }else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);
                 return redirect()->route('front.countrySelect');
-            }*/
-        /*}else{
+            }
+        }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
-        }*/
+        }
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);
