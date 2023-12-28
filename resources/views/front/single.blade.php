@@ -1191,11 +1191,11 @@
                           </tr>
                           @endif
                           @if($price_after_dis > 0)
-                          <tr>
+                          {{-- <tr>
                             <th scope="row">Approx.</th>
-                            <td>{{$location['geoplugin_currencyCode']}} {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td>
+                            <td>{{$location['geoplugin_currencyCode']}} {{number_format(round($location['geoplugin_currencyConverter']*$price_after_dis), 2, '.', ',')}}</td> --}}
                             <input type="hidden" class="convert_price" value="{{round($location['geoplugin_currencyConverter']*$price_after_dis)}}">
-                          </tr>
+                          {{-- </tr> --}}
                           @endif
                           <tr>
                             <th scope="row">Destination Country</th>
@@ -1278,18 +1278,18 @@
                             <th scope="row">Inspection<input type="checkbox" class="mx-2 chk" value="{{$des_country->inspection}}"></th>
                             <td class="ins_txt">USD {{$des_country->inspection}}</td>
                           </tr>
-                          <tr class="tr-hide">
+                          {{-- <tr class="tr-hide">
                             <th scope="row"></th>
                             <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->inspection)}}</td>
-                          </tr>
+                          </tr> --}}
                           <tr>
                             <th scope="row">Insurance<input type="checkbox" class="mx-2 chk" value="{{$des_country->insurance}}"></th>
                             <td class="insu_txt">USD {{$des_country->insurance}}</td>
                           </tr>
-                          <tr class="tr-hide">
+                          {{-- <tr class="tr-hide">
                             <th scope="row"></th>
                             <td>Approx. {{$location['geoplugin_currencyCode']}} {{round($location['geoplugin_currencyConverter']*$des_country->insurance)}}</td>
-                          </tr>
+                          </tr> --}}
                           <tr>
                             <th scope="row"></th>
                             <td class="total"></td>

@@ -921,7 +921,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
                     $dis_price = $v->price*$v->discount/100;
                     $price_after_dis = ($actual_price-$dis_price);
                     @endphp
-                    <p class="price-text m-0">Vehicle Price:
+                    <p class="price-text m-0">Price:
 
 
                       <span>USD {{$price_after_dis}}</span>
@@ -931,7 +931,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
                     @endif
 
                   </div>
-                  <p class="price-text m-0">Total Price: <span>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price_after_dis, 2, ',', ',')}}</span></p>
+                  {{-- <p class="price-text m-0">Total Price: <span>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price_after_dis, 2, ',', ',')}}</span></p> --}}
                   @if($v->discount > 0)
                   <p>Save: {{$v->discount}}</p>
                   @endif
