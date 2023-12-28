@@ -63,18 +63,7 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        $countryName = Country::select('id','name')->where('id',109)->first();
-        session()->put('countryName', $countryName);
-
-        $location = array(
-            'geoplugin_status' => 200,
-            'geoplugin_currencyCode' => 'JPY',
-            'geoplugin_currencyConverter' => 151.699,
-            'geoplugin_timezone' => "Asia/Tokyo"
-
-        );
-        session()->put('location', $location);
-        //countryIp();
+        countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         /*echo '<pre>';
