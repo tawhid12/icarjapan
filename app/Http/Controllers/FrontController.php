@@ -66,6 +66,8 @@ class FrontController extends Controller
         countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
+        echo '<pre>';
+        print_r($location);die;
         /*echo '<pre>';
         print_r($countryName);
         echo $countryName->name;
