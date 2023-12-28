@@ -77,7 +77,7 @@ class ClientModuleController extends Controller
             return view('cm_module.cm_module', compact('users', 'countries'));
         } elseif (currentUser() == 'accountant') {
             $countries = Country::all();
-            $users = User::where('role_id', 4)->paginate(50);
+            $users = User::where('role_id', 4)->whereIn('type', [1,2])->paginate(50);
             return view('cm_module.cm_module', compact('users', 'countries'));
         } else {
             $users = User::paginate(10);
