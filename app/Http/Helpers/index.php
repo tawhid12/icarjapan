@@ -52,8 +52,8 @@ function countryIp(){
     $jsonData = file_get_contents($api_url);
     $location = json_decode($jsonData, true);
     if ($user_ip) {
-        if(isset($location) and $location){
-            if(isset($location['success']) && $location['success'] == 'success'){
+        //if(isset($location) and $location){
+            //if(isset($location['success']) && $location['success'] == 'success'){
                 Log::info($location);
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
@@ -79,16 +79,16 @@ function countryIp(){
                     unset($_SESSION['location']);
                     return redirect()->route('front.countrySelect');
                 }
-            }else{
+            /*}else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);
                 return redirect()->route('front.countrySelect');
-            }
-        }else{
+            }*/
+        /*}else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
-        }
+        }*/
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);
