@@ -17,7 +17,7 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
               <p class="text-center">{{$japan_locale_data->format('M, d, H:i (T)')}} {{--Japan Time: Dec, 26, 18:42(JST)--}}</p>
               <h4 class="text-center m-0">Total Cars: {{$total_cars}}</h4>
               </div>
-              <div class="col-12 col-md-2 text-center">
+              <div class="col-12 col-md-1 text-center">
                 @if(session()->has('location'))
                 <p class="m-0">{{$location['country']}}</p>
                 @endif
@@ -42,7 +42,7 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
                 <option value="0">Off</option>
               </select>
             </div> --}}
-            <div class="col-6 col-md-5 text-center">
+            <div class="col-6 col-md-4 text-center">
               <p><span><i class="bi bi-headset"></i></span>Support</p>
               {{--<select class="form-select" id="lang_id" aria-label="Default select example">
                 <option value=""></option>
