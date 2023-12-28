@@ -70,7 +70,7 @@ class FrontController extends Controller
         echo $countryName->name;
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            if (isset($location['timezone'])) {
+            if (isset($location['timezone']) && !empty($location['timezone'])) {
             $current_locale_data = Carbon::now($location['timezone']);
             }
             else{
