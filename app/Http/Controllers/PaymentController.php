@@ -25,11 +25,13 @@ class PaymentController extends Controller
             return view('sales.payment.index', compact('payments'));
         } elseif (currentUser() == 'user') {
             $payments = Payment::where('client_id', 3)->get();
-            countryIp();
+
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
                 return view('user.payment.index', compact('payments','location'));
+            }else{
+                countryIp();
             }
         } else {
             $payments = Payment::all();
