@@ -46,14 +46,14 @@ use Illuminate\Support\Facades\Log;
 // }
 
 function countryIp(){
-    $user_ip = getenv('REMOTE_ADDR');
+    $user_ip = '122.152.55.65';
     $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
     // Fetch JSON data from the API
     $jsonData = file_get_contents($api_url);
     $location = json_decode($jsonData, true);
     if ($user_ip) {
-        //if(isset($location) and $location){
-            //if(isset($location['success']) && $location['success'] == 'success'){
+        if(isset($location)){
+            if(isset($location['status']) && $location['status'] == 'success'){
                 Log::info($location);
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
@@ -79,16 +79,16 @@ function countryIp(){
                     unset($_SESSION['location']);
                     return redirect()->route('front.countrySelect');
                 }
-            /*}else{
+            }else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);
                 return redirect()->route('front.countrySelect');
-            }*/
-        /*}else{
+            }
+        }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
-        }*/
+        }
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);

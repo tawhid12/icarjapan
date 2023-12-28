@@ -63,16 +63,8 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        countryIp();
         $location =  request()->session()->get('location');
-        print_r($location);
         $countryName =  request()->session()->get('countryName');
-        $currency_data = array(
-            'geoplugin_status' => 200,
-            'geoplugin_currencyCode' => 'USD',
-            'geoplugin_currencyConverter' => 0,
-        );
-        $location = array_merge($location, $currency_data);
         /*echo '<pre>';
         print_r($countryName);
         echo $countryName->name;
