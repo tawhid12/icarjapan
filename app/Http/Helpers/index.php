@@ -49,8 +49,8 @@ function countryIp(){
     $user_ip = getenv('REMOTE_ADDR');
     if ($user_ip) {
         $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
-        if(isset($location) and $location){
-            if(isset($location->success) && $location->success == 'success'){
+        //if(isset($location) and $location){
+            //if(isset($location->success) && $location->success == 'success'){
                 Log::info($location);
                 $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
                 $currency_data = array(
@@ -78,16 +78,16 @@ function countryIp(){
                     unset($_SESSION['location']);
                     return redirect()->route('front.countrySelect');
                 }
-            }else{
+            /*}else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);
                 return redirect()->route('front.countrySelect');
-            }
-        }else{
+            }*/
+        /*}else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
-        }
+        }*/
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);
