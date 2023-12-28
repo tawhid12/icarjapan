@@ -18,6 +18,9 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
               <h4 class="text-center m-0">Total Cars: {{$total_cars}}</h4>
               </div>
               <div class="col-12 col-md-2 text-center">
+                @if(session()->has('location'))
+                <p class="m-0">{{$location['country']}}</p>
+                @endif
                 <p class="m-0">
                 @if(session()->has('current_locale_data'))
                     @php
@@ -27,7 +30,7 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
                 @endif
                 </p>
               @if(session()->has('location'))
-              <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{--number_format($location['geoplugin_currencyConverter'], 2, '.', ',')--}}</p>
+              {{-- <p class="m-0">{{$location['geoplugin_currencyCode']}}/USD {{number_format($location['geoplugin_currencyConverter'], 2, '.', ',')}}</p> --}}
               @endif
             </div>
 
