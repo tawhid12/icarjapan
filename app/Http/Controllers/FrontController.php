@@ -65,7 +65,6 @@ class FrontController extends Controller
     {
         countryIp();
         $location =  request()->session()->get('location');
-        print_r($location);die;
         $countryName =  request()->session()->get('countryName');
         $currency_data = array(
             'geoplugin_status' => 200,
