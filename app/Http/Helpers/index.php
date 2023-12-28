@@ -48,9 +48,8 @@ use Illuminate\Support\Facades\Log;
 function countryIp(){
     $user_ip = getenv('REMOTE_ADDR');
     if ($user_ip) {
-        $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
+        $location = unserialize(json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO")));
         if(isset($location) and $location){
-            $location = unserialize($location);
             if(isset($location['success']) && $location['success'] == 'success'){
                 Log::info($location);
                 $location = unserialize(json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO")));
