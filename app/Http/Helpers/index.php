@@ -46,6 +46,8 @@ use Illuminate\Support\Facades\Log;
 // }
 
 function countryIp(){
+    unset($_SESSION['countryName']);
+    unset($_SESSION['location']);
     $user_ip = getenv('REMOTE_ADDR');
     $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
     // Fetch JSON data from the API
@@ -63,7 +65,6 @@ function countryIp(){
                     'geoplugin_currencyConverter' => 0,
                 );
                 $location = array_merge($location, $currency_data);
-                print_r($location);die;
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
