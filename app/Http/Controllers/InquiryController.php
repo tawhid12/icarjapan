@@ -19,11 +19,12 @@ class InquiryController extends Controller
         if (currentUser() == 'user') {
             $all_in = Inquiry::where('created_by', currentUserId())->get();
 
-            countryIp();
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
                 return view('user.inquiry.index', compact('all_in','location'));
+            }else{
+                countryIp();
             }
         } else {
             $all_in = Inquiry::all();
