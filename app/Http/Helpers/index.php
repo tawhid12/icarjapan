@@ -49,11 +49,9 @@ function countryIp(){
     $user_ip = getenv('REMOTE_ADDR');
     if ($user_ip) {
         $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
-        echo '<pre>';
-        print_r($location);die;
         //if(isset($location) and $location){
             //if(isset($location->success) && $location->success == 'success'){
-                Log::info($location);
+                //Log::info($location);
                 $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
                 $currency_data = array(
                     'geoplugin_status' => 200,
