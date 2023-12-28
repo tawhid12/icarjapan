@@ -225,10 +225,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     @endphp
                     @if($price > 0)
                     <p class="m-0">Price : USD {{$price}}</p>
-                    <div class="product-card-currency">
-                      {{-- <p class="m-0">Approx.
-                      <p class="m-0">{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p> --}}
-                    </div>
+                    {{-- <div class="product-card-currency">
+                      <p class="m-0">Approx.
+                      <p class="m-0">{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                    </div> --}}
                     @else
                     <p class="m-0">Ask</p>
                     @endif
@@ -284,10 +284,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     @endphp
                     @if($price > 0)
                     <p class="m-0">Price : USD {{$price}}</p>
-                    <div class="product-card-currency">
-                      {{-- <p>Approx.</p>
-                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p> --}}
-                    </div>
+                    {{-- <div class="product-card-currency">
+                      <p>Approx.</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                    </div> --}}
                     @else
                     <p class="m-0">Ask</p>
                     @endif
@@ -336,10 +336,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       $price = $actual_price - $dis_price;
                     @endphp
                     <p class="m-0">Price : USD {{$price}}</p>
-                    <div class="product-card-currency">
-                      {{-- <p>Approx.</p>
-                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p> --}}
-                    </div>
+                    {{-- <div class="product-card-currency">
+                      <p>Approx.</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                    </div> --}}
                   </div>
                 </div>
               </div>
@@ -382,10 +382,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       $price = $actual_price - $dis_price;
                     @endphp
                     <p class="m-0">Price : USD {{$price}}</p>
-                    <div class="product-card-currency">
-                      {{-- <p>Approx.</p>
-                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p> --}}
-                    </div>
+                    {{-- <div class="product-card-currency">
+                      <p>Approx.</p>
+                      <p>{{$location['geoplugin_currencyCode']}} {{number_format($location['geoplugin_currencyConverter']*$price, 2, ',', ',')}}</p>
+                    </div> --}}
                   </div>
                 </div>
               </div>
