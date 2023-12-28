@@ -37,7 +37,7 @@ class ReservedVehicleController extends Controller
             $countryName =  request()->session()->get('countryName');
             
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('user.resrv_vehicle.index', compact('resrv'));
+                return view('user.resrv_vehicle.index', compact('resrv','location'));
             }else{
                 countryIp();
             }
