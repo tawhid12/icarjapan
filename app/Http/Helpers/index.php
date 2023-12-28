@@ -46,15 +46,16 @@ use Illuminate\Support\Facades\Log;
 // }
 
 function countryIp(){
-    if ($_SERVER['REMOTE_ADDR']) {
-        $location = file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']);
+    $user_ip = getenv('REMOTE_ADDR');
+    if ($user_ip) {
+        $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
         if(isset($location) and $location){
             $location = unserialize($location);
-            if(isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206){
-                //Log::info($location);
-                $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
-                $current_locale_data = Carbon::now($location['geoplugin_timezone']);
-                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+            if(isset($location['success']) && $location['success'] == 'success'){
+                Log::info($location);
+                $location = unserialize(json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO")));
+                $current_locale_data = Carbon::now($location['timezone']);
+                $countryName = Country::where('code', $location['countryCode'])->first();
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
