@@ -66,7 +66,7 @@
             <tr>
                 <td>
                     <strong>Vehicle Name:{{$v_data->name}}</strong>
-                    <p>Country:{{$inquiry->country->?name}}</p>
+                    <p>Country:{{$inquiry->country?->name}}</p>
                 </td>
             </tr>
             <tr>
