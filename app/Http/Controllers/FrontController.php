@@ -64,13 +64,20 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         countryIp();
+        $currency = array(
+            'geoplugin_status' => 200,
+            'geoplugin_currencyCode' => 'USD',
+            'geoplugin_currencyConverter' => 0,
+
+        );
+        //
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         /*echo '<pre>';
         print_r($countryName);
         echo $countryName->name;
         die;*/
-        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+        if (isset($currency['geoplugin_currencyCode']) && isset($currency['geoplugin_currencyConverter']) && isset($countryName->id)) {
           
             $current_locale_data = Carbon::now($location['geoplugin_timezone']);
             /*==New Arival== | New Affordable==*/
