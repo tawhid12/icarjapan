@@ -42,7 +42,7 @@ $japan_locale_data = Carbon::now('Asia/Tokyo');
                 <option value="0">Off</option>
               </select>
             </div> --}}
-            <div class="col-6 col-md-2 text-center">
+            <div class="col-6 col-md-5 text-center">
               <p><span><i class="bi bi-headset"></i></span>Support</p>
               {{--<select class="form-select" id="lang_id" aria-label="Default select example">
                 <option value=""></option>
