@@ -76,12 +76,6 @@ class FrontController extends Controller
         echo $countryName->name;
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            if (array_key_exists('timezone', $location)) {
-                $current_locale_data = Carbon::now($location['timezone']);
-            } else {
-                countryIp();
-            }
-
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
                 ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
@@ -136,8 +130,13 @@ class FrontController extends Controller
             //return response()->json(array('data' =>'ok'));
 
 
-
-            return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
+            if (array_key_exists('timezone', $location)) {
+                $current_locale_data = Carbon::now($location['timezone']);
+                return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
+            } else {
+                countryIp();
+            }
+           
         } else {
             countryIp();
         }
