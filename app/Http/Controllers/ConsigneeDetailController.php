@@ -18,11 +18,12 @@ class ConsigneeDetailController extends Controller
     public function index()
     {
         $con_detl = ConsigneeDetail::paginate(10);
-        countryIp();
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             return view('user.consignee.index', compact('con_detl', 'location'));
+        }else{
+            countryIp();
         }
     }
 
