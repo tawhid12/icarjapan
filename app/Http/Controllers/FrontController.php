@@ -42,7 +42,11 @@ class FrontController extends Controller
                 //print_r($location);
                 if (isset($location['geoplugin_status']) && $location['geoplugin_status'] == 200 || $location['geoplugin_status'] == 206) {
                     //Log::info($location);
-                    $current_locale_data = Carbon::now($location['geoplugin_timezone']);
+                    if (array_key_exists('timezone', $location)) {
+                        $current_locale_data = Carbon::now($location['timezone']);
+                    } else {
+                        countryIp();
+                    }
                     $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                     session()->put('countryName', $countryName);
                     session()->put('location', $location);
@@ -71,12 +75,11 @@ class FrontController extends Controller
         die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             if (array_key_exists('timezone', $location)) {
-            $current_locale_data = Carbon::now($location['timezone']);
-            }
-            else{
+                $current_locale_data = Carbon::now($location['timezone']);
+            } else {
                 countryIp();
             }
-            
+
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
                 ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
@@ -356,7 +359,7 @@ class FrontController extends Controller
             }
 
 
-            $vehicles = $vehicles->orderBy('r_status','asc');
+            $vehicles = $vehicles->orderBy('r_status', 'asc');
             if ($request->adv_search == 'sale_module_search') {
                 $vehicles = $vehicles->paginate(10)->appends([
                     'adv_search' => $request->adv_search,
