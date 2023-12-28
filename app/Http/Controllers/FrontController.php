@@ -69,9 +69,14 @@ class FrontController extends Controller
         print_r($countryName);
         echo $countryName->name;
         die;*/
-        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id) && $location['timezone']) {
-          
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            if (isset($location['timezone'])) {
             $current_locale_data = Carbon::now($location['timezone']);
+            }
+            else{
+                countryIp();
+            }
+            
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
                 ->select('vehicles.id as vid', 'vehicles.r_status', 'vehicles.name', 'vehicles.price', 'vehicles.discount', 'vehicles.manu_year', 'vehicles.chassis_no', 'vehicles.stock_id', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
