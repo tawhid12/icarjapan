@@ -1,9 +1,5 @@
 <?php
-$arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer"=>false,
-        "verify_peer_name"=>false,
-    ),
-); 
-	echo file_get_contents("https://www.geoplugin.com/ip.php", false, stream_context_create($arrContextOptions));
+$user_ip = getenv('REMOTE_ADDR');
+$location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
+print_r($location);
 ?>
