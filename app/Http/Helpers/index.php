@@ -50,9 +50,9 @@ function countryIp(){
     if ($user_ip) {
         $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
         print_r($location);
-        if(isset($location) and $location){
+        //if(isset($location) and $location){
             if(isset($location->success) && $location->success == 'success'){
-                Log::info($location);
+                //Log::info($location);
                 $location = json_decode(file_get_contents("https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO"));
                 $current_locale_data = Carbon::now($location->timezone);
                 $countryName = Country::where('code', $location->countryCode)->first();
@@ -78,11 +78,11 @@ function countryIp(){
                 unset($_SESSION['location']);
                 return redirect()->route('front.countrySelect');
             }
-        }else{
+        /*}else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
             return redirect()->route('front.countrySelect');
-        }
+        }*/
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);
