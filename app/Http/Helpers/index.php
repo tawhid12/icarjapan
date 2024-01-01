@@ -46,15 +46,16 @@ use Illuminate\Support\Facades\Log;
 // }
 
 function countryIp(){
-    $user_ip = getenv('REMOTE_ADDR');
+    $user_ip = '101.188.67.134'/*getenv('REMOTE_ADDR')*/;
     $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
     // Fetch JSON data from the API
     $jsonData = file_get_contents($api_url);
     $location = json_decode($jsonData, true);
+    
     if ($user_ip) {
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success'){
-                Log::info($location);
+                //Log::info($location);
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(

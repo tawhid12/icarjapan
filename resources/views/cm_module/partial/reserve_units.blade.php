@@ -56,7 +56,7 @@
                                         </table>
                                         <table class="table mt-2 custom-table">
                                             <tr>
-                                                <td>DBA-L175S</td>
+                                                <td>{{$v->chassis_no}}</td>
                                                 <td>
                                                     @if($v->fuel_id)
                                                     @php $fuel = \DB::table('fuels')->where('id',$v->fuel_id)->first();@endphp
