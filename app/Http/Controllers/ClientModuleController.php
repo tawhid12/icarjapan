@@ -139,9 +139,9 @@ class ClientModuleController extends Controller
             ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
             ->select('vehicles.*', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
             ->where('vehicles.id', $inv->vehicle_id)->first();
+            
         \Mail::send(
-            '',
-            ['inv' => $inv, 'com_info' => $com_info, 'client_data' => $client_data, 'client_details' => $client_details, 'account_info' => $account_info, 'shipment' => $shipment, 'v' => $v],
+            /*'sales_module.invoice.proforma_mail'*/[],[],
             function ($message) use ($inv, $com_info, $client_details, $client_data, $account_info, $shipment, $v) {
 
                 $message->from('info@icarjapan.com', 'Icarjapan')
