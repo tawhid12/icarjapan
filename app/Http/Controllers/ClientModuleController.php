@@ -147,8 +147,8 @@ class ClientModuleController extends Controller
 
                 $message->from('info@icarjapan.com', 'Icarjapan')
                 ->to($client_data->email)
-                ->subject('Proforma Invoice For ' . $v->fullName . ' and Stock Id ' . $v->stock_id)
-                ->body('This is the body of the email.');
+                ->subject('Proforma Invoice For ' . $v->fullName . ' and Stock Id ' . $v->stock_id);
+                //->body('This is the body of the email.');
                 // To Show view Before Download
                 //return view('sales_module.invoice.proforma_mail', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
                 $pdf = PDF::loadView('sales_module.invoice.proforma_mail', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
