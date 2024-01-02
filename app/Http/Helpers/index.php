@@ -56,6 +56,8 @@ function countryIp(){
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success'){
                 //Log::info($location);
+                unset($_SESSION['countryName']);
+                unset($_SESSION['location']);
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
