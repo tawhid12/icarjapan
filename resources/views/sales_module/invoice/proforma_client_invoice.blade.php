@@ -27,7 +27,7 @@
         <div class="col-md-8 offset-md-2">
             <form method="" action="{{route(currentUser().'.send_proforma_invoice',$id)}}">
                 @csrf
-                <button type="submit" class="btn btn-success">Send Mail</button>
+                <button type="submit" class="btn btn-sm btn-success">Send Mail</button>
             </form>
             <div class="card">
                 <div style="background-image:url({{ asset('assets/images/logo/header-logo.png')}});width:320px;height:220px;background-repeat:no-repeat; background-size: contain;transform: rotate(317deg);opacity:0.1;position: absolute;top:55%;left:32%;"></div>

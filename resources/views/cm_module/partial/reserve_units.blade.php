@@ -180,7 +180,7 @@
                         <h6 class="border-bottom">Shipment Details/ Prepaid</h6>
                         <table class="table table-bordered m-0">
                             <tr>
-                                <th>ATD</th>
+                                <th>ETD</th>
                                 <td></td>
                                 <th>ETA</th>
                                 <td></td>

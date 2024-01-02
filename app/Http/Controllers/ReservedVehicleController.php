@@ -183,6 +183,7 @@ class ReservedVehicleController extends Controller
 
 
         try {
+            //print_r($request->toArray());die;
             $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
 
             if (currentUser() == 'accountant') {
@@ -211,17 +212,13 @@ class ReservedVehicleController extends Controller
 
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
                 if ($resv->shipment_type == 2) {
-
-
                     $resv->freight_amt = $request->freight_amt;
                     $resv->insp_amt = $request->insp_amt;
                     $resv->insu_amt = $request->insu_amt;
                     $resv->m3_value = $request->m3_value;
                     $resv->m3_charge = $request->m3_charge;
                     $resv->aditional_cost =  $request->aditional_cost;
-                    $resv->discount =  $request->discount;
                     $resv->fob_amt = $request->fob_amt;
-                    $resv->discount = $request->discount;
                 }
 
 
@@ -262,7 +259,7 @@ class ReservedVehicleController extends Controller
                 $invoice->save();
                 /* Send Proforma Invoice To User with mail */
             }
-
+            $resv->discount =  $request->discount;
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
                 return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));

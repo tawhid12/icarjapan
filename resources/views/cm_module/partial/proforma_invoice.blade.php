@@ -3,6 +3,11 @@
 <div class="border">
     <div class="p-2">
         <h5 class="text-center my-2 pb-2">Process Proforma Invoice</h5>
+        @php 
+        /*echo '<pre>';
+        print_r($resrv);
+        die;*/
+        @endphp
         @forelse($resrv as $v)
 
 
@@ -142,10 +147,7 @@
                     <div class="border p-2">
                         <h6 class="border-bottom">Prepare Proforma Invoice</h6>
                         <table class="table table-bordered m-0">
-
-                         
                                 @php
-
                                 if($client_data->country_id && empty(request('country_id'))){
                                 $des_port = \DB::table('ports')->where('inv_loc_id',$client_data->country_id)->get();
                                 $des_country = \DB::table('countries')->where('id',$client_data->country_id)->first();
@@ -185,6 +187,13 @@
                                     @endif
                                 </td>
                             </tr>
+                            {{-- <tr>
+                                <th>Discount:</th>
+                                <td>USD</td>
+                                <td colspan="2">
+                                    <input type="text" name="discount" value="{{$v->dis}}" style="border:none">
+                                </td>
+                            </tr> --}}
                             @if($v->insu_amt > 0)
                             <tr>
                                 <th>Insurance Amount:</th>
