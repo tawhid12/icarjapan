@@ -54,13 +54,14 @@ function countryIp(){
     if ($user_ip) {
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success'){
-                Log::info($location);
+                //Log::info($location);
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
                     'geoplugin_status' => 200,
                     'geoplugin_currencyCode' => 'USD',
                     'geoplugin_currencyConverter' => 0,
+                    'expairy' => 1,
                 );
                 $location = array_merge($location, $currency_data);
                 session()->put('countryName', $countryName);

@@ -44,7 +44,7 @@ class FrontController extends Controller
                 //print_r($location);
 
                     //Log::info($location);
-                    if (array_key_exists('timezone', $location)) {
+                    if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
                         $current_locale_data = Carbon::now($location['timezone']);
                     } else {
                         countryIp();
@@ -130,7 +130,7 @@ class FrontController extends Controller
             //return response()->json(array('data' =>'ok'));
 
 
-            if (array_key_exists('timezone', $location)) {
+            if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
                 $current_locale_data = Carbon::now($location['timezone']);
                 return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
             } else {
