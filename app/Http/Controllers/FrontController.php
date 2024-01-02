@@ -133,9 +133,9 @@ class FrontController extends Controller
             $api_url = "https://extreme-ip-lookup.com/json/$user_ip?key=9x9yyW5zMrdFwAKLH5jO";
             // Fetch JSON data from the API
             $jsonData = file_get_contents($api_url);
-            $chk_location = json_decode($jsonData, true);
-
-            if (array_key_exists('timezone', $location) && $chk_location['timezone'] != $location['timezone']) {
+            $location = json_decode($jsonData, true);
+            
+            if (array_key_exists('timezone', $location)) {
                 $current_locale_data = Carbon::now($location['timezone']);
                 return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
             } else {
