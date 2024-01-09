@@ -26,6 +26,7 @@ class ReservedVehicle extends Model
             $sum -=  $this->fob_amt*($this->discount/100);
         }
         $this->total = $sum;
+        //dd($this->total); 
         // Check if $sum is calculated correctly
         Log::info("Debugging: total = {$this->total}");
         $this->save();

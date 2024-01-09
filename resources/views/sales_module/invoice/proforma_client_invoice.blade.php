@@ -206,7 +206,7 @@
                         <th>{{$v->fullName}}</th>
 
                         <th>Steering :</th>
-                        <th>@if($v->steering == 1) Auto @else Manual @endif</th>
+                        <th>@if($v->steering == 1) RHD @else LHD @endif</th>
 
                     </tr>
                     <tr>
