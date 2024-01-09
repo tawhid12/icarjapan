@@ -64,7 +64,7 @@ use App\Http\Middleware\isSalesexecutive;
 use App\Http\Middleware\isUser;
 
 use App\Http\Middleware\unknownCountryMiddleware;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -311,3 +311,9 @@ Route::get('subBrand', [subBrand::class, 'get_sub_brand_by_id'])->name('subBrand
 Route::get('port', [port::class, 'get_port_by_id'])->name('portById');
 Route::get('m3', [port::class, 'get_m3_charge_by_port_id'])->name('m3Charge');
 Route::get('/watermark', [vehicle::class, 'addWatermarkall']);
+
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');

@@ -1292,7 +1292,7 @@
                           </tr> --}}
                           <tr>
                             <th scope="row"></th>
-                            <td class="total"></td>
+                            {{-- <td class="total"></td> --}}
                             <input type="hidden" class="con_total">
                             <input type="hidden" class="non_con_total">
                           </tr>
