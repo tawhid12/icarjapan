@@ -207,9 +207,9 @@
                                     </form>--}}
                                     @endif
                                     @if(currentUser() == 'accountant')
-                                    {{--<a target="blank" class="btn btn-sm btn-primary" href="{{route(currentUser().'.deposit.show',encryptor('encrypt',$cm->id))}}">
+                                    <a target="blank" class="btn btn-sm btn-primary" href="{{route(currentUser().'.deposit.show',encryptor('encrypt',$cm->id))}}">
                                     Deposit
-                                    </a>--}}
+                                    </a>
                                     @endif
                                 </td>
 

@@ -28,7 +28,7 @@ class ClientModuleController extends Controller
         $countries = Country::all();
         $order_by = $request->order_by ? $request->order_by : 'desc';
         $perPage = $request->perPage ? $request->perPage : 50;
-        if (currentUser() == 'salesexecutive' || currentUser() == 'superadmin') {
+        if (currentUser() == 'salesexecutive') {
             $users = User::with(['country', 'clientTransfers' => function ($query) {
                 $query->latest('id')->limit(1);
             }]);
@@ -53,7 +53,7 @@ class ClientModuleController extends Controller
             } elseif ($request->star) {
                 $users = $users->where('cmType', $request->star);
             }
-            if ($request->executiveId != 1 && currentUser() == 'salexexecutive') {
+            if ($request->executiveId != 1) {
                 $users = $users
                     ->where(function ($query) use ($request) {
                         $query->where('executiveId', '=', currentUserId());
