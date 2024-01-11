@@ -348,7 +348,7 @@ class ReservedVehicleController extends Controller
 
         $vehicle = Vehicle::find($request->vehicle_id);
         $resv = ReservedVehicle::findOrFail($request->reserve_id);
-        //dd($resv);
+        dd($vehicle);
         /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
         if ($resv->shipment_type == 1) {
 
@@ -401,6 +401,7 @@ class ReservedVehicleController extends Controller
 
         $invoice->save();
         if ($resv->save()) {
+        
             return redirect()->back()->with(Toastr::success('Shipment Type Updated', 'error', ["positionClass" => "toast-top-right"]));
         }
     }

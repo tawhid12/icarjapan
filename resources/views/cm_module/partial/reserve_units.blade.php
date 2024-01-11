@@ -201,7 +201,7 @@
                                         <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
                                         <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
                                     </select>
-                                    @if(currentUser() != 'accountant' && !$v->shipment_type)
+                                    @if(currentUser() != 'accountant' )
                                     <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
                                     @endif
                                     </form>
