@@ -143,6 +143,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    {{$user->port_id}}
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="country_id">Port<span class="text-danger">*</span></label>
