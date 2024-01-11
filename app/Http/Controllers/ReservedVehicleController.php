@@ -348,12 +348,12 @@ class ReservedVehicleController extends Controller
 
         $vehicle = Vehicle::find($request->vehicle_id);
         $resv = ReservedVehicle::findOrFail($request->reserve_id);
-        dd($vehicle);
+       
         /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
         if ($resv->shipment_type == 1) {
 
             $user = DB::table('users')->where('id', $resv->user_id)->first();
-
+            dd($vehicle);
             $country_data = DB::table('countries')->where('id', $user->country_id)->first();
             $resv->insp_amt =  $request->insp_amt == 1 ? $country_data->inspection : 0;
             $resv->insu_amt =  $request->insu_amt == 1 ? $country_data->insurance : 0;
