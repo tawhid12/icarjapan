@@ -138,7 +138,7 @@ class ClientModuleController extends Controller
             ->join('body_types', 'body_types.id', '=', 'vehicles.body_type_id')
             ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
             ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
-            ->select('vehicles.*', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
+            ->select('vehicles.*','reserved_vehicles.required_deposit', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
             ->where('vehicles.id', $inv->vehicle_id)->first();
             
         \Mail::send(
