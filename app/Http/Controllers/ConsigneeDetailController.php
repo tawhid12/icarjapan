@@ -123,13 +123,13 @@ class ConsigneeDetailController extends Controller
         $consignee = ConsigneeDetail::find(encryptor('decrypt', $id));
         if (currentUser() == 'user')
             $con_detl = ConsigneeDetail::where('user_id',currentUserId())->paginate(10);
-        countryIp();
-        $location =  request()->session()->get('location');
-        $countryName =  request()->session()->get('countryName');
-        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            return view('user.consignee.edit', compact('consignee', 'countries', 'location'));
-        } else
-            return view('cm_module.consignee.edit', compact('consignee', 'countries'));
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('user.consignee.edit', compact('consignee', 'countries', 'location'));
+            }else{
+                countryIp();
+            }
     }
 
     /**
