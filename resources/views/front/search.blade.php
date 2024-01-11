@@ -16,7 +16,7 @@ $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
 $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
 @endphp
-@section('pageTitle','ICARJAPAN')
+@section('pageTitle','Icarjapan')
 @section('pageSubTitle','Search')
 @push('styles')
 <style>

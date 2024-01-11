@@ -17,7 +17,7 @@ class ConsigneeDetailController extends Controller
      */
     public function index()
     {
-        $con_detl = ConsigneeDetail::paginate(10);
+        $con_detl = ConsigneeDetail::where('user_id',currentUserId())->paginate(10);
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {

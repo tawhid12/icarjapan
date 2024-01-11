@@ -1,6 +1,6 @@
 @extends('layout.landing')
-@section('pageTitle','ICARJAPAN')
-@section('pageSubTitle','HOME')
+@section('pageTitle','Icarjapan - ')
+@section('pageSubTitle',"{$country->name}")
 @push('styles')
 <style>
   .cat-heading img {

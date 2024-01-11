@@ -1,5 +1,5 @@
 @extends('layout.landing')
-@section('pageTitle','ICARJAPAN')
+@section('pageTitle','Icarjapan')
 @section('meta')
 <meta name="description" content="iCar Japan is the biggest used car marketplace from Japan. More than 30 brands such as Toyota, Nissan, Honda, any kind of SUV, trucks, buses etc. We ensure high quality Japanese used cars for our customers. Worldwide shipping.">
 <meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
@@ -17,11 +17,11 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
 <meta name="keywords" content="car,used cars,auto,automobile,vehicle,dealer,automotive news,automatic cars, car exporter, buy car, quality car, truck, 
 best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback, suv">
 @endsection
-@section('pageSubTitle','HOME')
+@section('pageSubTitle','')
 @push('styles')
 <style>
   .rating i.fa {
-    color: #f9cc00;
+    color: #312d1b;
 }
 
 .rating-count {

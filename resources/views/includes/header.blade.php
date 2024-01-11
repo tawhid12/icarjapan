@@ -4,14 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('pageTitle')|@yield('pageSubTitle')</title>
+    <title>@yield('pageTitle') @yield('pageSubTitle')</title>
+    <link rel="shortcut icon" href="{{ asset('front/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('front/img/favicon.ico') }}" type="image/x-icon">
     @yield('meta')
 
     <!-- css -->
-    <link rel="stylesheet" href="{{asset('front/css/main.css')}}" />
-    <link rel="stylesheet" href="{{asset('front/css/single.css')}}" />
+    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('front/css/single.css') }}" />
     <!-- Bootsrap 5.3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <!-- Bootstrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <!-- Google Fonts -->
@@ -22,9 +25,9 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="" type="text/css" />
     <!-- our project just needs Font Awesome Solid + Brands -->
-    <link href="{{asset('front/css/all.min.css')}}" rel="stylesheet">
-    <link href="{{asset('front/css/brands.css')}}" rel="stylesheet">
-    <link href="{{asset('front/css/solid.css')}}" rel="stylesheet">
+    <link href="{{ asset('front/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/brands.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/solid.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/extensions/laravel-toster/toastr.min.css') }}">
@@ -44,7 +47,8 @@
     <script type="text/javascript">
         (function e() {
             var e = document.createElement("script");
-            e.type = "text/javascript", e.async = true, e.src = "//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";
+            e.type = "text/javascript", e.async = true, e.src =
+                "//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";
             var t = document.getElementsByTagName("script")[0];
             t.parentNode.insertBefore(e, t)
         })();
@@ -171,7 +175,8 @@
         fbq('init', '678021051101387');
         fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=678021051101387&ev=PageView&noscript=1" /></noscript>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=678021051101387&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 </head>
 

@@ -1,6 +1,6 @@
 @extends('layout.landing')
-
-@section('pageSubTitle','ICAR JAPAN')
+@section('pageTitle','Icarjapan - ')
+@section('pageSubTitle',"{$v->name}")
 @section('meta')
 <meta property="og:url" content="{{ request()->url() }}" />
 @if(!empty($v->name))

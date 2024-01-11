@@ -1,12 +1,12 @@
 @extends('layout.auth')
-  
+@section('siteTitle', 'Reset Forget Password')   
 @section('content')
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
           <div class="col-md-8">
               <div class="card">
-                  <div class="card-header">Reset Password</div>
+                  <div class="card-header"><h4 class="text-center">Reset Password</h4></div>
                   <div class="card-body">
   
                       <form action="{{ route('reset.password.post') }}" method="POST">

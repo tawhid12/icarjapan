@@ -1,5 +1,5 @@
 @extends('layout.auth')
-
+@section('siteTitle', 'Register')
 @section('content')
 <h4 class="auth-title">Sign Up</h4>
 @if(Session::has('response'))
