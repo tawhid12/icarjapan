@@ -128,7 +128,7 @@ class ClientModuleController extends Controller
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
         $executive_data = User::where('id', $inv->executiveId)->first();
-dd($executive_data);
+        //dd($executive_data);
         $client_details = UserDetail::where('user_id', $inv->client_id)->first();
         $account_info = CompanyAccountInfo::first();
         $shipment = ShipmentDetail::where('client_id', $inv->client_id)->first();
