@@ -143,11 +143,11 @@
                                             </select>
                                         </div>
                                     </div>
-                                    dd{{$user->port_id}}
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="country_id">Port<span class="text-danger">*</span></label>
                                             <select id="port_id" class="form-control" name="port_id">
+                                                <option value="">Select Port</option>
                                                 @if(count($ports) > 0)
                                                 @forelse($ports as $p)
                                                 <option value="{{$p->id}}" @if($user->port_id == $p->id) selected @endif>{{$p->name}}</option>
