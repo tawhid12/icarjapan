@@ -278,6 +278,20 @@ Route::group(['middleware' => isSuperadmin::class], function () {
         Route::resource('port', Port::class, ['as' => 'superadmin']);
         /* Vehicle */
         Route::resource('vehicle', vehicle::class, ['as' => 'superadmin']);
+        Route::resource('favourvehicle', favourvehicle::class, ['as' => 'superadmin']);
+        /*Cm Module */
+        Route::get('all-client-list', [clientmodule::class, 'all_client_list'])->name('superadmin.all_client_list');
+        Route::get('client-individual/{id}', [clientmodule::class, 'client_individual'])->name('superadmin.client_individual');
+        Route::get('client-proforma-invoice/{id}', [clientmodule::class, 'send_proforma_invoice'])->name('superadmin.send_proforma_invoice');
+        Route::get('/download-pdf/{id}', [clientmodule::class, 'downloadPDF'])->name('superadmin.download-pdf');
+
+        /*Sales Module */
+        Route::get('all-client-list-json', [salesmodule::class, 'all_client_list_json'])->name('superadmin.all_client_list_json');
+        Route::get('favourite-list', [salesmodule::class, 'favourite_list'])->name('superadmin.favourite_list');
+        Route::get('reserve-list', [salesmodule::class, 'reserve_list'])->name('superadmin.reserve_list');
+        Route::get('search', [salesmodule::class, 'search'])->name('superadmin.search');
+        Route::get('sales-module', [salesmodule::class, 'sales_module'])->name('superadmin.sales_module');
+
         Route::resource('buy', buy::class, ['as' => 'superadmin']);
         Route::resource('inquiry', inquiry::class, ['as' => 'superadmin']);
         Route::resource('contactus', contactus::class, ['as' => 'superadmin']);

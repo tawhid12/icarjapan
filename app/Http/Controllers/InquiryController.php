@@ -17,7 +17,7 @@ class InquiryController extends Controller
     public function index()
     {
         if (currentUser() == 'user') {
-            $all_in = Inquiry::where('created_by', currentUserId())->get();
+            $all_in = Inquiry::where('created_by', currentUserId())->orderBy('id','desc')->paginate();
 
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
@@ -27,7 +27,7 @@ class InquiryController extends Controller
                 countryIp();
             }
         } else {
-            $all_in = Inquiry::all();
+            $all_in = Inquiry::orderBy('id','desc')->paginate();
             return view('settings.inquiry.index', compact('all_in'));
         }
     }

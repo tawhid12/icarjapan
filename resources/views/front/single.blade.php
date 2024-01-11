@@ -1346,6 +1346,7 @@
                     <form id="active-form" method="POST" action="{{route('user.reservevehicle.store')}}" style="display: inline;">
                       @csrf
                       <input name="vehicle_id" type="hidden" value="{{$v->id}}">
+                      <input name="user_id" type="hidden" value="{{currentUserId()}}">
                       @if(currentUserId())
                       <a href="javascript:void(0)" data-name="{{$v->fullName}}" class="confirm mr-2 bg-button" data-toggle="tooltip" title="Reserve now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
                       @else

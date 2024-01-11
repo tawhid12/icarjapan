@@ -111,6 +111,12 @@
                                                 <input type="text" id="website" class="form-control" value="{{ old('website',$com_acc_info->website)}}" name="website">
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="reserve_cancel">Reserve Cancel<span class="text-danger">*</span></label>
+                                                <input type="text" id="reserve_cancel" class="form-control" value="{{ old('reserve_cancel',$com_acc_info->reserve_cancel)}}" name="reserve_cancel">
+                                            </div>
+                                        </div>
                                         <div class="col-12 d-flex justify-content-end mt-2">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
                                         </div>

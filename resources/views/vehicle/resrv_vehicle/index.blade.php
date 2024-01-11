@@ -22,14 +22,14 @@
                                 <th>{{__('CM Country')}}</th>
                                 <th>{{__('Vehicle Info')}}</th>
                                 <th>{{__('Purchased Units')}}</th>
-                                <th>{{__('CM Status')}}</th>
-                                <th>{{__('Assign to')}}</th>
-                                <th>{{__('Previous Assign')}}</th>
+                                <th>{{__('Status')}}</th>
+                                <th>{{__('Executive')}}</th>
+                                <th>{{__('Assign From')}}</th>
                                 <th>{{__('Reserved On')}}</th>
                                 <th>{{__('Confirmed On')}}</th>
                                 <th>{{__('Confirm Note')}}</th>
                                 <th>{{__('Sold Status')}}</th>
-                                <th class="white-space-nowrap">{{__('Action')}}</th>
+                                {{-- <th class="white-space-nowrap">{{__('Action')}}</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +38,7 @@
                                 <td>{{ ++$loop->index }}</td>
                                 <td>{{$rsv->user_id}}</td>
                                 <td>{{optional($rsv->res_user)->name}}</td>
-                                <td>{{optional($rsv->res_user)->country_id}}</td>
+                                <td>{{optional($rsv->res_user)?->country->name}}</td>
                                 <td>
                                     <p class="m-0">{{optional($rsv->vehicle)->fullName}}</p>
                                     <p class="m-0">StockId : {{optional($rsv->vehicle)->stock_id}}</p>
@@ -52,7 +52,7 @@
                                 <td>@if($rsv->status == 1) {{__('Reserved') }} @elseif($rsv->status == 2) {{__('Confirmed') }} @else {{__('Cancelled') }}@endif</td>
                                 <td>
                                     @if($rsv->assign_user_id)
-                                    <p class="m-0"><strong>Executive Id: </strong>{{$rsv->assign_user_id}}</p>
+                                    {{-- <p class="m-0"><strong>Executive Id: </strong>{{$rsv->assign_user_id}}</p> --}}
                                     <p class="m-0">{{optional($rsv->assign_user)->name}}</p>
                                     @else
                                     <p>Pending</p>
@@ -81,7 +81,7 @@
                                 </td>
                                 <td class="d-flex">
                                 {{--$rsv->assign_user == null &&--}}
-                                    @if($rsv->status == 1 && currentUser() == 'superadmin')
+                                    {{-- @if($rsv->status == 1 && currentUser() == 'superadmin')
                                     <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Assign</a>
                                     @endif
                                     @if(currentUser() == 'salesexecutive' && $rsv->status == 1)
@@ -98,7 +98,7 @@
                                         <button type="submit" class="mx-1 btn btn-sm btn-info">Reserve Cancel</button>
                                     </form>
                                     @endif
-                                    <a data-reserve-id="{{$rsv->id}}" data-vehicle-id="{{$rsv->vehicle_id}}" data-vehicle-name="{{optional($rsv->vehicle)->fullName}}" href="#" data-bs-toggle="modal" data-bs-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Add Note</strong></a>
+                                    <a data-reserve-id="{{$rsv->id}}" data-vehicle-id="{{$rsv->vehicle_id}}" data-vehicle-name="{{optional($rsv->vehicle)->fullName}}" href="#" data-bs-toggle="modal" data-bs-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Add Note</strong></a> --}}
                                     <!-- <a class="btn btn-sm btn-warning">Payment History</a> -->
                                 </td>
                             </tr>

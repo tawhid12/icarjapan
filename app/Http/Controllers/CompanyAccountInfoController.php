@@ -87,6 +87,7 @@ class CompanyAccountInfoController extends Controller
             $cinfo->whatsup=$request->whatsup;
             $cinfo->email=$request->email;
             $cinfo->website=$request->website;
+            $cinfo->reserve_cancel=$request->reserve_cancel;
             if($cinfo->save())
                 return redirect()->route(currentUser().'.compaccinfo.create')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             else

@@ -55,6 +55,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pt-2">
+                        {{$all_in->links()}}
+                    </div>
                 </div>
             </div>
         </div>

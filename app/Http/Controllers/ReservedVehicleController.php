@@ -65,6 +65,7 @@ class ReservedVehicleController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
 
         $vehicle = Vehicle::find($request->vehicle_id);
 
@@ -84,7 +85,7 @@ class ReservedVehicleController extends Controller
                     $user = User::where('id', $request->user_id)->update(['executiveId' => currentUserId(), 'type' => 1]);
                 }
                 /* Check Shipment Type RORO or Container if container what is price need to ask but roro will calculate*/
-                if ($request->shipment_type == 1) {
+                //if ($request->shipment_type == 1) {
                     $user = DB::table('users')->where('id', $request->user_id)->first();
 
                     $country_data = DB::table('countries')->where('id', $user->country_id)->first();
@@ -109,9 +110,9 @@ class ReservedVehicleController extends Controller
                         $b->aditional_cost = $port_data->aditional_cost;
                     else
                         $b->aditional_cost =  0;
-                }
+                //}
                 $b->discount =  $vehicle->discount;
-                $b->shipment_type =  $request->shipment_type;
+                $b->shipment_type =  1 /*$request->shipment_type*/;
                 $b->fob_amt = $vehicle->price ? $vehicle->price : 0.00;
                 $b->discount = $vehicle->discount ? $vehicle->discount : 0.00;
 
