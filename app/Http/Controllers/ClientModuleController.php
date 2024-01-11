@@ -127,7 +127,8 @@ class ClientModuleController extends Controller
         $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->first();
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
-
+        $executive_data = User::where('id', $inv->executiveId)->first();
+dd($executive_data);
         $client_details = UserDetail::where('user_id', $inv->client_id)->first();
         $account_info = CompanyAccountInfo::first();
         $shipment = ShipmentDetail::where('client_id', $inv->client_id)->first();
@@ -143,10 +144,10 @@ class ClientModuleController extends Controller
         \Mail::send(
             /*'sales_module.invoice.proforma_mail'*/[],
             /*['inv' => $inv, 'com_info' => $com_info, 'client_data' => $client_data, 'client_details' => $client_details, 'account_info' => $account_info, 'shipment' => $shipment, 'v' => $v]*/[],
-            function ($message) use ($inv, $com_info, $client_details, $client_data, $account_info, $shipment, $v) {
+            function ($message) use ($inv, $com_info, $client_details, $client_data, $executive_data, $account_info, $shipment, $v) {
 
                 $message->from('info@icarjapan.com', 'Icarjapan')
-                ->to($client_data->email)
+                ->to([$client_data->email,$executive_data->email])
                 ->subject('Proforma Invoice For ' . $v->fullName . ' and Stock Id ' . $v->stock_id);
                 //->view('email.template'); // Replace 'email.template' with the name of your email blade view
                 // To Show view Before Download
