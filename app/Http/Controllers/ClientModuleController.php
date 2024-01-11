@@ -115,7 +115,7 @@ class ClientModuleController extends Controller
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
-            ->select('reserved_vehicles.allocated', 'reserved_vehicles.status as reserve_status', 'reserved_vehicles.total', 'reserved_vehicles.id as reserveId', 'reserved_vehicles.fob_amt', 'reserved_vehicles.shipment_type', 'reserved_vehicles.freight_amt', 'reserved_vehicles.insu_amt', 'reserved_vehicles.insp_amt', 'reserved_vehicles.aditional_cost', 'reserved_vehicles.discount as dis', 'reserved_vehicles.m3_value', 'reserved_vehicles.m3_charge', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+            ->select('reserved_vehicles.required_deposit','reserved_vehicles.allocated', 'reserved_vehicles.status as reserve_status', 'reserved_vehicles.total', 'reserved_vehicles.id as reserveId', 'reserved_vehicles.fob_amt', 'reserved_vehicles.shipment_type', 'reserved_vehicles.freight_amt', 'reserved_vehicles.insu_amt', 'reserved_vehicles.insp_amt', 'reserved_vehicles.aditional_cost', 'reserved_vehicles.discount as dis', 'reserved_vehicles.m3_value', 'reserved_vehicles.m3_charge', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
             ->where('reserved_vehicles.user_id', encryptor('decrypt', $id))->where('reserved_vehicles.status', 2)->orderBy('reserved_vehicles.id', 'DESC')
             ->paginate(25);
         /*echo '<pre>';
@@ -158,5 +158,38 @@ class ClientModuleController extends Controller
             }
         );
         return redirect()->back()->with(Toastr::success('Mail Sent Successful!', 'Success', ["positionClass" => "toast-top-right"]));;
+    }
+    public function downloadPDF($id)
+    {
+        $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->first();
+        $com_info = CompanyAccountInfo::first();
+        $client_data = User::where('id', $inv->client_id)->first();
+        $executive_data = User::where('id', $inv->executiveId)->first();
+        //dd($executive_data);
+        $client_details = UserDetail::where('user_id', $inv->client_id)->first();
+        $account_info = CompanyAccountInfo::first();
+        $shipment = ShipmentDetail::where('client_id', $inv->client_id)->first();
+        $v = DB::table('reserved_vehicles')
+            ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
+            ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
+            ->join('body_types', 'body_types.id', '=', 'vehicles.body_type_id')
+            ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
+            ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
+            ->select('vehicles.*', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
+            ->where('vehicles.id', $inv->vehicle_id)->first();
+        // Your PDF generation code
+        $pdf = PDF::loadView('sales_module.invoice.proforma_mail', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
+        
+        // Create the temp directory if it doesn't exist
+        $tempDir = storage_path('app/public/temp');
+        if (!file_exists($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+        // Save the PDF to a temporary file
+        $pdfPath = $tempDir . '/proforma.pdf';
+        $pdf->save($pdfPath);
+
+        // Download the PDF file
+        return response()->download($pdfPath)->deleteFileAfterSend(true);
     }
 }

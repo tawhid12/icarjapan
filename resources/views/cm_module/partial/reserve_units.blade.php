@@ -133,7 +133,7 @@
                                     @else
                                     <p><i class="badge bg-danger">Cancelled</i></p>
                                     @endif
-                                    @if($v->reserve_status == 1)
+                                    @if($v->reserve_status == 1 && $v->shipment_type)
                                     @if(currentUser() != 'accountant')
                                     <form method="post" action="{{route(currentUser().'.reservevehicle.update',encryptor('encrypt',$v->reserveId))}}">
                                         @csrf
@@ -191,18 +191,20 @@
                                 @if(currentUser() != 'accountant')
                                 <th>Shipment Type</th>
                                 <td>
-                                    <!-- <form action="{{route(currentUser().'.shipment.store')}}" method="post" class="d-flex"> -->
-                                    @csrf
+                                    <form action="{{route(currentUser().'.reserve_calculate')}}" method="post" class="d-flex">
+                                        @csrf
                                     <input type="hidden" name="vehicle_id" value="{{$v->id}}">
                                     <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
                                     <input type="hidden" name="client_id" value="{{$client_data->id}}">
-                                    <select class="form-control" name="shipment_type" style="width:150px;">
+                                    <select class="form-control" name="shipment_type" style="width:150px;" required>
                                         <option value="">Select</option>
                                         <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
                                         <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
                                     </select>
-                                    <!-- <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
-                                    </form> -->
+                                    @if(currentUser() != 'accountant' && !$v->shipment_type)
+                                    <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
+                                    @endif
+                                    </form>
                                 </td>
                                 @endif
                             </tr>

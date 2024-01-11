@@ -207,6 +207,8 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         Route::get('all-client-list', [clientmodule::class, 'all_client_list'])->name('salesexecutive.all_client_list');
         Route::get('client-individual/{id}', [clientmodule::class, 'client_individual'])->name('salesexecutive.client_individual');
         Route::get('client-proforma-invoice/{id}', [clientmodule::class, 'send_proforma_invoice'])->name('salesexecutive.send_proforma_invoice');
+        Route::get('/download-pdf/{id}', [clientmodule::class, 'downloadPDF'])->name('salesexecutive.download-pdf');
+
         /*Sales Module */
         Route::get('all-client-list-json', [salesmodule::class, 'all_client_list_json'])->name('salesexecutive.all_client_list_json');
         Route::get('favourite-list', [salesmodule::class, 'favourite_list'])->name('salesexecutive.favourite_list');
@@ -230,7 +232,7 @@ Route::group(['middleware' => isSalesexecutive::class], function () {
         Route::resource('userdetl', userdetl::class, ['as' => 'salesexecutive']);
 
         Route::resource('reservevehicle', reservevehicle::class, ['as' => 'salesexecutive']);
-
+        Route::post('/reserve/calculate', [reservevehicle::class, 'reserve_calculate'])->name('salesexecutive.reserve_calculate');
         Route::resource('invoice', invoice::class, ['as' => 'salesexecutive']);
         Route::resource('payment', payment::class, ['as' => 'salesexecutive']);
         Route::resource('/notes', note::class, ["as" => "salesexecutive"]);

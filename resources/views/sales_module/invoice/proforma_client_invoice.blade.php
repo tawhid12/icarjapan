@@ -167,7 +167,7 @@
                                 <div style="background-image:url({{ asset('assets/images/logo/corp_seal.png')}});width:200px;height:58px;background-repeat:no-repeat; background-size: contain;"></div>
                             </td>
                             <th colspan="2" class="text-right">REQUIRED DEPOSIT</th>
-                            <td><input type="text" class="form-control"></td>
+                            <td style="font-size: 12px;color:#000;"><b>{{$v->required_deposit}}</b></td>
                         </tr>
                         <tr>
                             <th>TMT CORPORATION</th>

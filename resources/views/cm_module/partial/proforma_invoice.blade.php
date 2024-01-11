@@ -194,6 +194,13 @@
                                     <input type="text" name="discount" value="{{$v->dis}}" style="border:none">
                                 </td>
                             </tr> --}}
+                            <tr>
+                                <th>Required Deposit:</th>
+                                <td>USD</td>
+                                <td colspan="2">
+                                    <input type="text" name="required_deposit" value="{{$v->required_deposit}}" style="border:none">
+                                </td>
+                            </tr>
                             @if($v->insu_amt > 0)
                             <tr>
                                 <th>Insurance Amount:</th>
@@ -289,6 +296,9 @@
                         
                             @if(currentUser() != 'accountant' /*&& $proforma_payment_count == 0*/)
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
+                            <form action="{{ route(currentUser().'.download-pdf',encryptor('encrypt',$v->reserveId)) }}" method="get">
+                                <button type="submit">Download PDF</button>
+                            </form>                            
                             @endif
                             @if(currentUser() == 'accountant')
                                 @if($proforma_invoice->id /*&& $proforma_payment_count == 0*/)
