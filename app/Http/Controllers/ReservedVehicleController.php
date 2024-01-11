@@ -353,7 +353,7 @@ class ReservedVehicleController extends Controller
         if ($resv->shipment_type == 1) {
 
             $user = DB::table('users')->where('id', $resv->user_id)->first();
-            dd($vehicle);
+            dd($user);
             $country_data = DB::table('countries')->where('id', $user->country_id)->first();
             $resv->insp_amt =  $request->insp_amt == 1 ? $country_data->inspection : 0;
             $resv->insu_amt =  $request->insu_amt == 1 ? $country_data->insurance : 0;
