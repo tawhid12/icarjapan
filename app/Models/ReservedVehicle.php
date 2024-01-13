@@ -23,7 +23,8 @@ class ReservedVehicle extends Model
 
         $sum = $this->fob_amt + ($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt;
         if($this->discount > 0){
-            $sum -=  $this->fob_amt*($this->discount/100);
+            //$sum -=  $this->fob_amt*($this->discount/100);
+            $sum -=  $this->discoun;
         }
         // If the decimal part is greater than or equal to 0.5, round up; otherwise, round down
         $sum = ($sum - floor($sum) >= 0.5) ? ceil($sum) : floor($sum);
