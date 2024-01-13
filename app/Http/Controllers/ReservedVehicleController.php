@@ -257,7 +257,7 @@ class ReservedVehicleController extends Controller
                 /* Send Proforma Invoice To User with mail */
             }
             $resv->discount =  $request->discount;
-            $resv->required_deposit =  $resv->total ? ($resv->total*0.05) : 0.00;;
+            $resv->required_deposit =  floor($resv->total >= 0.5) ? ceil($resv->total*0.5) : floor($resv->total*0.5);
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
                 return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));

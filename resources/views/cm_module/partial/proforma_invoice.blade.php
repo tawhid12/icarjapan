@@ -86,9 +86,9 @@
 
                                 <div class="d-flex justify-content-between">
                                     @php
-                                    $actual_price = $v->price;
+                                    /*$actual_price = $v->price;
                                     $dis_price = $v->price*$v->discount/100;
-                                    $price_after_dis = ($actual_price-$dis_price);
+                                    $price_after_dis = ($actual_price-$dis_price);*/
                                     @endphp
 
 
@@ -169,7 +169,7 @@
                                 <td>USD</td>
                                 <td colspan="2">
                                     @if($v->shipment_type == 1)
-                                    {{$price_after_dis}}
+                                    {{$v->fob_amt-$v->discount}}
                                     @else
                                     <input type="text" name="fob_amt" value="{{$v->fob_amt}}">
                                     @endif
