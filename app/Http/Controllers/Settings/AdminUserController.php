@@ -36,7 +36,11 @@ class AdminUserController extends Controller
             //$users = User::with(['country','role'])->where('role_id', 3)->orderBy('id','desc')->paginate(50);
             $users = User::with(['country','role']);
             if ($request->search) {
-                $users = $users->where('name', 'like', '%' . $request->search . '%');
+                $users = $users->where(function($query) use ($request){
+                    $query->where('name', 'like', '%' . $request->search . '%')
+                            ->orWhere('email', 'like', '%' . $request->search . '%');
+                });
+                
             } elseif ($request->country_id) {
                 $users = $users->where('country_id', $request->country_id);
             }elseif ($request->role_id) {

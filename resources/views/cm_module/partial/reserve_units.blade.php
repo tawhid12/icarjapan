@@ -95,7 +95,7 @@
                                     @endif
 
 
-                                    <p class="price-text m-0">Total Price: <span>${{number_format($price_after_dis, 2, ',', ',')}}</span></p>
+                                    <p class="price-text m-0">FOB: <span>${{number_format($price_after_dis, 2, ',', ',')}}</span></p>
                                     @if($v->discount > 0)
                                     <p>Save: {{$v->discount}}</p>
                                     @endif

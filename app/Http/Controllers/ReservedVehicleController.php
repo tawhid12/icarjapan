@@ -183,7 +183,7 @@ class ReservedVehicleController extends Controller
 
 
         try {
-            //print_r($request->toArray());die;
+            //dd($request->toArray());
             $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
 
             if (currentUser() == 'accountant') {
@@ -246,9 +246,6 @@ class ReservedVehicleController extends Controller
                         $invoice->inv_amount = $resv->total ? $resv->total : 0.00;
                         $invoice->save();
                     }
-
-
-
                     $resv->status = 2;
                 }
                 $resv->total();
@@ -260,7 +257,7 @@ class ReservedVehicleController extends Controller
                 /* Send Proforma Invoice To User with mail */
             }
             $resv->discount =  $request->discount;
-            $resv->required_deposit =  $request->required_deposit;
+            $resv->required_deposit =  $resv->total ? ($resv->total*0.05) : 0.00;;
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
                 return redirect()->back()->with(Toastr::success('Reserved Request Received!', 'Success', ["positionClass" => "toast-top-right"]));

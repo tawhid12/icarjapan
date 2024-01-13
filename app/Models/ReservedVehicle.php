@@ -25,6 +25,8 @@ class ReservedVehicle extends Model
         if($this->discount > 0){
             $sum -=  $this->fob_amt*($this->discount/100);
         }
+        // If the decimal part is greater than or equal to 0.5, round up; otherwise, round down
+        $sum = ($sum - floor($sum) >= 0.5) ? ceil($sum) : floor($sum);
         $this->total = $sum;
         //dd($this->total); 
         // Check if $sum is calculated correctly
