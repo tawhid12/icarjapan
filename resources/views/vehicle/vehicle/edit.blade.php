@@ -397,6 +397,14 @@
                                         <input type="text" id="discount" value="{{old('discount',$v->discount)}}" class="form-control" placeholder="discount" name="discount">
                                     </div>
                                 </div>
+                                @if(currentUser() == 'superadmin')
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label for="sp_dis">Special Discount</label>
+                                        <input type="text" id="sp_dis" value="{{old('sp_dis',$v->sp_dis)}}" class="form-control" placeholder="Special Discount" name="sp_dis">
+                                    </div>
+                                </div>
+                                @endif
 
 
                                 <div class="col-md-3 col-12">

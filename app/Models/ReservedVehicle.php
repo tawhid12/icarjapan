@@ -20,9 +20,11 @@ class ReservedVehicle extends Model
     protected $fillable = ['total']; // Make sure 'total' is fillable
     public function total()
     {
-        $sum = ($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt;
+        $sum = $this->fob_amt + ($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt;
+        Log::info("FoB: = {$this->fob_amt}");
+        Log::info("Discount: = {$this->discount}");
+        Log::info("Discount: = {($this->m3_value*$this->m3_charge) + $this->aditional_cost + $this->freight_amt + $this->insu_amt + $this->insp_amt}");
         if($this->discount > 0){
-            //$sum -=  $this->fob_amt*($this->discount/100);
             $sum -=  $this->discount;
         }
         // If the decimal part is greater than or equal to 0.5, round up; otherwise, round down

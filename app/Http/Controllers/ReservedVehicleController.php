@@ -111,10 +111,9 @@ class ReservedVehicleController extends Controller
                     else
                         $b->aditional_cost =  0;
                 //}
-                $b->discount =  $vehicle->discount;
                 $b->shipment_type =  1 /*$request->shipment_type*/;
                 $b->fob_amt = $vehicle->price ? $vehicle->price : 0.00;
-                $b->discount = $vehicle->discount ? $vehicle->discount : 0.00;
+                $b->discount = $vehicle->sp_dis ? $vehicle->sp_dis : 0.00;
 
 
 
@@ -185,7 +184,7 @@ class ReservedVehicleController extends Controller
         try {
             //dd($request->toArray());
             $resv = ReservedVehicle::findOrFail(encryptor('decrypt', $id));
-
+            $vehicle = Vehicle::find($resv->vehicle_id);
             if (currentUser() == 'accountant') {
                 DB::connection()->enableQueryLog();
                 $total_paid = DB::table('payments')
@@ -248,6 +247,7 @@ class ReservedVehicleController extends Controller
                     }
                     $resv->status = 2;
                 }
+                $resv->discount =  $vehicle->sp_dis ? $vehicle->sp_dis : 0.00;
                 $resv->total();
 
                 $invoice = Invoice::where('reserve_id', $resv->id)->where('invoice_type', 1)->first();
@@ -256,7 +256,7 @@ class ReservedVehicleController extends Controller
                 $invoice->save();
                 /* Send Proforma Invoice To User with mail */
             }
-            $resv->discount =  $request->discount;
+           
             $resv->required_deposit =  floor($resv->total >= 0.5) ? ceil($resv->total*0.5) : floor($resv->total*0.5);
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
@@ -375,10 +375,9 @@ class ReservedVehicleController extends Controller
             else
                 $resv->aditional_cost =  0;
         }
-        $resv->discount =  $vehicle->discount;
         $resv->shipment_type =  $request->shipment_type;
         $resv->fob_amt = $vehicle->price ? $vehicle->price : 0.00;
-        $resv->discount = $vehicle->discount ? $vehicle->discount : 0.00;
+        $resv->discount = $vehicle->sp_dis ? $vehicle->sp_dis : 0.00;
         $resv->total();
         /*Insert To Proforma Invoice */
         if (Invoice::where('vehicle_id', $resv->vehicle_id)->where('reserve_id', $resv->id)->where('invoice_type', 1)->doesntExist()) {

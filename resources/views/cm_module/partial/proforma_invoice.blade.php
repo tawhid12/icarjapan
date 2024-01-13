@@ -169,9 +169,9 @@
                                 <td>USD</td>
                                 <td colspan="2">
                                     @if($v->shipment_type == 1)
-                                    {{$v->fob_amt-$v->discount}}
+                                    {{$v->fob_amt-$v->sp_dis}}
                                     @else
-                                    <input type="text" name="fob_amt" value="{{$v->fob_amt}}">
+                                    <input type="text" name="fob_amt" value="{{$v->fob_amt-$v->sp_dis}}">
                                     @endif
                                 </td>
                             </tr>
@@ -187,13 +187,13 @@
                                     @endif
                                 </td>
                             </tr>
-                            {{-- <tr>
+                            <tr>
                                 <th>Discount:</th>
                                 <td>USD</td>
                                 <td colspan="2">
-                                    <input type="text" name="discount" value="{{$v->dis}}" style="border:none">
+                                    <input type="text" name="discount" value="{{$v->sp_dis}}" style="border:none" readonly>
                                 </td>
-                            </tr> --}}
+                            </tr>
                             <tr>
                                 <th>Required Deposit:</th>
                                 <td>USD</td>
@@ -265,9 +265,9 @@
                                 <td>USD</td>
                                 <td colspan="2">
                                     @if($v->shipment_type == 1)
-                                    @if($v->dis > 0) {{$v->dis}} @else 0.00 @endif
+                                    @if($v->sp_dis > 0) {{$v->sp_dis}} @else 0.00 @endif
                                     @else
-                                    <input type="hidden" name="discount" value="{{$v->dis}}">
+                                    <input type="hidden" name="discount" value="{{$v->sp_dis}}">
                                     @endif
                                 </td>
                             </tr> -->
