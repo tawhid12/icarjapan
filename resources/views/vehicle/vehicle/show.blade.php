@@ -77,11 +77,7 @@ th,td{
                                 <th class="bg" scope="row">Manufacture Year</th>
                                 <td>{{$v->manu_year}}</td>
                                 <th class="bg" scope="row">Registration Year</th>
-                                <td>
-                                    @if($v->reg_year)
-                                    {{\Carbon\Carbon::createFromTimestamp(strtotime($v->reg_year))->format('Y')}}
-                                    @endif
-                                </td>
+                                <td>{{$v->reg_year}}</td>
                             </tr>
                             <tr>
                                 <th class="bg" scope="row">Mileage (KM)</th>

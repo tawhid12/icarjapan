@@ -29,6 +29,8 @@
                                 <th scope="col">{{__('Brand')}}</th>
                                 {{--<th scope="col">{{__('Model')}}</th>--}}
                                 <th scope="col">{{__('Inventory Location')}}</th>
+                                <th scope="col">{{__('Posted By')}}</th>
+                                <th scope="col">{{__('Changed By')}}</th>
                                 <th class="white-space-nowrap">{{__('ACTION')}}</th>
                             </tr>
                         </thead>
@@ -44,6 +46,8 @@
                                 <td>{{$v->brand->name}}</td>
                                 {{--<td>{{optional($v->vehicle_model)->name}}</td>--}}
                                 <td>{{optional($v->inv_loc)->name}}</td>
+                                <td>{{optional($v->create_info)->name}}</td>
+                                <td>{{optional($v->update_info)->name}}</td>
                                 <td class="white-space-nowrap">
                                     <a href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$v->id))}}">
                                         <i class="bi bi-eye"></i>

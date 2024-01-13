@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Vehicle;
+use App\Models\User;
 use App\Models\Settings\InventoryLocation;
 use App\Models\Settings\BodyType;
 use App\Models\Settings\SubBodyType;
@@ -71,5 +72,11 @@ class Vehicle extends Model
     }
     public function country(){
         return $this->belongsTo(Country::class);
+    }
+    public function create_info(){
+        return $this->belongsTo(User::class,'created_by','id');
+    }
+    public function update_info(){
+        return $this->belongsTo(User::class,'updated_by','id');
     }
 }
