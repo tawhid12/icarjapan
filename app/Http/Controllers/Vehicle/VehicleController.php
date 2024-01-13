@@ -462,6 +462,7 @@ class VehicleController extends Controller
             $vehicle->turbo = $request->turbo == 1 ? $request->turbo : 0;
             //$vehicle = $request->image 
             //$vehicle->v_link = $request->v_link;
+            $vehicle->sp_dis = $request->sp_dis;
             $vehicle->updated_by = currentUserId();
 
 
