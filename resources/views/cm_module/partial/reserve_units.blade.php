@@ -178,12 +178,16 @@
                 <div class="col-md-6">
                     <div class="border p-2">
                         <h6 class="border-bottom">Shipment Details/ Prepaid</h6>
+                        @php 
+                        $shipment = DB::table('shipment_details')->where(['reserve_id' => $v->reserveId,'client_id' => $client_data->id])->first();
+                        //dd($shipment);
+                        @endphp
                         <table class="table table-bordered m-0">
                             <tr>
                                 <th>ETD</th>
-                                <td></td>
+                                <td>@if($shipment){{\Carbon\Carbon::createFromTimestamp(strtotime($shipment->shipping_date))->format('d/m/Y')}} @endif</td>
                                 <th>ETA</th>
-                                <td></td>
+                                <td>@if($shipment){{\Carbon\Carbon::createFromTimestamp(strtotime($shipment?->est_arival_date))->format('d/m/Y')}} @endif</td>
                             </tr>
                             <tr>
                                 <th>Consignee name</th>
@@ -259,11 +263,11 @@
                             </tr>
                             <tr>
                                 <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
                             </tr>
                         </table>
                     </div>

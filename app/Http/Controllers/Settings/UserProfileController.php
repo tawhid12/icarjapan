@@ -168,7 +168,7 @@ class UserProfileController extends Controller
         DB::beginTransaction();
 
         try {
-
+            
             foreach($request->user_id as $user_id){
                 //echo $user_id;die;
                 $data = array(

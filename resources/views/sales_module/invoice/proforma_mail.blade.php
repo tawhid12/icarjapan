@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Proforma Invoice Details</title>
+    <title>@if($inv->invoice_type ==1) Proforma @else Final @endif Invoice Details</title>
 
     <style type="text/css" media="all">
         body {
@@ -56,7 +56,7 @@
                                 </th>
                             </tr>
                             <tr style="background-color: #C00000;">
-                                <th colspan="4" class="text-center py-1" style="color:#fff;font-size:14px;">Proforma Invoice</th>
+                                <th colspan="4" class="text-center py-1" style="color:#fff;font-size:14px;">@if($inv->invoice_type ==1) Proforma @else Final @endif Invoice</th>
                             </tr>
                             <tr>
                                 <th>CUSTOMER / BUSINESS NAME:</th>
@@ -176,8 +176,10 @@
                                     <div style="background-image:url({{ asset('assets/images/logo/company_seal.png')}});width:58px;height:58px;background-repeat:no-repeat; background-size: contain;"></div>
                                     <div style="background-image:url({{ asset('assets/images/logo/corp_seal.png')}});width:200px;height:58px;background-repeat:no-repeat; background-size: contain;"></div>
                                 </td>
+                                @if($inv->invoice_type ==1)
                                 <th class="text-right">REQUIRED DEPOSIT</th>
                                 <td style="font-size: 12px;color:#000;"><b>{{$v->required_deposit}}</b></td>
+                                @endif
                             </tr>
                             <tr>
                                 <th colspan="4">TMT CORPORATION</th>

@@ -145,7 +145,7 @@
 
                             
                                 @php
-
+                                
                                 if($client_data->country_id && empty(request('country_id'))){
                                 $des_port = \DB::table('ports')->where('inv_loc_id',$client_data->country_id)->get();
                                 $des_country = \DB::table('countries')->where('id',$client_data->country_id)->first();
@@ -164,7 +164,7 @@
                                     <input type="hidden" name="reserve_id" value="{{$v->reserveId}}">
                                     <input type="hidden" name="vehicle_id" value="{{$v->id}}">
                                     <input type="hidden" name="client_id" value="{{$client_data->id}}">
-                                    <input type="hidden" name="inv_amount" value="{{$v->total}}">
+                                    <input type="hidden" name="executiveId" value="{{$client_data->executiveId}}">
                             <tr>
                                 <th>FOB Amount:</th>
                                 <td>USD</td>
@@ -267,6 +267,7 @@
                                 <th>Total Due:</th>
                                 <td>USD</td>
                                 <td colspan="2">{{$v->total-\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}</td>
+                                <input type="hidden" name="inv_amount" value="{{$v->total-\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}">
                             </tr>
                             @php $final_invoice_id = \DB::table('invoices')->where('invoice_type',4)->where('reserve_id',$v->reserveId)->first(); @endphp
                             @if(!$final_invoice_id)
@@ -279,7 +280,7 @@
                         </table>
                         <div class="d-flex justify-content-between my-2">
                             @if(currentUser() != 'accountant')
-                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Final Invoice To Customer</a>
+                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}?type=4">Send Final Invoice To Customer</a>
                             @endif
                             @if(currentUser() == 'accountant')
                                 @php 

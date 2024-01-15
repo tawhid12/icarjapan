@@ -74,7 +74,7 @@ class InvoiceController extends Controller
             $invoice->reserve_id =  $request->reserve_id;
             $invoice->vehicle_id = $request->vehicle_id;
             $invoice->client_id     = $request->client_id;
-            $invoice->executiveId = currentUserId();
+            $invoice->executiveId = $request->executiveId;
             $invoice->inv_amount = $request->inv_amount;
             //($request->inv_amount - DB::table('payments')->where('reserve_id', $request->reserve_id)->sum('amount'));
             if ($invoice->save())
@@ -83,7 +83,7 @@ class InvoiceController extends Controller
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }
         } catch (Exception $e) {
-            //dd($e);
+            dd($e);
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
         }
     }
@@ -96,6 +96,10 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
+        $type = request()->get('type');
+        if($type)
+        $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->where('invoice_type',4)->first();
+        else
         $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->first();
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();
