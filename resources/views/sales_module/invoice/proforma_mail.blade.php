@@ -168,7 +168,7 @@
                             </tr>
                             <tr>
                                 <th colspan="2">PLEASE TRANSFER THE FULL AMOUNT TO LOCAL BANK</th>
-                                <th>TOTAL CNF</th>
+                                <th>TOTAL @if($inv->invoice_type ==1) CNF @else Due @endif</th>
                                 <th style="background-color:#FFC000">{{$inv->inv_amount}}</th>
                             </tr>
                             <tr>
@@ -250,7 +250,7 @@
 
                         <tr style="background-color: #C00000;">
                             <th colspan="5" style="color:#fff;">TOTAL CNF</th>
-                            <th style="color:#fff">{{$inv->inv_amount}}</th>
+                            <th style="color:#fff">{{$inv->total}}</th>
                         </tr>
                     </table>
                 </div>

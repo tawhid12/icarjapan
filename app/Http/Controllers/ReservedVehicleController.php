@@ -256,7 +256,9 @@ class ReservedVehicleController extends Controller
                 $invoice->save();
                 /* Send Proforma Invoice To User with mail */
             }
-           
+           if($request->required_deposit)
+           $resv->required_deposit =  $request->required_deposit;
+           else
             $resv->required_deposit =  floor($resv->total >= 0.5) ? ceil($resv->total*0.5) : floor($resv->total*0.5);
             $resv->updated_by = currentUserId();
             if ($resv->save()) {
@@ -395,6 +397,11 @@ class ReservedVehicleController extends Controller
         }
         $invoice = Invoice::where('reserve_id', $resv->id)->where('invoice_type', 1)->first();
         $invoice->inv_amount =  $resv->total ? $resv->total : 0.00;
+
+        if($request->required_deposit > 0)
+           $resv->required_deposit =  $request->required_deposit;
+        else
+            $resv->required_deposit =  floor($resv->total >= 0.5) ? ceil($resv->total*0.5) : floor($resv->total*0.5);
 
         $invoice->save();
         if ($resv->save()) {

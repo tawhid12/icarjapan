@@ -303,8 +303,21 @@ class FrontController extends Controller
             ->orWhere('sub_brands.name', $request->sdata)
             ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
             ->inRandomOrder()->paginate(10);
-        if ($request->sales_search == 'search')
-            return view('sales_module.search_vehicle', compact('vehicles', 'countries'));
+        if ($request->sales_search == 'search'){
+                $brands = Brand::all();
+                $vehicle_models = VehicleModel::all();
+                $body_types = BodyType::get();
+                $sub_body_types = SubBodyType::all();
+                $drive_types = DriveType::all();
+                $trans = Transmission::get();
+                $fuel = Fuel::all();
+                $colors = Color::all();
+                $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
+                $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
+                $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
+                $inv_loc = InventoryLocation::all();
+            return view('sales_module.search_vehicle', compact('vehicles', 'countries','brands', 'vehicle_models', 'body_types', 'sub_body_types', 'drive_types', 'year_range', 'trans', 'fuel', 'colors', 'max_manu_Year', 'min_manu_Year', 'inv_loc'));
+        }
         else {
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
