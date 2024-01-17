@@ -61,7 +61,7 @@
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="shipping_date">Shipping Date:</label>
-                                        <input type="text" id="shipping_date" class="form-control" name="shipping_date" value="{{old('shipping_date',$shipment->shipping_date)}}">
+                                        <input type="text" id="shipping_date" class="form-control" name="shipping_date" value="{{old('shipping_date')}}">
                                     </div>
                                 </div>
 
@@ -118,13 +118,13 @@
                                 <div class="col-md-2 col-12">
                                     <div class="form-group">
                                         <label for="ins_req_date">Request Date</label>
-                                        <input type="text" id="ins_req_date" class="form-control" name="ins_req_date" value="{{old('ins_req_date',$shipment->ins_req_date)}}">
+                                        <input type="text" id="ins_req_date" class="form-control" name="ins_req_date" value="{{old('ins_req_date')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-12">
                                     <div class="form-group">
                                         <label for="ins_pass_date">Pass Date</label>
-                                        <input type="text" id="ins_pass_date" class="form-control" name="ins_pass_date" value="{{old('ins_pass_date',$shipment->ins_pass_date)}}">
+                                        <input type="text" id="ins_pass_date" class="form-control" name="ins_pass_date" value="{{old('ins_pass_date')}}">
                                     </div>
                                 </div>
 
@@ -189,7 +189,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="est_arival_date">Est. Arrival Date</label>
-                                        <input type="text" id="est_arival_date" class="form-control" name="est_arival_date" value="{{old('est_arival_date',$shipment->est_arival_date)}}">
+                                        <input type="text" id="est_arival_date" class="form-control" name="est_arival_date" value="{{old('est_arival_date')}}">
                                     </div>
                                 </div>
                                 <h6 class="mt-3">Documents Details</h6>
@@ -236,16 +236,6 @@
 @endsection
 @push('scripts')
 <script>
-    $("input[name='shipping_date'],input[name='ins_req_date'],input[name='ins_pass_date'],input[name='est_arival_date']").daterangepicker({
-        singleDatePicker: true,
-        startDate: new Date(),
-        showDropdowns: true,
-        autoUpdateInput: true,
-        format: 'dd/mm/yyyy',
-    }).on('changeDate', function(e) {
-        var date = moment(e.date).format('YYYY/MM/DD');
-        $(this).val(date);
-    });
     if ('{{$shipment->est_arival_date}}')
             date = '{{$shipment->est_arival_date}}'
         else
@@ -259,12 +249,13 @@
                 format: 'DD/MM/YYYY'
             }
         }).on('changeDate', function(e) {
-            var date = moment(e.date).format('YYYY/MM/DD');
+            var date = moment(e.date).format('DD/MM/YYYY');
             $(this).val(date);
         }).on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
             $(this).trigger('change');
         });
+        
         if ('{{$shipment->shipping_date}}')
             date = '{{$shipment->shipping_date}}'
         else
@@ -278,11 +269,54 @@
                 format: 'DD/MM/YYYY'
             }
         }).on('changeDate', function(e) {
-            var date = moment(e.date).format('YYYY/MM/DD');
+            var date = moment(e.date).format('DD/MM/YYYY');
             $(this).val(date);
         }).on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
             $(this).trigger('change');
         });
+
+
+        if ('{{$shipment->ins_req_date}}')
+            date = '{{$shipment->ins_req_date}}'
+        else
+            date = new Date();
+        $('#ins_req_date').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment(date).format('DD/MM/YYYY'),
+            showDropdowns: true,
+            autoUpdateInput: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        }).on('changeDate', function(e) {
+            var date = moment(e.date).format('DD/MM/YYYY');
+            $(this).val(date);
+        }).on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            $(this).trigger('change');
+        });
+
+        if ('{{$shipment->ins_pass_date}}')
+            date = '{{$shipment->ins_pass_date}}'
+        else
+            date = new Date();
+        $('#ins_pass_date').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment(date).format('DD/MM/YYYY'),
+            showDropdowns: true,
+            autoUpdateInput: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        }).on('changeDate', function(e) {
+            var date = moment(e.date).format('DD/MM/YYYY');
+            $(this).val(date);
+        }).on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            $(this).trigger('change');
+        });
+        
+        
 </script>
 @endpush

@@ -131,8 +131,11 @@ class ShipmentDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request);
         try {
             $shipment = ShipmentDetail::find(encryptor('decrypt', $id));
+            // Enable query logging
+            DB::enableQueryLog();
             $shipment->auc_country_id = $request->auc_country_id;
             $shipment->des_country_id = $request->des_country_id;
             $shipment->ins_req_date = date('Y-m-d', strtotime($request->ins_req_date));
@@ -153,6 +156,13 @@ class ShipmentDetailController extends Controller
             $shipment->executiveId = currentUserId();
             $shipment->updated_by = currentUserId();
             if ($shipment->save()) {
+
+            // Get the executed queries
+            //$queryLog = DB::getQueryLog();
+
+            // Dump or log the queries for debugging
+            //dd($queryLog);
+
                 return redirect()->route(currentUser() . '.client_individual', encryptor('encrypt', $shipment->client_id))->with(Toastr::success('Shipment Updated!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
