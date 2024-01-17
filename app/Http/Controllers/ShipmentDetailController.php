@@ -109,7 +109,7 @@ class ShipmentDetailController extends Controller
      */
     public function edit($id)
     {
-        $shipment = ShipmentDetail::where('reserve_id',encryptor('decrypt', $id))->first();
+        $shipment = ShipmentDetail::find(encryptor('decrypt', $id));
         $user = User::where('id', $shipment->client_id)->first();
         $countries = Country::all();
         $ports = Port::all();
@@ -118,7 +118,7 @@ class ShipmentDetailController extends Controller
         $resrv = DB::table('reserved_vehicles')
             ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
             ->select('reserved_vehicles.*', 'vehicles.fullName', 'vehicles.stock_id', 'vehicles.id as vid')
-            ->where('reserved_vehicles.id', encryptor('decrypt', $id))->first();
+            ->where('reserved_vehicles.id', $shipment->reserve_id)->first();
         return view('sales_module.shipment.edit', compact('shipment', 'resrv', 'user', 'countries', 'consignee', 'ports'));
     }
 

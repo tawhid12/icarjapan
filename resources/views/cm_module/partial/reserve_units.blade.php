@@ -240,7 +240,6 @@
                                 @endif
                             </tr>
                         </table>
-                        {{$v->reserveId}}
                         <div class="d-flex justify-content-between my-2">
                             <h6>Documents</h6>
                             @if(currentUser() != 'accountant')
