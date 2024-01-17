@@ -109,7 +109,7 @@ class ShipmentDetailController extends Controller
      */
     public function edit($id)
     {
-        $shipment = ShipmentDetail::find(encryptor('decrypt', $id));
+        $shipment = ShipmentDetail::where('reserve_id',encryptor('decrypt', $id));
         $user = User::where('id', $shipment->client_id)->first();
         $countries = Country::all();
         $ports = Port::all();
