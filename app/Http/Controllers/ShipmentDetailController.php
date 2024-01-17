@@ -11,6 +11,7 @@ use App\Http\Traits\ImageHandleTraits;
 use Illuminate\Http\Request;
 use Toastr;
 use DB;
+use Carbon\Carbon;
 
 class ShipmentDetailController extends Controller
 {
@@ -138,16 +139,16 @@ class ShipmentDetailController extends Controller
             DB::enableQueryLog();
             $shipment->auc_country_id = $request->auc_country_id;
             $shipment->des_country_id = $request->des_country_id;
-            $shipment->ins_req_date = date('Y-m-d', strtotime($request->ins_req_date));
-            $shipment->ins_pass_date = date('Y-m-d', strtotime($request->ins_pass_date));
+            $shipment->ins_req_date = $request->ins_req_date?Carbon::createFromFormat('d/m/Y', $request->ins_req_date)->format('Y-m-d'):null;
+            $shipment->ins_pass_date = $request->ins_pass_date?Carbon::createFromFormat('d/m/Y', $request->ins_pass_date)->format('Y-m-d'):null;
             $shipment->dep_port_id = $request->dep_port_id;
             $shipment->des_port_id = $request->des_port_id;
             $shipment->ship_name = $request->ship_name;
             $shipment->voyage_no = $request->voyage_no;
-            $shipment->est_arival_date = date('Y-m-d', strtotime($request->est_arival_date));
+            $shipment->est_arival_date = $request->est_arival_date?Carbon::createFromFormat('d/m/Y', $request->est_arival_date)->format('Y-m-d'):null;
             $shipment->consignee_id = $request->consignee_id;
             $shipment->tracking_no = $request->tracking_no;
-            $shipment->shipping_date = date('Y-m-d', strtotime($request->shipping_date));
+            $shipment->shipping_date = $request->shipping_date?Carbon::createFromFormat('d/m/Y', $request->shipping_date)->format('Y-m-d'):null;
             $shipment->updated_by = currentUserId();
             if ($request->has('bill_of_land_1_url')) $shipment->bill_of_land_1_url = $this->uploadImage($request->file('bill_of_land_1_url'), 'uploads/bill_of_land_1_url');
             if ($request->has('bill_of_land_2_url')) $shipment->bill_of_land_2_url = $this->uploadImage($request->file('bill_of_land_2_url'), 'uploads/bill_of_land_2_url');

@@ -61,7 +61,7 @@
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="shipping_date">Shipping Date:</label>
-                                        <input type="text" id="shipping_date" class="form-control" name="shipping_date" value="{{old('shipping_date')}}">
+                                        <input type="text" id="shipping_date" class="form-control" name="shipping_date">
                                     </div>
                                 </div>
 
@@ -118,13 +118,13 @@
                                 <div class="col-md-2 col-12">
                                     <div class="form-group">
                                         <label for="ins_req_date">Request Date</label>
-                                        <input type="text" id="ins_req_date" class="form-control" name="ins_req_date" value="{{old('ins_req_date')}}">
+                                        <input type="text" id="ins_req_date" class="form-control" name="ins_req_date">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-12">
                                     <div class="form-group">
                                         <label for="ins_pass_date">Pass Date</label>
-                                        <input type="text" id="ins_pass_date" class="form-control" name="ins_pass_date" value="{{old('ins_pass_date')}}">
+                                        <input type="text" id="ins_pass_date" class="form-control" name="ins_pass_date">
                                     </div>
                                 </div>
 
@@ -189,7 +189,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
                                         <label for="est_arival_date">Est. Arrival Date</label>
-                                        <input type="text" id="est_arival_date" class="form-control" name="est_arival_date" value="{{old('est_arival_date')}}">
+                                        <input type="text" id="est_arival_date" class="form-control" name="est_arival_date">
                                     </div>
                                 </div>
                                 <h6 class="mt-3">Documents Details</h6>
