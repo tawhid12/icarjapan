@@ -53,7 +53,8 @@
             t.parentNode.insertBefore(e, t)
         })();
     </script>
-
+    <!-- google Search Console-->
+    <meta name="google-site-verification" content="9nCRjFWabs69jXN8sdRazzRk_lcXH9jiVJ3o-vVqvco" />
 
 
     <style>
