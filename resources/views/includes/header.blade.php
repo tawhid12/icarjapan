@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <!-- google Search Console-->
+    <meta name="google-site-verification" content="9nCRjFWabs69jXN8sdRazzRk_lcXH9jiVJ3o-vVqvco" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('pageTitle') @yield('pageSubTitle')</title>
@@ -178,8 +180,6 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=678021051101387&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
-    <!-- google Search Console-->
-    <meta name="google-site-verification" content="9nCRjFWabs69jXN8sdRazzRk_lcXH9jiVJ3o-vVqvco" />
 </head>
 
 <body>
