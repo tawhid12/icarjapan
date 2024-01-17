@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- google Search Console-->
-    <meta name="google-site-verification" content="9nCRjFWabs69jXN8sdRazzRk_lcXH9jiVJ3o-vVqvco" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('pageTitle') @yield('pageSubTitle')</title>
