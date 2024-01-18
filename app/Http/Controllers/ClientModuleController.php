@@ -114,7 +114,7 @@ class ClientModuleController extends Controller
             ->join('vehicles', 'vehicles.id', '=', 'reserved_vehicles.vehicle_id')
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-            ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
+            ->leftJoin('transmissions', 'vehicles.transmission_id', 'transmissions.id')
             ->select('reserved_vehicles.required_deposit','reserved_vehicles.allocated', 'reserved_vehicles.status as reserve_status', 'reserved_vehicles.total', 'reserved_vehicles.id as reserveId', 'reserved_vehicles.fob_amt', 'reserved_vehicles.shipment_type', 'reserved_vehicles.freight_amt', 'reserved_vehicles.insu_amt', 'reserved_vehicles.insp_amt', 'reserved_vehicles.aditional_cost', 'reserved_vehicles.discount as dis', 'reserved_vehicles.m3_value', 'reserved_vehicles.m3_charge', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
             ->where('reserved_vehicles.user_id', encryptor('decrypt', $id))->where('reserved_vehicles.status', 2)->orderBy('reserved_vehicles.id', 'DESC')
             ->paginate(25);
