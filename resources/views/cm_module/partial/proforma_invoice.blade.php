@@ -75,8 +75,18 @@
                                                     {{$drive->name}}
                                                     @endif
                                                 </td>
-                                                <td>4 Seats</td>
-                                                <td>5 Doors</td>
+                                                <td>
+                                                    @if($v->seat_id)
+                                                    @php $seat = \DB::table('seats')->where('id',$v->seat_id)->first() @endphp 
+                                                    {{$seat->name}} Seats
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($v->door_id)
+                                                    @php $door = \DB::table('doors')->where('id',$v->door_id)->first() @endphp 
+                                                    {{$door->name}} Doors
+                                                    @endif
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
