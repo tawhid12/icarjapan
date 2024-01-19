@@ -303,7 +303,7 @@
                             </form>
                         </table>
                         <div class="d-flex justify-content-between my-2">
-                        
+                            {{$v->reserveId}}
                             @if(currentUser() != 'accountant' /*&& $proforma_payment_count == 0*/)
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             <form action="{{ route(currentUser().'.download-pdf',encryptor('encrypt',$v->reserveId)) }}" method="get">

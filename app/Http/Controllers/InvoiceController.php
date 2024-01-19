@@ -113,7 +113,7 @@ class InvoiceController extends Controller
             ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
             ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
             ->select('vehicles.*', 'reserved_vehicles.required_deposit','reserved_vehicles.total','brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
-            ->where('vehicles.id', $inv->vehicle_id)->first();
+            ->where('reserved_vehicles.id', encryptor('decrypt', $id))->first();
         //dd($v);
 
         return view('sales_module.invoice.proforma_client_invoice', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details','id'));

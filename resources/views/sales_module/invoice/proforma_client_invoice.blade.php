@@ -244,10 +244,9 @@ $text ="Final";
 
                     </tr>
 
-
                     <tr style="background-color: #C00000;">
                         <th colspan="5" style="color:#fff;">TOTAL CNF</th>
-                        <th style="color:#fff">{{$v->total}}</th>
+                        <th style="color:#fff">{{$inv->inv_amount}}</th>
                     </tr>
                 </table>
             </div>

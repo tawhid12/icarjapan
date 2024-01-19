@@ -892,7 +892,7 @@
                         <tr>
                           <th scope="row">Body Type</th>
                           <td>{{ optional($v->body_type)->name }}</td>
-                          <th scope="row">Dimention (L*H*W)</th>
+                          <th scope="row">Dimention (L*W*H)</th>
                           <td>
                             @if($v->b_length && $v->b_height && $v->b_width)
                             {{ $v->b_length }} x {{ $v->b_height }} x {{ $v->b_width }}

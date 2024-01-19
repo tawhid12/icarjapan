@@ -327,7 +327,7 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="b_length">Dimention (L*H*W)</label>
+                                        <label for="b_length">Dimention  (L*W*Hv)</label>
                                         <div class="row">
                                             <div class="col">
                                                 <input type="text" id="b_length" value="{{old('b_length')}}" class="form-control" placeholder="Length" name="b_length">

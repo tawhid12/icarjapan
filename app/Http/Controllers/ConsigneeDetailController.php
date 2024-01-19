@@ -121,7 +121,7 @@ class ConsigneeDetailController extends Controller
     {
         $countries = Country::all();
         $consignee = ConsigneeDetail::find(encryptor('decrypt', $id));
-        if (currentUser() == 'user')
+        if (currentUser() == 'user'){
             $con_detl = ConsigneeDetail::where('user_id',currentUserId())->paginate(10);
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
@@ -130,6 +130,10 @@ class ConsigneeDetailController extends Controller
             }else{
                 countryIp();
             }
+        }else{
+            return view('cm_module.consignee.edit', compact('consignee', 'countries'));
+        }
+            
     }
 
     /**

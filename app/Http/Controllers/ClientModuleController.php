@@ -33,7 +33,10 @@ class ClientModuleController extends Controller
                 $query->latest('id')->limit(1);
             }]);
             if ($request->userId) {
-                $users = $users->where('id', $request->userId);
+                $users = $users->where(function($query) use ($request){
+                    $query->where('id', $request->userId);
+                    $query->orWhere('name', 'like', '%' . $request->userId . '%');
+                });
             } elseif ($request->country_id) {
                 $users = $users->where('country_id', $request->country_id);
             } elseif ($request->executiveId) {
@@ -139,7 +142,7 @@ class ClientModuleController extends Controller
             ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
             ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
             ->select('vehicles.*','reserved_vehicles.required_deposit', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
-            ->where('vehicles.id', $inv->vehicle_id)->first();
+            ->where('reserved_vehicles.id', encryptor('decrypt', $id))->first();
             
         \Mail::send(
             /*'sales_module.invoice.proforma_mail'*/[],
@@ -176,7 +179,7 @@ class ClientModuleController extends Controller
             ->join('fuels', 'fuels.id', '=', 'vehicles.fuel_id')
             ->join('transmissions', 'transmissions.id', '=', 'vehicles.transmission_id')
             ->select('vehicles.*','reserved_vehicles.required_deposit', 'brands.name as bName', 'body_types.name as btName', 'fuels.name as fName', 'transmissions.name as tName')
-            ->where('vehicles.id', $inv->vehicle_id)->first();
+            ->where('reserved_vehicles.id', encryptor('decrypt', $id))->first();
         // Your PDF generation code
         $pdf = PDF::loadView('sales_module.invoice.proforma_mail', compact('v', 'shipment', 'account_info', 'inv', 'com_info', 'client_data', 'client_details'));
         
