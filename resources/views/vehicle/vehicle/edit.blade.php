@@ -353,7 +353,7 @@
 
                                 <div class="col-md-3 col-12">
                                     <div class="form-group">
-                                        <label for="b_length">Dimention (L*W*Hv)</label>
+                                        <label for="b_length">Dimention (L*W*H)</label>
                                         <div class="row">
                                             <div class="col">
                                                 <input type="text" id="b_length" value="{{old('b_length',$v->b_length)}}" class="form-control" placeholder="Length" name="b_length">

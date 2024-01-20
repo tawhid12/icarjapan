@@ -26,7 +26,7 @@
                                 <th>BL Detl</th>
                                 <th>Consignee</th>
                                 {{--<th>{{__('Status')}}</th>--}}
-                                <th class="white-space-nowrap" rowspan="2">{{__('ACTION')}}</th>
+                                {{-- <th class="white-space-nowrap" rowspan="2">{{__('ACTION')}}</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -43,23 +43,29 @@
                                     <p class="m-0">StockId : {{optional($inv->vehicle)->stock_id}}</p>
                                     <p class="m-0">Price : USD {{optional($inv->vehicle)->price}}</p>
                                 </td>
-                                <td>{{optional($inv->res_vehicle)->settle_price}}</td>
+                                <td>USD {{$inv->inv_amount}}</td>
+                                @php  $shipment_detail = \App\Models\ShipmentDetail::where('reserve_id', $inv->reserve_id)->first();@endphp
                                 <td>
-                                    <p class="m-0">{{$inv->ship_name}}</p>
-                                    <p class="m-0">{{$inv->voyage_no}}</p>
-                                    <p class="m-0">{{$inv->est_arival_date}}</p>
-                                    <p class="m-0">{{$inv->shipping_date}}</p>
+                                    <p class="m-0">{{$shipment_detail?->ship_name}}</p>
+                                    <p class="m-0">{{$shipment_detail?->voyage_no}}</p>
+                                    <p class="m-0">@if($shipment_detail?->est_arival_date) {{\Carbon\Carbon::createFromTimestamp(strtotime($shipment_detail?->est_arival_date))->format('d/m/Y')}} @endif</p>
+                                    <p class="m-0">@if($shipment_detail?->shipping_date) {{\Carbon\Carbon::createFromTimestamp(strtotime($shipment_detail?->shipping_date))->format('d/m/Y')}} @endif</p>
                                 </td>
                                 <td>
-                                    <p class="m-0">{{$inv->ins_req_date}}</p>
-                                    <p class="m-0">{{$inv->ins_pass_date}}</p>
+                                    <p class="m-0">@if($shipment_detail?->ins_req_date) {{\Carbon\Carbon::createFromTimestamp(strtotime($shipment_detail?->ins_req_date))->format('d/m/Y')}} @endif</p>
+                                    <p class="m-0">@if($shipment_detail?->ins_pass_date) {{\Carbon\Carbon::createFromTimestamp(strtotime($shipment_detail?->ins_pass_date))->format('d/m/Y')}} @endif</p>
                                 </td>
                                 <td>
-                                    <p class="m-0">{{$inv->tracking_no}}</p>
-                                    <p class="m-0">{{$inv-> shipping_date}}</p>
+                                    <p class="m-0">{{$shipment_detail?->tracking_no}}</p>
+                                    <p class="m-0">{{$shipment_detail?-> shipping_date}}</p>
                                 </td>
+
                                 <td>
-                                    <p class="m-0">{{optional($inv->consignee)->c_name}}</p>
+                                    @if(isset($shipment_detail->consignee_id))
+                                    @php  $consignee = \App\Models\ConsigneeDetail::where('id', $shipment_detail->consignee_id)->first();@endphp
+                                    <p class="m-0">{{$consignee->c_name}}</p>
+                                    @endif
+                                    
                                 </td>
                                 {{--<td>@if($inv->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>--}}
                                 <td class="white-space-nowrap">
