@@ -41,7 +41,7 @@
                                     <p class="m-0"><strong>Customer Name : </strong>{{optional($inv->user)->name}}</p>
                                     <p class="m-0"><strong>Vehicle Name : </strong>{{optional($inv->vehicle)->fullName}}</p>
                                     <p class="m-0">StockId : {{optional($inv->vehicle)->stock_id}}</p>
-                                    <p class="m-0">Price : USD {{optional($inv->vehicle)->price}}</p>
+                                    {{-- <p class="m-0">Price : USD {{optional($inv->vehicle)->price}}</p> --}}
                                 </td>
                                 <td>USD {{$inv->inv_amount}}</td>
                                 @php  $shipment_detail = \App\Models\ShipmentDetail::where('reserve_id', $inv->reserve_id)->first();@endphp
