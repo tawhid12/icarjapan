@@ -1,0 +1,174 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Review;
+use Illuminate\Http\Request;
+use Validator;
+use App\Http\Traits\ImageHandleTraits;
+use DB;
+use Toastr;
+
+class ReviewController extends Controller
+{
+    use ImageHandleTraits;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $reviews = DB::table('reviews')
+        ->select(
+            'vehicles.name as vehicle_name',
+            'reviews.comment',
+            'reviews.reply',
+            'reviews.rating',
+            'reviews.review_type',
+            'reviews.created_at',
+            'reviews.id',
+            'reviews.upload',
+            'users.name as user_name',
+            'users.image',
+            'countries.image as cimage',
+            DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
+            DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id) AS review_count')
+        )
+        ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
+        ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
+        ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
+        ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
+        ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
+        ->orderBy('reviews.id', 'desc');
+        if(currentUser() == 'user'){
+            $reviews = $reviews->where('reviews.client_id',currentUserId());
+        }
+        
+        $reviews = $reviews->whereNull('reviews.deleted_at')->paginate(10);
+        if (currentUser() == 'superadmin') {
+            return view('review.index', compact('reviews'));
+        } else {
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                $location =  request()->session()->get('location');
+                $countryName =  request()->session()->get('countryName');
+                return view('user.review.index', compact('location', 'countryName', 'reviews'));
+            } else {
+                countryIp();
+            }
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('user.review.create', compact('location', 'countryName'));
+        } else {
+            countryIp();
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            // 'name' => 'required|string',
+            // 'email' => 'required|email',
+            'rating' => 'required|integer|between:1,5',
+            'comment' => 'required|string',
+        ], [
+            'rating.required' => 'Please provide a rating.',
+            'rating.integer' => 'Rating must be an integer.',
+            'rating.between' => 'Rating must be between 1 and 5.',
+            'comment.required' => 'Please enter your comment.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Create a new review
+        $review = new Review();
+        // $review->name = $request->input('name');
+        // $review->email = $request->input('email');
+        $review->purchase_id = $request->input('purchase_id');
+        $review->client_id = currentUserId();
+        $review->rating = $request->input('rating');
+        $review->comment = $request->input('comment');
+        if ($request->input('review_type')) {
+            $review->review_type = $request->input('review_type');
+        }
+        if ($request->has('upload')) $review->upload = 'uploads/review/' . $this->uploadImage($request->file('upload'), 'uploads/review');
+        $review->save();
+
+        // Return success response
+        return response()->json(['message' => 'Review submitted successfully']);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Review $review)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Review $review)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Review $review)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $r = Review::findOrFail(encryptor('decrypt', $id));
+            if ($r::destroy(encryptor('decrypt', $id))) {
+                return redirect()->back()->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
+            } else {
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            }
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
+    }
+}

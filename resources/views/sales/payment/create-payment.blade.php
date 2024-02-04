@@ -34,7 +34,7 @@
                                   <input type="hidden" value="{{$invoice->executiveId}}" name="executive_id">
                                   <input type="hidden" value="{{$invoice->id}}" name="invoice_id">
                                   <input type="hidden" value="{{$invoice->reserve_id}}" name="reserve_id">
-                                  <input type="hidden" value="{{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}" name="deduction" class="dep">
+                                  <input type="hidden" name="deduction" class="dep">
                                   <input type="hidden" value="{{$invoice->inv_amount-\DB::table('payments')->where('reserve_id',$invoice->reserve_id)->sum('amount')}}" class="due">
                                   <input type="hidden" value="{{$id}}" name="payment_id">
                                   <div class="col-md-3 col-12">
@@ -108,8 +108,9 @@
       });
       $('.adjust_deposit').on('click', function() {
           if ($(this).is(':checked')) {
-              var actual_due = parseInt($('.due').val()) - parseInt($('.dep').val());
+              var actual_due = parseInt($('.due').val()) - parseInt({{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}});
               //alert(actual_due);
+              $('.dep').val({{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}});
               $('#amount').prop('readonly', true);
               $('#amount').val(actual_due);
           } else {

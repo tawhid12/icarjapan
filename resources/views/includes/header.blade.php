@@ -44,7 +44,7 @@
         gtag('config', 'UA-182321313-1');
     </script>
     <!-- Review Yotp -->
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         (function e() {
             var e = document.createElement("script");
             e.type = "text/javascript", e.async = true, e.src =
@@ -52,7 +52,7 @@
             var t = document.getElementsByTagName("script")[0];
             t.parentNode.insertBefore(e, t)
         })();
-    </script>
+    </script> --}}
     
 
 

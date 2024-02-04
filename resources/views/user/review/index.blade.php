@@ -1,35 +1,22 @@
 @extends('layout.landing')
-@section('pageTitle', 'Customer Review')
-@section('pageSubTitle', 'Customer Review')
-@push('styles')
-    <style>
 
-    </style>
+@section('pageTitle', 'Review')
+@section('pageSubTitle', 'List')
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endpush
 @section('content')
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- review section start -->
-                <div class="review">
-                    <div class="review-header">
-                        <div class="row">
-                            <div class="col-sm-4 d-flex">
-                                <i class="bi bi-brightness-high"></i>
-                                <p>Customer Review</p>
-                            </div>
-                            <div class="col-sm-4 d-flex justify-content-center">
-                                <p>{{ $review_count }} Reviews</p>
-                            </div>
-                            {{-- <div class="col-sm-4 d-flex justify-content-end">
-                                <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
-                            </div> --}}
-                        </div>
-                    </div>
+    @include('layout.nav.user')
+    <!-- Bordered table start -->
+    <section class="section m-5">
+        <div class="container">
+            <div class="row" id="table-bordered" style="background-color: #eee">
+                <div class="col-12">
+                    <h4>All Review</h4>
                     <div class="review-user-body my-3">
                         {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
                         @forelse ($reviews as $review)
-                            <div class="row my-1 border-bottom">
+                            <div class="row">
                                 <div class="col-sm-3 review-user-p-img">
                                     @if ($review->upload)
                                         <img class="img-fluid" src="{{ asset($review->upload) }}"
@@ -64,13 +51,13 @@
                                     {{-- <p>2018 Premio F EX grade 5</p> --}}
                                     <p>{{ $review->comment }}</p>
                                 </div>
-                                @if($review->review_type==1)
-                                <div class="col-sm-3 review-status d-flex justify-content-end">
-                                    <div>
-                                        <p>Review on -</p>
-                                        <p style="line-height:1.5">{{ $review->vehicle_name }}</p>
+                                @if ($review->review_type == 1)
+                                    <div class="col-sm-3 review-status d-flex justify-content-end">
+                                        <div>
+                                            <p>Review on -</p>
+                                            <p style="line-height:1.5">{{ $review->vehicle_name }}</p>
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
                             </div>
                         @empty
@@ -78,8 +65,6 @@
 
                     </div>
                 </div>
-                {{ $reviews->links() }}
             </div>
-        </div>
-    </div>
+    </section>
 @endsection

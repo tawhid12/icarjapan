@@ -4,6 +4,8 @@
   $com_acc_info = \App\Models\CompanyAccountInfo::first();
   $body_types = \App\Models\Settings\BodyType::get();
   @endphp
+
+  
   <!-- footer start -->
   <footer class="footer">
       <div class="container py-4">
@@ -404,7 +406,7 @@
     </script>
 
   <!-- Customer Review By Yotpo-->
-  <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
+  {{-- <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script> --}}
 
 
   <!--begin::Page Scripts(used by this page)-->

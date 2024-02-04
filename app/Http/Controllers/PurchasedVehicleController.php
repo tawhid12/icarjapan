@@ -14,7 +14,16 @@ class PurchasedVehicleController extends Controller
      */
     public function index()
     {
-        //
+        $pur = PurchasedVehicle::where('customer_id', currentUserId())->orderBy('id', 'DESC')->paginate(25);
+
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+            return view('user.pur_vehicle.index', compact('pur', 'location'));
+        } else {
+            countryIp();
+        }
     }
 
     /**

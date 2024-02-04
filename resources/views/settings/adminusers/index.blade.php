@@ -81,6 +81,7 @@
                                 <th scope="col">{{__('Contact')}}</th>
                                 <th scope="col">{{__('Image')}}</th>
                                 <th scope="col">{{__('Role')}}</th>
+                                <th scope="col">{{__('Executive')}}</th>
                                 <th scope="col">{{__('Status')}}</th>
                                 <th class="white-space-nowrap">{{__('Action') }}</th>
                                 @if(currentUser() == 'superadmin')
@@ -98,6 +99,7 @@
                                 <td>{{$p->contact_no}}</td>
                                 <td><img width="50px" src="{{asset('uploads/admin/'.$p->image)}}" alt=""></td>
                                 <td>{{$p->role?->identity}}</td>
+                                <td>{{$p->executive?->name}}</td>
                                 <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                                 <td class="white-space-nowrap">
                                     @if(currentUser() == 'superadmin')

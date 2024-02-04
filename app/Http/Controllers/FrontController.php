@@ -43,18 +43,17 @@ class FrontController extends Controller
             if (isset($location['status']) && $location['status'] == 'success') {
                 //print_r($location);
 
-                    //Log::info($location);
-                    if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
-                        $current_locale_data = Carbon::now($location['timezone']);
-                    } else {
-                        countryIp();
-                    }
-                    $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
-                    session()->put('countryName', $countryName);
-                    session()->put('location', $location);
-                    session()->put('current_locale_data', $current_locale_data);
-                    return redirect()->route('front');
-                
+                //Log::info($location);
+                if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
+                    $current_locale_data = Carbon::now($location['timezone']);
+                } else {
+                    countryIp();
+                }
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                session()->put('countryName', $countryName);
+                session()->put('location', $location);
+                session()->put('current_locale_data', $current_locale_data);
+                return redirect()->route('front');
             }
         } else {
             return redirect()->route('front.countrySelect');
@@ -129,14 +128,40 @@ class FrontController extends Controller
                 ->select('countries.name')->distinct()->get();
             //return response()->json(array('data' =>'ok'));
 
+            $reviews = DB::table('reviews')
+            ->select(
+                'vehicles.name as vehicle_name',
+                'reviews.comment',
+                'reviews.reply',
+                'reviews.rating',
+                'reviews.created_at',
+                'reviews.id',
+                'reviews.upload',
+                'users.name as user_name',
+                'users.image',
+                'countries.image as cimage',
+                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
+                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id AND reviews.review_type = 1) AS review_count')
+            )
+            ->join('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
+            ->join('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
+            ->join('users', 'purchased_vehicles.customer_id', '=', 'users.id')
+            ->join('countries', 'countries.id', '=', 'users.country_id')
+            ->join('user_details', 'users.id', '=', 'user_details.user_id')
+            ->where('reviews.review_type', 1)
+            ->whereNull('reviews.deleted_at')
+            ->orderBy('reviews.id','desc')
+            ->limit(10)
+            ->get();
+            $review_count = DB::table('reviews')->where('reviews.review_type', 1)->count();
+    
 
             if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
                 $current_locale_data = Carbon::now($location['timezone']);
-                return view('front.welcome', compact('most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
+                return view('front.welcome', compact('review_count','reviews', 'most_views', 'countryName', 'current_locale_data', 'location', 'afford_by_country', 'high_grade_by_country', 'new_arivals', 'vehicles', 'countries'));
             } else {
                 countryIp();
             }
-           
         } else {
             countryIp();
         }
@@ -303,22 +328,21 @@ class FrontController extends Controller
             ->orWhere('sub_brands.name', $request->sdata)
             ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
             ->inRandomOrder()->paginate(10);
-        if ($request->sales_search == 'search'){
-                $brands = Brand::all();
-                $vehicle_models = VehicleModel::all();
-                $body_types = BodyType::get();
-                $sub_body_types = SubBodyType::all();
-                $drive_types = DriveType::all();
-                $trans = Transmission::get();
-                $fuel = Fuel::all();
-                $colors = Color::all();
-                $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
-                $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
-                $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
-                $inv_loc = InventoryLocation::all();
-            return view('sales_module.search_vehicle', compact('vehicles', 'countries','brands', 'vehicle_models', 'body_types', 'sub_body_types', 'drive_types', 'year_range', 'trans', 'fuel', 'colors', 'max_manu_Year', 'min_manu_Year', 'inv_loc'));
-        }
-        else {
+        if ($request->sales_search == 'search') {
+            $brands = Brand::all();
+            $vehicle_models = VehicleModel::all();
+            $body_types = BodyType::get();
+            $sub_body_types = SubBodyType::all();
+            $drive_types = DriveType::all();
+            $trans = Transmission::get();
+            $fuel = Fuel::all();
+            $colors = Color::all();
+            $year_range = DB::table('vehicles')->select(\DB::raw('MIN(manu_year) AS minyear, MAX(manu_year) AS maxyear'))->get()->toArray();
+            $max_manu_Year = DB::table('vehicles')->max(DB::raw('YEAR(manu_year)'));
+            $min_manu_Year = DB::table('vehicles')->min(DB::raw('YEAR(manu_year)'));
+            $inv_loc = InventoryLocation::all();
+            return view('sales_module.search_vehicle', compact('vehicles', 'countries', 'brands', 'vehicle_models', 'body_types', 'sub_body_types', 'drive_types', 'year_range', 'trans', 'fuel', 'colors', 'max_manu_Year', 'min_manu_Year', 'inv_loc'));
+        } else {
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
@@ -558,7 +582,33 @@ class FrontController extends Controller
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            return view('front.page.customer-review', compact('location', 'countryName'));
+            $reviews = DB::table('reviews')
+            ->select(
+                'vehicles.name as vehicle_name',
+                'reviews.comment',
+                'reviews.reply',
+                'reviews.rating',
+                'reviews.review_type',
+                'reviews.created_at',
+                'reviews.id',
+                'reviews.upload',
+                'users.name as user_name',
+                'users.image',
+                'countries.image as cimage',
+                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
+                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id AND reviews.review_type = 1) AS review_count')
+            )
+            ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
+            ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
+            ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
+            ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
+            ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
+            ->whereNull('reviews.deleted_at')
+            ->orderBy('reviews.id','desc')
+            ->paginate(10);
+            $review_count = DB::table('reviews')->whereNull('reviews.deleted_at')->count();
+
+            return view('front.page.customer-review', compact('location', 'countryName','reviews','review_count'));
         } else {
             countryIp();
         }

@@ -101,6 +101,12 @@
                 </ul>  
             </div>
         </div>
+        <li class="menu-item">
+            <a href="{{route(currentUser().'.review.index')}}" class='menu-link'>
+                <i class="bi bi-shop"></i>
+                <span>{{__('Review List')}}</span>
+            </a>
+        </li>
     </li>
     <!-- <li class="menu-item has-sub">
         <a href="#" class='menu-link'>

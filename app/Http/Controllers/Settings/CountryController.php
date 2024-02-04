@@ -60,7 +60,7 @@ class CountryController extends Controller
             $c->inspection	=$request->inspection;
             $c->insurance	=$request->insurance;
             $c->created_by=currentUserId();
-            if($request->has('image')) $b->image = $this->uploadImage($request->file('image'), 'uploads/brands');
+            if($request->has('image')) $c->image = $this->uploadImage($request->file('image'), 'uploads/country');
             if($c->save()){
 
                 return redirect()->route(currentUser().'.country.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));

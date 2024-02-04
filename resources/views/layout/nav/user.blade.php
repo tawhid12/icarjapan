@@ -73,9 +73,14 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item"><a href="{{route(currentUser().'.reservevehicle.index')}}" class='nav-link'>{{__('Reserved Vehicle')}}</a></li>
-                                    <!-- <li class="nav-item"><a href="{{route(currentUser().'.purvehicle.index')}}" class='nav-link'>{{__('Purchase Vehicle')}}</a></li>
-                                    <li class="nav-item"><a href="{{route(currentUser().'.aucvehicle.index')}}" class='nav-link'>{{__('Auction Vehicle')}}</a></li> -->
+                                    <li class="nav-item"><a href="{{route(currentUser().'.purvehicle.index')}}" class='nav-link'>{{__('Purchase Vehicle')}}</a></li>
+                                    <!-- <li class="nav-item"><a href="{{route(currentUser().'.aucvehicle.index')}}" class='nav-link'>{{__('Auction Vehicle')}}</a></li> -->
                                 </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route(currentUser().'.review.create')}}" class='nav-link'>
+                                    <span>{{__('Give Us a Review')}}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>

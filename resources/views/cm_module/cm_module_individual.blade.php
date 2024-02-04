@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="purchase_history" role="tabpanel" aria-labelledby="purchase-history-tab">
-                        <p><strong>Purchase History</strong></p>
+                        @include('cm_module.partial.purchase_history')
                     </div>
 
                     <div class="tab-pane fade" id="courier" role="tabpanel" aria-labelledby="courier-tab">

@@ -402,37 +402,58 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   <p>Customer Review</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
-                  <p><!--2,337--> Reviews</p>
+                  <p>{{$review_count}} Reviews</p>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-end">
-                  <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
+                  <a href="{{url('/customer-review')}}">See More <i class="bi bi-arrow-right-circle"></i></a>
                 </div>
               </div>
             </div>
             <div class="review-user-body my-3">
-            <div id='yotpo-testimonials-custom-tab'></div>
-              <div class="row">
+            {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
+              @forelse ($reviews as $review)
+              <div class="row my-1 border-bottom">
                 <div class="col-sm-3 review-user-p-img">
-                  {{--<img class="img-fluid" src="{{asset('front/img/review.png')}}" alt="" />--}}
+                  @if($review->upload)
+                  <img class="img-fluid" src="{{asset($review->upload)}}" alt="" />
+                  @else
+                  <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user_name}}" alt="" />
+                  @endif
                 </div>
-                {{--<div class="col-sm-6 review-user">
+                <div class="col-sm-6 review-user">
                   <div class="d-flex">
-                    <img class="img-fluid" src="{{asset('front/img/bdf.png')}}" alt="" />
+                    @if($review->cimage)
+                    <img class="img-fluid" src="{{asset('uploads/reviews/'.$review->cimage)}}" alt="" />
+                    @endif
                     <div>
-                      <p>Shibly S.</p>
-                      <p>Nov 14, 2020</p>
+                      <p>{{$review->user_name}}
+                        @if($review->rating > 0)
+                        <span class="review">
+                          @php 
+                          for($i=1; $i<=$review->rating; $i++){
+                            echo '<i class="bi bi-star" style=""></i>';
+                          }
+                          @endphp
+                        </span>
+                        @endif
+                      </p>
+                      <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                     </div>
                   </div>
-                  <p>2018 Premio F EX grade 5</p>
-                  <p>Wonderful car and amazing price. Thanks ICAR JAPAN</p>
-                </div>--}}
-                {{--<div class="col-sm-3 review-status d-flex justify-content-end">
+                  {{-- <p>2018 Premio F EX grade 5</p> --}}
+                  <p>{{$review->comment}}</p>
+                </div>
+                <div class="col-sm-3 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
-                    <p>Toyota Premio</p>
+                    <p style="line-height:1.5">{{$review->vehicle_name}}</p>
                   </div>
-                </div>--}}
+                </div>
               </div>
+              @empty
+                
+              @endforelse
+             
             </div>
           </div>
         </div>
