@@ -18,14 +18,14 @@
                         @forelse ($reviews as $review)
                             <div class="row">
                                 <div class="col-sm-3 review-user-p-img">
-                                    @if ($review->upload)
+                                    {{-- @if ($review->upload)
                                         <img class="img-fluid" src="{{ asset($review->upload) }}"
                                             alt="" />
                                     @else
                                         <img class="img-fluid"
                                             src="https://ui-avatars.com/api/?name={{ $review->user_name }}"
                                             alt="" />
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <div class="col-sm-6 review-user">
                                     <div class="d-flex">
