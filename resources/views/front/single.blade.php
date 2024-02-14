@@ -1353,15 +1353,14 @@
                       <a class="bg-button" href="#" data-bs-toggle="modal" data-bs-target="#buy_now"><i class="bi bi-cart-check-fill"></i> Reserve Now</a>
                       @endif
                     </form>
-                    @if(currentUser() == 'user')
-                    <a href="#" data-bs-toggle="modal" data-vehicle-id="{{$v->id}}" data-bs-target="#reviewModal">Please Review Us</a>
-                    @endif
-                    
                     <div class="my-3">
                       <!--<img src="./resource/img/atm.jpg" alt="" />-->
                     </div>
                   </div>
                   @endif
+                  @if(currentUser() == 'user')
+                    <a class="bg-button" href="#" data-bs-toggle="modal" data-vehicle-id="{{$v->id}}" data-bs-target="#reviewModal">Please Review Us</a>
+                    @endif
                 </div>
                 {{--@endif--}}
                 <!-- Inquiry Form -->
