@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\MostView;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Models\Settings\BodyType;
 use App\Models\Settings\DriveType;
@@ -277,7 +278,8 @@ class FrontController extends Controller
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            return view('front.single', compact('location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+            $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->get();    
+            return view('front.single', compact('reviews','location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         } else {
             countryIp();
         }
