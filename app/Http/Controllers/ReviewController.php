@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\ReviewImage;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Traits\ImageHandleTraits;
@@ -20,35 +21,38 @@ class ReviewController extends Controller
     public function index()
     {
         $reviews = DB::table('reviews')
-        ->select(
-            'vehicles.name as vehicle_name',
-            'reviews.comment',
-            'reviews.reply',
-            'reviews.rating',
-            'reviews.review_type',
-            'reviews.created_at',
-            'reviews.id',
-            'reviews.upload',
-            'users.name as user_name',
-            'users.image',
-            'countries.image as cimage',
-            DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
-            DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id) AS review_count')
-        )
-        ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
-        ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
-        ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
-        ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
-        ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
-        ->orderBy('reviews.id', 'desc');
-        if(currentUser() == 'user'){
-            $reviews = $reviews->where('reviews.client_id',currentUserId());
+            ->select(
+                'vehicles.name as vehicle_name',
+                'reviews.comment',
+                'reviews.reply',
+                'reviews.rating',
+                'reviews.review_type',
+                'reviews.created_at',
+                'reviews.id',
+                'reviews.upload',
+                'users.name as user_name',
+                'users.image',
+                'countries.image as cimage',
+                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
+                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id) AS review_count')
+            )
+            ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
+            ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
+            ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
+            ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
+            ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
+            ->orderBy('reviews.id', 'desc');
+        if (currentUser() == 'user') {
+            $reviews = $reviews->where('reviews.client_id', currentUserId());
         }
-        
+
         $reviews = $reviews->whereNull('reviews.deleted_at')->paginate(10);
+
         if (currentUser() == 'superadmin') {
             return view('review.index', compact('reviews'));
         } else {
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
                 $location =  request()->session()->get('location');
                 $countryName =  request()->session()->get('countryName');
@@ -110,9 +114,24 @@ class ReviewController extends Controller
         if ($request->input('review_type')) {
             $review->review_type = $request->input('review_type');
         }
-        if ($request->has('upload')) $review->upload = 'uploads/review/' . $this->uploadImage($request->file('upload'), 'uploads/review');
+        if ($request->input('vehicle_id')) {
+            $review->vehicle_id = $request->input('vehicle_id');
+        }
         $review->save();
+        //if ($request->has('upload')) $review->upload = 'uploads/review/' . $this->uploadImage($request->file('upload'), 'uploads/review');
+        // Handle multiple image uploads
+        if ($request->hasFile('upload')) {
+            foreach ($request->file('upload') as $image) {
+                // Save each image
+                $path = $this->uploadImage($image, 'uploads/review');
 
+                // Create a ReviewImage instance and associate it with the review
+                $reviewImage = new ReviewImage();
+                $reviewImage->review_id = $review->id; // Assuming review_id is the foreign key in ReviewImage table
+                $reviewImage->upload = $path;
+                $reviewImage->save();
+            }
+        }
         // Return success response
         return response()->json(['message' => 'Review submitted successfully']);
     }

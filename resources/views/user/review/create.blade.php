@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Upload File</label>
-                            <input type="file" class="form-control" name="upload">
+                            <input type="file" class="form-control" name="upload[]" multiple>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Review</button>
                     </form>
@@ -65,14 +65,19 @@
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
                 );
 
-                // Get the uploaded file
-                var fileInput = $(this).find('input[name="upload"]')[0];
-                var file = fileInput.files[0];
+                // Get the uploaded files
+                var files = $(this).find('input[name="upload[]"]')[0].files;
 
-                // Check if a file is selected
-                if (file) {
-                    // Check if the file is an image
-                    if (!file.type.match('image.*')) {
+                // Check if files are selected
+                if (files.length === 0) {
+                    toastr.error('Please select at least one image to upload.');
+                    submitButton.prop('disabled', false); // Re-enable submit button
+                    submitButton.html('Submit Review');
+                    return;
+                }
+                // Check if all files are images
+                for (var i = 0; i < files.length; i++) {
+                    if (!files[i].type.match('image.*')) {
                         toastr.error('Please upload only image files.');
                         submitButton.prop('disabled', false); // Re-enable submit button
                         submitButton.html('Submit Review');

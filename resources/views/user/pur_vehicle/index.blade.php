@@ -130,7 +130,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Upload File</label>
-                            <input type="file" class="form-control" name="upload">
+                            <input type="file" class="form-control" name="upload[]" multiple>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Review</button>
                     </form>
