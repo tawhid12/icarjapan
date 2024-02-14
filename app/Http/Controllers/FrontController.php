@@ -136,7 +136,7 @@ class FrontController extends Controller
                 'reviews.rating',
                 'reviews.created_at',
                 'reviews.id',
-                'reviews.upload',
+                // 'reviews.upload',
                 'users.name as user_name',
                 'users.image',
                 'countries.image as cimage',
