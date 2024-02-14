@@ -29,7 +29,7 @@ class ReviewController extends Controller
                 'reviews.review_type',
                 'reviews.created_at',
                 'reviews.id',
-                'reviews.upload',
+                // 'reviews.upload',
                 'users.name as user_name',
                 'users.image',
                 'countries.image as cimage',
