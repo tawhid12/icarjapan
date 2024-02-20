@@ -413,19 +413,17 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
               @forelse ($reviews as $review)
               <div class="row my-1 border-bottom">
-                <div class="col-sm-3 review-user-p-img">
-                  {{-- @if($review->upload)
-                  <img class="img-fluid" src="{{asset($review->upload)}}" alt="" />
-                  @else
-                  <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user_name}}" alt="" />
-                  @endif --}}
+                <div class="col-sm-2 review-user-p-img">
+                 
+                    @foreach ($review->review_images as $rimg)
+                        <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}" alt="" />
+                        @break <!-- Stop the loop after the first iteration -->
+                    @endforeach
+                
                 </div>
-                <div class="col-sm-6 review-user">
+                <div class="col-sm-7 review-user">
                   <div class="d-flex">
-                    @if($review->cimage)
-                    <img class="img-fluid" src="{{asset('uploads/reviews/'.$review->cimage)}}" alt="" />
-                    @endif
-                    <div>
+                    
                       <p>{{$review->user_name}}
                         @if($review->rating > 0)
                         <span class="review">
@@ -438,17 +436,19 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                         @endif
                       </p>
                       <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
-                    </div>
+                    
                   </div>
                   {{-- <p>2018 Premio F EX grade 5</p> --}}
                   <p>{{$review->comment}}</p>
                 </div>
+                @if($review->review_type==1)
                 <div class="col-sm-3 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
                     <p style="line-height:1.5">{{$review->vehicle_name}}</p>
                   </div>
                 </div>
+                @endif
               </div>
               @empty
                 
