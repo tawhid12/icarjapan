@@ -597,9 +597,11 @@ class FrontController extends Controller
                 'users.name as user_name',
                 'users.image',
                 'countries.image as cimage',
+                'review_images.upload',
                 DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
                 DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id AND reviews.review_type = 1) AS review_count')
             )
+            ->leftjoin('review_images', 'reviews.id', '=', 'review_images.id')
             ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
             ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
             ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
