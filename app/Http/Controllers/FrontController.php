@@ -279,7 +279,7 @@ class FrontController extends Controller
                 ->twitter()
                 ->whatsapp();
             $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->get();
-            $clientIds = Review::whereNull('deleted_at')->distinct()->pluck('client_id')->toArray(); 
+            $clientIds = Review::whereNull('deleted_at')->distinct()->where('review_type',3)->pluck('client_id')->toArray(); 
             return view('front.single', compact('clientIds','reviews','location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         } else {
             countryIp();
