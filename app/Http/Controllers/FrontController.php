@@ -129,31 +129,7 @@ class FrontController extends Controller
                 ->select('countries.name')->distinct()->get();
             //return response()->json(array('data' =>'ok'));
 
-            $reviews = DB::table('reviews')
-            ->select(
-                'vehicles.name as vehicle_name',
-                'reviews.comment',
-                'reviews.reply',
-                'reviews.rating',
-                'reviews.created_at',
-                'reviews.id',
-                // 'reviews.upload',
-                'users.name as user_name',
-                'users.image',
-                'countries.image as cimage',
-                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
-                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id AND reviews.review_type = 1) AS review_count')
-            )
-            ->join('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
-            ->join('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
-            ->join('users', 'purchased_vehicles.customer_id', '=', 'users.id')
-            ->join('countries', 'countries.id', '=', 'users.country_id')
-            ->join('user_details', 'users.id', '=', 'user_details.user_id')
-            ->where('reviews.review_type', 1)
-            ->whereNull('reviews.deleted_at')
-            ->orderBy('reviews.id','desc')
-            ->limit(10)
-            ->get();
+            $reviews = Review::with(['review_images','vehicle','user'])->orderBy('id','desc')->take(15)->get();
             $review_count = DB::table('reviews')->where('reviews.review_type', 1)->count();
     
 

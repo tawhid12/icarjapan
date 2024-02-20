@@ -17,14 +17,14 @@
                                     <th scope="col">{{ __('Uploaded Photo') }}</th>
                                     <th scope="col">{{ __('Information') }}</th>
                                     <th scope="col">{{ __('Comment') }}</th>
-                                    <th scope="col">{{ __('Review On') }}</th>
+                                    <th scope="col">{{ __('Type') }}</th>
                                     <th class="white-space-nowrap">{{ __('ACTION') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($reviews as $review)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div class="slider">
                                                 @forelse ($review->review_images as $rimg)
@@ -60,9 +60,13 @@
                                         </td>
                                         <td>{{ $review->comment }}</td>
                                         <td>
-                                            <p>Review on -</p>
-                                            <p style="line-height:1.5">{{ $review->vehilce?->vehicle_name }}
-                                            </p>
+                                            @if ($review->review_type == 1)
+                                                Purchased
+                                            @elseif($review->review_type == 2)
+                                                Company Review
+                                            @else
+                                                Vehicle Review
+                                            @endif
                                         </td>
                                         <td>
                                             <form id="form{{ $review->id }}"
@@ -70,9 +74,11 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="bi bi-trash"></i></button>
                                             </form>
-                                            <button type="" class="btn btn-sm btn-info"><i class="bi bi-reply"></i></button>
+                                            <button type="" class="btn btn-sm btn-info"><i
+                                                    class="bi bi-reply"></i></button>
                                         </td>
                                     </tr>
                                 @empty
