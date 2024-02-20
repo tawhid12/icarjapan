@@ -24,6 +24,7 @@
                             <tbody>
                                 @forelse ($reviews as $review)
                                     <tr>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>
                                             <div class="slider">
                                                 @forelse ($review->review_images as $rimg)
