@@ -424,7 +424,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-9 review-user">
                  
                     
-                      <h5 class="m-1">{{$review->user?->name}}
+                      <h6 class="m-1">{{$review->user?->name}}
                         @if($review->rating > 0)
                         <span class="m-1 review">
                           @php 
@@ -434,7 +434,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                           @endphp
                         </span>
                         @endif
-                      </h5>
+                      </h6>
                   <p>{{$review->comment}}</p>
                   <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                 </div>
