@@ -9,24 +9,10 @@
 @section('content')
     <div class="container my-4">
         <div class="row">
-            <div class="col-md-12">
-                <!-- review section start -->
-                <div class="review">
-                    <div class="review-header">
-                        <div class="row">
-                            <div class="col-sm-4 d-flex">
-                                <i class="bi bi-brightness-high"></i>
-                                <p>Customer Review</p>
-                            </div>
-                            <div class="col-sm-4 d-flex justify-content-center">
-                                <p>{{ $review_count }} Reviews</p>
-                            </div>
-                            {{-- <div class="col-sm-4 d-flex justify-content-end">
-                                <a href="#">See More <i class="bi bi-arrow-right-circle"></i></a>
-                            </div> --}}
-                        </div>
-                    </div>
-                    <div class="review-user-body my-3">
+            <div class="col-sm-12">
+                    <div class="card shadow radious-10 my-3">
+                        <h5 class="card-title bg-black text-white"></h5>
+                        {{-- <div class="yotpo yotpo-main-widget"  data-product-id="{{$v->id}}" data-price="{{$price_after_dis}}" data-currency="{{$location['geoplugin_currencyCode']}}" data-name="{{ str_replace('-', ' ', $v->name) }}" data-url="{{route('singleVehicle',['brand'=>$brand->slug_name,'subBrand'=>$sub_brand_id->slug_name,'stock_id'=>$v->stock_id])}}" data-image-url="@if (!empty($cover_img->image)) {{asset('uploads/vehicle_images/'.$cover_img->image)}} @endif"></div> --}}
                         <div class="row my-1 border-bottom">
                             @forelse ($reviews as $review)
                                 <div class="col-sm-4 review-user-p-img">
@@ -34,7 +20,6 @@
                                         @forelse ($review->review_images as $rimg)
                                             <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}"
                                                 alt="" />
-
                                         @empty
                                             <img class="img-fluid"
                                                 src="https://ui-avatars.com/api/?name={{ $review->user?->name }}"
@@ -65,6 +50,7 @@
                                     </div>
                                     <p>{{ $review->comment }}</p>
                                 </div>
+
                             @empty
                             @endforelse
                         </div>
