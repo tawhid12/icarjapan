@@ -104,26 +104,14 @@
             border: 1px solid transparent
         }
 
-        .review i {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 80px solid yellow;
-            position: relative;
+        .review {
+            font-size: 24px;
+            /* Adjust size as needed */
         }
 
-        .review i {
-            content: "";
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-top: 80px solid yellow;
-            position: absolute;
-            top: 30px;
-            left: -50px;
+        .review .star {
+            color: #FFD700;
+            /* Gold color */
         }
     </style>
 @endpush
