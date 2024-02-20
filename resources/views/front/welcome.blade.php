@@ -424,17 +424,17 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-7 review-user">
                   <div class="d-flex">
                     
-                      <p>{{$review->user?->name}}
+                      <p>{{$review->user?->name}}</p>
                         @if($review->rating > 0)
-                        <span class="review">
+                        <p class="review">
                           @php 
                           for($i=1; $i<=$review->rating; $i++){
                             echo '<i class="bi bi-star" style=""></i>';
                           }
                           @endphp
-                        </span>
+                        </p>
                         @endif
-                      </p>
+                      
                       <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                     
                   </div>
