@@ -32,14 +32,13 @@
                                 <div class="col-sm-4 review-user-p-img">
                                     @forelse ($review->review_images as $rimg)
                                         <div class="slider">
-                                            <div class="slider">
-                                                <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}"
-                                                    alt="" />
-                                            </div>
-                                        @empty
-                                            <img class="img-fluid"
-                                                src="https://ui-avatars.com/api/?name={{ $review->user?->name }}"
+                                            <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}"
                                                 alt="" />
+                                        </div>
+                                    @empty
+                                        <img class="img-fluid"
+                                            src="https://ui-avatars.com/api/?name={{ $review->user?->name }}"
+                                            alt="" />
                                     @endforelse
                                 </div>
                                 <div class="col-sm-8 review-user">
