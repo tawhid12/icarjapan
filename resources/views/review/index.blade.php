@@ -27,32 +27,22 @@
                                 @forelse ($reviews as $review)
                                     <tr>
                                         <td>
-                                            @if ($review->upload)
-                                                <img class="img-fluid" src="{{ asset($review->upload) }}" alt="" />
-                                            @else
-                                                <img class="img-fluid"
-                                                    src="https://ui-avatars.com/api/?name={{ $review->user_name }}"
-                                                    alt="" />
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($review->upload)
-                                                <img class="img-fluid" src="{{ asset($review->upload) }}" alt="" />
-                                            @else
-                                                <img class="img-fluid"
-                                                    src="https://ui-avatars.com/api/?name={{ $review->user_name }}"
-                                                    alt="" />
-                                            @endif
+                                            <div class="slider">
+                                                @forelse ($review->review_images as $rimg)
+                                                    <img class="img-thumbnail" src="{{ asset('uploads/review/' . $rimg->upload) }}"
+                                                        alt="" />
+        
+                                                @empty
+                                                    <img class="img-thumbnail"
+                                                        src="https://ui-avatars.com/api/?name={{ $review->user?->name }}"
+                                                        alt="" />
+                                                @endforelse
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                @if ($review->cimage)
-                                                    <img class="img-fluid"
-                                                        src="{{ asset('uploads/reviews/' . $review->cimage) }}"
-                                                        alt="" />
-                                                @endif
                                                 <div>
-                                                    <p>{{ $review->user_name }}
+                                                    <p>{{ $review->user?->user_name }}
                                                         @if ($review->rating > 0)
                                                             <span class="review">
                                                                 @php
@@ -74,7 +64,7 @@
                                                 <div class="col-sm-3 review-status d-flex justify-content-end">
                                                     <div>
                                                         <p>Review on -</p>
-                                                        <p style="line-height:1.5">{{ $review->vehicle_name }}</p>
+                                                        <p style="line-height:1.5">{{ $review->vehilce?->vehicle_name }}</p>
                                                     </div>
                                                 </div>
                                             @endif

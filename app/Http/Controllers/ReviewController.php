@@ -20,28 +20,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = DB::table('reviews')
-            ->select(
-                'vehicles.name as vehicle_name',
-                'reviews.comment',
-                'reviews.reply',
-                'reviews.rating',
-                'reviews.review_type',
-                'reviews.created_at',
-                'reviews.id',
-                // 'reviews.upload',
-                'users.name as user_name',
-                'users.image',
-                'countries.image as cimage',
-                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
-                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id) AS review_count')
-            )
-            ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
-            ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
-            ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
-            ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
-            ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
-            ->orderBy('reviews.id', 'desc');
+        $reviews = Review::with(['review_images','vehicle','user']);
         if (currentUser() == 'user') {
             $reviews = $reviews->where('reviews.client_id', currentUserId());
         }
