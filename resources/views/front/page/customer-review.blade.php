@@ -12,7 +12,6 @@
             <div class="col-sm-12">
                     <div class="card shadow radious-10 my-3">
                         <h5 class="card-title bg-black text-white"></h5>
-                        {{-- <div class="yotpo yotpo-main-widget"  data-product-id="{{$v->id}}" data-price="{{$price_after_dis}}" data-currency="{{$location['geoplugin_currencyCode']}}" data-name="{{ str_replace('-', ' ', $v->name) }}" data-url="{{route('singleVehicle',['brand'=>$brand->slug_name,'subBrand'=>$sub_brand_id->slug_name,'stock_id'=>$v->stock_id])}}" data-image-url="@if (!empty($cover_img->image)) {{asset('uploads/vehicle_images/'.$cover_img->image)}} @endif"></div> --}}
                         <div class="row my-1 border-bottom">
                             @forelse ($reviews as $review)
                                 <div class="col-sm-4 review-user-p-img">
