@@ -416,7 +416,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-3 review-user-p-img">
                  
                     @foreach ($review->review_images as $rimg)
-                        <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}" alt="" />
+                        <img class="img-thumbnail" src="{{ asset('uploads/review/' . $rimg->upload) }}" alt="" />
                         @break <!-- Stop the loop after the first iteration -->
                     @endforeach
                 
