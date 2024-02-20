@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- review section start -->
-                <div class="review card">
+                <div class="review">
                     <div class="review-header">
                         <div class="row">
                             <div class="col-sm-4 d-flex">
@@ -136,7 +136,7 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="review-user-body my-3">
+                    <div class="card">
                         <div class="row my-1 border-bottom">
                             @forelse ($reviews as $review)
                                 <div class="col-sm-2 review-user-p-img">
