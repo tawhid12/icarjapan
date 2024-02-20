@@ -278,8 +278,9 @@ class FrontController extends Controller
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->get();    
-            return view('front.single', compact('reviews','location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
+            $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->get();
+            $clientIds = Review::distinct()->pluck('client_id'); 
+            return view('front.single', compact('clientIds','reviews','location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         } else {
             countryIp();
         }
