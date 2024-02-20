@@ -424,22 +424,19 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-7 review-user">
                  
                     
-                      <h5 class="my-1">{{$review->user?->name}}</h5>
+                      <h5 class="m-1">{{$review->user?->name}}
                         @if($review->rating > 0)
-                        <p class="my-1 review" style="font-size: 16px">
+                        <span class="my-1 review">
                           @php 
                           for($i=1; $i<=$review->rating; $i++){
                             echo '<i class="bi bi-star" style=""></i>';
                           }
                           @endphp
-                        </p>
+                        </span>
                         @endif
-                      
-                      <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
-                    
-              
-                  {{-- <p>2018 Premio F EX grade 5</p> --}}
-                  <p>{{$review->comment}}</p>
+                      </h5>
+                  <p style="font-size: 16px">{{$review->comment}}</p>
+                  <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                 </div>
                 @if($review->review_type==1)
                 <div class="col-sm-3 review-status d-flex justify-content-end">
