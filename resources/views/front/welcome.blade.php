@@ -424,7 +424,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-7 review-user">
                   <div class="d-flex">
                     
-                      <p>{{$review->user?->user_name}}
+                      <p>{{$review->user?->name}}
                         @if($review->rating > 0)
                         <span class="review">
                           @php 
