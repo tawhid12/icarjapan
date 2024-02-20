@@ -105,12 +105,13 @@
         }
 
         .review {
-            font-size: 24px;
+            font-size: 18px;
             /* Adjust size as needed */
         }
 
         .review .bi-star {
             color: #FFD700;
+            padding: 2px;
             /* Gold color */
         }
     </style>
