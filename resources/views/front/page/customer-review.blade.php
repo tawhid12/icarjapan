@@ -131,11 +131,11 @@
                                 <div class="col-sm-2 review-user-p-img">
                                     <div class="slider">
                                         @forelse ($review->review_images as $rimg)
-                                            <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}"
+                                            <img class="img-thumbnail" src="{{ asset('uploads/review/' . $rimg->upload) }}"
                                                 alt="" />
 
                                         @empty
-                                            <img class="img-fluid"
+                                            <img class="img-thumbnail"
                                                 src="https://ui-avatars.com/api/?name={{ $review->user?->name }}"
                                                 alt="" />
                                         @endforelse
@@ -144,7 +144,7 @@
                                 <div class="col-sm-10 review-user">
                                     <div class="d-flex">
                                         @if ($review->cimage)
-                                            <img class="img-fluid" src="{{ asset('uploads/reviews/' . $review->cimage) }}"
+                                            <img class="img-thumbnail" src="{{ asset('uploads/reviews/' . $review->cimage) }}"
                                                 alt="" />
                                         @endif
                                         <div>
