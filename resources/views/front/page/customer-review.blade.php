@@ -41,6 +41,7 @@
                                     <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user?->name}}" alt="" />
                                     @endforelse
                                   </div>
+                                </div>
                                   <div class="col-sm-8 review-user">
                                     <div class="d-flex">
                                       @if($review->cimage)
@@ -64,10 +65,11 @@
                                     <p>{{$review->comment}}</p>
                                   </div>
                                 </div>
+                            </div>
                         @empty
                         @endforelse
 
-                    </div>
+                    
                 </div>
                 {{ $reviews->links() }}
             </div>
