@@ -424,9 +424,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-7 review-user">
                  
                     
-                      <p>{{$review->user?->name}}</p>
+                      <p class="my-1">{{$review->user?->name}}</p>
                         @if($review->rating > 0)
-                        <p class="review">
+                        <p class="my-1 review">
                           @php 
                           for($i=1; $i<=$review->rating; $i++){
                             echo '<i class="bi bi-star" style=""></i>';
@@ -435,7 +435,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                         </p>
                         @endif
                       
-                      <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
+                      <p class="my-1">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                     
               
                   {{-- <p>2018 Premio F EX grade 5</p> --}}
