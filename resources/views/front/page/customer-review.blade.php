@@ -28,10 +28,39 @@
                     </div>
                     <div class="review-user-body my-3">
                         {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
+                        {{$reviews}}
                         @forelse ($reviews as $review)
-                            <div class="row my-1 border-bottom">
-                               
-                            </div>
+                                <div class="col-sm-4 review-user-p-img">
+                                    <div class="slider">
+                                    @forelse ($review->review_images as $rimg)
+                                    <img class="img-fluid" src="{{asset('uploads/review/'.$rimg->upload)}}" alt="" />
+                                    @empty
+                                    <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user?->name}}" alt="" />
+                                    @endforelse
+                                  </div>
+                                  </div>
+                                  <div class="col-sm-8 review-user">
+                                    <div class="d-flex">
+                                      @if($review->cimage)
+                                      <img class="img-fluid" src="{{asset('uploads/reviews/'.$review->cimage)}}" alt="" />
+                                      @endif
+                                      <div>
+                                        <p>{{$review->user->name}}
+                                          @if($review->rating > 0)
+                                          <span class="review">
+                                            @php 
+                                            for($i=1; $i<=$review->rating; $i++){
+                                              echo '<i class="bi bi-star" style=""></i>';
+                                            }
+                                            @endphp
+                                          </span>
+                                          @endif
+                                        </p>
+                                        <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
+                                      </div>
+                                    </div>
+                                    <p>{{$review->comment}}</p>
+                                  </div>
                         @empty
                         @endforelse
 
