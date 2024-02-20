@@ -60,15 +60,9 @@
                                         </td>
                                         <td>{{ $review->comment }}</td>
                                         <td>
-                                            @if ($review->review_type == 1)
-                                                <div class="col-sm-3 review-status d-flex justify-content-end">
-                                                    <div>
-                                                        <p>Review on -</p>
-                                                        <p style="line-height:1.5">{{ $review->vehilce?->vehicle_name }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            @endif
+                                            <p>Review on -</p>
+                                            <p style="line-height:1.5">{{ $review->vehilce?->vehicle_name }}
+                                            </p>
                                         </td>
                                         <td>
                                             <form id="form{{ $review->id }}"
@@ -76,8 +70,9 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                                             </form>
+                                            <button type="" class="btn btn-sm btn-info"><i class="bi bi-reply"></i></button>
                                         </td>
                                     </tr>
                                 @empty

@@ -278,7 +278,7 @@ class FrontController extends Controller
                 ->facebook()
                 ->twitter()
                 ->whatsapp();
-            $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->get();
+            $reviews = Review::with(['review_images','vehicle','user'])->where('vehicle_id',$v->id)->orderBy('id','desc')->get();
             $clientIds = Review::whereNull('deleted_at')->distinct()->where('review_type',3)->pluck('client_id')->toArray(); 
             return view('front.single', compact('clientIds','reviews','location', 'countryName', 'countries', 'v_images', 'v', 'brand', 'sub_brand_id', 'shareComponent', 'url', 'cover_img', 'recomended'));
         } else {
@@ -585,7 +585,7 @@ class FrontController extends Controller
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            $reviews = Review::with(['review_images','vehicle','user'])->paginate(10);
+            $reviews = Review::with(['review_images','vehicle','user'])->orderBy('id','desc')->paginate(10);
             $review_count = DB::table('reviews')->whereNull('reviews.deleted_at')->count();
             return view('front.page.customer-review', compact('location', 'countryName','reviews','review_count'));
         } else {
