@@ -68,7 +68,7 @@
                                                 Vehicle Review
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="d-flex">
                                             <form id="form{{ $review->id }}"
                                                 action="{{ route('superadmin.review.destroy', encryptor('encrypt', $review->id)) }}"
                                                 method="post">
