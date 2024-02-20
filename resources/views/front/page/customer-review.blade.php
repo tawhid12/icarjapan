@@ -103,6 +103,28 @@
             height: auto;
             border: 1px solid transparent
         }
+
+        .review i {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid yellow;
+            position: relative;
+        }
+
+        .review i {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-top: 80px solid yellow;
+            position: absolute;
+            top: 30px;
+            left: -50px;
+        }
     </style>
 @endpush
 @section('content')
@@ -144,8 +166,8 @@
                                 <div class="col-sm-10 review-user">
                                     <div class="d-flex">
                                         @if ($review->cimage)
-                                            <img class="img-thumbnail" src="{{ asset('uploads/reviews/' . $review->cimage) }}"
-                                                alt="" />
+                                            <img class="img-thumbnail"
+                                                src="{{ asset('uploads/reviews/' . $review->cimage) }}" alt="" />
                                         @endif
                                         <div>
                                             <p>{{ $review->user->name }}
