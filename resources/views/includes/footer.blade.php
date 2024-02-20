@@ -412,7 +412,8 @@
   <script>
     $('.slider').slick({
       autoplay: true, // Enable autoplay
-      autoplaySpeed: 2000 // Set autoplay speed in milliseconds (2 seconds in this example)
+      autoplaySpeed: 2000, // Set autoplay speed in milliseconds (2 seconds in this example)
+      arrows: false // Hide previous and next arrows
     });
   </script>
   <!--begin::Page Scripts(used by this page)-->
