@@ -542,82 +542,9 @@
             position: relative;
         }
 
-        #contents_detail .car_display_area #pager_display {
-            position: absolute;
-            width: 58px;
-            font-size: 12px;
-            background-color: rgba(0, 0, 0, .4);
-            color: #fff;
-            line-height: 1.5405;
-            text-align: center;
-            bottom: 17px;
-            left: 50%;
-            border-radius: 4px;
-            margin-left: -29px !important;
-            z-index: 3;
-        }
 
-        /*Share */
-        div#social-links ul {
-            margin: 0;
-        }
 
-        div#social-links ul li {
-            display: inline-block;
-        }
 
-        div#social-links ul li a {
-            color: #fff;
-            font-size: 18px;
-            margin: 0 2px;
-            padding: 0px 22px;
-            display: block;
-
-        }
-
-        div#social-links ul li:nth-child(1) a {
-            background-color: #32529f;
-        }
-
-        div#social-links ul li:nth-child(2) a {
-            background-color: #1da1f2;
-        }
-
-        div#social-links ul li:nth-child(3) a {
-            background-color: #25d366;
-        }
-
-        .bg-danger-subtle {
-            border: 1px solid #d6d6d6;
-            font-size: 14px;
-            text-align: center;
-            height: 30px;
-        }
-
-        .detl th,
-        td {
-            background-color: #f8f8f8;
-        }
-
-        .detl th,
-        td {
-            border: 1px solid #d6d6d6;
-        }
-
-        .bg-button {
-            font-weight: 700;
-            font-size: 20px;
-            text-decoration: none;
-            background-color: red;
-            color: #fff;
-            padding: 6px 42px;
-        }
-
-        .bg-button:hover {
-            outline: 1px solid red;
-            color: #fff;
-            background-color: red;
-        }
     </style>
 @endpush
 @section('content')
