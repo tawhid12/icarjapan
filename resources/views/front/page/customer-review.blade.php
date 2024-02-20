@@ -27,8 +27,12 @@
                         </div>
                     </div>
                     <div class="review-user-body my-3">
+                        
+
+                        
                         {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
                         @forelse ($reviews as $review)
+                        <div class="row">
                                 <div class="col-sm-4 review-user-p-img">
                                     <div class="slider">
                                     @forelse ($review->review_images as $rimg)
@@ -60,6 +64,7 @@
                                     </div>
                                     <p>{{$review->comment}}</p>
                                   </div>
+                                </div>
                         @empty
                         @endforelse
 
