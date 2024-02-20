@@ -1010,9 +1010,9 @@
                       @forelse ($review->review_images as $rimg)
                       <img class="img-fluid" src="{{asset('uploads/review/'.$rimg->upload)}}" alt="" />
                       @empty
-                      </div>
                       <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user?->name}}" alt="" />
                       @endforelse
+                    </div>
                     </div>
                     <div class="col-sm-8 review-user">
                       <div class="d-flex">
