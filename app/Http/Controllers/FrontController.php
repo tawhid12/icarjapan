@@ -585,34 +585,8 @@ class FrontController extends Controller
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-            $reviews = DB::table('reviews')
-            ->select(
-                'vehicles.name as vehicle_name',
-                'reviews.comment',
-                'reviews.reply',
-                'reviews.rating',
-                'reviews.review_type',
-                'reviews.created_at',
-                'reviews.id',
-                // 'reviews.upload',
-                'users.name as user_name',
-                'users.image',
-                'countries.image as cimage',
-                'review_images.upload',
-                DB::raw('(SELECT image FROM vehicle_images WHERE vehicle_images.vehicle_id = vehicles.id LIMIT 1) AS vehicle_image'),
-                DB::raw('(SELECT COUNT(*) FROM reviews WHERE reviews.purchase_id = purchased_vehicles.id AND reviews.review_type = 1) AS review_count')
-            )
-            ->leftjoin('review_images', 'reviews.id', '=', 'review_images.id')
-            ->leftjoin('purchased_vehicles', 'reviews.purchase_id', '=', 'purchased_vehicles.id')
-            ->leftjoin('vehicles', 'purchased_vehicles.vehicle_id', '=', 'vehicles.id')
-            ->leftjoin('users', 'reviews.client_id', '=', 'users.id')
-            ->leftjoin('countries', 'countries.id', '=', 'users.country_id')
-            ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
-            ->whereNull('reviews.deleted_at')
-            ->orderBy('reviews.id','desc')
-            ->paginate(10);
+            $reviews = Review::with(['review_images','vehicle','user'])->paginate(10);
             $review_count = DB::table('reviews')->whereNull('reviews.deleted_at')->count();
-
             return view('front.page.customer-review', compact('location', 'countryName','reviews','review_count'));
         } else {
             countryIp();
