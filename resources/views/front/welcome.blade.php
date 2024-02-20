@@ -424,7 +424,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-7 review-user">
                   <div class="d-flex">
                     
-                      <p>{{$review->user_name}}
+                      <p>{{$review->user?->user_name}}
                         @if($review->rating > 0)
                         <span class="review">
                           @php 
@@ -445,7 +445,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 <div class="col-sm-3 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
-                    <p style="line-height:1.5">{{$review->vehicle_name}}</p>
+                    <p style="line-height:1.5">{{$review->vehicle?->vehicle_name}}</p>
                   </div>
                 </div>
                 @endif

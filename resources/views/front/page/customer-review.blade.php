@@ -104,16 +104,7 @@
             border: 1px solid transparent
         }
 
-        .review {
-            font-size: 18px;
-            /* Adjust size as needed */
-        }
 
-        .review .bi-star {
-            color: #FFD700;
-            padding: 2px;
-            /* Gold color */
-        }
     </style>
 @endpush
 @section('content')
