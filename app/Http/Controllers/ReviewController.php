@@ -25,7 +25,7 @@ class ReviewController extends Controller
             $reviews = $reviews->where('reviews.client_id', currentUserId());
         }
 
-        $reviews = $reviews->whereNull('reviews.deleted_at')->paginate(10);
+        $reviews = $reviews->whereNull('reviews.deleted_at')->orderBy('id','desc')->paginate(10);
 
         if (currentUser() == 'superadmin') {
             return view('review.index', compact('reviews'));
