@@ -422,7 +422,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 
                 </div>
                 <div class="col-sm-7 review-user">
-                  <div class="d-flex">
+                 
                     
                       <p>{{$review->user?->name}}</p>
                         @if($review->rating > 0)
@@ -437,7 +437,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       
                       <p>{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                     
-                  </div>
+              
                   {{-- <p>2018 Premio F EX grade 5</p> --}}
                   <p>{{$review->comment}}</p>
                 </div>
