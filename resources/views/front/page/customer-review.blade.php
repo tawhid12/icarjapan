@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- review section start -->
-                <div class="review">
+                <div class="review card">
                     <div class="review-header">
                         <div class="row">
                             <div class="col-sm-4 d-flex">
