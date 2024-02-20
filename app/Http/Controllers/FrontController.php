@@ -130,7 +130,7 @@ class FrontController extends Controller
             //return response()->json(array('data' =>'ok'));
 
             $reviews = Review::with(['review_images','vehicle','user'])->orderBy('id','desc')->take(15)->get();
-            $review_count = DB::table('reviews')->where('reviews.review_type', 1)->count();
+            $review_count = DB::table('reviews')->where('reviews.review_type')->count();
     
 
             if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
