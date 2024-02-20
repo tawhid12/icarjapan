@@ -426,7 +426,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     
                       <h5 class="m-1">{{$review->user?->name}}
                         @if($review->rating > 0)
-                        <span class="my-1 review">
+                        <span class="m-1 review">
                           @php 
                           for($i=1; $i<=$review->rating; $i++){
                             echo '<i class="bi bi-star" style=""></i>';
@@ -435,7 +435,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                         </span>
                         @endif
                       </h5>
-                  <p style="font-size: 16px">{{$review->comment}}</p>
+                  <p>{{$review->comment}}</p>
                   <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                 </div>
                 @if($review->review_type==1)
