@@ -27,6 +27,7 @@
                         </div>
                     </div>
                     <div class="review-user-body my-3">
+                        @php dd($reviews); @endphp
                         {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
                         @forelse ($reviews as $review)
                             <div class="row my-1 border-bottom">
