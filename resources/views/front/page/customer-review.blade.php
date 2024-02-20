@@ -103,13 +103,6 @@
             height: auto;
             border: 1px solid transparent
         }
-
-
-
-
-
-
-
     </style>
 @endpush
 @section('content')
@@ -135,7 +128,7 @@
                     <div class="review-user-body my-3">
                         <div class="row my-1 border-bottom">
                             @forelse ($reviews as $review)
-                                <div class="col-sm-4 review-user-p-img">
+                                <div class="col-sm-2 review-user-p-img">
                                     <div class="slider">
                                         @forelse ($review->review_images as $rimg)
                                             <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}"
@@ -148,7 +141,7 @@
                                         @endforelse
                                     </div>
                                 </div>
-                                <div class="col-sm-8 review-user">
+                                <div class="col-sm-10 review-user">
                                     <div class="d-flex">
                                         @if ($review->cimage)
                                             <img class="img-fluid" src="{{ asset('uploads/reviews/' . $review->cimage) }}"
@@ -179,4 +172,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
