@@ -109,7 +109,7 @@
             /* Adjust size as needed */
         }
 
-        .review .star {
+        .review .bi-star {
             color: #FFD700;
             /* Gold color */
         }
