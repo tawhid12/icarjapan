@@ -29,7 +29,7 @@
                                         <td>
                                             <div class="slider">
                                                 @forelse ($review->review_images as $rimg)
-                                                    <img class="img-thumbnail" src="{{ asset('uploads/review/' . $rimg->upload) }}"
+                                                    <img width="100px" height="80" class="img-thumbnail" src="{{ asset('uploads/review/' . $rimg->upload) }}"
                                                         alt="" />
         
                                                 @empty
