@@ -1006,9 +1006,11 @@
                   @forelse ($reviews as $review)
                   <div class="row my-1 border-bottom">
                     <div class="col-sm-4 review-user-p-img">
+                      <div class="slider">
                       @forelse ($review->review_images as $rimg)
                       <img class="img-fluid" src="{{asset($rimg->upload)}}" alt="" />
                       @empty
+                      </div>
                       <img class="img-fluid" src="https://ui-avatars.com/api/?name={{$review->user?->name}}" alt="" />
                       @endforelse
                     </div>
@@ -1600,7 +1602,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js" integrity="sha512-An4a3FEMyR5BbO9CRQQqgsBscxjM7uNNmccUSESNVtWn53EWx5B9oO7RVnPvPG6EcYcYPp0Gv3i/QQ4KUzB5WA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js" integrity="sha512-An4a3FEMyR5BbO9CRQQqgsBscxjM7uNNmccUSESNVtWn53EWx5B9oO7RVnPvPG6EcYcYPp0Gv3i/QQ4KUzB5WA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 <script>
   $(document).ready(function() {
 

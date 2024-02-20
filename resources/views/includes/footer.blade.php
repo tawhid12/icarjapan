@@ -408,7 +408,13 @@
   <!-- Customer Review By Yotpo-->
   {{-- <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/fH6c2xJm2synckDLh2ylP6r8ifftZl7rGfPSt0LB/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script> --}}
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js" integrity="sha512-An4a3FEMyR5BbO9CRQQqgsBscxjM7uNNmccUSESNVtWn53EWx5B9oO7RVnPvPG6EcYcYPp0Gv3i/QQ4KUzB5WA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $('.slider').slick({
+      autoplay: true, // Enable autoplay
+      autoplaySpeed: 2000 // Set autoplay speed in milliseconds (2 seconds in this example)
+    });
+  </script>
   <!--begin::Page Scripts(used by this page)-->
   @stack('scripts')
   <!--end::Page Scripts-->
