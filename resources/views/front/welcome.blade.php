@@ -413,7 +413,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             {{-- <div id='yotpo-testimonials-custom-tab'></div> --}}
               @forelse ($reviews as $review)
               <div class="row my-1 border-bottom">
-                <div class="col-sm-2 review-user-p-img">
+                <div class="col-sm-3 review-user-p-img">
                  
                     @foreach ($review->review_images as $rimg)
                         <img class="img-fluid" src="{{ asset('uploads/review/' . $rimg->upload) }}" alt="" />
@@ -421,7 +421,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     @endforeach
                 
                 </div>
-                <div class="col-sm-7 review-user">
+                <div class="col-sm-9 review-user">
                  
                     
                       <h5 class="m-1">{{$review->user?->name}}
@@ -439,7 +439,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                   <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                 </div>
                 @if($review->review_type==1)
-                <div class="col-sm-3 review-status d-flex justify-content-end">
+                <div class="col-sm-12 review-status d-flex justify-content-end">
                   <div>
                     <p>Review on -</p>
                     <p style="line-height:1.5">{{$review->vehicle?->vehicle_name}}</p>
