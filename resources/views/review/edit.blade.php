@@ -7,6 +7,9 @@
         <div class="card">
             @include('layout.message')
             <form method="post" action="{{route(currentUser().'.review.update',encryptor('encrypt',$review->id))}}">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$review->id)}}">
                 <div class="row" id="table-bordered">
                     <div class="col-md-12">
                         <!-- table bordered -->
