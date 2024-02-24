@@ -134,8 +134,8 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        $r = Review::findOrFail(encryptor('decrypt', $id));
-        print_r($r);
+        $review = Review::findOrFail(encryptor('decrypt', $id));
+        return view('user.review.edit', compact('review'));
     }
 
     /**
