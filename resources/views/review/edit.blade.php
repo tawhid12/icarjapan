@@ -6,22 +6,22 @@
     <section class="section">
         <div class="card">
             @include('layout.message')
-            <div class="row" id="table-bordered">
-                <div class="col-md-12">
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">{{ __('Uploaded Photo') }}</th>
-                                    <th scope="col">{{ __('Information') }}</th>
-                                    <th scope="col">{{ __('Comment') }}</th>
-                                    <th scope="col">{{ __('Type') }}</th>
-                                    <th class="white-space-nowrap">{{ __('ACTION') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
+            <form method="post" action="{{route(currentUser().'.review.update',encryptor('encrypt',$review->id))}}">
+                <div class="row" id="table-bordered">
+                    <div class="col-md-12">
+                        <!-- table bordered -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{ __('Uploaded Photo') }}</th>
+                                        <th scope="col">{{ __('Information') }}</th>
+                                        <th scope="col">{{ __('Comment') }}</th>
+                                        <th scope="col">{{ __('Type') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
                                     <tr>
                                         <td>
                                             <div class="slider">
@@ -67,10 +67,17 @@
                                             @endif
                                         </td>
                                     </tr>
-                            </tbody>
+                                    <tr>
+                                        <td colspan="4">
+                                            <textarea class="form-control" rows="4"></textarea>
+                                            <button type="submit" class="btn btn-primary">Reply</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         </div>
     </section>

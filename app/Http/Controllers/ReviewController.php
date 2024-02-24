@@ -145,9 +145,22 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $review = Review::findOrFail(encryptor('decrypt', $id));
+            $review->reply = $request->reply;
+            $review->save();
+            $review->updated_by = currentUserId();
+            if($review->save()){
+                return redirect()->route(currentUser().'.review.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
+            }else{
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            }
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 
     /**
