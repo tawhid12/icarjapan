@@ -325,7 +325,7 @@ class FrontController extends Controller
             $location =  request()->session()->get('location');
             $countryName =  request()->session()->get('countryName');
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('front.search', compact('vehicles', 'countries', 'location'));
+            return view('front.search', compact('vehicles', 'countries', 'location'));
             } else {
                 countryIp();
             }

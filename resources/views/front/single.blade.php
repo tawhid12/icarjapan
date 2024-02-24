@@ -1395,6 +1395,7 @@
                     </div>
                   </div>
                   @endif
+                  {{$clientIds}}
                   @if(currentUser() == 'user' && !(in_array(currentUserId(),$clientIds)))
                     <a class="bg-button" href="#" data-bs-toggle="modal" data-vehicle-id="{{$v->id}}" data-bs-target="#reviewModal">Please Review Us</a>
                     @endif
