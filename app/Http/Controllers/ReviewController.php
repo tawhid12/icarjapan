@@ -132,9 +132,10 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit($id)
     {
-        //
+        $r = Review::findOrFail(encryptor('decrypt', $id));
+        print_r($r);
     }
 
     /**

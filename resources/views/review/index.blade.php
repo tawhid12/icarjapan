@@ -77,8 +77,9 @@
                                                 <button type="submit" class="btn btn-sm btn-danger"><i
                                                         class="bi bi-trash"></i></button>
                                             </form>
-                                            <button type="" class="ms-2 btn btn-sm btn-info"><i
-                                                    class="bi bi-reply"></i></button>
+                                            <a hrf="{{{{ route('superadmin.review.edit', encryptor('encrypt', $review->id)) }}}}" class="ms-2 btn btn-sm btn-info">
+                                                <i class="bi bi-reply"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
