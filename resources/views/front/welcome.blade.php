@@ -433,6 +433,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                           }
                           @endphp
                         </span>
+                        <span style="font-size:14px;" class="my-1 d-flex justify-content-end">
+                          {{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}
+                        </span>
                         @endif
                       </h6>
                   <p>{{$review->comment}}</p>
@@ -442,7 +445,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                     {{$review->reply }}
                   </p>
                   @endif
-                  <p class="my-1 d-flex justify-content-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
+                  
                 </div>
                 @if($review->review_type==1)
                 <div class="col-sm-12 review-status d-flex justify-content-end">
