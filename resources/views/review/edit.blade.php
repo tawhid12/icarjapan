@@ -72,7 +72,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <textarea class="form-control" rows="4"></textarea>
+                                            <textarea class="form-control" rows="4" name="reply"></textarea>
                                             <button type="submit" class="btn btn-primary">Reply</button>
                                         </td>
                                     </tr>
