@@ -437,8 +437,10 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       </h6>
                   <p>{{$review->comment}}</p>
                   @if($review->reply)
-                  <p style="color:#ED2129;font-size:14px;text-indent:30px" class="my-1 d-flex justify-content-start"><strong>Reply</strong></p>
-                  <p style="color:#ED2129;font-size:14px;text-indent:40px">{{$review->reply }}</p>
+                  <p style="color:#ED2129;font-size:14px;text-indent:30px" class="my-1 d-flex justify-content-start">
+                    <strong>Reply From Icarjapan -</strong>
+                    {{$review->reply }}
+                  </p>
                   @endif
                   <p class="my-1 d-flex justify-content-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
                 </div>
