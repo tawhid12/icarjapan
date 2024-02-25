@@ -151,7 +151,6 @@ class ReviewController extends Controller
             $review = Review::findOrFail(encryptor('decrypt', $id));
             $review->reply = $request->reply;
             $review->save();
-            $review->updated_by = currentUserId();
             if($review->save()){
                 return redirect()->route(currentUser().'.review.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             }else{
