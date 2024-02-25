@@ -163,7 +163,7 @@
                 var file = fileInput.files[0];
 
                 // Check if a file is selected
-                if (file) {
+                /*if (file) {
                     // Check if the file is an image
                     if (!file.type.match('image.*')) {
                         toastr.error('Please upload only image files.');
@@ -171,7 +171,7 @@
                         submitButton.html('Submit Review');
                         return;
                     }
-                }
+                }*/
 
                 $.ajax({
                     type: 'POST',

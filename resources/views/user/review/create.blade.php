@@ -69,12 +69,12 @@
                 var files = $(this).find('input[name="upload[]"]')[0].files;
 
                 // Check if files are selected
-                if (files.length === 0) {
+                /*if (files.length === 0) {
                     toastr.error('Please select at least one image to upload.');
                     submitButton.prop('disabled', false); // Re-enable submit button
                     submitButton.html('Submit Review');
                     return;
-                }
+                }*/
                 // Check if all files are images
                 for (var i = 0; i < files.length; i++) {
                     if (!files[i].type.match('image.*')) {
