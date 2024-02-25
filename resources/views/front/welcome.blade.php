@@ -436,8 +436,8 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                         @endif
                       </h6>
                   <p>{{$review->comment}}</p>
-                  <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
-                  <p class="my-1 float-start">{{$review->reply }}</p>
+                  <p class="my-1 d-lfex justify-content-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
+                  <p style="color:#ED2129;font-size:14px" class="my-1 d-lfex justify-content-start">Reply {{$review->reply }}</p>
                 </div>
                 @if($review->review_type==1)
                 <div class="col-sm-12 review-status d-flex justify-content-end">
