@@ -165,7 +165,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
         </div>
         <!-- mid row 3 -->
     
-          <div class="mid-row-3">
+          {{-- <div class="mid-row-3">
             <div class="row">
               <div class="col-md-4">
               <a class="" href="#"><i class="bi bi-heart-fill"></i>My Favorites</a>
@@ -176,9 +176,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
               <div class="col-md-4">
               <a class="" href="#"><i class="bi bi-search"></i>My Search History</a>
               </div>
-            </div>
+            </div> --}}
             {{--<a class="shadow" href="#">My Accounts Status</a>--}}
-          </div>
+          {{-- </div> --}}
        
         <!-- mid row 4 product row 1 -->
         <div class="mid-row-4 my-4">
@@ -437,6 +437,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                       </h6>
                   <p>{{$review->comment}}</p>
                   <p class="my-1 float-end">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</p>
+                  <p class="my-1 float-start">{{$review->reply }}</p>
                 </div>
                 @if($review->review_type==1)
                 <div class="col-sm-12 review-status d-flex justify-content-end">
