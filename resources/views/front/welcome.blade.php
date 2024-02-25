@@ -442,7 +442,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                      
                         
        
-                  <p>{{$review->comment}}</p>
+                  <p style="text-align:justify">{{$review->comment}}</p>
                   @if($review->reply)
                   <p style="color:#ED2129;font-size:14px;text-indent:30px" class="my-1 d-flex justify-content-start">
                     <strong>Reply From Icarjapan -</strong>
