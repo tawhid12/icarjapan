@@ -520,7 +520,8 @@ body {
 }
 
 .review .bi-star {
-  color: #263a26;
+  color: greenyellow;
   padding: 2px;
+  font-weight:700 ;
   /* Gold color */
 }
