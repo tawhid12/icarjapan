@@ -165,6 +165,12 @@
                                         </div>
                                     </div>
                                     <p>{{ $review->comment }}</p>
+                                    @if($review->reply)
+                                    <p style="color:#ED2129;font-size:14px;text-indent:30px" class="my-1 d-flex justify-content-start">
+                                      <strong>Reply From Icarjapan -</strong>
+                                      {{$review->reply }}
+                                    </p>
+                                    @endif
                                 </div>
                             @empty
                             @endforelse
