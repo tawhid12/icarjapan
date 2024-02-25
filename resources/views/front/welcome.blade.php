@@ -423,9 +423,9 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 </div>
                 <div class="col-sm-9 review-user">
                  
-                    
-                      <h6 style="font-size:14px;">{{$review->user?->name}}
-                        @if($review->rating > 0)
+                    <div class="d-flex justify-content-between">
+                      <h6 style="font-size:14px;">{{$review->user?->name}}</h6>
+                      @if($review->rating > 0)
                         <span class="m-1 review">
                           @php 
                           for($i=1; $i<=$review->rating; $i++){
@@ -433,11 +433,15 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                           }
                           @endphp
                         </span>
+                       
+                        @endif
                         <span style="font-size:14px;" class="d-flex justify-content-end">
                           {{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}
                         </span>
-                        @endif
-                      </h6>
+                    </div>
+                     
+                        
+       
                   <p>{{$review->comment}}</p>
                   @if($review->reply)
                   <p style="color:#ED2129;font-size:14px;text-indent:30px" class="my-1 d-flex justify-content-start">
