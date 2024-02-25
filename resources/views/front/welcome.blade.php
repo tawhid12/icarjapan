@@ -569,7 +569,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
             </div>
           </div>
           <!-- right row 5 -->
-          <div class="right-row-5 mb-3">
+          {{-- <div class="right-row-5 mb-3">
             <div class="card shadow radious-10">
               <h5 class="card-title text-brand">ICarJapan News</h5>
               <div class="card-body">
@@ -593,7 +593,7 @@ best car, cheap car,high quality car, motor vehicle,saloon, sedan car, hatchback
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>

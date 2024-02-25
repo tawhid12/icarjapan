@@ -1141,12 +1141,12 @@
                   </div>
                 </div> -->
                 <!-- REVIEW HIGHLIGHTS  -->
-                <div class="card shadow radious-10 my-3">
+                {{-- <div class="card shadow radious-10 my-3">
                   <h5 class="card-title bg-black text-white">
                     Recently Viewed Cars
                   </h5>
                   <div class="p-2 customer-highlights text-center">
-                    <div class="row">
+                    <div class="row"> --}}
                       {{--<div class="col-sm-4">
                         <div class="product-card my-3">
                           <!--<img class="img-fluid" src="./resource/img/product-img.png" alt="" />-->
@@ -1162,10 +1162,10 @@
                           </div>
                         </div>
                       </div>--}}
-                    </div>
+                    {{-- </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
               <div class="col-sm-4">
                 <!-- Page View & Icon of The Number of Free QuotesFree Quote Favorites -->
                 <div class="row">
