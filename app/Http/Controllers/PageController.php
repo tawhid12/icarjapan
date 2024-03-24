@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
-
+use Toastr;
 class PageController extends Controller
 {
+   
     
     /**
      * Display a listing of the resource.
@@ -25,7 +26,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.create');
     }
 
     /**
@@ -36,7 +37,19 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $p=new Page;
+            $p->title=$request->title;
+            $p->details=$request->details;
+            if($p->save()){
+                return redirect()->route(currentUser().'.page.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
+            }else{
+                return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+            }
+        }catch(Exception $e){
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 
     /**

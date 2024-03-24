@@ -58,6 +58,8 @@ use App\Http\Controllers\DepositController as deposit;
 use App\Http\Controllers\PhotoGallaryController as pGallery;
 
 use App\Http\Controllers\ReviewController as review;
+use App\Http\Controllers\PageController as page;
+
 
 /* Middleware */
 use App\Http\Middleware\isAccountant;
@@ -317,6 +319,8 @@ Route::group(['middleware' => isSuperadmin::class], function () {
         /*== Secret Login ==*/
         Route::get('secret/login/{id}', [admin::class, 'secretLogin'])->name('superadmin.secretLogin');
         Route::resource('review', review::class, ['as' => 'superadmin']);
+        /*==== Page =====*/
+        Route::resource('page', page::class, ['as' => 'superadmin']);
     });
 });
 Route::group(['middleware' => isAdmin::class], function () {
