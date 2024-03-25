@@ -605,7 +605,13 @@ class FrontController extends Controller
         }
     }
     public function page($slug){
+        $location =  request()->session()->get('location');
+        $countryName =  request()->session()->get('countryName');
+        if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
         $page = Page::where('slug',$slug)->first();
         return view('front.page.page', compact('page'));
+        }else {
+            countryIp();
+        }
     }
 }

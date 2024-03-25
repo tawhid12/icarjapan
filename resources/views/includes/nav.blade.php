@@ -102,7 +102,7 @@ $body_types = \App\Models\Settings\BodyType::get();
               <li><a class="dropdown-item" href="{{url('/bank-information')}}">Bank Information</a></li>
               <li><a class="dropdown-item" href="{{url('/faq')}}">FAQ</a></li>
               <li><a class="dropdown-item" href="{{url('/contact-us')}}">Contact Us</a></li> --}}
-              <li><a class="dropdown-item" href="{{route('page',$p->slug)}}">Overview</a></li>
+              <li><a class="dropdown-item" href="{{route('page',$p->slug)}}">{{$p->title}}</a></li>
               @empty             
               @endforelse
             </ul>
