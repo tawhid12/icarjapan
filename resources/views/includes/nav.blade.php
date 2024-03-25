@@ -95,12 +95,16 @@ $body_types = \App\Models\Settings\BodyType::get();
           <li class="nav-item dropdown">
             <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">About Us</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{url('/overview')}}">Overview</a></li>
+              @forelse ( \App\Models\Page::all() as $p )
+              {{-- <li><a class="dropdown-item" href="{{url('/overview')}}">Overview</a></li>
               <li><a class="dropdown-item" href="{{url('/company-profile')}}">Company Profile</a></li>
               <li><a class="dropdown-item" href="{{url('/customer-review')}}">Customer Reviews</a></li>
               <li><a class="dropdown-item" href="{{url('/bank-information')}}">Bank Information</a></li>
               <li><a class="dropdown-item" href="{{url('/faq')}}">FAQ</a></li>
-              <li><a class="dropdown-item" href="{{url('/contact-us')}}">Contact Us</a></li>
+              <li><a class="dropdown-item" href="{{url('/contact-us')}}">Contact Us</a></li> --}}
+              <li><a class="dropdown-item" href="{{route('page',$p->slug)}}">Overview</a></li>
+              @empty             
+              @endforelse
             </ul>
           </li>
           <li class="nav-item">

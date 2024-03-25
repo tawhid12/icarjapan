@@ -20,6 +20,7 @@ use App\Models\Vehicle\Fuel;
 use App\Models\Vehicle\Color;
 use App\Models\Vehicle\Transmission;
 use App\Models\Vehicle\VehicleModel;
+use App\Models\Page;
 
 use DB;
 use Carbon\Carbon;
@@ -602,5 +603,9 @@ class FrontController extends Controller
         } else {
             countryIp();
         }
+    }
+    public function page($slug){
+        $page = Page::where('slug',$slug)->first();
+        return view('front.page.page', compact('page'));
     }
 }
