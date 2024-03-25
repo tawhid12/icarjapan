@@ -7,5 +7,11 @@
 </style>
 @endpush
 @section('content')
-{!!$page->details!!}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            {!!$page->details!!}
+        </div>
+    </div>
+</div>
 @endsection
