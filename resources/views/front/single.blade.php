@@ -1355,7 +1355,10 @@
                                         {{-- @if (currentUser() == 'user') --}}
                                         <div class="card shadow radious-10 my-3 contact-us-section">
                                             <h5 class="card-title bg-brand text-white">Contact Us</h5>
-                                            @if ($v->r_status && !$v->sold_status)
+                                            @if ($v->sold_status)
+                                            <p>Sold</p>
+                                            @else
+                                            @if ($v->r_status)
                                                 <div class="p-2 customer-highlights text-center">
                                                     <form id="notify-active-form" method="POST"
                                                         action="{{ route('user.notifyvehicle.store') }}"
@@ -1406,7 +1409,9 @@
                                                         <!--<img src="./resource/img/atm.jpg" alt="" />-->
                                                     </div>
                                                 </div>
+                                            @endif    
                                             @endif
+                                            
                                             {{-- @php print_r($clientIds) @endphp; --}}
                                             {{-- currentUserId() --}}
                                             {{-- currentUser() --}}
