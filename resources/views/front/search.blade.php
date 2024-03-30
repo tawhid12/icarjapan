@@ -899,11 +899,15 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               @endif
 
               <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
+              @if ($v->sold_status)
+              <p class="stock-text m-0">Sold</p>
+              @endif
+              
             </div>
             <div class="col-md-9">
               <div class="col-md-12 d-flex justify-content-between align-items-center">
-                <span class="v-tag"><a href="">New Arival</a></span>
-                <a href="" class="fav"><i class="fa fa-heart"></i>Add to Favorites</a>
+                {{-- <span class="v-tag"><a href="">New Arival</a></span>
+                <a href="" class="fav"><i class="fa fa-heart"></i>Add to Favorites</a> --}}
               </div>
               <div class="heading d-flex justify-content-between">
 
