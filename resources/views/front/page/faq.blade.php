@@ -51,10 +51,10 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">About Auction</button>
-                </li>
+                </li>--}}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Shipment</button>
-                </li>--}}
+                </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Payment</button> 
                 </li>
@@ -185,6 +185,26 @@
                 </div>
                 <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
                     <!-- Content for Tab 3 -->
+                    <h2 class="accordion-header my-1" id="heading13">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>How long does it take me to receive my car?
+                        </button>
+                    </h2>
+                    <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            We cannot tell you the exact time for your car to be delivered to you as it completely depends on the shipping schedule. However, your car will be shipped on the earliest available vessel. Usually, it takes 4 to 8 weeks.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading13">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>How long does it take me to receive my car?
+                        </button>
+                    </h2>
+                    <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            We cannot tell you the exact time for your car to be delivered to you as it completely depends on the shipping schedule. However, your car will be shipped on the earliest available vessel. Usually, it takes 4 to 8 weeks.
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
                     <!-- Content for Tab 3 -->
@@ -196,6 +216,69 @@
                     <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve" data-bs-parent="#accordion">
                         <div class="accordion-body">
                             Because of the high frequency of credit card fraud, we don't accept payment by credit card. We only accept payment by telegraphic transfer to our designated bank account from your bank.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading14">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse14" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>Is there any membership fee?
+                        </button>
+                    </h2>
+                    <div id="collapse14" class="accordion-collapse collapse" aria-labelledby="heading14" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            No. No fees or hidden charges are required. So don't hesitate and sign up now.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading15">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse15" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>If I purchase a vehicle at $ 2,000, how much will I have to pay as extra charges?
+                        </button>
+                    </h2>
+                    <div id="collapse15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            If the price is in FOB, you will have to pay Freight charge, Clearance fee, Import duty, Registration fee, Compliance fee, and any other fee which may occur according to the import regulations of your country.
+                            If the price is in C&F, you can omit Freight charge from the above charges.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading16">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse16" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>Can I purchase LHD cars from iCar Japan?
+                        </button>
+                    </h2>
+                    <div id="collapse16" class="accordion-collapse collapse" aria-labelledby="heading16" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            LHD cars are very rare in Japan. LHD cars are usually imported from countries like the US, Europe and Korea. However, you can search for an LHD car in a fair amount of Korean and American Inventory.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading17">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse17" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>Can I cancel my purchase order?
+                        </button>
+                    </h2>
+                    <div id="collapse17" class="accordion-collapse collapse" aria-labelledby="heading17" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            When you cancel an order, we may have to resell that car in an auction or in any other way. Therefore, if you cancel the order, you have to pay the balance in addition to the costs that may incur.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading18">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse18" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>Do you inspect the cars before shipping?
+                        </button>
+                    </h2>
+                    <div id="collapse18" class="accordion-collapse collapse" aria-labelledby="heading18" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            All the cars are thoroughly inspected to confirm that there is no difference between the actual specifications and those on the specification sheet.
+                        </div>
+                    </div>
+                    <h2 class="accordion-header my-1" id="heading19">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse19" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-plus me-4"></i>For further questions, feel free to contact us
+                        </button>
+                    </h2>
+                    <div id="collapse19" class="accordion-collapse collapse" aria-labelledby="heading19" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            Call:   +81 50 5539 4712 (Hotline)
+                            Fax:  +81 90-8099-1615
+                            Email:   csd@icarjapan.com
                         </div>
                     </div>
                 </div>
