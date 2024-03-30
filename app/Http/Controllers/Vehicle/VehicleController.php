@@ -49,7 +49,8 @@ class VehicleController extends Controller
         if ($search != '') {
             $vehicles = Vehicle::where(function ($query) use ($search) {
                 $query->where('fullName', '=', '%' . $search . '%')
-                    ->orWhere('stock_id', '=', $search);
+                    ->orWhere('stock_id', '=', $search)
+                    ->orWhere('chassis_no', '=', $search);
             })->paginate(25);
             $vehicles->appends(array('search' => $search,));
             if (count($vehicles) > 0) {
