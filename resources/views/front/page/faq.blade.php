@@ -53,10 +53,10 @@
                     <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">About Auction</button>
                 </li>--}}
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Shipment</button>
+                    <button class="nav-link" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Shipment</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Payment</button> 
+                    <button class="nav-link" id="tab5-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button" role="tab" aria-controls="tab4" aria-selected="false">About Payment</button> 
                 </li>
             </ul>
 
@@ -183,7 +183,7 @@
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <!-- Content for Tab 2 -->
                 </div>
-                <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab3-tab">
                     <!-- Content for Tab 3 -->
                     <h2 class="accordion-header my-1" id="heading13">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="true" aria-controls="collapseTwo">
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab4-tab">
                     <!-- Content for Tab 3 -->
                     <h2 class="accordion-header my-1" id="headingTwelve">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseTwo">
