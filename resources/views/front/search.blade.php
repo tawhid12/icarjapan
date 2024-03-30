@@ -900,7 +900,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
               <p class="stock-text m-0">Stock ID : {{$v->stock_id}}</p>
               @if ($v->sold_status)
-              <p class="stock-text m-0">Sold</p>
+              <p class="price-text m-0">Sold</p>
               @endif
               
             </div>
