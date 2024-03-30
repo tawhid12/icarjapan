@@ -797,6 +797,9 @@
                                                 @if ($v->r_status)
                                                     <p class="img_inner_sold_disp_text">Reserved</p>
                                                 @endif
+                                                @if ($v->sold_status)
+                                                <p class="img_inner_sold_disp_text">Sold</p>
+                                                @endif
                                                 <p id="pager_display" class="nopointer_event nowrap_txt"><span
                                                         id="currentPage_display">1</span>&nbsp;/&nbsp;<span
                                                         id="totalPages_display">00</span></p>
