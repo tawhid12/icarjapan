@@ -486,20 +486,20 @@
           </div>
 
           <div class="col-sm-12 mb-3">
-            <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" value="1" {{ request()->get('sbt_stocks') == 1 ? 'checked' : '' }}/>
-            <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
+            {{-- <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" value="1" {{ request()->get('sbt_stocks') == 1 ? 'checked' : '' }}/>
+            <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label> --}}
 
-            <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks value="1" {{ request()->get('partner_stocks') == 1 ? 'checked' : '' }}/>
-            <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
+            {{-- <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks value="1" {{ request()->get('partner_stocks') == 1 ? 'checked' : '' }}/>
+            <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label> --}}
 
-            <input type="checkbox" class="form-check-input" id="new" class="new-arival" name="new" value="1" {{ request()->get('new') == 1 ? 'checked' : '' }}/>
-            <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
+            {{-- <input type="checkbox" class="form-check-input" id="new" class="new-arival" name="new" value="1" {{ request()->get('new') == 1 ? 'checked' : '' }}/>
+            <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label> --}}
 
             <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
 
-            <input type="checkbox" class="form-check-input" id="360_img" name="360_img" value="1" {{ request()->get('360_img') == 1 ? 'checked' : '' }}/>
-            <label class="form-check-label me-3 img-360" for="360_img">360Degree</label>
+            {{-- <input type="checkbox" class="form-check-input" id="360_img" name="360_img" value="1" {{ request()->get('360_img') == 1 ? 'checked' : '' }}/>
+            <label class="form-check-label me-3 img-360" for="360_img">360Degree</label> --}}
 
 
           </div>

@@ -658,20 +658,20 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
             </div>
 
             <div class="col-sm-12 mb-3">
-              <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
-              <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label>
+              {{-- <input type="checkbox" class="form-check-input" id="sbt" name="sbt_stocks" />
+              <label class="form-check-label me-3 sbt-stock sbt-checkbox" for="sbt">ICAR Stocks</label> --}}
 
-              <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
-              <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label>
+              {{-- <input type="checkbox" class="form-check-input" id="partner" name=partner_stocks />
+              <label class="form-check-label me-3 partner sbt-checkbox" for="partner">Partner's Stocks</label> --}}
 
-              <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
-              <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label>
+              {{-- <input type="checkbox" class="form-check-input" id="new" class="new-arival" />
+              <label class="form-check-label me-3 new sbt-checkbox" for="new">New Arrival</label> --}}
 
               <!-- <label class="form-check-label me-3" for="exampleCheck1">3 Emission Code</label>
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
 
-              <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
-              <label class="form-check-label me-3 img-360" for="360_img"></label>
+              {{-- <input type="checkbox" class="form-check-input" id="img-360" name="360_img" />
+              <label class="form-check-label me-3 img-360" for="360_img"></label> --}}
 
 
             </div>

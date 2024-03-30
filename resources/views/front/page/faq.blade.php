@@ -1,6 +1,6 @@
 @extends('layout.landing')
 @section('pageTitle','Faq')
-@section('pageSubTitle','Faq')
+@section('pageSubTitle','')
 @push('styles')
 <style>
     .nav-tabs .nav-link,
