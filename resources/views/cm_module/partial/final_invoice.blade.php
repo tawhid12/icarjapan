@@ -98,13 +98,16 @@
 
 
 
-
+                                    @if($v->sold_status)
+                                    <p><i class="badge bg-primary">Sold</i></p>
+                                    @else
                                     @if($v->reserve_status == 1)
                                     <p><i class="badge bg-warning">Reserved</i></p>
                                     @elseif($v->reserve_status == 2)
                                     <p><i class="badge bg-success">Confirmed</i></p>
                                     @else
                                     <p><i class="badge bg-danger">Cancelled</i></p>
+                                    @endif
                                     @endif
                                     @if($v->reserve_status == 1)
                                     @if(currentUser() != 'accountant')
