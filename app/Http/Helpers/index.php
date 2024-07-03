@@ -59,6 +59,8 @@ function countryIp(){
                 $current_locale_data = Carbon::now('Asia/Singapore');
                 elseif($location['timezone'] == 'US')
                 $current_locale_data = Carbon::now('Asia/New_York');
+                elseif($location['timezone'] == 'BD')
+                $current_locale_data = Carbon::now('Asia/Dhaka');
                 else
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
