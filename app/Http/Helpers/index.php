@@ -54,7 +54,7 @@ function countryIp(){
     if ($user_ip) {
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success'){
-                //Log::info($location);
+                Log::info($location);
                 if($location['timezone'] == 'SG')
                 $current_locale_data = Carbon::now('Asia/Singapore');
                 else
