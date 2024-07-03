@@ -55,6 +55,9 @@ function countryIp(){
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success'){
                 //Log::info($location);
+                if($location['timezone'] == 'SG')
+                $current_locale_data = Carbon::now('Asia/Singapore');
+                else
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
