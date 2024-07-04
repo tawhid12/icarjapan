@@ -276,7 +276,7 @@ class FrontController extends Controller
                 //Log::info($location);
                 if (array_key_exists('timezone', $location)) {
                     $current_locale_data = Carbon::now($location['timezone']);
-                } else {`
+                } else {
                     countryIp();
                 }
                 $countryName = Country::where('code', $request->code)->first();
