@@ -313,12 +313,20 @@ class FrontController extends Controller
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
             ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
-            ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
-            ->orWhere('vehicles.fullName', $request->sdata)
-            ->orWhere('vehicles.stock_id', $request->sdata)
-            ->orWhere('brands.name', $request->sdata)
-            ->orWhere('sub_brands.name', $request->sdata)
-            ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+            ->where(function($query) use ($request) {
+                $query->where('vehicles.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%');
+                
+                // Handling search_keyword field
+                $keywords = explode(',', $request->sdata);
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('vehicles.search_keyword', 'like', '%' . $keyword . '%');
+                }
+            })
             ->inRandomOrder()->paginate(10);
         if ($request->sales_search == 'search') {
             $brands = Brand::all();
