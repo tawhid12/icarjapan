@@ -49,7 +49,7 @@ class FrontController extends Controller
                 //Log::info($location);
                 //if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
                 if (isset($timezone)) {
-                    $current_locale_data = Carbon::now($timezone);
+                    $current_locale_data = Carbon::now($timezone['0']);
                 } else {
                     countryIp();
                 }
