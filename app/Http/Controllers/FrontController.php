@@ -29,6 +29,12 @@ use Intervention\Image\Facades\Image;
 
 class FrontController extends Controller
 {
+    function isValidCountryCode($code) {
+        $countryCodes = array_flip(DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY));
+        return isset($countryCodes[$code]);
+    }
+
+    
     public function countrySelectpost(Request $request)
     {
         $c_data = Country::where('code', $request->code)->first();
@@ -42,9 +48,9 @@ class FrontController extends Controller
             $api_url = file_get_contents('https://extreme-ip-lookup.com/json/' . $c_data->ip_address . '?key=9x9yyW5zMrdFwAKLH5jO');
             $location = json_decode($api_url, true);
             if (isset($location['status']) && $location['status'] == 'success') {
-                if (isset($location['timezone']) && strlen($location['timezone']) === 2 && isValidCountryCode($location['timezone'])) {
+                if (isset($location['timezone']) && strlen($location['timezone']) === 2 && isValidCountryCode($request->code)) {
                     // Change the timezone value
-                    $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
+                    $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $request->code);
                     $location['timezone'] =  $timezone[0];
                 }
                 //print_r($location);die;
