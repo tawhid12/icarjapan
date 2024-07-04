@@ -268,12 +268,20 @@ class FrontController extends Controller
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name')
-            ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
-            ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
-            ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
-            ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
-            ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
-            ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+            ->where(function($query) use ($request) {
+                $query->where('vehicles.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%');
+                
+                // Handling search_keyword field
+                $keywords = explode(',', $request->sdata);
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('vehicles.search_keyword', 'like', '%' . $keyword . '%');
+                }
+            })
             ->get();
         $search_keywords = [];
 
@@ -285,6 +293,10 @@ class FrontController extends Controller
             $search_keywords[] = $sd->sb_name;
             $search_keywords[] = $sd->chassis_no;
             $search_keywords[] = explode(',', $sd->search_keyword);
+
+            // Handling search_keyword field which is comma-separated
+            $keywords = explode(',', $sd->search_keyword);
+            $search_keywords = array_merge($search_keywords, $keywords);
         }
         $unique_keyword = array_values(array_unique($search_keywords));
         $unique_keyword = array_filter($unique_keyword, function ($value) use ($request) {
