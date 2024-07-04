@@ -44,6 +44,10 @@ use Illuminate\Support\Facades\Log;
 //             return redirect()->route('front.countrySelect');
 //         }
 // }
+function isValidCountryCode($code) {
+    $countryCodes = array_flip(DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY));
+    return isset($countryCodes[$code]);
+}
 
 function countryIp(){
     $user_ip = getenv('REMOTE_ADDR') /*'122.152.53.35'*/;
@@ -55,10 +59,12 @@ function countryIp(){
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success' /*&& in_array($location['timezone'], timezone_identifiers_list())*/){
                 Log::info($location);
-                if (isset($location['timezone']) && strlen($location['timezone']) === 2) {
-                $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
-                $location['timezone'] =  $timezone[0];
+                if (isset($location['timezone']) && strlen($location['timezone']) === 2 && isValidCountryCode($location['timezone'])) {
+                    // Change the timezone value
+                    $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
+                    $location['timezone'] =  $timezone[0];
                 }
+
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
