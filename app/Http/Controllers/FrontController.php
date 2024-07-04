@@ -42,18 +42,19 @@ class FrontController extends Controller
             $api_url = file_get_contents('https://extreme-ip-lookup.com/json/' . $c_data->ip_address . '?key=9x9yyW5zMrdFwAKLH5jO');
             $location = json_decode($api_url, true);
             if (isset($location['status']) && $location['status'] == 'success') {
-                //print_r($location);
+               
                 $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $request->code);
+                $location['timezone'] =  $timezone[0];
+                //print_r($location);die;
                 //print_r($timezone);die;
                 //echo $timezone['0'];die;
                 //Log::info($location);
-                //if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
-                if (isset($timezone)) {
-                    $current_locale_data = Carbon::now($timezone['0']);
+                if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
+                    $current_locale_data = Carbon::now($location['timezone']);
                 } else {
                     countryIp();
                 }
-                $countryName = Country::where('code', $request->code)->first();
+                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
