@@ -271,7 +271,7 @@
   <script>
     $("#item_search").autocomplete({
 		source: function(data, cb) {
-			//console.log(data);
+			console.log(data);
 			$.ajax({
 				autoFocus: true,
 				url: "{{route('searchStData')}}", //To Get Data

@@ -267,7 +267,7 @@ class FrontController extends Controller
         $search_data = DB::table('vehicles')
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-            ->select('vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name')
+            ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name')
             ->where('vehicles.name', 'like', '%' . $request->sdata . '%')
             ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
             ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
@@ -284,6 +284,7 @@ class FrontController extends Controller
             $search_keywords[] = $sd->b_name;
             $search_keywords[] = $sd->sb_name;
             $search_keywords[] = $sd->chassis_no;
+            $search_keywords[] = explode(',', $sd->search_keyword);
         }
         $unique_keyword = array_values(array_unique($search_keywords));
         $unique_keyword = array_filter($unique_keyword, function ($value) use ($request) {
