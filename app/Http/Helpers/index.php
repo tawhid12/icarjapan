@@ -52,16 +52,16 @@ function countryIp(){
     $jsonData = file_get_contents($api_url);
     $location = json_decode($jsonData, true);
     if ($user_ip) {
-        if(isset($location)){
+        if(isset($location) && in_array($location['timezone'], timezone_identifiers_list())){
             if(isset($location['status']) && $location['status'] == 'success'){
                 Log::info($location);
-                if($location['timezone'] == 'SG')
-                $current_locale_data = Carbon::now('Asia/Singapore');
-                elseif($location['timezone'] == 'US')
-                $current_locale_data = Carbon::now('America/New_York');
-                elseif($location['timezone'] == 'BD')
-                $current_locale_data = Carbon::now('Asia/Dhaka');
-                else
+                // if($location['timezone'] == 'SG')
+                // $current_locale_data = Carbon::now('Asia/Singapore');
+                // elseif($location['timezone'] == 'US')
+                // $current_locale_data = Carbon::now('America/New_York');
+                // elseif($location['timezone'] == 'BD')
+                // $current_locale_data = Carbon::now('Asia/Dhaka');
+                // else
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
