@@ -52,8 +52,8 @@ function countryIp(){
     $jsonData = file_get_contents($api_url);
     $location = json_decode($jsonData, true);
     if ($user_ip) {
-        if(isset($location) && in_array($location['timezone'], timezone_identifiers_list())){
-            if(isset($location['status']) && $location['status'] == 'success'){
+        if(isset($location)){
+            if(isset($location['status']) && $location['status'] == 'success' && in_array($location['timezone'], timezone_identifiers_list())){
                 Log::info($location);
                 // if($location['timezone'] == 'SG')
                 // $current_locale_data = Carbon::now('Asia/Singapore');
