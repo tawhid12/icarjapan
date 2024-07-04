@@ -53,8 +53,10 @@ function countryIp(){
     $location = json_decode($jsonData, true);
     if ($user_ip) {
         if(isset($location)){
-            if(isset($location['status']) && $location['status'] == 'success' && in_array($location['timezone'], timezone_identifiers_list())){
+            if(isset($location['status']) && $location['status'] == 'success' /*&& in_array($location['timezone'], timezone_identifiers_list())*/){
                 Log::info($location);
+                $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
+                $location['timezone'] =  $timezone[0];
                 // if($location['timezone'] == 'SG')
                 // $current_locale_data = Carbon::now('Asia/Singapore');
                 // elseif($location['timezone'] == 'US')
