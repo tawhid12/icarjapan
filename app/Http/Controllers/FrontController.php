@@ -42,9 +42,12 @@ class FrontController extends Controller
             $api_url = file_get_contents('https://extreme-ip-lookup.com/json/' . $c_data->ip_address . '?key=9x9yyW5zMrdFwAKLH5jO');
             $location = json_decode($api_url, true);
             if (isset($location['status']) && $location['status'] == 'success') {
-               
-                $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $request->code);
-                $location['timezone'] =  $timezone[0];
+                if (isset($location['timezone']) && strlen($location['timezone']) === 2 && isValidCountryCode($location['timezone'])) {
+                    // Change the timezone value
+                    $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
+                    $location['timezone'] =  $timezone[0];
+                }
+                $current_locale_data = Carbon::now($location['timezone']);
                 //print_r($location);die;
                 //print_r($timezone);die;
                 //echo $timezone['0'];die;
