@@ -49,18 +49,28 @@ class FrontController extends Controller
                 //print_r($timezone);die;
                 //echo $timezone['0'];die;
                 //Log::info($location);
-                if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
+                if (array_key_exists('timezone', $location)) {
+
                     $current_locale_data = Carbon::now($location['timezone']);
                 } else {
+                   
                     countryIp();
                 }
-                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                $countryName = Country::where('code', $request->code)->first();
+                $currency_data = array(
+                    'geoplugin_status' => 200,
+                    'geoplugin_currencyCode' => 'USD',
+                    'geoplugin_currencyConverter' => 0,
+                    'expairy' => 1,
+                );
+                $location = array_merge($location, $currency_data);
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
                 return redirect()->route('front');
             }
         } else {
+            
             return redirect()->route('front.countrySelect');
         }
     }
