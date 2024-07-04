@@ -47,16 +47,13 @@ class FrontController extends Controller
                     $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
                     $location['timezone'] =  $timezone[0];
                 }
-                $current_locale_data = Carbon::now($location['timezone']);
                 //print_r($location);die;
                 //print_r($timezone);die;
                 //echo $timezone['0'];die;
                 //Log::info($location);
                 if (array_key_exists('timezone', $location)) {
-
                     $current_locale_data = Carbon::now($location['timezone']);
                 } else {
-                   
                     countryIp();
                 }
                 $countryName = Country::where('code', $request->code)->first();
