@@ -292,7 +292,6 @@ class FrontController extends Controller
             $search_keywords[] = $sd->b_name;
             $search_keywords[] = $sd->sb_name;
             $search_keywords[] = $sd->chassis_no;
-            $search_keywords[] = explode(',', $sd->search_keyword);
 
             // Handling search_keyword field which is comma-separated
             $keywords = explode(',', $sd->search_keyword);
