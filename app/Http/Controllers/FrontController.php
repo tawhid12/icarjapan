@@ -87,10 +87,10 @@ class FrontController extends Controller
         unset($_SESSION['location']);
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($countryName);
         echo $countryName->name;
-        die;
+        die;*/
         if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
             /*==New Arival== | New Affordable==*/
             $new_arivals = DB::table('vehicles')
