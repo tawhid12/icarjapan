@@ -85,22 +85,26 @@ function countryIp(){
                 }else{
                     unset($_SESSION['countryName']);
                     unset($_SESSION['location']);
-                    return redirect()->route('front.countrySelect');
+                    //return redirect()->route('front.countrySelect');
+                    echo "<script> window.location.href= ' https://icarjapan.com/country-select ' </script>";
                 }
             }else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);
-                return redirect()->route('front.countrySelect');
+                //return redirect()->route('front.countrySelect');
+                echo "<script> window.location.href= ' https://icarjapan.com/country-select ' </script>";
             }
         }else{
             unset($_SESSION['countryName']);
             unset($_SESSION['location']);
-            return redirect()->route('front.countrySelect');
+            //return redirect()->route('front.countrySelect');
+            echo "<script> window.location.href= ' https://icarjapan.com/country-select ' </script>";
         }
     }else{
         unset($_SESSION['countryName']);
         unset($_SESSION['location']);
-        return redirect()->route('front.countrySelect');
+        //return redirect()->route('front.countrySelect');
+        echo "<script> window.location.href= ' https://icarjapan.com/country-select ' </script>";
     }
 }
 function Replace($data) {
