@@ -55,8 +55,10 @@ function countryIp(){
         if(isset($location)){
             if(isset($location['status']) && $location['status'] == 'success' /*&& in_array($location['timezone'], timezone_identifiers_list())*/){
                 Log::info($location);
+                if (isset($location['timezone']) && strlen($location['timezone']) === 2) {
                 $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
                 $location['timezone'] =  $timezone[0];
+                }
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
