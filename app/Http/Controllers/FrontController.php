@@ -40,14 +40,16 @@ class FrontController extends Controller
             //echo 'ok';die;
 
             $api_url = file_get_contents('https://extreme-ip-lookup.com/json/' . $c_data->ip_address . '?key=9x9yyW5zMrdFwAKLH5jO');
-            $jsonData = file_get_contents($api_url);
-            $location = json_decode($jsonData, true);
+            $location = json_decode($api_url, true);
             if (isset($location['status']) && $location['status'] == 'success') {
                 //print_r($location);
-
+                $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $request->code);
+                //print_r($timezone);die;
+                //echo $timezone['0'];die;
                 //Log::info($location);
-                if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
-                    $current_locale_data = Carbon::now($location['timezone']);
+                //if (array_key_exists('timezone', $location) && array_key_exists('expairy', $location)) {
+                if (isset($timezone)) {
+                    $current_locale_data = Carbon::now($timezone);
                 } else {
                     countryIp();
                 }
