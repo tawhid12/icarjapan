@@ -53,7 +53,7 @@ class FrontController extends Controller
                 } else {
                     countryIp();
                 }
-                $countryName = Country::where('code', $location['geoplugin_countryCode'])->first();
+                $countryName = Country::where('code', $request->code)->first();
                 session()->put('countryName', $countryName);
                 session()->put('location', $location);
                 session()->put('current_locale_data', $current_locale_data);
