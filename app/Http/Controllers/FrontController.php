@@ -83,8 +83,6 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        unset($_SESSION['countryName']);
-        unset($_SESSION['location']);
         $location =  request()->session()->get('location');
         $countryName =  request()->session()->get('countryName');
         /*echo '<pre>';

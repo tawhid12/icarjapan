@@ -57,13 +57,6 @@ function countryIp(){
                 Log::info($location);
                 $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $location['timezone']);
                 $location['timezone'] =  $timezone[0];
-                // if($location['timezone'] == 'SG')
-                // $current_locale_data = Carbon::now('Asia/Singapore');
-                // elseif($location['timezone'] == 'US')
-                // $current_locale_data = Carbon::now('America/New_York');
-                // elseif($location['timezone'] == 'BD')
-                // $current_locale_data = Carbon::now('Asia/Dhaka');
-                // else
                 $current_locale_data = Carbon::now($location['timezone']);
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
