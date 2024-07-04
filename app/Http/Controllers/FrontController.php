@@ -270,7 +270,7 @@ class FrontController extends Controller
                 } else {
                     $location['timezone'] = 'UTC';
                 }
-                //print_r($location);die;
+                print_r($location);die;
                 //print_r($timezone);die;
                 //echo $timezone['0'];die;
                 //Log::info($location);
