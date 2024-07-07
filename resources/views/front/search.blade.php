@@ -561,67 +561,67 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
             <div class="row gx-1">
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="air_bag" name="air_bag" />
+                  <input type="checkbox" class="form-check-input" id="air_bag" name="air_bag" @if(request()->get('air_bag')) checked @endif/>
                   <label class="form-check-label" for="air_bag">Air Bag</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="anti_lock_brake_system" name="anti_lock_brake_system" />
+                  <input type="checkbox" class="form-check-input" id="anti_lock_brake_system" name="anti_lock_brake_system" @if(request()->get('anti_lock_brake_system')) checked @endif/>
                   <label class="form-check-label" for="anti_lock_brake_system">Anti-Lock Brake System</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="air_con" name="air_con" />
+                  <input type="checkbox" class="form-check-input" id="air_con" name="air_con" @if(request()->get('air_con')) checked @endif/>
                   <label class="form-check-label" for="air_con">Air Conditioner</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="alloy_wheels" name="alloy_wheels" />
+                  <input type="checkbox" class="form-check-input" id="alloy_wheels" name="alloy_wheels" @if(request()->get('alloy_wheels')) checked @endif/>
                   <label class="form-check-label" for="alloy_wheels">Alloy Wheels</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="back_tire" name="back_tire" />
+                  <input type="checkbox" class="form-check-input" id="back_tire" name="back_tire" @if(request()->get('back_tire')) checked @endif/>
                   <label class="form-check-label" for="back_tire">Back Tire</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="fog_lights" name="fog_lights" />
+                  <input type="checkbox" class="form-check-input" id="fog_lights" name="fog_lights" @if(request()->get('fog_lights')) checked @endif/>
                   <label class="form-check-label" for="fog_lights">Fog Lights</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="grill_guard" name="grill_guard" />
+                  <input type="checkbox" class="form-check-input" id="grill_guard" name="grill_guard" @if(request()->get('grill_guard')) checked @endif/>
                   <label class="form-check-label" for="grill_guard">Grill Guard</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="leather_seat" name="leather_seat" />
+                  <input type="checkbox" class="form-check-input" id="leather_seat" name="leather_seat" @if(request()->get('leather_seat')) checked @endif/>
                   <label class="form-check-label" for="leather_seat">Leather Seats</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="navigation" name="navigation" />
+                  <input type="checkbox" class="form-check-input" id="navigation" name="navigation" @if(request()->get('navigation')) checked @endif/>
                   <label class="form-check-label" for="navigation">Navigation</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="power_steering" name="power_steering" />
+                  <input type="checkbox" class="form-check-input" id="power_steering" name="power_steering" @if(request()->get('power_steering')) checked @endif/>
                   <label class="form-check-label" for="power_steering">Power Steering</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="power_windows" name="power_windows" />
+                  <input type="checkbox" class="form-check-input" id="power_windows" name="power_windows" @if(request()->get('power_windows')) checked @endif/>
                   <label class="form-check-label" for="power_windows">Power Windows</label>
                 </div>
               </div>
@@ -633,19 +633,19 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               </div> -->
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="rear_spoiler" name="rear_spoiler" />
+                  <input type="checkbox" class="form-check-input" id="rear_spoiler" name="rear_spoiler" @if(request()->get('rear_spoiler')) checked @endif/>
                   <label class="form-check-label" for="rear_spoiler">Rear Spoiler</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="sun_roof" name="sun_roof" />
+                  <input type="checkbox" class="form-check-input" id="sun_roof" name="sun_roof" @if(request()->get('sun_roof')) checked @endif/>
                   <label class="form-check-label" for="sun_roof">Sun Roof</label>
                 </div>
               </div>
               <div class="col-sm-2 my-1 d-flex">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="tv" name="tv" />
+                  <input type="checkbox" class="form-check-input" id="tv" name="tv" @if(request()->get('tv')) checked @endif/>
                   <label class="form-check-label" for="tv">TV</label>
                 </div>
               </div>
