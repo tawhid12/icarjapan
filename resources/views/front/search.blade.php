@@ -244,16 +244,16 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
           <div class="search-body-upper shadow p-3">
             <div class="row gx-1">
               <div class="col-sm-3 mb-3">
-                <select name="brand" class="form-select form-select-md" id="brand_id" required>
+                <select name="brand" class="form-select form-select-md" id="brand_id">
                   <option value="">Make:</option>
                   @forelse($brands as $b)
-                  <option value="{{$b->id}}" @if(!empty($brand)) @if($b->id == $brand->id) selected @endif @endif>{{$b->name}}</option>
+                  <option value="{{$b->id}}" @if($b->id == request('brand')) selected @endif >{{$b->name}}</option>
                   @empty
                   @endforelse
                 </select>
               </div>
               <div class="col-sm-3 mb-3">
-                <select name="sub_brand" class="form-select form-select-md" id="sub_brand" required>
+                <select name="sub_brand" class="form-select form-select-md" id="sub_brand">
                   <option value="" selected>Model</option>
                   {{--@forelse($sub_brands as $sb)
                 <option value="{{$sb->id}}" @if(!empty($sub_brand)) @if($sb->id == $sub_brand->id) selected @endif @endif>{{$sb->name}}</option>
@@ -305,12 +305,12 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
                 </select>
               </div>
               <div class="col-sm-3 mb-3 d-flex">
-                <select name="to_year" class="date-filter form-select form-select-md">
+                <select name="from_year" class="date-filtler form-select form-select-md">
                   <option value="">Year:</option>
                   @php
                   for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
                     @endphp
-                    <option value="{{$i}}" @if(request()->get('to_year') == $i) selected @endif>{{$i}}</option>
+                    <option value="{{$i}}" @if(request()->get('from_year') == $i) selected @endif>{{$i}}</option>
                     @php
                     }
                     @endphp
@@ -324,12 +324,12 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
                   @endphp
               </select> -->
                 <span>~</span>
-                <select name="from_year" class="date-filtler form-select form-select-md">
+                <select name="to_year" class="date-filter form-select form-select-md">
                   <option value="">Year:</option>
                   @php
                   for ($i = $year_range[0]->minyear; $i <= $year_range[0]->maxyear; $i += 1) {
                     @endphp
-                    <option value="{{$i}}" @if(request()->get('from_year') == $i) selected @endif>{{$i}}</option>
+                    <option value="{{$i}}" @if(request()->get('to_year') == $i) selected @endif>{{$i}}</option>
                     @php
                     }
                     @endphp
@@ -449,7 +449,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
               <div class="col-sm-3 mb-3 d-flex">
                 <select name="fuel_id" class="form-select form-select-md">
-                  <option vale="">Fuel:</option>
+                  <option value="">Fuel:</option>
                   @forelse($fuel as $f)
                   <option value="{{$f->id}}" @if(request()->get('fuel_id') == $f->id) selected @endif>{{$f->name}}</option>
                   @empty
@@ -543,9 +543,9 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               <div class="col-sm-3 mb-3 d-flex">
                 <select name="inv_locatin_id" class="form-select form-select-md">
                   <option value="">Inventory Location:</option>
-                  @forelse($inv_loc as $inv)
-                  <option value="{{$inv->id}}" @if(request()->get('inv_locatin_id') == $inv->id) selected @endif>
-                    {{optional($inv->country)->name}}
+                  @forelse($countries as $c)
+                  <option value="{{$c->id}}" @if(request()->get('inv_locatin_id') == $c->id) selected @endif>
+                    {{$c->name}}
                   </option>
                   @empty
                   @endforelse
@@ -677,9 +677,9 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
             </div>
             <div class="d-flex align-items-center justify-content-end">
 
-              <button type="button" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
+              <a href="{{route('front_adv_search_by_data')}}" class="col-md-2 btn btn-sm me-2" style="background: linear-gradient(to bottom,#fff 0,#ededed 100%);border: 1px solid #a8a8a8;">
                 Reset
-              </button>
+              </a>
               <button type="submit" class="col-md-2 btn btn-primary btn-sm">
                 Search
               </button>
@@ -805,7 +805,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
         </form>
 
-
+        @if(isset($vehicles))
         <!-- Vehicles -->
         @forelse($vehicles as $v)
 
@@ -1024,11 +1024,15 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
           </div>
         </div>
         @empty
+        <h4 class="my-3">No Vehicle Found</h4>
         @endforelse
         <div class="pt-2">
           {{ $vehicles->links() }}
         </div>
         <!-- Vehicles -->
+        @else
+        <h4 class="my-3">Please Select Any Search Parameter</h4>
+        @endif
       </div>
     </div>
   </div>

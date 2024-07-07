@@ -591,49 +591,125 @@ class FrontController extends Controller
 
     public function front_adv_search_by_data(Request $request)
     {
+        //dd($request);
         /* print_r($request->toArray());
         echo 'ok';die;*/
         $countries = Country::all();
-        if (!empty($request->brand) && !empty($request->sub_brand)) {
-            $vehicles = DB::table('vehicles')
-                ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug')
-                ->join('brands', 'vehicles.brand_id', 'brands.id')
-                ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-                ->where('vehicles.sold_status', 0)
-                ->inRandomOrder()->paginate(10);
-            /*echo '<pre>';
-            print_r($vehicles);die;*/
-
-            /*echo '<pre>';
-            print_r(request()->toArray());*/
+        if ($request) {
             $brands = Brand::withCount('vehicles')->get();
-            $brand = Brand::where('id', $request->brand)->firstOrFail();
-            $sub_brand_id = SubBrand::where('id', $request->sub_brand)->firstOrFail();
+  
             $vehicles = DB::table('vehicles')
                 ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
                 ->leftjoin('brands', 'vehicles.brand_id', 'brands.id')
                 ->leftjoin('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
-                ->leftjoin('transmissions', 'vehicles.transmission_id', 'transmissions.id')
-                ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id);
-            if ($request->filled('body_type')) {
-                $vehicles = $vehicles->where('vehicles.body_type_id', $request->body_type);
+                ->leftjoin('transmissions', 'vehicles.transmission_id', 'transmissions.id');
+                
+            if ($request->filled('brand')) {
+                    $vehicles = $vehicles->where('vehicles.brand_id', $request->brand);
+            }
+            if ($request->filled('sub_brand')) {
+                $vehicles = $vehicles->where('vehicles.sub_brand_id', $request->sub_brand);
             }
             if ($request->filled('steering')) {
                 $vehicles = $vehicles->where('vehicles.steering', $request->steering);
             }
-            if ($request->filled('from_year') && $request->filled('to_year')) {
-                $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->to_year, $request->from_year]);
+            if ($request->filled('body_type')) {
+                $vehicles = $vehicles->where('vehicles.body_type_id', $request->body_type);
             }
+            if ($request->filled('drive_id') ) {
+                $vehicles = $vehicles->where('vehicles.drive_id', $request->drive_id);
+            }
+
+            if ($request->filled('from_year') && $request->filled('to_year')) {
+                $vehicles = $vehicles->whereBetween('vehicles.reg_year', [$request->from_year, $request->to_year]);
+            }
+            if ($request->filled('from_year') && ! $request->filled('to_year')) {
+                $vehicles = $vehicles->where('vehicles.reg_year', '=', $request->from_year);
+            }
+            if ($request->filled('to_year') && ! $request->filled('from_year')) {
+                $vehicles = $vehicles->where('vehicles.reg_year', '=', $request->to_year);
+            }
+            
+            if ($request->filled('from_price') && $request->filled('to_price')) {
+                $vehicles = $vehicles->whereBetween('vehicles.price', [$request->from_price, $request->to_price]);
+            }
+            if ($request->filled('from_price') && ! $request->filled('to_price')) {
+                $vehicles = $vehicles->where('vehicles.price', '=', $request->from_price);
+            }
+            if ($request->filled('to_price') && ! $request->filled('from_price')) {
+                $vehicles = $vehicles->where('vehicles.price', '=', $request->to_price);
+            }
+
+            if ($request->filled('e_size_from') && $request->filled('e_size_to')) {
+                $vehicles = $vehicles->whereBetween('vehicles.e_size', [$request->e_size_from, $request->e_size_to]);
+            }
+            if ($request->filled('e_size_from') && ! $request->filled('e_size_to')) {
+                $vehicles = $vehicles->where('vehicles.e_size', '=', $request->e_size_from);
+            }
+            if ($request->filled('e_size_to') && ! $request->filled('e_size_from')) {
+                $vehicles = $vehicles->where('vehicles.e_size', '=', $request->e_size_to);
+            }
+
+            if ($request->filled('mileage_from') && $request->filled('mileage_to')) {
+                $vehicles = $vehicles->whereBetween('vehicles.mileage', [$request->mileage_from, $request->mileage_to]);
+            }
+            /*if ($request->filled('mileage_from') && ! $request->filled('mileage_to')) {
+                $vehicles = $vehicles->where('vehicles.mileage', '=', $request->mileage_from);
+            }
+            if ($request->filled('mileage_to') && ! $request->filled('mileage_from')) {
+                $vehicles = $vehicles->where('vehicles.mileage', '=', $request->mileage_to);
+            }*/
+
+            if ($request->filled('transmission_id') ) {
+                $vehicles = $vehicles->where('vehicles.transmission_id', $request->transmission_id);
+            }
+
+            if ($request->filled('discount_from') && $request->filled('discount_to')) {
+                $vehicles = $vehicles->whereBetween('vehicles.discount', [$request->discount_from, $request->discount_to]);
+            }
+            /*if ($request->filled('discount_from') && ! $request->filled('discount_to')) {
+                $vehicles = $vehicles->where('vehicles.discount', '=', $request->discount_from);
+            }
+            if ($request->filled('discount_to') && ! $request->filled('discount_from')) {
+                $vehicles = $vehicles->where('vehicles.discount', '=', $request->discount_to);
+            }*/
+
+            if ($request->filled('fuel_id') ) {
+                $vehicles = $vehicles->where('vehicles.fuel_id', $request->fuel_id);
+            }
+
+            if ($request->filled('max_loading_capacity') ) {
+                $vehicles = $vehicles->where('vehicles.max_loading_capacity', '=',$request->max_loading_capacity);
+            }
+
+            if ($request->filled('inv_locatin_id') ) {
+                $vehicles = $vehicles->where('vehicles.inv_locatin_id', '=',$request->inv_locatin_id);
+            }
+
+
+            if ($request->filled('stock_or_keyword')) {
+                $keywords = explode(' ', $request->stock_or_keyword);
+                
+                $vehicles = $vehicles->where(function($query) use ($keywords) {
+                    foreach ($keywords as $keyword) {
+                        $query->orWhere('vehicles.stock_id', 'like', '%' . $keyword . '%')
+                              ->orWhere('vehicles.search_keyword', 'like', '%' . $keyword . '%');
+                    }
+                });
+            }
+
+            
             /*=== Most Affordable === price desc*/
-            if ($request->afford) {
+            /*if ($request->afford) {
                 $vehicles = $vehicles->where('price', '>', 0)->orderBy('price', 'asc');
             }
             if ($request->highgrade) {
                 $vehicles = $vehicles->where('price', '>', 0)->orderBy('price', 'desc');
-            }
+            }*/
 
 
             $vehicles = $vehicles->orderBy('r_status', 'asc');
+           
             if ($request->adv_search == 'sale_module_search') {
                 $vehicles = $vehicles->paginate(10)->appends([
                     'adv_search' => $request->adv_search,
@@ -694,7 +770,7 @@ class FrontController extends Controller
                 print_r(session()->all());
                 die;*/
             if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                return view('front.search', compact('location', 'brands', 'vehicles', 'brand', 'sub_brand_id', 'countries'));
+                return view('front.search', compact('location', 'brands', 'vehicles', 'countries'));
             } else {
                 return redirect()->route('front.countrySelect');
             }
@@ -715,7 +791,14 @@ class FrontController extends Controller
                 ->get();
 
             return view('front.brand', compact('brand', 'sub_prefix', 'countries'));
-        } elseif ($request->adv_search) {
+        } else{
+            $location =  request()->session()->get('location');
+            $countryName =  request()->session()->get('countryName');
+            if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
+                return view('front.search', compact('location','countries'));
+            } else {
+                return redirect()->route('front.countrySelect');
+            }
         }
     }
 
