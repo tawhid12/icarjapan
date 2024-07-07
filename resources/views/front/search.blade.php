@@ -397,7 +397,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               <div class="col-sm-3 mb-3 d-flex">
                 <select name="mileage_from" class="form-select form-select-md">
                   <option value="">Mileage:</option>
-                  @php for ($i = 10001; $i <= 100001; $i +=10000) { @endphp <option value="{{$i}}">{{$i}} km</option>
+                  @php for ($i = 10001; $i <= 100001; $i +=10000) { @endphp <option value="{{$i}}" @if(request()->get('mileage_from') == $i) selected @endif>{{$i}} km</option>
                     @php
                     }
                     @endphp
@@ -408,8 +408,8 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
                 <span>~</span>
                 <select name="mileage_to" class="form-select form-select-md">
-                  <option value="0">Milege:</option>
-                  @php for ($i = 10000; $i <= 100000; $i +=10000) { @endphp <option value="{{$i}}">{{$i}} km</option>
+                  <option value="">Milege:</option>
+                  @php for ($i = 10000; $i <= 100000; $i +=10000) { @endphp <option value="{{$i}}" @if(request()->get('mileage_to') == $i) selected @endif>{{$i}} km</option>
                     @php
                     }
                     @endphp
@@ -439,7 +439,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
 
                 <span>~</span>
                 <select name="discount_to" class="form-select form-select-md">
-                  <option value="0">Discount:</option>
+                  <option value="">Discount:</option>
                   @php for ($i = 9; $i < 100; $i +=10) { @endphp <option value="{{$i}}" @if(request()->get('discount_to') == $i) selected @endif>{{$i}}%</option>
                     @php
                     }

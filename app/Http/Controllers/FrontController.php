@@ -653,12 +653,12 @@ class FrontController extends Controller
             if ($request->filled('mileage_from') && $request->filled('mileage_to')) {
                 $vehicles = $vehicles->whereBetween('vehicles.mileage', [$request->mileage_from, $request->mileage_to]);
             }
-            /*if ($request->filled('mileage_from') && ! $request->filled('mileage_to')) {
+            if ($request->filled('mileage_from') && ! $request->filled('mileage_to')) {
                 $vehicles = $vehicles->where('vehicles.mileage', '=', $request->mileage_from);
             }
             if ($request->filled('mileage_to') && ! $request->filled('mileage_from')) {
                 $vehicles = $vehicles->where('vehicles.mileage', '=', $request->mileage_to);
-            }*/
+            }
 
             if ($request->filled('transmission_id') ) {
                 $vehicles = $vehicles->where('vehicles.transmission_id', $request->transmission_id);
@@ -667,12 +667,12 @@ class FrontController extends Controller
             if ($request->filled('discount_from') && $request->filled('discount_to')) {
                 $vehicles = $vehicles->whereBetween('vehicles.discount', [$request->discount_from, $request->discount_to]);
             }
-            /*if ($request->filled('discount_from') && ! $request->filled('discount_to')) {
+            if ($request->filled('discount_from') && ! $request->filled('discount_to')) {
                 $vehicles = $vehicles->where('vehicles.discount', '=', $request->discount_from);
             }
             if ($request->filled('discount_to') && ! $request->filled('discount_from')) {
                 $vehicles = $vehicles->where('vehicles.discount', '=', $request->discount_to);
-            }*/
+            }
 
             if ($request->filled('fuel_id') ) {
                 $vehicles = $vehicles->where('vehicles.fuel_id', $request->fuel_id);
@@ -684,6 +684,62 @@ class FrontController extends Controller
 
             if ($request->filled('inv_locatin_id') ) {
                 $vehicles = $vehicles->where('vehicles.inv_locatin_id', '=',$request->inv_locatin_id);
+            }
+
+            if ($request->filled('air_bag') ) {
+                $vehicles = $vehicles->where('vehicles.air_bag', '=',1);
+            }
+
+            if ($request->filled('anti_lock_brake_system') ) {
+                $vehicles = $vehicles->where('vehicles.anti_lock_brake_system', '=',1);
+            }
+
+            if ($request->filled('air_con') ) {
+                $vehicles = $vehicles->where('vehicles.air_con', '=',1);
+            }
+
+            if ($request->filled('alloy_wheels') ) {
+                $vehicles = $vehicles->where('vehicles.alloy_wheels', '=',1);
+            }
+
+            if ($request->filled('back_tire') ) {
+                $vehicles = $vehicles->where('vehicles.back_tire', '=',1);
+            }
+
+            if ($request->filled('fog_lights') ) {
+                $vehicles = $vehicles->where('vehicles.fog_lights', '=',1);
+            }
+
+            if ($request->filled('grill_guard') ) {
+                $vehicles = $vehicles->where('vehicles.grill_guard', '=',1);
+            }
+
+            if ($request->filled('leather_seat') ) {
+                $vehicles = $vehicles->where('vehicles.leather_seat', '=',1);
+            }
+
+            if ($request->filled('navigation') ) {
+                $vehicles = $vehicles->where('vehicles.navigation', '=',1);
+            }
+
+            if ($request->filled('power_steering') ) {
+                $vehicles = $vehicles->where('vehicles.power_steering', '=',1);
+            }
+
+            if ($request->filled('power_windows') ) {
+                $vehicles = $vehicles->where('vehicles.power_windows', '=',1);
+            }
+
+            if ($request->filled('rear_spoiler') ) {
+                $vehicles = $vehicles->where('vehicles.rear_spoiler', '=',1);
+            }
+
+            if ($request->filled('sun_roof') ) {
+                $vehicles = $vehicles->where('vehicles.sun_roof', '=',1);
+            }
+
+            if ($request->filled('tv') ) {
+                $vehicles = $vehicles->where('vehicles.tv', '=',1);
             }
 
 
