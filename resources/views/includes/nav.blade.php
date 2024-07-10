@@ -109,7 +109,7 @@ $body_types = \App\Models\Settings\BodyType::get();
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://auc.tmtcarz.com/">Auction</a>
+            <a class="nav-link" href="https://auc.icarjapan.com/">Auction</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url('/customer-review')}}">Reviews</a>
