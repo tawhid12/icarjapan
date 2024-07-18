@@ -60,7 +60,7 @@
 
                                     <a class="btn btn-sm btn-info" href="{{route(currentUser().'.pGallery.show',encryptor('encrypt',$v->id))}}">Photo</a>
                                     @endif
-                                    @if(currentUser() != 'salesexecutive')
+                                    @if(currentUser() != 'salesexecutive' && $v->r_status == null && $v->sold_status==0)
                                     <a href="javascript:void()" onclick="$('#form{{$v->id}}').submit()">
                                         <i class="bi bi-trash"></i>
                                     </a>

@@ -51,7 +51,23 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 <script>
-    
+    function addCustomAnchor(file, response) {
+                // Adjust the href attribute to dynamically set the route based on each file's data
+                var makeCoverRoute = "{{ route('gallery.cover', ':id') }}";
+                if(response.success)
+                makeCoverRoute = makeCoverRoute.replace(':id', response.success);
+                else{
+                    makeCoverRoute = makeCoverRoute.replace(':id', response.id);
+                }
+                var customAnchor = document.createElement('a');
+                customAnchor.href = makeCoverRoute;
+                customAnchor.innerHTML = "Make Cover";
+                customAnchor.className = "dz-remove"; // Add a class for styling
+
+                // Append the custom anchor to the preview element
+                file.previewElement.appendChild(customAnchor);
+            }
+
 var myDropZone = new Dropzone("#image-upload", {
 	    maxFiles: 55, 
         maxFilesize: 256,
@@ -62,6 +78,8 @@ var myDropZone = new Dropzone("#image-upload", {
             // Get images
             var myDropzone = this;
 
+            // Function to add custom anchor to each file preview
+            
             $.ajax({
                 url: "{{route(currentUser().'.pGallery.index')}}",
                 type: 'GET',
@@ -74,6 +92,7 @@ var myDropZone = new Dropzone("#image-upload", {
                         myDropzone.options.addedfile.call(myDropzone, file);
                         myDropzone.options.thumbnail.call(myDropzone, file, value.path);
                         myDropzone.emit("complete", file);
+                        addCustomAnchor(file, { success: value.id }); // Call function to add anchor
                     });
                 }
             });
@@ -115,6 +134,8 @@ var myDropZone = new Dropzone("#image-upload", {
             var olddatadzname = file.previewElement.querySelector("[data-dz-name]");   
             file.previewElement.querySelector("img").alt = response.success;
             olddatadzname.innerHTML = response.success;
+            console.log(response)
+            addCustomAnchor(file,{ success: response.id }); // Call function to add anchor
         },
         error: function(file, response)
         {

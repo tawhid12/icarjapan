@@ -320,6 +320,7 @@ class FrontController extends Controller
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
                 //->whereNull('r_status')
+                ->whereNull('vehicles.deleted_at')
                 ->where('new_arivals.country_id', $countryName->id)
                 ->orWhereNull('new_arivals.country_id')->orderBy('vehicles.id', 'desc')->take(10)->get();
             //->inRandomOrder()->take(10);
@@ -333,6 +334,7 @@ class FrontController extends Controller
                 ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('r_status')
                 ->where('countries_vehicles.country_id', $countryName->id)
                 ->where('price', '<=', $country_price_range->afford_range)->orderBy('vehicles.id', 'desc')->take(10)->get();
@@ -344,6 +346,7 @@ class FrontController extends Controller
                 ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('r_status')
                 ->where('countries_vehicles.country_id', $countryName->id)
                 ->where('price', '>=', $country_price_range->high_grade_range)->orderBy('vehicles.id', 'desc')->take(10)->get();
@@ -356,6 +359,7 @@ class FrontController extends Controller
                 ->join('most_views', 'vehicles.id', 'most_views.vehicle_id')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('vehicles.r_status')
                 ->where('most_views.country_id', $countryName->id)->orderBy('vehicles.id', 'desc')->take(10)->get();
             //->inRandomOrder()->take(10)
@@ -392,6 +396,7 @@ class FrontController extends Controller
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
                 ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('r_status')
                 ->where('countries_vehicles.country_id', $country->id)
                 ->orderBy('vehicles.id', 'desc')->get();
@@ -444,6 +449,7 @@ class FrontController extends Controller
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
                 ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
                 ->where('vehicles.brand_id', $brand->id)->where('vehicles.sub_brand_id', $sub_brand_id->id)
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('r_status')
                 ->inRandomOrder()->paginate(10);
 
@@ -471,7 +477,7 @@ class FrontController extends Controller
             $brand = Brand::where('slug_name', $brand->slug_name)->firstOrFail();
             $sub_brand_id = SubBrand::where('slug_name', $subBrand->slug_name)->firstOrFail();
 
-            $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->get();
+            $v_images = DB::table('vehicle_images')->where('vehicle_id', $v->id)->orderBy('is_cover_img','desc')->get();
             $cover_img = DB::table('vehicle_images')->where('vehicle_id', $v->id)->where('is_cover_img', 1)->first();
             $countries = Country::all();
             $recomended = DB::table('vehicles')
@@ -479,6 +485,7 @@ class FrontController extends Controller
                 ->join('countries_vehicles', 'vehicles.id', 'countries_vehicles.vehicle_id')
                 ->join('brands', 'vehicles.brand_id', 'brands.id')
                 ->join('sub_brands', 'vehicles.sub_brand_id', 'sub_brands.id')
+                ->whereNull('vehicles.deleted_at')
                 //->whereNull('r_status')
                 ->orWhere('countries_vehicles.country_id', $countryName->id)
                 ->where('brands.id', $v->brand_id)
@@ -503,14 +510,18 @@ class FrontController extends Controller
         $search_data = DB::table('vehicles')
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
-            ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name')
+            ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
+            ->join('body_types', 'vehicles.body_type_id', 'body_types.id')
+            ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name','body_types.name as body_type_name')
+            ->whereNull('vehicles.deleted_at')
             ->where(function($query) use ($request) {
                 $query->where('vehicles.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
                       ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
-                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%');
+                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%');
                 
                 // Handling search_keyword field
                 $keywords = explode(',', $request->sdata);
@@ -528,6 +539,7 @@ class FrontController extends Controller
             $search_keywords[] = $sd->b_name;
             $search_keywords[] = $sd->sb_name;
             $search_keywords[] = $sd->chassis_no;
+            $search_keywords[] = $sd->body_type_name;
 
             // Handling search_keyword field which is comma-separated
             $keywords = explode(',', $sd->search_keyword);
@@ -548,15 +560,17 @@ class FrontController extends Controller
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
+            ->join('body_types', 'vehicles.body_type_id', 'body_types.id')
             ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
+            ->whereNull('vehicles.deleted_at')
             ->where(function($query) use ($request) {
                 $query->where('vehicles.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.fullName', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.stock_id', 'like', '%' . $request->sdata . '%')
                       ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
-                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%');
-                
+                      ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%');
                 // Handling search_keyword field
                 $keywords = explode(',', $request->sdata);
                 foreach ($keywords as $keyword) {
@@ -564,6 +578,9 @@ class FrontController extends Controller
                 }
             })
             ->inRandomOrder()->paginate(10);
+            // Append query parameters to pagination links
+            $vehicles->appends($request->query());
+
         if ($request->sales_search == 'search') {
             $brands = Brand::all();
             $vehicle_models = VehicleModel::all();
@@ -592,8 +609,6 @@ class FrontController extends Controller
     public function front_adv_search_by_data(Request $request)
     {
         //dd($request);
-        /* print_r($request->toArray());
-        echo 'ok';die;*/
         $countries = Country::all();
         if ($request) {
             $brands = Brand::withCount('vehicles')->get();
@@ -634,10 +649,16 @@ class FrontController extends Controller
                 $vehicles = $vehicles->whereBetween('vehicles.price', [$request->from_price, $request->to_price]);
             }
             if ($request->filled('from_price') && ! $request->filled('to_price')) {
-                $vehicles = $vehicles->where('vehicles.price', '=', $request->from_price);
+                if ($request->type)
+                $vehicles = $vehicles->where('vehicles.price', '<', $request->from_price);
+                else
+                $vehicles = $vehicles->where('vehicles.price', '>=', $request->from_price);
             }
             if ($request->filled('to_price') && ! $request->filled('from_price')) {
-                $vehicles = $vehicles->where('vehicles.price', '=', $request->to_price);
+                if ($request->type)
+                $vehicles = $vehicles->where('vehicles.price', '>', $request->to_price);
+                else
+                $vehicles = $vehicles->where('vehicles.price', '<=', $request->to_price);
             }
 
             if ($request->filled('e_size_from') && $request->filled('e_size_to')) {
@@ -764,7 +785,7 @@ class FrontController extends Controller
             }*/
 
 
-            $vehicles = $vehicles->orderBy('r_status', 'asc');
+            $vehicles = $vehicles->whereNull('vehicles.deleted_at')->orderBy('r_status', 'asc');
            
             if ($request->adv_search == 'sale_module_search') {
                 $vehicles = $vehicles->paginate(10)->appends([

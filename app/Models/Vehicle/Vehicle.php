@@ -12,10 +12,11 @@ use App\Models\Settings\Country;
 use App\Models\Settings\Port;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vehicle extends Model
 {
-    use HasFactory;
+    use SoftDeletes, HasFactory;
     public function vehicle_model(){
         return $this->belongsTo(VehicleModel::class,'v_model_id','id');
     }

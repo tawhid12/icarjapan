@@ -58,7 +58,7 @@ class VehicleController extends Controller
             }
             return back()->with('error', 'No results Found');
         }
-        $vehicles = Vehicle::latest()->paginate(20);
+        $vehicles = Vehicle::latest()->whereNull('deleted_at')->paginate(20);
         return view('vehicle.vehicle.index', compact('vehicles'));
     }
 
@@ -626,8 +626,12 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         try {
-            /*$vehicle = Vehicle::find(encryptor('decrypt', $id));
-            $vehicle_images = DB::table('vehicle_images')->where('vehicle_id', $id)->get();
+            $vehicle = Vehicle::find(encryptor('decrypt', $id));
+            if ($vehicle) {
+                $vehicle->delete(); // This will perform a soft delete
+                return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
+            }
+            /*$vehicle_images = DB::table('vehicle_images')->where('vehicle_id', $id)->get();
             foreach ($vehicle_images as $v) {
                 if (File::exists(public_path($v->image))) {
                     File::delete(public_path($v->image));
@@ -638,9 +642,9 @@ class VehicleController extends Controller
                 DB::table('new_arivals')->where('vehicle_id', $id)->delete();
                 DB::table('countries_vehicles')->where('vehicle_id', $id)->delete();
                 return redirect()->route(currentUser() . '.vehicle.index')->with(Toastr::success('Data Updated!', 'Success', ["positionClass" => "toast-top-right"]));
-            } else {*/
+            } */else {
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
-            //}
+            }
         } catch (Exception $e) {
             //dd($e);
             return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
@@ -742,7 +746,7 @@ class VehicleController extends Controller
 
         return 'Watermark added successfully.';
     }
-
+    
     /*
     $files = DB::table('vehicle_images')->pluck('image'); // Retrieve all file names from the database
         $directory = public_path('uploads/vehicle_images');

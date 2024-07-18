@@ -247,7 +247,12 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
                 <select name="brand" class="form-select form-select-md" id="brand_id">
                   <option value="">Make:</option>
                   @forelse($brands as $b)
-                  <option value="{{$b->id}}" @if($b->id == request('brand')) selected @endif >{{$b->name}}</option>
+                    @if(request()->has('brand'))
+                    <option value="{{$b->id}}" @if($b->id == request('brand')) selected @endif >{{$b->name}}</option>
+                    @endif
+                    @if(isset($brand))
+                    <option value="{{$b->id}}" @if($b->id == $brand->id) selected @endif >{{$b->name}}</option>
+                    @endif
                   @empty
                   @endforelse
                 </select>
@@ -347,20 +352,19 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               <div class="col-sm-3 mb-3 d-flex">
                 <select name="from_price" class="form-select form-select-md">
                   <option value="">Price Range:</option>
-                  <option value="501">USD 501</option>
+                  <option value="500" @if(request()->get('from_price') == 500) selected @endif>USD 500</option>
                   @php
-                  for ($i = 1001; $i <= 30001; $i +=1000) { @endphp <option value="{{$i}}" @if(request()->get('from_price') == $i) selected @endif>USD {{$i}}</option>
+                  for ($i = 1000; $i <= 30000; $i +=1000) { @endphp <option value="{{$i}}" @if(request()->get('from_price') == $i) selected @endif>USD {{$i}}</option>
                     @php
                     }
                     @endphp
                 </select>
-
                 <span>~</span>
                 <select name="to_price" class="form-select form-select-md">
                   <option value="">Price Range:</option>
-                  <option value="500">USD 500</option>
+                  <option value="501"  @if(request()->get('to_price') == 501) selected @endif>USD 501</option>
                   @php
-                  for ($i = 1000; $i <= 30000; $i +=1000) { @endphp <option value="{{$i}}" @if(request()->get('to_price') == $i) selected @endif>USD {{$i}}</option>
+                  for ($i = 1001; $i <= 30001; $i +=1000) { @endphp <option value="{{$i}}" @if(request()->get('to_price') == $i) selected @endif>USD {{$i}}</option>
                     @php
                     }
                     @endphp

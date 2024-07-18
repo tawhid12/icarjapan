@@ -354,7 +354,11 @@
             }
         });
         var brand_id = $('#brand_id option:selected').val();
+        @if(isset($sub_brand_id))
+        var sub_brand = "{{$sub_brand_id->id}}";
+        @else
         var sub_brand = "{{request()->get('sub_brand')}}";
+        @endif
         if (brand_id) {
             $.ajax({
                 url: "{{route('subBrandbyId')}}",

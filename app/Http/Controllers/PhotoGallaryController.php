@@ -36,7 +36,15 @@ class PhotoGallaryController extends Controller
                 $file_path = public_path('uploads/vehicle_images/') . $file;
                 $obj['size'] = filesize($file_path);
                 $obj['path'] = url('public/uploads/vehicle_images/' . $file);
+                // Retrieve the ID from the $images array based on image name
+                $imageKey = array_search($file, array_column($images, 'image'));
+                if ($imageKey !== false) {
+                    $obj['id'] = $images[$imageKey]['id']; // Assuming 'id' is the column name in your database
+                }
+                
                 $data[] = $obj;
+
+                
             }
         }
         //dd($data);
@@ -87,7 +95,7 @@ class PhotoGallaryController extends Controller
         $imageUpload->vehicle_id = $request->vehicle_id;
         $imageUpload->image = $file_name;
         $imageUpload->save();
-        return response()->json(['success' => $file_name]);
+        return response()->json(['success' => $file_name,'id' => $imageUpload->id]);
     }
 
 
