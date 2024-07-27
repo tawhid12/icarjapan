@@ -562,6 +562,7 @@ class FrontController extends Controller
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
             ->join('body_types', 'vehicles.body_type_id', 'body_types.id')
+            ->join('countries', 'vehicles.inv_locatin_id', 'countries.id')
             ->select('vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
             ->whereNull('vehicles.deleted_at')
             ->where(function($query) use ($request) {
@@ -571,7 +572,8 @@ class FrontController extends Controller
                       ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
-                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%');
+                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('countries.name', 'like', '%' . $request->sdata . '%');
                 // Handling search_keyword field
                 $keywords = explode(',', $request->sdata);
                 foreach ($keywords as $keyword) {
