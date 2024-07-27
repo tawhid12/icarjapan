@@ -512,7 +512,8 @@ class FrontController extends Controller
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
             ->join('body_types', 'vehicles.body_type_id', 'body_types.id')
-            ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name','body_types.name as body_type_name')
+            ->join('countries', 'vehicles.inv_locatin_id', 'countries.id')
+            ->select('vehicles.search_keyword','vehicles.name as v_name', 'vehicles.fullName as v_full_name', 'vehicles.stock_id', 'vehicles.chassis_no', 'brands.name as b_name', 'sub_brands.name as sb_name','body_types.name as body_type_name','countries.name as cname')
             ->whereNull('vehicles.deleted_at')
             ->where(function($query) use ($request) {
                 $query->where('vehicles.name', 'like', '%' . $request->sdata . '%')
@@ -521,8 +522,8 @@ class FrontController extends Controller
                       ->orWhere('brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('sub_brands.name', 'like', '%' . $request->sdata . '%')
                       ->orWhere('vehicles.chassis_no', 'like', '%' . $request->sdata . '%')
-                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%');
-                
+                      ->orWhere('body_types.name', 'like', '%' . $request->sdata . '%')
+                      ->orWhere('countries.name', 'like', '%' . $request->sdata . '%');
                 // Handling search_keyword field
                 $keywords = explode(',', $request->sdata);
                 foreach ($keywords as $keyword) {
@@ -540,7 +541,7 @@ class FrontController extends Controller
             $search_keywords[] = $sd->sb_name;
             $search_keywords[] = $sd->chassis_no;
             $search_keywords[] = $sd->body_type_name;
-
+            $search_keywords[] = $sd->cname;
             // Handling search_keyword field which is comma-separated
             $keywords = explode(',', $sd->search_keyword);
             $search_keywords = array_merge($search_keywords, $keywords);
@@ -838,6 +839,7 @@ class FrontController extends Controller
                     'mileage' => $request->mileage,
                     'ext_color_id' => $request->ext_color_id,
                     'max_loading_capacity' => $request->max_loading_capacity,
+                    'type' => $request->type,
                     'inv_locatin_id' => $request->inv_locatin_id,
                 ]);
             //countryIp();

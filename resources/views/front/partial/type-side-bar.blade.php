@@ -7,7 +7,7 @@
       @forelse($body_types as $bt)
       @if($bt->vehicles_count > 0)
       <p class="card-text">
-        <a href="" style="text-decoration:none;color:#000;"><i class="bi bi-car-front-fill"></i>{{$bt->name}} ({{$bt->vehicles_count}})</a>
+        <a href="vehicle/advance/search/data?body_type={{$bt->id}}" style="text-decoration:none;color:#000;"><i class="bi bi-car-front-fill"></i>{{$bt->name}} ({{$bt->vehicles_count}})</a>
       </p>
       @endif
       @empty

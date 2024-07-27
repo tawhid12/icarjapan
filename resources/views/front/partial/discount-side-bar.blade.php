@@ -14,14 +14,14 @@
                 @php
                 //}
                 @endphp
-                <p class="card-text"><i class="bi bi-funnel"></i>90%~ Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>80%~89% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>70%~79% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>60%~69% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>50%~59% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>40%~49% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>30%~39% Off</p>
-                <p class="card-text"><i class="bi bi-funnel"></i>1%~29% Off</p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=90&type=<" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>90%~ Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=80&discount_to=89" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>80%~89% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=70&discount_to=79" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>70%~79% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=60&discount_to=69" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>60%~69% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=50&discount_to=59" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>50%~59% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=40&discount_to=49" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>40%~49% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=30&discount_to=39" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>30%~39% Off</a></p>
+                <p class="card-text"><a href="vehicle/advance/search/data?discount_from=1&discount_to=29" style="text-decoration: none;color:#000;"><i class="bi bi-funnel"></i>1%~29% Off</a></p>
             </div>
           </div>
         </div>

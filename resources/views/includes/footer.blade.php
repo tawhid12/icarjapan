@@ -93,13 +93,12 @@
                   </div>
                   <div class="my-3">
                       <ul>
-
-                          <li class="nav-item"><a class="nav-link" href="#">Under USD 500 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="#">Under USD 1000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="#">Under USD 2000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="#">Under USD 3000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="#">Under USD 4000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="#">Over USD 5000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=500&type=<">Under USD 500 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=1000&type=<">Under USD 1000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=2000&type=<">Under USD 2000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=3000&type=<">Under USD 3000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=4000&type=<">Under USD 4000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=5000&type=>">Over USD 5000 </a></li>
 
                       </ul>
                   </div>
@@ -108,16 +107,16 @@
                   </div>
                   <div class="my-3">
                       <ul>
-                        <li class="nav-item"><a class="nav-link" href="">90%~ Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">80%~89% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">70%~79% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">60%~69% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">50%~59% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">60%~69% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">50%~59% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">40%~49% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">30%~39% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">1%~29% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=90&type=<">90%~ Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=80&discount_to=89">80%~89% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=70&discount_to=79">70%~79% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=40&discount_to=49">40%~49% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=30&discount_to=39">30%~39% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=1&discount_to=29">1%~29% Off</a></li>
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -127,7 +126,7 @@
                       <ul>
                           @forelse($inv_loc as $inv)
                           <li class="nav-item">
-                              <a class="nav-link" href="#">{{$inv->country->name}} </a>
+                              <a class="nav-link" href="{{url('/vehicle/advance/search/data')}}?inv_locatin_id={{$inv->id}}">{{$inv->country->name}} </a>
                           </li>
                           @empty
                           @endforelse
@@ -142,7 +141,7 @@
                       <ul>
                           @forelse($body_types as $bt)
                           <li class="nav-item">
-                              <a class="nav-link" href="#">{{$bt->name}}</a>
+                              <a class="nav-link" href="vehicle/advance/search/data?body_type={{$bt->id}}">{{$bt->name}}</a>
                           </li>
                           @empty
                           @endforelse
@@ -155,7 +154,7 @@
                       <ul>
                           @forelse($drive_types as $dt)
                           <li class="nav-item">
-                              <a class="nav-link" href="#">{{$dt->name}}</a>
+                              <a class="nav-link" href="vehicle/advance/search/data?drive_id={{$dt->id}}">{{$dt->name}}</a>
                           </li>
                           @empty
                           @endforelse

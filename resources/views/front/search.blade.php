@@ -434,7 +434,7 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
               <div class="col-sm-3 mb-3 d-flex">
                 <select name="discount_from" class="form-select form-select-md">
                   <option value="">Discount:</option>
-                  <option value="1">1%</option>
+                  <option value="1"  @if(request()->get('discount_from') == 1) selected @endif>1%</option>
                   @php for ($i = 10; $i <= 90; $i +=10) { @endphp <option value="{{$i}}" @if(request()->get('discount_from') == $i) selected @endif>{{$i}}%</option>
                     @php
                     }

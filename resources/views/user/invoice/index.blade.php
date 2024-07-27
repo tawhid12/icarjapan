@@ -26,7 +26,7 @@
                                 <th>BL Detl</th>
                                 <th>Consignee</th>
                                 {{--<th>{{__('Status')}}</th>--}}
-                                {{-- <th class="white-space-nowrap" rowspan="2">{{__('ACTION')}}</th> --}}
+                                <th class="white-space-nowrap" rowspan="2">{{__('ACTION')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +73,11 @@
                                     <a title="payment" href="{{route(currentUser().'.payment.create')}}?id={{$inv->id}}"><i class="bi bi-box-arrow-in-right"></i></a>
                                     <a href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}"><i class="bi bi-pencil-square"></i></a>
                                     <a href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$inv->id))}}"><i class="bi bi-eye"></i></a>
+                                    @endif
+                                    @if(currentUser() == 'user' && $inv->client_id == currentUserId())
+                                    <form action="{{ route(currentUser().'.download-pdf',encryptor('encrypt',$inv->reserve_id)) }}" method="get">
+                                        <button type="submit">Download PDF</button>
+                                    </form>   
                                     @endif
                                     <!-- <a href="javascript:void()" onclick="$('#form{{$inv->id}}').submit()">
                                                 <i class="bi bi-trash"></i>
