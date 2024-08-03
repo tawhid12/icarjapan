@@ -283,8 +283,13 @@ function countryIp(){
                 ];
                 if (isset($location['timezone']) && strlen($location['timezone']) === 2 && array_key_exists($location['timezone'], $countryCodeToTimeZone)) {
                     $location['timezone'] = $countryCodeToTimeZone[$location['timezone']];
-                } else {
-                    $location['timezone'] = 'UTC';
+                } elseif(in_array($location['timezone'], timezone_identifiers_list())){
+                    $location['timezone'] = $location['timezone'];
+                }else {
+                    unset($_SESSION['countryName']);
+                    unset($_SESSION['location']);
+                    //return redirect()->route('front.countrySelect');
+                    echo "<script> window.location.href= 'https://icarjapan.com/country-select ' </script>";
                 }
 
 
