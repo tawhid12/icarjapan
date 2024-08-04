@@ -95,7 +95,7 @@ Route::get('/country-select-post', [front::class, 'countrySelectpost'])->name('c
 
 //Route::group(['middleware' => 'country.selection'], function () {
 // Your protected routes
-Route::get('/', [front::class, 'index'])->name('front');
+Route::get('/', [front::class, 'index'])->name('front')->middleware('countryIp');
 
 Route::resource('mostview', mostView::class);
 Route::get('/used-cars-search/{brand}', [front::class, 'brand'])->name('brand');
