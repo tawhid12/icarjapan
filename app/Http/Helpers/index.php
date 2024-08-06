@@ -311,7 +311,7 @@ function countryIp(){
                 $requestedUrl = session()->get('requestedUrl');
                 //if ($requestedUrl) {
                 if (isset($location['geoplugin_currencyCode']) && isset($location['geoplugin_currencyConverter']) && isset($countryName->id)) {
-                    echo "<script> window.location.href= ' $requestedUrl ' </script>";
+                echo "<script> window.location.href= ' $requestedUrl 3z' </script>";
                     // If a requested URL is found in the session, redirect to it
                     //return Redirect::to($requestedUrl);
                 }else{
