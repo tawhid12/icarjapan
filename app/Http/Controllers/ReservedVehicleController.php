@@ -774,4 +774,7 @@ class ReservedVehicleController extends Controller
             return redirect()->back()->with(Toastr::success('Shipment Type Updated', 'error', ["positionClass" => "toast-top-right"]));
         }
     }
+    public function reserve_merge(){
+        
+    }
 }

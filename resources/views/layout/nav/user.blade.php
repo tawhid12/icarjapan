@@ -73,6 +73,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item"><a href="{{route(currentUser().'.reservevehicle.index')}}" class='nav-link'>{{__('Reserved Vehicle')}}</a></li>
+                                    <li class="nav-item"><a href="{{route(currentUser().'.reservevehicle.index')}}" class='nav-link'>{{__('Reserved Vehicle')}}</a></li>
                                     <li class="nav-item"><a href="{{route(currentUser().'.purvehicle.index')}}" class='nav-link'>{{__('Purchase Vehicle')}}</a></li>
                                     <!-- <li class="nav-item"><a href="{{route(currentUser().'.aucvehicle.index')}}" class='nav-link'>{{__('Auction Vehicle')}}</a></li> -->
                                 </ul>
