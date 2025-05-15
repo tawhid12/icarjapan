@@ -202,9 +202,10 @@
                             <tr>
                                 <th>Consignee name</th>
                                 <td>{{$consignee?->c_name}}</td>
-                                @if(currentUser() != 'accountant')
+                                @if(currentUser() == 'salesexecutive')
                                 <th>Shipment Type</th>
                                 <td>
+                                    @php //dd(currentUser().'reserve_calculate'); @endphp
                                     <form action="{{route(currentUser().'.reserve_calculate')}}" method="post" class="d-flex">
                                         @csrf
                                     <input type="hidden" name="vehicle_id" value="{{$v->id}}">
@@ -215,7 +216,7 @@
                                         <option value="1" @if($v->shipment_type == 1) selected @endif>Roro</option>
                                         <option value="2" @if($v->shipment_type == 2) selected @endif>Container</option>
                                     </select>
-                                    @if(currentUser() != 'accountant' && !$v->shipment_type)
+                                    @if(currentUser() == 'accountant' && !$v->shipment_type)
                                     <button type="submit" class="ms-2 btn btn-sm btn-primary">Submit</button>
                                     @endif
                                     </form>
@@ -252,9 +253,9 @@
                         </table>
                         <div class="d-flex justify-content-between my-2">
                             <h6>Documents</h6>
-                            @if(currentUser() != 'accountant')
+                            @if(currentUser() == 'salesexecutive')
                             @php $shipment_data = \DB::table('shipment_details')->where('reserve_id',$v->reserveId)->first(); //print_r($shipment_data);@endphp
-                            @if(!$shipment_data)
+                            @if(!$shipment_data && currentUser() == 'salesexecutive')
                             <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.show',encryptor('encrypt',$v->reserveId))}}">Add Shipment Details</a>
                             @else
                             <a class="btn btn-sm btn-primary" href="{{route(currentUser().'.shipment.edit',encryptor('encrypt',$shipment_data->id))}}">Update Shipment Details</a>

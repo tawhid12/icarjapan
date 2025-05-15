@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 // function countryIp(){
 //     if ($_SERVER['REMOTE_ADDR']) {
 //         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']));
@@ -283,12 +284,18 @@ function countryIp(){
                 ];
                 if (isset($location['timezone']) && strlen($location['timezone']) === 2 && array_key_exists($location['timezone'], $countryCodeToTimeZone)) {
                     $location['timezone'] = $countryCodeToTimeZone[$location['timezone']];
-                } else {
-                    $location['timezone'] = 'UTC';
+                } elseif(isset($location['timezone']) && strlen($location['timezone']) > 2 && in_array($location['timezone'], timezone_identifiers_list())){
+                    $location['timezone'] = $location['timezone'];
+                }else {
+                    unset($_SESSION['countryName']);
+                    unset($_SESSION['location']);
+                    //return redirect()->route('front.countrySelect');
+                    echo "<script> window.location.href= 'https://icarjapan.com/country-select ' </script>";
                 }
 
 
                 $current_locale_data = Carbon::now($location['timezone']);
+
                 $countryName = Country::where('code', $location['countryCode'])->first();
                 $currency_data = array(
                     'geoplugin_status' => 200,
@@ -297,23 +304,25 @@ function countryIp(){
                     'expairy' => 1,
                 );
                 $location = array_merge($location, $currency_data);
-                session()->put('countryName', $countryName);
-                session()->put('location', $location);
-                session()->put('current_locale_data', $current_locale_data);
+                request()->session()->put('countryName', $countryName);
+                request()->session()->put('location', $location);
+                request()->session()->put('current_locale_data', $current_locale_data);
     
                 // Check if there is a requested URL in the session
-                session()->put('requestedUrl', url()->current());
+                //request()->session()->put('requestedUrl', url()->current());
                 $requestedUrl = session()->get('requestedUrl');
-                if ($requestedUrl) {
-                    echo "<script> window.location.href= ' $requestedUrl ' </script>";
+                //if ($requestedUrl) {
+                    
+                    //echo "<script> window.location.href= ' $requestedUrl ' </script>";
                     // If a requested URL is found in the session, redirect to it
                     //return Redirect::to($requestedUrl);
-                }else{
+                   
+                //}else{
                     unset($_SESSION['countryName']);
                     unset($_SESSION['location']);
                     //return redirect()->route('front.countrySelect');
                     echo "<script> window.location.href= 'https://icarjapan.com/country-select ' </script>";
-                }
+                //}
             }else{
                 unset($_SESSION['countryName']);
                 unset($_SESSION['location']);

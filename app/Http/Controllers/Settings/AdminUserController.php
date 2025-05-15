@@ -16,6 +16,9 @@ use App\Models\Settings\Country;
 use Carbon\Carbon;
 use Exception;
 use Toastr;
+use App\Models\FavouriteVehicle;
+use App\Models\ReservedVehicle;
+use App\Models\Vehicle\Vehicle;
 
 class AdminUserController extends Controller
 {
@@ -254,5 +257,37 @@ class AdminUserController extends Controller
                 'image' => $user->image ? $user->image : 'no-image.png'
             ]
         );
+    }
+    
+    public function reserve_cancel(Request $request)
+    {
+        $id = $request->id;
+        $reserveId =  $request->reserveId;
+        if ($id && $reserveId) {
+            $notify = FavouriteVehicle::where(['vehicle_id' => $id, 'user_id' => currentUserId(), 'status' => 2])->get();
+            foreach ($notify as $n) {
+                /*echo '<pre>';
+                print_r($n);die;*/
+                dispatch(new SendReserveCancelEmailJOb($n));
+                /*== Favourite Status Update ==*/
+                $notify  =  FavouriteVehicle::find($n->id);
+                $notify->status = 1;
+                $notify->save();
+            }
+            /*== Reserve Vehicle Cancel ==*/
+            $resv = ReservedVehicle::findOrFail($reserveId);
+            dd($resv);
+            $resv->status = 3;
+            $resv->save();
+
+            /*== Notify Vehicle Cancel Update ==*/
+            $vehicle = Vehicle::findOrFail($id);
+            $vehicle->r_status = null;
+            $vehicle->save();
+
+            return redirect()->back()->with(Toastr::success('Reserve Cancel!', 'Success', ["positionClass" => "toast-top-right"]));
+        } else {
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 }

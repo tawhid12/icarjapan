@@ -1,4 +1,15 @@
-@php $inv_loc = \App\Models\Settings\InventoryLocation::all(); @endphp
+@php 
+$inv_loc = \App\Models\Settings\InventoryLocation::all(); 
+$inv_loc = DB::table('countries')
+    ->whereIn('id', function ($query) {
+        $query->select('inv_locatin_id')
+            ->distinct()
+            ->from('vehicles')
+            ->whereNotNull('inv_locatin_id');
+    })
+    ->get();
+    //print_r($inv_loc);die;
+@endphp
 <!-- left row 4 -->
 <div class="left-row left-row-4 mb-3">
     <div class="card shadow radious-10">
@@ -10,7 +21,7 @@
                 @forelse($inv_loc as $inv)
             <p class="card-text">
                 <a href="{{url('/vehicle/advance/search/data')}}?inv_locatin_id={{$inv->id}}" style="text-decoration:none;color:#000;">
-                    {{optional($inv->country)->name}}
+                    {{$inv->name}}
                 </a>
             </p>
             @empty

@@ -1,15 +1,9 @@
-<?php 
-$to = 'tawhid102@gmail.com'; // Replace with the recipient's email address
-$subject = 'Test Email'; // Replace with the email subject
-$message = 'This is a test email.'; // Replace with the email content
-$headers = 'From: tawhid8995@gmail.com'; // Replace with the sender's email address
-
-// Send the email
-$mailSent = mail($to, $subject, $message, $headers);
-
-if ($mailSent) {
-    echo 'Email sent successfully.';
-} else {
-    echo 'Failed to send email.';
-}
+<?php
+$message="hi";
+$to="tawhid8995@gmail.com";
+$sub='Subject of the Mail';
+//$headers = "MIME-Version: 1.0" . "\r\n";
+//$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+//$headers .= "From:tawhid8995@gmail.com\r\n";
+mail($to,$sub,$message); 
 ?>

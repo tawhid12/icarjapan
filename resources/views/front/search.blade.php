@@ -207,11 +207,11 @@ $inv_loc = \App\Models\Settings\InventoryLocation::all();
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
         <!-- left row 1 -->
-        <div class="left-row-1 mb-3">
+        {{--<div class="left-row-1 mb-3">
           <a href="#">
             <img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />
           </a>
-        </div>
+        </div>--}}
         @include('front.partial.brand-side-bar')
         @include('front.partial.inventory-side-bar')
         @include('front.partial.price-side-bar')

@@ -322,6 +322,7 @@ Route::group(['middleware' => isSuperadmin::class], function () {
         Route::resource('review', review::class, ['as' => 'superadmin']);
         /*==== Page =====*/
         Route::resource('page', page::class, ['as' => 'superadmin']);
+        Route::get('/reserve-cancel', [reservevehicle::class, 'reserve_cancel'])->name('salesexecutive.reservecancel');
     });
 });
 Route::group(['middleware' => isAdmin::class], function () {

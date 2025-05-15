@@ -78,11 +78,11 @@
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-2 container-xl-2 left-col">
         <!-- left row 1 -->
-        <div class="left-row-1 mb-3">
+        {{--<div class="left-row-1 mb-3">
           <a href="#">
             <img class="img-fluid" src="{{asset('front/img/left-top-catagory-banner.png')}}" alt="" />
           </a>
-        </div>
+        </div>--}}
         @include('front.partial.brand-side-bar')
         @include('front.partial.inventory-side-bar')
         @include('front.partial.price-side-bar')
@@ -176,7 +176,7 @@
           @if($sub_brand->vehicles_count > 0)
           <div class="col-md-2">
             <!-- <h4>{{substr($sub_brand->name, 0, 1)}}</h4> -->
-            <a class="brand-heading" href="{{route('subBrand',['brand' => strtolower($brand->name),'subBrand' => strtolower($sub_brand->name)])}}">
+            <a class="brand-heading" href="{{route('subBrand',['brand' => strtolower($brand->slug_name),'subBrand' => strtolower($sub_brand->slug_name)])}}">
               @if(empty($sub_brand->image))
               <img src="{{asset('uploads/default/comingsoon_l.png')}}" class="card-img-top" alt="{{$sub_brand->name}}">
               @else

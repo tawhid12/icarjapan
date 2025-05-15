@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\ConsigneeDetail;
 use App\Models\ReservedVehicle;
 use App\Models\Settings\Country;
@@ -84,7 +85,9 @@ class ClientModuleController extends Controller
             return view('cm_module.cm_module', compact('users', 'countries'));
         } else {
             $users = User::paginate(10);
-            return view('settings.adminusers.index', compact('users'));
+            $roles = Role::all();
+            $countries = Country::all();
+            return view('settings.adminusers.index', compact('users','roles','countries'));
         }
     }
     public function client_individual($id)

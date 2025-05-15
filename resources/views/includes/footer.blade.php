@@ -1,5 +1,13 @@
   @php
   $inv_loc = \App\Models\Settings\InventoryLocation::all();
+  $inv_loc = DB::table('countries')
+    ->whereIn('id', function ($query) {
+        $query->select('inv_locatin_id')
+            ->distinct()
+            ->from('vehicles')
+            ->whereNotNull('inv_locatin_id');
+    })
+    ->get();
   $drive_types = \App\Models\Settings\DriveType::all();
   $com_acc_info = \App\Models\CompanyAccountInfo::first();
   $body_types = \App\Models\Settings\BodyType::get();
@@ -93,12 +101,12 @@
                   </div>
                   <div class="my-3">
                       <ul>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=500&type=<">Under USD 500 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=1000&type=<">Under USD 1000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=2000&type=<">Under USD 2000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=3000&type=<">Under USD 3000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=4000&type=<">Under USD 4000 </a></li>
-                          <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?from_price=5000&type=>">Over USD 5000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=500&type=<">Under USD 500 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=1000&type=<">Under USD 1000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=2000&type=<">Under USD 2000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=3000&type=<">Under USD 3000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=4000&type=<">Under USD 4000 </a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?from_price=5000&type=>">Over USD 5000 </a></li>
 
                       </ul>
                   </div>
@@ -107,16 +115,16 @@
                   </div>
                   <div class="my-3">
                       <ul>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=90&type=<">90%~ Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=80&discount_to=89">80%~89% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=70&discount_to=79">70%~79% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=40&discount_to=49">40%~49% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=30&discount_to=39">30%~39% Off</a></li>
-                        <li class="nav-item"><a class="nav-link" href="vehicle/advance/search/data?discount_from=1&discount_to=29">1%~29% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=90&type=<">90%~ Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=80&discount_to=89">80%~89% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=70&discount_to=79">70%~79% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=60&discount_to=69">60%~69% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=50&discount_to=59">50%~59% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=40&discount_to=49">40%~49% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=30&discount_to=39">30%~39% Off</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?discount_from=1&discount_to=29">1%~29% Off</a></li>
                       </ul>
                   </div>
                   <div class="footer-title">
@@ -126,7 +134,7 @@
                       <ul>
                           @forelse($inv_loc as $inv)
                           <li class="nav-item">
-                              <a class="nav-link" href="{{url('/vehicle/advance/search/data')}}?inv_locatin_id={{$inv->id}}">{{$inv->country->name}} </a>
+                              <a class="nav-link" href="{{url('/vehicle/advance/search/data')}}?inv_locatin_id={{$inv->id}}">{{$inv->name}} </a>
                           </li>
                           @empty
                           @endforelse
@@ -141,7 +149,7 @@
                       <ul>
                           @forelse($body_types as $bt)
                           <li class="nav-item">
-                              <a class="nav-link" href="vehicle/advance/search/data?body_type={{$bt->id}}">{{$bt->name}}</a>
+                              <a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?body_type={{$bt->id}}">{{$bt->name}}</a>
                           </li>
                           @empty
                           @endforelse
@@ -154,7 +162,7 @@
                       <ul>
                           @forelse($drive_types as $dt)
                           <li class="nav-item">
-                              <a class="nav-link" href="vehicle/advance/search/data?drive_id={{$dt->id}}">{{$dt->name}}</a>
+                              <a class="nav-link" href="{{url('/')}}/vehicle/advance/search/data?drive_id={{$dt->id}}">{{$dt->name}}({{$dt->vehicles_count}})</a>
                           </li>
                           @empty
                           @endforelse
@@ -423,6 +431,8 @@
   @stack('scripts')
   <!--end::Page Scripts-->
   {!! Toastr::message() !!}
+  <!-- Zoho Sales Code -->
+  <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siqe44be0ba2df73366d15364db81724dc291c7a6eddfbeaae93bd1b04f43d54994" defer></script>
   </body>
 
   </html>

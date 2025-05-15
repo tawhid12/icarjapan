@@ -3,7 +3,7 @@
     <!-- table bordered -->
     <div class="table-responsive">
         <table class="table table-bordered mb-0 text-center">
-        @if(currentUser() != 'accountant')
+        @if(currentUser() == 'salesexecutive')
             <a class="btn btn-sm btn-primary float-end" href="{{route(currentUser().'.consigdetl.create',['id' => $client_data->id])}}"><i class="bi bi-pencil-square"></i></a>
         @endif    
             <thead>
@@ -62,7 +62,7 @@
                     <td>{{$c->per_con==1?"Yes":"No"}}</td>
                     <td>@if($c->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                     <td class="white-space-nowrap">
-                        @if(currentUser() != 'accountant')
+                        @if(currentUser() == 'superadmin')
                         <a href="{{route(currentUser().'.consigdetl.edit',encryptor('encrypt',$c->id))}}">
                             <i class="bi bi-pencil-square"></i>
                         </a>

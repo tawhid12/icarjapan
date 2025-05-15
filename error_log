@@ -1,0 +1,118 @@
+[13-Sep-2023 18:57:12 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 400560128 bytes) in /home5/icarjapan/public_html/app/Http/Controllers/InvoiceController.php on line 94
+[13-Sep-2023 18:58:15 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 400560128 bytes) in /home5/icarjapan/public_html/app/Http/Controllers/InvoiceController.php on line 94
+[15-Nov-2023 03:12:46 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 2
+[15-Nov-2023 03:12:46 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 2
+[15-Nov-2023 03:12:46 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 2
+[15-Nov-2023 03:16:59 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 03:16:59 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 03:16:59 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 03:17:04 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 03:17:04 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 03:17:04 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 04:13:48 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 04:13:48 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 8
+[15-Nov-2023 04:13:48 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 8
+[22-Nov-2023 14:57:27 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 2
+[22-Nov-2023 14:57:27 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 2
+[22-Nov-2023 14:57:27 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 2
+[23-Nov-2023 10:17:41 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 2
+[23-Nov-2023 10:17:41 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 2
+[23-Nov-2023 10:17:41 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 2
+[10-Dec-2023 08:34:25 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../symfony/translation/Resources/functions.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:34:25 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../symfony/translation/Resources/functions.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:34:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home5/icarjapan/public_html/vendor/composer/../symfony/translation/Resources/functions.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home5/icarjapan/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home5/icarjapan/public_html/vendor/composer/autoload_real.php(38): composerRequire396ed1de576fffb2986c7bd11acafaef('a1105708a18b769...', '/home5/icarjapa...')
+#1 /home5/icarjapan/public_html/vendor/autoload.php(25): ComposerAutoloaderInit396ed1de576fffb2986c7bd11acafaef::getLoader()
+#2 /home5/icarjapan/public_html/index.php(34): require('/home5/icarjapa...')
+#3 {main}
+  thrown in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:34:37 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../barryvdh/laravel-debugbar/src/helpers.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:34:37 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../barryvdh/laravel-debugbar/src/helpers.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:34:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home5/icarjapan/public_html/vendor/composer/../barryvdh/laravel-debugbar/src/helpers.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home5/icarjapan/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home5/icarjapan/public_html/vendor/composer/autoload_real.php(38): composerRequire396ed1de576fffb2986c7bd11acafaef('4a1f389d6ce373b...', '/home5/icarjapa...')
+#1 /home5/icarjapan/public_html/vendor/autoload.php(25): ComposerAutoloaderInit396ed1de576fffb2986c7bd11acafaef::getLoader()
+#2 /home5/icarjapan/public_html/index.php(34): require('/home5/icarjapa...')
+#3 {main}
+  thrown in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:08 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:09 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home5/icarjapan/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home5/icarjapan/public_html/vendor/composer/autoload_real.php(38): composerRequire396ed1de576fffb2986c7bd11acafaef('2cffec82183ee1c...', '/home5/icarjapa...')
+#1 /home5/icarjapan/public_html/vendor/autoload.php(25): ComposerAutoloaderInit396ed1de576fffb2986c7bd11acafaef::getLoader()
+#2 /home5/icarjapan/public_html/index.php(34): require('/home5/icarjapa...')
+#3 {main}
+  thrown in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:32 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:32 UTC] PHP Warning:  require(/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php): Failed to open stream: No such file or directory in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[10-Dec-2023 08:36:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home5/icarjapan/public_html/vendor/composer/../ezyang/htmlpurifier/library/HTMLPurifier.composer.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home5/icarjapan/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home5/icarjapan/public_html/vendor/composer/autoload_real.php(38): composerRequire396ed1de576fffb2986c7bd11acafaef('2cffec82183ee1c...', '/home5/icarjapa...')
+#1 /home5/icarjapan/public_html/vendor/autoload.php(25): ComposerAutoloaderInit396ed1de576fffb2986c7bd11acafaef::getLoader()
+#2 /home5/icarjapan/public_html/index.php(34): require('/home5/icarjapa...')
+#3 {main}
+  thrown in /home5/icarjapan/public_html/vendor/composer/autoload_real.php on line 55
+[14-Dec-2023 10:14:40 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ipchek.php on line 2
+[14-Dec-2023 10:14:40 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ipchek.php on line 2
+[14-Dec-2023 10:14:40 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ipchek.php on line 2
+[16-Dec-2023 06:19:19 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/ip.php on line 2
+[16-Dec-2023 06:19:19 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/ip.php on line 2
+[16-Dec-2023 06:19:19 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/ip.php): Failed to open stream: operation failed in /home5/icarjapan/public_html/ip.php on line 2
+[16-Dec-2023 10:47:46 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 10:47:46 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 10:47:46 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/json.gp): Failed to open stream: operation failed in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:48 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:48 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:48 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/json.gp): Failed to open stream: operation failed in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:58 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:58 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:39:58 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/json.gp): Failed to open stream: operation failed in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:40:21 UTC] PHP Warning:  file_get_contents(http://www.geoplugin.com/json.gp): Failed to open stream: HTTP request failed! HTTP/1.0 404 Not Found
+ in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:41:05 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:41:05 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:41:05 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/json.gp): Failed to open stream: operation failed in /home5/icarjapan/public_html/location.php on line 4
+[16-Dec-2023 12:42:14 UTC] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small in /home5/icarjapan/public_html/location.php on line 5
+[16-Dec-2023 12:42:14 UTC] PHP Warning:  file_get_contents(): Failed to enable crypto in /home5/icarjapan/public_html/location.php on line 5
+[16-Dec-2023 12:42:14 UTC] PHP Warning:  file_get_contents(https://www.geoplugin.com/json.gp): Failed to open stream: operation failed in /home5/icarjapan/public_html/location.php on line 5
+[28-Dec-2023 06:10:27 UTC] PHP Fatal error:  Uncaught TypeError: unserialize(): Argument #1 ($data) must be of type string, stdClass given in /home5/icarjapan/public_html/ip.php:3
+Stack trace:
+#0 /home5/icarjapan/public_html/ip.php(3): unserialize(Object(stdClass))
+#1 {main}
+  thrown in /home5/icarjapan/public_html/ip.php on line 3
+[28-Dec-2023 06:49:36 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home5/icarjapan/public_html/ip.php:16
+Stack trace:
+#0 {main}
+  thrown in /home5/icarjapan/public_html/ip.php on line 16
+[28-Jul-2024 20:52:01 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'i360.so' (tried: /opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so (libhs_runtime.so.5: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so.so (/opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[28-Jul-2024 20:52:01 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'i360.so' (tried: /opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so (libhs_runtime.so.5: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so.so (/opt/cpanel/ea-php81/root/usr/lib64/php/modules/i360.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[03-Aug-2024 16:12:36 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 73646080 bytes) in /home/icarjapan/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 32
+[03-Aug-2024 16:18:20 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 73646080 bytes) in /home/icarjapan/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 32
+[03-Aug-2024 10:30:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:35 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:36 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:38 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:41 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[03-Aug-2024 10:30:49 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/icarjapan/public_html/vendor/composer/platform_check.php on line 28
+[04-Aug-2024 07:20:58 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Log as Log because the name is already in use in /home/icarjapan/public_html/app/Http/Helpers/index.php on line 8
+[04-Aug-2024 07:21:08 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Log as Log because the name is already in use in /home/icarjapan/public_html/app/Http/Helpers/index.php on line 8
+[27-Aug-2024 14:01:42 Asia/Dhaka] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home/icarjapan/public_html/app/Http/Controllers/ReservedVehicleController.php on line 17
+[25-Mar-2025 12:23:33 Asia/Dhaka] PHP Fatal error:  Cannot use App\Models\Settings\Country as Country because the name is already in use in /home/icarjapan/public_html/app/Http/Controllers/ClientModuleController.php on line 11

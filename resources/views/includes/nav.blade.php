@@ -1,6 +1,14 @@
 @php 
 $brands = \App\Models\Vehicle\Brand::withCount('vehicles')->get();
 $body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
+$inv_loc = DB::table('countries')
+    ->whereIn('id', function ($query) {
+        $query->select('inv_locatin_id')
+            ->distinct()
+            ->from('vehicles')
+            ->whereNotNull('inv_locatin_id');
+    })
+    ->get();
 @endphp
 <!-- nav start -->
   <nav class="navbar navbar-expand-lg bg-brand sticky-top top-nav">
@@ -11,7 +19,7 @@ $body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="top-menu navbar-nav">
           <li class="nav-item"><a class="nav-link" href="{{url('/')}}">Home</a></li>
-          <li class="nav-item dropdown position-static"">
+          <li class="nav-item dropdown position-static">
             <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">Car Search</a>
             <!-- Dropdown menu -->
             <div class="dropdown-menu w-75 mt-0" aria-labelledby="navbarDropdown" style="border-top-left-radius: 0;border-top-right-radius: 0;">
@@ -26,23 +34,23 @@ $body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
                     </div>
                     <p class="text-white mb-2"><strong>Search By Price</strong></p>
                     <div class="list-group list-group-flush">
-                      <a href="vehicle/advance/search/data?from_price=500&type=<" class="list-group-item list-group-item-action">Under USD 500</a>
-                      <a href="vehicle/advance/search/data?from_price=1000&type=<" class="list-group-item list-group-item-action">Under USD 1000</a>
-                      <a href="vehicle/advance/search/data?from_price=2000&type=<" class="list-group-item list-group-item-action">Under USD 2000</a>
-                      <a href="vehicle/advance/search/data?from_price=3000&type=<" class="list-group-item list-group-item-action">Under USD 3000</a>
-                      <a href="vehicle/advance/search/data?from_price=4000&type=<" class="list-group-item list-group-item-action">Under USD 4000</a>
-                      <a href="vehicle/advance/search/data?from_price=5000&type=>" class="list-group-item list-group-item-action">Over USD 5000</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=500&type=<" class="list-group-item list-group-item-action">Under USD 500</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=1000&type=<" class="list-group-item list-group-item-action">Under USD 1000</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=2000&type=<" class="list-group-item list-group-item-action">Under USD 2000</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=3000&type=<" class="list-group-item list-group-item-action">Under USD 3000</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=4000&type=<" class="list-group-item list-group-item-action">Under USD 4000</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?from_price=5000&type=>" class="list-group-item list-group-item-action">Over USD 5000</a>
                     </div>
                     <p class="text-white mb-2"><strong>Search By Discount</strong></p>
                     <div class="list-group list-group-flush">
-                      <a href="vehicle/advance/search/data?discount_from=90&type=<" class="list-group-item list-group-item-action">90%~ Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=80&discount_to=89" class="list-group-item list-group-item-action">80%~89% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=70&discount_to=79" class="list-group-item list-group-item-action">70%~79% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=60&discount_to=69" class="list-group-item list-group-item-action">60%~69% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=50&discount_to=59" class="list-group-item list-group-item-action">50%~59% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=40&discount_to=49" class="list-group-item list-group-item-action">40%~49% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=30&discount_to=39" class="list-group-item list-group-item-action">30%~39% Off</a>
-                      <a href="vehicle/advance/search/data?discount_from=1&discount_to=29" class="list-group-item list-group-item-action">1%~29% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=90&type=<" class="list-group-item list-group-item-action">90%~ Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=80&discount_to=89" class="list-group-item list-group-item-action">80%~89% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=70&discount_to=79" class="list-group-item list-group-item-action">70%~79% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=60&discount_to=69" class="list-group-item list-group-item-action">60%~69% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=50&discount_to=59" class="list-group-item list-group-item-action">50%~59% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=40&discount_to=49" class="list-group-item list-group-item-action">40%~49% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=30&discount_to=39" class="list-group-item list-group-item-action">30%~39% Off</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?discount_from=1&discount_to=29" class="list-group-item list-group-item-action">1%~29% Off</a>
                     </div>
                   </div>
                   <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
@@ -61,7 +69,7 @@ $body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
                     <div class="list-group list-group-flush">
                       @forelse($body_types as $bt)
                       @if($bt->vehicles_count > 0)
-                      <a href="vehicle/advance/search/data?body_type={{$bt->id}}" class="list-group-item list-group-item-action">{{$bt->name}} ({{$bt->vehicles_count}})</a>
+                      <a href="{{url('/')}}/vehicle/advance/search/data?body_type={{$bt->id}}" class="list-group-item list-group-item-action">{{$bt->name}} ({{$bt->vehicles_count}})</a>
                       @endif
                       @empty
                       @endforelse
@@ -70,9 +78,9 @@ $body_types = \App\Models\Settings\BodyType::withCount('vehicles')->get();
                   <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <p class="text-white mb-2"><strong>Inventory Location</strong></p>
                     <div class="list-group list-group-flush">
-                      @forelse($body_types as $bt)
+                      @forelse($inv_loc as $inv)
                     
-                          <a class="list-group-item list-group-item-action" href="vehicle/advance/search/data?body_type={{$bt->id}}">{{$bt->name}}</a>
+                          <a class="list-group-item list-group-item-action" href="{{url('/vehicle/advance/search/data')}}?inv_locatin_id={{$inv->id}}">{{$inv->name}}</a>
                       
                       @empty
                       @endforelse

@@ -8,6 +8,51 @@
 
 <!-- Bordered table start -->
 <section class="section">
+    <form action="{{route(currentUser().'.reservevehicle.index')}}" role="search" class="my-3">
+            @csrf
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label for="search">Search By CM ID</label>
+                        <input type="text" name="cmId" class="form-control" value="{{request()->get('cmId')}}">
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label for="search">Search By Stock ID|ChasisNo</label>
+                        <input type="text" placeholder="Search Vehicle.." name="search" class="form-control" value="{{request()->get('search')}}">
+                    </div>
+                </div>
+                <div class="col-md-2 col-12">
+                    <div class="form-group">
+                        <label for="country_id">Select Executives</label>
+                        <select name="executive_id" class="js-example-basic-single form-control">
+                            <option></option>
+                            @forelse($sales_executives as $ex)
+                            <option value="{{$ex->id}}" @if(request()->get('executive_id') == $ex->id) selected @endif>{{$ex->name}}</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 col-12">
+                    <div class="form-group">
+                        <label for="country_id">Select Status</label>
+                        <select name="status" class="js-example-basic-single form-control">
+                            <option></option>
+                            <option value="1" @if(request()->get('status') == 1) selected @endif>Pending</option>
+                            <option value="2" @if(request()->get('status') == 2) selected @endif>Confirmed</option>
+                            <option value="3" @if(request()->get('status') == 3) selected @endif>Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 d-flex justify-content-end my-1">
+                    <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-search"></i></button>
+                    <a href="{{route(currentUser().'.reservevehicle.index')}}" class="reset-btn btn btn-sm btn-warning"><i class="bi bi-arrow-repeat"></i></a>
+                </div>
+            </div>
+        </form>
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
@@ -16,20 +61,23 @@
                     <table class="table table-sm table-bordered mb-0">
                         <thead>
                             <tr>
-                                <th>{{__('#SL')}}</th>
-                                <th>{{__('CM ID')}}</th>
-                                <th>{{__('CM Name')}}</th>
-                                <th>{{__('CM Country')}}</th>
-                                <th>{{__('Vehicle Info')}}</th>
-                                <th>{{__('Purchased Units')}}</th>
-                                <th>{{__('Status')}}</th>
-                                <th>{{__('Executive')}}</th>
-                                <th>{{__('Assign From')}}</th>
-                                <th>{{__('Reserved On')}}</th>
-                                <th>{{__('Confirmed On')}}</th>
-                                <th>{{__('Confirm Note')}}</th>
-                                <th>{{__('Sold Status')}}</th>
-                                {{-- <th class="white-space-nowrap">{{__('Action')}}</th> --}}
+                                <th rowspan="2">{{__('#SL')}}</th>
+                                <th colspan="3">{{__('CM')}}</th>
+                                <th rowspan="2">{{__('Vehicle Info')}}</th>
+                                <th rowspan="2">{{__('Purchased Units')}}</th>
+                                <th rowspan="2">{{__('Status')}}</th>
+                                <th rowspan="2">{{__('Executive')}}</th>
+                                <th rowspan="2">{{__('Assign From')}}</th>
+                                <th rowspan="2">{{__('Reserved On')}}</th>
+                                <th rowspan="2">{{__('Confirmed On')}}</th>
+                                <th rowspan="2">{{__('Confirm Note')}}</th>
+                                <th rowspan="2">{{__('Sold Status')}}</th>
+                                <th rowspan="2" class="white-space-nowrap">{{__('Action')}}</th>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Country/Port</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,25 +85,35 @@
                             <tr>
                                 <td>{{ ++$loop->index }}</td>
                                 <td>{{$rsv->user_id}}</td>
-                                <td>{{optional($rsv->res_user)->name}}</td>
-                                <td>{{optional($rsv->res_user)?->country->name}}</td>
+                                <td>{{optional($rsv->res_user)?->name}}</td>
                                 <td>
-                                    <p class="m-0">{{optional($rsv->vehicle)->fullName}}</p>
+                                    {{optional($rsv->res_user)?->country?->name}}/
+                                    {{optional($rsv->res_user)?->port?->name}}
+                                </td>
+                                <td>
+                                    <p class="m-0">{{optional($rsv->vehicle)?->fullName}}</p>
                                     <p class="m-0">StockId : {{optional($rsv->vehicle)->stock_id}}</p>
                                     <p class="m-0">Price : USD {{optional($rsv->vehicle)->price}}</p>
                                 </td>
                                 <td>
+                                    @if($rsv->status == 1)
                                     <a class="btn btn-sm btn-primary" target="_blank" href="{{route(currentUser().'.vehicle.show',encryptor('encrypt',$rsv->vehicle_id))}}" title="Vehicle Details">
                                         <strong>Detail</strong>
                                     </a>
+                                    @else
+                                    <a class="btn btn-sm btn-primary" target="_blank" href="{{route(currentUser().'.client_individual',encryptor('encrypt',$rsv->user_id))}}" title="Vehicle Details">
+                                        <strong>Detail</strong>
+                                    </a>
+                                    @endif
                                 </td>
-                                <td>@if($rsv->status == 1) {{__('Reserved') }} @elseif($rsv->status == 2) {{__('Confirmed') }} @else {{__('Cancelled') }}@endif</td>
+                                {{--<td>@if($rsv->status == 1) {{__('Reserved') }} @elseif($rsv->status == 2) {{__('Confirmed') }} @else {{__('Cancelled') }}@endif</td>--}}
+                                <td>@if($rsv->status == 1) {{__('Pending') }} @elseif($rsv->status == 2) {{__('Confirmed') }} @else {{__('Cancelled') }}@endif</td>
                                 <td>
                                     @if($rsv->assign_user_id)
                                     {{-- <p class="m-0"><strong>Executive Id: </strong>{{$rsv->assign_user_id}}</p> --}}
-                                    <p class="m-0">{{optional($rsv->assign_user)->name}}</p>
+                                    <p class="m-0">{{optional($rsv->assign_user)?->name}}</p>
                                     @else
-                                    <p>Pending</p>
+                                    <p>-{{--Pending--}}</p>
                                     @endif
                                 </td>
                                 <td></td>
@@ -72,33 +130,56 @@
                                     $inv = \DB::table('invoices')->where('reserve_id',$rsv->id)->first();
                                     $vehicle = \DB::table('vehicles')->where('id',$rsv->vehicle_id)->first();  
                                 @endphp
+                                @php 
+                                    $payment = \App\Models\Payment::where('reserve_id', $rsv->id)->sum('amount'); 
+                                    $v = \App\Models\Vehicle\Vehicle::find($rsv->vehicle_id); 
+                                @endphp
                                 <td> 
                                     @if($vehicle->sold_status)
                                         <button class="btn btn-sm btn-success">Sold</button>
-                                    @else
-                                    -
+                                        @else
+                                        @if($payment > 0)
+                                         <button class="btn btn-sm btn-warning">DR</button>
+                                        @endif
                                     @endif
+                                   
                                 </td>
                                 <td class="d-flex">
                                 {{--$rsv->assign_user == null &&--}}
-                                    {{-- @if($rsv->status == 1 && currentUser() == 'superadmin')
-                                    <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Assign</a>
+                                    @if($rsv->status == 1 && $rsv->assign_user_id !=null  && currentUser() == 'superadmin')
+                                    <!--<a class="btn btn-sm btn-warning" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Assign</a>-->
+                                        <form method="post" action="{{route(currentUser().'.reservevehicle.update',encryptor('encrypt',$rsv->id))}}">
+                                            @csrf
+                                            @method('patch')
+                                            <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$rsv->id)}}">
+                                            <input type="hidden" name="status" value="2">
+                                            <button type="submit" class="btn btn-warning btn-sm mx-2">Confirm Order</button>
+                                        </form>
+                                    @endif
+                                    @if(currentUser() == 'superadmin' && $rsv->status == 1)
+                                    <a class="btn btn-sm btn-success" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Assign</a>
                                     @endif
                                     @if(currentUser() == 'salesexecutive' && $rsv->status == 1)
                                     <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Confirm</a>
                                     @endif
                                     
                                     @if( $rsv->status == 2 && $inv)
-                                        <a class="btn btn-sm btn-danger" href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}">Invoice</a>
+                                        {{--<a class="btn btn-sm btn-danger" href="{{route(currentUser().'.invoice.edit',encryptor('encrypt',$inv->id))}}">Invoice</a>--}}
                                     @endif
-                                    @if($rsv->status == 1 && currentUser() == 'superadmin')
-                                    <form id="form{{$rsv->id}}" action="{{route(currentUser().'.reservevehicle.destroy',$rsv->vehicle_id)}}" method="post">
+
+                                    {{--@if($rsv->status == 1 && currentUser() == 'superadmin')--}}
+                                    @if(currentUser() == 'superadmin' && $payment == 0 && $rsv->status !=3)
+                                    {{--$payment--}}
+                                     <form id="approve-form" action="{{route(currentUser().'.reservecancel')}}" style="display: inline;">
                                         @csrf
-                                        @method('delete')
-                                        <button type="submit" class="mx-1 btn btn-sm btn-info">Reserve Cancel</button>
+                                        <input name="id" type="hidden" value="{{$rsv->id}}">
+                                        <input name="reserveId" type="hidden" value="{{$rsv->id}}">
+                                        <a href="javascript:void(0)" data-title="{{strtoupper($v?->fullName)}}" class="approve btn btn-danger btn-sm mx-2" data-toggle="tooltip" title="Approve">Cancel Reserve</a>
                                     </form>
+                                    @else
+                                    {{--$payment--}}
                                     @endif
-                                    <a data-reserve-id="{{$rsv->id}}" data-vehicle-id="{{$rsv->vehicle_id}}" data-vehicle-name="{{optional($rsv->vehicle)->fullName}}" href="#" data-bs-toggle="modal" data-bs-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Add Note</strong></a> --}}
+                                    <a data-reserve-id="{{$rsv->id}}" data-vehicle-id="{{$rsv->vehicle_id}}" data-vehicle-name="{{optional($rsv->vehicle)?->fullName}}" href="#" data-bs-toggle="modal" data-bs-target="#addNoteModal" class="mx-1 btn btn-sm btn-primary text-white" title="note"><strong>Add Note</strong></a>
                                     <!-- <a class="btn btn-sm btn-warning">Payment History</a> -->
                                 </td>
                             </tr>
@@ -130,7 +211,7 @@
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="addNoteModalLabel">Add Note For <span id="vehicleName"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -176,6 +257,7 @@
 </div>
 @endsection
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script>
     $(document).on('show.bs.modal', function(event) {
         $('#note-history').empty();
@@ -202,6 +284,28 @@
                 console.log(e);
             }
         });
+    });
+    
+    /*=========== Approve ============*/
+    $('.approve').on('click', function(event) {
+        var title = $(this).data("title");
+
+        var text = `Are want to  Cancel  this Reserve of ${title}?`;
+        var icon = 'error';
+        var mode = true;
+
+        event.preventDefault();
+        swal({
+                title: text,
+                icon: icon,
+                buttons: true,
+                dangerMode: mode,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $(this).parent().submit();
+                }
+            });
     });
 </script>
 @endpush
