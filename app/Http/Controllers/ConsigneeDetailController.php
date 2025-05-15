@@ -609,7 +609,7 @@ class ConsigneeDetailController extends Controller
                 if (currentUser() != 'user')
                     return redirect()->route(currentUser() . '.client_individual', encryptor('encrypt', $request->user_id))->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
                 else
-                    return redirect()->route(currentUser() . 'consigdetl.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
+                    return redirect()->route(currentUser() . '.consigdetl.index')->with(Toastr::success('Data Saved!', 'Success', ["positionClass" => "toast-top-right"]));
             } else {
                 return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
             }

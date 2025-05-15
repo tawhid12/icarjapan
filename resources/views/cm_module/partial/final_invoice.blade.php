@@ -2,16 +2,18 @@
 @if(!empty($resrv))
 <div class="border">
     <div class="p-2">
-        <h5 class="text-center my-2 pb-2">Process Proforma Invoice</h5>
+        <h5 class="text-center my-2 pb-2">Process Invoice</h5>
         @forelse($resrv as $v)
-
-
+        @php 
+        $payment = DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount');
+        $total_cnf = DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount');
+        @endphp
         <div class="border p-2 mb-3">
             <div class="row gx-2">
                 <div class="col-md-6">
                     <div class="border p-2">
                         <div class="row gx-1">
-                            <h6 class="border-bottom">{{ ++$loop->index }}.Reserved Details</h6>
+                            <h6 class="border-bottom">{{ (($resrv->currentPage() - 1) * $resrv->perPage()) + $loop->iteration }}.Reserved Details</h6>
                             <div class="col-md-3">
                                 @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
                                 @if($cover_img)
@@ -153,7 +155,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="border p-2">
-                        <h6 class="border-bottom">Prepare Final Invoice</h6>
+                        <h6 class="border-bottom">Prepare Due Invoice # {{$v->invoice_no}}</h6>
                         <table class="table table-bordered m-0">
 
                             
@@ -283,17 +285,19 @@
                                 <input type="hidden" name="inv_amount" value="{{$v->total-\DB::table('payments')->where('reserve_id',$v->reserveId)->sum('amount')}}">
                             </tr>
                             @php $final_invoice_id = \DB::table('invoices')->where('invoice_type',4)->where('reserve_id',$v->reserveId)->first(); @endphp
-                            @if(!$final_invoice_id)
+                            {{--@if(!$final_invoice_id)
                             <tr>
                                 <td> <button class="btn btn-sm btn-success" type="submit">Submit</button></td>
                             </tr>
-                            @endif
+                            @endif--}}
 
                             </form>
                         </table>
                         <div class="d-flex justify-content-between my-2">
-                            @if(currentUser() != 'accountant')
-                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}?type=4">Send Final Invoice To Customer</a>
+                            @php $balance = $v->total- $payment; @endphp
+                            @if(currentUser() != 'accountant' && $balance < $v->total)
+                           
+                            <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}?type=4">Send @if($balance == 0) Final @elseif($balance > 0) Due @endif Invoice To Customer</a>
                             @endif
                             @if(currentUser() == 'accountant')
                                 @php 
@@ -319,6 +323,7 @@
         </div>
         @empty
         @endforelse
+        {{ $resrv->links() }}
     </div>
 </div>
 @endif

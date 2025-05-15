@@ -64,10 +64,11 @@ class ShipmentDetailController extends Controller
                 $shipment->tracking_no = $request->tracking_no;
                 $shipment->shipping_date = date('Y-m-d', strtotime($request->shipping_date));
                 $shipment->updated_by = currentUserId();
-                if ($request->has('bill_of_land_1_url')) $shipment->bill_of_land_1_url = $this->uploadImage($request->file('bill_of_land_1_url'), 'uploads/bill_of_land_1_url');
-                if ($request->has('bill_of_land_2_url')) $shipment->bill_of_land_2_url = $this->uploadImage($request->file('bill_of_land_2_url'), 'uploads/bill_of_land_2_url');
+                if ($request->has('ins_cer_url')) $shipment->ins_cer_url = $this->uploadImage($request->file('ins_cer_url'), 'uploads/ins_cer_url');
                 if ($request->has('exp_can_cer_url_1')) $shipment->exp_can_cer_url_1 = $this->uploadImage($request->file('exp_can_cer_url_1'), 'uploads/exp_can_cer_url_1');
                 if ($request->has('exp_can_cer_url_2')) $shipment->exp_can_cer_url_2 = $this->uploadImage($request->file('exp_can_cer_url_2'), 'uploads/exp_can_cer_url_2');
+                if ($request->has('bl_copy_url')) $shipment->bl_copy_url = $this->uploadImage($request->file('bl_copy_url'), 'uploads/bl_copy_url');
+                if ($request->has('final_bl_url')) $shipment->final_bl_url = $this->uploadImage($request->file('final_bl_url'), 'uploads/final_bl_url');
                 $shipment->executiveId = currentUserId();
                 $shipment->created_by = currentUserId();
                 if ($shipment->save())
@@ -150,10 +151,11 @@ class ShipmentDetailController extends Controller
             $shipment->tracking_no = $request->tracking_no;
             $shipment->shipping_date = $request->shipping_date?Carbon::createFromFormat('d/m/Y', $request->shipping_date)->format('Y-m-d'):null;
             $shipment->updated_by = currentUserId();
-            if ($request->has('bill_of_land_1_url')) $shipment->bill_of_land_1_url = $this->uploadImage($request->file('bill_of_land_1_url'), 'uploads/bill_of_land_1_url');
-            if ($request->has('bill_of_land_2_url')) $shipment->bill_of_land_2_url = $this->uploadImage($request->file('bill_of_land_2_url'), 'uploads/bill_of_land_2_url');
+            if ($request->has('ins_cer_url')) $shipment->ins_cer_url = $this->uploadImage($request->file('ins_cer_url'), 'uploads/ins_cer_url');
             if ($request->has('exp_can_cer_url_1')) $shipment->exp_can_cer_url_1 = $this->uploadImage($request->file('exp_can_cer_url_1'), 'uploads/exp_can_cer_url_1');
             if ($request->has('exp_can_cer_url_2')) $shipment->exp_can_cer_url_2 = $this->uploadImage($request->file('exp_can_cer_url_2'), 'uploads/exp_can_cer_url_2');
+            if ($request->has('bl_copy_url')) $shipment->bl_copy_url = $this->uploadImage($request->file('bl_copy_url'), 'uploads/bl_copy_url');
+            if ($request->has('final_bl_url')) $shipment->final_bl_url = $this->uploadImage($request->file('final_bl_url'), 'uploads/final_bl_url');
             $shipment->executiveId = currentUserId();
             $shipment->updated_by = currentUserId();
             if ($shipment->save()) {

@@ -16,7 +16,7 @@
                 <div class="col-md-6">
                     <div class="border p-2">
                         <div class="row gx-1">
-                            <h6 class="border-bottom">{{ ++$loop->index }}.Reserved Details</h6>
+                            <h6 class="border-bottom">{{ (($resrv->currentPage() - 1) * $resrv->perPage()) + $loop->iteration }}.Reserved Details</h6>
                             <div class="col-md-3">
                                 @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
                                 @if($cover_img)
@@ -104,10 +104,12 @@
 
 
 
-                                    @if($v->reserve_status == 1)
+                                    @if($v->reserve_status == 1 && $v->sold_status == 0)
                                     <p><i class="badge bg-warning">Reserved</i></p>
-                                    @elseif($v->reserve_status == 2)
+                                    @elseif($v->reserve_status == 2 && $v->sold_status == 0)
                                     <p><i class="badge bg-success">Confirmed</i></p>
+                                    @elseif($v->reserve_status == 2 && $v->sold_status == 1)
+                                    <p><i class="badge bg-primary">sold</i></p>
                                     @else
                                     <p><i class="badge bg-danger">Cancelled</i></p>
                                     @endif
@@ -155,7 +157,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="border p-2">
-                        <h6 class="border-bottom">Prepare Proforma Invoice</h6>
+                        <h6 class="border-bottom">Prepare Proforma Invoice # {{$v->invoice_no}}</h6>
                         <table class="table table-bordered m-0">
                                 @php
                                 if($client_data->country_id && empty(request('country_id'))){
@@ -283,8 +285,10 @@
                             </tr> -->
                             @php 
                                 $proforma_invoice = \DB::table('invoices')->where('invoice_type',1)->where('reserve_id',$v->reserveId)->first(); 
-                                if($proforma_invoice)
-                                $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count();
+                                if($proforma_invoice){
+                                    $proforma_payment_count = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->count();
+                                    $payment = \DB::table('payments')->where('invoice_id',$proforma_invoice->id)->where('reserve_id',$v->reserveId)->sum('amount');
+                                }
                                 else
                                 $proforma_payment_count = 0
                                 //echo $proforma_payment_count ;
@@ -303,15 +307,17 @@
                             </form>
                         </table>
                         <div class="d-flex justify-content-between my-2">
-                            @if(currentUser() != 'accountant' /*&& $proforma_payment_count == 0*/)
+                            @if(currentUser() != 'accountant' /*&& $proforma_payment_count == 0*/ && $payment < $v->total)
                             <a class="btn btn-sm btn-success" href="{{route(currentUser().'.invoice.show',encryptor('encrypt',$v->reserveId))}}">Send Proforma Invoice To Customer</a>
                             <form action="{{ route(currentUser().'.download-pdf',encryptor('encrypt',$v->reserveId)) }}" method="get">
                                 <button type="submit">Download PDF</button>
                             </form>                            
                             @endif
                             @if(currentUser() == 'accountant')
-                                @if($proforma_invoice->id /*&& $proforma_payment_count == 0*/)
+                                @if($proforma_invoice->id /*&& $proforma_payment_count == 0*/ && $payment < $v->total )
                                 <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.payment.show',$proforma_invoice->id)}}">Paid</a>
+                                @else
+                                <button class="btn btn-sm btn-success">Full Paid</button>
                                 @endif
                             @endif
                         </div>
@@ -321,6 +327,7 @@
         </div>
         @empty
         @endforelse
+        {{ $resrv->links() }}
     </div>
 </div>
 @endif

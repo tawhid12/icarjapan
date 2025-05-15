@@ -171,9 +171,10 @@
                         </div>
 
                         <h6 class="text-center">Update User Details Information</h6>
-                        <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.store')}}">
+                        <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.userdetl.update',encryptor('encrypt',$user->id))}}">
                             @csrf
-                            <input type="hidden" name="id" value="{{$user->userDetl->id}}">
+                            @method('PUT')
+
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -187,7 +188,7 @@
                                         <textarea id="address2" class="form-control" name="address2" rows="4">{{ old('address2',$user->userDetl->address2)}}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                {{--<div class="col-4">
                                     <div class="form-group">
                                         <label for="city">City <span class="text-danger">*</span></label>
                                         <input type="text" id="city" class="form-control" value="{{ old('city',$user->userDetl->city)}}" name="city">
@@ -204,7 +205,7 @@
                                         <label for="zip">Zip <span class="text-danger">*</span></label>
                                         <input type="text" id="zip" class="form-control" value="{{ old('zip',$user->userDetl->zip)}}" name="zip">
                                     </div>
-                                </div>
+                                </div>--}}
                                 <div class="col-12 d-flex justify-content-end mt-2">
                                     <button type="submit" class="btn btn-sm btn-primary me-1 mb-1">Save</button>
                                 </div>

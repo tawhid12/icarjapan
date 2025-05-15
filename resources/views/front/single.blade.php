@@ -316,15 +316,17 @@
 
         #contents_detail .car_display_area .img_inner_sold_disp_text {
             position: absolute;
-            bottom: 0px;
-            left: 0;
-            width: 100%;
+            width: 50%;
             color: #f03;
             text-shadow: 2px 2px 0 #fff, 0 0 4px #fff;
             font-weight: 700;
             line-height: 2;
             z-index: 3;
-            font-size: 18px;
+            /* font-size: 18px; */
+            font-size: 60PX;
+            top: 50%;
+            left: 50%;
+            transform: translate(-25%, -25%);
         }
 
         #contents_detail .car_display_area #car_MainIMG_car_display {
@@ -694,9 +696,11 @@
                                                             ->first();
                                                     @endphp
                                                     @if ($cover_img)
-                                                        <img class="img-fluid"
+                                                        <a href="{{ route('singleVehicle', ['brand' => $r->b_slug, 'subBrand' => $r->sb_slug, 'stock_id' => $r->stock_id]) }}">
+                                                            <img class="img-fluid"
                                                             src="{{ asset('uploads/vehicle_images/' . $cover_img->image) }}"
                                                             alt="" />
+                                                        </a>
                                                     @else
                                                         <img class="img-fluid"
                                                             src="{{ asset('front/img/product-img.png') }}" alt="" />
@@ -796,7 +800,7 @@
                                                 </div><!-- #car_MainIMG_car_display -->
                                                 
                                                 @if ($v->sold_status)
-                                                <p class="img_inner_sold_disp_text">Sold</p>
+                                                <p class="img_inner_sold_disp_text">SOLD</p>
                                                 @else
                                                 @if ($v->r_status)
                                                     <p class="img_inner_sold_disp_text">Reserved</p>
@@ -1151,7 +1155,7 @@
                                         <div class="row">
                                             <!-- price table -->
                                             <form class="p-0" id="my-form">
-                                                <div class="my-2 price-table bg-light">
+                                                <div class="price-table bg-light">
                                                     <table class="table table-bordered m-0">
                                                         <thead>
                                                             <tr>
@@ -1356,7 +1360,7 @@
                                         <div class="card shadow radious-10 my-3 contact-us-section">
                                             <h5 class="card-title bg-brand text-white">Contact Us</h5>
                                             @if ($v->sold_status)
-                                            <p>Sold</p>
+                                            <p class="text-center">SOLD</p>
                                             @else
                                             @if ($v->r_status)
                                                 <div class="p-2 customer-highlights text-center">

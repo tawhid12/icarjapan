@@ -835,6 +835,14 @@
       success: function(res) {
         console.log(res.data);
         $('#clientData').append(res.data);
+        
+        // Disable modal focus enforcement (Bootstrap 5 workaround)
+        $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+
+        // Initialize select2 with modal dropdown parent
+        $('.js-example-basic-single').select2({
+            dropdownParent: $('#reserveModal')
+        });
       },
       error: function(e) {
         console.log(e);

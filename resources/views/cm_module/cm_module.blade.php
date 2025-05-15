@@ -22,12 +22,12 @@
                 <form action="{{route(currentUser().'.all_client_list')}}" role="search" class="my-3">
                     @csrf
                     <div class="row my-2">
-                        <div class="col-sm-2">
+                        <div class="col-sm-1">
                             <label for="name" class="col-form-label"><strong>CM ID</strong></label>
                             <input type="text" class="form-control" name="userId" placeholder="Search By CM ID">
                         </div>
                         <div class="col-sm-2">
-                            <label for="country_id" class="col-form-label"><strong>Select Country</strong></label>
+                            <label for="country_id" class="col-form-label"><strong>Country</strong></label>
                             <select name="country_id" class="js-example-basic-single form-control">
                                 <option></option>
                                 @forelse($countries as $c)
@@ -45,11 +45,11 @@
                             </select>
                         </div>
                         <div class="col-sm-1">
-                            <label for="executiveId" class="col-form-label"><strong>Status</strong></label>
-                            <select class="js-example-basic-single form-control" id="executiveId" name="executiveId">
-                                <option></option>
-                                <option value="1" @if(request()->get('executiveId') == 1) selected @endif>Free CM</option>
-                                <option value="2" @if(request()->get('executiveId') == 2) selected @endif>Assigned CM</option>
+                            <label for="cm_status" class="col-form-label"><strong>Status</strong></label>
+                            <select class="js-example-basic-single form-control" id="cm_status" name="cm_status">
+                                 <option></option>
+                                <option value="1" @if(request()->get('cm_status') == 1) selected @endif>Free CM</option>
+                                <option value="2" @if(request()->get('cm_status') == 2) selected @endif>Assigned CM</option>
                             </select>
                         </div>
                         <div class="col-sm-1">
@@ -69,7 +69,7 @@
                                 <option value="2" @if(request()->get('star') == 2) selected @endif>Extra SP *</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label for="name" class="col-form-label"><strong>CM ID Date</strong></label>
                             <div class="input-group">
                                 <input type="text" name="created_at" class="form-control" placeholder="dd/mm/yyyy">
@@ -78,6 +78,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if(currentUser() == 'superadmin')
+                        <div class="col-sm-2">
+                            <label for="executive_id" class="col-form-label"><strong>Select Executives</strong></label>
+                            <select name="executive_id" class="js-example-basic-single form-control">
+                                <option></option>
+                                @forelse($sales_executives as $ex)
+                                <option value="{{$ex->id}}" @if(request()->get('executive_id') == $ex->id) selected @endif>{{$ex->name}}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                        @endif
                         <div class="col-sm-1">
                             <label for="perPage" class="col-form-label"><strong>Per Page</strong></label>
                             <select class="js-example-basic-single form-control" id="perPage" name="perPage">
@@ -162,7 +174,11 @@
                                         @if($cm->type == 0 && $cm->executiveId == currentUserId())
                                         -
                                         @else
-                                        <button class="btn btn-sm btn-secondary">Free</button>
+                                            @if($cm->executiveId == 0 && $cm->created_by ==0)
+                                            <button class="btn btn-sm btn-secondary">Free</button>
+                                            @else
+                                            <button class="btn btn-sm btn-danger">Inactive</button>
+                                            @endif
                                         @endif
 
                                     @endif
@@ -175,13 +191,22 @@
                                     @endif
                                 </td> -->
                                 <td>
-                                    @if ($cm->clientTransfers->isNotEmpty())
-                                    @php $prev = $cm->clientTransfers->first(); @endphp
-                                    {{$prev->prevExeutive?->name}}
+                                   @if($cm->clientTransfers->isNotEmpty())
+                                        {{--<ul style="list-style:none">--}}
+                                            @foreach ($cm->clientTransfers as $clientTransfer)
+                                                 <!-- Check if previous executive data is available -->
+                                                @if ($clientTransfer->prevExeutive)
+                                                    {{ $clientTransfer->prevExeutive->name ?? 'N/A' }}
+                                                @else
+                                                    -
+                                                @endif
+                                            @endforeach
                                     @else
+                                        -
                                     @endif
                                 </td>
                                 <td>
+                                    
                                     @if($cm->executiveId)
                                     {{$cm->executive?->name}}
                                     @else

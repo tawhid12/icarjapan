@@ -76,8 +76,11 @@ class UserDetailController extends Controller
     {
         try {
             $user = User::findOrFail(encryptor('decrypt',$id));
-            $user->name =  trim($request->firstName).' '.trim($request->lastName);
-            $user->save();
+            if($request->firstName || $request->lastName){
+                $user->name =  trim($request->firstName).' '.trim($request->lastName);
+                $user->save();
+            }
+            
 
             $userdetl=UserDetail::where('user_id',encryptor('decrypt',$id))->first();
             //print_r($userdetl->toArray());die;

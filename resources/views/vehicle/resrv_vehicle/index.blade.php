@@ -46,6 +46,16 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-2 col-12">
+                    <div class="form-group">
+                        <label for="country_id">Select DR|SOLD</label>
+                        <select name="type" class="js-example-basic-single form-control">
+                            <option></option>
+                            <option value="1" @if(request()->get('type') == 1) selected @endif>SOLD</option>
+                            <option value="2" @if(request()->get('type') == 2) selected @endif>DR</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="col-sm-12 d-flex justify-content-end my-1">
                     <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-search"></i></button>
@@ -156,7 +166,7 @@
                                             <button type="submit" class="btn btn-warning btn-sm mx-2">Confirm Order</button>
                                         </form>
                                     @endif
-                                    @if(currentUser() == 'superadmin' && $rsv->status == 1)
+                                    @if(currentUser() == 'superadmin' && $rsv->status == 1 &&  $rsv->res_user?->created_by == 0)
                                     <a class="btn btn-sm btn-success" href="{{route(currentUser().'.reservevehicle.edit',$rsv->id)}}">Assign</a>
                                     @endif
                                     @if(currentUser() == 'salesexecutive' && $rsv->status == 1)

@@ -47,7 +47,7 @@
                         <a class="nav-link" id="profoma-invoice-tab" data-bs-toggle="tab" href="#profoma_inovice" role="tab" aria-controls="profoma_inovice">Profoma Invoice</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="final-invoice-tab" data-bs-toggle="tab" href="#final_inovice" role="tab" aria-controls="final_inovice">Final Invoice</a>
+                        <a class="nav-link" id="final-invoice-tab" data-bs-toggle="tab" href="#final_inovice" role="tab" aria-controls="final_inovice">Due Invoice</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reserve-units-tab" data-bs-toggle="tab" href="#reserve_units" role="tab" aria-controls="reserve_units">Reserved Units</a>

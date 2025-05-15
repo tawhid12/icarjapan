@@ -387,7 +387,6 @@ class PaymentController extends Controller
                         $vehicle->save();
 
 
-
                         /* Insert Data Into Purchase Table */
                         $pur_vehicle = new PurchasedVehicle();
                         $pur_vehicle->vehicle_id = $inv->vehicle_id;
@@ -480,8 +479,18 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
-        //
+        try {
+        $payment = Payment::find(encryptor('decrypt', $id));
+        if($payment->delete()){
+            return redirect()->back()->with(Toastr::success('Payment Deleted Successfully!', 'Success', ["positionClass" => "toast-top-right"]));
+        }
+        return redirect()->back()->withInput()->with(Toastr::error('Paid Amount Greater Than Due Amount!', 'Fail', ["positionClass" => "toast-top-right"]));
+        
+        } catch (Exception $e) {
+            //dd($e);
+            return redirect()->back()->withInput()->with(Toastr::error('Please try again!', 'Fail', ["positionClass" => "toast-top-right"]));
+        }
     }
 }

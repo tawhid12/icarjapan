@@ -25,9 +25,12 @@
                                   <div class="col-md-2 col-12">
                                       <p class="m-0"><strong>Due Amount : {{$invoice->inv_amount-\DB::table('payments')->where('reserve_id',$invoice->reserve_id)->sum('amount')}}</strong></p>
                                   </div>
+                                    @php $adjust = \DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum'); @endphp
+                                    @if($adjust > 0)
                                   <div class="col-md-2 col-12">
-                                      <p class="m-0"><strong>Deposit Available : {{\DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum')}}</strong></p>
+                                      <p class="m-0"><strong>Deposit Available : {{$adjust}}</strong></p>
                                   </div>
+                                  @endif
 
                                   <hr>
                                   <input type="hidden" value="{{$invoice->client_id}}" name="client_id">
@@ -75,10 +78,13 @@
                                       </div>
                                   </div> -->
                               </div>
+                              @php $adjust = \DB::table('deposits')->where('client_id',$invoice->client_id) ->selectRaw('SUM(COALESCE(deposit_amt,0) + COALESCE(deduction,0)) as total_sum')->value('total_sum'); @endphp
+                              @if($adjust > 0)
                               <div class="form-check form-check-inline">
                                   <input class="form-check-input  adjust_deposit" type="checkbox" id="adjust_deposit" name="adjust_deposit" value="1">
                                   <label class="form-check-label" for="adjust_deposit">Adjust Deposit</label>
                               </div>
+                              @endif
                               <div class="row my-3">
                                   <div class="col-12 d-flex justify-content-end">
                                       <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>

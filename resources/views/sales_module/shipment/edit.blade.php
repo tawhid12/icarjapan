@@ -193,7 +193,7 @@
                                     </div>
                                 </div>
                                 <h6 class="mt-3">Documents Details</h6>
-                                <div class="col-md-4 col-12">
+                                {{--<div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="bill_of_land_1_url"><!--Bill of Lading (Copy)-->Proforma Invoice</label>
                                         <input type="file" id="bill_of_land_1_url" class="form-control" name="bill_of_land_1_url">
@@ -204,17 +204,35 @@
                                         <label for="bill_of_land_2_url"><!--Bill of Lading (Release)-->Final Invoice</label>
                                         <input type="file" id="bill_of_land_2_url" class="form-control" name="bill_of_land_2_url">
                                     </div>
+                                </div>--}}
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="ins_cer_url">Insurance Certificate</label>
+                                        <input type="file" id="ins_cer_url" class="form-control" name="ins_cer_url">
+                                    </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label for="exp_can_cer_url_1">Export Cancellation Certificate (English)</label>
+                                        <label for="exp_can_cer_url_1">Export {{--Cancellation--}} Certificate (English)</label>
                                         <input type="file" id="exp_can_cer_url_1" class="form-control" name="exp_can_cer_url_1">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label for="exp_can_cer_url_2">Export Cancellation Certificate (Japanese)</label>
+                                        <label for="exp_can_cer_url_2">Export {{--Cancellation--}} Certificate (Japanese)</label>
                                         <input type="file" id="exp_can_cer_url_2" class="form-control" name="exp_can_cer_url_2">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="bl_copy_url">B/L Copy</label>
+                                        <input type="file" id="bl_copy_url" class="form-control" name="bl_copy_url">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="final_bl_url">Final BL</label>
+                                        <input type="file" id="final_bl_url" class="form-control" name="final_bl_url">
                                     </div>
                                 </div>
                             </div>

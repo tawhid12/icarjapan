@@ -296,7 +296,25 @@ class ReservedVehicleController extends Controller
             if ($request->filled('status')) {
                 $resrv->where('reserved_vehicles.status', $request->status);
             }
-                        /* vehicle search */
+           if ($request->filled('type')) {
+                if ($request->type == 1) {
+                    // Type 1: Sold vehicles
+                    $resrv->where('vehicles.sold_status', 1);
+                } elseif ($request->type == 2) {
+                   $resrv->where('vehicles.sold_status', '!=', 1)
+                          ->whereExists(function ($query) {
+                              $query->select(DB::raw(1))
+                                    ->from('payments')
+                                    ->whereColumn('payments.reserve_id', 'reserved_vehicles.id')
+                                    ->where('payments.amount', '>', 0);
+                          });
+                }
+                // You can add more type conditions here if needed
+            }
+
+
+
+            /* vehicle search */
             if ($request->filled('search')) {
                 $search = $request->search;
             
@@ -537,6 +555,8 @@ class ReservedVehicleController extends Controller
                         $invoice->save();
                     }
                     $resv->status = 2;
+                    $inv = Invoice::where('reserve_id', $resv->id)->where('invoice_type', 1)->first();
+                    $resv->invoice_no = 'ICJ' .\Carbon\Carbon::createFromTimestamp(strtotime(date('Y-m-d')))->format('Ymd'). $inv->id;
                 }
                 $resv->discount =  $vehicle->sp_dis ? $vehicle->sp_dis : 0.00;
                 $resv->total();

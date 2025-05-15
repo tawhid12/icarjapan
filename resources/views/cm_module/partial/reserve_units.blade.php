@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                     <div class="border p-2">
                         <div class="row gx-1">
-                            <h6 class="border-bottom">{{ ++$loop->index }}.Reserved Details</h6>
+                            <h6 class="border-bottom">{{ (($reserve_vehicle->currentPage() - 1) * $reserve_vehicle->perPage()) + $loop->iteration }}.Reserved Details</h6>
                             <div class="col-md-3">
                                 @php $cover_img = \DB::table('vehicle_images')->where('vehicle_id',$v->id)->where('is_cover_img',1)->first(); @endphp
                                 @if($cover_img)
@@ -266,19 +266,18 @@
                         <table class="table table-bordered m-0">
                             <tr>
                                 <th>Ins Certificate</th>
-                                <th>Ex. Cer. (JP)</th>
                                 <th>Ex. Cer. (ENG)</th>
-                                <th>P. Invoice</th>
-                                <th>B/L</th>
-                                <th>Final In.</th>
+                                <th>Ex. Cer. (JP)</th>
+                                <!--<th>P. Invoice</th>-->
+                                <th>B/L Copy</th>
+                                <th>Final BL</th>
                             </tr>
                             <tr>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
-                                <td>@if($shipment_detail)<a href="{{asset('uploads/bill_of_land_1_url/'.$shipment_detail?->bill_of_land_1_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail?->ins_cer_url)<a href="{{asset('uploads/ins_cer_url/'.$shipment_detail?->ins_cer_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail?->exp_can_cer_url_1)<a href="{{asset('uploads/exp_can_cer_url_1/'.$shipment_detail?->exp_can_cer_url_1)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail?->exp_can_cer_url_2)<a href="{{asset('uploads/exp_can_cer_url_2/'.$shipment_detail?->exp_can_cer_url_2)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail?->bl_copy_url)<a href="{{asset('uploads/bl_copy_url/'.$shipment_detail?->bl_copy_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
+                                <td>@if($shipment_detail?->final_bl_url)<a href="{{asset('uploads/final_bl_url/'.$shipment_detail?->final_bl_url)}}"><i class="bi bi-file-earmark-pdf"></i></a>@endif</td>
                             </tr>
                         </table>
                     </div>
@@ -287,6 +286,7 @@
         </div>
         @empty
         @endforelse
+        {{ $reserve_vehicle->links() }}
     </div>
 </div>
 @endif

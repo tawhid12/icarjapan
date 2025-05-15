@@ -264,6 +264,7 @@ Route::group(['middleware' => isSuperadmin::class], function () {
 
 
         Route::resource('pGallery', pGallery::class, ['as' => 'superadmin']);
+        Route::resource('consigdetl', consigdetl::class, ['as' => 'superadmin']);
         Route::get('pGallerydelete', [pGallery::class, 'delete'])->name('superadmin.image.delete');
         /* settings */
         Route::resource('admin', admin::class, ['as' => 'superadmin']);
@@ -303,11 +304,14 @@ Route::group(['middleware' => isSuperadmin::class], function () {
         Route::resource('contactus', contactus::class, ['as' => 'superadmin']);
         Route::resource('notification', notification::class, ['as' => 'superadmin']);
         Route::resource('reservevehicle', reservevehicle::class, ['as' => 'superadmin']);
+        Route::post('/reserve/calculate', [reservevehicle::class, 'reserve_calculate'])->name('superadmin.reserve_calculate');
         Route::resource('invoice', invoice::class, ['as' => 'superadmin']);
         Route::resource('payment', payment::class, ['as' => 'superadmin']);
         Route::resource('/notes', note::class, ["as" => "superadmin"]);
         Route::get('/note/history', [note::class, 'note_by_vehicle_id'])->name('superadmin.noteHistoryByvehicleId');
 
+        /*Shipment Details */
+        Route::resource('shipment', shipment::class, ['as' => 'superadmin']);
 
         /*==Client Transfer==*/
         Route::get('/client/transfer/list', [userprofile::class, 'clientTransferList'])->name('superadmin.clientTransferList');
@@ -322,7 +326,7 @@ Route::group(['middleware' => isSuperadmin::class], function () {
         Route::resource('review', review::class, ['as' => 'superadmin']);
         /*==== Page =====*/
         Route::resource('page', page::class, ['as' => 'superadmin']);
-        Route::get('/reserve-cancel', [reservevehicle::class, 'reserve_cancel'])->name('salesexecutive.reservecancel');
+        Route::get('/reserve-cancel', [reservevehicle::class, 'reserve_cancel'])->name('superadmin.reservecancel');
     });
 });
 Route::group(['middleware' => isAdmin::class], function () {
@@ -335,6 +339,8 @@ Route::post('gallery/delete', [vehicle::class, 'deleteImg'])->name('gallery.dele
 Route::get('gallery/cover/{id}', [vehicle::class, 'galleryCover'])->name('gallery.cover');
 Route::get('subBrand', [subBrand::class, 'get_sub_brand_by_id'])->name('subBrandbyId');
 Route::get('port', [port::class, 'get_port_by_id'])->name('portById');
+Route::get('/ports-by-country', [country::class, 'getPortsByCountry'])->name('portByCountryId');
+
 Route::get('m3', [port::class, 'get_m3_charge_by_port_id'])->name('m3Charge');
 Route::get('/watermark', [vehicle::class, 'addWatermarkall']);
 

@@ -51,9 +51,11 @@ print_r($favourites->toArray());die;*/
             ->join('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->join('sub_brands', 'sub_brands.id', '=', 'vehicles.sub_brand_id')
             ->join('transmissions', 'vehicles.transmission_id', 'transmissions.id')
-            ->select('reserved_vehicles.*', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname')
-            ->where('reserved_vehicles.assign_user_id', currentUserId())
-            ->whereNotNull('vehicles.r_status')
+            ->select('reserved_vehicles.*', 'vehicles.*', 'brands.slug_name as b_slug', 'sub_brands.slug_name as sb_slug', 'transmissions.name as tname');
+            if(currentUser() == 'salesexecutive'){
+                $vehicles = $vehicles->where('reserved_vehicles.assign_user_id', currentUserId());
+            }
+            $vehicles = $vehicles->whereNotNull('vehicles.r_status')
             ->paginate(50);
         /*echo '<pre>';
 print_r($favourites->toArray());die;*/
@@ -91,7 +93,11 @@ print_r($favourites->toArray());die;*/
     }
     public function all_client_list_json()
     {
-        $users = User::where('executiveId', currentUserId())->get();
+        if(currentUser() == 'superadmin')
+        $users = User::where('role_id', 4)->get();
+        else{
+            $users = User::where('executiveId', currentUserId())->get();
+        }
 
 
         $data = '<div class="row">';
@@ -103,7 +109,7 @@ print_r($favourites->toArray());die;*/
         $data .= '<option value="">Select</option>';
 
         foreach ($users as $user) {
-            $data .= '<option value="' . $user->id . '">' . $user->name . '</option>';
+            $data .= '<option value="' . $user->id . '">' . $user->id.' - '.$user->name . '</option>';
         }
 
         $data .= '</select>';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 
 use App\Models\Settings\Country;
+use App\Models\Settings\Port;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
@@ -136,4 +137,18 @@ class CountryController extends Controller
     {
         //
     }
+    public function getPortsByCountry(Request $request)
+    {
+        // Get the country_id using the country code
+        $country = Country::where('code', $request->country_code)->first();
+    
+        if ($country) {
+            // Fetch ports related to the found country_id
+           $ports = Port::where('inv_loc_id',$country->id)->get();
+           echo json_encode($ports);
+        }
+    
+   
+    }
+
 }

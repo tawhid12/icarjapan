@@ -68,12 +68,15 @@ class User extends Authenticatable
         return $this->belongsTo(Port::class);
     }
     public function executive(){
-        return $this->belongsTo(User::class,'executiveId');
+        return $this->belongsTo(User::class,'executiveId','id');
     }
     public function clientTransfers()
     {
         return $this->hasMany(ClientTransfer::class);
     }
-
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
 }

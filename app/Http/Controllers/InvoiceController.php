@@ -356,10 +356,10 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        $type = request()->get('type');
+        /*$type = request()->get('type');
         if($type)
         $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->where('invoice_type',4)->first();
-        else
+        else*/
         $inv = Invoice::where('reserve_id', encryptor('decrypt', $id))->first();
         $com_info = CompanyAccountInfo::first();
         $client_data = User::where('id', $inv->client_id)->first();

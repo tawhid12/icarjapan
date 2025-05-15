@@ -148,6 +148,9 @@ class AdminUserController extends Controller
             $user = User::findOrFail(encryptor('decrypt', $id));
 
             $user->name = $request->userName;
+            if(currentUser() == 'superadmin'){
+                $user->email = $request->userEmail;   
+            }
             $user->contact_no = $request->contactNumber;
             $user->role_id = $request->role_id;
             $user->status = $request->status;

@@ -1,9 +1,10 @@
 @php
-$text = "";
+/*$text = "";
 if($inv->invoice_type ==1) 
 $text ="Proforma"; 
 else 
-$text ="Final";
+$text ="Final";*/
+$text = "Send Mail";
 @endphp
 @extends('layout.app')
 @section('pageTitle',trans("{$text}"))
@@ -107,7 +108,7 @@ $text ="Final";
                                 @endif
                             </th>
                         </tr>
-                        <tr style="background-color: #C00000;text-align:center;">
+                        {{--<tr style="background-color: #C00000;text-align:center;">
                             <th style="font-size:14px;color:#fff;" rowspan="2">IMPORTANT NOTICE</th>
                             <th colspan="3" style="font-size:12px;color:#fff;"><small> MENTION BELOW INFORMATION ON THE TT SLIP</small></th>
                         </tr>
@@ -188,7 +189,7 @@ $text ="Final";
                         <tr>
                             <th colspan="4">TOTAL UNIT(s):</th>
                         </tr>
-                    </thead>
+                    </thead>--}}
                 </table>
                 <table class="mt-2 table table-bordered mb-0">
                     <tr style="background-color: #C00000;">

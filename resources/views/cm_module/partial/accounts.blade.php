@@ -83,19 +83,34 @@
             <th>Deposit Ratio</th>
             <th>Deposit Count</th>
             <th>Balance Count</th>
-            <th>Payment ID</th>
+            <!--<th>Payment ID</th>-->
+            @if(currentUser() == 'superadmin')
+            <th>Action</th>
+            @endif
         </tr>
         @forelse($payments as $p)
         <tr>
-            <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->format('d/m/Y')}}</td>
+            <td>{{\Carbon\Carbon::createFromTimestamp(strtotime($p->receive_date))->format('d/m/Y')}}</td>
             <td>USD</td>
-            <td>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->format('Ymd')}}{{$p->invoice_id}}</td>
+            <!--<td>ICJ{{\Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->format('Ymd')}}{{$p->invoice_id}}</td>-->
+            <td>{{$p->invoice_no}}</td>
             <td>{{$p->amount}}</td>
             <td>{{$p->amount}}</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{$p->id}}</td>
+            <!--<td>{{$p->id}}</td>-->
+            @if(currentUser() == 'superadmin')
+                <td>
+                    <a href="javascript:void(0)" onclick="if(confirm('Are you sure you want to delete this item?')) { $('#form{{$p->id}}').submit(); }">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                    <form id="form{{$p->id}}" action="{{ route(currentUser().'.payment.destroy', encryptor('encrypt', $p->id)) }}" method="post" style="display: none;">
+                        @csrf
+                        @method('delete')
+                    </form>
+                </td>
+             @endif
         </tr>
         @empty
         @endforelse
