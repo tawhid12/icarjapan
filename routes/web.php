@@ -171,7 +171,8 @@ Route::group(['middleware' => isUser::class], function () {
         Route::resource('payment', payment::class, ['as' => 'user']);
         Route::resource('review', review::class, ['as' => 'user']);
         Route::get('/download-pdf/{id}', [clientmodule::class, 'downloadPDF'])->name('user.download-pdf');
-        Route::get('reserve-merge',[reservevehicle::class, 'reserve_merge']);
+        Route::get('reserve-merge',[reservevehicle::class, 'reserve_merge'])->name('user.reserve_merge');
+        Route::post('update-reserve-merge',[reservevehicle::class, 'update_reserve_merge'])->name('user.update_reserve_merge');
     });
 });
 Route::group(['middleware' => isAccountant::class], function () {

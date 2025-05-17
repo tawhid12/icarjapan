@@ -12,8 +12,6 @@
         <div class="row" id="table-bordered" style="background-color: #eee">
             <div class="col-12">
               <h4>All Reserved</h4>
-              <button id="updateInvoices" class="btn btn-primary mt-3">Update Invoice IDs</button>
-
                     <!-- table bordered -->
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered mb-0">
@@ -33,10 +31,7 @@
                             <tbody>
                                 @forelse($resrv as $rsv)
                                 <tr>
-                                    <th scope="row">
-                                         <input type="checkbox" class="reserve-check" value="{{ $rsv->id }}">
-                                        {{ ++$loop->index }}
-                                    </th>
+                                    <th scope="row">{{ ++$loop->index }}</th>
                                     <td>
                                         <p class="m-0"><strong>Vehicle Name : </strong>{{optional($rsv->vehicle)->fullName}}</p>
                                         <p class="m-0">StockId : {{optional($rsv->vehicle)->stock_id}}</p>
@@ -98,37 +93,3 @@
 
 
 @endsection
-@push('scripts')
-<script>
-$(document).ready(function() {
-    $('#updateInvoices').click(function() {
-        let selected = [];
-        $('.reserve-check:checked').each(function() {
-            selected.push($(this).val());
-        });
-
-        if(selected.length < 2) {
-            alert("Select at least two reserves to update.");
-            return;
-        }
-
-        $.ajax({
-            url: "{{ route(currentUser().'.update_reserve_merge') }}",
-            method: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                selected_ids: selected
-            },
-            success: function(response) {
-                alert(response.message);
-                location.reload();
-            },
-            error: function(xhr) {
-                alert("An error occurred.");
-                console.log(xhr.responseText);
-            }
-        });
-    });
-});
-</script>
-@endpush

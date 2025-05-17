@@ -11,4 +11,9 @@ class Payment extends Model
     public function user(){
         return $this->hasOne(User::class,'id','customer_id');
     }
+    
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id');
+    }
 }
